@@ -1,0 +1,26 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "Welcome to `Movie Mania!` This is the starting point of a full-stack application that we will be builiding together over the course of the class. Each week we will build upon this project, adding the new skills you will be learning along the way. Before we begin, let's cover a few things first.",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=test nodemon --exec 'mocha --recursive -R min'",
+    "start": "npm run seed && nodemon server.js",
+    "seed": "mongosh movie-buzz --eval 'printjson(db.dropDatabase())' && mongoimport --db=movie-buzz --collection=movies --file=db_seed/movies.json"
+  },
+  "keywords": [],
+  "author": "Terrell Lemons",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.4.2",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.11",
+    "morgan": "^1.10.1"
+  },
+  "devDependencies": {
+    "mocha": "^10.1.0",
+    "nodemon": "^2.0.12",
+    "supertest": "^6.3.1"
+  }
+}

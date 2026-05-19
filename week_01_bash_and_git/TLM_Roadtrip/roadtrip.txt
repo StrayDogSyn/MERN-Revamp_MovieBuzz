@@ -1,0 +1,9 @@
+
+Our point of departure is going to be from the TLM Headquarters, so navigate your terminal to that location using the command:
+
+cd California/Cities
+
+Once there, view the home city of TLM by using the command:
+
+cat San_Francisco.txt
+

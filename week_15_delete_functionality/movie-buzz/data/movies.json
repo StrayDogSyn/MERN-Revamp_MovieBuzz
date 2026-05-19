@@ -1,0 +1,79 @@
+[
+  {
+    "name": "The Matrix",
+    "year": 1999,
+    "rating": "R",
+    "length": "136 minutes",
+    "description": "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
+    "genre": ["Action", "Sci-Fi", "Thriller"],
+    "director": "The Wachowskis",
+    "stars": ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss", "Hugo Weaving"],
+    "poster": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=300&h=450&fit=crop"
+  },
+  {
+    "name": "Inception",
+    "year": 2010,
+    "rating": "PG-13",
+    "length": "148 minutes",
+    "description": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
+    "genre": ["Action", "Sci-Fi", "Thriller"],
+    "director": "Christopher Nolan",
+    "stars": ["Leonardo DiCaprio", "Marion Cotillard", "Tom Hardy", "Elliot Page"],
+    "poster": "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=300&h=450&fit=crop"
+  },
+  {
+    "name": "Pulp Fiction",
+    "year": 1994,
+    "rating": "R", 
+    "length": "154 minutes",
+    "description": "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+    "genre": ["Crime", "Drama"],
+    "director": "Quentin Tarantino",
+    "stars": ["John Travolta", "Samuel L. Jackson", "Uma Thurman", "Bruce Willis"],
+    "poster": "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=300&h=450&fit=crop"
+  },
+  {
+    "name": "The Dark Knight",
+    "year": 2008,
+    "rating": "PG-13",
+    "length": "152 minutes", 
+    "description": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests.",
+    "genre": ["Action", "Crime", "Drama"],
+    "director": "Christopher Nolan",
+    "stars": ["Christian Bale", "Heath Ledger", "Aaron Eckhart", "Michael Caine"],
+    "poster": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=300&h=450&fit=crop"
+  },
+  {
+    "name": "Forrest Gump",
+    "year": 1994,
+    "rating": "PG-13",
+    "length": "142 minutes",
+    "description": "The presidencies of Kennedy and Johnson, the events of Vietnam, Watergate and other historical events unfold through the perspective of an Alabama man.",
+    "genre": ["Drama", "Romance"],
+    "director": "Robert Zemeckis", 
+    "stars": ["Tom Hanks", "Robin Wright", "Gary Sinise", "Sally Field"],
+    "poster": "https://images.unsplash.com/photo-1489599904095-47bcc2e35168?w=300&h=450&fit=crop"
+  },
+  {
+    "name": "The Shawshank Redemption",
+    "year": 1994,
+    "rating": "R",
+    "length": "142 minutes",
+    "description": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+    "genre": ["Drama"],
+    "director": "Frank Darabont",
+    "stars": ["Tim Robbins", "Morgan Freeman", "Bob Gunton", "William Sadler"],
+    "poster": "https://images.unsplash.com/photo-1489599904095-47bcc2e35168?w=300&h=450&fit=crop"
+  },
+  {
+    "name": "The Godfather",
+    "year": 1972,
+    "rating": "R",
+    "length": "175 minutes",
+    "description": "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+    "genre": ["Crime", "Drama"],
+    "director": "Francis Ford Coppola",
+    "stars": ["Marlon Brando", "Al Pacino", "James Caan", "Diane Keaton"],
+    "poster": "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=300&h=450&fit=crop"
+  }
+]

@@ -1,0 +1,11 @@
+
+Hilly and roughly square, San Francisco occupies the northern tip of a peninsula. To its south are the bedroom suburbs of San Mateo county, to the east and northeast is the bay, and to the west and northwest lies the Pacific Ocean.
+
+Okay, everyone on board? Let's go! Before we do, let's make a note of our progress. Run the following command:
+
+export start="bash"
+
+Now that we've recorded our progress, let's continue on our journey. Let's hop on a plane and travel to one of the original post offices in the Sunflower State.
+
+HINT: use cd ../.. to return to the root of the TLM_Roadtrip directory, then use the ls command to see the list of available states. Use the cd command to navigate to the correct state and then use ls again to view all the possible locations in that state.
+

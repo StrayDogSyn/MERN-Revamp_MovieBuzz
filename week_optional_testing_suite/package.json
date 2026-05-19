@@ -1,0 +1,54 @@
+{
+  "name": "movie-buzz-testing-suite",
+  "version": "1.0.0",
+  "description": "Optional testing suite for Movie Buzz MERN application end-to-end validation",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --detectOpenHandles",
+    "test:api": "jest tests/api --detectOpenHandles",
+    "test:frontend": "jest tests/frontend --detectOpenHandles",
+    "test:e2e": "jest tests/e2e --detectOpenHandles",
+    "test:integration": "jest tests/integration --detectOpenHandles",
+    "test:watch": "jest --watch --detectOpenHandles",
+    "test:coverage": "jest --coverage --detectOpenHandles",
+    "test:report": "jest --json --outputFile=test-results.json && node generate-report.js",
+    "validate": "node validate-environment.js",
+    "setup": "node setup-test-data.js",
+    "cleanup": "node cleanup-test-data.js"
+  },
+  "keywords": [
+    "testing",
+    "mern",
+    "movie-buzz",
+    "end-to-end",
+    "integration",
+    "quality-assurance"
+  ],
+  "author": "MERN Stack Curriculum Team",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "mongoose": "^8.0.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3",
+    "puppeteer": "^21.5.0",
+    "mongodb-memory-server": "^9.1.0",
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.5.1"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": ["<rootDir>/tests/setup.js"],
+    "testTimeout": 30000,
+    "collectCoverageFrom": [
+      "tests/**/*.{js,jsx}",
+      "!tests/setup.js",
+      "!**/node_modules/**"
+    ],
+    "coverageDirectory": "coverage",
+    "coverageReporters": ["text", "lcov", "html"]
+  }
+}

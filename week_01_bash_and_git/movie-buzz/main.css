@@ -1,0 +1,55 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: antiquewhite;
+  margin-bottom: 26px;
+}
+
+#title {
+  padding: 10px;
+  display: inline-block;
+}
+
+#title-icon {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+#title-text {
+  display: inline-block;
+}
+
+#title-text h1 {
+  font-style: oblique;
+}
+
+#add-new {
+  float: right;
+  padding: 10px;
+}
+
+#add-new button {
+  font-size: 30px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: green;
+  color: white;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+footer {
+  position: fixed;
+  width: 100vw;
+  bottom: 0px;
+  text-align: center;
+  background-color: lightgrey;
+  padding: 3px;
+}

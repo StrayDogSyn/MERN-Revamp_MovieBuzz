@@ -1,0 +1,569 @@
+/* Movie Buzz - Week 6 Styles: React Component Patterns */
+/* Netflix-style dark theme with rgb(194, 143, 41) gold accents */
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #141414;
+  color: #ffffff;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.app-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  flex: 1;
+  width: 100%;
+}
+
+/* ============================================================
+   Favorites Counter
+   ============================================================ */
+.favorites-counter {
+  text-align: center;
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  background: rgba(194, 143, 41, 0.1);
+  border: 1px solid rgba(194, 143, 41, 0.3);
+  border-radius: 8px;
+  color: rgb(194, 143, 41);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* ============================================================
+   Netflix-style Movie Grid
+   ============================================================ */
+.movies-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 30px;
+  padding: 20px 0;
+}
+
+/* ============================================================
+   Netflix-style Movie Cards (poster left, content right)
+   ============================================================ */
+.movie-block {
+  background: #222;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #333;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  min-height: 280px;
+}
+
+.movie-block:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  background: #2a2a2a;
+}
+
+.movie-poster {
+  flex-shrink: 0;
+  width: 180px;
+}
+
+.movie-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px 0 0 8px;
+}
+
+.movie-content {
+  flex: 1;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-block h3 {
+  font-size: 1.5rem;
+  color: rgb(194, 143, 41);
+  margin-bottom: 15px;
+  border-bottom: 2px solid rgb(194, 143, 41);
+  padding-bottom: 10px;
+}
+
+.movie-info {
+  margin-bottom: 20px;
+}
+
+.movie-info p {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: #ccc;
+}
+
+.movie-info strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.movie-description p {
+  font-style: italic;
+  color: #bbb;
+  line-height: 1.7;
+  text-align: justify;
+  margin-bottom: 20px;
+}
+
+.movie-details p {
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.movie-details strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ============================================================
+   Movie Card Actions (favorite, edit, delete buttons)
+   ============================================================ */
+.movie-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid #333;
+}
+
+.movie-actions button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-favorite {
+  background: rgba(194, 143, 41, 0.2);
+  color: rgb(194, 143, 41);
+  border: 1px solid rgba(194, 143, 41, 0.4);
+}
+
+.btn-favorite:hover {
+  background: rgba(194, 143, 41, 0.4);
+}
+
+.btn-favorite.active {
+  background: rgb(194, 143, 41);
+  color: #000;
+}
+
+.btn-edit {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-edit:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-delete {
+  background: rgba(220, 53, 69, 0.2);
+  color: #dc3545;
+  border: 1px solid rgba(220, 53, 69, 0.4);
+}
+
+.btn-delete:hover {
+  background: rgba(220, 53, 69, 0.4);
+  color: #fff;
+}
+
+/* ============================================================
+   Movie Form Styles
+   ============================================================ */
+.movie-form {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+  border-radius: 16px;
+  padding: 40px;
+  margin-bottom: 30px;
+  border: 1px solid #333;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.movie-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, rgb(194, 143, 41), #ffd700, rgb(194, 143, 41));
+  border-radius: 16px 16px 0 0;
+}
+
+.movie-form h2 {
+  color: rgb(194, 143, 41);
+  margin-bottom: 30px;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  position: relative;
+}
+
+.movie-form h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgb(194, 143, 41), transparent);
+}
+
+.movie-form input,
+.movie-form textarea {
+  width: 100%;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 400;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+}
+
+.movie-form input:hover,
+.movie-form textarea:hover {
+  border-color: rgba(194, 143, 41, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.movie-form input::placeholder,
+.movie-form textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+  font-style: italic;
+}
+
+.movie-form input:focus,
+.movie-form textarea:focus {
+  outline: none;
+  border-color: rgb(194, 143, 41);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 0 0 3px rgba(194, 143, 41, 0.15),
+    0 8px 25px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.movie-form textarea {
+  min-height: 120px;
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.6;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-buttons button {
+  min-width: 140px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.form-buttons button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.form-buttons button:hover::before {
+  left: 100%;
+}
+
+.form-buttons button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.form-buttons button[type="submit"] {
+  background: linear-gradient(135deg, rgb(194, 143, 41), #ffd700);
+  color: #000;
+  font-weight: 700;
+}
+
+.form-buttons button[type="submit"]:hover {
+  background: linear-gradient(135deg, #ffd700, rgb(194, 143, 41));
+  box-shadow: 0 8px 25px rgba(194, 143, 41, 0.4);
+}
+
+.form-buttons button[type="button"] {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.form-buttons button[type="button"]:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================================
+   Week 6: Reusable Card Component Styles
+   Students will use these when building the Card component
+   ============================================================ */
+.card {
+  background: #222;
+  border-radius: 8px;
+  border: 1px solid #333;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.card-header {
+  padding: 15px 20px;
+  border-bottom: 2px solid rgb(194, 143, 41);
+  color: rgb(194, 143, 41);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.card-body {
+  padding: 20px;
+  color: #ccc;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.card-footer {
+  padding: 15px 20px;
+  border-top: 1px solid #333;
+  display: flex;
+  gap: 10px;
+}
+
+/* ============================================================
+   Week 6: Loading Spinner Styles
+   Students will use these when building the LoadingSpinner
+   ============================================================ */
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: #ccc;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top: 4px solid rgb(194, 143, 41);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-spinner p {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ============================================================
+   Week 6: Error Message Styles
+   Students will use these when building the ErrorMessage
+   ============================================================ */
+.error-message {
+  text-align: center;
+  padding: 40px 20px;
+  background: rgba(220, 53, 69, 0.1);
+  border: 1px solid rgba(220, 53, 69, 0.3);
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.error-message p {
+  color: #dc3545;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+
+.btn-retry {
+  background: rgb(194, 143, 41);
+  color: #000;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.btn-retry:hover {
+  background: #ffd700;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(194, 143, 41, 0.3);
+}
+
+/* ============================================================
+   Week 6: Badge Component Styles (for genre/rating badges)
+   Students can use these when building reusable Badge component
+   ============================================================ */
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-gold {
+  background: rgba(194, 143, 41, 0.2);
+  color: rgb(194, 143, 41);
+  border: 1px solid rgba(194, 143, 41, 0.4);
+}
+
+.badge-dark {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ccc;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ============================================================
+   Empty State
+   ============================================================ */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #888;
+}
+
+.empty-state h2 {
+  color: rgb(194, 143, 41);
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+.empty-state p {
+  font-size: 1rem;
+  color: #888;
+}
+
+/* ============================================================
+   Responsive Design
+   ============================================================ */
+@media (max-width: 768px) {
+  .movies-list {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .movie-block {
+    padding: 20px;
+  }
+
+  .movie-form {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .app {
+    padding: 1em;
+  }
+
+  .movie-block {
+    padding: 0;
+    width: 85%;
+    margin: 0 auto 1.5em auto;
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .movie-poster {
+    width: 100%;
+    height: 200px;
+  }
+
+  .movie-poster img {
+    border-radius: 8px 8px 0 0;
+  }
+
+  .movie-content {
+    padding: 1em;
+  }
+
+  .movie-form {
+    padding: 1em;
+  }
+
+  .movies-list {
+    grid-template-columns: 1fr;
+  }
+
+  .card-header {
+    padding: 12px 15px;
+    font-size: 1rem;
+  }
+
+  .card-body {
+    padding: 15px;
+  }
+
+  .card-footer {
+    padding: 12px 15px;
+  }
+}

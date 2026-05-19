@@ -1,0 +1,9 @@
+
+The Hollenberg Pony Express Station is located about 2 miles (3.2 km) east of Hanover, Kansas along Kansas Highway 243. The station consists of a 1-1/2 story rectangular Cottonwood frame building, with a gabled roof, wooden shingled exterior, and stone foundation.
+
+After visiting this cool station, let's record our progress before we continue. Run the following command:
+
+export middle="is"
+
+Now that we've recorded our progress, let's continue on our journey. Let's travel to the home city of Indiana University.
+

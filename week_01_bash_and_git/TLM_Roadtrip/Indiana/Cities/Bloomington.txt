@@ -1,0 +1,9 @@
+
+Bloomington, the seat of Monroe County, is an attractive progressive community situated 50 miles south of Indianapolis. It is known as the "Gateway to Scenic Southern Indiana". The area includes a number of Indiana state parks, nearby state and national forests, as well as city parks and recreation.
+
+After visiting this city and maybe catching a game, let's record our progress before we continue. Run the following command:
+
+export end="awesome"
+
+Now that we've recorded our progress, let's continue on our journey. Let's travel to The Sooner State and visit some waterfalls.
+

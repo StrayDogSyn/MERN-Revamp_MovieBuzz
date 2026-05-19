@@ -1,0 +1,685 @@
+/* Movie Buzz - Week 4 Starter Styles: React State & Hooks */
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #141414;
+  color: #ffffff;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 20px;
+  position: relative;
+}
+
+.app-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+  color: rgb(194, 143, 41);
+}
+
+.app-header p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* Add Movie Button (students will add this) */
+.add-movie-btn {
+  background-color: rgb(194, 143, 41);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.2s ease;
+}
+
+.add-movie-btn:hover {
+  background-color: #f40612;
+}
+
+.app-main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Netflix-style movie grid */
+.movies-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 30px;
+  padding: 20px 0;
+}
+
+/* Netflix-style movie cards */
+.movie-block {
+  background: #222;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #333;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  min-height: 280px;
+}
+
+.movie-poster {
+  flex-shrink: 0;
+  width: 180px;
+}
+
+.movie-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px 0 0 8px;
+}
+
+.movie-content {
+  flex: 1;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-block:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  background: #2a2a2a;
+}
+
+.movie-block h3 {
+  font-size: 1.5rem;
+  color: rgb(194, 143, 41);
+  margin-bottom: 15px;
+  border-bottom: 2px solid rgb(194, 143, 41);
+  padding-bottom: 10px;
+}
+
+.movie-info {
+  margin-bottom: 20px;
+}
+
+.movie-info p {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: #ccc;
+}
+
+.movie-info strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.movie-description p {
+  font-style: italic;
+  color: #bbb;
+  line-height: 1.7;
+  text-align: justify;
+  margin-bottom: 20px;
+}
+
+.movie-details p {
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.movie-details strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Modern Movie Form Styles (students will add this component) */
+.movie-form {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+  border-radius: 16px;
+  padding: 40px;
+  margin-bottom: 30px;
+  border: 1px solid #333;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.movie-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, rgb(194, 143, 41), #ffd700, rgb(194, 143, 41));
+  border-radius: 16px 16px 0 0;
+}
+
+.movie-form h2 {
+  color: rgb(194, 143, 41);
+  margin-bottom: 30px;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  position: relative;
+}
+
+.movie-form h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgb(194, 143, 41), transparent);
+}
+
+.movie-form input,
+.movie-form textarea {
+  width: 100%;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 400;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+}
+
+.movie-form input:hover,
+.movie-form textarea:hover {
+  border-color: rgba(194, 143, 41, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.movie-form input::placeholder,
+.movie-form textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+  font-style: italic;
+}
+
+.movie-form input:focus,
+.movie-form textarea:focus {
+  outline: none;
+  border-color: rgb(194, 143, 41);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 0 0 3px rgba(194, 143, 41, 0.15),
+    0 8px 25px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.movie-form textarea {
+  min-height: 120px;
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.6;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-buttons button {
+  min-width: 140px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.form-buttons button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.form-buttons button:hover::before {
+  left: 100%;
+}
+
+.form-buttons button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.form-buttons button[type="submit"] {
+  background: linear-gradient(135deg, rgb(194, 143, 41), #ffd700);
+  color: #000;
+  font-weight: 700;
+}
+
+.form-buttons button[type="submit"]:hover {
+  background: linear-gradient(135deg, #ffd700, rgb(194, 143, 41));
+  box-shadow: 0 8px 25px rgba(194, 143, 41, 0.4);
+}
+
+.form-buttons button[type="button"] {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.form-buttons button[type="button"]:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .movies-list {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .app-header h1 {
+    font-size: 2rem;
+  }
+  
+  .movie-block {
+    padding: 20px;
+  }
+  
+  .movie-form {
+    padding: 30px 25px;
+    border-radius: 12px;
+  }
+  
+  .movie-form h2 {
+    font-size: 1.6rem;
+  }
+  
+  .form-buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .form-buttons button {
+    width: 100%;
+    min-width: auto;
+  }
+}
+
+@media (max-width: 500px) {
+  .app {
+    padding: 1em;
+  }
+  
+  .app-header {
+    padding: 1em;
+    margin-bottom: 1em;
+  }
+  
+  .movie-block {
+    padding: 0;
+    width: 85%;
+    margin: 0 auto 1.5em auto;
+    flex-direction: column;
+    min-height: auto;
+  }
+  
+  .movie-poster {
+    width: 100%;
+    height: 200px;
+  }
+  
+  .movie-poster img {
+    border-radius: 8px 8px 0 0;
+  }
+  
+  .movie-content {
+    padding: 1em;
+  }
+  
+  .movie-form {
+    padding: 1.5em;
+    border-radius: 12px;
+  }
+  
+  .movie-form h2 {
+    font-size: 1.4rem;
+    margin-bottom: 25px;
+  }
+  
+  .movie-form input,
+  .movie-form textarea {
+    padding: 14px 16px;
+    margin-bottom: 18px;
+    font-size: 0.95rem;
+    border-radius: 10px;
+  }
+  
+  .movie-form textarea {
+    min-height: 100px;
+  }
+  
+  .form-buttons {
+    margin-top: 30px;
+    padding-top: 25px;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .form-buttons button {
+    padding: 16px 24px;
+    font-size: 0.9rem;
+    width: 100%;
+    min-width: auto;
+    border-radius: 10px;
+  }
+}
+
+/* Search Bar Styles - Students will style this */
+.search-bar {
+  margin-bottom: 30px;
+  padding: 0 20px;
+}
+
+.search-input-container {
+  position: relative;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.search-input {
+  width: 100%;
+  padding: 16px 50px 16px 20px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: rgb(194, 143, 41);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 3px rgba(194, 143, 41, 0.15);
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.clear-button {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.clear-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgb(194, 143, 41);
+}
+
+.search-info {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.search-results-text {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+/* Filter Controls Styles - Students will style this */
+.filter-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-label {
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.filter-select {
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: rgb(194, 143, 41);
+}
+
+.filter-select option {
+  background: #333;
+  color: #fff;
+}
+
+.reset-filters-btn {
+  background: rgba(194, 143, 41, 0.2);
+  border: 2px solid rgb(194, 143, 41);
+  color: rgb(194, 143, 41);
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.reset-filters-btn:hover {
+  background: rgb(194, 143, 41);
+  color: #000;
+}
+
+/* Results Counter */
+.results-counter {
+  text-align: center;
+  margin-bottom: 20px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+  padding: 10px;
+}
+
+/* Interactive MovieBlock Styles - Students will enhance this */
+.movie-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.expand-btn {
+  background: transparent;
+  border: 2px solid rgba(194, 143, 41, 0.3);
+  color: rgb(194, 143, 41);
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  transition: all 0.2s ease;
+}
+
+.expand-btn:hover {
+  background: rgba(194, 143, 41, 0.1);
+  border-color: rgb(194, 143, 41);
+}
+
+.favorite-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.favorite-btn:hover {
+  background: rgba(0, 0, 0, 0.9);
+  transform: scale(1.1);
+}
+
+.favorite-btn.favorited {
+  background: rgba(194, 143, 41, 0.2);
+}
+
+.movie-poster {
+  position: relative;
+}
+
+.movie-expanded-content {
+  animation: slideDown 0.3s ease-out;
+}
+
+.movie-preview {
+  margin-top: 15px;
+}
+
+.description-preview {
+  color: #bbb;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.genre-preview {
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+  }
+}
+
+.movie-block.expanded {
+  background: #2a2a2a;
+}
+
+/* Responsive adjustments for new components */
+@media (max-width: 768px) {
+  .filter-controls {
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px 15px;
+  }
+  
+  .filter-group {
+    flex-direction: column;
+    text-align: center;
+    gap: 5px;
+  }
+  
+  .filter-select {
+    width: 200px;
+  }
+  
+  .search-bar {
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 500px) {
+  .search-input-container {
+    max-width: 100%;
+  }
+  
+  .filter-controls {
+    margin: 0 auto 20px auto;
+    width: 85%;
+    padding: 15px;
+  }
+  
+  .filter-select {
+    width: 100%;
+    max-width: 250px;
+  }
+  
+  .movie-header {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  
+  .expand-btn {
+    align-self: center;
+  }
+}

@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "name": "The Matrix",
+    "year": 1999,
+    "rating": "R",
+    "length": "136 minutes",
+    "description": "A computer hacker learns about the true nature of reality.",
+    "genre": ["Action", "Sci-Fi"],
+    "director": "The Wachowskis",
+    "stars": ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"]
+  },
+  {
+    "id": 2,
+    "name": "Inception",
+    "year": 2010,
+    "rating": "PG-13",
+    "length": "148 minutes",
+    "description": "A thief who steals corporate secrets through dream-sharing technology.",
+    "genre": ["Action", "Sci-Fi", "Thriller"],
+    "director": "Christopher Nolan",
+    "stars": ["Leonardo DiCaprio", "Marion Cotillard", "Tom Hardy"]
+  },
+  {
+    "id": 3,
+    "name": "Pulp Fiction",
+    "year": 1994,
+    "rating": "R",
+    "length": "154 minutes",
+    "description": "The lives of two mob hitmen, a boxer, and other criminals intertwine in Los Angeles.",
+    "genre": ["Crime", "Drama"],
+    "director": "Quentin Tarantino",
+    "stars": ["John Travolta", "Samuel L. Jackson", "Uma Thurman"]
+  }
+]

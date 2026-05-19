@@ -1,0 +1,9 @@
+
+Theodore Roosevelt National Park is an American national park comprising three geographically separated areas of badlands in western North Dakota. The park covers 70,446 acres of land in three sections: the North Unit, the South Unit, and the Elkhorn Ranch Unit.
+
+After visiting this national park, let's record our progress before we continue. Run the following command:
+
+export label="TLM"
+
+Now that we've recorded our progress, let's continue on our journey. Let's travel to the city historically known for its automobile production.
+

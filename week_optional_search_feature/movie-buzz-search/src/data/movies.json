@@ -1,0 +1,222 @@
+[
+  {
+    "id": 1,
+    "name": "The Matrix",
+    "year": 1999,
+    "rating": "R",
+    "length": "136 minutes",
+    "description": "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
+    "genre": ["Action", "Sci-Fi"],
+    "director": "The Wachowskis",
+    "stars": ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"]
+  },
+  {
+    "id": 2,
+    "name": "Inception",
+    "year": 2010,
+    "rating": "PG-13",
+    "length": "148 minutes",
+    "description": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
+    "genre": ["Action", "Sci-Fi", "Thriller"],
+    "director": "Christopher Nolan",
+    "stars": ["Leonardo DiCaprio", "Marion Cotillard", "Tom Hardy"]
+  },
+  {
+    "id": 3,
+    "name": "Pulp Fiction",
+    "year": 1994,
+    "rating": "R",
+    "length": "154 minutes",
+    "description": "The lives of two mob hitmen, a boxer, a gangster and his wife intertwine in four tales of violence and redemption.",
+    "genre": ["Crime", "Drama"],
+    "director": "Quentin Tarantino",
+    "stars": ["John Travolta", "Samuel L. Jackson", "Uma Thurman"]
+  },
+  {
+    "id": 4,
+    "name": "The Godfather",
+    "year": 1972,
+    "rating": "R",
+    "length": "175 minutes",
+    "description": "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+    "genre": ["Crime", "Drama"],
+    "director": "Francis Ford Coppola",
+    "stars": ["Marlon Brando", "Al Pacino", "James Caan"]
+  },
+  {
+    "id": 5,
+    "name": "Toy Story",
+    "year": 1995,
+    "rating": "G",
+    "length": "81 minutes",
+    "description": "A cowboy doll is profoundly threatened and jealous when a new spaceman figure supplants him as top toy in a boy's room.",
+    "genre": ["Animation", "Comedy", "Family"],
+    "director": "John Lasseter",
+    "stars": ["Tom Hanks", "Tim Allen", "Don Rickles"]
+  },
+  {
+    "id": 6,
+    "name": "The Dark Knight",
+    "year": 2008,
+    "rating": "PG-13",
+    "length": "152 minutes",
+    "description": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests.",
+    "genre": ["Action", "Crime", "Drama"],
+    "director": "Christopher Nolan",
+    "stars": ["Christian Bale", "Heath Ledger", "Aaron Eckhart"]
+  },
+  {
+    "id": 7,
+    "name": "Forrest Gump",
+    "year": 1994,
+    "rating": "PG-13",
+    "length": "142 minutes",
+    "description": "The presidencies of Kennedy and Johnson, the Vietnam War, and other historical events unfold from the perspective of an Alabama man.",
+    "genre": ["Drama", "Romance"],
+    "director": "Robert Zemeckis",
+    "stars": ["Tom Hanks", "Robin Wright", "Gary Sinise"]
+  },
+  {
+    "id": 8,
+    "name": "Interstellar",
+    "year": 2014,
+    "rating": "PG-13",
+    "length": "169 minutes",
+    "description": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+    "genre": ["Sci-Fi", "Drama", "Thriller"],
+    "director": "Christopher Nolan",
+    "stars": ["Matthew McConaughey", "Anne Hathaway", "Jessica Chastain"]
+  },
+  {
+    "id": 9,
+    "name": "The Shawshank Redemption",
+    "year": 1994,
+    "rating": "R",
+    "length": "142 minutes",
+    "description": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+    "genre": ["Drama"],
+    "director": "Frank Darabont",
+    "stars": ["Tim Robbins", "Morgan Freeman", "Bob Gunton"]
+  },
+  {
+    "id": 10,
+    "name": "Jurassic Park",
+    "year": 1993,
+    "rating": "PG-13",
+    "length": "127 minutes",
+    "description": "A pragmatic paleontologist touring an almost complete theme park on an island in Central America is tasked with protecting a couple of kids after a power failure causes the park's cloned dinosaurs to run loose.",
+    "genre": ["Action", "Sci-Fi", "Thriller"],
+    "director": "Steven Spielberg",
+    "stars": ["Sam Neill", "Laura Dern", "Jeff Goldblum"]
+  },
+  {
+    "id": 11,
+    "name": "The Lion King",
+    "year": 1994,
+    "rating": "G",
+    "length": "88 minutes",
+    "description": "Lion prince Simba and his father are targeted by his bitter uncle, who wants to ascend the throne himself.",
+    "genre": ["Animation", "Drama", "Family"],
+    "director": "Roger Allers",
+    "stars": ["Matthew Broderick", "Jeremy Irons", "James Earl Jones"]
+  },
+  {
+    "id": 12,
+    "name": "Goodfellas",
+    "year": 1990,
+    "rating": "R",
+    "length": "146 minutes",
+    "description": "The story of Henry Hill and his life in the mob, covering his relationship with his wife Karen Hill and his mob partners.",
+    "genre": ["Crime", "Drama"],
+    "director": "Martin Scorsese",
+    "stars": ["Robert De Niro", "Ray Liotta", "Joe Pesci"]
+  },
+  {
+    "id": 13,
+    "name": "The Silence of the Lambs",
+    "year": 1991,
+    "rating": "R",
+    "length": "118 minutes",
+    "description": "A young FBI cadet must receive the help of an incarcerated and manipulative cannibal killer to catch another serial killer.",
+    "genre": ["Crime", "Drama", "Thriller"],
+    "director": "Jonathan Demme",
+    "stars": ["Jodie Foster", "Anthony Hopkins", "Lawrence A. Bonney"]
+  },
+  {
+    "id": 14,
+    "name": "Gladiator",
+    "year": 2000,
+    "rating": "R",
+    "length": "155 minutes",
+    "description": "A former Roman General sets out to exact vengeance against the corrupt emperor who murdered his family and sent him into slavery.",
+    "genre": ["Action", "Drama"],
+    "director": "Ridley Scott",
+    "stars": ["Russell Crowe", "Joaquin Phoenix", "Connie Nielsen"]
+  },
+  {
+    "id": 15,
+    "name": "Finding Nemo",
+    "year": 2003,
+    "rating": "G",
+    "length": "100 minutes",
+    "description": "After his son is captured in the Great Barrier Reef and taken to Sydney, a timid clownfish sets out on a journey to bring him home.",
+    "genre": ["Animation", "Comedy", "Family"],
+    "director": "Andrew Stanton",
+    "stars": ["Albert Brooks", "Ellen DeGeneres", "Alexander Gould"]
+  },
+  {
+    "id": 16,
+    "name": "The Departed",
+    "year": 2006,
+    "rating": "R",
+    "length": "151 minutes",
+    "description": "An undercover cop and a mole in the police attempt to identify each other while infiltrating an Irish gang in South Boston.",
+    "genre": ["Crime", "Drama", "Thriller"],
+    "director": "Martin Scorsese",
+    "stars": ["Leonardo DiCaprio", "Matt Damon", "Jack Nicholson"]
+  },
+  {
+    "id": 17,
+    "name": "Avatar",
+    "year": 2009,
+    "rating": "PG-13",
+    "length": "162 minutes",
+    "description": "A paraplegic Marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.",
+    "genre": ["Action", "Sci-Fi"],
+    "director": "James Cameron",
+    "stars": ["Sam Worthington", "Zoe Saldana", "Sigourney Weaver"]
+  },
+  {
+    "id": 18,
+    "name": "The Avengers",
+    "year": 2012,
+    "rating": "PG-13",
+    "length": "143 minutes",
+    "description": "Earth's mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.",
+    "genre": ["Action", "Sci-Fi"],
+    "director": "Joss Whedon",
+    "stars": ["Robert Downey Jr.", "Chris Evans", "Scarlett Johansson"]
+  },
+  {
+    "id": 19,
+    "name": "Frozen",
+    "year": 2013,
+    "rating": "PG",
+    "length": "102 minutes",
+    "description": "When the newly crowned Queen Elsa accidentally uses her power to turn things into ice to curse her home in infinite winter, her sister Anna teams up with a mountain man to end the winter.",
+    "genre": ["Animation", "Family"],
+    "director": "Chris Buck",
+    "stars": ["Kristen Bell", "Idina Menzel", "Josh Gad"]
+  },
+  {
+    "id": 20,
+    "name": "Parasite",
+    "year": 2019,
+    "rating": "R",
+    "length": "132 minutes",
+    "description": "Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan.",
+    "genre": ["Drama", "Thriller"],
+    "director": "Bong Joon Ho",
+    "stars": ["Kang-ho Song", "Sun-kyun Lee", "Yeo-jeong Jo"]
+  }
+]

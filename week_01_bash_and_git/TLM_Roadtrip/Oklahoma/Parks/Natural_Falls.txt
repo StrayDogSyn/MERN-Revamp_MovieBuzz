@@ -1,0 +1,9 @@
+
+Located near the Oklahoma/Arkansas border in the scenic Ozark Highlands region of northeast Oklahoma, Natural Falls State Park features a stunning 77-foot waterfall cascading through rock formations and creating a hidden, serene atmosphere at the bottom of a narrow V-shaped valley.
+
+After visiting this natural wonder, let's record our progress before we continue. Run the following command:
+
+export under="_"
+
+Now that we've recorded our progress, let's continue on our journey. Let's travel to one of our northern-most states and visit a Presidential park.
+

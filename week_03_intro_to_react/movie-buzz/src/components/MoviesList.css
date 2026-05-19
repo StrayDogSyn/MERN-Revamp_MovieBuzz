@@ -1,0 +1,43 @@
+/* Netflix-style Movie Cards */
+
+/* TODO: Style the main section container */
+/* Hint: .trending-section { background: #000; padding: 40px 20px; border-radius: 24px; margin: 20px; } */
+
+/* TODO: Style the section title */
+/* Hint: .trending-title { color: rgb(194, 143, 41); font-size: 2.5rem; font-weight: bold; margin-bottom: 8px; } */
+
+/* TODO: Style the section subtitle */
+/* Hint: .trending-subtitle { color: #ccc; font-size: 1.1rem; margin-bottom: 24px; font-style: italic; } */
+
+/* TODO: Style the card row - use flexbox with horizontal scrolling */
+/* Hint: .trending-cards { display: flex; gap: 32px; padding: 20px 0; overflow-x: auto; } */
+
+/* TODO: Style each individual movie card */
+/* Hint: .trending-card { position: relative; width: 280px; min-width: 280px; border-radius: 18px; overflow: hidden; background: #222; } */
+
+/* TODO: Add a hover effect to the card */
+/* Hint: .trending-card:hover { transform: scale(1.05); } */
+
+/* TODO: Style the card image */
+/* Hint: .card-image { width: 100%; height: 320px; object-fit: cover; display: block; } */
+
+/* TODO: Style the rank number (positioned top-left over the image) */
+/* Hint: .card-rank { position: absolute; left: 12px; top: 12px; font-size: 4.5rem; font-weight: 900; color: #fff; } */
+
+/* TODO: Style the content overlay (sits at the bottom of the card over the image) */
+/* Hint: .card-content { position: absolute; left: 0; bottom: 0; width: 100%; padding: 16px; background: linear-gradient(0deg, rgba(0,0,0,0.95) 80%, transparent 100%); color: #fff; } */
+
+/* TODO: Style the movie title */
+/* Hint: .card-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; display: block; } */
+
+/* TODO: Style the info line (year, length, rating) */
+/* Hint: .card-info { font-size: 0.9rem; color: rgb(194, 143, 41); margin-bottom: 8px; } */
+
+/* TODO: Style the meta section (genre and director) */
+/* Hint: .card-meta { font-size: 0.85rem; margin-bottom: 12px; } */
+
+/* TODO: Style the genre text */
+/* Hint: .card-genre { color: #ccc; display: block; margin-bottom: 4px; } */
+
+/* TODO: Style the director text */
+/* Hint: .card-director { color: #ccc; display: block; } */

@@ -1,0 +1,9 @@
+
+Detroit is the largest city in Michigan and rests in Wayne County. It is a major port city on the Detroit River and is known as the world's traditional auto center. The auto industry and famous music scene has earned it the nicknames The Motor City and Motown.
+
+After visiting the Motor City, let's record our progress before we continue. Run the following command:
+
+export open="{"
+
+Now that we've recorded our progress, let's continue on our journey. Let's go to Disneyland!
+
