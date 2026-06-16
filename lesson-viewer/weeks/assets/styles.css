@@ -296,8 +296,8 @@ pre {
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   color: var(--text-primary);
-  border-left: 3px solid var(--tlm-gold);
   border: 1px solid var(--glass-border);
+  border-left: 3px solid var(--tlm-gold);
   border-radius: var(--radius);
   padding: 18px 20px;
   overflow-x: auto;

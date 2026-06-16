@@ -156,7 +156,7 @@ function wrapGlossarySection(markdownSource) {
 
   const body = lines.slice(startIdx + 1, endIdx).join('\n').trim();
   const wrapped = [
-    '<details open class="glossary-disclosure glass">',
+    '<details open class="glossary-disclosure">',
     '<summary>📖 Click to collapse glossary</summary>',
     '',
     body,
