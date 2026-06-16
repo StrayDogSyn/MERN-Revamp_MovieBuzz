@@ -1,6 +1,7 @@
 /* Header Styles - Netflix-style dark theme */
 .app-header {
-  background: linear-gradient(135deg, rgb(20, 20, 20) 0%, rgb(40, 40, 40) 100%);
+  background: #111;
+  border-bottom: 3px solid rgb(194, 143, 41);
   color: white;
   padding: 1.5rem 2rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
@@ -59,11 +60,11 @@
 
 .btn-primary {
   background: rgb(194, 143, 41);
-  color: white;
+  color: #000;
 }
 
 .btn-primary:hover {
-  background: rgb(174, 123, 21);
+  background: #ffd700;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(194, 143, 41, 0.3);
 }

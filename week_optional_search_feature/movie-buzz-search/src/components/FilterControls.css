@@ -6,10 +6,12 @@
   justify-content: center;
   align-items: center;
   margin: 20px 0;
-  padding: 15px;
-  background-color: #f5f5f5;
-  border-radius: 8px;
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(194, 143, 41, 0.15);
+  border-radius: 16px;
   flex-wrap: wrap;
+  backdrop-filter: blur(10px);
 }
 
 .filter-group {
@@ -19,25 +21,32 @@
 }
 
 .filter-group label {
-  font-weight: bold;
-  color: #333;
+  font-weight: 600;
+  color: #fff;
   font-size: 14px;
   white-space: nowrap;
 }
 
 .filter-select {
   padding: 8px 12px;
-  border: 2px solid #ddd;
-  border-radius: 4px;
+  border: 2px solid rgba(194, 143, 41, 0.3);
+  border-radius: 8px;
   font-size: 14px;
-  background-color: white;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
   cursor: pointer;
-  transition: border-color 0.3s ease;
+  transition: all 0.3s ease;
   min-width: 140px;
 }
 
 .filter-select:hover {
-  border-color: #bbb;
+  border-color: rgba(194, 143, 41, 0.5);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.filter-select option {
+  background: #2a2a2a;
+  color: #fff;
 }
 
 .filter-select:focus {

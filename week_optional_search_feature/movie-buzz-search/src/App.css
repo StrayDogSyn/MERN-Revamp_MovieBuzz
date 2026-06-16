@@ -12,7 +12,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #1a1a1a;
+  background-color: #141414;
   color: #fff;
 }
 
@@ -25,9 +25,10 @@ body {
 .app-header {
   text-align: center;
   padding: 40px 20px;
-  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+  background: #111;
+  border-bottom: 3px solid rgb(194, 143, 41);
   margin-bottom: 30px;
-  border-radius: 12px;
+  border-radius: 0;
 }
 
 .app-header h1 {
@@ -72,7 +73,7 @@ body {
   text-align: center;
   margin: 25px 0;
   padding: 15px;
-  background-color: #2a2a2a;
+  background-color: #222;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -111,7 +112,7 @@ body {
 .empty-state {
   text-align: center;
   padding: 60px 20px;
-  background-color: #2a2a2a;
+  background-color: #222;
   border-radius: 12px;
   margin: 40px auto;
   max-width: 500px;
@@ -132,7 +133,7 @@ body {
 .btn-primary {
   padding: 12px 24px;
   background-color: rgb(194, 143, 41);
-  color: #1a1a1a;
+  color: #000;
   border: none;
   border-radius: 8px;
   font-size: 16px;
@@ -152,8 +153,8 @@ body {
   text-align: center;
   margin-top: 60px;
   padding: 30px 20px;
-  background-color: #2a2a2a;
-  border-radius: 8px;
+  background-color: #111;
+  border-radius: 0;
   border-top: 3px solid rgb(194, 143, 41);
 }
 

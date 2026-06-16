@@ -1,7 +1,7 @@
 /* Header Component Styles - PROVIDED CSS */
 .app-header {
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-  border-bottom: 2px solid rgb(194, 143, 41);
+  background: #111;
+  border-bottom: 3px solid rgb(194, 143, 41);
   padding: 1rem 0;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
