@@ -12,7 +12,7 @@
     margin-bottom: 36px;
   }
   .index-hero h1 { margin: 0 0 8px; }
-  .index-hero p { margin: 0; color: var(--brand-black); opacity: 0.75; font-size: 1.05rem; }
+  .index-hero p { margin: 0; color: var(--brand-text-muted); font-size: 1.05rem; }
 
   .phase-section { margin-bottom: 48px; }
   .phase-section h2 {
@@ -34,26 +34,27 @@
 
   .week-card {
     display: block;
-    background: #fff;
-    border: 1px solid var(--brand-grey);
+    background: var(--brand-card);
+    border: 1px solid var(--brand-border);
     border-left: 4px solid var(--brand-gold-deep);
     border-radius: var(--radius);
     padding: 14px 16px;
     text-decoration: none;
-    color: var(--brand-black);
+    color: var(--brand-text);
     transition: border-left-color 0.12s ease, box-shadow 0.12s ease;
   }
   .week-card:hover {
     border-left-color: var(--brand-gold);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    color: var(--brand-black);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    color: var(--brand-text);
+    background: var(--brand-card-hover);
   }
   .week-card .week-num {
     font-family: var(--font-sans-condensed);
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--brand-grey);
+    color: var(--brand-text-muted);
     margin-bottom: 4px;
   }
   .week-card .week-title {
@@ -66,7 +67,7 @@
   .phase-section--backend .week-card { border-left-color: var(--brand-gold); }
   .phase-section--backend .week-card:hover { border-left-color: var(--brand-gold-deep); }
 
-  .phase-section--optional .week-card { border-left-color: var(--brand-black); }
+  .phase-section--optional .week-card { border-left-color: var(--brand-border-subtle); }
   .phase-section--optional .week-card:hover { border-left-color: var(--brand-gold-deep); }
 
   .boundary-marker {
@@ -74,7 +75,7 @@
     align-items: center;
     gap: 14px;
     margin: 40px 0;
-    color: var(--brand-grey);
+    color: var(--brand-text-muted);
     font-family: var(--font-sans-condensed);
     font-size: 0.78rem;
     text-transform: uppercase;
