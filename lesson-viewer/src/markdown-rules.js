@@ -72,7 +72,7 @@ function classifyCallouts(state) {
     tokens[i].attrJoin('class', `callout callout--${type}`);
     if (label) {
       const labelToken = new state.Token('html_block', '', 0);
-      labelToken.content = `<div class="callout-label">${label}</div>\n`;
+      labelToken.content = `<div class="callout-label lift">${label}</div>\n`;
       tokens.splice(i + 1, 0, labelToken);
       i++;
     }
@@ -156,7 +156,7 @@ function wrapGlossarySection(markdownSource) {
 
   const body = lines.slice(startIdx + 1, endIdx).join('\n').trim();
   const wrapped = [
-    '<details open class="glossary-disclosure">',
+    '<details open class="glossary-disclosure glass">',
     '<summary>📖 Click to collapse glossary</summary>',
     '',
     body,

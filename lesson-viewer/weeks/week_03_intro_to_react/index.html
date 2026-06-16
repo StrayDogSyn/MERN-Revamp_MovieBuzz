@@ -10,7 +10,7 @@
 <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
 <label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
 <div class="layout">
-<nav class="sidebar" aria-label="Course weeks">
+<nav class="sidebar glass" aria-label="Course weeks">
 <div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
 <div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
 <a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
@@ -79,7 +79,7 @@
 </ul>
 <hr>
 <h2 id="glossary" tabindex="-1">Glossary</h2>
-<details open class="glossary-disclosure">
+<details open class="glossary-disclosure glass">
 <summary>📖 Click to collapse glossary</summary>
 <ul>
 <li><code>React</code>: A JavaScript library for building user interfaces, particularly single-page applications where data changes over time</li>
@@ -110,7 +110,7 @@ npm start
 </ul>
 <p>React represents a shift from traditional server-side rendering to client-side component-based architecture, which is the current industry standard for modern web applications.</p>
 <blockquote class="callout callout--reflection-consider">
-<div class="callout-label">🤔 Reflection Prompt — Consider This</div>
+<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
 <p><code>Consider This</code><br>
 Why might building with reusable components be more efficient than writing individual HTML pages?</p>
 </blockquote>
@@ -125,7 +125,7 @@ Why might building with reusable components be more efficient than writing indiv
 </ol>
 <p>Notice the dark Netflix-style theme we're starting with! The app currently shows a placeholder message because we haven't built our movie components yet.</p>
 <blockquote class="callout callout--reflection-consider">
-<div class="callout-label">🤔 Reflection Prompt — Consider This</div>
+<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
 <p><code>Consider This</code><br>
 How is this different from the Node/Express servers we've been running? What's handling the &quot;server&quot; functionality now?</p>
 </blockquote>
@@ -177,7 +177,7 @@ function App() {
 export default App;
 </code></pre>
 <blockquote class="callout callout--reflection-try">
-<div class="callout-label">🛠️ Hands-On — Try It Out</div>
+<div class="callout-label lift">🛠️ Hands-On — Try It Out</div>
 <p><code>Try It Out</code>
 Create these simple components and test them in your app before moving on to the movie components. Notice how props allow us to reuse the same component with different data!</p>
 </blockquote>
@@ -274,7 +274,7 @@ export default MovieBlock;
 </code></pre>
 <p>Notice how this component accepts a <code>movie</code> prop and displays its properties!</p>
 <blockquote class="callout callout--reflection-consider">
-<div class="callout-label">🤔 Reflection Prompt — Consider This</div>
+<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
 <p><code>Consider This</code><br>
 What is the <code>{ movie }</code> syntax in the function parameters? How does this differ from regular JavaScript function parameters?</p>
 </blockquote>
@@ -323,7 +323,7 @@ function MoviesList({ movies }) {
 export default MoviesList;
 </code></pre>
 <blockquote class="callout callout--reflection-consider">
-<div class="callout-label">🤔 Reflection Prompt — Consider This</div>
+<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
 <p><code>Consider This</code><br>
 What is the <code>.map()</code> method doing here? Why do we need the <code>key</code> prop?</p>
 </blockquote>
@@ -527,7 +527,7 @@ export default App;
 </ul>
 <p>This creates a clear data flow: App → MoviesList → MovieBlock</p>
 <blockquote class="callout callout--reflection-consider">
-<div class="callout-label">🤔 Reflection Prompt — Consider This</div>
+<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
 <p><code>Consider This</code><br>
 How is passing props similar to calling a function with parameters? How is it different?</p>
 </blockquote>
@@ -556,7 +556,7 @@ How is passing props similar to calling a function with parameters? How is it di
 <li>What are the advantages of component-based architecture over static HTML?</li>
 </ul>
 
-<div class="pager">
+<div class="pager lift">
 <a href="../week_02_dev_environment/index.html">← Week 02</a>
 <a href="../week_04_react_state_and_hooks/index.html">Week 04 →</a>
 </div>

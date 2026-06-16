@@ -6,102 +6,132 @@
 <title>Movie Buzz Curriculum · Lesson Viewer</title>
 <link rel="stylesheet" href="assets/styles.css">
 <style>
+  /* Index-page-specific overrides — main sheet tokens only */
   .index-hero {
-    border-bottom: 4px solid var(--brand-gold);
-    padding: 32px 0 24px;
-    margin-bottom: 36px;
+    border-bottom: 1px solid var(--glass-border);
+    padding: 40px 0 28px;
+    margin-bottom: 40px;
+    position: relative;
   }
-  .index-hero h1 { margin: 0 0 8px; }
-  .index-hero p { margin: 0; color: var(--brand-text-muted); font-size: 1.05rem; }
+  .index-hero::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 80px;
+    height: 2px;
+    background: var(--tlm-gold);
+    box-shadow: 0 0 10px var(--tlm-gold-glow);
+  }
+  .index-hero h1 { margin: 0 0 10px; }
+  .index-hero p  { margin: 0; color: var(--text-muted); font-size: 1.05rem; }
 
-  .phase-section { margin-bottom: 48px; }
+  .phase-section { margin-bottom: 52px; }
   .phase-section h2 {
     font-family: var(--font-sans-condensed);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 0.07em;
-    color: var(--brand-gold-deep);
-    border-bottom: 2px solid var(--brand-gold);
+    letter-spacing: 0.1em;
+    color: var(--tlm-gold);
+    border-bottom: 1px solid var(--glass-border);
     padding-bottom: 8px;
     margin-bottom: 20px;
+    position: relative;
+  }
+  .phase-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 32px;
+    height: 1px;
+    background: var(--tlm-gold);
   }
 
   .week-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 14px;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 12px;
   }
 
   .week-card {
     display: block;
-    background: var(--brand-card);
-    border: 1px solid var(--brand-border);
-    border-left: 4px solid var(--brand-gold-deep);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border-subtle);
+    border-left: 3px solid var(--tlm-gold-deep);
     border-radius: var(--radius);
     padding: 14px 16px;
     text-decoration: none;
-    color: var(--brand-text);
-    transition: border-left-color 0.12s ease, box-shadow 0.12s ease;
+    color: var(--text-primary);
+    transition: border-left-color 0.18s ease, box-shadow 0.18s ease,
+                background 0.18s ease, transform 0.18s ease;
   }
   .week-card:hover {
-    border-left-color: var(--brand-gold);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-    color: var(--brand-text);
-    background: var(--brand-card-hover);
+    border-left-color: var(--tlm-gold);
+    background: var(--glass-bg-hover);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5), inset 0 0 0 1px var(--glass-border);
+    transform: translateY(-2px);
+    color: var(--text-primary);
+    text-decoration: none;
   }
   .week-card .week-num {
     font-family: var(--font-sans-condensed);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--brand-text-muted);
+    letter-spacing: 0.07em;
+    color: var(--text-dim);
     margin-bottom: 4px;
   }
   .week-card .week-title {
     font-family: var(--font-sans-condensed);
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.95rem;
     line-height: 1.3;
+    color: var(--text-primary);
   }
 
-  .phase-section--backend .week-card { border-left-color: var(--brand-gold); }
-  .phase-section--backend .week-card:hover { border-left-color: var(--brand-gold-deep); }
+  .phase-section--backend .week-card { border-left-color: var(--tlm-gold); }
+  .phase-section--backend .week-card:hover { border-left-color: var(--tlm-gold-bright); }
 
-  .phase-section--optional .week-card { border-left-color: var(--brand-border-subtle); }
-  .phase-section--optional .week-card:hover { border-left-color: var(--brand-gold-deep); }
+  .phase-section--optional .week-card { border-left-color: var(--glass-border); }
+  .phase-section--optional .week-card:hover { border-left-color: var(--tlm-gold-deep); }
 
   .boundary-marker {
     display: flex;
     align-items: center;
     gap: 14px;
-    margin: 40px 0;
-    color: var(--brand-text-muted);
+    margin: 44px 0;
+    color: var(--text-dim);
     font-family: var(--font-sans-condensed);
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
   }
   .boundary-marker::before,
   .boundary-marker::after {
     content: '';
     flex: 1;
-    height: 2px;
-    background: var(--brand-gold);
+    height: 1px;
+    background: var(--glass-border);
   }
+  .boundary-marker::before { background: linear-gradient(to right, transparent, var(--tlm-gold)); }
+  .boundary-marker::after  { background: linear-gradient(to left,  transparent, var(--glass-border)); }
 </style>
 </head>
 <body>
-<div class="layout" style="display:block;">
+<div class="layout">
 <main class="main">
 
   <div class="index-hero">
     <h1>&#127916; Movie Buzz Curriculum</h1>
-    <p>16-week full-stack bootcamp — React · Node.js · Express · MongoDB</p>
+    <p>16-week full-stack bootcamp &mdash; React &middot; Node.js &middot; Express &middot; MongoDB</p>
   </div>
 
   <!-- Pre-Backend Phase -->
   <section class="phase-section phase-section--pre-backend">
-    <h2>Weeks 00–07 · Pre-Backend (React &amp; Tooling)</h2>
+    <h2>Weeks 00&ndash;07 &middot; Pre-Backend (React &amp; Tooling)</h2>
     <div class="week-grid">
       <a class="week-card" href="week_00_welcome_call/index.html">
         <div class="week-num">Week 00</div>
@@ -139,11 +169,11 @@
   </section>
 
   <!-- Phase boundary -->
-  <div class="boundary-marker">Week 08 · Backend begins here</div>
+  <div class="boundary-marker">Week 08 &middot; Backend begins here</div>
 
   <!-- Backend Phase -->
   <section class="phase-section phase-section--backend">
-    <h2>Weeks 08–16 · Backend (Node, Express, MongoDB)</h2>
+    <h2>Weeks 08&ndash;16 &middot; Backend (Node, Express, MongoDB)</h2>
     <div class="week-grid">
       <a class="week-card" href="week_08_nodejs_and_http/index.html">
         <div class="week-num">Week 08</div>

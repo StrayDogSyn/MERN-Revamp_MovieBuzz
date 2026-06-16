@@ -10,7 +10,7 @@
 <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
 <label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
 <div class="layout">
-<nav class="sidebar" aria-label="Course weeks">
+<nav class="sidebar glass" aria-label="Course weeks">
 <div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
 <div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
 <a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
@@ -87,7 +87,7 @@
 </ul>
 <hr>
 <h2 id="glossary" tabindex="-1">Glossary</h2>
-<details open class="glossary-disclosure">
+<details open class="glossary-disclosure glass">
 <summary>📖 Click to collapse glossary</summary>
 <ul>
 <li><code>CREATE Operation</code>: The &quot;C&quot; in CRUD - adding new data to the database</li>
@@ -297,7 +297,7 @@ app.get('/api/movies', (req, res) =&gt; {
 <li><strong>DELETE</strong>: Removes existing data (modifies database by removing)</li>
 </ul>
 <blockquote class="callout callout--reflection-consider">
-<div class="callout-label">🤔 Reflection Prompt — Consider This</div>
+<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
 <p><code>Consider This</code><br>
 Why is validation especially important for CREATE operations compared to READ operations? What could go wrong if we don't validate data properly?</p>
 </blockquote>
@@ -1133,7 +1133,7 @@ router.post('/', authenticateUser, createMovie);
 </ul>
 <p>Next week, we'll implement UPDATE functionality, allowing users to modify existing movies while maintaining data integrity.</p>
 <blockquote class="callout callout--reflection-consider">
-<div class="callout-label">🤔 Reflection Prompt — Consider This</div>
+<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
 <p><code>Consider This</code><br>
 How does proper validation and error handling in CREATE operations improve the user experience? What would happen without these safeguards?</p>
 </blockquote>
@@ -1151,7 +1151,7 @@ How does proper validation and error handling in CREATE operations improve the u
 <li>How do you provide meaningful error messages to frontend applications?</li>
 </ul>
 
-<div class="pager">
+<div class="pager lift">
 <a href="../week_12_mongoose_and_read/index.html">← Week 12</a>
 <a href="../week_14_update_functionality/index.html">Week 14 →</a>
 </div>

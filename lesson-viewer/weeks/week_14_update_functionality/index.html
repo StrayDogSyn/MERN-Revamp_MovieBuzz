@@ -10,7 +10,7 @@
 <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
 <label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
 <div class="layout">
-<nav class="sidebar" aria-label="Course weeks">
+<nav class="sidebar glass" aria-label="Course weeks">
 <div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
 <div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
 <a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
@@ -88,7 +88,7 @@
 </ul>
 <hr>
 <h2 id="glossary" tabindex="-1">Glossary</h2>
-<details open class="glossary-disclosure">
+<details open class="glossary-disclosure glass">
 <summary>📖 Click to collapse glossary</summary>
 <ul>
 <li><code>UPDATE Operation</code>: The &quot;U&quot; in CRUD - modifying existing data in the database</li>
@@ -394,7 +394,7 @@ Movie.updateOne({ _id: movieId, year: { $lt: 2000 } }, updateData)
 </li>
 </ol>
 <blockquote class="callout callout--reflection-consider">
-<div class="callout-label">🤔 Reflection Prompt — Consider This</div>
+<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
 <p><code>Consider This</code><br>
 Why might partial updates be more efficient and safer than complete document replacement? What are the trade-offs?</p>
 </blockquote>
@@ -1151,7 +1151,7 @@ const updateMovieWithErrorHandling = async (req, res) =&gt; {
 </ul>
 <p>Next week, we'll implement DELETE functionality to complete our full CRUD operations, giving students a complete data management system.</p>
 <blockquote class="callout callout--reflection-consider">
-<div class="callout-label">🤔 Reflection Prompt — Consider This</div>
+<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
 <p><code>Consider This</code><br>
 How do UPDATE operations differ from CREATE operations in terms of validation and error handling? Why might updates be more complex than creation?</p>
 </blockquote>
@@ -1169,7 +1169,7 @@ How do UPDATE operations differ from CREATE operations in terms of validation an
 <li>When would you use <code>findByIdAndUpdate</code> vs <code>updateOne</code>?</li>
 </ul>
 
-<div class="pager">
+<div class="pager lift">
 <a href="../week_13_create_functionality/index.html">← Week 13</a>
 <a href="../week_15_delete_functionality/index.html">Week 15 →</a>
 </div>
