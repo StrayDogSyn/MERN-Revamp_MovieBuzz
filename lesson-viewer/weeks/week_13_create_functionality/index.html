@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 13 - CREATE Functionality · Movie Buzz Lesson Viewer</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+<label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
+<div class="layout">
+<nav class="sidebar" aria-label="Course weeks">
+<div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
+<a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
+<a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
+<a class="nav-link" href="../week_02_dev_environment/index.html">Week 02 · Dev Environment</a>
+<a class="nav-link" href="../week_03_intro_to_react/index.html">Week 03 · Intro to React</a>
+<a class="nav-link" href="../week_04_react_state_and_hooks/index.html">Week 04 · React State & Hooks</a>
+<a class="nav-link" href="../week_05_react_events_and_hooks/index.html">Week 05 · React Events & Hooks</a>
+<a class="nav-link" href="../week_06_react_component_patterns/index.html">Week 06 · React Component Patterns</a>
+<a class="nav-link" href="../week_07_react_hooks_and_context/index.html">Week 07 · React Hooks & Context</a>
+<div class="nav-phase">Weeks 08–16 · Backend (Node, Express, MongoDB)</div>
+<a class="nav-link" href="../week_08_nodejs_and_http/index.html">Week 08 · Node.js & HTTP</a>
+<a class="nav-link" href="../week_09_express_and_cors/index.html">Week 09 · Express & CORS</a>
+<a class="nav-link" href="../week_10_tic_tac_toe_checkpoint/index.html">Week 10 · Tic-Tac-Toe Checkpoint</a>
+<a class="nav-link" href="../week_11_intro_to_mongodb/index.html">Week 11 · Intro to MongoDB</a>
+<a class="nav-link" href="../week_12_mongoose_and_read/index.html">Week 12 · Mongoose & Read</a>
+<a class="nav-link active" href="../week_13_create_functionality/index.html">Week 13 · Create Functionality</a>
+<a class="nav-link" href="../week_14_update_functionality/index.html">Week 14 · Update Functionality</a>
+<a class="nav-link" href="../week_15_delete_functionality/index.html">Week 15 · Delete Functionality</a>
+<a class="nav-link" href="../week_16_frontend_backend_integration/index.html">Week 16 · Frontend/Backend Integration</a>
+<div class="nav-phase">Optional Modules</div>
+<a class="nav-link" href="../week_optional_search_feature/index.html">Search Feature</a>
+<a class="nav-link" href="../week_optional_testing_suite/index.html">Testing Suite</a>
+</nav>
+<main class="main">
+<div class="page-header">
+<div class="breadcrumb">Weeks 08–16 · Backend (Node, Express, MongoDB)</div>
+</div>
+<h1 id="week-13---create-functionality" tabindex="-1">Week 13 - CREATE Functionality</h1>
+<ul>
+<li><a href="#week-13---create-functionality">Week 13 - CREATE Functionality</a>
+<ul>
+<li><a href="#notes-about-this-lesson-plan">Notes About This Lesson Plan</a></li>
+<li><a href="#learning-objectives">Learning Objectives</a></li>
+<li><a href="#glossary">Glossary</a></li>
+<li><a href="#simple-examples---building-understanding">Simple Examples - Building Understanding</a></li>
+<li><a href="#starting-point">Starting Point</a></li>
+<li><a href="#understanding-create-operations">Understanding CREATE Operations</a></li>
+<li><a href="#implementing-create-with-mongoose">Implementing CREATE with Mongoose</a>
+<ul>
+<li><a href="#basic-document-creation">Basic Document Creation</a></li>
+<li><a href="#handling-validation-errors">Handling Validation Errors</a></li>
+<li><a href="#advanced-creation-patterns">Advanced Creation Patterns</a></li>
+</ul>
+</li>
+<li><a href="#building-create-api-endpoints">Building CREATE API Endpoints</a></li>
+<li><a href="#frontend-integration">Frontend Integration</a></li>
+<li><a href="#data-validation-and-sanitization">Data Validation and Sanitization</a></li>
+<li><a href="#testing-create-operations">Testing CREATE Operations</a></li>
+<li><a href="#error-handling-best-practices">Error Handling Best Practices</a></li>
+<li><a href="#security-considerations">Security Considerations</a></li>
+<li><a href="#final-thoughts">Final Thoughts</a></li>
+<li><a href="#exit-ticket">Exit Ticket</a></li>
+<li><a href="#review">Review</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="notes-about-this-lesson-plan" tabindex="-1">Notes About This Lesson Plan</h2>
+<p>Please review this lesson plan in advance of our RI session. If this plan doesn't align with where you and your classmates are at in the LMS, please send a ticket to Help Desk as soon as possible.</p>
+<p>This code is for instructional purposes only. It should be utilized as an example in developing your own work. No part of it should be directly copied into your own project. As per TLM's plagiarism policy, submitting or misrepresenting code or an idea as your own when it was created by someone else constitutes plagiarism.</p>
+<hr>
+<h2 id="learning-objectives" tabindex="-1">Learning Objectives</h2>
+<p>By the end of this session, learners will be able to:</p>
+<ul>
+<li>Implement CREATE operations using Mongoose models and methods</li>
+<li>Build robust API endpoints for creating new movies</li>
+<li>Handle data validation and provide meaningful error messages</li>
+<li>Implement proper data sanitization and security measures</li>
+<li>Connect React frontend to CREATE endpoints with error handling</li>
+<li>Use Mongoose middleware for data processing during creation</li>
+<li>Test CREATE functionality thoroughly using various methods</li>
+<li>Apply best practices for handling user input and data creation</li>
+</ul>
+<hr>
+<h2 id="glossary" tabindex="-1">Glossary</h2>
+<details open class="glossary-disclosure">
+<summary>📖 Click to collapse glossary</summary>
+<ul>
+<li><code>CREATE Operation</code>: The &quot;C&quot; in CRUD - adding new data to the database</li>
+<li><code>Data Validation</code>: Checking that data meets specified criteria before saving</li>
+<li><code>Data Sanitization</code>: Cleaning and formatting data to prevent security issues</li>
+<li><code>Middleware</code>: Functions that run during the document lifecycle (pre/post save)</li>
+<li><code>Duplicate Key Error</code>: Error when trying to create a document with a unique field that already exists</li>
+<li><code>Request Body</code>: Data sent from client to server in POST requests</li>
+<li><code>Status Code 201</code>: HTTP status indicating successful resource creation</li>
+<li><code>Idempotent</code>: Operations that produce the same result when repeated</li>
+</ul>
+</details>
+---
+<h2 id="simple-examples---building-understanding" tabindex="-1">Simple Examples - Building Understanding</h2>
+<p>Before diving into the full implementation, let's explore some simple, focused examples to build our understanding of CREATE operations step by step.</p>
+<h3 class="step-heading" id="1step-1-basic-post-request-handling" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Basic POST Request Handling</h3>
+<p>Let's start with a minimal POST endpoint that accepts data:</p>
+<pre><code class="language-javascript">// Simple POST endpoint
+app.post('/api/movies', (req, res) =&gt; {
+  console.log('Received data:', req.body);
+
+  // Return success response
+  res.status(201).json({
+    success: true,
+    message: 'Data received successfully',
+    receivedData: req.body
+  });
+});
+</code></pre>
+<p><strong>Try It Out:</strong> Use Postman or curl to send POST data to this endpoint and see how it handles the request body.</p>
+<h3 class="step-heading" id="2step-2-request-body-validation" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Request Body Validation</h3>
+<p>Now let's add some basic validation to ensure we receive the required data:</p>
+<pre><code class="language-javascript">// POST endpoint with validation
+app.post('/api/movies', (req, res) =&gt; {
+  const { name, year, rating } = req.body;
+
+  // Check if required fields are present
+  if (!name || !year || !rating) {
+    return res.status(400).json({
+      success: false,
+      error: 'Missing required fields: name, year, and rating are required'
+    });
+  }
+
+  // Validation passed
+  res.status(201).json({
+    success: true,
+    message: 'Movie data is valid',
+    movie: { name, year, rating }
+  });
+});
+</code></pre>
+<p><strong>Try It Out:</strong> Test this endpoint with both complete and incomplete data to see how validation works.</p>
+<h3 class="step-heading" id="3step-3-simple-data-creation-no-database" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Simple Data Creation (No Database)</h3>
+<p>Let's simulate creating data by storing it in an array (before we connect to MongoDB):</p>
+<pre><code class="language-javascript">// In-memory storage for testing
+let movies = [];
+let nextId = 1;
+
+// POST endpoint that &quot;creates&quot; a movie
+app.post('/api/movies', (req, res) =&gt; {
+  const { name, year, rating, description } = req.body;
+
+  // Basic validation
+  if (!name || !year || !rating) {
+    return res.status(400).json({
+      success: false,
+      error: 'Missing required fields'
+    });
+  }
+
+  // Create new movie object
+  const newMovie = {
+    id: nextId++,
+    name,
+    year: parseInt(year),
+    rating,
+    description: description || 'No description provided',
+    createdAt: new Date().toISOString()
+  };
+
+  // &quot;Save&quot; to our array
+  movies.push(newMovie);
+
+  // Return created movie
+  res.status(201).json({
+    success: true,
+    message: 'Movie created successfully',
+    data: newMovie
+  });
+});
+
+// GET endpoint to see our created movies
+app.get('/api/movies', (req, res) =&gt; {
+  res.json({
+    success: true,
+    count: movies.length,
+    data: movies
+  });
+});
+</code></pre>
+<p><strong>Try It Out:</strong> Create several movies using POST, then use GET to see your created data persist in memory.</p>
+<h3 class="step-heading" id="4step-4-error-handling-for-invalid-data" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Error Handling for Invalid Data</h3>
+<p>Let's handle common error scenarios that occur during creation:</p>
+<pre><code class="language-javascript">app.post('/api/movies', (req, res) =&gt; {
+  try {
+    const { name, year, rating } = req.body;
+
+    // Check for empty request body
+    if (!req.body || Object.keys(req.body).length === 0) {
+      return res.status(400).json({
+        success: false,
+        error: 'Request body is required',
+        hint: 'Send JSON data with movie information'
+      });
+    }
+
+    // Validate name
+    if (!name || typeof name !== 'string' || name.trim().length === 0) {
+      return res.status(400).json({
+        success: false,
+        error: 'Movie name is required and must be a non-empty string'
+      });
+    }
+
+    // Validate year
+    if (!year || isNaN(year) || year &lt; 1800 || year &gt; new Date().getFullYear() + 5) {
+      return res.status(400).json({
+        success: false,
+        error: 'Year must be a valid number between 1800 and ' + (new Date().getFullYear() + 5)
+      });
+    }
+
+    // Validate rating
+    const validRatings = ['G', 'PG', 'PG-13', 'R', 'NC-17', 'NR'];
+    if (!rating || !validRatings.includes(rating)) {
+      return res.status(400).json({
+        success: false,
+        error: 'Rating must be one of: ' + validRatings.join(', ')
+      });
+    }
+
+    // If we get here, data is valid
+    const newMovie = {
+      id: nextId++,
+      name: name.trim(),
+      year: parseInt(year),
+      rating,
+      createdAt: new Date().toISOString()
+    };
+
+    movies.push(newMovie);
+
+    res.status(201).json({
+      success: true,
+      message: 'Movie created successfully',
+      data: newMovie
+    });
+
+  } catch (error) {
+    // Handle unexpected errors
+    console.error('Unexpected error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Internal server error',
+      message: 'Something went wrong while creating the movie'
+    });
+  }
+});
+</code></pre>
+<p><strong>Try It Out:</strong> Test this endpoint with various invalid inputs (empty body, invalid year, bad rating) to see how comprehensive error handling works.</p>
+<p>These examples build the foundation for understanding how CREATE operations work before we dive into the full MongoDB implementation with Mongoose!</p>
+<hr>
+<h2 id="starting-point" tabindex="-1">Starting Point</h2>
+<p>Before we begin this lesson, make sure you have completed Week 12 and have:</p>
+<ul>
+<li>Mongoose installed and configured in your Movie Buzz backend</li>
+<li>A complete Movie schema with validation rules</li>
+<li>Working READ operations (GET endpoints)</li>
+<li>React frontend that can fetch and display movies</li>
+<li>All previous endpoints tested and functional</li>
+</ul>
+<p>Your current API should support:</p>
+<ul>
+<li><code>GET /api/movies</code> - Get all movies with filtering/pagination</li>
+<li><code>GET /api/movies/:id</code> - Get single movie by ID</li>
+<li><code>GET /api/movies/genre/:genre</code> - Get movies by genre</li>
+<li><code>GET /api/movies/recent</code> - Get recent movies</li>
+</ul>
+<hr>
+<h2 id="understanding-create-operations" tabindex="-1">Understanding CREATE Operations</h2>
+<p>CREATE operations are responsible for adding new data to your database. In the context of our Movie Buzz application, this means allowing users to add new movies to our collection.</p>
+<p><strong>Key Principles of CREATE Operations:</strong></p>
+<ol>
+<li><strong>Data Validation</strong>: Ensure incoming data meets schema requirements</li>
+<li><strong>Data Sanitization</strong>: Clean and format data before saving</li>
+<li><strong>Error Handling</strong>: Provide clear feedback when creation fails</li>
+<li><strong>Security</strong>: Prevent malicious data from entering the system</li>
+<li><strong>Consistency</strong>: Maintain data integrity across the application</li>
+<li><strong>User Feedback</strong>: Inform users of success or failure</li>
+</ol>
+<p><strong>CREATE vs Other Operations:</strong></p>
+<ul>
+<li><strong>READ</strong>: Retrieves existing data (no data modification)</li>
+<li><strong>CREATE</strong>: Adds new data (modifies database by adding)</li>
+<li><strong>UPDATE</strong>: Modifies existing data (changes existing records)</li>
+<li><strong>DELETE</strong>: Removes existing data (modifies database by removing)</li>
+</ul>
+<blockquote class="callout callout--reflection-consider">
+<div class="callout-label">🤔 Reflection Prompt — Consider This</div>
+<p><code>Consider This</code><br>
+Why is validation especially important for CREATE operations compared to READ operations? What could go wrong if we don't validate data properly?</p>
+</blockquote>
+<hr>
+<h2 id="implementing-create-with-mongoose" tabindex="-1">Implementing CREATE with Mongoose</h2>
+<h3 id="basic-document-creation" tabindex="-1">Basic Document Creation</h3>
+<p>Mongoose provides several methods for creating documents:</p>
+<pre><code class="language-javascript">// Method 1: Create instance and save
+const movie = new Movie({
+  name: &quot;The Godfather&quot;,
+  year: 1972,
+  rating: &quot;R&quot;,
+  length: &quot;175 minutes&quot;,
+  description: &quot;The aging patriarch of an organized crime dynasty transfers control to his reluctant son.&quot;,
+  genre: [&quot;Crime&quot;, &quot;Drama&quot;],
+  director: &quot;Francis Ford Coppola&quot;,
+  stars: [&quot;Marlon Brando&quot;, &quot;Al Pacino&quot;, &quot;James Caan&quot;]
+});
+
+const savedMovie = await movie.save();
+
+// Method 2: Direct creation with Model.create()
+const movie = await Movie.create({
+  name: &quot;The Godfather&quot;,
+  year: 1972,
+  rating: &quot;R&quot;,
+  length: &quot;175 minutes&quot;,
+  description: &quot;The aging patriarch of an organized crime dynasty transfers control to his reluctant son.&quot;,
+  genre: [&quot;Crime&quot;, &quot;Drama&quot;],
+  director: &quot;Francis Ford Coppola&quot;,
+  stars: [&quot;Marlon Brando&quot;, &quot;Al Pacino&quot;, &quot;James Caan&quot;]
+});
+
+// Method 3: Insert multiple documents
+const movies = await Movie.insertMany([
+  { name: &quot;Movie 1&quot;, year: 2021, /* other fields */ },
+  { name: &quot;Movie 2&quot;, year: 2022, /* other fields */ }
+]);
+</code></pre>
+<p><strong>When to Use Each Method:</strong></p>
+<ul>
+<li><strong>new + save()</strong>: When you need to perform operations before saving</li>
+<li><strong>create()</strong>: Most common for single document creation</li>
+<li><strong>insertMany()</strong>: For bulk creation (less common in web APIs)</li>
+</ul>
+<h3 id="handling-validation-errors" tabindex="-1">Handling Validation Errors</h3>
+<p>Mongoose automatically validates data based on your schema before saving:</p>
+<pre><code class="language-javascript">try {
+  const movie = await Movie.create({
+    name: &quot;Incomplete Movie&quot;,
+    year: &quot;not a number&quot;, // This will fail validation
+    // Missing required fields like rating, length, etc.
+  });
+} catch (error) {
+  if (error.name === 'ValidationError') {
+    // Handle validation errors
+    console.log('Validation failed:');
+    Object.values(error.errors).forEach(err =&gt; {
+      console.log(`${err.path}: ${err.message}`);
+    });
+  }
+}
+</code></pre>
+<h3 id="advanced-creation-patterns" tabindex="-1">Advanced Creation Patterns</h3>
+<pre><code class="language-javascript">// Creating with pre-save transformations
+const movieData = {
+  name: &quot;  the matrix  &quot;, // Has extra spaces
+  year: 1999,
+  rating: &quot;r&quot;, // Lowercase
+  genre: [&quot;action&quot;, &quot;sci-fi&quot;], // Lowercase genres
+  // ... other fields
+};
+
+// The schema's pre-save middleware will clean this up
+const movie = await Movie.create(movieData);
+// Result: name trimmed, rating uppercase, genres capitalized
+
+// Creating with custom validation
+const movie = new Movie(movieData);
+
+// Add custom logic before saving
+if (movie.year &gt; new Date().getFullYear()) {
+  throw new Error('Movie cannot be from the future');
+}
+
+await movie.save();
+
+// Creating with default values
+const movie = await Movie.create({
+  name: &quot;New Movie&quot;,
+  year: 2024,
+  rating: &quot;PG&quot;,
+  length: &quot;120 minutes&quot;,
+  description: &quot;A great movie&quot;,
+  genre: [&quot;Drama&quot;],
+  director: &quot;Unknown Director&quot;,
+  stars: [&quot;Actor One&quot;]
+  // awards.oscars and awards.nominations will default to 0
+});
+</code></pre>
+<hr>
+<h2 id="building-create-api-endpoints" tabindex="-1">Building CREATE API Endpoints</h2>
+<p>Let's implement the CREATE endpoint in our Express controller. Update your <code>controllers/movieController.js</code>:</p>
+<pre><code class="language-javascript">const Movie = require('../models/Movie');
+
+// Create new movie
+const createMovie = async (req, res) =&gt; {
+  try {
+    // Extract data from request body
+    const movieData = req.body;
+
+    // Basic input validation
+    if (!movieData || Object.keys(movieData).length === 0) {
+      return res.status(400).json({
+        success: false,
+        error: 'Movie data is required'
+      });
+    }
+
+    // Check for required fields (additional validation beyond schema)
+    const requiredFields = ['name', 'year', 'rating', 'length', 'description', 'director'];
+    const missingFields = requiredFields.filter(field =&gt; !movieData[field]);
+
+    if (missingFields.length &gt; 0) {
+      return res.status(400).json({
+        success: false,
+        error: 'Missing required fields',
+        missingFields: missingFields
+      });
+    }
+
+    // Data sanitization
+    const sanitizedData = {
+      ...movieData,
+      name: movieData.name?.toString().trim(),
+      director: movieData.director?.toString().trim(),
+      description: movieData.description?.toString().trim(),
+      year: parseInt(movieData.year),
+      genre: Array.isArray(movieData.genre) ? 
+        movieData.genre.map(g =&gt; g.toString().trim()) : 
+        [movieData.genre?.toString().trim()].filter(Boolean),
+      stars: Array.isArray(movieData.stars) ? 
+        movieData.stars.map(s =&gt; s.toString().trim()) : 
+        [movieData.stars?.toString().trim()].filter(Boolean)
+    };
+
+    // Create the movie
+    const newMovie = await Movie.create(sanitizedData);
+
+    // Return success response
+    res.status(201).json({
+      success: true,
+      message: 'Movie created successfully',
+      data: newMovie
+    });
+
+  } catch (error) {
+    console.error('Error creating movie:', error);
+
+    // Handle specific error types
+    if (error.name === 'ValidationError') {
+      const validationErrors = Object.values(error.errors).map(err =&gt; ({
+        field: err.path,
+        message: err.message,
+        value: err.value
+      }));
+
+      return res.status(400).json({
+        success: false,
+        error: 'Validation failed',
+        details: validationErrors
+      });
+    }
+
+    if (error.code === 11000) {
+      // Duplicate key error (if you have unique fields)
+      const field = Object.keys(error.keyPattern)[0];
+      return res.status(409).json({
+        success: false,
+        error: `Movie with this ${field} already exists`
+      });
+    }
+
+    if (error.name === 'CastError') {
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid data type provided',
+        details: `${error.path} must be a valid ${error.kind}`
+      });
+    }
+
+    // Generic server error
+    res.status(500).json({
+      success: false,
+      error: 'Failed to create movie',
+      details: error.message
+    });
+  }
+};
+
+// Bulk create movies (optional advanced endpoint)
+const createMultipleMovies = async (req, res) =&gt; {
+  try {
+    const moviesData = req.body;
+
+    // Validate input
+    if (!Array.isArray(moviesData) || moviesData.length === 0) {
+      return res.status(400).json({
+        success: false,
+        error: 'Array of movies is required'
+      });
+    }
+
+    // Limit bulk creation to prevent abuse
+    if (moviesData.length &gt; 50) {
+      return res.status(400).json({
+        success: false,
+        error: 'Cannot create more than 50 movies at once'
+      });
+    }
+
+    // Create all movies
+    const newMovies = await Movie.insertMany(moviesData, { 
+      ordered: false, // Continue even if some fail
+      rawResult: true // Get detailed results
+    });
+
+    res.status(201).json({
+      success: true,
+      message: `Successfully created ${newMovies.insertedCount} movies`,
+      data: newMovies,
+      created: newMovies.insertedCount,
+      total: moviesData.length
+    });
+
+  } catch (error) {
+    console.error('Error creating multiple movies:', error);
+
+    // Handle bulk write errors
+    if (error.name === 'BulkWriteError') {
+      const successCount = error.result.insertedCount;
+      const failureCount = error.writeErrors?.length || 0;
+
+      return res.status(207).json({ // 207 = Multi-Status
+        success: false,
+        message: `Partial success: ${successCount} created, ${failureCount} failed`,
+        created: successCount,
+        failed: failureCount,
+        errors: error.writeErrors?.map(err =&gt; ({
+          index: err.index,
+          message: err.errmsg
+        }))
+      });
+    }
+
+    res.status(500).json({
+      success: false,
+      error: 'Failed to create movies',
+      details: error.message
+    });
+  }
+};
+
+module.exports = {
+  // ... existing functions (getAllMovies, getMovieById, etc.)
+  createMovie,
+  createMultipleMovies
+};
+</code></pre>
+<p>Update your routes in <code>routes/movieRoutes.js</code>:</p>
+<pre><code class="language-javascript">const express = require('express');
+const {
+  getAllMovies,
+  getMovieById,
+  getMoviesByGenre,
+  getRecentMovies,
+  createMovie,
+  createMultipleMovies, // Optional
+  updateMovie,
+  deleteMovie
+} = require('../controllers/movieController');
+
+const router = express.Router();
+
+// READ routes
+router.get('/', getAllMovies);
+router.get('/genre/:genre', getMoviesByGenre);
+router.get('/recent', getRecentMovies);
+router.get('/:id', getMovieById);
+
+// CREATE routes
+router.post('/', createMovie);                    // POST /api/movies
+router.post('/bulk', createMultipleMovies);       // POST /api/movies/bulk (optional)
+
+// UPDATE and DELETE routes (placeholders for now)
+router.put('/:id', updateMovie);
+router.delete('/:id', deleteMovie);
+
+module.exports = router;
+</code></pre>
+<hr>
+<h2 id="frontend-integration" tabindex="-1">Frontend Integration</h2>
+<p>Now let's update your React frontend to handle movie creation. First, make sure your MovieForm component can create new movies:</p>
+<pre><code class="language-javascript">// In your React App.js, update the handleAddMovie function
+const handleAddMovie = async (movieData) =&gt; {
+  try {
+    setLoading(true);
+    setError(null);
+
+    const response = await fetch(`${API_BASE_URL}/movies`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(movieData),
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      // Success: refresh the movie list and close form
+      await fetchMovies(); // Refresh the list to show new movie
+      setShowForm(false);
+      
+      // Optional: Show success message
+      setSuccessMessage(`&quot;${result.data.name}&quot; has been added successfully!`);
+      
+      // Clear success message after 3 seconds
+      setTimeout(() =&gt; setSuccessMessage(''), 3000);
+    } else {
+      // Handle API errors
+      if (result.details &amp;&amp; Array.isArray(result.details)) {
+        // Validation errors
+        const errorMessages = result.details.map(err =&gt; 
+          `${err.field}: ${err.message}`
+        ).join(', ');
+        setError(`Validation failed: ${errorMessages}`);
+      } else {
+        setError(result.error || 'Failed to add movie');
+      }
+    }
+  } catch (error) {
+    console.error('Error adding movie:', error);
+    setError('Failed to connect to server. Please try again.');
+  } finally {
+    setLoading(false);
+  }
+};
+</code></pre>
+<p>Update your MovieForm component to handle validation errors:</p>
+<pre><code class="language-javascript">// In MovieForm.js, add state for handling errors
+import React, { useState, useEffect } from 'react';
+
+function MovieForm({ onAddMovie, onUpdateMovie, onCancel, editingMovie }) {
+  const [movieData, setMovieData] = useState({
+    name: '',
+    year: '',
+    rating: '',
+    length: '',
+    description: '',
+    genre: '',
+    director: '',
+    stars: ''
+  });
+  
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // ... existing useEffect for editing ...
+
+  const handleInputChange = (e) =&gt; {
+    const { name, value } = e.target;
+    setMovieData({
+      ...movieData,
+      [name]: value
+    });
+
+    // Clear error for this field when user starts typing
+    if (errors[name]) {
+      setErrors({
+        ...errors,
+        [name]: ''
+      });
+    }
+  };
+
+  const validateForm = () =&gt; {
+    const newErrors = {};
+
+    if (!movieData.name.trim()) {
+      newErrors.name = 'Movie name is required';
+    }
+
+    if (!movieData.year || movieData.year &lt; 1800) {
+      newErrors.year = 'Please enter a valid year';
+    }
+
+    if (!movieData.rating) {
+      newErrors.rating = 'Rating is required';
+    }
+
+    if (!movieData.length.trim()) {
+      newErrors.length = 'Movie length is required';
+    }
+
+    if (!movieData.description.trim() || movieData.description.length &lt; 10) {
+      newErrors.description = 'Description must be at least 10 characters';
+    }
+
+    if (!movieData.director.trim()) {
+      newErrors.director = 'Director is required';
+    }
+
+    if (!movieData.genre.trim()) {
+      newErrors.genre = 'At least one genre is required';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) =&gt; {
+    e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const processedMovie = {
+        ...movieData,
+        genre: movieData.genre.split(',').map(g =&gt; g.trim()).filter(Boolean),
+        stars: movieData.stars.split(',').map(s =&gt; s.trim()).filter(Boolean),
+        year: parseInt(movieData.year)
+      };
+
+      if (editingMovie) {
+        await onUpdateMovie({ ...processedMovie, _id: editingMovie._id });
+      } else {
+        await onAddMovie(processedMovie);
+      }
+    } catch (error) {
+      // Error handling is done in parent component
+      console.error('Form submission error:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    &lt;div className=&quot;movie-form&quot;&gt;
+      &lt;h2&gt;{editingMovie ? 'Edit Movie' : 'Add New Movie'}&lt;/h2&gt;
+      
+      &lt;form onSubmit={handleSubmit}&gt;
+        &lt;div className=&quot;form-group&quot;&gt;
+          &lt;input
+            type=&quot;text&quot;
+            name=&quot;name&quot;
+            placeholder=&quot;Movie Name *&quot;
+            value={movieData.name}
+            onChange={handleInputChange}
+            className={errors.name ? 'error' : ''}
+            required
+          /&gt;
+          {errors.name &amp;&amp; &lt;span className=&quot;error-message&quot;&gt;{errors.name}&lt;/span&gt;}
+        &lt;/div&gt;
+
+        &lt;div className=&quot;form-group&quot;&gt;
+          &lt;input
+            type=&quot;number&quot;
+            name=&quot;year&quot;
+            placeholder=&quot;Year *&quot;
+            value={movieData.year}
+            onChange={handleInputChange}
+            className={errors.year ? 'error' : ''}
+            min=&quot;1800&quot;
+            max={new Date().getFullYear() + 5}
+            required
+          /&gt;
+          {errors.year &amp;&amp; &lt;span className=&quot;error-message&quot;&gt;{errors.year}&lt;/span&gt;}
+        &lt;/div&gt;
+
+        &lt;div className=&quot;form-group&quot;&gt;
+          &lt;select
+            name=&quot;rating&quot;
+            value={movieData.rating}
+            onChange={handleInputChange}
+            className={errors.rating ? 'error' : ''}
+            required
+          &gt;
+            &lt;option value=&quot;&quot;&gt;Select Rating *&lt;/option&gt;
+            &lt;option value=&quot;G&quot;&gt;G&lt;/option&gt;
+            &lt;option value=&quot;PG&quot;&gt;PG&lt;/option&gt;
+            &lt;option value=&quot;PG-13&quot;&gt;PG-13&lt;/option&gt;
+            &lt;option value=&quot;R&quot;&gt;R&lt;/option&gt;
+            &lt;option value=&quot;NC-17&quot;&gt;NC-17&lt;/option&gt;
+            &lt;option value=&quot;NR&quot;&gt;Not Rated&lt;/option&gt;
+          &lt;/select&gt;
+          {errors.rating &amp;&amp; &lt;span className=&quot;error-message&quot;&gt;{errors.rating}&lt;/span&gt;}
+        &lt;/div&gt;
+
+        &lt;div className=&quot;form-group&quot;&gt;
+          &lt;input
+            type=&quot;text&quot;
+            name=&quot;length&quot;
+            placeholder=&quot;Length (e.g., '120 minutes') *&quot;
+            value={movieData.length}
+            onChange={handleInputChange}
+            className={errors.length ? 'error' : ''}
+            required
+          /&gt;
+          {errors.length &amp;&amp; &lt;span className=&quot;error-message&quot;&gt;{errors.length}&lt;/span&gt;}
+        &lt;/div&gt;
+
+        &lt;div className=&quot;form-group&quot;&gt;
+          &lt;textarea
+            name=&quot;description&quot;
+            placeholder=&quot;Description (minimum 10 characters) *&quot;
+            value={movieData.description}
+            onChange={handleInputChange}
+            className={errors.description ? 'error' : ''}
+            rows=&quot;4&quot;
+            required
+          /&gt;
+          {errors.description &amp;&amp; &lt;span className=&quot;error-message&quot;&gt;{errors.description}&lt;/span&gt;}
+        &lt;/div&gt;
+
+        &lt;div className=&quot;form-group&quot;&gt;
+          &lt;input
+            type=&quot;text&quot;
+            name=&quot;genre&quot;
+            placeholder=&quot;Genres (comma-separated) *&quot;
+            value={movieData.genre}
+            onChange={handleInputChange}
+            className={errors.genre ? 'error' : ''}
+            required
+          /&gt;
+          {errors.genre &amp;&amp; &lt;span className=&quot;error-message&quot;&gt;{errors.genre}&lt;/span&gt;}
+        &lt;/div&gt;
+
+        &lt;div className=&quot;form-group&quot;&gt;
+          &lt;input
+            type=&quot;text&quot;
+            name=&quot;director&quot;
+            placeholder=&quot;Director *&quot;
+            value={movieData.director}
+            onChange={handleInputChange}
+            className={errors.director ? 'error' : ''}
+            required
+          /&gt;
+          {errors.director &amp;&amp; &lt;span className=&quot;error-message&quot;&gt;{errors.director}&lt;/span&gt;}
+        &lt;/div&gt;
+
+        &lt;div className=&quot;form-group&quot;&gt;
+          &lt;input
+            type=&quot;text&quot;
+            name=&quot;stars&quot;
+            placeholder=&quot;Stars (comma-separated)&quot;
+            value={movieData.stars}
+            onChange={handleInputChange}
+          /&gt;
+        &lt;/div&gt;
+
+        &lt;div className=&quot;form-buttons&quot;&gt;
+          &lt;button 
+            type=&quot;submit&quot; 
+            disabled={isSubmitting}
+            className={isSubmitting ? 'submitting' : ''}
+          &gt;
+            {isSubmitting ? 'Saving...' : (editingMovie ? 'Update Movie' : 'Add Movie')}
+          &lt;/button&gt;
+          &lt;button type=&quot;button&quot; onClick={onCancel}&gt;Cancel&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default MovieForm;
+</code></pre>
+<hr>
+<h2 id="data-validation-and-sanitization" tabindex="-1">Data Validation and Sanitization</h2>
+<p>Proper data validation and sanitization are crucial for CREATE operations:</p>
+<pre><code class="language-javascript">// Example validation middleware (optional)
+const validateMovieData = (req, res, next) =&gt; {
+  const { name, year, rating, length, description, director } = req.body;
+
+  // Check required fields
+  if (!name || !year || !rating || !length || !description || !director) {
+    return res.status(400).json({
+      success: false,
+      error: 'Missing required fields'
+    });
+  }
+
+  // Validate data types
+  if (typeof year !== 'number' || year &lt; 1800 || year &gt; new Date().getFullYear() + 5) {
+    return res.status(400).json({
+      success: false,
+      error: 'Year must be a valid number between 1800 and future releases'
+    });
+  }
+
+  // Validate rating
+  const validRatings = ['G', 'PG', 'PG-13', 'R', 'NC-17', 'NR'];
+  if (!validRatings.includes(rating)) {
+    return res.status(400).json({
+      success: false,
+      error: 'Rating must be one of: ' + validRatings.join(', ')
+    });
+  }
+
+  // Sanitize strings
+  req.body.name = name.toString().trim();
+  req.body.director = director.toString().trim();
+  req.body.description = description.toString().trim();
+
+  next();
+};
+
+// Use in routes
+router.post('/', validateMovieData, createMovie);
+</code></pre>
+<hr>
+<h2 id="testing-create-operations" tabindex="-1">Testing CREATE Operations</h2>
+<h3 id="using-curl" tabindex="-1">Using curl</h3>
+<pre><code class="language-bash"># Test successful creation
+curl -X POST http://localhost:4000/api/movies \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{
+    &quot;name&quot;: &quot;Test Movie&quot;,
+    &quot;year&quot;: 2024,
+    &quot;rating&quot;: &quot;PG-13&quot;,
+    &quot;length&quot;: &quot;120 minutes&quot;,
+    &quot;description&quot;: &quot;A test movie for our API&quot;,
+    &quot;genre&quot;: [&quot;Comedy&quot;, &quot;Drama&quot;],
+    &quot;director&quot;: &quot;Test Director&quot;,
+    &quot;stars&quot;: [&quot;Actor One&quot;, &quot;Actor Two&quot;]
+  }'
+
+# Test validation errors
+curl -X POST http://localhost:4000/api/movies \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{
+    &quot;name&quot;: &quot;&quot;,
+    &quot;year&quot;: &quot;not a number&quot;,
+    &quot;rating&quot;: &quot;INVALID&quot;
+  }'
+
+# Test missing data
+curl -X POST http://localhost:4000/api/movies \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{}'
+</code></pre>
+<h3 id="using-javascript-fetch" tabindex="-1">Using JavaScript fetch()</h3>
+<pre><code class="language-javascript">// Test in browser console or React app
+const testCreateMovie = async () =&gt; {
+  try {
+    const response = await fetch('http://localhost:4000/api/movies', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: &quot;JavaScript Test Movie&quot;,
+        year: 2024,
+        rating: &quot;R&quot;,
+        length: &quot;95 minutes&quot;,
+        description: &quot;A movie created via JavaScript fetch&quot;,
+        genre: [&quot;Thriller&quot;],
+        director: &quot;JS Developer&quot;,
+        stars: [&quot;Code Master&quot;, &quot;Debug Hero&quot;]
+      }),
+    });
+
+    const result = await response.json();
+    console.log('Result:', result);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
+
+testCreateMovie();
+</code></pre>
+<hr>
+<h2 id="error-handling-best-practices" tabindex="-1">Error Handling Best Practices</h2>
+<pre><code class="language-javascript">// Comprehensive error handling example
+const createMovieWithErrorHandling = async (req, res) =&gt; {
+  try {
+    const movieData = req.body;
+
+    // Input validation
+    if (!movieData) {
+      return res.status(400).json({
+        success: false,
+        error: 'Request body is required',
+        code: 'MISSING_BODY'
+      });
+    }
+
+    // Create movie
+    const newMovie = await Movie.create(movieData);
+
+    // Success response
+    res.status(201).json({
+      success: true,
+      message: 'Movie created successfully',
+      data: newMovie
+    });
+
+  } catch (error) {
+    // Log error for debugging
+    console.error('CREATE Error:', {
+      message: error.message,
+      stack: error.stack,
+      name: error.name,
+      code: error.code
+    });
+
+    // Validation errors
+    if (error.name === 'ValidationError') {
+      return res.status(400).json({
+        success: false,
+        error: 'Validation failed',
+        code: 'VALIDATION_ERROR',
+        details: Object.values(error.errors).map(err =&gt; ({
+          field: err.path,
+          message: err.message,
+          rejectedValue: err.value
+        }))
+      });
+    }
+
+    // Duplicate key errors
+    if (error.code === 11000) {
+      const field = Object.keys(error.keyPattern)[0];
+      return res.status(409).json({
+        success: false,
+        error: `Duplicate ${field}`,
+        code: 'DUPLICATE_KEY',
+        field: field
+      });
+    }
+
+    // Cast errors (wrong data type)
+    if (error.name === 'CastError') {
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid data type',
+        code: 'CAST_ERROR',
+        details: {
+          field: error.path,
+          expectedType: error.kind,
+          receivedValue: error.value
+        }
+      });
+    }
+
+    // Generic server error
+    res.status(500).json({
+      success: false,
+      error: 'Internal server error',
+      code: 'INTERNAL_ERROR',
+      message: process.env.NODE_ENV === 'development' ? error.message : 'Something went wrong'
+    });
+  }
+};
+</code></pre>
+<hr>
+<h2 id="security-considerations" tabindex="-1">Security Considerations</h2>
+<p>When implementing CREATE operations, consider these security measures:</p>
+<pre><code class="language-javascript">// 1. Rate limiting (requires express-rate-limit)
+const rateLimit = require('express-rate-limit');
+
+const createMovieRateLimit = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 10, // limit each IP to 10 requests per windowMs
+  message: {
+    success: false,
+    error: 'Too many movies created, please try again later'
+  }
+});
+
+router.post('/', createMovieRateLimit, createMovie);
+
+// 2. Input size limiting
+app.use(express.json({ limit: '1mb' })); // Limit request body size
+
+// 3. Data sanitization
+const sanitizeInput = (req, res, next) =&gt; {
+  // Remove potentially dangerous characters
+  for (let key in req.body) {
+    if (typeof req.body[key] === 'string') {
+      req.body[key] = req.body[key]
+        .replace(/&lt;script\b[^&lt;]*(?:(?!&lt;\/script&gt;)&lt;[^&lt;]*)*&lt;\/script&gt;/gi, '') // Remove scripts
+        .trim();
+    }
+  }
+  next();
+};
+
+router.post('/', sanitizeInput, createMovie);
+
+// 4. Authentication (placeholder)
+const authenticateUser = (req, res, next) =&gt; {
+  // Add authentication logic here
+  // For now, just continue
+  next();
+};
+
+router.post('/', authenticateUser, createMovie);
+</code></pre>
+<hr>
+<h2 id="final-thoughts" tabindex="-1">Final Thoughts</h2>
+<p>We've successfully implemented CREATE functionality for our Movie Buzz application! Our implementation includes:</p>
+<ul>
+<li><strong>Robust Data Validation</strong>: Schema-based validation with custom rules</li>
+<li><strong>Comprehensive Error Handling</strong>: Specific error types with helpful messages</li>
+<li><strong>Data Sanitization</strong>: Clean and format incoming data</li>
+<li><strong>Frontend Integration</strong>: React forms with validation and error display</li>
+<li><strong>Security Measures</strong>: Rate limiting and input sanitization</li>
+<li><strong>Professional API Design</strong>: Proper HTTP status codes and response formats</li>
+</ul>
+<p>The CREATE operations now support:</p>
+<ul>
+<li>Single movie creation with full validation</li>
+<li>Bulk movie creation (optional)</li>
+<li>Rich error responses for debugging</li>
+<li>Frontend form validation</li>
+<li>Security best practices</li>
+</ul>
+<p>Next week, we'll implement UPDATE functionality, allowing users to modify existing movies while maintaining data integrity.</p>
+<blockquote class="callout callout--reflection-consider">
+<div class="callout-label">🤔 Reflection Prompt — Consider This</div>
+<p><code>Consider This</code><br>
+How does proper validation and error handling in CREATE operations improve the user experience? What would happen without these safeguards?</p>
+</blockquote>
+<hr>
+<h2 id="exit-ticket" tabindex="-1">Exit Ticket</h2>
+<p>Please complete the exit ticket in the LMS. You may use the lesson plan for this session, but do not use any additional resources. This exit ticket will not be part of your grade for the course, and rather is used to inform future instruction and curricular releases.</p>
+<hr>
+<h2 id="review" tabindex="-1">Review</h2>
+<ul>
+<li>What are the key principles of implementing CREATE operations?</li>
+<li>How do you handle validation errors in Mongoose?</li>
+<li>What HTTP status code should be used for successful resource creation?</li>
+<li>How do you implement data sanitization for security?</li>
+<li>What are the differences between <code>new Model()</code> + <code>save()</code> vs <code>Model.create()</code>?</li>
+<li>How do you provide meaningful error messages to frontend applications?</li>
+</ul>
+
+<div class="pager">
+<a href="../week_12_mongoose_and_read/index.html">← Week 12</a>
+<a href="../week_14_update_functionality/index.html">Week 14 →</a>
+</div>
+</main>
+</div>
+</body>
+</html>

@@ -6,15 +6,15 @@ const router = express.Router();
 router.get('/api/movies', movieController.getMovies);
 
 // GET single movie by ID (for edit form)
-router.get('/api/movie/:id', movieController.getMovieToEdit);
+router.get('/api/movies/:id', movieController.getMovieToEdit);
 
 // POST new movie
-router.post('/api/movie/new', movieController.createMovie);
+router.post('/api/movies', movieController.createMovie);
 
 // DELETE movie
-router.delete('/api/movie/:id', movieController.deleteMovie);
+router.delete('/api/movies/:id', movieController.deleteMovie);
 
 // PUT update movie
-router.put('/api/movie/:id', movieController.updateMovie);
+router.put('/api/movies/:id', movieController.updateMovie);
 
 module.exports = router;

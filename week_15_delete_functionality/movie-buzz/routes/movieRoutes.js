@@ -1,3 +1,13 @@
+/**
+ * STARTER FILE — Week 15: DELETE Operations
+ *
+ * This file is intentionally incomplete. Your task:
+ *   1. Implement deleteMovie in controllers/movieController.js
+ *   2. Uncomment router.delete('/:id', deleteMovie) and remove the placeholder route
+ *
+ * Reference: movie-buzz-finished/server/routes/movieRoutes.js
+ * Do not copy from the reference — implement it yourself first.
+ */
 const express = require('express');
 const {
   getMovies,
@@ -16,7 +26,7 @@ router.get('/test', (req, res) => {
   res.json({
     success: true,
     message: 'Movie routes are working!',
-    week: 13,
+    week: 15,
     focus: 'DELETE Operations',
     availableRoutes: [
       'GET /api/movies - Get all movies',

@@ -414,10 +414,10 @@ GET /movies → JSON
 ### API Endpoints
 
 - `GET /api/movies`
-- `POST /api/movie/new`
-- `GET /api/movie/:id`
-- `PUT /api/movie/:id`
-- `DELETE /api/movie/:id`
+- `POST /api/movies`
+- `GET /api/movies/:id`
+- `PUT /api/movies/:id`
+- `DELETE /api/movies/:id`
 
 </div>
 
@@ -632,7 +632,7 @@ const Movie = model('Movie', movieSchema);
 <div class="bg-gray-900 p-4 rounded text-sm">
 
 ```javascript
-POST /api/movie/new
+POST /api/movies
 
 const newMovie = new Movie(req.body);
 await newMovie.save();
@@ -683,7 +683,7 @@ res.status(201).json(newMovie);
 <div class="bg-gray-900 p-4 rounded text-sm">
 
 ```javascript
-PUT /api/movie/:id
+PUT /api/movies/:id
 
 const updated = await Movie
   .findByIdAndUpdate(
@@ -735,7 +735,7 @@ const updated = await Movie
 <div class="bg-gray-900 p-4 rounded text-sm">
 
 ```javascript
-DELETE /api/movie/:id
+DELETE /api/movies/:id
 
 const deleted = await Movie
   .findByIdAndDelete(req.params.id);

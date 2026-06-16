@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>🎬 Week 04: React State & Hooks — Student Guide · Movie Buzz Lesson Viewer</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+<label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
+<div class="layout">
+<nav class="sidebar" aria-label="Course weeks">
+<div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
+<a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
+<a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
+<a class="nav-link" href="../week_02_dev_environment/index.html">Week 02 · Dev Environment</a>
+<a class="nav-link" href="../week_03_intro_to_react/index.html">Week 03 · Intro to React</a>
+<a class="nav-link active" href="../week_04_react_state_and_hooks/index.html">Week 04 · React State & Hooks</a>
+<a class="nav-link" href="../week_05_react_events_and_hooks/index.html">Week 05 · React Events & Hooks</a>
+<a class="nav-link" href="../week_06_react_component_patterns/index.html">Week 06 · React Component Patterns</a>
+<a class="nav-link" href="../week_07_react_hooks_and_context/index.html">Week 07 · React Hooks & Context</a>
+<div class="nav-phase">Weeks 08–16 · Backend (Node, Express, MongoDB)</div>
+<a class="nav-link" href="../week_08_nodejs_and_http/index.html">Week 08 · Node.js & HTTP</a>
+<a class="nav-link" href="../week_09_express_and_cors/index.html">Week 09 · Express & CORS</a>
+<a class="nav-link" href="../week_10_tic_tac_toe_checkpoint/index.html">Week 10 · Tic-Tac-Toe Checkpoint</a>
+<a class="nav-link" href="../week_11_intro_to_mongodb/index.html">Week 11 · Intro to MongoDB</a>
+<a class="nav-link" href="../week_12_mongoose_and_read/index.html">Week 12 · Mongoose & Read</a>
+<a class="nav-link" href="../week_13_create_functionality/index.html">Week 13 · Create Functionality</a>
+<a class="nav-link" href="../week_14_update_functionality/index.html">Week 14 · Update Functionality</a>
+<a class="nav-link" href="../week_15_delete_functionality/index.html">Week 15 · Delete Functionality</a>
+<a class="nav-link" href="../week_16_frontend_backend_integration/index.html">Week 16 · Frontend/Backend Integration</a>
+<div class="nav-phase">Optional Modules</div>
+<a class="nav-link" href="../week_optional_search_feature/index.html">Search Feature</a>
+<a class="nav-link" href="../week_optional_testing_suite/index.html">Testing Suite</a>
+</nav>
+<main class="main">
+<div class="page-header">
+<div class="breadcrumb">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
+</div>
+<h1 id="🎬-week-04-react-state--hooks-—-student-guide" tabindex="-1">🎬 Week 04: React State &amp; Hooks — Student Guide</h1>
+<blockquote class="callout callout--meta">
+<p>🔑 <strong>Access Code:</strong> <code>loop84</code>   ·   ⏱️ <strong>Estimated Time:</strong> 3–4 hrs   ·   🎯 <strong>Difficulty:</strong> ⭐⭐</p>
+</blockquote>
+<hr>
+<h2 id="🗺️-what-youre-building-this-week" tabindex="-1">🗺️ What You're Building This Week</h2>
+<p>This week you will add interactivity to individual Movie Buzz cards. Each card will gain a favorites toggle — a heart icon that flips between favorited and unfavorited when clicked — and a show/hide description toggle that expands or collapses the movie's description. Both features live entirely in the component; no database is involved yet.</p>
+<blockquote class="callout callout--tip">
+<p>💡 <strong>This week in the arc:</strong> You've already built static components that display data; now you're making those components respond to user actions, which is the foundation for every interactive feature in the rest of the course.</p>
+</blockquote>
+<hr>
+<h2 id="🎯-learning-objectives" tabindex="-1">🎯 Learning Objectives</h2>
+<p>By the end of this week you will be able to:</p>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> Explain what React state is and how it differs from props</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> Use the <code>useState</code> hook to add and update local component state</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> Write an event handler that calls a state setter correctly</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> Use <code>useEffect</code> to run code in response to a state change or component mount</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> Describe what triggers a React re-render and why immutable updates matter</li>
+</ul>
+<hr>
+<h2 id="🔑-key-concepts" tabindex="-1">🔑 Key Concepts</h2>
+<blockquote class="callout callout--concept">
+<p><strong>State</strong>
+A piece of data that a component owns and can change over time. When state changes, React automatically re-renders the component so the UI stays in sync. Think of it as a sticky note on the fridge that React is watching — the moment you change what the note says, React redraws anything that reads from it.</p>
+</blockquote>
+<blockquote class="callout callout--concept">
+<p><strong>useState</strong>
+The React hook that creates a state variable and a setter function. You call it at the top of your component: <code>const [value, setValue] = useState(initialValue)</code>. You always update state by calling the setter — never by modifying <code>value</code> directly.</p>
+</blockquote>
+<blockquote class="callout callout--concept">
+<p><strong>useEffect</strong>
+The React hook that lets you run a side effect (anything outside the render itself — fetching data, updating the document title, reading from localStorage) after the component renders. The dependency array controls when the effect re-runs.</p>
+</blockquote>
+<blockquote class="callout callout--concept">
+<p><strong>Re-render</strong>
+React re-draws a component whenever its state or props change. Re-renders are cheap and intentional — don't be afraid of them. What you must avoid is accidentally preventing them (by mutating state instead of replacing it) or causing infinite loops (by updating state inside an effect with no dependency array).</p>
+</blockquote>
+<blockquote class="callout callout--concept">
+<p><strong>Controlled Component</strong>
+A form element whose <code>value</code> is bound to React state, so React is the single source of truth. Every keystroke calls a setter; the displayed value always reflects state.</p>
+</blockquote>
+<hr>
+<h2 id="⚙️-setup" tabindex="-1">⚙️ Setup</h2>
+<details>
+<summary>📦 Step-by-step environment setup</summary>
+<h3 class="step-heading" id="1step-1-navigate-to-this-weeks-directory" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Navigate to this week's directory</h3>
+<pre><code class="language-bash">cd week_04_react_state_and_hooks/movie-buzz
+</code></pre>
+<h3 class="step-heading" id="2step-2-install-client-dependencies" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Install client dependencies</h3>
+<pre><code class="language-bash">cd client &amp;&amp; npm install
+</code></pre>
+<h3 class="step-heading" id="3step-3-start-the-react-development-server" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Start the React development server</h3>
+<pre><code class="language-bash">npm start
+</code></pre>
+<h3 class="step-heading" id="4step-4-verify-its-working" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Verify it's working</h3>
+<pre><code class="language-bash"># Expected: browser opens to http://localhost:3000
+# You should see a list of movies rendered from static data
+</code></pre>
+</details>
+<details>
+<summary>✅ Pre-flight checklist — confirm before starting</summary>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> You completed Week 03 (or reviewed the reference implementation in <code>week_03_intro_to_react/movie-buzz-finished/</code>)</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> Node.js v18+ is installed (<code>node -v</code>)</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <code>npm install</code> completed with no errors</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> The app loads at <code>http://localhost:3000</code> without a blank screen</li>
+</ul>
+</details>
+<hr>
+<h2 id="📚-core-concepts" tabindex="-1">📚 Core Concepts</h2>
+<h3 id="what-is-state-—-and-why-does-it-matter" tabindex="-1">What is State — and Why Does It Matter?</h3>
+<p>Props flow down from parent to child and are read-only inside the component that receives them. State is different: it belongs to the component that declares it, and only that component can change it. When you call a setter function, React schedules a re-render and then calls your component function again with the new value, producing updated JSX.</p>
+<pre><code class="language-javascript">// A simple example — NOT a task solution
+import { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Count: {count}&lt;/p&gt;
+      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;Increment&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<p>Every time the button is clicked, <code>setCount</code> is called, <code>count</code> increases by 1, React re-renders <code>Counter</code>, and the paragraph shows the updated number. The critical rule: <strong>never do <code>count = count + 1</code></strong> — mutating the variable directly does not tell React anything changed.</p>
+<details>
+<summary>🤔 Comprehension check — think before expanding</summary>
+<p>Before moving on, try to answer:</p>
+<ol>
+<li>If you have <code>const [name, setName] = useState(&quot;Alice&quot;)</code> and you want the display to show &quot;Bob&quot;, what exactly do you write?</li>
+<li>If state is updated in a click handler but the screen never changes, what is the most likely mistake?</li>
+</ol>
+<p><em>(Discuss with your instructor if you're unsure — do not look at finished code until you have a guess)</em></p>
+</details>
+<hr>
+<h3 id="the-usestate-hook-—-destructuring-the-pair" tabindex="-1">The useState Hook — Destructuring the Pair</h3>
+<p><code>useState</code> returns a two-element array. The convention is to destructure it immediately. The first element is the current value; the second is the function you call to update it.</p>
+<pre><code class="language-javascript">// ✅ Correct — destructure at declaration
+const [isFavorited, setIsFavorited] = useState(false);
+
+// ✅ Calling the setter toggles the boolean
+const handleFavoriteClick = () =&gt; {
+  setIsFavorited(!isFavorited);
+};
+
+// ❌ Wrong — mutating the variable does nothing
+isFavorited = true; // React never sees this change
+</code></pre>
+<p>You can call <code>useState</code> multiple times in one component to manage multiple independent pieces of state.</p>
+<hr>
+<h3 id="the-useeffect-hook-—-running-code-after-render" tabindex="-1">The useEffect Hook — Running Code After Render</h3>
+<p><code>useEffect</code> takes two arguments: a callback function and a dependency array. React runs the callback after every render by default. The dependency array limits when it runs:</p>
+<pre><code class="language-javascript">// Runs once on mount only (empty dependency array)
+useEffect(() =&gt; {
+  console.log('Component mounted');
+}, []);
+
+// Runs every time `isFavorited` changes
+useEffect(() =&gt; {
+  console.log('Favorite status changed to:', isFavorited);
+}, [isFavorited]);
+
+// Runs after EVERY render (no dependency array — usually a mistake)
+useEffect(() =&gt; {
+  console.log('This runs constantly');
+});
+</code></pre>
+<p>This week you will use <code>useEffect</code> to synchronize a side effect (writing to <code>localStorage</code>) with your favorites state.</p>
+<details>
+<summary>🤔 Comprehension check — think before expanding</summary>
+<p>Before moving on, try to answer:</p>
+<ol>
+<li>What happens if you call <code>setIsFavorited</code> inside a <code>useEffect</code> that lists <code>isFavorited</code> as a dependency?</li>
+<li>When would you use <code>[]</code> vs <code>[someValue]</code> as the dependency array?</li>
+</ol>
+<p><em>(If you're unsure, talk it through with your instructor before writing any code)</em></p>
+</details>
+<hr>
+<h3 id="event-handlers-—-where-state-changes-happen" tabindex="-1">Event Handlers — Where State Changes Happen</h3>
+<p>Event handlers are plain JavaScript functions that you pass to JSX event props like <code>onClick</code> and <code>onChange</code>. The key rules:</p>
+<pre><code class="language-javascript">// ✅ Pass the function reference — React calls it on click
+&lt;button onClick={handleClick}&gt;Click me&lt;/button&gt;
+
+// ✅ Arrow function in JSX is fine for simple cases
+&lt;button onClick={() =&gt; setCount(count + 1)}&gt;+&lt;/button&gt;
+
+// ❌ Wrong — calling the function immediately on render
+&lt;button onClick={handleClick()}&gt;This runs immediately, not on click&lt;/button&gt;
+</code></pre>
+<hr>
+<h2 id="🛠️-your-tasks" tabindex="-1">🛠️ Your Tasks</h2>
+<blockquote class="callout callout--warning">
+<p>⚠️ <strong>Reminder:</strong> Implement each TODO yourself. Looking at <code>movie-buzz-finished/</code> before you've tried is the fast path to forgetting everything by next week.</p>
+</blockquote>
+<h3 class="step-heading" id="1step-1-add-a-favorites-toggle-to-movieblock" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Add a Favorites Toggle to MovieBlock</h3>
+<p><strong>File to edit:</strong> <code>client/src/components/MovieBlock.js</code></p>
+<p><strong>What you're doing:</strong> Add an <code>isFavorited</code> state variable that flips between <code>true</code> and <code>false</code> each time the user clicks the heart icon.</p>
+<pre><code class="language-javascript">// STARTER CODE — implement the TODO blocks
+import { useState } from 'react';
+
+function MovieBlock({ movie }) {
+  // TODO: Declare an isFavorited state variable, initialized to false
+
+  // TODO: Write a handleFavoriteClick function that toggles isFavorited
+
+  return (
+    &lt;div className=&quot;movie-block&quot;&gt;
+      &lt;div className=&quot;movie-info&quot;&gt;
+        &lt;h3&gt;{movie.name}&lt;/h3&gt;
+        &lt;p&gt;{movie.year} · {movie.director}&lt;/p&gt;
+        {/* TODO: Render a heart button that:
+              - Calls handleFavoriteClick when clicked
+              - Displays &quot;❤️&quot; when isFavorited is true
+              - Displays &quot;🤍&quot; when isFavorited is false
+        */}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default MovieBlock;
+</code></pre>
+<details>
+<summary>💡 Stuck? Expand for a hint — not an answer</summary>
+<ul>
+<li><strong>Think about:</strong> The toggle pattern — the new value of <code>isFavorited</code> is always the opposite of the current value.</li>
+<li><strong>Check:</strong> Are you passing the function reference to <code>onClick</code>, or calling it immediately?</li>
+<li><strong>The pattern looks like:</strong> <code>set___(!___)</code> inside your handler function.</li>
+</ul>
+</details>
+<hr>
+<h3 class="step-heading" id="2step-2-add-an-expandcollapse-description-toggle" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Add an Expand/Collapse Description Toggle</h3>
+<p><strong>File to edit:</strong> <code>client/src/components/MovieBlock.js</code></p>
+<p><strong>What you're doing:</strong> Add a second piece of state, <code>isExpanded</code>, that controls whether the full movie description is visible. A &quot;Show more&quot; / &quot;Show less&quot; button toggles it.</p>
+<pre><code class="language-javascript">// STARTER CODE — add to your existing MovieBlock component
+// (This is a continuation of Task 1 — both states live in MovieBlock)
+
+function MovieBlock({ movie }) {
+  // (your isFavorited state from Task 1 is here)
+
+  // TODO: Declare an isExpanded state variable, initialized to false
+
+  // TODO: Write a handleExpandClick function that toggles isExpanded
+
+  return (
+    &lt;div className=&quot;movie-block&quot;&gt;
+      &lt;div className=&quot;movie-info&quot;&gt;
+        &lt;h3&gt;{movie.name}&lt;/h3&gt;
+        &lt;p&gt;{movie.year} · {movie.director}&lt;/p&gt;
+
+        {/* TODO: Conditionally render movie.description only when isExpanded is true */}
+
+        {/* TODO: Render a button that:
+              - Calls handleExpandClick when clicked
+              - Displays &quot;Show more&quot; when isExpanded is false
+              - Displays &quot;Show less&quot; when isExpanded is true
+        */}
+
+        {/* Your heart button from Task 1 goes here */}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<details>
+<summary>💡 Stuck? Expand for a hint — not an answer</summary>
+<ul>
+<li><strong>Think about:</strong> Conditional rendering in JSX uses the <code>&amp;&amp;</code> operator or a ternary.</li>
+<li><strong>Check:</strong> Do you have two separate state variables (<code>isFavorited</code> and <code>isExpanded</code>) or are you trying to combine them?</li>
+<li><strong>The pattern looks like:</strong> <code>{isExpanded &amp;&amp; &lt;p&gt;{movie.description}&lt;/p&gt;}</code> for the conditional, and <code>{isExpanded ? 'Show less' : 'Show more'}</code> for the button label.</li>
+</ul>
+</details>
+<hr>
+<h3 class="step-heading" id="3step-3-verify-both-states-survive-multiple-clicks" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Verify Both States Survive Multiple Clicks</h3>
+<p><strong>File to verify:</strong> <code>client/src/components/MovieBlock.js</code></p>
+<p><strong>What you're doing:</strong> This is a testing task, not a coding task. Manually click the heart and expand buttons on multiple movie cards in sequence and answer these questions before moving on:</p>
+<ol>
+<li>If you favorite card A and then expand card B, is card A still favorited?</li>
+<li>If you click &quot;Show more&quot; on card C and then &quot;Show less&quot;, does it return to the collapsed state?</li>
+<li>What happens if you click the heart button 5 times in a row — do you end up back at the starting state?</li>
+</ol>
+<p>These questions reveal whether your state is truly local to each component instance. If a click on one card affects another, your state is probably in the wrong place.</p>
+<details>
+<summary>💡 Stuck? Expand for a hint — not an answer</summary>
+<ul>
+<li><strong>Think about:</strong> Each <code>&lt;MovieBlock&gt;</code> rendered by <code>MoviesList</code> is a separate component instance with its own independent state.</li>
+<li><strong>Check:</strong> Is your state declared inside <code>MovieBlock</code>, or is it declared in a parent component and passed down as a prop?</li>
+<li><strong>The pattern looks like:</strong> <code>const [isFavorited, setIsFavorited] = useState(false)</code> should be the first line inside the <code>MovieBlock</code> function body.</li>
+</ul>
+</details>
+<hr>
+<h3 class="step-heading" id="4step-4-use-useeffect-to-log-state-changes" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Use useEffect to Log State Changes</h3>
+<p><strong>File to edit:</strong> <code>client/src/components/MovieBlock.js</code></p>
+<p><strong>What you're doing:</strong> Add a <code>useEffect</code> that logs to the console whenever <code>isFavorited</code> changes. This is a diagnostic step — it confirms you understand the dependency array and prepares you for the localStorage stretch goal.</p>
+<pre><code class="language-javascript">// STARTER CODE — add this inside MovieBlock, after your state declarations
+
+// TODO: Add a useEffect that:
+//   - Runs only when isFavorited changes (not on every render)
+//   - Logs: &quot;Favorite status changed: true&quot; or &quot;Favorite status changed: false&quot;
+//   - Uses the correct dependency array
+</code></pre>
+<details>
+<summary>💡 Stuck? Expand for a hint — not an answer</summary>
+<ul>
+<li><strong>Think about:</strong> Which argument to <code>useEffect</code> controls when it runs?</li>
+<li><strong>Check:</strong> Open your browser DevTools Console tab. You should see the log message fire exactly once per click on the heart — not once on load, not continuously.</li>
+<li><strong>The pattern looks like:</strong> <code>useEffect(() =&gt; { /* side effect here */ }, [dependency])</code> where the dependency is the state variable you want to watch.</li>
+</ul>
+</details>
+<hr>
+<h2 id="🐛-common-errors--fixes" tabindex="-1">🐛 Common Errors &amp; Fixes</h2>
+<details>
+<summary>❌ Error: Clicking the button changes nothing — the UI does not update</summary>
+<p><strong>Why this happens:</strong>
+You are modifying the variable directly instead of calling the setter function. React only triggers a re-render when you use the setter.</p>
+<p><strong>Check these things:</strong></p>
+<ol>
+<li>Are you calling <code>setIsFavorited(...)</code> or are you writing <code>isFavorited = ...</code>?</li>
+<li>Is your handler function actually connected to the button's <code>onClick</code> prop?</li>
+</ol>
+<p><strong>The fix:</strong></p>
+<pre><code class="language-javascript">// Wrong — mutating state directly:
+const handleClick = () =&gt; {
+  isFavorited = !isFavorited; // React never sees this
+};
+
+// Correct — calling the setter:
+const handleClick = () =&gt; {
+  setIsFavorited(!isFavorited); // React sees this and re-renders
+};
+</code></pre>
+</details>
+<details>
+<summary>❌ Error: The handler fires immediately when the page loads, not on click</summary>
+<p><strong>Why this happens:</strong>
+You are calling the function in the JSX (<code>onClick={handleClick()}</code>) instead of passing the function reference (<code>onClick={handleClick}</code>). Adding <code>()</code> calls it immediately during render.</p>
+<p><strong>Check these things:</strong></p>
+<ol>
+<li>Look at your JSX — does the <code>onClick</code> value have parentheses after the function name?</li>
+<li>Are you seeing console logs or state changes on initial render before any clicking?</li>
+</ol>
+<p><strong>The fix:</strong></p>
+<pre><code class="language-javascript">// Wrong — calling the function immediately:
+&lt;button onClick={handleFavoriteClick()}&gt;Heart&lt;/button&gt;
+
+// Correct — passing the reference:
+&lt;button onClick={handleFavoriteClick}&gt;Heart&lt;/button&gt;
+
+// Also correct — arrow function wrapper:
+&lt;button onClick={() =&gt; handleFavoriteClick()}&gt;Heart&lt;/button&gt;
+</code></pre>
+</details>
+<details>
+<summary>❌ Error: useEffect runs in an infinite loop</summary>
+<p><strong>Why this happens:</strong>
+You are calling a state setter inside a <code>useEffect</code> that lists that state variable as a dependency. Updating the state triggers a re-render, which runs the effect again, which updates state again — forever.</p>
+<p><strong>Check these things:</strong></p>
+<ol>
+<li>Is there a setter call inside your <code>useEffect</code>?</li>
+<li>Does the same state variable appear in both the effect body and the dependency array?</li>
+</ol>
+<p><strong>The fix:</strong></p>
+<pre><code class="language-javascript">// Wrong — infinite loop:
+useEffect(() =&gt; {
+  setIsFavorited(!isFavorited); // changes isFavorited...
+}, [isFavorited]); // ...which re-runs this effect
+
+// Correct — just logging, no state mutation:
+useEffect(() =&gt; {
+  console.log('Favorite status changed:', isFavorited);
+}, [isFavorited]);
+</code></pre>
+</details>
+<details>
+<summary>❌ Error: All movie cards show the same favorite/expand state</summary>
+<p><strong>Why this happens:</strong>
+The state is declared in a parent component (like <code>MoviesList</code> or <code>App</code>) and passed down as a prop, instead of being declared inside <code>MovieBlock</code>. All cards then share the same piece of state.</p>
+<p><strong>Check these things:</strong></p>
+<ol>
+<li>Where is <code>useState</code> being called — inside <code>MovieBlock</code>, or somewhere above it?</li>
+<li>Is <code>isFavorited</code> arriving as a prop, or is it declared locally?</li>
+</ol>
+<p><strong>The fix:</strong>
+Move the <code>useState</code> calls inside the <code>MovieBlock</code> function body. Each card will then have its own independent copy of each state variable.</p>
+</details>
+<hr>
+<h2 id="✅-deliverables-checklist" tabindex="-1">✅ Deliverables Checklist</h2>
+<p>Before marking this week complete, verify each item by running your code:</p>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>Favorites toggle:</strong> Click the heart button on a movie card. The icon switches between ❤️ and 🤍. Click it again — it switches back. Run this 5 times; it should always return to the starting state.</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>Expand/collapse:</strong> Click &quot;Show more&quot; on a movie card — the description appears. Click &quot;Show less&quot; — it disappears. The button label matches the current state every time.</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>State isolation:</strong> Favorite card 1 and expand card 2. Card 1 remains favorited and card 2 remains expanded — interactions on one card do not affect others.</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>useEffect log:</strong> Open the browser DevTools Console. Click the heart button on any card. A log message appears in the console showing the new favorite status. No log fires on initial page load.</li>
+</ul>
+<hr>
+<h2 id="🚀-stretch-goals" tabindex="-1">🚀 Stretch Goals</h2>
+<blockquote class="callout callout--default">
+<p>These are optional. Attempt them after completing all deliverables. No starter code is provided — that's the point.</p>
+</blockquote>
+<details>
+<summary>⭐ Stretch 1: Persist Favorites to localStorage</summary>
+<p><strong>The challenge:</strong>
+When you refresh the page, all favorites are lost because component state resets on unmount. Make favorites survive a browser refresh by reading from and writing to <code>localStorage</code>.</p>
+<p><strong>Why this matters:</strong>
+localStorage is the simplest form of client-side persistence. Real applications use it for user preferences, cached data, and auth tokens. Understanding it now makes later backend integration feel natural.</p>
+<p><strong>You'll need to research:</strong></p>
+<ul>
+<li><code>localStorage.setItem(key, value)</code> and <code>localStorage.getItem(key)</code></li>
+<li>Why you must <code>JSON.stringify</code> and <code>JSON.parse</code> when storing non-strings</li>
+<li>How to initialize <code>useState</code> from localStorage: <code>useState(() =&gt; JSON.parse(localStorage.getItem(...)) ?? false)</code></li>
+<li>How <code>useEffect</code> can write to localStorage when state changes</li>
+</ul>
+</details>
+<details>
+<summary>⭐⭐ Stretch 2: "Show Favorites Only" Filter Toggle (harder)</summary>
+<p><strong>The challenge:</strong>
+Add a button to your <code>MoviesList</code> component (or <code>App</code>) that, when toggled on, hides all non-favorited movies. When toggled off, all movies show again.</p>
+<p><strong>Why this matters:</strong>
+This requires lifting state up — the &quot;show favorites only&quot; toggle lives in the parent (<code>MoviesList</code> or <code>App</code>), but the individual <code>isFavorited</code> state lives in each <code>MovieBlock</code> child. You need to decide how to share that information. This is the central design challenge of React state management.</p>
+<p><strong>You'll need to research:</strong></p>
+<ul>
+<li>Lifting state up: moving state to a common ancestor</li>
+<li>Passing callbacks as props so children can update parent state</li>
+<li>The <code>Array.filter</code> method for filtering the rendered list</li>
+<li>Why this gets complex and what patterns (Context, Redux) exist to solve it</li>
+</ul>
+</details>
+<hr>
+<h2 id="🎫-exit-ticket" tabindex="-1">🎫 Exit Ticket</h2>
+<blockquote class="callout callout--default">
+<p>When you're done, submit your exit ticket using access code: <strong><code>loop84</code></strong></p>
+<p>The questions cover: state vs props, useState syntax, toggle patterns, useEffect dependency arrays, and what triggers a re-render.</p>
+</blockquote>
+<hr>
+<h2 id="📖-reference--resources" tabindex="-1">📖 Reference &amp; Resources</h2>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Why It's Useful</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://react.dev/reference/react/useState">React Docs: useState</a></td>
+<td>Official reference with interactive examples</td>
+</tr>
+<tr>
+<td><a href="https://react.dev/reference/react/useEffect">React Docs: useEffect</a></td>
+<td>Explains the dependency array in depth</td>
+</tr>
+<tr>
+<td><a href="https://react.dev/learn/responding-to-events">React Docs: Responding to Events</a></td>
+<td>Covers the onClick/onChange patterns used this week</td>
+</tr>
+<tr>
+<td><a href="https://react.dev/learn/state-a-components-memory">React Docs: State: A Component's Memory</a></td>
+<td>Best conceptual explanation of what state actually is</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage">MDN: localStorage</a></td>
+<td>Reference for the Stretch Goal 1 persistence feature</td>
+</tr>
+</tbody>
+</table>
+<blockquote class="callout callout--note">
+<p>📌 <strong>Reminder:</strong> <code>movie-buzz-finished/</code> is the reference implementation. Use it to <strong>verify your output</strong>, not to copy code.</p>
+</blockquote>
+
+<div class="pager">
+<a href="../week_03_intro_to_react/index.html">← Week 03</a>
+<a href="../week_05_react_events_and_hooks/index.html">Week 05 →</a>
+</div>
+</main>
+</div>
+</body>
+</html>

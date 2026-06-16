@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}} · Movie Buzz Lesson Viewer</title>
+<link rel="stylesheet" href="{{ASSET_PATH}}">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+<label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
+<div class="layout">
+<nav class="sidebar" aria-label="Course weeks">
+<div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+{{SIDEBAR_HTML}}
+</nav>
+<main class="main">
+<div class="page-header">
+<div class="breadcrumb">{{PHASE_LABEL}}</div>
+</div>
+{{CONTENT_HTML}}
+<div class="pager">
+{{PREV_LINK}}
+{{NEXT_LINK}}
+</div>
+</main>
+</div>
+</body>
+</html>

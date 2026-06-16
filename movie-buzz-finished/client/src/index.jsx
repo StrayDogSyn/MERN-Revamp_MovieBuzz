@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import axios from 'axios';
+import { movieService } from './services/movieService';
 import MoviesList from './components/MoviesList/MoviesList';
 import MovieForm from './components/MovieForm/MovieForm';
 import Header from './components/HeaderFooter/Header';
@@ -28,9 +28,9 @@ function App() {
   const fetchMovies = () => {
     setLoading(true);
     setError(null);
-    axios.get('/api/movies')
-      .then(response => {
-        setMovies(response.data);
+    movieService.getMovies()
+      .then(data => {
+        setMovies(data);
         setLoading(false);
       })
       .catch(err => {
@@ -45,9 +45,9 @@ function App() {
   }, []);
 
   const onDelete = (movieId) => {
-    axios.delete(`/api/movie/${movieId}`)
-      .then(({ data }) => {
-        setMovies(prev => prev.filter(movie => movie._id !== data._id));
+    movieService.deleteMovie(movieId)
+      .then(deleted => {
+        setMovies(prev => prev.filter(movie => movie._id !== deleted._id));
       })
       .catch(err => {
         console.error('Error deleting movie:', err);
@@ -56,17 +56,17 @@ function App() {
   };
 
   const onAdd = (movie) => {
-    return axios.post('/api/movie/new', movie)
-      .then(response => {
-        setMovies(prev => [...prev, response.data]);
+    return movieService.createMovie(movie)
+      .then(newMovie => {
+        setMovies(prev => [...prev, newMovie]);
       });
     // Note: errors propagate to MovieForm's try/catch — do not catch here
   };
 
   const editMovie = (movie) => {
-    return axios.put(`/api/movie/${movie._id}`, movie)
-      .then(response => {
-        setMovies(prev => prev.map(m => m._id === movie._id ? response.data : m));
+    return movieService.updateMovie(movie._id, movie)
+      .then(updatedMovie => {
+        setMovies(prev => prev.map(m => m._id === movie._id ? updatedMovie : m));
       });
     // Note: errors propagate to MovieForm's try/catch — do not catch here
   };

@@ -13,32 +13,33 @@ app.use(cors());
 // Home route with API information
 app.get('/', (req, res) => {
   res.json({
-    message: 'Movie Buzz API - Week 10: Mongoose and READ Operations',
-    version: '2.0.0',
+    message: 'Movie Buzz API - Week 14: UPDATE Functionality',
+    version: '4.0.0',
     database: 'MongoDB with Mongoose ODM',
     features: [
-      'Mongoose schema and model',
-      'READ operations (GET endpoints)',
-      'Data validation',
-      'Error handling'
+      'READ operations (GET endpoints) - from Week 12',
+      'CREATE operations (POST endpoints) - from Week 13',
+      'UPDATE operations (PUT endpoints) - NEW this week',
+      'Mongoose validation and error handling'
     ],
     endpoints: [
-      'GET /api/movies - Get all movies (TODO)',
-      'GET /api/movies/:id - Get movie by ID (TODO)',
-      'GET /api/movies/search/:query - Search movies (TODO - bonus)',
-      'GET /api/movies/test-connection - Test database connection (TODO)'
+      'GET /api/movies - Get all movies',
+      'GET /api/movies/:id - Get movie by ID',
+      'POST /api/movies - Create new movie',
+      'PUT /api/movies/:id - Update movie (TODO - Week 14 focus)',
+      'PATCH /api/movies/:id - Partial update (bonus)',
+      'GET /api/movies/search/:query - Search movies (bonus)',
+      'GET /api/movies/test-connection - Test database connection'
     ],
     instructions: [
-      '1. Students will implement database connection in config/db_connection.js',
-      '2. Students will create Movie schema in models/movie.js',
-      '3. Students will implement READ controllers',
-      '4. Students will connect routes in routes/movieRoutes.js',
-      '5. Test all endpoints to verify functionality'
+      '1. Implement updateMovie controller in controllers/movieController.js',
+      '2. Uncomment router.put("/:id", updateMovie) in routes/movieRoutes.js',
+      '3. Test PUT /api/movies/:id with Postman',
+      '4. Handle validation errors and 404 for missing movies'
     ]
   });
 });
 
-// TODO: Students will connect movie routes during lesson
 app.use('/api/movies', movieRoutes);
 
 // Test endpoint without database
@@ -59,7 +60,7 @@ app.use('*', (req, res) => {
     availableRoutes: [
       'GET / - API information',
       'GET /api/test-server - Server test',
-      'GET /api/movies/* - Movie routes (TODO)'
+      'GET /api/movies/* - Movie routes'
     ]
   });
 });
@@ -74,33 +75,26 @@ app.use((error, req, res, next) => {
   });
 });
 
-// TODO: Students will implement server startup with database connection
 const startServer = async () => {
   try {
     console.log('🎬 Starting Movie Buzz API...');
-    
-    // TODO: Connect to database before starting server
-    console.log('⚠️  Database connection not implemented yet');
-    console.log('📚 Students will implement this during lesson:');
-    console.log('   - Call connectDB() function');
-    console.log('   - Wait for successful connection');
-    console.log('   - Then start Express server');
-    
-    // Start server (without database for now)
+
+    // connectDB() must be implemented in config/db_connection.js first
+    await connectDB();
+    console.log('✅ Database connected successfully');
+
     app.listen(PORT, () => {
       console.log(`🚀 Server running on http://localhost:${PORT}`);
-      console.log('📖 Visit http://localhost:${PORT} for API documentation');
+      console.log(`📖 Visit http://localhost:${PORT} for API documentation`);
       console.log('');
-      console.log('🔧 TODO for lesson:');
-      console.log('   - Implement connectDB() in config/db_connection.js');
-      console.log('   - Create Movie schema in models/movie.js');
-      console.log('   - Implement controllers in controllers/movieController.js');
-      console.log('   - Connect routes in routes/movieRoutes.js');
-      console.log('   - Test all endpoints');
+      console.log('✏️  Week 14 Focus: UPDATE Operations');
+      console.log('   - Implement updateMovie controller');
+      console.log('   - Uncomment router.put("/:id", updateMovie) in routes');
+      console.log('   - Test PUT /api/movies/:id with Postman');
       console.log('');
-      console.log('🌱 Optional: Run "npm run seed" to add sample data');
+      console.log('🌱 Optional: Run "npm run seed" to add sample data for testing');
     });
-    
+
   } catch (error) {
     console.error('❌ Failed to start server:', error);
     process.exit(1);

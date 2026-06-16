@@ -1,3 +1,14 @@
+/**
+ * STARTER FILE — Week 15: DELETE Operations
+ *
+ * This file is intentionally incomplete. Your task:
+ *   1. Implement deleteMovie: validate the ObjectId, use Movie.findByIdAndDelete,
+ *      return the deleted document (or 404 if it didn't exist)
+ *   2. All other CRUD methods are already implemented (from Weeks 12–14)
+ *
+ * Reference: movie-buzz-finished/server/controllers/movieController.js
+ * Do not copy from the reference — implement it yourself first.
+ */
 const Movie = require('../models/movie');
 const mongoose = require('mongoose');
 
@@ -5,12 +16,8 @@ const mongoose = require('mongoose');
 const getMovies = async (req, res) => {
   try {
     const movies = await Movie.find().sort({ createdAt: -1 });
-    
-    res.status(200).json({
-      success: true,
-      count: movies.length,
-      data: movies
-    });
+    // Returns bare array — matches reference app and keeps React destructuring simple
+    res.json(movies);
     
   } catch (error) {
     console.error('Error fetching movies:', error);
@@ -26,7 +33,7 @@ const getMovies = async (req, res) => {
 const getMovieById = async (req, res) => {
   try {
     const { id } = req.params;
-    
+
     // Validate ObjectId
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({
@@ -34,20 +41,18 @@ const getMovieById = async (req, res) => {
         error: 'Invalid movie ID format'
       });
     }
-    
+
     const movie = await Movie.findById(id);
-    
+
     if (!movie) {
       return res.status(404).json({
         success: false,
         error: 'Movie not found'
       });
     }
-    
-    res.status(200).json({
-      success: true,
-      data: movie
-    });
+
+    // Returns bare object — matches reference app
+    res.json(movie);
     
   } catch (error) {
     console.error('Error fetching movie by ID:', error);
@@ -63,15 +68,12 @@ const getMovieById = async (req, res) => {
 const createMovie = async (req, res) => {
   try {
     const movieData = req.body;
-    
+
     const movie = new Movie(movieData);
     const savedMovie = await movie.save();
-    
-    res.status(201).json({
-      success: true,
-      message: 'Movie created successfully',
-      data: savedMovie
-    });
+
+    // Returns bare object — matches reference app
+    res.status(201).json(savedMovie);
     
   } catch (error) {
     console.error('Error creating movie:', error);
@@ -128,11 +130,8 @@ const updateMovie = async (req, res) => {
       });
     }
     
-    res.status(200).json({
-      success: true,
-      message: 'Movie updated successfully',
-      data: movie
-    });
+    // Returns bare object — matches reference app
+    res.json(movie);
     
   } catch (error) {
     console.error('Error updating movie:', error);
@@ -159,7 +158,7 @@ const updateMovie = async (req, res) => {
   }
 };
 
-// DELETE /api/movies/:id - Delete movie (NEW - Week 13 Focus)
+// DELETE /api/movies/:id - Delete movie (NEW - Week 15 Focus)
 const deleteMovie = async (req, res) => {
   try {
     console.log('deleteMovie called - TODO: Students will implement during lesson');
@@ -189,17 +188,8 @@ const deleteMovie = async (req, res) => {
     // TODO: Step 4 - Delete the movie using findByIdAndDelete
     // const deletedMovie = await Movie.findByIdAndDelete(id);
     
-    // TODO: Step 5 - Return success response with deleted movie info
-    // res.status(200).json({
-    //   success: true,
-    //   message: 'Movie deleted successfully',
-    //   data: {
-    //     id: deletedMovie._id,
-    //     name: deletedMovie.name,
-    //     director: deletedMovie.director,
-    //     year: deletedMovie.year
-    //   }
-    // });
+    // TODO: Step 5 - Return deleted movie directly (bare object, no wrapper)
+    // res.json(deletedMovie);
     
     // Placeholder response for students
     res.status(501).json({
@@ -293,7 +283,7 @@ module.exports = {
   getMovieById,
   createMovie,
   updateMovie,
-  deleteMovie,  // NEW - Week 13 focus
+  deleteMovie,  // NEW - Week 15 focus
   testConnection,
   searchMovies
 };

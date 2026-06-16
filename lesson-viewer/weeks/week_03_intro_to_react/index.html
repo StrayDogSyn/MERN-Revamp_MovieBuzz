@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 3 - Intro to React · Movie Buzz Lesson Viewer</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+<label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
+<div class="layout">
+<nav class="sidebar" aria-label="Course weeks">
+<div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
+<a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
+<a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
+<a class="nav-link" href="../week_02_dev_environment/index.html">Week 02 · Dev Environment</a>
+<a class="nav-link active" href="../week_03_intro_to_react/index.html">Week 03 · Intro to React</a>
+<a class="nav-link" href="../week_04_react_state_and_hooks/index.html">Week 04 · React State & Hooks</a>
+<a class="nav-link" href="../week_05_react_events_and_hooks/index.html">Week 05 · React Events & Hooks</a>
+<a class="nav-link" href="../week_06_react_component_patterns/index.html">Week 06 · React Component Patterns</a>
+<a class="nav-link" href="../week_07_react_hooks_and_context/index.html">Week 07 · React Hooks & Context</a>
+<div class="nav-phase">Weeks 08–16 · Backend (Node, Express, MongoDB)</div>
+<a class="nav-link" href="../week_08_nodejs_and_http/index.html">Week 08 · Node.js & HTTP</a>
+<a class="nav-link" href="../week_09_express_and_cors/index.html">Week 09 · Express & CORS</a>
+<a class="nav-link" href="../week_10_tic_tac_toe_checkpoint/index.html">Week 10 · Tic-Tac-Toe Checkpoint</a>
+<a class="nav-link" href="../week_11_intro_to_mongodb/index.html">Week 11 · Intro to MongoDB</a>
+<a class="nav-link" href="../week_12_mongoose_and_read/index.html">Week 12 · Mongoose & Read</a>
+<a class="nav-link" href="../week_13_create_functionality/index.html">Week 13 · Create Functionality</a>
+<a class="nav-link" href="../week_14_update_functionality/index.html">Week 14 · Update Functionality</a>
+<a class="nav-link" href="../week_15_delete_functionality/index.html">Week 15 · Delete Functionality</a>
+<a class="nav-link" href="../week_16_frontend_backend_integration/index.html">Week 16 · Frontend/Backend Integration</a>
+<div class="nav-phase">Optional Modules</div>
+<a class="nav-link" href="../week_optional_search_feature/index.html">Search Feature</a>
+<a class="nav-link" href="../week_optional_testing_suite/index.html">Testing Suite</a>
+</nav>
+<main class="main">
+<div class="page-header">
+<div class="breadcrumb">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
+</div>
+<h1 id="week-3---intro-to-react" tabindex="-1">Week 3 - Intro to React</h1>
+<ul>
+<li><a href="#week-3---intro-to-react">Week 3 - Intro to React</a>
+<ul>
+<li><a href="#notes-about-this-lesson-plan">Notes About This Lesson Plan</a></li>
+<li><a href="#learning-objectives">Learning Objectives</a></li>
+<li><a href="#glossary">Glossary</a></li>
+<li><a href="#starting-point">Starting Point</a></li>
+<li><a href="#what-is-react">What is React?</a></li>
+<li><a href="#understanding-the-starter-code">Understanding the Starter Code</a></li>
+<li><a href="#creating-your-first-component---simple-examples">Creating Your First Component - Simple Examples</a></li>
+<li><a href="#creating-your-first-movie-component">Creating Your First Movie Component</a></li>
+<li><a href="#understanding-jsx">Understanding JSX</a></li>
+<li><a href="#creating-the-movies-list-component">Creating the Movies List Component</a></li>
+<li><a href="#adding-sample-movie-data">Adding Sample Movie Data</a></li>
+<li><a href="#adding-netflix-style-movie-card-styling">Adding Netflix-Style Movie Card Styling</a></li>
+<li><a href="#props-passing-data-between-components">Props: Passing Data Between Components</a></li>
+<li><a href="#final-thoughts">Final Thoughts</a></li>
+<li><a href="#exit-ticket">Exit Ticket</a></li>
+<li><a href="#review">Review</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="notes-about-this-lesson-plan" tabindex="-1">Notes About This Lesson Plan</h2>
+<p>Please review this lesson plan in advance of our RI session. If this plan doesn't align with where you and your classmates are at in the LMS, please send a ticket to Help Desk as soon as possible.</p>
+<p>This code is for instructional purposes only. It should be utilized as an example in developing your own work. No part of it should be directly copied into your own project. As per TLM's plagiarism policy, submitting or misrepresenting code or an idea as your own when it was created by someone else constitutes plagiarism.</p>
+<hr>
+<h2 id="learning-objectives" tabindex="-1">Learning Objectives</h2>
+<p>By the end of this session, learners will be able to:</p>
+<ul>
+<li>Explain what React is and why it's used in modern web development</li>
+<li>Create and export React functional components</li>
+<li>Understand and use JSX syntax</li>
+<li>Pass props between React components</li>
+<li>Transform static HTML into reusable React components</li>
+<li>Set up a basic React application structure</li>
+</ul>
+<hr>
+<h2 id="glossary" tabindex="-1">Glossary</h2>
+<details open class="glossary-disclosure">
+<summary>📖 Click to collapse glossary</summary>
+<ul>
+<li><code>React</code>: A JavaScript library for building user interfaces, particularly single-page applications where data changes over time</li>
+<li><code>Component</code>: A reusable piece of UI that can accept inputs (props) and return React elements describing what should appear on screen</li>
+<li><code>JSX</code>: JavaScript XML - a syntax extension that allows you to write HTML-like code in JavaScript</li>
+<li><code>Props</code>: Short for &quot;properties&quot; - a way of passing data from parent components to child components</li>
+<li><code>Functional Component</code>: A JavaScript function that returns JSX to describe what should be rendered</li>
+</ul>
+</details>
+---
+<h2 id="starting-point" tabindex="-1">Starting Point</h2>
+<p>Before we begin this lesson, we'll be working with the provided starter code for our Movie Buzz React app. Navigate to the <code>week_03_intro_to_react/movie-buzz</code> directory.</p>
+<p>Install the dependencies and start the development server:</p>
+<pre><code class="language-bash">cd week_03_intro_to_react/movie-buzz
+npm install
+npm start
+</code></pre>
+<p>You should see a basic app with a Netflix-style dark theme and a placeholder message. We'll be building the movie components during this lesson!</p>
+<hr>
+<h2 id="what-is-react" tabindex="-1">What is React?</h2>
+<p>React is a JavaScript library developed by Facebook (now Meta) for building user interfaces. It allows developers to create reusable UI components and efficiently update the user interface when data changes.</p>
+<p>Key benefits of React:</p>
+<ul>
+<li><strong>Component-based</strong>: Build encapsulated components that manage their own state</li>
+<li><strong>Reusable</strong>: Write once, use anywhere approach</li>
+<li><strong>Virtual DOM</strong>: Efficient updates to the actual DOM</li>
+<li><strong>Industry Standard</strong>: Used by major companies worldwide</li>
+</ul>
+<p>React represents a shift from traditional server-side rendering to client-side component-based architecture, which is the current industry standard for modern web applications.</p>
+<blockquote class="callout callout--reflection-consider">
+<div class="callout-label">🤔 Reflection Prompt — Consider This</div>
+<p><code>Consider This</code><br>
+Why might building with reusable components be more efficient than writing individual HTML pages?</p>
+</blockquote>
+<hr>
+<h2 id="understanding-the-starter-code" tabindex="-1">Understanding the Starter Code</h2>
+<p>Let's examine what we have in our starter code:</p>
+<ol>
+<li><strong>App.js</strong>: Contains our main App component with a Netflix-style header</li>
+<li><strong>App.css</strong>: Basic Netflix-inspired dark theme styling</li>
+<li><strong>index.js</strong>: React entry point that renders our App</li>
+<li><strong>public/index.html</strong>: Basic HTML template</li>
+</ol>
+<p>Notice the dark Netflix-style theme we're starting with! The app currently shows a placeholder message because we haven't built our movie components yet.</p>
+<blockquote class="callout callout--reflection-consider">
+<div class="callout-label">🤔 Reflection Prompt — Consider This</div>
+<p><code>Consider This</code><br>
+How is this different from the Node/Express servers we've been running? What's handling the &quot;server&quot; functionality now?</p>
+</blockquote>
+<hr>
+<h2 id="creating-your-first-component---simple-examples" tabindex="-1">Creating Your First Component - Simple Examples</h2>
+<p>Before we build our movie components, let's start with simple examples to understand how React components work.</p>
+<h3 class="step-heading" id="1step-1-a-simple-greeting-component" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>A Simple Greeting Component</h3>
+<p>Create a new file <code>src/components/Greeting.js</code>:</p>
+<pre><code class="language-jsx">// A simple component that displays a greeting
+function Greeting() {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Hello, React!&lt;/h1&gt;
+      &lt;p&gt;Welcome to component-based development&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default Greeting;
+</code></pre>
+<h3 class="step-heading" id="2step-2-component-with-props" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Component with Props</h3>
+<p>Now let's make it dynamic. Create <code>src/components/Welcome.js</code>:</p>
+<pre><code class="language-jsx">// A component that accepts props to customize the greeting
+function Welcome({ name, age }) {
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Welcome, {name}!&lt;/h2&gt;
+      &lt;p&gt;You are {age} years old.&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default Welcome;
+</code></pre>
+<p>To use these components in your App.js:</p>
+<pre><code class="language-jsx">import Greeting from './components/Greeting';
+import Welcome from './components/Welcome';
+
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;Greeting /&gt;
+      &lt;Welcome name=&quot;Sarah&quot; age={25} /&gt;
+      &lt;Welcome name=&quot;John&quot; age={30} /&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App;
+</code></pre>
+<blockquote class="callout callout--reflection-try">
+<div class="callout-label">🛠️ Hands-On — Try It Out</div>
+<p><code>Try It Out</code>
+Create these simple components and test them in your app before moving on to the movie components. Notice how props allow us to reuse the same component with different data!</p>
+</blockquote>
+<h2 id="creating-your-first-movie-component" tabindex="-1">Creating Your First Movie Component</h2>
+<p>Now that you understand the basics, let's build out our movie component. Open <code>src/components/MovieBlock.js</code> from the starter code:</p>
+<h3 id="code-structure-explanation" tabindex="-1">Code Structure Explanation</h3>
+<p>Before we write the code, let's understand what this component will do:</p>
+<ul>
+<li><strong>Purpose</strong>: Display information about a single movie</li>
+<li><strong>Input</strong>: Receives a movie object as a prop</li>
+<li><strong>Output</strong>: Returns JSX that renders the movie information</li>
+<li><strong>Reusability</strong>: Can be used for any movie object with the same structure</li>
+</ul>
+<pre><code class="language-jsx">import React from &quot;react&quot;;
+
+function MovieBlock({ movie, index }) {
+  return (
+    &lt;div className=&quot;trending-card&quot;&gt;
+      &lt;img src=&quot;/images/movie-placeholder.png&quot; className=&quot;card-image&quot; alt={movie.name} /&gt;
+
+      &lt;span className=&quot;card-rank&quot;&gt;{index + 1}&lt;/span&gt;
+
+      &lt;div className=&quot;card-content&quot;&gt;
+        &lt;span className=&quot;card-title&quot;&gt;{movie.name}&lt;/span&gt;
+
+        &lt;div className=&quot;card-info&quot;&gt;
+          {movie.year} | {movie.length} | Rated: {movie.rating}
+        &lt;/div&gt;
+
+        &lt;div className=&quot;card-meta&quot;&gt;
+          &lt;span className=&quot;card-genre&quot;&gt;
+            {Array.isArray(movie.genre) ? movie.genre.join(', ') : movie.genre}
+          &lt;/span&gt;
+          &lt;span className=&quot;card-director&quot;&gt;Director: {movie.director}&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default MovieBlock;
+</code></pre>
+<h3 id="line-by-line-breakdown" tabindex="-1">Line-by-Line Breakdown</h3>
+<ol>
+<li>
+<p><strong>Function Declaration</strong>: <code>function MovieBlock({ movie, index })</code></p>
+<ul>
+<li>Creates a functional component named MovieBlock</li>
+<li>Uses destructuring to extract <code>movie</code> and <code>index</code> from the props object</li>
+<li>Equivalent to: <code>function MovieBlock(props)</code> and then <code>const { movie, index } = props</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Props</strong>: <code>movie</code> and <code>index</code></p>
+<ul>
+<li><code>movie</code> is the full movie object (name, year, genre, etc.)</li>
+<li><code>index</code> is the position in the list (0, 1, 2...) — used to display a rank number</li>
+</ul>
+</li>
+<li>
+<p><strong>JSX Expressions</strong>: <code>{movie.name}</code>, <code>{movie.year}</code>, etc.</p>
+<ul>
+<li>Curly braces <code>{}</code> let you embed JavaScript expressions in JSX</li>
+<li>React automatically converts the value to text</li>
+</ul>
+</li>
+<li>
+<p><strong>Array Display</strong>: <code>Array.isArray(movie.genre) ? movie.genre.join(', ') : movie.genre</code></p>
+<ul>
+<li><code>movie.genre</code> is an array like <code>[&quot;Action&quot;, &quot;Sci-Fi&quot;]</code></li>
+<li><code>.join(', ')</code> converts it to a string: <code>&quot;Action, Sci-Fi&quot;</code></li>
+<li>The <code>Array.isArray()</code> check prevents errors if the value isn't an array</li>
+</ul>
+</li>
+<li>
+<p><strong>Export Statement</strong>: <code>export default MovieBlock</code></p>
+<ul>
+<li>Makes this component available for import in other files</li>
+<li><code>default</code> means this is the main export from this file</li>
+</ul>
+</li>
+</ol>
+<h3 id="expected-movie-data-structure" tabindex="-1">Expected Movie Data Structure</h3>
+<pre><code class="language-javascript">const movie = {
+  name: &quot;The Matrix&quot;,
+  year: 1999,
+  rating: &quot;R&quot;,
+  length: &quot;136 min&quot;,
+  description: &quot;A computer hacker learns...&quot;,
+  genre: [&quot;Action&quot;, &quot;Sci-Fi&quot;],
+  director: &quot;The Wachowskis&quot;,
+  stars: [&quot;Keanu Reeves&quot;, &quot;Laurence Fishburne&quot;]
+};
+</code></pre>
+<p>Notice how this component accepts a <code>movie</code> prop and displays its properties!</p>
+<blockquote class="callout callout--reflection-consider">
+<div class="callout-label">🤔 Reflection Prompt — Consider This</div>
+<p><code>Consider This</code><br>
+What is the <code>{ movie }</code> syntax in the function parameters? How does this differ from regular JavaScript function parameters?</p>
+</blockquote>
+<hr>
+<h2 id="understanding-jsx" tabindex="-1">Understanding JSX</h2>
+<p>JSX looks like HTML, but it's actually JavaScript. Key differences to remember:</p>
+<ul>
+<li>Use <code>className</code> instead of <code>class</code></li>
+<li>Self-closing tags must end with <code>/&gt;</code></li>
+<li>JavaScript expressions go inside <code>{}</code></li>
+<li>Component names must start with a capital letter</li>
+</ul>
+<pre><code class="language-jsx">function Example() {
+  const movieTitle = &quot;The Matrix&quot;;
+  
+  return (
+    &lt;div className=&quot;movie&quot;&gt;
+      &lt;h3&gt;{movieTitle}&lt;/h3&gt;
+      &lt;img src=&quot;/movie-icon.png&quot; alt=&quot;Movie icon&quot; /&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<hr>
+<h2 id="creating-the-movies-list-component" tabindex="-1">Creating the Movies List Component</h2>
+<p>Now let's create a component to display a list of movies. Create <code>src/components/MoviesList.js</code>:</p>
+<pre><code class="language-jsx">import React from &quot;react&quot;;
+import &quot;./MoviesList.css&quot;;
+import MovieBlock from './MovieBlock';
+
+function MoviesList({ movies }) {
+  return (
+    &lt;div className=&quot;trending-section&quot;&gt;
+      &lt;h2 className=&quot;trending-title&quot;&gt;Your Movie Collection ({movies.length} movies)&lt;/h2&gt;
+      &lt;p className=&quot;trending-subtitle&quot;&gt;Discover and manage your favorite films&lt;/p&gt;
+
+      &lt;div className=&quot;trending-cards&quot;&gt;
+        {movies.map((movie, index) =&gt; (
+          &lt;MovieBlock key={movie.id} movie={movie} index={index} /&gt;
+        ))}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default MoviesList;
+</code></pre>
+<blockquote class="callout callout--reflection-consider">
+<div class="callout-label">🤔 Reflection Prompt — Consider This</div>
+<p><code>Consider This</code><br>
+What is the <code>.map()</code> method doing here? Why do we need the <code>key</code> prop?</p>
+</blockquote>
+<h2 id="adding-sample-movie-data" tabindex="-1">Adding Sample Movie Data</h2>
+<p>Now let's add some sample movie data to our App component. Update <code>src/App.js</code>:</p>
+<pre><code class="language-jsx">import React from 'react';
+import MoviesList from './components/MoviesList';
+import './App.css';
+
+// Sample movie data for Week 3
+const movies = [
+  {
+    id: 1,
+    name: &quot;The Matrix&quot;,
+    year: 1999,
+    rating: &quot;R&quot;,
+    length: &quot;136 minutes&quot;,
+    description: &quot;A computer programmer is led to fight an underground war against powerful computers who have constructed his entire reality with a system called the Matrix.&quot;,
+    genre: [&quot;Action&quot;, &quot;Sci-Fi&quot;],
+    director: &quot;The Wachowskis&quot;,
+    stars: [&quot;Keanu Reeves&quot;, &quot;Laurence Fishburne&quot;, &quot;Carrie-Anne Moss&quot;]
+  },
+  {
+    id: 2,
+    name: &quot;The Godfather&quot;,
+    year: 1972,
+    rating: &quot;R&quot;,
+    length: &quot;175 minutes&quot;,
+    description: &quot;The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.&quot;,
+    genre: [&quot;Crime&quot;, &quot;Drama&quot;],
+    director: &quot;Francis Ford Coppola&quot;,
+    stars: [&quot;Marlon Brando&quot;, &quot;Al Pacino&quot;, &quot;James Caan&quot;]
+  },
+  {
+    id: 3,
+    name: &quot;Pulp Fiction&quot;,
+    year: 1994,
+    rating: &quot;R&quot;,
+    length: &quot;154 minutes&quot;,
+    description: &quot;The lives of two mob hitmen, a boxer, a gangster and his wife intertwine in four tales of violence and redemption.&quot;,
+    genre: [&quot;Crime&quot;, &quot;Drama&quot;],
+    director: &quot;Quentin Tarantino&quot;,
+    stars: [&quot;John Travolta&quot;, &quot;Uma Thurman&quot;, &quot;Samuel L. Jackson&quot;]
+  },
+  {
+    id: 4,
+    name: &quot;The Dark Knight&quot;,
+    year: 2008,
+    rating: &quot;PG-13&quot;,
+    length: &quot;152 minutes&quot;,
+    description: &quot;When the menace known as The Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests.&quot;,
+    genre: [&quot;Action&quot;, &quot;Crime&quot;, &quot;Drama&quot;],
+    director: &quot;Christopher Nolan&quot;,
+    stars: [&quot;Christian Bale&quot;, &quot;Heath Ledger&quot;, &quot;Aaron Eckhart&quot;]
+  },
+  {
+    id: 5,
+    name: &quot;Forrest Gump&quot;,
+    year: 1994,
+    rating: &quot;PG-13&quot;,
+    length: &quot;142 minutes&quot;,
+    description: &quot;The presidencies of Kennedy and Johnson, the Vietnam War, the Watergate scandal and other historical events unfold from the perspective of an Alabama man.&quot;,
+    genre: [&quot;Drama&quot;, &quot;Romance&quot;],
+    director: &quot;Robert Zemeckis&quot;,
+    stars: [&quot;Tom Hanks&quot;, &quot;Robin Wright&quot;, &quot;Gary Sinise&quot;]
+  }
+];
+
+function App() {
+  return (
+    &lt;div className=&quot;app&quot;&gt;
+      &lt;header className=&quot;app-header&quot;&gt;
+        &lt;h1&gt;🎬 Movie Buzz&lt;/h1&gt;
+        &lt;p&gt;Where all the best movies live...&lt;/p&gt;
+      &lt;/header&gt;
+
+      &lt;main className=&quot;app-main&quot;&gt;
+        &lt;MoviesList movies={movies} /&gt;
+      &lt;/main&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App;
+</code></pre>
+<h2 id="adding-netflix-style-movie-card-styling" tabindex="-1">Adding Netflix-Style Movie Card Styling</h2>
+<p>Now let's add some beautiful Netflix-inspired styling to make our movie cards look professional. This CSS is already provided for you in <code>src/components/MoviesList.css</code> — open it to see how the classes connect to the JSX you just wrote:</p>
+<pre><code class="language-css">/* Netflix-style movie section */
+.trending-section {
+  background: #000;
+  padding: 40px 20px;
+  border-radius: 24px;
+  margin: 20px;
+}
+
+.trending-title {
+  color: rgb(194, 143, 41);
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.trending-subtitle {
+  color: #ccc;
+  font-size: 1.1rem;
+  margin-bottom: 24px;
+  font-style: italic;
+}
+
+/* Horizontal scrolling card row */
+.trending-cards {
+  display: flex;
+  gap: 32px;
+  padding: 20px 0;
+  overflow-x: auto;
+}
+
+/* Individual movie card */
+.trending-card {
+  position: relative;
+  width: 280px;
+  min-width: 280px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  background: #222;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.trending-card:hover {
+  transform: scale(1.05);
+}
+
+.card-image {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  display: block;
+}
+
+.card-rank {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  font-size: 4.5rem;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 2px 2px 8px #000;
+}
+
+/* Card content overlays the image */
+.card-content {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(0deg, rgba(0,0,0,0.95) 80%, transparent 100%);
+  color: #fff;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: block;
+  letter-spacing: 1px;
+}
+
+.card-info {
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  color: rgb(194, 143, 41);
+  font-weight: 500;
+}
+
+.card-meta {
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+}
+
+.card-genre {
+  color: #ccc;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.card-director {
+  color: #ccc;
+  display: block;
+}
+</code></pre>
+<hr>
+<h2 id="props-passing-data-between-components" tabindex="-1">Props: Passing Data Between Components</h2>
+<p>Props allow us to pass data from parent components to child components. In our example:</p>
+<ul>
+<li><code>App</code> component passes the <code>movies</code> array to <code>MoviesList</code></li>
+<li><code>MoviesList</code> passes individual <code>movie</code> objects to <code>MovieBlock</code></li>
+<li>Each <code>MovieBlock</code> receives a <code>movie</code> prop and displays its data</li>
+</ul>
+<p>This creates a clear data flow: App → MoviesList → MovieBlock</p>
+<blockquote class="callout callout--reflection-consider">
+<div class="callout-label">🤔 Reflection Prompt — Consider This</div>
+<p><code>Consider This</code><br>
+How is passing props similar to calling a function with parameters? How is it different?</p>
+</blockquote>
+<hr>
+<h2 id="final-thoughts" tabindex="-1">Final Thoughts</h2>
+<p>We've successfully built our Movie Buzz app using React components with a Netflix-inspired design! This approach gives us:</p>
+<ul>
+<li>Reusable components (MovieBlock, MoviesList)</li>
+<li>Clear data flow through props</li>
+<li>Professional Netflix-style UI</li>
+<li>Responsive design that works on all devices</li>
+<li>Industry-standard development practices</li>
+</ul>
+<p>Your app should now display beautiful movie cards in a grid layout that looks similar to Netflix!</p>
+<p>Next week, we'll learn about managing changing data with React state and connecting to real APIs.</p>
+<hr>
+<h2 id="exit-ticket" tabindex="-1">Exit Ticket</h2>
+<p>Please complete the exit ticket in the LMS. You may use the lesson plan for this session, but do not use any additional resources. This exit ticket will not be part of your grade for the course, and rather is used to inform future instruction and curricular releases.</p>
+<hr>
+<h2 id="review" tabindex="-1">Review</h2>
+<ul>
+<li>What is React and why is it used in modern web development?</li>
+<li>What is a <code>component</code> in React?</li>
+<li>What is <code>JSX</code> and how is it different from HTML?</li>
+<li>How do <code>props</code> allow components to communicate?</li>
+<li>What are the advantages of component-based architecture over static HTML?</li>
+</ul>
+
+<div class="pager">
+<a href="../week_02_dev_environment/index.html">← Week 02</a>
+<a href="../week_04_react_state_and_hooks/index.html">Week 04 →</a>
+</div>
+</main>
+</div>
+</body>
+</html>

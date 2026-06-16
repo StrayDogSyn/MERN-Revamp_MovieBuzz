@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 12 - Mongoose & READ Functionality · Movie Buzz Lesson Viewer</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+<label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
+<div class="layout">
+<nav class="sidebar" aria-label="Course weeks">
+<div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
+<a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
+<a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
+<a class="nav-link" href="../week_02_dev_environment/index.html">Week 02 · Dev Environment</a>
+<a class="nav-link" href="../week_03_intro_to_react/index.html">Week 03 · Intro to React</a>
+<a class="nav-link" href="../week_04_react_state_and_hooks/index.html">Week 04 · React State & Hooks</a>
+<a class="nav-link" href="../week_05_react_events_and_hooks/index.html">Week 05 · React Events & Hooks</a>
+<a class="nav-link" href="../week_06_react_component_patterns/index.html">Week 06 · React Component Patterns</a>
+<a class="nav-link" href="../week_07_react_hooks_and_context/index.html">Week 07 · React Hooks & Context</a>
+<div class="nav-phase">Weeks 08–16 · Backend (Node, Express, MongoDB)</div>
+<a class="nav-link" href="../week_08_nodejs_and_http/index.html">Week 08 · Node.js & HTTP</a>
+<a class="nav-link" href="../week_09_express_and_cors/index.html">Week 09 · Express & CORS</a>
+<a class="nav-link" href="../week_10_tic_tac_toe_checkpoint/index.html">Week 10 · Tic-Tac-Toe Checkpoint</a>
+<a class="nav-link" href="../week_11_intro_to_mongodb/index.html">Week 11 · Intro to MongoDB</a>
+<a class="nav-link active" href="../week_12_mongoose_and_read/index.html">Week 12 · Mongoose & Read</a>
+<a class="nav-link" href="../week_13_create_functionality/index.html">Week 13 · Create Functionality</a>
+<a class="nav-link" href="../week_14_update_functionality/index.html">Week 14 · Update Functionality</a>
+<a class="nav-link" href="../week_15_delete_functionality/index.html">Week 15 · Delete Functionality</a>
+<a class="nav-link" href="../week_16_frontend_backend_integration/index.html">Week 16 · Frontend/Backend Integration</a>
+<div class="nav-phase">Optional Modules</div>
+<a class="nav-link" href="../week_optional_search_feature/index.html">Search Feature</a>
+<a class="nav-link" href="../week_optional_testing_suite/index.html">Testing Suite</a>
+</nav>
+<main class="main">
+<div class="page-header">
+<div class="breadcrumb">Weeks 08–16 · Backend (Node, Express, MongoDB)</div>
+</div>
+<h1 id="week-12---mongoose--read-functionality" tabindex="-1">Week 12 - Mongoose &amp; READ Functionality</h1>
+<ul>
+<li><a href="#week-12---mongoose--read-functionality">Week 12 - Mongoose &amp; READ Functionality</a>
+<ul>
+<li><a href="#notes-about-this-lesson-plan">Notes About This Lesson Plan</a></li>
+<li><a href="#learning-objectives">Learning Objectives</a></li>
+<li><a href="#glossary">Glossary</a></li>
+<li><a href="#starting-point">Starting Point</a></li>
+<li><a href="#what-is-mongoose">What is Mongoose?</a></li>
+<li><a href="#installing-and-setting-up-mongoose">Installing and Setting Up Mongoose</a></li>
+<li><a href="#creating-mongoose-schemas">Creating Mongoose Schemas</a></li>
+<li><a href="#understanding-mongoose-models">Understanding Mongoose Models</a></li>
+<li><a href="#implementing-read-operations">Implementing READ Operations</a>
+<ul>
+<li><a href="#finding-all-movies">Finding All Movies</a></li>
+<li><a href="#finding-single-movies">Finding Single Movies</a></li>
+<li><a href="#advanced-query-methods">Advanced Query Methods</a></li>
+</ul>
+</li>
+<li><a href="#updating-express-controllers">Updating Express Controllers</a></li>
+<li><a href="#testing-read-functionality">Testing READ Functionality</a></li>
+<li><a href="#error-handling-with-mongoose">Error Handling with Mongoose</a></li>
+<li><a href="#final-thoughts">Final Thoughts</a></li>
+<li><a href="#exit-ticket">Exit Ticket</a></li>
+<li><a href="#review">Review</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="notes-about-this-lesson-plan" tabindex="-1">Notes About This Lesson Plan</h2>
+<p>Please review this lesson plan in advance of our RI session. If this plan doesn't align with where you and your classmates are at in the LMS, please send a ticket to Help Desk as soon as possible.</p>
+<p>This code is for instructional purposes only. It should be utilized as an example in developing your own work. No part of it should be directly copied into your own project. As per TLM's plagiarism policy, submitting or misrepresenting code or an idea as your own when it was created by someone else constitutes plagiarism.</p>
+<hr>
+<h2 id="learning-objectives" tabindex="-1">Learning Objectives</h2>
+<p>By the end of this session, learners will be able to:</p>
+<ul>
+<li>Explain what Mongoose is and its advantages over the native MongoDB driver</li>
+<li>Install and configure Mongoose in a Node.js application</li>
+<li>Create and understand Mongoose schemas and models</li>
+<li>Implement READ operations using Mongoose methods</li>
+<li>Build API endpoints that retrieve data from MongoDB using Mongoose</li>
+<li>Handle errors properly in Mongoose operations</li>
+<li>Use advanced Mongoose query methods for filtering and searching</li>
+<li>Connect their React frontend to the new Mongoose-powered backend</li>
+</ul>
+<hr>
+<h2 id="glossary" tabindex="-1">Glossary</h2>
+<details open class="glossary-disclosure">
+<summary>📖 Click to collapse glossary</summary>
+<ul>
+<li><code>Mongoose</code>: An Object Document Mapper (ODM) for MongoDB and Node.js</li>
+<li><code>Schema</code>: A structure that defines the shape of documents within a collection</li>
+<li><code>Model</code>: A constructor function created from a schema that creates and reads documents</li>
+<li><code>ODM</code>: Object Document Mapper - translates between objects in code and documents in database</li>
+<li><code>Validation</code>: Rules that ensure data meets certain criteria before being saved</li>
+<li><code>Middleware</code>: Functions that run at specific stages of the Mongoose lifecycle</li>
+<li><code>Population</code>: Method to reference documents in other collections</li>
+<li><code>Query</code>: A Mongoose object that allows you to search for documents</li>
+</ul>
+</details>
+---
+<h2 id="starting-point" tabindex="-1">Starting Point</h2>
+<p>Before we begin this lesson, make sure you have completed Week 11 and have:</p>
+<ul>
+<li>MongoDB installed and running on your system</li>
+<li>A Movie Buzz database with sample movie documents</li>
+<li>Express API server with basic MongoDB connection</li>
+<li>React frontend that can consume API endpoints</li>
+</ul>
+<p>Your project structure should look like:</p>
+<pre><code>movie-buzz-backend/
+├── config/
+│   └── database.js
+├── controllers/
+│   └── movieController.js
+├── models/
+│   └── Movie.js
+├── routes/
+│   └── movieRoutes.js
+├── data/
+│   └── movies.json
+├── server.js
+└── package.json
+</code></pre>
+<hr>
+<h2 id="simple-mongoose-examples---building-understanding" tabindex="-1">Simple Mongoose Examples - Building Understanding</h2>
+<p>Before implementing Movie Buzz with Mongoose, let's understand schemas and models with simple examples:</p>
+<h3 class="step-heading" id="1step-1-creating-your-first-schema" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Creating Your First Schema</h3>
+<p>Create <code>simple-schema.js</code>:</p>
+<pre><code class="language-javascript">const mongoose = require('mongoose');
+
+// Connect to MongoDB
+mongoose.connect('mongodb://127.0.0.1:27017/practice_db');
+
+// Define a simple schema
+const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    minlength: 2,
+    maxlength: 50
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    lowercase: true
+  },
+  age: {
+    type: Number,
+    min: 0,
+    max: 120
+  },
+  isActive: {
+    type: Boolean,
+    default: true
+  },
+  tags: [String],  // Array of strings
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+// Create a model
+const User = mongoose.model('User', userSchema);
+
+// Export for use in other files
+module.exports = User;
+</code></pre>
+<h3 class="step-heading" id="2step-2-basic-crud-with-mongoose" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Basic CRUD with Mongoose</h3>
+<p>Create <code>mongoose-crud.js</code>:</p>
+<pre><code class="language-javascript">const mongoose = require('mongoose');
+
+// Simple schema
+const bookSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  author: { type: String, required: true },
+  pages: { type: Number, min: 1 },
+  genre: [String],
+  published: Date,
+  rating: { type: Number, min: 1, max: 5 }
+});
+
+const Book = mongoose.model('Book', bookSchema);
+
+async function demonstrateCRUD() {
+  try {
+    // Connect
+    await mongoose.connect('mongodb://127.0.0.1:27017/book_db');
+    console.log('Connected to MongoDB');
+
+    // CREATE - Add a new book
+    const newBook = new Book({
+      title: 'JavaScript Guide',
+      author: 'Jane Doe',
+      pages: 400,
+      genre: ['Programming', 'Education'],
+      published: new Date('2023-01-01'),
+      rating: 4.5
+    });
+
+    const savedBook = await newBook.save();
+    console.log('Created book:', savedBook);
+
+    // READ - Find books
+    const allBooks = await Book.find();
+    console.log('All books:', allBooks);
+
+    const programmingBooks = await Book.find({ genre: 'Programming' });
+    console.log('Programming books:', programmingBooks);
+
+    const oneBook = await Book.findOne({ title: 'JavaScript Guide' });
+    console.log('Found book:', oneBook);
+
+    // More complex queries
+    const highRatedBooks = await Book.find({ rating: { $gte: 4 } });
+    console.log('High rated books:', highRatedBooks);
+
+  } catch (error) {
+    console.error('Error:', error);
+  } finally {
+    mongoose.connection.close();
+  }
+}
+
+// Run the demonstration
+demonstrateCRUD();
+</code></pre>
+<h3 class="step-heading" id="3step-3-schema-validation-and-error-handling" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Schema Validation and Error Handling</h3>
+<p>Create <code>validation-example.js</code>:</p>
+<pre><code class="language-javascript">const mongoose = require('mongoose');
+
+const productSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, 'Product name is required'],
+    trim: true,
+    maxlength: [100, 'Name cannot exceed 100 characters']
+  },
+  price: {
+    type: Number,
+    required: [true, 'Price is required'],
+    min: [0, 'Price cannot be negative']
+  },
+  category: {
+    type: String,
+    required: true,
+    enum: {
+      values: ['Electronics', 'Clothing', 'Books', 'Sports'],
+      message: 'Category must be Electronics, Clothing, Books, or Sports'
+    }
+  },
+  inStock: {
+    type: Boolean,
+    default: true
+  }
+});
+
+const Product = mongoose.model('Product', productSchema);
+
+async function testValidation() {
+  try {
+    await mongoose.connect('mongodb://127.0.0.1:27017/validation_db');
+
+    // Valid product
+    const validProduct = new Product({
+      name: 'Gaming Laptop',
+      price: 999.99,
+      category: 'Electronics'
+    });
+
+    const saved = await validProduct.save();
+    console.log('Valid product saved:', saved);
+
+    // Invalid product (will cause validation errors)
+    const invalidProduct = new Product({
+      name: '',  // Required field missing
+      price: -50,  // Negative price
+      category: 'InvalidCategory'  // Not in enum
+    });
+
+    await invalidProduct.save();
+
+  } catch (error) {
+    console.log('Validation errors:');
+    if (error.errors) {
+      Object.keys(error.errors).forEach(key =&gt; {
+        console.log(`${key}: ${error.errors[key].message}`);
+      });
+    }
+  } finally {
+    mongoose.connection.close();
+  }
+}
+
+testValidation();
+</code></pre>
+<h3 class="step-heading" id="4step-4-advanced-queries-and-methods" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Advanced Queries and Methods</h3>
+<p>Create <code>advanced-queries.js</code>:</p>
+<pre><code class="language-javascript">const mongoose = require('mongoose');
+
+const studentSchema = new mongoose.Schema({
+  name: String,
+  grade: String,
+  subjects: [String],
+  gpa: Number,
+  graduationYear: Number
+});
+
+// Add custom methods to schema
+studentSchema.methods.getFullInfo = function() {
+  return `${this.name} - Grade: ${this.grade}, GPA: ${this.gpa}`;
+};
+
+// Add static methods to schema
+studentSchema.statics.findByGrade = function(grade) {
+  return this.find({ grade: grade });
+};
+
+const Student = mongoose.model('Student', studentSchema);
+
+async function demonstrateQueries() {
+  try {
+    await mongoose.connect('mongodb://127.0.0.1:27017/school_db');
+
+    // Insert sample data
+    await Student.deleteMany({}); // Clear existing data
+
+    const students = [
+      { name: 'Alice', grade: 'A', subjects: ['Math', 'Science'], gpa: 3.8, graduationYear: 2024 },
+      { name: 'Bob', grade: 'B', subjects: ['History', 'English'], gpa: 3.2, graduationYear: 2024 },
+      { name: 'Carol', grade: 'A', subjects: ['Math', 'Physics'], gpa: 3.9, graduationYear: 2025 }
+    ];
+
+    await Student.insertMany(students);
+
+    // Various query methods
+    console.log('--- All Students ---');
+    const all = await Student.find();
+    all.forEach(student =&gt; console.log(student.getFullInfo()));
+
+    console.log('\n--- A Grade Students ---');
+    const aGradeStudents = await Student.findByGrade('A');
+    console.log(aGradeStudents);
+
+    console.log('\n--- Math Students ---');
+    const mathStudents = await Student.find({ subjects: 'Math' });
+    console.log(mathStudents);
+
+    console.log('\n--- High GPA Students ---');
+    const highGPA = await Student.find({ gpa: { $gte: 3.5 } });
+    console.log(highGPA);
+
+    console.log('\n--- Sorted by GPA ---');
+    const sorted = await Student.find().sort({ gpa: -1 }); // -1 for descending
+    console.log(sorted);
+
+    console.log('\n--- Limited Results ---');
+    const limited = await Student.find().limit(2);
+    console.log(limited);
+
+  } catch (error) {
+    console.error('Error:', error);
+  } finally {
+    mongoose.connection.close();
+  }
+}
+
+demonstrateQueries();
+</code></pre>
+<blockquote class="callout callout--reflection-try">
+<div class="callout-label">🛠️ Hands-On — Try It Out</div>
+<p><code>Try It Out</code>
+Create and run these Mongoose examples to understand:</p>
+<ul>
+<li>Schema definition with validation rules</li>
+<li>Model creation and basic CRUD operations</li>
+<li>Error handling and validation messages</li>
+<li>Advanced querying with conditions and sorting</li>
+<li>Custom methods on schemas</li>
+<li>Working with arrays and embedded data</li>
+</ul>
+</blockquote>
+<h2 id="what-is-mongoose" tabindex="-1">What is Mongoose?</h2>
+<p>Now that you've seen Mongoose in action, let's understand why it's so valuable. Mongoose is an Object Document Mapper (ODM) for MongoDB and Node.js. It provides a straightforward, schema-based solution to model your application data.</p>
+<p><strong>Key Benefits of Mongoose:</strong></p>
+<ol>
+<li><strong>Schema Validation</strong>: Define structure and validate data before saving</li>
+<li><strong>Type Casting</strong>: Automatically converts data to correct types</li>
+<li><strong>Query Building</strong>: Provides a rich API for building database queries</li>
+<li><strong>Middleware Support</strong>: Pre and post hooks for database operations</li>
+<li><strong>Population</strong>: Easy way to reference documents in other collections</li>
+<li><strong>Built-in Validation</strong>: Email validation, required fields, custom validators</li>
+<li><strong>Better Error Handling</strong>: More descriptive error messages</li>
+</ol>
+<p><strong>Mongoose vs Native MongoDB Driver:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Native Driver</th>
+<th>Mongoose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Schema</td>
+<td>No schema enforcement</td>
+<td>Schema-based with validation</td>
+</tr>
+<tr>
+<td>Queries</td>
+<td>Manual query building</td>
+<td>Rich query API</td>
+</tr>
+<tr>
+<td>Type Safety</td>
+<td>Manual type checking</td>
+<td>Automatic type casting</td>
+</tr>
+<tr>
+<td>Validation</td>
+<td>Manual validation</td>
+<td>Built-in validators</td>
+</tr>
+<tr>
+<td>Relationships</td>
+<td>Manual references</td>
+<td>Population support</td>
+</tr>
+</tbody>
+</table>
+<blockquote class="callout callout--reflection-consider">
+<div class="callout-label">🤔 Reflection Prompt — Consider This</div>
+<p><code>Consider This</code><br>
+How might having a defined schema help prevent bugs in your application, even though MongoDB itself is schema-less?</p>
+</blockquote>
+<hr>
+<h2 id="installing-and-setting-up-mongoose" tabindex="-1">Installing and Setting Up Mongoose</h2>
+<p>First, let's install Mongoose in our project:</p>
+<pre><code class="language-bash">cd movie-buzz-backend
+npm install mongoose
+</code></pre>
+<p>Now, let's update our database connection to use Mongoose. Replace your <code>config/database.js</code> file:</p>
+<pre><code class="language-javascript">const mongoose = require('mongoose');
+
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/movie-buzz';
+
+const connectToDatabase = async () =&gt; {
+  try {
+    const connection = await mongoose.connect(MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+
+    console.log(`🍃 MongoDB connected: ${connection.connection.host}`);
+    return connection;
+  } catch (error) {
+    console.error('MongoDB connection error:', error);
+    process.exit(1);
+  }
+};
+
+// Handle connection events
+mongoose.connection.on('connected', () =&gt; {
+  console.log('Mongoose connected to MongoDB');
+});
+
+mongoose.connection.on('error', (error) =&gt; {
+  console.error('Mongoose connection error:', error);
+});
+
+mongoose.connection.on('disconnected', () =&gt; {
+  console.log('Mongoose disconnected from MongoDB');
+});
+
+// Handle process termination
+process.on('SIGINT', async () =&gt; {
+  await mongoose.connection.close();
+  console.log('Mongoose connection closed through app termination');
+  process.exit(0);
+});
+
+module.exports = connectToDatabase;
+</code></pre>
+<p>Update your <code>server.js</code> to use the new connection:</p>
+<pre><code class="language-javascript">const express = require('express');
+const cors = require('cors');
+const connectToDatabase = require('./config/database');
+const movieRoutes = require('./routes/movieRoutes');
+
+const app = express();
+const PORT = process.env.PORT || 4000;
+
+// Middleware
+app.use(express.json());
+app.use(cors());
+
+// Routes
+app.get('/', (req, res) =&gt; {
+  res.json({
+    message: 'Welcome to Movie Buzz API',
+    version: '2.0.0',
+    database: 'MongoDB with Mongoose',
+    endpoints: [
+      'GET /api/movies - Get all movies',
+      'GET /api/movies/:id - Get movie by ID',
+      'POST /api/movies - Create new movie',
+      'PUT /api/movies/:id - Update movie',
+      'DELETE /api/movies/:id - Delete movie'
+    ]
+  });
+});
+
+// API routes
+app.use('/api/movies', movieRoutes);
+
+// 404 handler
+app.use('*', (req, res) =&gt; {
+  res.status(404).json({
+    success: false,
+    error: 'Route not found'
+  });
+});
+
+// Connect to database and start server
+connectToDatabase().then(() =&gt; {
+  app.listen(PORT, () =&gt; {
+    console.log(`🎬 Movie Buzz API running on http://localhost:${PORT}`);
+  });
+});
+</code></pre>
+<hr>
+<h2 id="creating-mongoose-schemas" tabindex="-1">Creating Mongoose Schemas</h2>
+<p>A Mongoose schema defines the structure of documents in a collection. Let's create a comprehensive schema for our movies.</p>
+<p>Replace your <code>models/Movie.js</code> file with a Mongoose model:</p>
+<pre><code class="language-javascript">const mongoose = require('mongoose');
+
+// Define the movie schema
+const movieSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, 'Movie name is required'],
+    trim: true,
+    maxlength: [200, 'Movie name cannot exceed 200 characters']
+  },
+  year: {
+    type: Number,
+    required: [true, 'Release year is required'],
+    min: [1800, 'Year must be after 1800'],
+    max: [new Date().getFullYear() + 5, 'Year cannot be more than 5 years in the future']
+  },
+  rating: {
+    type: String,
+    required: [true, 'Rating is required'],
+    enum: {
+      values: ['G', 'PG', 'PG-13', 'R', 'NC-17', 'NR'],
+      message: 'Rating must be G, PG, PG-13, R, NC-17, or NR'
+    }
+  },
+  length: {
+    type: String,
+    required: [true, 'Movie length is required'],
+    validate: {
+      validator: function(v) {
+        return /^\d+\s+minutes?$/.test(v);
+      },
+      message: 'Length must be in format &quot;120 minutes&quot;'
+    }
+  },
+  description: {
+    type: String,
+    required: [true, 'Description is required'],
+    trim: true,
+    minlength: [10, 'Description must be at least 10 characters'],
+    maxlength: [1000, 'Description cannot exceed 1000 characters']
+  },
+  genre: [{
+    type: String,
+    required: true,
+    trim: true
+  }],
+  director: {
+    type: String,
+    required: [true, 'Director is required'],
+    trim: true,
+    maxlength: [100, 'Director name cannot exceed 100 characters']
+  },
+  stars: [{
+    type: String,
+    trim: true,
+    maxlength: [100, 'Actor name cannot exceed 100 characters']
+  }],
+  poster: {
+    type: String,
+    validate: {
+      validator: function(v) {
+        return !v || /^https?:\/\/.+\.(jpg|jpeg|png|gif)$/i.test(v);
+      },
+      message: 'Poster must be a valid image URL'
+    }
+  },
+  boxOffice: {
+    type: String,
+    validate: {
+      validator: function(v) {
+        return !v || /^\$[\d,]+(\.\d{1,2})?\s*(million|billion)?$/i.test(v);
+      },
+      message: 'Box office must be in format &quot;$123.45 million&quot;'
+    }
+  },
+  awards: {
+    oscars: {
+      type: Number,
+      min: 0,
+      default: 0
+    },
+    nominations: {
+      type: Number,
+      min: 0,
+      default: 0
+    }
+  }
+}, {
+  timestamps: true, // Automatically adds createdAt and updatedAt
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true }
+});
+
+// Virtual for movie age
+movieSchema.virtual('age').get(function() {
+  const currentYear = new Date().getFullYear();
+  return currentYear - this.year;
+});
+
+// Virtual for full movie info
+movieSchema.virtual('fullInfo').get(function() {
+  return `${this.name} (${this.year}) - Directed by ${this.director}`;
+});
+
+// Instance method to check if movie is classic (over 25 years old)
+movieSchema.methods.isClassic = function() {
+  return this.age &gt; 25;
+};
+
+// Static method to find movies by genre
+movieSchema.statics.findByGenre = function(genre) {
+  return this.find({ genre: { $in: [genre] } });
+};
+
+// Static method to find recent movies
+movieSchema.statics.findRecent = function(years = 5) {
+  const cutoffYear = new Date().getFullYear() - years;
+  return this.find({ year: { $gte: cutoffYear } });
+};
+
+// Pre-save middleware to capitalize first letter of genre
+movieSchema.pre('save', function(next) {
+  if (this.genre &amp;&amp; Array.isArray(this.genre)) {
+    this.genre = this.genre.map(g =&gt; 
+      g.charAt(0).toUpperCase() + g.slice(1).toLowerCase()
+    );
+  }
+  next();
+});
+
+// Create and export the model
+const Movie = mongoose.model('Movie', movieSchema);
+
+module.exports = Movie;
+</code></pre>
+<hr>
+<h2 id="understanding-mongoose-models" tabindex="-1">Understanding Mongoose Models</h2>
+<p>A Mongoose model is a constructor function created from a schema. It provides an interface to interact with a specific MongoDB collection.</p>
+<p><strong>Key Features of Our Movie Model:</strong></p>
+<ol>
+<li><strong>Validation</strong>: Built-in validation for required fields, data types, and custom rules</li>
+<li><strong>Virtuals</strong>: Computed properties that don't get stored in MongoDB</li>
+<li><strong>Instance Methods</strong>: Methods available on individual documents</li>
+<li><strong>Static Methods</strong>: Methods available on the model itself</li>
+<li><strong>Middleware</strong>: Functions that run before or after certain operations</li>
+<li><strong>Timestamps</strong>: Automatic createdAt and updatedAt fields</li>
+</ol>
+<p><strong>Example Usage:</strong></p>
+<pre><code class="language-javascript">// Create a new movie instance
+const movie = new Movie({
+  name: &quot;The Matrix&quot;,
+  year: 1999,
+  rating: &quot;R&quot;,
+  // ... other fields
+});
+
+// Use instance method
+console.log(movie.isClassic()); // true or false
+
+// Use virtual property
+console.log(movie.age); // Current year - 1999
+console.log(movie.fullInfo); // &quot;The Matrix (1999) - Directed by The Wachowskis&quot;
+
+// Use static method
+const actionMovies = await Movie.findByGenre('Action');
+const recentMovies = await Movie.findRecent(10);
+</code></pre>
+<hr>
+<h2 id="implementing-read-operations" tabindex="-1">Implementing READ Operations</h2>
+<p>Now let's implement READ operations using Mongoose. This is the &quot;R&quot; in CRUD.</p>
+<h3 id="finding-all-movies" tabindex="-1">Finding All Movies</h3>
+<pre><code class="language-javascript">// Basic find all
+const movies = await Movie.find();
+
+// Find all with specific fields only
+const movies = await Movie.find({}, 'name year director rating');
+
+// Find all sorted by year (newest first)
+const movies = await Movie.find().sort({ year: -1 });
+
+// Find all with pagination
+const movies = await Movie.find()
+  .skip(10)        // Skip first 10 results
+  .limit(5)        // Return only 5 results
+  .sort({ name: 1 }); // Sort alphabetically
+
+// Find all with population (we'll cover this more later)
+const movies = await Movie.find().select('name year director');
+</code></pre>
+<h3 id="finding-single-movies" tabindex="-1">Finding Single Movies</h3>
+<pre><code class="language-javascript">// Find by ID
+const movie = await Movie.findById('507f1f77bcf86cd799439011');
+
+// Find one by condition
+const movie = await Movie.findOne({ name: 'The Matrix' });
+
+// Find one with multiple conditions
+const movie = await Movie.findOne({ 
+  year: 1999, 
+  director: 'The Wachowskis' 
+});
+</code></pre>
+<h3 id="advanced-query-methods" tabindex="-1">Advanced Query Methods</h3>
+<pre><code class="language-javascript">// Find movies by genre
+const actionMovies = await Movie.find({ 
+  genre: { $in: ['Action'] } 
+});
+
+// Find movies within year range
+const nineties = await Movie.find({ 
+  year: { $gte: 1990, $lte: 1999 } 
+});
+
+// Find movies with text search
+const matrixMovies = await Movie.find({
+  name: { $regex: 'Matrix', $options: 'i' }
+});
+
+// Find movies with complex conditions
+const epicMovies = await Movie.find({
+  $and: [
+    { year: { $gte: 2000 } },
+    { 'awards.oscars': { $gte: 3 } },
+    { genre: { $in: ['Action', 'Adventure'] } }
+  ]
+});
+
+// Count documents
+const totalMovies = await Movie.countDocuments();
+const actionCount = await Movie.countDocuments({ genre: 'Action' });
+</code></pre>
+<hr>
+<h2 id="updating-express-controllers" tabindex="-1">Updating Express Controllers</h2>
+<p>Now let's update our Express controllers to use Mongoose instead of file operations.</p>
+<p>Update your <code>controllers/movieController.js</code>:</p>
+<pre><code class="language-javascript">const Movie = require('../models/Movie');
+
+// Get all movies
+const getAllMovies = async (req, res) =&gt; {
+  try {
+    // Extract query parameters for filtering and pagination
+    const { 
+      page = 1, 
+      limit = 10, 
+      sortBy = 'year', 
+      sortOrder = 'desc',
+      genre,
+      year,
+      rating,
+      search
+    } = req.query;
+
+    // Build query object
+    let query = {};
+    
+    if (genre) {
+      query.genre = { $in: [genre] };
+    }
+    
+    if (year) {
+      query.year = parseInt(year);
+    }
+    
+    if (rating) {
+      query.rating = rating;
+    }
+    
+    if (search) {
+      query.$or = [
+        { name: { $regex: search, $options: 'i' } },
+        { director: { $regex: search, $options: 'i' } },
+        { description: { $regex: search, $options: 'i' } }
+      ];
+    }
+
+    // Execute query with pagination and sorting
+    const movies = await Movie.find(query)
+      .sort({ [sortBy]: sortOrder === 'desc' ? -1 : 1 })
+      .skip((page - 1) * limit)
+      .limit(parseInt(limit));
+
+    // Get total count for pagination info
+    const totalCount = await Movie.countDocuments(query);
+    const totalPages = Math.ceil(totalCount / limit);
+
+    res.json({
+      success: true,
+      data: movies,
+      pagination: {
+        currentPage: parseInt(page),
+        totalPages,
+        totalCount,
+        hasNextPage: page &lt; totalPages,
+        hasPrevPage: page &gt; 1
+      }
+    });
+  } catch (error) {
+    console.error('Error fetching movies:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to retrieve movies',
+      details: error.message
+    });
+  }
+};
+
+// Get single movie by ID
+const getMovieById = async (req, res) =&gt; {
+  try {
+    const { id } = req.params;
+
+    // Validate MongoDB ObjectId format
+    if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid movie ID format'
+      });
+    }
+
+    const movie = await Movie.findById(id);
+    
+    if (!movie) {
+      return res.status(404).json({
+        success: false,
+        error: 'Movie not found'
+      });
+    }
+    
+    res.json({
+      success: true,
+      data: movie
+    });
+  } catch (error) {
+    console.error('Error fetching movie:', error);
+    
+    // Handle specific Mongoose errors
+    if (error.name === 'CastError') {
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid movie ID format'
+      });
+    }
+    
+    res.status(500).json({
+      success: false,
+      error: 'Failed to retrieve movie',
+      details: error.message
+    });
+  }
+};
+
+// Get movies by genre
+const getMoviesByGenre = async (req, res) =&gt; {
+  try {
+    const { genre } = req.params;
+    
+    const movies = await Movie.findByGenre(genre);
+    
+    res.json({
+      success: true,
+      data: movies,
+      count: movies.length,
+      genre: genre
+    });
+  } catch (error) {
+    console.error('Error fetching movies by genre:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to retrieve movies by genre',
+      details: error.message
+    });
+  }
+};
+
+// Get recent movies
+const getRecentMovies = async (req, res) =&gt; {
+  try {
+    const { years = 5 } = req.query;
+    
+    const movies = await Movie.findRecent(parseInt(years));
+    
+    res.json({
+      success: true,
+      data: movies,
+      count: movies.length,
+      yearsBack: parseInt(years)
+    });
+  } catch (error) {
+    console.error('Error fetching recent movies:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to retrieve recent movies',
+      details: error.message
+    });
+  }
+};
+
+// Placeholder functions for other CRUD operations (we'll implement these in coming weeks)
+const createMovie = (req, res) =&gt; {
+  res.status(501).json({
+    success: false,
+    error: 'Create functionality not yet implemented'
+  });
+};
+
+const updateMovie = (req, res) =&gt; {
+  res.status(501).json({
+    success: false,
+    error: 'Update functionality not yet implemented'
+  });
+};
+
+const deleteMovie = (req, res) =&gt; {
+  res.status(501).json({
+    success: false,
+    error: 'Delete functionality not yet implemented'
+  });
+};
+
+module.exports = {
+  getAllMovies,
+  getMovieById,
+  getMoviesByGenre,
+  getRecentMovies,
+  createMovie,
+  updateMovie,
+  deleteMovie
+};
+</code></pre>
+<p>Update your routes to include the new endpoints in <code>routes/movieRoutes.js</code>:</p>
+<pre><code class="language-javascript">const express = require('express');
+const {
+  getAllMovies,
+  getMovieById,
+  getMoviesByGenre,
+  getRecentMovies,
+  createMovie,
+  updateMovie,
+  deleteMovie
+} = require('../controllers/movieController');
+
+const router = express.Router();
+
+// READ routes
+router.get('/', getAllMovies);                    // GET /api/movies
+router.get('/genre/:genre', getMoviesByGenre);    // GET /api/movies/genre/Action
+router.get('/recent', getRecentMovies);           // GET /api/movies/recent
+router.get('/:id', getMovieById);                 // GET /api/movies/:id
+
+// Other CRUD routes (placeholders for now)
+router.post('/', createMovie);                    // POST /api/movies
+router.put('/:id', updateMovie);                  // PUT /api/movies/:id
+router.delete('/:id', deleteMovie);               // DELETE /api/movies/:id
+
+module.exports = router;
+</code></pre>
+<hr>
+<h2 id="testing-read-functionality" tabindex="-1">Testing READ Functionality</h2>
+<p>Let's test our new Mongoose-powered READ operations:</p>
+<h3 id="using-browser" tabindex="-1">Using Browser</h3>
+<ul>
+<li><code>http://localhost:4000/api/movies</code> - Get all movies</li>
+<li><code>http://localhost:4000/api/movies?page=1&amp;limit=5</code> - Paginated results</li>
+<li><code>http://localhost:4000/api/movies?genre=Action</code> - Filter by genre</li>
+<li><code>http://localhost:4000/api/movies?search=Matrix</code> - Search movies</li>
+<li><code>http://localhost:4000/api/movies/genre/Action</code> - Movies by genre</li>
+<li><code>http://localhost:4000/api/movies/recent?years=10</code> - Recent movies</li>
+</ul>
+<h3 id="using-curl" tabindex="-1">Using curl</h3>
+<pre><code class="language-bash"># Get all movies with pagination
+curl &quot;http://localhost:4000/api/movies?page=1&amp;limit=3&quot;
+
+# Search movies
+curl &quot;http://localhost:4000/api/movies?search=Matrix&quot;
+
+# Get movies by genre
+curl &quot;http://localhost:4000/api/movies/genre/Action&quot;
+
+# Get recent movies
+curl &quot;http://localhost:4000/api/movies/recent?years=5&quot;
+
+# Get specific movie by ID (replace with actual ID)
+curl &quot;http://localhost:4000/api/movies/507f1f77bcf86cd799439011&quot;
+</code></pre>
+<h3 id="testing-with-your-react-frontend" tabindex="-1">Testing with Your React Frontend</h3>
+<p>Your React frontend should continue to work with the new API, but now with enhanced features:</p>
+<pre><code class="language-javascript">// In your React App.js, you can now use additional query parameters
+const fetchMovies = async (params = {}) =&gt; {
+  try {
+    const queryString = new URLSearchParams(params).toString();
+    const url = queryString ? 
+      `${API_BASE_URL}/movies?${queryString}` : 
+      `${API_BASE_URL}/movies`;
+    
+    const response = await fetch(url);
+    const result = await response.json();
+    
+    if (result.success) {
+      setMovies(result.data);
+      setPagination(result.pagination); // If you want to implement pagination
+    }
+  } catch (error) {
+    console.error('Error fetching movies:', error);
+  }
+};
+
+// Example usage
+fetchMovies({ search: 'Matrix', limit: 10 });
+fetchMovies({ genre: 'Action', sortBy: 'year' });
+</code></pre>
+<hr>
+<h2 id="error-handling-with-mongoose" tabindex="-1">Error Handling with Mongoose</h2>
+<p>Mongoose provides detailed error information. Here are common error types and how to handle them:</p>
+<pre><code class="language-javascript">// In your controller functions
+try {
+  const movie = await Movie.findById(id);
+} catch (error) {
+  console.error('Error details:', error);
+  
+  // Handle specific Mongoose error types
+  if (error.name === 'CastError') {
+    // Invalid ObjectId format
+    return res.status(400).json({
+      success: false,
+      error: 'Invalid ID format'
+    });
+  }
+  
+  if (error.name === 'ValidationError') {
+    // Schema validation failed
+    const errors = Object.values(error.errors).map(e =&gt; e.message);
+    return res.status(400).json({
+      success: false,
+      error: 'Validation failed',
+      details: errors
+    });
+  }
+  
+  // Generic server error
+  res.status(500).json({
+    success: false,
+    error: 'Internal server error',
+    details: error.message
+  });
+}
+</code></pre>
+<hr>
+<h2 id="final-thoughts" tabindex="-1">Final Thoughts</h2>
+<p>We've successfully implemented READ functionality using Mongoose! Our Movie Buzz API now features:</p>
+<ul>
+<li><strong>Structured Data</strong>: Mongoose schemas provide validation and consistency</li>
+<li><strong>Advanced Queries</strong>: Filtering, sorting, pagination, and search capabilities</li>
+<li><strong>Better Error Handling</strong>: Descriptive error messages and proper status codes</li>
+<li><strong>Rich API</strong>: Multiple endpoints for different use cases</li>
+<li><strong>Type Safety</strong>: Automatic type casting and validation</li>
+</ul>
+<p>The READ operations are now production-ready with features like:</p>
+<ul>
+<li>Pagination for large datasets</li>
+<li>Search across multiple fields</li>
+<li>Genre-based filtering</li>
+<li>Recent movies endpoint</li>
+<li>Comprehensive error handling</li>
+</ul>
+<p>Next week, we'll implement CREATE functionality, allowing users to add new movies through our API.</p>
+<blockquote class="callout callout--reflection-consider">
+<div class="callout-label">🤔 Reflection Prompt — Consider This</div>
+<p><code>Consider This</code><br>
+How do the validation rules in our Mongoose schema help ensure data quality? What happens when invalid data is submitted?</p>
+</blockquote>
+<hr>
+<h2 id="exit-ticket" tabindex="-1">Exit Ticket</h2>
+<p>Please complete the exit ticket in the LMS. You may use the lesson plan for this session, but do not use any additional resources. This exit ticket will not be part of your grade for the course, and rather is used to inform future instruction and curricular releases.</p>
+<hr>
+<h2 id="review" tabindex="-1">Review</h2>
+<ul>
+<li>What is Mongoose and what advantages does it provide over the native MongoDB driver?</li>
+<li>How do schemas help structure and validate data in MongoDB?</li>
+<li>What are the different ways to query documents using Mongoose?</li>
+<li>How do you implement pagination and sorting in Mongoose queries?</li>
+<li>What are virtuals and when would you use them?</li>
+<li>How do you handle different types of errors in Mongoose operations?</li>
+</ul>
+
+<div class="pager">
+<a href="../week_11_intro_to_mongodb/index.html">← Week 11</a>
+<a href="../week_13_create_functionality/index.html">Week 13 →</a>
+</div>
+</main>
+</div>
+</body>
+</html>

@@ -13,7 +13,7 @@ app.use(cors());
 // Home route with API information
 app.get('/', (req, res) => {
   res.json({
-    message: 'Movie Buzz API - Week 10: Mongoose and READ Operations',
+    message: 'Movie Buzz API - Week 12: Mongoose and READ Operations',
     version: '2.0.0',
     database: 'MongoDB with Mongoose ODM',
     features: [
@@ -85,7 +85,7 @@ const startServer = async () => {
     // For now, just start the server without database
     app.listen(PORT, () => {
       console.log(`🚀 Server running on http://localhost:${PORT}`);
-      console.log('📖 Visit http://localhost:${PORT} for API documentation');
+      console.log(`📖 Visit http://localhost:${PORT} for API documentation`);
       console.log('');
       console.log('⚠️ Database connection not yet implemented');
       console.log('📝 Students will complete the following:');

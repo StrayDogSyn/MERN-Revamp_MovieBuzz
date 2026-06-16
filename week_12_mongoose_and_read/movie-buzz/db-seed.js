@@ -1,4 +1,4 @@
-// Database seeding script for Week 10
+// Database seeding script for Week 12
 // This script loads sample movies into MongoDB using Mongoose
 
 const mongoose = require('mongoose');
@@ -12,11 +12,27 @@ const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/movie-
 const seedDatabase = async () => {
   try {
     console.log('🌱 Starting database seed...');
-    
+
     // Connect to MongoDB
     await mongoose.connect(MONGODB_URI);
     console.log('✅ Connected to MongoDB');
-    
+
+    // Guard: detect if the Movie schema is still the empty starter (no fields defined).
+    // If so, seeding will succeed but every logged field will print "undefined" — which
+    // trains students to ignore log output. Abort early with an actionable message instead.
+    const definedFields = Object.keys(Movie.schema.paths)
+      .filter(k => !['_id', '__v'].includes(k));
+
+    if (definedFields.length === 0) {
+      console.warn(
+        '\n⚠️  Seed aborted: Movie schema has no fields defined yet.' +
+        '\n   Implement your schema in models/movie.js first, then re-run:' +
+        '\n   npm run seed\n'
+      );
+      await mongoose.connection.close();
+      process.exit(0);
+    }
+
     // Clear existing movies
     await Movie.deleteMany({});
     console.log('🧹 Cleared existing movies');

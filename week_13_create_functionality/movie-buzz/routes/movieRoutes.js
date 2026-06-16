@@ -1,3 +1,14 @@
+/**
+ * STARTER FILE — Week 13: CREATE Operations
+ *
+ * This file is intentionally incomplete. Your task:
+ *   1. Uncomment router.post('/', createMovie) once you implement createMovie
+ *   2. The placeholder POST route below gives you a 501 until then — it is
+ *      intentional, not a bug
+ *
+ * Reference: movie-buzz-finished/server/routes/movieRoutes.js
+ * Do not copy from the reference — implement it yourself first.
+ */
 const express = require('express');
 const {
   getMovies,
@@ -14,7 +25,7 @@ router.get('/test', (req, res) => {
   res.json({
     success: true,
     message: 'Movie routes are working!',
-    week: 11,
+    week: 13,
     focus: 'CREATE Operations',
     availableRoutes: [
       'GET /api/movies - Get all movies',

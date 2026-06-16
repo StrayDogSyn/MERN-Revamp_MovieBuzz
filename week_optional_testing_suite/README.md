@@ -89,12 +89,12 @@ npm install
 # Terminal 1: Start MongoDB
 mongod
 
-# Terminal 2: Start Backend (Week 14)
-cd ../week_14_frontend_backend_integration/movie-buzz-fullstack/server
+# Terminal 2: Start Backend (Week 16)
+cd ../week_16_frontend_backend_integration/movie-buzz-fullstack/server
 npm start
 
-# Terminal 3: Start Frontend (Week 14)  
-cd ../week_14_frontend_backend_integration/movie-buzz-fullstack/client
+# Terminal 3: Start Frontend (Week 16)
+cd ../week_16_frontend_backend_integration/movie-buzz-fullstack/client
 npm start
 ```
 

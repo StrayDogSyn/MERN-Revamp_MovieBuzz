@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 6 - React Component Patterns & Composition · Movie Buzz Lesson Viewer</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+<label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
+<div class="layout">
+<nav class="sidebar" aria-label="Course weeks">
+<div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
+<a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
+<a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
+<a class="nav-link" href="../week_02_dev_environment/index.html">Week 02 · Dev Environment</a>
+<a class="nav-link" href="../week_03_intro_to_react/index.html">Week 03 · Intro to React</a>
+<a class="nav-link" href="../week_04_react_state_and_hooks/index.html">Week 04 · React State & Hooks</a>
+<a class="nav-link" href="../week_05_react_events_and_hooks/index.html">Week 05 · React Events & Hooks</a>
+<a class="nav-link active" href="../week_06_react_component_patterns/index.html">Week 06 · React Component Patterns</a>
+<a class="nav-link" href="../week_07_react_hooks_and_context/index.html">Week 07 · React Hooks & Context</a>
+<div class="nav-phase">Weeks 08–16 · Backend (Node, Express, MongoDB)</div>
+<a class="nav-link" href="../week_08_nodejs_and_http/index.html">Week 08 · Node.js & HTTP</a>
+<a class="nav-link" href="../week_09_express_and_cors/index.html">Week 09 · Express & CORS</a>
+<a class="nav-link" href="../week_10_tic_tac_toe_checkpoint/index.html">Week 10 · Tic-Tac-Toe Checkpoint</a>
+<a class="nav-link" href="../week_11_intro_to_mongodb/index.html">Week 11 · Intro to MongoDB</a>
+<a class="nav-link" href="../week_12_mongoose_and_read/index.html">Week 12 · Mongoose & Read</a>
+<a class="nav-link" href="../week_13_create_functionality/index.html">Week 13 · Create Functionality</a>
+<a class="nav-link" href="../week_14_update_functionality/index.html">Week 14 · Update Functionality</a>
+<a class="nav-link" href="../week_15_delete_functionality/index.html">Week 15 · Delete Functionality</a>
+<a class="nav-link" href="../week_16_frontend_backend_integration/index.html">Week 16 · Frontend/Backend Integration</a>
+<div class="nav-phase">Optional Modules</div>
+<a class="nav-link" href="../week_optional_search_feature/index.html">Search Feature</a>
+<a class="nav-link" href="../week_optional_testing_suite/index.html">Testing Suite</a>
+</nav>
+<main class="main">
+<div class="page-header">
+<div class="breadcrumb">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
+</div>
+<h1 id="week-6---react-component-patterns--composition" tabindex="-1">Week 6 - React Component Patterns &amp; Composition</h1>
+<h2 id="learning-objectives" tabindex="-1">Learning Objectives</h2>
+<p>By the end of this session, you will be able to:</p>
+<ul>
+<li>Build complex UIs using component composition</li>
+<li>Create reusable component libraries</li>
+<li>Implement loading and error states</li>
+<li>Use advanced prop patterns</li>
+<li>Structure React applications effectively</li>
+</ul>
+<h2 id="simple-pattern-examples---building-understanding" tabindex="-1">Simple Pattern Examples - Building Understanding</h2>
+<p>Before applying patterns to Movie Buzz, let's explore simple examples of component patterns:</p>
+<h3 class="step-heading" id="1step-1-basic-container-component" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Basic Container Component</h3>
+<p>Create <code>src/components/Box.js</code>:</p>
+<pre><code class="language-javascript">// A simple container that wraps content
+function Box({ color = 'lightblue', children }) {
+  return (
+    &lt;div style={{
+      backgroundColor: color,
+      padding: '20px',
+      margin: '10px',
+      borderRadius: '8px'
+    }}&gt;
+      {children}
+    &lt;/div&gt;
+  );
+}
+
+// Usage
+&lt;Box color=&quot;lightgreen&quot;&gt;
+  &lt;h3&gt;Hello World&lt;/h3&gt;
+  &lt;p&gt;This is inside a box!&lt;/p&gt;
+&lt;/Box&gt;
+</code></pre>
+<h3 class="step-heading" id="2step-2-list-and-item-pattern" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>List and Item Pattern</h3>
+<p>Create <code>src/components/SimpleList.js</code>:</p>
+<pre><code class="language-javascript">// Parent component that manages the list
+function SimpleList({ items }) {
+  return (
+    &lt;ul&gt;
+      {items.map(item =&gt; (
+        &lt;SimpleListItem key={item.id} item={item} /&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}
+
+// Child component for individual items
+function SimpleListItem({ item }) {
+  return (
+    &lt;li&gt;
+      &lt;strong&gt;{item.title}:&lt;/strong&gt; {item.description}
+    &lt;/li&gt;
+  );
+}
+
+// Usage
+const items = [
+  { id: 1, title: 'First', description: 'First item' },
+  { id: 2, title: 'Second', description: 'Second item' }
+];
+&lt;SimpleList items={items} /&gt;
+</code></pre>
+<h3 class="step-heading" id="3step-3-conditional-rendering-pattern" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Conditional Rendering Pattern</h3>
+<p>Create <code>src/components/Alert.js</code>:</p>
+<pre><code class="language-javascript">function Alert({ type = 'info', message, onClose }) {
+  const colors = {
+    info: 'blue',
+    success: 'green',
+    warning: 'orange',
+    error: 'red'
+  };
+
+  return (
+    &lt;div style={{
+      color: colors[type],
+      padding: '10px',
+      border: `1px solid ${colors[type]}`
+    }}&gt;
+      &lt;span&gt;{message}&lt;/span&gt;
+      {onClose &amp;&amp; (
+        &lt;button onClick={onClose} style={{ marginLeft: '10px' }}&gt;
+          Dismiss
+        &lt;/button&gt;
+      )}
+    &lt;/div&gt;
+  );
+}
+
+// Usage examples
+&lt;Alert type=&quot;success&quot; message=&quot;Operation successful!&quot; /&gt;
+&lt;Alert type=&quot;error&quot; message=&quot;Something went wrong&quot; onClose={() =&gt; console.log('closed')} /&gt;
+</code></pre>
+<blockquote class="callout callout--reflection-try">
+<div class="callout-label">🛠️ Hands-On — Try It Out</div>
+<p><code>Try It Out</code>
+Create these simple pattern components and experiment with:</p>
+<ul>
+<li>Passing different props</li>
+<li>Nesting components</li>
+<li>Conditional rendering</li>
+<li>Component composition</li>
+</ul>
+</blockquote>
+<h2 id="component-composition" tabindex="-1">Component Composition</h2>
+<h3 id="what-is-composition" tabindex="-1">What is Composition?</h3>
+<p>Now that you've seen simple examples, let's understand composition more deeply. Composition is about building components from other components. Instead of using inheritance, React uses composition to share code between components.</p>
+<pre><code class="language-javascript">// Instead of inheritance
+class SpecialButton extends Button { }
+
+// React uses composition
+function SpecialButton(props) {
+  return &lt;Button color=&quot;red&quot; {...props} /&gt;;
+}
+</code></pre>
+<h3 id="children-prop" tabindex="-1">Children Prop</h3>
+<p>The <code>children</code> prop allows you to pass components as data to other components:</p>
+<pre><code class="language-javascript">function Card({ children, title }) {
+  return (
+    &lt;div className=&quot;card&quot;&gt;
+      &lt;h2&gt;{title}&lt;/h2&gt;
+      &lt;div className=&quot;card-content&quot;&gt;
+        {children}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+// Usage
+&lt;Card title=&quot;Movie Details&quot;&gt;
+  &lt;p&gt;Any content can go here!&lt;/p&gt;
+  &lt;button&gt;Click me&lt;/button&gt;
+&lt;/Card&gt;
+</code></pre>
+<h2 id="building-reusable-components" tabindex="-1">Building Reusable Components</h2>
+<h3 id="modal-component" tabindex="-1">Modal Component</h3>
+<pre><code class="language-javascript">function Modal({ isOpen, onClose, title, children }) {
+  if (!isOpen) return null;
+
+  return (
+    &lt;div className=&quot;modal-overlay&quot; onClick={onClose}&gt;
+      &lt;div className=&quot;modal-content&quot; onClick={(e) =&gt; e.stopPropagation()}&gt;
+        &lt;div className=&quot;modal-header&quot;&gt;
+          &lt;h2&gt;{title}&lt;/h2&gt;
+          &lt;button onClick={onClose}&gt;×&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;modal-body&quot;&gt;
+          {children}
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<h3 id="loading-component" tabindex="-1">Loading Component</h3>
+<pre><code class="language-javascript">function LoadingSpinner({ size = &quot;medium&quot;, message = &quot;Loading...&quot; }) {
+  return (
+    &lt;div className={`loading-spinner ${size}`}&gt;
+      &lt;div className=&quot;spinner&quot;&gt;&lt;/div&gt;
+      &lt;p&gt;{message}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<h3 id="error-boundary" tabindex="-1">Error Boundary</h3>
+<pre><code class="language-javascript">class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error('Error caught:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        &lt;div className=&quot;error-fallback&quot;&gt;
+          &lt;h2&gt;Something went wrong&lt;/h2&gt;
+          &lt;p&gt;{this.state.error?.message}&lt;/p&gt;
+          &lt;button onClick={() =&gt; this.setState({ hasError: false })}&gt;
+            Try again
+          &lt;/button&gt;
+        &lt;/div&gt;
+      );
+    }
+
+    return this.props.children;
+  }
+}
+</code></pre>
+<h2 id="compound-components-pattern" tabindex="-1">Compound Components Pattern</h2>
+<p>Compound components work together to form a complete UI:</p>
+<pre><code class="language-javascript">function Tabs({ children, defaultTab }) {
+  const [activeTab, setActiveTab] = useState(defaultTab);
+
+  return (
+    &lt;div className=&quot;tabs&quot;&gt;
+      {React.Children.map(children, child =&gt;
+        React.cloneElement(child, { activeTab, setActiveTab })
+      )}
+    &lt;/div&gt;
+  );
+}
+
+function TabList({ children, activeTab, setActiveTab }) {
+  return (
+    &lt;div className=&quot;tab-list&quot;&gt;
+      {React.Children.map(children, child =&gt;
+        React.cloneElement(child, { activeTab, setActiveTab })
+      )}
+    &lt;/div&gt;
+  );
+}
+
+function Tab({ id, children, activeTab, setActiveTab }) {
+  return (
+    &lt;button
+      className={`tab ${activeTab === id ? 'active' : ''}`}
+      onClick={() =&gt; setActiveTab(id)}
+    &gt;
+      {children}
+    &lt;/button&gt;
+  );
+}
+
+function TabPanels({ children, activeTab }) {
+  return (
+    &lt;div className=&quot;tab-panels&quot;&gt;
+      {React.Children.map(children, child =&gt;
+        child.props.id === activeTab ? child : null
+      )}
+    &lt;/div&gt;
+  );
+}
+
+function TabPanel({ children }) {
+  return &lt;div className=&quot;tab-panel&quot;&gt;{children}&lt;/div&gt;;
+}
+
+// Usage
+&lt;Tabs defaultTab=&quot;cast&quot;&gt;
+  &lt;TabList&gt;
+    &lt;Tab id=&quot;cast&quot;&gt;Cast&lt;/Tab&gt;
+    &lt;Tab id=&quot;crew&quot;&gt;Crew&lt;/Tab&gt;
+    &lt;Tab id=&quot;details&quot;&gt;Details&lt;/Tab&gt;
+  &lt;/TabList&gt;
+  &lt;TabPanels&gt;
+    &lt;TabPanel id=&quot;cast&quot;&gt;Cast information...&lt;/TabPanel&gt;
+    &lt;TabPanel id=&quot;crew&quot;&gt;Crew information...&lt;/TabPanel&gt;
+    &lt;TabPanel id=&quot;details&quot;&gt;Movie details...&lt;/TabPanel&gt;
+  &lt;/TabPanels&gt;
+&lt;/Tabs&gt;
+</code></pre>
+<h2 id="toast-notifications" tabindex="-1">Toast Notifications</h2>
+<pre><code class="language-javascript">function ToastProvider({ children }) {
+  const [toasts, setToasts] = useState([]);
+
+  const addToast = (message, type = 'info') =&gt; {
+    const id = Date.now();
+    setToasts(prev =&gt; [...prev, { id, message, type }]);
+    
+    setTimeout(() =&gt; {
+      setToasts(prev =&gt; prev.filter(toast =&gt; toast.id !== id));
+    }, 3000);
+  };
+
+  return (
+    &lt;&gt;
+      {children({ addToast })}
+      &lt;div className=&quot;toast-container&quot;&gt;
+        {toasts.map(toast =&gt; (
+          &lt;Toast key={toast.id} {...toast} /&gt;
+        ))}
+      &lt;/div&gt;
+    &lt;/&gt;
+  );
+}
+
+function Toast({ message, type }) {
+  return (
+    &lt;div className={`toast toast-${type}`}&gt;
+      {message}
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<h2 id="project-tasks" tabindex="-1">Project Tasks</h2>
+<h3 class="step-heading" id="1step-1-create-a-component-library" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Create a Component Library</h3>
+<p>Build these reusable components for Movie Buzz:</p>
+<ul>
+<li>Modal for movie details</li>
+<li>LoadingSpinner for async operations</li>
+<li>ErrorBoundary for error handling</li>
+<li>Toast for notifications</li>
+<li>Card component for consistent styling</li>
+<li>Button component with variants</li>
+</ul>
+<h3 class="step-heading" id="2step-2-implement-loading-states" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Implement Loading States</h3>
+<p>Add proper loading states to your app:</p>
+<pre><code class="language-javascript">function MoviesList() {
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() =&gt; {
+    fetchMovies()
+      .then(data =&gt; {
+        setMovies(data);
+        setLoading(false);
+      })
+      .catch(err =&gt; {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return &lt;LoadingSpinner /&gt;;
+  if (error) return &lt;ErrorMessage message={error} /&gt;;
+  if (movies.length === 0) return &lt;EmptyState /&gt;;
+
+  return &lt;MovieGrid movies={movies} /&gt;;
+}
+</code></pre>
+<h3 class="step-heading" id="3step-3-add-modal-for-movie-details" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Add Modal for Movie Details</h3>
+<pre><code class="language-javascript">function MovieDetailsModal({ movie, isOpen, onClose }) {
+  return (
+    &lt;Modal isOpen={isOpen} onClose={onClose} title={movie?.name}&gt;
+      {movie &amp;&amp; (
+        &lt;&gt;
+          &lt;img src={movie.poster} alt={movie.name} /&gt;
+          &lt;p&gt;{movie.description}&lt;/p&gt;
+          &lt;div&gt;
+            &lt;strong&gt;Director:&lt;/strong&gt; {movie.director}
+          &lt;/div&gt;
+          &lt;div&gt;
+            &lt;strong&gt;Stars:&lt;/strong&gt; {movie.stars.join(', ')}
+          &lt;/div&gt;
+        &lt;/&gt;
+      )}
+    &lt;/Modal&gt;
+  );
+}
+</code></pre>
+<h2 id="best-practices" tabindex="-1">Best Practices</h2>
+<ol>
+<li><strong>Keep components focused</strong> - Each component should do one thing well</li>
+<li><strong>Use composition over inheritance</strong> - Build complex UIs from simple parts</li>
+<li><strong>Make components reusable</strong> - Think about how components might be used elsewhere</li>
+<li><strong>Handle edge cases</strong> - Loading, error, and empty states</li>
+<li><strong>Use semantic HTML</strong> - For accessibility</li>
+<li><strong>Test your components</strong> - Ensure they work in isolation</li>
+</ol>
+<h2 id="review-questions" tabindex="-1">Review Questions</h2>
+<ol>
+<li>What is component composition and why is it preferred over inheritance?</li>
+<li>How does the children prop work?</li>
+<li>What are compound components?</li>
+<li>Why are loading and error states important?</li>
+<li>How do you make components reusable?</li>
+</ol>
+<h2 id="exit-ticket" tabindex="-1">Exit Ticket</h2>
+<p>Please complete the exit ticket in the LMS. You may use the lesson plan for this session, but do not use any additional resources. This exit ticket will not be part of your grade for the course, and rather is used to inform future instruction and curricular releases.</p>
+<hr>
+<h2 id="next-week-preview" tabindex="-1">Next Week Preview</h2>
+<p>In Week 7, we'll dive into advanced React hooks and Context API for global state management!</p>
+
+<div class="pager">
+<a href="../week_05_react_events_and_hooks/index.html">← Week 05</a>
+<a href="../week_07_react_hooks_and_context/index.html">Week 07 →</a>
+</div>
+</main>
+</div>
+</body>
+</html>

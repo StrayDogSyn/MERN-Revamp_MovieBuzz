@@ -429,12 +429,12 @@ const getDeleteConfirmation = async (req, res) => {
 
 1. **Delete a Movie**:
    - Method: DELETE
-   - URL: `http://localhost:4000/api/movie/{movie_id}`
+   - URL: `http://localhost:4000/api/movies/{movie_id}`
    - Expected Response: 200 with deleted movie info
 
 2. **Delete Non-Existent Movie**:
    - Method: DELETE
-   - URL: `http://localhost:4000/api/movie/507f1f77bcf86cd799439011`
+   - URL: `http://localhost:4000/api/movies/507f1f77bcf86cd799439011`
    - Expected Response: 404 Movie not found
 
 3. **Soft Delete a Movie**:
@@ -459,10 +459,7 @@ const getDeleteConfirmation = async (req, res) => {
 
 ```bash
 # Delete a movie
-curl -X DELETE http://localhost:4000/api/movie/{movie_id}
-
-# Get delete confirmation
-curl -X GET http://localhost:4000/api/movie/{movie_id}/delete-confirm
+curl -X DELETE http://localhost:4000/api/movies/{movie_id}
 
 # Bulk delete movies
 curl -X DELETE http://localhost:4000/api/movies/bulk \
@@ -482,7 +479,7 @@ curl -X DELETE http://localhost:4000/api/movies/bulk \
 
 ## RESTful Conventions
 
-- DELETE `/api/movie/:id` - Delete single resource
+- DELETE `/api/movies/:id` - Delete single resource
 - DELETE `/api/movies/bulk` - Delete multiple resources
 - Return 200 (OK) status on successful deletion
 - Return 404 (Not Found) if resource doesn't exist

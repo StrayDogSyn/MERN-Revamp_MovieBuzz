@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 8 - Node.js & HTTP Fundamentals · Movie Buzz Lesson Viewer</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+<label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
+<div class="layout">
+<nav class="sidebar" aria-label="Course weeks">
+<div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
+<a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
+<a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
+<a class="nav-link" href="../week_02_dev_environment/index.html">Week 02 · Dev Environment</a>
+<a class="nav-link" href="../week_03_intro_to_react/index.html">Week 03 · Intro to React</a>
+<a class="nav-link" href="../week_04_react_state_and_hooks/index.html">Week 04 · React State & Hooks</a>
+<a class="nav-link" href="../week_05_react_events_and_hooks/index.html">Week 05 · React Events & Hooks</a>
+<a class="nav-link" href="../week_06_react_component_patterns/index.html">Week 06 · React Component Patterns</a>
+<a class="nav-link" href="../week_07_react_hooks_and_context/index.html">Week 07 · React Hooks & Context</a>
+<div class="nav-phase">Weeks 08–16 · Backend (Node, Express, MongoDB)</div>
+<a class="nav-link active" href="../week_08_nodejs_and_http/index.html">Week 08 · Node.js & HTTP</a>
+<a class="nav-link" href="../week_09_express_and_cors/index.html">Week 09 · Express & CORS</a>
+<a class="nav-link" href="../week_10_tic_tac_toe_checkpoint/index.html">Week 10 · Tic-Tac-Toe Checkpoint</a>
+<a class="nav-link" href="../week_11_intro_to_mongodb/index.html">Week 11 · Intro to MongoDB</a>
+<a class="nav-link" href="../week_12_mongoose_and_read/index.html">Week 12 · Mongoose & Read</a>
+<a class="nav-link" href="../week_13_create_functionality/index.html">Week 13 · Create Functionality</a>
+<a class="nav-link" href="../week_14_update_functionality/index.html">Week 14 · Update Functionality</a>
+<a class="nav-link" href="../week_15_delete_functionality/index.html">Week 15 · Delete Functionality</a>
+<a class="nav-link" href="../week_16_frontend_backend_integration/index.html">Week 16 · Frontend/Backend Integration</a>
+<div class="nav-phase">Optional Modules</div>
+<a class="nav-link" href="../week_optional_search_feature/index.html">Search Feature</a>
+<a class="nav-link" href="../week_optional_testing_suite/index.html">Testing Suite</a>
+</nav>
+<main class="main">
+<div class="page-header">
+<div class="breadcrumb">Weeks 08–16 · Backend (Node, Express, MongoDB)</div>
+</div>
+<h1 id="week-8---nodejs--http-fundamentals" tabindex="-1">Week 8 - Node.js &amp; HTTP Fundamentals</h1>
+<ul>
+<li><a href="#week-8---nodejs--http-fundamentals">Week 8 - Node.js &amp; HTTP Fundamentals</a>
+<ul>
+<li><a href="#notes-about-this-lesson-plan">Notes About This Lesson Plan</a></li>
+<li><a href="#learning-objectives">Learning Objectives</a></li>
+<li><a href="#glossary">Glossary</a></li>
+<li><a href="#starting-point">Starting Point</a></li>
+<li><a href="#what-is-nodejs">What is Node.js?</a></li>
+<li><a href="#setting-up-nodejs-development">Setting Up Node.js Development</a></li>
+<li><a href="#nodejs-modules-and-require">Node.js Modules and require()</a></li>
+<li><a href="#file-system-operations">File System Operations</a></li>
+<li><a href="#creating-movie-buzz-backend">Creating Movie Buzz Backend</a>
+<ul>
+<li><a href="#project-structure">Project Structure</a></li>
+<li><a href="#creating-movie-data-module">Creating Movie Data Module</a></li>
+<li><a href="#building-server-utilities">Building Server Utilities</a></li>
+</ul>
+</li>
+<li><a href="#command-line-arguments">Command Line Arguments</a></li>
+<li><a href="#asynchronous-programming-basics">Asynchronous Programming Basics</a></li>
+<li><a href="#final-thoughts">Final Thoughts</a></li>
+<li><a href="#exit-ticket">Exit Ticket</a></li>
+<li><a href="#review">Review</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="notes-about-this-lesson-plan" tabindex="-1">Notes About This Lesson Plan</h2>
+<p>Please review this lesson plan in advance of our RI session. If this plan doesn't align with where you and your classmates are at in the LMS, please send a ticket to Help Desk as soon as possible.</p>
+<p>This code is for instructional purposes only. It should be utilized as an example in developing your own work. No part of it should be directly copied into your own project. As per TLM's plagiarism policy, submitting or misrepresenting code or an idea as your own when it was created by someone else constitutes plagiarism.</p>
+<hr>
+<h2 id="learning-objectives" tabindex="-1">Learning Objectives</h2>
+<p>By the end of this session, learners will be able to:</p>
+<ul>
+<li>Explain what Node.js is and how it differs from browser JavaScript</li>
+<li>Set up a Node.js development environment</li>
+<li>Use Node.js modules and the require/import system</li>
+<li>Perform file system operations with Node.js</li>
+<li>Create modular backend code for the Movie Buzz application</li>
+<li>Understand HTTP protocol and make HTTP requests with Node.js</li>
+<li>Create basic HTTP servers using the built-in http module</li>
+<li>Handle command line arguments in Node.js applications</li>
+<li>Understand basic asynchronous programming concepts</li>
+</ul>
+<hr>
+<h2 id="glossary" tabindex="-1">Glossary</h2>
+<details open class="glossary-disclosure">
+<summary>📖 Click to collapse glossary</summary>
+<ul>
+<li><code>Node.js</code>: A JavaScript runtime built on Chrome's V8 engine that allows JavaScript to run on servers</li>
+<li><code>Module</code>: A reusable piece of code that can be exported from one file and imported into another</li>
+<li><code>require()</code>: Node.js function used to import modules (CommonJS syntax)</li>
+<li><code>module.exports</code>: Node.js way to export functions, objects, or values from a module</li>
+<li><code>File System (fs)</code>: Node.js built-in module for interacting with files and directories</li>
+<li><code>Runtime</code>: The environment in which code is executed</li>
+<li><code>Backend</code>: Server-side code that handles data, logic, and communication with databases</li>
+<li><code>HTTP</code>: HyperText Transfer Protocol - the protocol used for communication between web clients and servers</li>
+<li><code>API</code>: Application Programming Interface - a way for different software applications to communicate</li>
+</ul>
+</details>
+---
+<h2 id="starting-point" tabindex="-1">Starting Point</h2>
+<p>This lesson introduces server-side JavaScript with Node.js. We'll be moving from frontend React development to backend Node.js development.</p>
+<p>Navigate to the <code>week_08_nodejs_and_http/movie-buzz-backend</code> directory:</p>
+<pre><code class="language-bash">cd week_08_nodejs_and_http/movie-buzz-backend
+npm install
+node server.js
+</code></pre>
+<p>You should see a welcome message from our Node.js backend! We'll be building file system operations, modules, and movie data management during this lesson.</p>
+<hr>
+<h2 id="simple-examples---building-understanding" tabindex="-1">Simple Examples - Building Understanding</h2>
+<p>Before building the Movie Buzz backend, let's start with simple Node.js examples to understand server-side JavaScript:</p>
+<h3 class="step-heading" id="1step-1-your-first-nodejs-script" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Your First Node.js Script</h3>
+<p>Create <code>hello.js</code>:</p>
+<pre><code class="language-javascript">// Simple Node.js script
+console.log('Hello from Node.js!');
+console.log('Current directory:', __dirname);
+console.log('Current file:', __filename);
+
+// Node.js has different global objects than browser
+console.log('Process ID:', process.pid);
+console.log('Node version:', process.version);
+</code></pre>
+<p>Run it:</p>
+<pre><code class="language-bash">node hello.js
+</code></pre>
+<h3 class="step-heading" id="2step-2-working-with-files" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Working with Files</h3>
+<p>Create <code>file-example.js</code>:</p>
+<pre><code class="language-javascript">// Import the file system module
+const fs = require('fs');
+
+// Read a file synchronously (blocking)
+try {
+  const data = fs.readFileSync('package.json', 'utf8');
+  console.log('File contents:', data);
+} catch (error) {
+  console.error('Error reading file:', error.message);
+}
+
+// Write a file
+const message = 'Hello from Node.js file system!';
+fs.writeFileSync('output.txt', message);
+console.log('File written successfully!');
+
+// Read file asynchronously (non-blocking)
+fs.readFile('output.txt', 'utf8', (error, data) =&gt; {
+  if (error) {
+    console.error('Async read error:', error);
+  } else {
+    console.log('Async read result:', data);
+  }
+});
+</code></pre>
+<h3 class="step-heading" id="3step-3-creating-a-simple-http-server" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Creating a Simple HTTP Server</h3>
+<p>Create <code>simple-server.js</code>:</p>
+<pre><code class="language-javascript">// Import the http module
+const http = require('http');
+
+// Create a simple server
+const server = http.createServer((req, res) =&gt; {
+  // Set response headers
+  res.writeHead(200, { 'Content-Type': 'text/html' });
+
+  // Send different responses based on URL
+  if (req.url === '/') {
+    res.end('&lt;h1&gt;Welcome to my Node.js server!&lt;/h1&gt;');
+  } else if (req.url === '/about') {
+    res.end('&lt;h1&gt;About Page&lt;/h1&gt;&lt;p&gt;This is a simple Node.js server&lt;/p&gt;');
+  } else {
+    res.writeHead(404);
+    res.end('&lt;h1&gt;Page Not Found&lt;/h1&gt;');
+  }
+});
+
+// Start the server
+const PORT = 3000;
+server.listen(PORT, () =&gt; {
+  console.log(`Server running at http://localhost:${PORT}`);
+});
+</code></pre>
+<p>Run it and visit <code>http://localhost:3000</code>:</p>
+<pre><code class="language-bash">node simple-server.js
+</code></pre>
+<h3 class="step-heading" id="4step-4-working-with-modules" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Working with Modules</h3>
+<p>Create <code>math-utils.js</code>:</p>
+<pre><code class="language-javascript">// Simple module with utility functions
+function add(a, b) {
+  return a + b;
+}
+
+function multiply(a, b) {
+  return a * b;
+}
+
+function divide(a, b) {
+  if (b === 0) {
+    throw new Error('Cannot divide by zero');
+  }
+  return a / b;
+}
+
+// Export functions for use in other files
+module.exports = {
+  add,
+  multiply,
+  divide
+};
+</code></pre>
+<p>Create <code>use-math.js</code>:</p>
+<pre><code class="language-javascript">// Import our custom module
+const math = require('./math-utils');
+
+console.log('2 + 3 =', math.add(2, 3));
+console.log('4 * 5 =', math.multiply(4, 5));
+console.log('10 / 2 =', math.divide(10, 2));
+
+try {
+  console.log('10 / 0 =', math.divide(10, 0));
+} catch (error) {
+  console.error('Math error:', error.message);
+}
+</code></pre>
+<blockquote class="callout callout--reflection-try">
+<div class="callout-label">🛠️ Hands-On — Try It Out</div>
+<p><code>Try It Out</code>
+Create and run these examples to understand:</p>
+<ul>
+<li>How Node.js differs from browser JavaScript</li>
+<li>File system operations (reading/writing files)</li>
+<li>Creating basic HTTP servers</li>
+<li>Module system (require/module.exports)</li>
+<li>Notice how Node.js enables server-side development</li>
+</ul>
+</blockquote>
+<h2 id="what-is-nodejs" tabindex="-1">What is Node.js?</h2>
+<p>Now that you've seen Node.js in action, let's understand what it is. Node.js is a JavaScript runtime that allows you to run JavaScript outside of web browsers. This means you can use JavaScript to build:</p>
+<ul>
+<li>Web servers</li>
+<li>Command line tools</li>
+<li>Desktop applications</li>
+<li>APIs and backend services</li>
+</ul>
+<p>Key differences between Node.js and browser JavaScript:</p>
+<ul>
+<li><strong>No DOM</strong>: Node.js doesn't have <code>window</code>, <code>document</code>, or DOM APIs</li>
+<li><strong>File system access</strong>: Node.js can read and write files on your computer</li>
+<li><strong>Network capabilities</strong>: Node.js can create servers and make network requests</li>
+<li><strong>Process control</strong>: Node.js can spawn processes and handle system operations</li>
+</ul>
+<blockquote class="callout callout--reflection-consider">
+<div class="callout-label">🤔 Reflection Prompt — Consider This</div>
+<p><code>Consider This</code><br>
+Why might it be advantageous to use the same language (JavaScript) for both frontend and backend development?</p>
+</blockquote>
+<hr>
+<h2 id="setting-up-nodejs-development" tabindex="-1">Setting Up Node.js Development</h2>
+<p>First, let's initialize a new Node.js project:</p>
+<pre><code class="language-bash">npm init -y
+</code></pre>
+<p>This creates a <code>package.json</code> file with default settings. Let's examine what was created:</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;movie-buzz-backend&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;main&quot;: &quot;index.js&quot;,
+  &quot;scripts&quot;: {
+    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;
+  },
+  &quot;keywords&quot;: [],
+  &quot;author&quot;: &quot;&quot;,
+  &quot;license&quot;: &quot;ISC&quot;
+}
+</code></pre>
+<p>Let's add a start script to our package.json:</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;movie-buzz-backend&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;Backend for Movie Buzz application&quot;,
+  &quot;main&quot;: &quot;server.js&quot;,
+  &quot;scripts&quot;: {
+    &quot;start&quot;: &quot;node server.js&quot;,
+    &quot;dev&quot;: &quot;nodemon server.js&quot;,
+    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;
+  },
+  &quot;keywords&quot;: [&quot;movies&quot;, &quot;backend&quot;, &quot;node&quot;],
+  &quot;author&quot;: &quot;Your Name&quot;,
+  &quot;license&quot;: &quot;ISC&quot;
+}
+</code></pre>
+<hr>
+<h2 id="nodejs-modules-and-require" tabindex="-1">Node.js Modules and require()</h2>
+<p>Node.js uses modules to organize code. There are three types of modules:</p>
+<ol>
+<li><strong>Built-in modules</strong> (like <code>fs</code>, <code>http</code>, <code>path</code>)</li>
+<li><strong>Local modules</strong> (files you create)</li>
+<li><strong>Third-party modules</strong> (installed with npm)</li>
+</ol>
+<h3 id="using-built-in-modules" tabindex="-1">Using Built-in Modules</h3>
+<pre><code class="language-javascript">// Import the file system module
+const fs = require('fs');
+
+// Import the path module for working with file paths
+const path = require('path');
+
+// Use the modules
+console.log('Current directory:', __dirname);
+console.log('Current file:', __filename);
+</code></pre>
+<h3 id="creating-and-using-local-modules" tabindex="-1">Creating and Using Local Modules</h3>
+<p>Create a file called <code>utils.js</code>:</p>
+<pre><code class="language-javascript">// utils.js
+function formatMovieTitle(title) {
+  return title.toUpperCase();
+}
+
+function calculateMovieAge(year) {
+  const currentYear = new Date().getFullYear();
+  return currentYear - year;
+}
+
+// Export functions so they can be used in other files
+module.exports = {
+  formatMovieTitle,
+  calculateMovieAge
+};
+</code></pre>
+<p>Now use it in another file:</p>
+<pre><code class="language-javascript">// main.js
+const { formatMovieTitle, calculateMovieAge } = require('./utils');
+
+console.log(formatMovieTitle('the matrix')); // THE MATRIX
+console.log(calculateMovieAge(1999)); // Current year - 1999
+</code></pre>
+<blockquote class="callout callout--reflection-consider">
+<div class="callout-label">🤔 Reflection Prompt — Consider This</div>
+<p><code>Consider This</code><br>
+How does the module system help organize large applications? What problems does it solve?</p>
+</blockquote>
+<hr>
+<h2 id="file-system-operations" tabindex="-1">File System Operations</h2>
+<p>Node.js can read and write files using the <code>fs</code> module:</p>
+<pre><code class="language-javascript">const fs = require('fs');
+
+// Reading files synchronously (blocks execution)
+try {
+  const data = fs.readFileSync('data.txt', 'utf8');
+  console.log('File contents:', data);
+} catch (error) {
+  console.error('Error reading file:', error.message);
+}
+
+// Reading files asynchronously (non-blocking)
+fs.readFile('data.txt', 'utf8', (error, data) =&gt; {
+  if (error) {
+    console.error('Error reading file:', error.message);
+    return;
+  }
+  console.log('File contents:', data);
+});
+
+// Writing files
+const movieData = JSON.stringify({
+  name: &quot;The Matrix&quot;,
+  year: 1999,
+  director: &quot;The Wachowskis&quot;
+}, null, 2);
+
+fs.writeFile('movie.json', movieData, 'utf8', (error) =&gt; {
+  if (error) {
+    console.error('Error writing file:', error.message);
+    return;
+  }
+  console.log('File saved successfully!');
+});
+</code></pre>
+<hr>
+<h2 id="creating-movie-buzz-backend" tabindex="-1">Creating Movie Buzz Backend</h2>
+<p>Let's start building the backend for our Movie Buzz application.</p>
+<h3 id="project-structure" tabindex="-1">Project Structure</h3>
+<p>Create the following directory structure:</p>
+<pre><code class="language-bash">mkdir data models utils
+touch server.js data/movies.json models/Movie.js utils/fileUtils.js
+</code></pre>
+<p>Your project should look like:</p>
+<pre><code>movie-buzz-backend/
+├── data/
+│   └── movies.json
+├── models/
+│   └── Movie.js
+├── utils/
+│   └── fileUtils.js
+├── package.json
+└── server.js
+</code></pre>
+<h3 id="creating-movie-data-module" tabindex="-1">Creating Movie Data Module</h3>
+<p>First, let's create sample movie data in <code>data/movies.json</code>:</p>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: 1,
+    &quot;name&quot;: &quot;The Matrix&quot;,
+    &quot;year&quot;: 1999,
+    &quot;rating&quot;: &quot;R&quot;,
+    &quot;length&quot;: &quot;136 minutes&quot;,
+    &quot;description&quot;: &quot;A computer hacker learns about the true nature of reality.&quot;,
+    &quot;genre&quot;: [&quot;Action&quot;, &quot;Sci-Fi&quot;],
+    &quot;director&quot;: &quot;The Wachowskis&quot;,
+    &quot;stars&quot;: [&quot;Keanu Reeves&quot;, &quot;Laurence Fishburne&quot;, &quot;Carrie-Anne Moss&quot;]
+  },
+  {
+    &quot;id&quot;: 2,
+    &quot;name&quot;: &quot;Inception&quot;,
+    &quot;year&quot;: 2010,
+    &quot;rating&quot;: &quot;PG-13&quot;,
+    &quot;length&quot;: &quot;148 minutes&quot;,
+    &quot;description&quot;: &quot;A thief who steals corporate secrets through dream-sharing technology.&quot;,
+    &quot;genre&quot;: [&quot;Action&quot;, &quot;Sci-Fi&quot;, &quot;Thriller&quot;],
+    &quot;director&quot;: &quot;Christopher Nolan&quot;,
+    &quot;stars&quot;: [&quot;Leonardo DiCaprio&quot;, &quot;Marion Cotillard&quot;, &quot;Tom Hardy&quot;]
+  },
+  {
+    &quot;id&quot;: 3,
+    &quot;name&quot;: &quot;Pulp Fiction&quot;,
+    &quot;year&quot;: 1994,
+    &quot;rating&quot;: &quot;R&quot;,
+    &quot;length&quot;: &quot;154 minutes&quot;,
+    &quot;description&quot;: &quot;The lives of two mob hitmen, a boxer, and other criminals intertwine in Los Angeles.&quot;,
+    &quot;genre&quot;: [&quot;Crime&quot;, &quot;Drama&quot;],
+    &quot;director&quot;: &quot;Quentin Tarantino&quot;,
+    &quot;stars&quot;: [&quot;John Travolta&quot;, &quot;Samuel L. Jackson&quot;, &quot;Uma Thurman&quot;]
+  }
+]
+</code></pre>
+<h3 id="building-server-utilities" tabindex="-1">Building Server Utilities</h3>
+<p>Create <code>utils/fileUtils.js</code>:</p>
+<pre><code class="language-javascript">const fs = require('fs');
+const path = require('path');
+
+// Function to read JSON files
+function readJsonFile(filename) {
+  try {
+    const filePath = path.join(__dirname, '..', 'data', filename);
+    const data = fs.readFileSync(filePath, 'utf8');
+    return JSON.parse(data);
+  } catch (error) {
+    console.error(`Error reading file ${filename}:`, error.message);
+    return [];
+  }
+}
+
+// Function to write JSON files
+function writeJsonFile(filename, data) {
+  try {
+    const filePath = path.join(__dirname, '..', 'data', filename);
+    const jsonData = JSON.stringify(data, null, 2);
+    fs.writeFileSync(filePath, jsonData, 'utf8');
+    return true;
+  } catch (error) {
+    console.error(`Error writing file ${filename}:`, error.message);
+    return false;
+  }
+}
+
+module.exports = {
+  readJsonFile,
+  writeJsonFile
+};
+</code></pre>
+<p>Create a Movie model in <code>models/Movie.js</code>:</p>
+<pre><code class="language-javascript">const { readJsonFile, writeJsonFile } = require('../utils/fileUtils');
+
+class Movie {
+  constructor(movieData) {
+    this.id = movieData.id;
+    this.name = movieData.name;
+    this.year = movieData.year;
+    this.rating = movieData.rating;
+    this.length = movieData.length;
+    this.description = movieData.description;
+    this.genre = movieData.genre;
+    this.director = movieData.director;
+    this.stars = movieData.stars;
+  }
+
+  // Static method to get all movies
+  static getAll() {
+    return readJsonFile('movies.json');
+  }
+
+  // Static method to find a movie by ID
+  static findById(id) {
+    const movies = readJsonFile('movies.json');
+    return movies.find(movie =&gt; movie.id === parseInt(id));
+  }
+
+  // Static method to get the next available ID
+  static getNextId() {
+    const movies = readJsonFile('movies.json');
+    if (movies.length === 0) return 1;
+    const maxId = Math.max(...movies.map(movie =&gt; movie.id));
+    return maxId + 1;
+  }
+
+  // Instance method to save a movie
+  save() {
+    const movies = readJsonFile('movies.json');
+    
+    if (!this.id) {
+      // New movie - assign ID
+      this.id = Movie.getNextId();
+      movies.push(this);
+    } else {
+      // Update existing movie
+      const index = movies.findIndex(movie =&gt; movie.id === this.id);
+      if (index !== -1) {
+        movies[index] = this;
+      } else {
+        movies.push(this);
+      }
+    }
+    
+    return writeJsonFile('movies.json', movies);
+  }
+
+  // Static method to delete a movie
+  static delete(id) {
+    const movies = readJsonFile('movies.json');
+    const filteredMovies = movies.filter(movie =&gt; movie.id !== parseInt(id));
+    return writeJsonFile('movies.json', filteredMovies);
+  }
+}
+
+module.exports = Movie;
+</code></pre>
+<p>Now create your main server file <code>server.js</code>:</p>
+<pre><code class="language-javascript">const Movie = require('./models/Movie');
+
+// Test our Movie model
+console.log('=== Movie Buzz Backend ===');
+
+// Get all movies
+console.log('All movies:');
+const allMovies = Movie.getAll();
+allMovies.forEach(movie =&gt; {
+  console.log(`- ${movie.name} (${movie.year})`);
+});
+
+// Find a specific movie
+console.log('\nFinding movie with ID 2:');
+const movie = Movie.findById(2);
+if (movie) {
+  console.log(`Found: ${movie.name} directed by ${movie.director}`);
+} else {
+  console.log('Movie not found');
+}
+
+// Create a new movie
+console.log('\nCreating a new movie...');
+const newMovie = new Movie({
+  name: &quot;The Godfather&quot;,
+  year: 1972,
+  rating: &quot;R&quot;,
+  length: &quot;175 minutes&quot;,
+  description: &quot;The aging patriarch of an organized crime dynasty transfers control to his reluctant son.&quot;,
+  genre: [&quot;Crime&quot;, &quot;Drama&quot;],
+  director: &quot;Francis Ford Coppola&quot;,
+  stars: [&quot;Marlon Brando&quot;, &quot;Al Pacino&quot;, &quot;James Caan&quot;]
+});
+
+if (newMovie.save()) {
+  console.log(`Successfully saved: ${newMovie.name} with ID ${newMovie.id}`);
+} else {
+  console.log('Failed to save movie');
+}
+
+console.log('\nBackend operations complete!');
+</code></pre>
+<p>Test your backend:</p>
+<pre><code class="language-bash">node server.js
+</code></pre>
+<hr>
+<h2 id="introduction-to-http-module" tabindex="-1">Introduction to HTTP Module</h2>
+<p>While our Movie Buzz backend currently works with local files, in web development we often need to make HTTP requests to external APIs or communicate between servers. Node.js provides a built-in <code>http</code> module for this purpose.</p>
+<h3 id="understanding-http-requests" tabindex="-1">Understanding HTTP Requests</h3>
+<p>HTTP (HyperText Transfer Protocol) is how web browsers and servers communicate. When you visit a website, your browser makes an HTTP request to a server, which responds with HTML, CSS, JavaScript, or data.</p>
+<p><strong>Common HTTP Methods:</strong></p>
+<ul>
+<li><strong>GET</strong>: Retrieve data (like getting a list of movies)</li>
+<li><strong>POST</strong>: Create new data (like adding a new movie)</li>
+<li><strong>PUT</strong>: Update existing data (like editing a movie)</li>
+<li><strong>DELETE</strong>: Remove data (like deleting a movie)</li>
+</ul>
+<h3 id="making-http-requests-with-nodejs" tabindex="-1">Making HTTP Requests with Node.js</h3>
+<p>Let's explore how Node.js can make HTTP requests to external APIs:</p>
+<pre><code class="language-javascript">// http-client.js
+const http = require('http');
+
+// Function to make a GET request
+function makeHttpRequest(hostname, path, callback) {
+  const options = {
+    hostname: hostname,
+    port: 80,
+    path: path,
+    method: 'GET'
+  };
+
+  const request = http.request(options, (response) =&gt; {
+    let data = '';
+    
+    // Collect data chunks
+    response.on('data', (chunk) =&gt; {
+      data += chunk;
+    });
+    
+    // Handle complete response
+    response.on('end', () =&gt; {
+      console.log('Response received:');
+      console.log('Status Code:', response.statusCode);
+      console.log('Data:', data);
+      
+      if (callback) {
+        callback(null, data);
+      }
+    });
+  });
+
+  // Handle request errors
+  request.on('error', (error) =&gt; {
+    console.error('Request error:', error.message);
+    if (callback) {
+      callback(error, null);
+    }
+  });
+
+  // Send the request
+  request.end();
+}
+
+// Example: Get data from a public API
+console.log('Making HTTP request to a public API...');
+makeHttpRequest('jsonplaceholder.typicode.com', '/posts/1', (error, data) =&gt; {
+  if (error) {
+    console.error('Failed to get data:', error.message);
+  } else {
+    console.log('Successfully retrieved data!');
+    try {
+      const post = JSON.parse(data);
+      console.log('Post title:', post.title);
+    } catch (parseError) {
+      console.error('Failed to parse JSON:', parseError.message);
+    }
+  }
+});
+</code></pre>
+<h3 id="creating-a-simple-http-server" tabindex="-1">Creating a Simple HTTP Server</h3>
+<p>The <code>http</code> module can also create servers. Here's a basic example:</p>
+<pre><code class="language-javascript">// simple-server.js
+const http = require('http');
+
+const server = http.createServer((request, response) =&gt; {
+  console.log(`${request.method} request to ${request.url}`);
+  
+  // Set response headers
+  response.writeHead(200, { 'Content-Type': 'text/html' });
+  
+  // Send response
+  response.end('&lt;h1&gt;Hello from Node.js HTTP Server!&lt;/h1&gt;');
+});
+
+const PORT = 3000;
+server.listen(PORT, () =&gt; {
+  console.log(`Simple HTTP server running on http://localhost:${PORT}`);
+});
+</code></pre>
+<h3 id="why-learn-http-now" tabindex="-1">Why Learn HTTP Now?</h3>
+<p>Understanding HTTP is crucial because:</p>
+<ol>
+<li><strong>Next week</strong> we'll use Express.js framework, which builds on HTTP concepts</li>
+<li><strong>Frontend-backend communication</strong> relies on HTTP requests</li>
+<li><strong>REST APIs</strong> use HTTP methods to perform CRUD operations</li>
+<li><strong>Modern web development</strong> requires understanding client-server communication</li>
+</ol>
+<blockquote class="callout callout--reflection-consider">
+<div class="callout-label">🤔 Reflection Prompt — Consider This</div>
+<p><code>Consider This</code><br>
+How might understanding HTTP requests help you when connecting a React frontend to a Node.js backend? What advantages does Express.js provide over the raw HTTP module?</p>
+</blockquote>
+<hr>
+<h2 id="command-line-arguments" tabindex="-1">Command Line Arguments</h2>
+<p>Node.js can read command line arguments through <code>process.argv</code>:</p>
+<pre><code class="language-javascript">// command-line.js
+console.log('Command line arguments:');
+console.log(process.argv);
+
+// Get arguments after the script name
+const args = process.argv.slice(2);
+console.log('User arguments:', args);
+
+// Example usage: node command-line.js search &quot;The Matrix&quot;
+if (args[0] === 'search' &amp;&amp; args[1]) {
+  const searchTerm = args[1];
+  const Movie = require('./models/Movie');
+  
+  const movies = Movie.getAll();
+  const results = movies.filter(movie =&gt; 
+    movie.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  
+  console.log(`Found ${results.length} movies matching &quot;${searchTerm}&quot;:`);
+  results.forEach(movie =&gt; console.log(`- ${movie.name}`));
+}
+</code></pre>
+<hr>
+<h2 id="asynchronous-programming-basics" tabindex="-1">Asynchronous Programming Basics</h2>
+<p>JavaScript in Node.js is asynchronous and event-driven. Here's a basic introduction:</p>
+<pre><code class="language-javascript">// Synchronous (blocking) - not recommended for production
+console.log('Start');
+const data = require('./data/movies.json');
+console.log('Data loaded');
+console.log('End');
+
+// Asynchronous (non-blocking) - recommended
+console.log('Start');
+
+setTimeout(() =&gt; {
+  console.log('This runs after 2 seconds');
+}, 2000);
+
+console.log('End - this runs before the timeout');
+
+// Using callbacks for file operations
+const fs = require('fs');
+
+fs.readFile('./data/movies.json', 'utf8', (error, data) =&gt; {
+  if (error) {
+    console.error('Error:', error);
+    return;
+  }
+  
+  const movies = JSON.parse(data);
+  console.log(`Loaded ${movies.length} movies asynchronously`);
+});
+
+console.log('File read started - this runs before the file is loaded');
+</code></pre>
+<hr>
+<h2 id="final-thoughts" tabindex="-1">Final Thoughts</h2>
+<p>We've successfully created the foundation for our Movie Buzz backend using Node.js! We now have:</p>
+<ul>
+<li>A modular project structure with separate concerns</li>
+<li>File-based data storage and retrieval</li>
+<li>A Movie model with CRUD operations</li>
+<li>Utility functions for file operations</li>
+<li>Understanding of HTTP protocol and requests</li>
+<li>Command line interface capabilities</li>
+</ul>
+<p>This backend will serve as the foundation for our Express server in the next week, where we'll transform the HTTP concepts into a powerful web framework and connect it to our React frontend.</p>
+<blockquote class="callout callout--reflection-consider">
+<div class="callout-label">🤔 Reflection Prompt — Consider This</div>
+<p><code>Consider This</code><br>
+How does this backend structure prepare us for scaling to a real database? What advantages does the modular approach provide?</p>
+</blockquote>
+<hr>
+<h2 id="exit-ticket" tabindex="-1">Exit Ticket</h2>
+<p>Please complete the exit ticket in the LMS. You may use the lesson plan for this session, but do not use any additional resources. This exit ticket will not be part of your grade for the course, and rather is used to inform future instruction and curricular releases.</p>
+<hr>
+<h2 id="review" tabindex="-1">Review</h2>
+<ul>
+<li>What is Node.js and how does it differ from browser JavaScript?</li>
+<li>How do you create and use modules in Node.js?</li>
+<li>What is the difference between synchronous and asynchronous file operations?</li>
+<li>How do you export and import functions between files?</li>
+<li>What are HTTP methods and when would you use each one?</li>
+<li>How does the Node.js http module work for making requests and creating servers?</li>
+<li>What are the advantages of organizing code into modules?</li>
+<li>How can Node.js applications handle command line arguments?</li>
+</ul>
+
+<div class="pager">
+<a href="../week_07_react_hooks_and_context/index.html">← Week 07</a>
+<a href="../week_09_express_and_cors/index.html">Week 09 →</a>
+</div>
+</main>
+</div>
+</body>
+</html>

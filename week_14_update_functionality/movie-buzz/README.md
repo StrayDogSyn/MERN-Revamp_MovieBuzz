@@ -354,7 +354,7 @@ const bulkUpdateMovies = async (req, res) => {
 
 1. **Update a Movie**:
    - Method: PUT
-   - URL: `http://localhost:4000/api/movie/{movie_id}`
+   - URL: `http://localhost:4000/api/movies/{movie_id}`
    - Headers: `Content-Type: application/json`
    - Body (raw JSON):
    ```json
@@ -379,13 +379,13 @@ const bulkUpdateMovies = async (req, res) => {
 
 4. **Get Movie for Editing**:
    - Method: GET
-   - URL: `http://localhost:4000/api/movie/{movie_id}/edit`
+   - URL: `http://localhost:4000/api/movies/{movie_id}`
 
 ### Using cURL
 
 ```bash
 # Update a movie
-curl -X PUT http://localhost:4000/api/movie/{movie_id} \
+curl -X PUT http://localhost:4000/api/movies/{movie_id} \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Updated Movie Title",
@@ -393,7 +393,7 @@ curl -X PUT http://localhost:4000/api/movie/{movie_id} \
   }'
 
 # Get movie for editing
-curl -X GET http://localhost:4000/api/movie/{movie_id}/edit
+curl -X GET http://localhost:4000/api/movies/{movie_id}
 ```
 
 ## Common Issues and Solutions
@@ -406,8 +406,8 @@ curl -X GET http://localhost:4000/api/movie/{movie_id}/edit
 
 ## RESTful Conventions
 
-- PUT `/api/movie/:id` - Update entire resource (full update)
-- PATCH `/api/movie/:id` - Update partial resource (partial update)
+- PUT `/api/movies/:id` - Update entire resource (full update)
+- PATCH `/api/movies/:id` - Update partial resource (partial update)
 - Return 200 (OK) status on successful update
 - Return 404 (Not Found) if resource doesn't exist
 - Return 400 (Bad Request) for validation errors

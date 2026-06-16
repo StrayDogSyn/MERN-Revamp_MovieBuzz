@@ -78,9 +78,9 @@ By the end of this session, learners will be able to:
 
 Students should have a complete Movie Buzz API from Weeks 12-14 with:
 
-- **READ** operations: `GET /api/movies` and `GET /api/movie/:id`
-- **CREATE** operations: `POST /api/movie/new`
-- **UPDATE** operations: `PUT /api/movie/:id`
+- **READ** operations: `GET /api/movies` and `GET /api/movies/:id`
+- **CREATE** operations: `POST /api/movies`
+- **UPDATE** operations: `PUT /api/movies/:id`
 - Working MongoDB connection via Mongoose
 - Proper error handling patterns
 - Movie model with schema validation
@@ -94,7 +94,7 @@ npm start
 
 # In a separate terminal, test existing operations:
 curl http://localhost:4000/api/movies
-curl -X POST http://localhost:4000/api/movie/new \
+curl -X POST http://localhost:4000/api/movies \
   -H "Content-Type: application/json" \
   -d '{"name": "Test Movie", "year": 2024, "rating": "PG", "length": "90 minutes", "description": "Test", "genre": ["Action"], "director": "Test Director", "stars": ["Test Star"]}'
 ```
@@ -201,17 +201,17 @@ movieSchema.pre('findOneAndDelete', async function(next) {
 
 | Method | Endpoint | Purpose | Response |
 |--------|----------|---------|----------|
-| DELETE | `/api/movie/:id` | Delete single movie | 200 with deleted data or 204 |
+| DELETE | `/api/movies/:id` | Delete single movie | 200 with deleted data or 204 |
 | DELETE | `/api/movies/bulk` | Delete multiple movies | 200 with count |
 
 **Key Principle — Idempotency**: Deleting the same resource twice should not cause an error. The first DELETE removes it (200), subsequent DELETEs return 404 (resource already gone). This is expected behavior.
 
 ```javascript
 // First DELETE: returns 200 with deleted movie
-DELETE /api/movie/abc → 200 { message: "Deleted", data: {...} }
+DELETE /api/movies/abc → 200 { ... }
 
 // Second DELETE: returns 404 (already gone - this is correct!)
-DELETE /api/movie/abc → 404 { error: "Movie not found" }
+DELETE /api/movies/abc → 404 { error: "Movie not found" }
 ```
 
 ---
@@ -443,7 +443,7 @@ const deleteMovie = async (req, res) => {
 Create an endpoint that returns movie info for a confirmation dialog:
 
 ```javascript
-// GET /api/movie/:id/confirm-delete
+// GET /api/movies/:id
 const getDeleteConfirmation = async (req, res) => {
   try {
     const { id } = req.params;
@@ -485,7 +485,7 @@ const handleDelete = async (movieId, movieName) => {
 
   if (confirmed) {
     try {
-      const response = await fetch(`/api/movie/${movieId}`, {
+      const response = await fetch(`/api/movies/${movieId}`, {
         method: 'DELETE'
       });
       if (response.ok) {
@@ -665,17 +665,17 @@ Walk students through these test scenarios:
 
 **1. Successful Deletion:**
 - Method: `DELETE`
-- URL: `http://localhost:4000/api/movie/{valid_movie_id}`
+- URL: `http://localhost:4000/api/movies/{valid_movie_id}`
 - Expected: 200 with deleted movie data
 
 **2. Delete Non-Existent Movie:**
 - Method: `DELETE`
-- URL: `http://localhost:4000/api/movie/507f1f77bcf86cd799439011`
+- URL: `http://localhost:4000/api/movies/507f1f77bcf86cd799439011`
 - Expected: 404 "Movie not found"
 
 **3. Invalid ID Format:**
 - Method: `DELETE`
-- URL: `http://localhost:4000/api/movie/not-a-valid-id`
+- URL: `http://localhost:4000/api/movies/not-a-valid-id`
 - Expected: 400 "Invalid movie ID format"
 
 **4. Double Delete (Idempotency Test):**
@@ -690,13 +690,13 @@ Walk students through these test scenarios:
 curl http://localhost:4000/api/movies | python3 -m json.tool
 
 # Test successful deletion (replace with actual ID)
-curl -X DELETE http://localhost:4000/api/movie/PASTE_ID_HERE
+curl -X DELETE http://localhost:4000/api/movies/PASTE_ID_HERE
 
 # Test not found
-curl -X DELETE http://localhost:4000/api/movie/507f1f77bcf86cd799439011
+curl -X DELETE http://localhost:4000/api/movies/507f1f77bcf86cd799439011
 
 # Test invalid ID
-curl -X DELETE http://localhost:4000/api/movie/invalid-id
+curl -X DELETE http://localhost:4000/api/movies/invalid-id
 
 # Test bulk delete
 curl -X DELETE http://localhost:4000/api/movies/bulk \
@@ -713,7 +713,7 @@ After deleting, students should verify the movie is gone:
 curl http://localhost:4000/api/movies
 
 # This should return 404
-curl http://localhost:4000/api/movie/DELETED_ID
+curl http://localhost:4000/api/movies/DELETED_ID
 ```
 
 ---

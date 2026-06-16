@@ -1,68 +1,73 @@
+const mongoose = require('mongoose');
 const Movie = require('../models/movie');
 
-// Helper: extract only permitted fields from a request body
 const permitFields = (body) => {
   const { name, description, rating, length, year, genre, director, stars } = body;
   return { name, description, rating, length, year, genre, director, stars };
 };
 
+const isValidId = (id) => mongoose.Types.ObjectId.isValid(id);
+
 module.exports = {
-  // READ — all movies
-  getMovies(req, res) {
-    Movie.find()
-      .then(movies => res.json(movies))
-      .catch(err => res.status(500).json({ error: err.message }));
+  async getMovies(req, res) {
+    try {
+      const movies = await Movie.find();
+      res.json(movies);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
   },
 
-  // READ — single movie by ID (for edit form deep-linking)
-  getMovieToEdit(req, res) {
+  async getMovieToEdit(req, res) {
     const { id } = req.params;
-    Movie.findById(id)
-      .then(movie => {
-        if (!movie) return res.status(404).json({ error: 'Movie not found' });
-        res.json(movie);
-      })
-      .catch(err => res.status(500).json({ error: err.message }));
+    if (!isValidId(id)) return res.status(400).json({ error: 'Invalid movie ID' });
+    try {
+      const movie = await Movie.findById(id);
+      if (!movie) return res.status(404).json({ error: 'Movie not found' });
+      res.json(movie);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
   },
 
-  // CREATE
-  createMovie(req, res) {
-    const data = permitFields(req.body);
-    Movie.create(data)
-      .then(movie => res.status(201).json(movie))
-      .catch(err => {
-        if (err.name === 'ValidationError') {
-          return res.status(400).json({ error: err.message });
-        }
-        res.status(500).json({ error: err.message });
-      });
+  async createMovie(req, res) {
+    try {
+      const data = permitFields(req.body);
+      const movie = await Movie.create(data);
+      res.status(201).json(movie);
+    } catch (err) {
+      if (err.name === 'ValidationError') {
+        return res.status(400).json({ error: err.message });
+      }
+      res.status(500).json({ error: err.message });
+    }
   },
 
-  // DELETE
-  deleteMovie(req, res) {
+  async deleteMovie(req, res) {
     const { id } = req.params;
-    Movie.findByIdAndDelete(id)
-      .then(movie => {
-        if (!movie) return res.status(404).json({ error: 'Movie not found' });
-        res.json(movie);
-      })
-      .catch(err => res.status(500).json({ error: err.message }));
+    if (!isValidId(id)) return res.status(400).json({ error: 'Invalid movie ID' });
+    try {
+      const movie = await Movie.findByIdAndDelete(id);
+      if (!movie) return res.status(404).json({ error: 'Movie not found' });
+      res.json(movie);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
   },
 
-  // UPDATE
-  updateMovie(req, res) {
-    const data = permitFields(req.body);
+  async updateMovie(req, res) {
     const { id } = req.params;
-    Movie.findByIdAndUpdate(id, data, { new: true, runValidators: true })
-      .then(movie => {
-        if (!movie) return res.status(404).json({ error: 'Movie not found' });
-        res.json(movie);
-      })
-      .catch(err => {
-        if (err.name === 'ValidationError') {
-          return res.status(400).json({ error: err.message });
-        }
-        res.status(500).json({ error: err.message });
-      });
+    if (!isValidId(id)) return res.status(400).json({ error: 'Invalid movie ID' });
+    try {
+      const data = permitFields(req.body);
+      const movie = await Movie.findByIdAndUpdate(id, data, { new: true, runValidators: true });
+      if (!movie) return res.status(404).json({ error: 'Movie not found' });
+      res.json(movie);
+    } catch (err) {
+      if (err.name === 'ValidationError') {
+        return res.status(400).json({ error: err.message });
+      }
+      res.status(500).json({ error: err.message });
+    }
   }
 };

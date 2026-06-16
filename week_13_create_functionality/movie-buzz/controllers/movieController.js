@@ -1,16 +1,23 @@
+/**
+ * STARTER FILE — Week 13: CREATE Operations
+ *
+ * This file is intentionally incomplete. Your task:
+ *   1. Implement createMovie: extract req.body, create a new Movie instance,
+ *      save it, and return the saved document with status 201
+ *   2. getMovies and getMovieById are already implemented (from Week 12)
+ *
+ * Reference: movie-buzz-finished/server/controllers/movieController.js
+ * Do not copy from the reference — implement it yourself first.
+ */
 const Movie = require('../models/movie');
 const mongoose = require('mongoose');
 
-// GET /api/movies - Get all movies (implemented in Week 10)
+// GET /api/movies - Get all movies (implemented in Week 12)
 const getMovies = async (req, res) => {
   try {
     const movies = await Movie.find().sort({ createdAt: -1 });
-    
-    res.status(200).json({
-      success: true,
-      count: movies.length,
-      data: movies
-    });
+    // Returns bare array — matches reference app and keeps React destructuring simple
+    res.json(movies);
     
   } catch (error) {
     console.error('Error fetching movies:', error);
@@ -22,11 +29,11 @@ const getMovies = async (req, res) => {
   }
 };
 
-// GET /api/movies/:id - Get movie by ID (implemented in Week 10)
+// GET /api/movies/:id - Get movie by ID (implemented in Week 12)
 const getMovieById = async (req, res) => {
   try {
     const { id } = req.params;
-    
+
     // Validate ObjectId
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({
@@ -34,20 +41,18 @@ const getMovieById = async (req, res) => {
         error: 'Invalid movie ID format'
       });
     }
-    
+
     const movie = await Movie.findById(id);
-    
+
     if (!movie) {
       return res.status(404).json({
         success: false,
         error: 'Movie not found'
       });
     }
-    
-    res.status(200).json({
-      success: true,
-      data: movie
-    });
+
+    // Returns bare object — matches reference app
+    res.json(movie);
     
   } catch (error) {
     console.error('Error fetching movie by ID:', error);
@@ -59,7 +64,7 @@ const getMovieById = async (req, res) => {
   }
 };
 
-// POST /api/movies - Create new movie (NEW - Week 11 Focus)
+// POST /api/movies - Create new movie (NEW - Week 13 Focus)
 const createMovie = async (req, res) => {
   try {
     console.log('createMovie called - TODO: Students will implement during lesson');
@@ -75,12 +80,8 @@ const createMovie = async (req, res) => {
     // TODO: Step 3 - Save movie to database
     // const savedMovie = await movie.save();
     
-    // TODO: Step 4 - Return success response with created movie
-    // res.status(201).json({
-    //   success: true,
-    //   message: 'Movie created successfully',
-    //   data: savedMovie
-    // });
+    // TODO: Step 4 - Return 201 with the created movie (bare object, no wrapper)
+    // res.status(201).json(savedMovie);
     
     // Placeholder response for students
     res.status(501).json({

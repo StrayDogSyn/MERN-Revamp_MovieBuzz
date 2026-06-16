@@ -25,8 +25,8 @@ export const movieService = {
       // Step 2: Handle the response using handleResponse helper
       // const data = await handleResponse(response);
       
-      // Step 3: Return the movies data
-      // return data.data || data;
+      // Step 3: Return the movies data (bare array from server)
+      // return data;
       
       // Placeholder - remove when implementing
       console.log('TODO: Implement getAll in movieService');
@@ -69,8 +69,8 @@ export const movieService = {
       // Step 2: Handle response
       // const data = await handleResponse(response);
       
-      // Step 3: Return created movie
-      // return data.data || data;
+      // Step 3: Return created movie (bare object from server)
+      // return data;
       
       console.log('TODO: Implement create in movieService', movieData);
       return movieData;

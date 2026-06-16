@@ -15,7 +15,7 @@ const mongoose = require('mongoose');
 const MovieSchema = new mongoose.Schema({
   // TODO: Students will implement schema fields here
   // HINT: Start with basic fields and add validation later
-  
+
   // Example structure for one field:
   // name: {
   //   type: String,
@@ -23,9 +23,9 @@ const MovieSchema = new mongoose.Schema({
   //   trim: true,
   //   maxLength: [100, 'Movie name cannot exceed 100 characters']
   // },
-  
+
   // TODO: Add remaining fields following the pattern above
-  
+
 }, {
   // TODO: Add timestamps option to automatically track createdAt and updatedAt
   // timestamps: ???

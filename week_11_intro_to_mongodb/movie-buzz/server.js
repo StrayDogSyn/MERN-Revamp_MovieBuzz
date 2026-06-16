@@ -28,7 +28,7 @@ async function readMoviesFromFile() {
 // Home route
 app.get('/', (req, res) => {
   res.json({
-    message: 'Movie Buzz API - Week 9: MongoDB Integration',
+    message: 'Movie Buzz API - Week 11: Intro to MongoDB',
     version: '1.0.0',
     endpoints: [
       'GET /api/movies - Get all movies',
@@ -116,7 +116,7 @@ async function startServer() {
     // Start server without database for now
     app.listen(PORT, () => {
       console.log(`🚀 Movie Buzz API running on http://localhost:${PORT}`);
-      console.log('📖 Visit http://localhost:${PORT} for available endpoints');
+      console.log(`📖 Visit http://localhost:${PORT} for available endpoints`);
       console.log('');
       console.log('🔧 TODO for lesson:');
       console.log('   - Implement database connection');
