@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>🎬 Week 01: Bash & Git — Student Guide · Movie Buzz Lesson Viewer</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+<label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
+<div class="layout">
+<nav class="sidebar" aria-label="Course weeks">
+<div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
+<a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
+<a class="nav-link active" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
+<a class="nav-link" href="../week_02_dev_environment/index.html">Week 02 · Dev Environment</a>
+<a class="nav-link" href="../week_03_intro_to_react/index.html">Week 03 · Intro to React</a>
+<a class="nav-link" href="../week_04_react_state_and_hooks/index.html">Week 04 · React State & Hooks</a>
+<a class="nav-link" href="../week_05_react_events_and_hooks/index.html">Week 05 · React Events & Hooks</a>
+<a class="nav-link" href="../week_06_react_component_patterns/index.html">Week 06 · React Component Patterns</a>
+<a class="nav-link" href="../week_07_react_hooks_and_context/index.html">Week 07 · React Hooks & Context</a>
+<div class="nav-phase">Weeks 08–16 · Backend (Node, Express, MongoDB)</div>
+<a class="nav-link" href="../week_08_nodejs_and_http/index.html">Week 08 · Node.js & HTTP</a>
+<a class="nav-link" href="../week_09_express_and_cors/index.html">Week 09 · Express & CORS</a>
+<a class="nav-link" href="../week_10_tic_tac_toe_checkpoint/index.html">Week 10 · Tic-Tac-Toe Checkpoint</a>
+<a class="nav-link" href="../week_11_intro_to_mongodb/index.html">Week 11 · Intro to MongoDB</a>
+<a class="nav-link" href="../week_12_mongoose_and_read/index.html">Week 12 · Mongoose & Read</a>
+<a class="nav-link" href="../week_13_create_functionality/index.html">Week 13 · Create Functionality</a>
+<a class="nav-link" href="../week_14_update_functionality/index.html">Week 14 · Update Functionality</a>
+<a class="nav-link" href="../week_15_delete_functionality/index.html">Week 15 · Delete Functionality</a>
+<a class="nav-link" href="../week_16_frontend_backend_integration/index.html">Week 16 · Frontend/Backend Integration</a>
+<div class="nav-phase">Optional Modules</div>
+<a class="nav-link" href="../week_optional_search_feature/index.html">Search Feature</a>
+<a class="nav-link" href="../week_optional_testing_suite/index.html">Testing Suite</a>
+</nav>
+<main class="main">
+<div class="page-header">
+<div class="breadcrumb">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
+</div>
+<h1 id="🎬-week-01-bash--git-—-student-guide" tabindex="-1">🎬 Week 01: Bash &amp; Git — Student Guide</h1>
+<blockquote class="callout callout--meta">
+<p>🔑 <strong>Access Code:</strong> <code>bash73</code>   ·   ⏱️ <strong>Estimated Time:</strong> 2–3 hrs   ·   🎯 <strong>Difficulty:</strong> ⭐⭐</p>
+</blockquote>
+<hr>
+<h2 id="🗺️-what-youre-building-this-week" tabindex="-1">🗺️ What You're Building This Week</h2>
+<p>You are setting up the Movie Buzz project repository and creating its first commit history. By the end of this week you will have a Git-tracked project directory with a basic HTML/CSS movie page, a <code>.gitignore</code> file, and at least three meaningful commits pushed to GitHub. Every file you write for the rest of the course will live inside this repository.</p>
+<blockquote class="callout callout--tip">
+<p>💡 <strong>This week in the arc:</strong> Week 01 is the foundation under everything else. The Git habits you build now — meaningful commit messages, proper staging, keeping <code>node_modules</code> out of version control — will matter every single week through Week 16.</p>
+</blockquote>
+<hr>
+<h2 id="🎯-learning-objectives" tabindex="-1">🎯 Learning Objectives</h2>
+<p>By the end of this week you will be able to:</p>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> Navigate the file system using <code>cd</code>, <code>ls</code>, and <code>pwd</code> without looking up the syntax</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> Create and move files and directories using <code>mkdir</code>, <code>touch</code>, and <code>mv</code></li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> Initialize a Git repository, stage files, and create descriptive commits</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> Push a local repository to GitHub and verify the push succeeded</li>
+</ul>
+<hr>
+<h2 id="🔑-key-concepts" tabindex="-1">🔑 Key Concepts</h2>
+<blockquote class="callout callout--concept">
+<p><strong>Shell</strong>
+A program that reads commands you type and tells the operating system to execute them. Think of it as a universal remote for your computer — instead of clicking, you type.</p>
+</blockquote>
+<blockquote class="callout callout--concept">
+<p><strong>Bash</strong>
+The most common shell on macOS and Linux. &quot;Bash&quot; stands for Bourne Again Shell. It is the language your terminal speaks when you type commands.</p>
+</blockquote>
+<blockquote class="callout callout--concept">
+<p><strong>Terminal</strong>
+The window that displays your shell. The terminal is the container; Bash is the language running inside it.</p>
+</blockquote>
+<blockquote class="callout callout--concept">
+<p><strong>Directory</strong>
+The technical name for a folder. When you navigate the file system in the terminal, you are moving between directories.</p>
+</blockquote>
+<blockquote class="callout callout--concept">
+<p><strong>Git</strong>
+Version control software that takes snapshots of your project at specific points in time. If you break something, you can go back to a snapshot where it worked.</p>
+</blockquote>
+<blockquote class="callout callout--concept">
+<p><strong>Repository (repo)</strong>
+A directory that Git is tracking. It contains your files plus a hidden <code>.git/</code> folder that stores the entire history.</p>
+</blockquote>
+<blockquote class="callout callout--concept">
+<p><strong>Staging Area</strong>
+A holding zone between your working files and your commits. You add files to the staging area with <code>git add</code>; you commit everything in the staging area with <code>git commit</code>.</p>
+</blockquote>
+<blockquote class="callout callout--concept">
+<p><strong>Commit</strong>
+A permanent snapshot of everything in the staging area at a given moment. Every commit has a message that explains what changed and why.</p>
+</blockquote>
+<blockquote class="callout callout--concept">
+<p><strong>.gitignore</strong>
+A file that tells Git which files and directories to ignore. You never want to commit <code>node_modules/</code> — it's gigabytes of downloaded code that can be regenerated with <code>npm install</code>.</p>
+</blockquote>
+<hr>
+<h2 id="⚙️-setup" tabindex="-1">⚙️ Setup</h2>
+<details>
+<summary>📦 Step-by-step environment setup</summary>
+<h3 class="step-heading" id="1step-1-open-your-terminal" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Open your terminal</h3>
+<p><strong>macOS:</strong> Press <code>Cmd + Space</code>, type &quot;terminal&quot;, press Enter.
+<strong>Windows:</strong> Use Git Bash (installed with Git for Windows). Search &quot;Git Bash&quot; in the Start menu.
+<strong>VS Code:</strong> Press `Ctrl+`` (backtick) to open the integrated terminal.</p>
+<h3 class="step-heading" id="2step-2-confirm-your-tools-are-ready" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Confirm your tools are ready</h3>
+<pre><code class="language-bash">node --version   # Must return v16 or higher
+git --version    # Must return any version
+git config --global user.name   # Must return your name
+</code></pre>
+<p>If any of these fail, resolve them before starting the tasks. See the Week 00 student guide for fix instructions.</p>
+<h3 class="step-heading" id="3step-3-navigate-to-your-documents-directory-or-equivalent-workspace" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Navigate to your Documents directory (or equivalent workspace)</h3>
+<pre><code class="language-bash">cd ~/Documents
+</code></pre>
+<h3 class="step-heading" id="4step-4-youll-create-the-movie-buzz-directory-as-part-of-task-1-—-do-not-create-it-here" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>You'll create the Movie Buzz directory as part of Task 1 — do not create it here.</h3>
+<h3 class="step-heading" id="5step-5-verify-you-are-not-already-inside-a-git-repository" tabindex="-1"><span class="step-badge" aria-hidden="true">5</span><span class="sr-only">Step 5: </span>Verify you are not already inside a Git repository</h3>
+<pre><code class="language-bash">git status
+# Expected: fatal: not a git repository
+# If you see anything else, use `cd ..` to move up until you are outside a repo
+</code></pre>
+</details>
+<details>
+<summary>✅ Pre-flight checklist — confirm before starting</summary>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> Terminal opens and you can type commands</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <code>node --version</code> returns v16 or higher</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <code>git --version</code> returns a version number</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <code>git config --global user.name</code> returns your name (not blank)</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <code>git config --global user.email</code> returns your email (not blank)</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> You have a GitHub account and are logged in at <a href="http://github.com">github.com</a></li>
+</ul>
+</details>
+<hr>
+<h2 id="📚-core-concepts" tabindex="-1">📚 Core Concepts</h2>
+<h3 id="navigating-the-file-system" tabindex="-1">Navigating the File System</h3>
+<p>The terminal gives you a text interface to your file system. You are always &quot;inside&quot; one directory at a time — this is called your <strong>current working directory</strong>. The three most important navigation commands are:</p>
+<pre><code class="language-bash">pwd          # Print Working Directory — tells you where you are right now
+ls           # List contents of the current directory
+cd dirname   # Change Directory — move into dirname
+cd ..        # Move up one level to the parent directory
+cd ~         # Jump directly to your home directory
+</code></pre>
+<p>Think of <code>pwd</code> as &quot;where am I?&quot;, <code>ls</code> as &quot;what's in here?&quot;, and <code>cd</code> as &quot;take me there.&quot;</p>
+<details>
+<summary>🤔 Comprehension check — think before expanding</summary>
+<p>Before moving on, try to answer:</p>
+<ol>
+<li>If you type <code>pwd</code> and see <code>/home/you/Documents/movie-buzz</code>, what command would take you to <code>/home/you/Documents</code>?</li>
+<li>What does <code>ls -la</code> do differently from plain <code>ls</code>? (Try it and observe the output.)</li>
+</ol>
+<p><em>(Discuss in class if unsure — these patterns will be automatic by Week 03)</em></p>
+</details>
+<hr>
+<h3 id="creating-and-moving-files" tabindex="-1">Creating and Moving Files</h3>
+<pre><code class="language-bash">mkdir dirname          # Make a new directory called dirname
+mkdir dir1 dir2 dir3   # Make multiple directories at once
+touch filename.txt     # Create an empty file
+mv file destination    # Move a file to a destination directory
+mv oldname newname     # Rename a file (move to a new name)
+cp source destination  # Copy a file
+rm filename            # Delete a file (permanent — no Trash)
+rm -r dirname          # Delete a directory and all its contents
+</code></pre>
+<blockquote class="callout callout--default">
+<p><strong>Important:</strong> <code>rm</code> is permanent. There is no undo. Be careful with <code>rm -r</code>.</p>
+</blockquote>
+<hr>
+<h3 id="the-git-workflow" tabindex="-1">The Git Workflow</h3>
+<p>Every change you track with Git follows this three-step rhythm:</p>
+<pre><code>Working Directory → Staging Area → Repository (commit)
+     (your files)    (git add)       (git commit)
+</code></pre>
+<pre><code class="language-bash">git status                     # See what has changed since last commit
+git add filename               # Stage a specific file
+git add .                      # Stage all changed files in current directory
+git commit -m &quot;message here&quot;   # Commit everything staged, with a message
+git log                        # View commit history
+git log --oneline              # View history in compact form
+</code></pre>
+<p><strong>What makes a good commit message?</strong>
+Write it in the imperative mood, as if completing the sentence &quot;This commit will...&quot;:</p>
+<ul>
+<li><code>Add MovieBlock component</code> (good)</li>
+<li><code>stuff</code> (bad)</li>
+<li><code>fix bug</code> (bad — which bug? what fix?)</li>
+<li><code>Set up project directory structure</code> (good)</li>
+</ul>
+<details>
+<summary>🤔 Comprehension check — think before expanding</summary>
+<p>Before moving on, try to answer:</p>
+<ol>
+<li>What is the difference between <code>git add .</code> and <code>git commit</code>? Why are they two separate commands instead of one?</li>
+<li>After you run <code>git commit</code>, where does the snapshot live — on your computer or on GitHub?</li>
+</ol>
+<p><em>(The answer to #2 is important — understand it before Task 3)</em></p>
+</details>
+<hr>
+<h3 id="connecting-to-github" tabindex="-1">Connecting to GitHub</h3>
+<p><code>git push</code> uploads your local commits to a remote repository (on GitHub). Before you can push, you need to connect your local repo to a remote:</p>
+<pre><code class="language-bash">git remote add origin https://github.com/yourusername/movie-buzz.git
+git branch -M main
+git push -u origin main
+</code></pre>
+<p>After the first push with <code>-u</code>, future pushes are just <code>git push</code>.</p>
+<hr>
+<h2 id="🛠️-your-tasks" tabindex="-1">🛠️ Your Tasks</h2>
+<blockquote class="callout callout--warning">
+<p>⚠️ <strong>Reminder:</strong> Implement each TODO yourself. The goal is to build muscle memory — type the commands, don't copy-paste them.</p>
+</blockquote>
+<h3 class="step-heading" id="1step-1-build-the-directory-structure" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Build the Directory Structure</h3>
+<p><strong>What you're doing:</strong> Navigate to your working directory and create the Movie Buzz project structure using only terminal commands — no Finder or File Explorer.</p>
+<pre><code class="language-bash"># TODO: Navigate to your Documents directory (or wherever you keep projects)
+# TODO: Create a directory called movie-buzz
+# TODO: Navigate into movie-buzz
+# TODO: Create the following subdirectories: assets, js, style
+# TODO: Create these files in their correct locations:
+#   - index.html (in the root of movie-buzz)
+#   - style/main.css
+#   - js/main.js
+#   - assets/.gitkeep (an empty file so the assets folder gets committed)
+# TODO: Verify everything was created using pwd and ls
+</code></pre>
+<details>
+<summary>💡 Stuck? Expand for a hint — not an answer</summary>
+<ul>
+<li><strong>Think about:</strong> You can create a file inside a directory without navigating into it. The pattern looks like: <code>touch dirname/filename.ext</code></li>
+<li><strong>Check:</strong> Use <code>ls style</code> to verify that <code>main.css</code> is in the <code>style</code> directory without navigating there.</li>
+<li><strong>The pattern looks like:</strong> <code>mkdir dirname</code> then <code>touch dirname/filename</code></li>
+</ul>
+</details>
+<hr>
+<h3 class="step-heading" id="2step-2-add-basic-html-content" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Add Basic HTML Content</h3>
+<p><strong>File to edit:</strong> <code>movie-buzz/index.html</code></p>
+<p><strong>What you're doing:</strong> Open <code>index.html</code> in VS Code and write a simple HTML page that links to your CSS and JS files. This is a placeholder — we'll replace it with React in Week 03.</p>
+<pre><code class="language-html">&lt;!-- STARTER CODE — fill in the TODO sections --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot; /&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+    &lt;title&gt;Movie Buzz&lt;/title&gt;
+    &lt;!-- TODO: Add a link tag connecting to style/main.css --&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;!-- TODO: Add an h1 with the text &quot;Movie Buzz&quot; --&gt;
+    &lt;!-- TODO: Add a p tag with a one-sentence description of the app --&gt;
+    &lt;!-- TODO: Add a script tag connecting to js/main.js --&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<details>
+<summary>💡 Hint</summary>
+<ul>
+<li><strong>Think about:</strong> A <code>&lt;link&gt;</code> tag for CSS uses <code>rel=&quot;stylesheet&quot;</code> and an <code>href</code> attribute pointing to the file path.</li>
+<li><strong>The pattern looks like:</strong> <code>&lt;link rel=&quot;stylesheet&quot; href=&quot;style/main.css&quot; /&gt;</code></li>
+<li><strong>For JS:</strong> A <code>&lt;script&gt;</code> tag uses a <code>src</code> attribute. Place it at the bottom of <code>&lt;body&gt;</code> so it loads after the HTML.</li>
+</ul>
+</details>
+<hr>
+<h3 class="step-heading" id="3step-3-initialize-git-and-make-your-first-commits" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Initialize Git and Make Your First Commits</h3>
+<p><strong>What you're doing:</strong> Turn <code>movie-buzz/</code> into a Git repository and record your work with three separate, meaningful commits.</p>
+<pre><code class="language-bash"># TODO: Confirm you are inside the movie-buzz directory (use pwd)
+# TODO: Verify you are NOT already in a Git repo (use git status — expect an error)
+# TODO: Initialize a new Git repository
+# TODO: Check git status to see your untracked files
+# TODO: Create a .gitignore file and add node_modules/ to it
+# TODO: Stage all files and make your first commit
+#       Commit message: &quot;Initialize Movie Buzz project structure&quot;
+# TODO: Add some CSS to style/main.css (even just a body background color)
+# TODO: Stage just main.css and commit it
+#       Commit message: &quot;Add base styles to main.css&quot;
+# TODO: Add a console.log to js/main.js
+# TODO: Stage main.js and commit it
+#       Commit message: &quot;Add initial JS entry point&quot;
+# TODO: Run git log to confirm you have three commits
+</code></pre>
+<details>
+<summary>💡 Hint</summary>
+<ul>
+<li><strong>Think about:</strong> <code>git add .</code> stages everything. <code>git add style/main.css</code> stages only that one file. Separate commits for separate concerns is a professional habit.</li>
+<li><strong>Check:</strong> After each commit, run <code>git status</code> — it should say &quot;nothing to commit, working tree clean.&quot;</li>
+<li><strong>The pattern looks like:</strong> <code>git add filename</code> → <code>git status</code> → <code>git commit -m &quot;message&quot;</code> → <code>git status</code></li>
+</ul>
+</details>
+<hr>
+<h3 class="step-heading" id="4step-4-push-to-github" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Push to GitHub</h3>
+<p><strong>What you're doing:</strong> Create a new repository on GitHub and push your local commits there.</p>
+<pre><code class="language-bash"># TODO: Go to github.com and create a new repository named &quot;movie-buzz&quot;
+#       - Set it to Public
+#       - Do NOT initialize it with a README (you already have local commits)
+# TODO: Copy the repository URL (HTTPS format)
+# TODO: Back in your terminal, connect your local repo to GitHub:
+git remote add origin https://github.com/YOUR_USERNAME/movie-buzz.git
+git branch -M main
+git push -u origin main
+
+# TODO: Refresh github.com/YOUR_USERNAME/movie-buzz and verify your files appear
+# TODO: Click on &quot;Commits&quot; and confirm all three commits appear with your messages
+</code></pre>
+<details>
+<summary>💡 Hint</summary>
+<ul>
+<li><strong>Think about:</strong> After <code>git push</code>, GitHub is a backup of your local repo. Any commit that exists locally but hasn't been pushed yet is not on GitHub.</li>
+<li><strong>Check:</strong> If <code>git push</code> fails with &quot;remote origin already exists,&quot; you already ran <code>git remote add origin</code> once. Skip that command and run <code>git push -u origin main</code> directly.</li>
+<li><strong>The pattern looks like:</strong> Create repo on GitHub → copy the URL → run the three commands in your terminal → refresh GitHub to verify.</li>
+</ul>
+</details>
+<hr>
+<h3 class="step-heading" id="5step-5-create-a-gitignore" tabindex="-1"><span class="step-badge" aria-hidden="true">5</span><span class="sr-only">Step 5: </span>Create a .gitignore</h3>
+<p><strong>File to edit:</strong> <code>movie-buzz/.gitignore</code></p>
+<p><strong>What you're doing:</strong> Ensure that <code>node_modules/</code> (and other generated files) will never be committed accidentally.</p>
+<pre><code class="language-bash"># STARTER — your .gitignore should contain at minimum:
+# TODO: Add node_modules/ on its own line
+# TODO: Add .DS_Store (macOS system file) on its own line
+# TODO: Add .env on its own line (for secret keys you'll add later)
+# TODO: Commit the .gitignore file with message: &quot;Add .gitignore&quot;
+# TODO: Push the update to GitHub
+</code></pre>
+<details>
+<summary>💡 Hint</summary>
+<ul>
+<li><strong>Think about:</strong> Each line in <code>.gitignore</code> is a pattern. Anything matching that pattern is ignored. <code>node_modules/</code> with a trailing slash means &quot;a directory named node_modules.&quot;</li>
+<li><strong>Check:</strong> Create a test directory called <code>node_modules</code>, run <code>git status</code>, and confirm it does NOT appear as an untracked file. Then delete the test directory.</li>
+<li><strong>The pattern looks like:</strong> One item per line, no quotes needed.</li>
+</ul>
+</details>
+<hr>
+<h2 id="🐛-common-errors--fixes" tabindex="-1">🐛 Common Errors &amp; Fixes</h2>
+<details>
+<summary>❌ Error: `fatal: not a git repository` when running `git add` or `git commit`</summary>
+<p><strong>Why this happens:</strong>
+You ran <code>git add</code> or <code>git commit</code> without running <code>git init</code> first. Or you navigated out of the <code>movie-buzz</code> directory without realizing it.</p>
+<p><strong>Check these things:</strong></p>
+<ol>
+<li>Run <code>pwd</code> to confirm you are inside <code>movie-buzz/</code>.</li>
+<li>Run <code>ls -la</code> and look for a <code>.git/</code> directory. If it's not there, you haven't initialized yet.</li>
+</ol>
+<p><strong>The fix:</strong></p>
+<pre><code class="language-bash"># Wrong (running git commands outside the repo):
+cd ~/Documents
+git status   # This fails — you're not in a repo
+
+# Correct (navigate into the project first):
+cd ~/Documents/movie-buzz
+git init
+git status   # Now it works
+</code></pre>
+</details>
+<details>
+<summary>❌ Error: Committed `node_modules/` accidentally</summary>
+<p><strong>Why this happens:</strong>
+You ran <code>git add .</code> before creating the <code>.gitignore</code> file, so Git staged everything including <code>node_modules/</code>.</p>
+<p><strong>Check these things:</strong></p>
+<ol>
+<li>Run <code>git log</code> to see if <code>node_modules</code> was included in a commit.</li>
+<li>Run <code>git status</code> — if <code>node_modules</code> is green (staged), it hasn't been committed yet.</li>
+</ol>
+<p><strong>The fix:</strong></p>
+<pre><code class="language-bash"># If not yet committed — unstage it:
+git rm -r --cached node_modules/
+# Then add node_modules/ to .gitignore and commit the .gitignore
+
+# Prevention: Always create .gitignore BEFORE running git add for the first time
+</code></pre>
+</details>
+<details>
+<summary>❌ Error: `git push` fails with `src refspec main does not match any`</summary>
+<p><strong>Why this happens:</strong>
+Your local branch is named <code>master</code> (the old Git default) but you're trying to push to <code>main</code>. GitHub now uses <code>main</code> as the default.</p>
+<p><strong>Check these things:</strong></p>
+<ol>
+<li>Run <code>git branch</code> to see what your current branch is named.</li>
+<li>If it says <code>master</code>, you need to rename it.</li>
+</ol>
+<p><strong>The fix:</strong></p>
+<pre><code class="language-bash"># Wrong: trying to push main when branch is named master
+git push -u origin main   # Fails
+
+# Correct: rename the branch first
+git branch -M main        # Rename master → main
+git push -u origin main   # Now works
+</code></pre>
+</details>
+<hr>
+<h2 id="✅-deliverables-checklist" tabindex="-1">✅ Deliverables Checklist</h2>
+<p>Before marking this week complete, verify each item by running your code:</p>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>Directory structure built:</strong> <code>ls movie-buzz</code> shows <code>index.html</code>, <code>assets/</code>, <code>js/</code>, <code>style/</code>, <code>.gitignore</code></li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>Three commits in history:</strong> <code>git log --oneline</code> in <code>movie-buzz/</code> shows three commits with descriptive messages</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>Pushed to GitHub:</strong> Refresh <code>github.com/YOUR_USERNAME/movie-buzz</code> — files and commits appear</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong><code>.gitignore</code> working:</strong> Create a test <code>node_modules/</code> directory, run <code>git status</code>, confirm it does not appear as untracked</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>TLM Roadtrip (optional but encouraged):</strong> Complete the bash navigation challenge in <code>TLM_Roadtrip/</code> — see its README for instructions</li>
+</ul>
+<hr>
+<h2 id="🚀-stretch-goals" tabindex="-1">🚀 Stretch Goals</h2>
+<blockquote class="callout callout--default">
+<p>These are optional. Attempt them after completing all deliverables. No starter code is provided — that's the point.</p>
+</blockquote>
+<details>
+<summary>⭐ Stretch 1: Feature Branch Workflow</summary>
+<p><strong>The challenge:</strong>
+Create a feature branch called <code>feature/add-movie-styles</code>, add more CSS to <code>main.css</code> on that branch, commit the changes, and then merge the branch back into <code>main</code>. Delete the feature branch after merging.</p>
+<p><strong>Why this matters:</strong>
+Every professional development team uses branches. Pull requests (the next step after branches) are how code gets reviewed before it's merged. Starting this habit now in a low-stakes environment will make Week 13–16 much smoother.</p>
+<p><strong>You'll need to research:</strong></p>
+<ul>
+<li><code>git checkout -b branchname</code> to create and switch to a branch</li>
+<li><code>git merge branchname</code> to merge a branch into your current branch</li>
+<li><code>git branch -d branchname</code> to delete a branch after merging</li>
+</ul>
+</details>
+<details>
+<summary>⭐⭐ Stretch 2: Automate Directory Setup with a Shell Script (harder)</summary>
+<p><strong>The challenge:</strong>
+Write a Bash script called <code>setup.sh</code> that, when run, automatically creates the full Movie Buzz directory structure from scratch — all the directories, all the starter files, and even a starter <code>.gitignore</code>. Running <code>bash setup.sh</code> in any empty directory should produce the same file tree you built manually in Task 1.</p>
+<p><strong>Why this matters:</strong>
+Shell scripts are how professional developers automate repetitive setup tasks. Every project scaffold tool you'll ever use (Create React App, Vite, Next.js starter) is doing something similar under the hood.</p>
+<p><strong>You'll need to research:</strong></p>
+<ul>
+<li>Bash variables: <code>PROJECT_NAME=&quot;movie-buzz&quot;</code></li>
+<li>Bash script structure: <code>#!/bin/bash</code> shebang line</li>
+<li>How to make a script executable: <code>chmod +x setup.sh</code></li>
+</ul>
+</details>
+<hr>
+<h2 id="🎫-exit-ticket" tabindex="-1">🎫 Exit Ticket</h2>
+<blockquote class="callout callout--default">
+<p>When you're done, submit your exit ticket using access code: <strong><code>bash73</code></strong></p>
+<p>The questions cover: Bash navigation commands, Git staging concepts, the purpose of <code>.gitignore</code>, and Git commit messages.</p>
+</blockquote>
+<hr>
+<h2 id="📖-reference--resources" tabindex="-1">📖 Reference &amp; Resources</h2>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Why It's Useful</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://git-scm.com/doc">Git Official Docs</a></td>
+<td>Authoritative reference for every Git command</td>
+</tr>
+<tr>
+<td><a href="https://docs.github.com/en/get-started/quickstart/create-a-repo">GitHub Docs: Creating a repo</a></td>
+<td>Step-by-step for setting up your first GitHub repo</td>
+</tr>
+<tr>
+<td><a href="https://www.atlassian.com/git/tutorials">Atlassian Git Tutorial</a></td>
+<td>Visual explanations of staging, commits, and branching</td>
+</tr>
+<tr>
+<td><a href="https://www.toptal.com/developers/gitignore">gitignore.io</a></td>
+<td>Generate <code>.gitignore</code> files for any project type</td>
+</tr>
+<tr>
+<td><a href="./TLM_Roadtrip/">TLM Roadtrip</a></td>
+<td>Supplemental bash navigation challenge included with this week</td>
+</tr>
+</tbody>
+</table>
+<blockquote class="callout callout--note">
+<p>📌 <strong>Reminder:</strong> <code>movie-buzz-finished/</code> is the reference implementation for the full application. Use it to <strong>verify your output</strong>, not to copy code.</p>
+</blockquote>
+
+<div class="pager">
+<a href="../week_00_welcome_call/index.html">← Week 00</a>
+<a href="../week_02_dev_environment/index.html">Week 02 →</a>
+</div>
+</main>
+</div>
+</body>
+</html>

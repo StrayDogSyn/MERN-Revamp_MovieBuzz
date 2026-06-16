@@ -1,0 +1,2219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 5 - React Events & Hooks · Movie Buzz Lesson Viewer</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+<label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
+<div class="layout">
+<nav class="sidebar" aria-label="Course weeks">
+<div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
+<a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
+<a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
+<a class="nav-link" href="../week_02_dev_environment/index.html">Week 02 · Dev Environment</a>
+<a class="nav-link" href="../week_03_intro_to_react/index.html">Week 03 · Intro to React</a>
+<a class="nav-link" href="../week_04_react_state_and_hooks/index.html">Week 04 · React State & Hooks</a>
+<a class="nav-link active" href="../week_05_react_events_and_hooks/index.html">Week 05 · React Events & Hooks</a>
+<a class="nav-link" href="../week_06_react_component_patterns/index.html">Week 06 · React Component Patterns</a>
+<a class="nav-link" href="../week_07_react_hooks_and_context/index.html">Week 07 · React Hooks & Context</a>
+<div class="nav-phase">Weeks 08–16 · Backend (Node, Express, MongoDB)</div>
+<a class="nav-link" href="../week_08_nodejs_and_http/index.html">Week 08 · Node.js & HTTP</a>
+<a class="nav-link" href="../week_09_express_and_cors/index.html">Week 09 · Express & CORS</a>
+<a class="nav-link" href="../week_10_tic_tac_toe_checkpoint/index.html">Week 10 · Tic-Tac-Toe Checkpoint</a>
+<a class="nav-link" href="../week_11_intro_to_mongodb/index.html">Week 11 · Intro to MongoDB</a>
+<a class="nav-link" href="../week_12_mongoose_and_read/index.html">Week 12 · Mongoose & Read</a>
+<a class="nav-link" href="../week_13_create_functionality/index.html">Week 13 · Create Functionality</a>
+<a class="nav-link" href="../week_14_update_functionality/index.html">Week 14 · Update Functionality</a>
+<a class="nav-link" href="../week_15_delete_functionality/index.html">Week 15 · Delete Functionality</a>
+<a class="nav-link" href="../week_16_frontend_backend_integration/index.html">Week 16 · Frontend/Backend Integration</a>
+<div class="nav-phase">Optional Modules</div>
+<a class="nav-link" href="../week_optional_search_feature/index.html">Search Feature</a>
+<a class="nav-link" href="../week_optional_testing_suite/index.html">Testing Suite</a>
+</nav>
+<main class="main">
+<div class="page-header">
+<div class="breadcrumb">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
+</div>
+<h1 id="week-5---react-events--hooks" tabindex="-1">Week 5 - React Events &amp; Hooks</h1>
+<ul>
+<li><a href="#week-5---react-events--hooks">Week 5 - React Events &amp; Hooks</a>
+<ul>
+<li><a href="#notes-about-this-lesson-plan">Notes About This Lesson Plan</a></li>
+<li><a href="#learning-objectives">Learning Objectives</a></li>
+<li><a href="#glossary">Glossary</a></li>
+<li><a href="#starting-point">Starting Point</a></li>
+<li><a href="#advanced-event-handling">Advanced Event Handling</a></li>
+<li><a href="#more-react-hooks">More React Hooks</a>
+<ul>
+<li><a href="#useeffect-with-cleanup">useEffect with Cleanup</a></li>
+<li><a href="#custom-hooks">Custom Hooks</a></li>
+</ul>
+</li>
+<li><a href="#enhancing-movie-buzz">Enhancing Movie Buzz</a>
+<ul>
+<li><a href="#adding-search-functionality">Adding Search Functionality</a></li>
+<li><a href="#adding-delete-functionality">Adding Delete Functionality</a></li>
+<li><a href="#adding-edit-functionality">Adding Edit Functionality</a></li>
+</ul>
+</li>
+<li><a href="#event-handling-best-practices">Event Handling Best Practices</a></li>
+<li><a href="#state-management-patterns">State Management Patterns</a></li>
+<li><a href="#final-thoughts">Final Thoughts</a></li>
+<li><a href="#exit-ticket">Exit Ticket</a></li>
+<li><a href="#review">Review</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="notes-about-this-lesson-plan" tabindex="-1">Notes About This Lesson Plan</h2>
+<p>Please review this lesson plan in advance of our RI session. If this plan doesn't align with where you and your classmates are at in the LMS, please send a ticket to Help Desk as soon as possible.</p>
+<p>This code is for instructional purposes only. It should be utilized as an example in developing your own work. No part of it should be directly copied into your own project. As per TLM's plagiarism policy, submitting or misrepresenting code or an idea as your own when it was created by someone else constitutes plagiarism.</p>
+<hr>
+<h2 id="learning-objectives" tabindex="-1">Learning Objectives</h2>
+<p>By the end of this session, learners will be able to:</p>
+<ul>
+<li>Handle complex user interactions and events in React</li>
+<li>Use useEffect for cleanup and advanced lifecycle management</li>
+<li>Create and use custom hooks for reusable logic</li>
+<li>Implement search, edit, and delete functionality in React</li>
+<li>Apply best practices for event handling and state management</li>
+<li>Create functional React components that manage multiple types of state</li>
+</ul>
+<hr>
+<h2 id="glossary" tabindex="-1">Glossary</h2>
+<details open class="glossary-disclosure">
+<summary>📖 Click to collapse glossary</summary>
+<ul>
+<li><code>Event Delegation</code>: A technique where you handle events at a parent level instead of individual child elements</li>
+<li><code>Custom Hook</code>: A JavaScript function that uses React hooks and can be shared between components</li>
+<li><code>Cleanup Function</code>: A function returned by useEffect to clean up resources when a component unmounts</li>
+<li><code>Debouncing</code>: A technique to delay function execution until after a specified time has passed</li>
+<li><code>Controlled vs Uncontrolled</code>: Components where React controls the form data vs. the DOM controlling it</li>
+<li><code>State Lifting</code>: Moving state up to a common parent component to share between siblings</li>
+</ul>
+</details>
+---
+<h2 id="starting-point" tabindex="-1">Starting Point</h2>
+<p>Before we begin this lesson, navigate to the <code>week_05_react_events_and_hooks/movie-buzz</code> directory. This contains your Movie Buzz app from Week 4, with basic state management and form functionality already working.</p>
+<pre><code class="language-bash">cd week_05_react_events_and_hooks/movie-buzz
+npm install
+npm start
+</code></pre>
+<p>Your app should have:</p>
+<ul>
+<li>A list of movies displayed with React components</li>
+<li>Basic useState for managing movies and form visibility</li>
+<li>A working MovieForm component for adding movies</li>
+<li>Netflix-style dark theme UI</li>
+</ul>
+<p>We'll be adding advanced interactivity: search, edit, and delete functionality!</p>
+<hr>
+<h2 id="simple-event-examples---building-understanding" tabindex="-1">Simple Event Examples - Building Understanding</h2>
+<p>Before we add advanced features to Movie Buzz, let's practice with simple event handling examples:</p>
+<h3 class="step-heading" id="1step-1-button-click-handler" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Button Click Handler</h3>
+<p>Create <code>src/components/ClickCounter.js</code>:</p>
+<h3 id="code-structure-explanation" tabindex="-1">Code Structure Explanation</h3>
+<p>Before we write the code, let's understand what this component will do:</p>
+<ul>
+<li><strong>Purpose</strong>: Track button clicks and show when the last click occurred</li>
+<li><strong>State Management</strong>: Two pieces of state - click count and timestamp</li>
+<li><strong>Event Handling</strong>: A click handler that updates both pieces of state</li>
+<li><strong>Real-time Updates</strong>: Display live feedback to the user about their interactions</li>
+</ul>
+<pre><code class="language-jsx">// 1. Import React and useState hook for state management
+import React, { useState } from 'react';
+
+// 2. Function component definition
+function ClickCounter() {
+  // 3. State for tracking total number of clicks
+  const [clicks, setClicks] = useState(0);
+  // 4. State for tracking when the last click occurred
+  const [lastClickTime, setLastClickTime] = useState('Never');
+
+  // 5. Event handler function for button clicks
+  const handleClick = () =&gt; {
+    // 6. Increment click counter using current value + 1
+    setClicks(clicks + 1);
+    // 7. Update timestamp with current time formatted as readable string
+    setLastClickTime(new Date().toLocaleTimeString());
+  };
+
+  // 8. Return JSX that describes the UI structure
+  return (
+    // 9. Container div for all counter elements
+    &lt;div&gt;
+      {/* 10. Button element with onClick event listener */}
+      &lt;button onClick={handleClick}&gt;
+        Click Me!
+      &lt;/button&gt;
+      {/* 11. Display current click count using JSX expression */}
+      &lt;p&gt;Total Clicks: {clicks}&lt;/p&gt;
+      {/* 12. Display last click time using JSX expression */}
+      &lt;p&gt;Last Click: {lastClickTime}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+
+// 13. Export component for use in other files
+export default ClickCounter;
+</code></pre>
+<h3 id="line-by-line-breakdown" tabindex="-1">Line-by-Line Breakdown:</h3>
+<ol>
+<li>
+<p><strong>Import Statement</strong>: <code>import React, { useState } from 'react';</code></p>
+<ul>
+<li>Imports React library and specifically extracts the useState hook</li>
+<li>useState is needed for managing component state</li>
+<li>This is ES6 destructuring syntax to pull useState out of React</li>
+</ul>
+</li>
+<li>
+<p><strong>Function Declaration</strong>: <code>function ClickCounter()</code></p>
+<ul>
+<li>Creates a functional component named ClickCounter</li>
+<li>Component names must start with a capital letter in React</li>
+<li>This will be callable as <code>&lt;ClickCounter /&gt;</code> in JSX</li>
+</ul>
+</li>
+<li>
+<p><strong>Click State</strong>: <code>const [clicks, setClicks] = useState(0);</code></p>
+<ul>
+<li>Creates state variable <code>clicks</code> initialized to 0</li>
+<li><code>setClicks</code> is the updater function for this state</li>
+<li>Array destructuring gets both the value and setter from useState</li>
+<li>Starting at 0 makes sense for counting clicks</li>
+</ul>
+</li>
+<li>
+<p><strong>Time State</strong>: <code>const [lastClickTime, setLastClickTime] = useState('Never');</code></p>
+<ul>
+<li>Creates state for tracking when the last click happened</li>
+<li>Initialized to 'Never' as a user-friendly default message</li>
+<li>String value will be replaced with actual timestamp on first click</li>
+</ul>
+</li>
+<li>
+<p><strong>Event Handler</strong>: <code>const handleClick = () =&gt; { ... }</code></p>
+<ul>
+<li>Arrow function that will be called when button is clicked</li>
+<li>Defined inside component so it has access to state setters</li>
+<li>Function name follows React convention: <code>handle</code> + <code>EventType</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Increment Count</strong>: <code>setClicks(clicks + 1);</code></p>
+<ul>
+<li>Updates click count by adding 1 to current value</li>
+<li>React will re-render component when state changes</li>
+<li>Uses current value of <code>clicks</code> to calculate new value</li>
+</ul>
+</li>
+<li>
+<p><strong>Update Timestamp</strong>: <code>setLastClickTime(new Date().toLocaleTimeString());</code></p>
+<ul>
+<li>Creates new Date object representing current moment</li>
+<li><code>.toLocaleTimeString()</code> formats time in user's local format (e.g., &quot;2:30:45 PM&quot;)</li>
+<li>Stores this formatted string in state for display</li>
+</ul>
+</li>
+<li>
+<p><strong>Return JSX</strong>: <code>return ( ... )</code></p>
+<ul>
+<li>Every React component must return JSX or null</li>
+<li>Parentheses allow multi-line JSX for readability</li>
+<li>JSX describes what the UI should look like</li>
+</ul>
+</li>
+<li>
+<p><strong>Container Div</strong>: <code>&lt;div&gt;</code></p>
+<ul>
+<li>Wraps all content in a single parent element (React requirement)</li>
+<li>Could use React.Fragment if you don't want extra HTML</li>
+</ul>
+</li>
+<li>
+<p><strong>Button Element</strong>: <code>&lt;button onClick={handleClick}&gt;</code></p>
+<ul>
+<li>Creates clickable button element</li>
+<li><code>onClick</code> prop connects to our event handler function</li>
+<li>Note: We pass the function itself, not call it with <code>handleClick()</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Click Display</strong>: <code>&lt;p&gt;Total Clicks: {clicks}&lt;/p&gt;</code></p>
+<ul>
+<li>Paragraph element showing current click count</li>
+<li><code>{clicks}</code> embeds JavaScript expression in JSX</li>
+<li>React automatically converts number to string for display</li>
+</ul>
+</li>
+<li>
+<p><strong>Time Display</strong>: <code>&lt;p&gt;Last Click: {lastClickTime}&lt;/p&gt;</code></p>
+<ul>
+<li>Shows when the last click occurred</li>
+<li>Initially displays &quot;Never&quot;, then shows actual timestamps</li>
+<li>String is displayed directly (no conversion needed)</li>
+</ul>
+</li>
+<li>
+<p><strong>Export Statement</strong>: <code>export default ClickCounter;</code></p>
+<ul>
+<li>Makes component available for import in other files</li>
+<li><code>default</code> means this is the main export from this file</li>
+</ul>
+</li>
+</ol>
+<h3 id="why-this-pattern-works" tabindex="-1">Why This Pattern Works:</h3>
+<ul>
+<li><strong>Immediate Feedback</strong>: Users see instant response to their actions</li>
+<li><strong>Multiple State</strong>: Demonstrates managing two related but separate pieces of state</li>
+<li><strong>Event Handling</strong>: Shows proper way to attach and define event handlers</li>
+<li><strong>State Updates</strong>: Both states update in single event, showing React's batching</li>
+<li><strong>User Experience</strong>: Provides meaningful information (count + timestamp)</li>
+</ul>
+<h3 class="step-heading" id="2step-2-form-with-multiple-inputs" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Form with Multiple Inputs</h3>
+<p>Create <code>src/components/SimpleForm.js</code>:</p>
+<h3 id="code-structure-explanation-1" tabindex="-1">Code Structure Explanation</h3>
+<p>Before we write the code, let's understand what this component will do:</p>
+<ul>
+<li><strong>Purpose</strong>: Create a form with multiple input fields that work together</li>
+<li><strong>State Strategy</strong>: Use a single object to hold all form field values</li>
+<li><strong>Event Handling</strong>: One handler for all inputs using the <code>name</code> attribute</li>
+<li><strong>Form Submission</strong>: Prevent default browser behavior and show user feedback</li>
+<li><strong>Controlled Components</strong>: React controls all input values (not the DOM)</li>
+</ul>
+<pre><code class="language-jsx">// 1. Import React and useState for managing form state
+import React, { useState } from 'react';
+
+// 2. Function component definition
+function SimpleForm() {
+  // 3. Single state object containing all form fields
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    age: ''
+  });
+
+  // 4. Generic change handler for all form inputs
+  const handleChange = (e) =&gt; {
+    // 5. Extract name and value from the input that triggered the event
+    const { name, value } = e.target;
+    // 6. Update state by spreading previous state and updating changed field
+    setFormData(prev =&gt; ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  // 7. Form submission handler
+  const handleSubmit = (e) =&gt; {
+    // 8. Prevent default form submission (page refresh)
+    e.preventDefault();
+    // 9. Log form data to console for debugging
+    console.log('Form submitted:', formData);
+    // 10. Show user feedback with alert
+    alert(`Welcome ${formData.username}!`);
+  };
+
+  // 11. Return JSX form structure
+  return (
+    // 12. Form element with submit handler
+    &lt;form onSubmit={handleSubmit}&gt;
+      {/* 13. Username input with controlled value */}
+      &lt;input
+        type=&quot;text&quot;
+        name=&quot;username&quot;
+        value={formData.username}
+        onChange={handleChange}
+        placeholder=&quot;Username&quot;
+      /&gt;
+      {/* 14. Email input with controlled value */}
+      &lt;input
+        type=&quot;email&quot;
+        name=&quot;email&quot;
+        value={formData.email}
+        onChange={handleChange}
+        placeholder=&quot;Email&quot;
+      /&gt;
+      {/* 15. Age input with controlled value */}
+      &lt;input
+        type=&quot;number&quot;
+        name=&quot;age&quot;
+        value={formData.age}
+        onChange={handleChange}
+        placeholder=&quot;Age&quot;
+      /&gt;
+      {/* 16. Submit button */}
+      &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+    &lt;/form&gt;
+  );
+}
+
+// 17. Export component for use in other files
+export default SimpleForm;
+</code></pre>
+<h3 id="line-by-line-breakdown-1" tabindex="-1">Line-by-Line Breakdown:</h3>
+<ol>
+<li>
+<p><strong>Import Statement</strong>: <code>import React, { useState } from 'react';</code></p>
+<ul>
+<li>Same as previous example - brings in React and useState hook</li>
+<li>useState is essential for managing form data</li>
+</ul>
+</li>
+<li>
+<p><strong>Component Declaration</strong>: <code>function SimpleForm()</code></p>
+<ul>
+<li>Creates functional component for our form</li>
+<li>Name indicates this is a simplified form example</li>
+</ul>
+</li>
+<li>
+<p><strong>Form State Object</strong>: <code>const [formData, setFormData] = useState({ ... })</code></p>
+<ul>
+<li>Single state object holds ALL form field values</li>
+<li>Much more efficient than separate useState for each field</li>
+<li>Object keys match the <code>name</code> attributes of inputs</li>
+<li>All fields initialized to empty strings</li>
+</ul>
+</li>
+<li>
+<p><strong>Generic Handler</strong>: <code>const handleChange = (e) =&gt; { ... }</code></p>
+<ul>
+<li>One function handles changes for ALL inputs</li>
+<li>More maintainable than separate handlers for each field</li>
+<li>Uses event object to determine which field changed</li>
+</ul>
+</li>
+<li>
+<p><strong>Destructuring</strong>: <code>const { name, value } = e.target;</code></p>
+<ul>
+<li>Extracts <code>name</code> and <code>value</code> properties from the input element</li>
+<li><code>name</code> tells us which field changed (username, email, or age)</li>
+<li><code>value</code> is the new content the user typed</li>
+<li>ES6 destructuring makes this code cleaner</li>
+</ul>
+</li>
+<li>
+<p><strong>State Update</strong>: <code>setFormData(prev =&gt; ({ ...prev, [name]: value }))</code></p>
+<ul>
+<li>Uses functional update pattern with previous state</li>
+<li>Spread operator <code>...prev</code> copies all existing form fields</li>
+<li><code>[name]: value</code> updates only the field that changed</li>
+<li>Square brackets make <code>name</code> a computed property (dynamic key)</li>
+<li>This preserves other field values while updating one</li>
+</ul>
+</li>
+<li>
+<p><strong>Submit Handler</strong>: <code>const handleSubmit = (e) =&gt; { ... }</code></p>
+<ul>
+<li>Function to handle form submission</li>
+<li>Takes event object as parameter</li>
+<li>Will be called when form is submitted (button click or Enter key)</li>
+</ul>
+</li>
+<li>
+<p><strong>Prevent Default</strong>: <code>e.preventDefault();</code></p>
+<ul>
+<li>Stops browser's default form submission behavior</li>
+<li>Without this, page would refresh and lose our data</li>
+<li>Essential for Single Page Applications (SPAs)</li>
+</ul>
+</li>
+<li>
+<p><strong>Console Logging</strong>: <code>console.log('Form submitted:', formData);</code></p>
+<ul>
+<li>Debugging tool to see what data was submitted</li>
+<li>Useful during development to verify form is working</li>
+<li>In production, you'd send this data to a server</li>
+</ul>
+</li>
+<li>
+<p><strong>User Feedback</strong>: <code>alert(\</code>Welcome ${formData.username}!`);`</p>
+<ul>
+<li>Shows user that submission was successful</li>
+<li>Uses template literal with ${} to embed username</li>
+<li>In real apps, you'd show better feedback than alert()</li>
+</ul>
+</li>
+<li>
+<p><strong>Return JSX</strong>: <code>return ( ... )</code></p>
+<ul>
+<li>Component must return JSX describing the UI</li>
+<li>Form elements describe the structure</li>
+</ul>
+</li>
+<li>
+<p><strong>Form Element</strong>: <code>&lt;form onSubmit={handleSubmit}&gt;</code></p>
+<ul>
+<li>HTML form with React event handler</li>
+<li><code>onSubmit</code> fires when form is submitted (button click or Enter)</li>
+<li>React's SyntheticEvent handles cross-browser compatibility</li>
+</ul>
+</li>
+</ol>
+<p>13-15. <strong>Input Elements</strong>: Each input follows the same pattern:</p>
+<ul>
+<li><code>type</code>: Specifies input type (text, email, number)</li>
+<li><code>name</code>: Matches the key in our formData object</li>
+<li><code>value</code>: Controlled by React state (formData.fieldname)</li>
+<li><code>onChange</code>: Uses our generic handleChange function</li>
+<li><code>placeholder</code>: User hint text</li>
+</ul>
+<ol start="16">
+<li>
+<p><strong>Submit Button</strong>: <code>&lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;</code></p>
+<ul>
+<li>Button with type=&quot;submit&quot; triggers form submission</li>
+<li>Could also be <code>&lt;input type=&quot;submit&quot; value=&quot;Submit&quot; /&gt;</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Export Statement</strong>: <code>export default SimpleForm;</code></p>
+<ul>
+<li>Makes component available for import elsewhere</li>
+</ul>
+</li>
+</ol>
+<h3 id="key-react-concepts-demonstrated" tabindex="-1">Key React Concepts Demonstrated:</h3>
+<ul>
+<li><strong>Controlled Components</strong>: React controls input values, not the DOM</li>
+<li><strong>Event Delegation</strong>: One handler manages multiple inputs</li>
+<li><strong>State Management</strong>: Object state for related data</li>
+<li><strong>Functional Updates</strong>: Using previous state to calculate new state</li>
+<li><strong>Event Prevention</strong>: Stopping default browser behavior</li>
+<li><strong>Dynamic Property Names</strong>: Using <code>[name]</code> syntax for computed keys</li>
+</ul>
+<h3 id="why-this-pattern-is-powerful" tabindex="-1">Why This Pattern is Powerful:</h3>
+<ul>
+<li><strong>Scalable</strong>: Easy to add more form fields</li>
+<li><strong>Maintainable</strong>: One handler instead of many</li>
+<li><strong>Predictable</strong>: React always controls the data</li>
+<li><strong>Debuggable</strong>: All form data in one place</li>
+<li><strong>Flexible</strong>: Same pattern works for any form size</li>
+</ul>
+<h3 class="step-heading" id="3step-3-dynamic-list-with-delete" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Dynamic List with Delete</h3>
+<p>Create <code>src/components/TodoList.js</code>:</p>
+<h3 id="code-structure-explanation-2" tabindex="-1">Code Structure Explanation</h3>
+<p>Before we write the code, let's understand what this component will do:</p>
+<ul>
+<li><strong>Purpose</strong>: Manage a dynamic list where users can add and remove items</li>
+<li><strong>State Management</strong>: Two pieces of state - the list of todos and current input</li>
+<li><strong>List Operations</strong>: Add new items and delete existing items</li>
+<li><strong>User Experience</strong>: Support both button clicks and Enter key for adding</li>
+<li><strong>Data Structure</strong>: Each todo is an object with unique ID and text</li>
+</ul>
+<pre><code class="language-jsx">// 1. Import React and useState for state management
+import React, { useState } from 'react';
+
+// 2. Function component definition
+function TodoList() {
+  // 3. State for the list of todos with initial sample data
+  const [todos, setTodos] = useState([
+    { id: 1, text: 'Learn React' },
+    { id: 2, text: 'Build an app' }
+  ]);
+  // 4. State for the current input field value
+  const [inputValue, setInputValue] = useState('');
+
+  // 5. Function to add a new todo to the list
+  const addTodo = () =&gt; {
+    // 6. Check if input has actual content (not just whitespace)
+    if (inputValue.trim()) {
+      // 7. Add new todo to existing list using spread operator
+      setTodos([...todos, {
+        id: Date.now(),
+        text: inputValue
+      }]);
+      // 8. Clear the input field after adding
+      setInputValue('');
+    }
+  };
+
+  // 9. Function to delete a todo by its ID
+  const deleteTodo = (id) =&gt; {
+    // 10. Filter out the todo with matching ID
+    setTodos(todos.filter(todo =&gt; todo.id !== id));
+  };
+
+  // 11. Return JSX describing the UI
+  return (
+    // 12. Container div for entire todo interface
+    &lt;div&gt;
+      {/* 13. Input field with multiple event handlers */}
+      &lt;input
+        value={inputValue}
+        onChange={(e) =&gt; setInputValue(e.target.value)}
+        onKeyPress={(e) =&gt; e.key === 'Enter' &amp;&amp; addTodo()}
+        placeholder=&quot;Add a todo...&quot;
+      /&gt;
+      {/* 14. Button to add new todo */}
+      &lt;button onClick={addTodo}&gt;Add&lt;/button&gt;
+      {/* 15. Unordered list to display todos */}
+      &lt;ul&gt;
+        {/* 16. Map over todos array to create list items */}
+        {todos.map(todo =&gt; (
+          &lt;li key={todo.id}&gt;
+            {/* 17. Display todo text */}
+            {todo.text}
+            {/* 18. Delete button for each todo */}
+            &lt;button onClick={() =&gt; deleteTodo(todo.id)}&gt;Delete&lt;/button&gt;
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  );
+}
+
+// 19. Export component for use in other files
+export default TodoList;
+</code></pre>
+<h3 id="line-by-line-breakdown-2" tabindex="-1">Line-by-Line Breakdown:</h3>
+<ol>
+<li>
+<p><strong>Import Statement</strong>: <code>import React, { useState } from 'react';</code></p>
+<ul>
+<li>Brings in React library and useState hook</li>
+<li>useState needed for managing todo list and input state</li>
+</ul>
+</li>
+<li>
+<p><strong>Component Declaration</strong>: <code>function TodoList()</code></p>
+<ul>
+<li>Creates functional component for todo list functionality</li>
+<li>Name clearly indicates this manages a list of todos</li>
+</ul>
+</li>
+<li>
+<p><strong>Todos State</strong>: <code>const [todos, setTodos] = useState([...])</code></p>
+<ul>
+<li>Array state containing todo objects</li>
+<li>Each todo has <code>id</code> (for React keys and deletion) and <code>text</code> (content)</li>
+<li>Initial state includes sample todos to show structure</li>
+<li>Array allows for dynamic addition/removal of items</li>
+</ul>
+</li>
+<li>
+<p><strong>Input State</strong>: <code>const [inputValue, setInputValue] = useState('');</code></p>
+<ul>
+<li>Separate state for the current input field value</li>
+<li>Initialized to empty string</li>
+<li>Controlled component pattern (React manages input value)</li>
+</ul>
+</li>
+<li>
+<p><strong>Add Function</strong>: <code>const addTodo = () =&gt; { ... }</code></p>
+<ul>
+<li>Function to add new todos to the list</li>
+<li>No parameters needed (uses current inputValue)</li>
+<li>Called when user clicks Add button or presses Enter</li>
+</ul>
+</li>
+<li>
+<p><strong>Input Validation</strong>: <code>if (inputValue.trim())</code></p>
+<ul>
+<li><code>.trim()</code> removes whitespace from beginning and end</li>
+<li>Prevents adding empty or whitespace-only todos</li>
+<li>Good user experience - prevents meaningless entries</li>
+</ul>
+</li>
+<li>
+<p><strong>Array Update</strong>: <code>setTodos([...todos, { id: Date.now(), text: inputValue }])</code></p>
+<ul>
+<li>Spread operator <code>...todos</code> copies existing todos</li>
+<li>Adds new todo object to the end of array</li>
+<li><code>Date.now()</code> provides unique ID (timestamp in milliseconds)</li>
+<li><code>text: inputValue</code> stores what user typed</li>
+<li>Creates new array (immutable update pattern)</li>
+</ul>
+</li>
+<li>
+<p><strong>Clear Input</strong>: <code>setInputValue('');</code></p>
+<ul>
+<li>Resets input field to empty after successful add</li>
+<li>Good UX - ready for next todo entry</li>
+<li>Only clears if todo was actually added (inside the if block)</li>
+</ul>
+</li>
+<li>
+<p><strong>Delete Function</strong>: <code>const deleteTodo = (id) =&gt; { ... }</code></p>
+<ul>
+<li>Function to remove a specific todo</li>
+<li>Takes <code>id</code> parameter to identify which todo to delete</li>
+<li>Called when user clicks a delete button</li>
+</ul>
+</li>
+<li>
+<p><strong>Filter Operation</strong>: <code>setTodos(todos.filter(todo =&gt; todo.id !== id))</code></p>
+<ul>
+<li><code>.filter()</code> creates new array excluding items that match condition</li>
+<li><code>todo.id !== id</code> keeps todos that DON'T match the delete ID</li>
+<li>Results in new array without the deleted todo</li>
+<li>Immutable update - doesn't modify original array</li>
+</ul>
+</li>
+<li>
+<p><strong>Return JSX</strong>: <code>return ( ... )</code></p>
+<ul>
+<li>Component returns JSX describing the interface</li>
+<li>Contains input, button, and dynamic list</li>
+</ul>
+</li>
+<li>
+<p><strong>Container Div</strong>: <code>&lt;div&gt;</code></p>
+<ul>
+<li>Wraps all todo interface elements</li>
+<li>Single parent required by React</li>
+</ul>
+</li>
+<li>
+<p><strong>Input Element</strong>: Complex input with multiple props:</p>
+<ul>
+<li><code>value={inputValue}</code>: Controlled component (React controls value)</li>
+<li><code>onChange={(e) =&gt; setInputValue(e.target.value)}</code>: Updates state on every keystroke</li>
+<li><code>onKeyPress={(e) =&gt; e.key === 'Enter' &amp;&amp; addTodo()}</code>: Calls addTodo when Enter pressed</li>
+<li><code>placeholder=&quot;Add a todo...&quot;</code>: User hint text</li>
+</ul>
+</li>
+<li>
+<p><strong>Add Button</strong>: <code>&lt;button onClick={addTodo}&gt;Add&lt;/button&gt;</code></p>
+<ul>
+<li>Triggers addTodo function when clicked</li>
+<li>Alternative to pressing Enter in input field</li>
+</ul>
+</li>
+<li>
+<p><strong>List Container</strong>: <code>&lt;ul&gt;</code></p>
+<ul>
+<li>Semantic HTML for unordered list</li>
+<li>Will contain dynamically generated list items</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic List</strong>: <code>{todos.map(todo =&gt; ( ... ))}</code></p>
+<ul>
+<li><code>.map()</code> transforms each todo into a JSX element</li>
+<li>Creates one <code>&lt;li&gt;</code> for each todo in the array</li>
+<li><code>key={todo.id}</code> required by React for efficient updates</li>
+<li>Parentheses allow multi-line JSX return</li>
+</ul>
+</li>
+<li>
+<p><strong>Todo Text</strong>: <code>{todo.text}</code></p>
+<ul>
+<li>Displays the content of each todo</li>
+<li>JSX expression embeds JavaScript in markup</li>
+</ul>
+</li>
+<li>
+<p><strong>Delete Button</strong>: <code>&lt;button onClick={() =&gt; deleteTodo(todo.id)}&gt;Delete&lt;/button&gt;</code></p>
+<ul>
+<li>Arrow function passes the specific todo's ID to deleteTodo</li>
+<li>Each button knows which todo it should delete</li>
+<li>Inline arrow function creates closure over <a href="http://todo.id">todo.id</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Export Statement</strong>: <code>export default TodoList;</code></p>
+<ul>
+<li>Makes component available for import in other files</li>
+</ul>
+</li>
+</ol>
+<h3 id="key-concepts-demonstrated" tabindex="-1">Key Concepts Demonstrated:</h3>
+<ul>
+<li><strong>Dynamic Lists</strong>: Adding and removing items from arrays</li>
+<li><strong>Unique Keys</strong>: Using IDs for React list reconciliation</li>
+<li><strong>Multiple Event Handlers</strong>: onChange, onKeyPress, onClick</li>
+<li><strong>Array Methods</strong>: map() for rendering, filter() for deletion</li>
+<li><strong>Immutable Updates</strong>: Creating new arrays instead of modifying existing</li>
+<li><strong>Controlled Components</strong>: React manages all input values</li>
+<li><strong>Event Delegation</strong>: Different buttons call same function with different parameters</li>
+</ul>
+<h3 id="why-this-pattern-is-important" tabindex="-1">Why This Pattern is Important:</h3>
+<ul>
+<li><strong>Foundation for CRUD Apps</strong>: Create, Read, Update, Delete operations</li>
+<li><strong>Scalable</strong>: Works with any number of todos</li>
+<li><strong>Performant</strong>: React only updates changed items (thanks to keys)</li>
+<li><strong>User Friendly</strong>: Multiple ways to interact (button, Enter key)</li>
+<li><strong>Data Integrity</strong>: Validation prevents empty todos</li>
+</ul>
+<blockquote class="callout callout--reflection-try">
+<div class="callout-label">🛠️ Hands-On — Try It Out</div>
+<p><code>Try It Out</code>
+Create and test these components before moving to Movie Buzz. Notice how:</p>
+<ul>
+<li>Events pass data to handlers</li>
+<li>preventDefault() stops default form behavior</li>
+<li>State updates trigger re-renders</li>
+<li>Event handlers can be inline or separate functions</li>
+</ul>
+</blockquote>
+<h2 id="advanced-event-handling" tabindex="-1">Advanced Event Handling</h2>
+<p>Now that you understand the basics, let's explore more sophisticated event handling patterns.</p>
+<h3 id="event-object-properties" tabindex="-1">Event Object Properties</h3>
+<p>React's SyntheticEvent provides consistent behavior across browsers:</p>
+<h3 id="code-structure-explanation-3" tabindex="-1">Code Structure Explanation</h3>
+<p>Before we examine the code, let's understand what this demonstrates:</p>
+<ul>
+<li><strong>Purpose</strong>: Show how to access information from React events</li>
+<li><strong>SyntheticEvent</strong>: React's wrapper around native browser events</li>
+<li><strong>Event Properties</strong>: Different data available in the event object</li>
+<li><strong>Cross-browser Compatibility</strong>: Same interface regardless of browser</li>
+</ul>
+<pre><code class="language-jsx">// 1. Event handler function that receives event object
+function handleInputChange(e) {
+  // 2. Log the type of event that occurred
+  console.log('Event type:', e.type);
+  // 3. Log the actual DOM element that triggered the event
+  console.log('Target element:', e.target);
+  // 4. Log the current value of the input field
+  console.log('Current value:', e.target.value);
+  // 5. Log the name attribute of the element
+  console.log('Element name:', e.target.name);
+}
+</code></pre>
+<h3 id="line-by-line-breakdown-3" tabindex="-1">Line-by-Line Breakdown:</h3>
+<ol>
+<li>
+<p><strong>Function Declaration</strong>: <code>function handleInputChange(e)</code></p>
+<ul>
+<li>Event handler function that accepts event parameter</li>
+<li><code>e</code> is React's SyntheticEvent object</li>
+<li>Contains all information about the event that occurred</li>
+</ul>
+</li>
+<li>
+<p><strong>Event Type</strong>: <code>console.log('Event type:', e.type);</code></p>
+<ul>
+<li><code>e.type</code> tells you what kind of event happened</li>
+<li>Examples: 'change', 'click', 'keypress', 'submit'</li>
+<li>Useful for handlers that manage multiple event types</li>
+</ul>
+</li>
+<li>
+<p><strong>Target Element</strong>: <code>console.log('Target element:', e.target);</code></p>
+<ul>
+<li><code>e.target</code> is the actual DOM element that triggered the event</li>
+<li>Shows the HTML element object in console</li>
+<li>You can access any property of that element</li>
+</ul>
+</li>
+<li>
+<p><strong>Current Value</strong>: <code>console.log('Current value:', e.target.value);</code></p>
+<ul>
+<li><code>e.target.value</code> gets the current value of form elements</li>
+<li>Works for inputs, textareas, selects</li>
+<li>This is how you get user input in React forms</li>
+</ul>
+</li>
+<li>
+<p><strong>Element Name</strong>: <code>console.log('Element name:', e.target.name);</code></p>
+<ul>
+<li><code>e.target.name</code> gets the name attribute of the element</li>
+<li>Crucial for generic form handlers</li>
+<li>Tells you which field changed in multi-input forms</li>
+</ul>
+</li>
+</ol>
+<h3 id="preventing-default-behavior" tabindex="-1">Preventing Default Behavior</h3>
+<p>For forms and links, you often need to prevent default browser behavior:</p>
+<h3 id="code-structure-explanation-4" tabindex="-1">Code Structure Explanation</h3>
+<p>Before we examine the code, let's understand what this demonstrates:</p>
+<ul>
+<li><strong>Purpose</strong>: Stop browser's built-in behaviors to implement custom logic</li>
+<li><strong>preventDefault()</strong>: Method to stop default actions</li>
+<li><strong>Form Submission</strong>: Prevent page refresh on form submit</li>
+<li><strong>Link Navigation</strong>: Prevent browser navigation on link clicks</li>
+<li><strong>SPA Behavior</strong>: Essential for Single Page Applications</li>
+</ul>
+<pre><code class="language-jsx">// 1. Form submission handler
+function handleSubmit(e) {
+  // 2. Prevent the form from refreshing the page
+  e.preventDefault(); // Prevents form from refreshing the page
+  // 3. Your custom logic here instead of browser default
+  // Your custom logic here
+}
+
+// 4. Link click handler
+function handleLinkClick(e) {
+  // 5. Prevent the browser from navigating to href
+  e.preventDefault(); // Prevents navigation
+  // 6. Implement custom navigation (like React Router)
+  // Custom navigation logic
+}
+</code></pre>
+<h3 id="line-by-line-breakdown-4" tabindex="-1">Line-by-Line Breakdown:</h3>
+<ol>
+<li>
+<p><strong>Submit Handler</strong>: <code>function handleSubmit(e)</code></p>
+<ul>
+<li>Event handler specifically for form submissions</li>
+<li>Receives event object when form is submitted</li>
+<li>Could be triggered by submit button or Enter key</li>
+</ul>
+</li>
+<li>
+<p><strong>Prevent Form Default</strong>: <code>e.preventDefault();</code></p>
+<ul>
+<li>Stops browser from submitting form traditionally</li>
+<li>Without this, page would refresh and lose React state</li>
+<li>Essential for client-side form handling</li>
+</ul>
+</li>
+<li>
+<p><strong>Custom Logic Placeholder</strong>: <code>// Your custom logic here</code></p>
+<ul>
+<li>After preventing default, you handle submission yourself</li>
+<li>Might validate data, send to API, update state</li>
+<li>You control what happens instead of browser</li>
+</ul>
+</li>
+<li>
+<p><strong>Link Handler</strong>: <code>function handleLinkClick(e)</code></p>
+<ul>
+<li>Event handler for anchor tag clicks</li>
+<li>Receives click event when link is clicked</li>
+<li>Used in SPAs where you control navigation</li>
+</ul>
+</li>
+<li>
+<p><strong>Prevent Navigation</strong>: <code>e.preventDefault();</code></p>
+<ul>
+<li>Stops browser from following the href attribute</li>
+<li>Prevents page reload or navigation to new page</li>
+<li>Keeps user in your React application</li>
+</ul>
+</li>
+<li>
+<p><strong>Custom Navigation</strong>: <code>// Custom navigation logic</code></p>
+<ul>
+<li>After preventing default, implement your own routing</li>
+<li>Might use React Router to change components</li>
+<li>Could update state to show different content</li>
+</ul>
+</li>
+</ol>
+<h3 id="when-to-use-preventdefault" tabindex="-1">When to Use preventDefault():</h3>
+<ul>
+<li><strong>Forms</strong>: Always prevent default to handle in JavaScript</li>
+<li><strong>Links</strong>: In SPAs, prevent navigation to control routing</li>
+<li><strong>Buttons</strong>: Sometimes buttons have default behaviors to override</li>
+<li><strong>Key Events</strong>: Prevent default key actions (like form submission on Enter)</li>
+</ul>
+<h3 id="event-propagation" tabindex="-1">Event Propagation</h3>
+<p>Sometimes you need to stop events from bubbling up to parent elements:</p>
+<h3 id="code-structure-explanation-5" tabindex="-1">Code Structure Explanation</h3>
+<p>Before we examine the code, let's understand what this demonstrates:</p>
+<ul>
+<li><strong>Purpose</strong>: Control how events travel through the DOM tree</li>
+<li><strong>Event Bubbling</strong>: Events normally bubble from child to parent</li>
+<li><strong>stopPropagation()</strong>: Method to stop events from bubbling up</li>
+<li><strong>Use Case</strong>: When child and parent both have event handlers</li>
+<li><strong>Event Isolation</strong>: Ensure only specific handlers run</li>
+</ul>
+<pre><code class="language-jsx">// 1. Event handler that stops propagation
+function handleButtonClick(e) {
+  // 2. Stop event from bubbling up to parent elements
+  e.stopPropagation(); // Stops event from reaching parent
+  // 3. Only this handler will execute
+  console.log('Only this handler runs');
+}
+</code></pre>
+<h3 id="line-by-line-breakdown-5" tabindex="-1">Line-by-Line Breakdown:</h3>
+<ol>
+<li>
+<p><strong>Button Handler</strong>: <code>function handleButtonClick(e)</code></p>
+<ul>
+<li>Event handler for a button click</li>
+<li>Receives the click event object</li>
+<li>Designed to prevent event propagation</li>
+</ul>
+</li>
+<li>
+<p><strong>Stop Propagation</strong>: <code>e.stopPropagation();</code></p>
+<ul>
+<li>Prevents event from bubbling up to parent elements</li>
+<li>Event stops at this element, doesn't continue upward</li>
+<li>Parent click handlers won't be triggered</li>
+</ul>
+</li>
+<li>
+<p><strong>Isolated Logic</strong>: <code>console.log('Only this handler runs');</code></p>
+<ul>
+<li>Code that runs only for this specific element</li>
+<li>Parent handlers won't interfere with this logic</li>
+<li>Demonstrates that propagation was stopped</li>
+</ul>
+</li>
+</ol>
+<h3 id="event-propagation-example" tabindex="-1">Event Propagation Example:</h3>
+<pre><code class="language-jsx">// Without stopPropagation:
+&lt;div onClick={() =&gt; console.log('Parent clicked')}&gt;
+  &lt;button onClick={() =&gt; console.log('Button clicked')}&gt;
+    Click me
+  &lt;/button&gt;
+&lt;/div&gt;
+// Result: Both &quot;Button clicked&quot; and &quot;Parent clicked&quot; logged
+
+// With stopPropagation:
+&lt;div onClick={() =&gt; console.log('Parent clicked')}&gt;
+  &lt;button onClick={(e) =&gt; {
+    e.stopPropagation();
+    console.log('Button clicked');
+  }}&gt;
+    Click me
+  &lt;/button&gt;
+&lt;/div&gt;
+// Result: Only &quot;Button clicked&quot; logged
+</code></pre>
+<h3 id="when-to-use-stoppropagation" tabindex="-1">When to Use stopPropagation():</h3>
+<ul>
+<li><strong>Nested Interactive Elements</strong>: Button inside clickable card</li>
+<li><strong>Modal Overlays</strong>: Prevent clicks from closing modal</li>
+<li><strong>Menu Items</strong>: Stop menu from closing when item clicked</li>
+<li><strong>Complex UI</strong>: When parent and child both need click handlers</li>
+</ul>
+<hr>
+<h2 id="more-react-hooks" tabindex="-1">More React Hooks</h2>
+<h3 id="useeffect-with-cleanup" tabindex="-1">useEffect with Cleanup</h3>
+<p>Some effects need cleanup to prevent memory leaks:</p>
+<h3 id="code-structure-explanation-6" tabindex="-1">Code Structure Explanation</h3>
+<p>Before we examine the code, let's understand what this demonstrates:</p>
+<ul>
+<li><strong>Purpose</strong>: Create a timer that counts seconds and cleans up properly</li>
+<li><strong>useEffect Hook</strong>: Manage side effects in functional components</li>
+<li><strong>Cleanup Function</strong>: Prevent memory leaks when component unmounts</li>
+<li><strong>setInterval</strong>: Browser API for running code repeatedly</li>
+<li><strong>Dependency Array</strong>: Control when effect runs</li>
+</ul>
+<pre><code class="language-jsx">// 1. Import React hooks for state and effects
+import React, { useState, useEffect } from 'react';
+
+// 2. Function component definition
+function Timer() {
+  // 3. State to track elapsed seconds
+  const [seconds, setSeconds] = useState(0);
+
+  // 4. useEffect to set up timer and cleanup
+  useEffect(() =&gt; {
+    // 5. Create interval that runs every 1000ms (1 second)
+    const interval = setInterval(() =&gt; {
+      // 6. Update seconds using functional state update
+      setSeconds(seconds =&gt; seconds + 1);
+    }, 1000);
+
+    // 7. Cleanup function returned by useEffect
+    return () =&gt; clearInterval(interval);
+  }, []); // 8. Empty dependency array means this runs once on mount
+
+  // 9. Render current seconds count
+  return &lt;div&gt;Seconds: {seconds}&lt;/div&gt;;
+}
+</code></pre>
+<h3 id="line-by-line-breakdown-6" tabindex="-1">Line-by-Line Breakdown:</h3>
+<ol>
+<li>
+<p><strong>Import Statement</strong>: <code>import React, { useState, useEffect } from 'react';</code></p>
+<ul>
+<li>Imports React and two essential hooks</li>
+<li><code>useState</code> for managing the seconds counter</li>
+<li><code>useEffect</code> for running side effects (the timer)</li>
+</ul>
+</li>
+<li>
+<p><strong>Component Declaration</strong>: <code>function Timer()</code></p>
+<ul>
+<li>Creates functional component that displays a timer</li>
+<li>Will count seconds and display current count</li>
+</ul>
+</li>
+<li>
+<p><strong>State Declaration</strong>: <code>const [seconds, setSeconds] = useState(0);</code></p>
+<ul>
+<li>Creates state to track elapsed seconds</li>
+<li>Initialized to 0 (timer starts at zero)</li>
+<li><code>setSeconds</code> will be used to increment the count</li>
+</ul>
+</li>
+<li>
+<p><strong>useEffect Setup</strong>: <code>useEffect(() =&gt; { ... }, []);</code></p>
+<ul>
+<li>Hook for performing side effects in functional components</li>
+<li>First argument is the effect function</li>
+<li>Second argument is dependency array (empty = run once)</li>
+</ul>
+</li>
+<li>
+<p><strong>setInterval Creation</strong>: <code>const interval = setInterval(() =&gt; { ... }, 1000);</code></p>
+<ul>
+<li>Browser API that runs a function repeatedly</li>
+<li>Function runs every 1000 milliseconds (1 second)</li>
+<li>Returns interval ID that can be used to stop the timer</li>
+<li>Stored in <code>interval</code> variable for cleanup</li>
+</ul>
+</li>
+<li>
+<p><strong>State Update</strong>: <code>setSeconds(seconds =&gt; seconds + 1);</code></p>
+<ul>
+<li>Functional update pattern using previous state</li>
+<li><code>seconds =&gt; seconds + 1</code> increments by 1</li>
+<li>Safer than <code>setSeconds(seconds + 1)</code> in this context</li>
+<li>Avoids stale closure issues with intervals</li>
+</ul>
+</li>
+<li>
+<p><strong>Cleanup Function</strong>: <code>return () =&gt; clearInterval(interval);</code></p>
+<ul>
+<li>Function returned by useEffect runs when component unmounts</li>
+<li><code>clearInterval(interval)</code> stops the timer</li>
+<li>Prevents memory leaks and continued execution</li>
+<li>Essential for proper component lifecycle management</li>
+</ul>
+</li>
+<li>
+<p><strong>Dependency Array</strong>: <code>}, []);</code></p>
+<ul>
+<li>Empty array means effect runs only once (on mount)</li>
+<li>If array had values, effect would re-run when they change</li>
+<li>Empty array perfect for &quot;setup once&quot; scenarios like timers</li>
+</ul>
+</li>
+<li>
+<p><strong>Render</strong>: <code>return &lt;div&gt;Seconds: {seconds}&lt;/div&gt;;</code></p>
+<ul>
+<li>Displays current seconds count</li>
+<li>Updates automatically as state changes</li>
+<li>Simple UI to show timer functionality</li>
+</ul>
+</li>
+</ol>
+<h3 id="why-cleanup-is-critical" tabindex="-1">Why Cleanup is Critical:</h3>
+<ul>
+<li><strong>Memory Leaks</strong>: Without cleanup, intervals continue forever</li>
+<li><strong>Performance</strong>: Multiple timers slow down the application</li>
+<li><strong>Errors</strong>: Trying to update state of unmounted components</li>
+<li><strong>Resource Management</strong>: Proper cleanup is professional coding</li>
+</ul>
+<h3 id="useeffect-lifecycle" tabindex="-1">useEffect Lifecycle:</h3>
+<ol>
+<li><strong>Mount</strong>: Component appears, useEffect runs, timer starts</li>
+<li><strong>Update</strong>: Timer updates state every second, component re-renders</li>
+<li><strong>Unmount</strong>: Component disappears, cleanup function runs, timer stops</li>
+</ol>
+<h3 id="common-cleanup-scenarios" tabindex="-1">Common Cleanup Scenarios:</h3>
+<ul>
+<li><strong>Timers</strong>: <code>clearInterval()</code>, <code>clearTimeout()</code></li>
+<li><strong>Event Listeners</strong>: <code>removeEventListener()</code></li>
+<li><strong>Subscriptions</strong>: Unsubscribe from data sources</li>
+<li><strong>Network Requests</strong>: Cancel pending API calls</li>
+</ul>
+<h3 id="custom-hooks" tabindex="-1">Custom Hooks</h3>
+<p>Custom hooks let you extract and reuse stateful logic:</p>
+<h3 id="code-structure-explanation-7" tabindex="-1">Code Structure Explanation</h3>
+<p>Before we examine the code, let's understand what this demonstrates:</p>
+<ul>
+<li><strong>Purpose</strong>: Create reusable logic for form input management</li>
+<li><strong>Custom Hook</strong>: JavaScript function that uses React hooks</li>
+<li><strong>Logic Extraction</strong>: Move common patterns into reusable functions</li>
+<li><strong>Multiple Instances</strong>: Use same hook for different form fields</li>
+<li><strong>Encapsulation</strong>: Hide implementation details, expose clean interface</li>
+</ul>
+<pre><code class="language-jsx">// 1. Custom hook definition (must start with 'use')
+function useInput(initialValue) {
+  // 2. State for the input's current value
+  const [value, setValue] = useState(initialValue);
+
+  // 3. Change handler function
+  const handleChange = (e) =&gt; {
+    // 4. Update value from event target
+    setValue(e.target.value);
+  };
+
+  // 5. Reset function to return to initial value
+  const reset = () =&gt; {
+    // 6. Set value back to initial value
+    setValue(initialValue);
+  };
+
+  // 7. Return object with value and functions
+  return {
+    value,
+    onChange: handleChange,
+    reset
+  };
+}
+
+// 8. Component using the custom hook
+function MyForm() {
+  // 9. Create name input with custom hook
+  const name = useInput('');
+  // 10. Create email input with custom hook
+  const email = useInput('');
+
+  // 11. Return form JSX
+  return (
+    &lt;form&gt;
+      {/* 12. Name input using hook's returned properties */}
+      &lt;input
+        type=&quot;text&quot;
+        placeholder=&quot;Name&quot;
+        value={name.value}
+        onChange={name.onChange}
+      /&gt;
+      {/* 13. Email input using hook's returned properties */}
+      &lt;input
+        type=&quot;email&quot;
+        placeholder=&quot;Email&quot;
+        value={email.value}
+        onChange={email.onChange}
+      /&gt;
+      {/* 14. Reset button that calls both reset functions */}
+      &lt;button type=&quot;button&quot; onClick={() =&gt; {
+        name.reset();
+        email.reset();
+      }}&gt;
+        Reset Form
+      &lt;/button&gt;
+    &lt;/form&gt;
+  );
+}
+</code></pre>
+<h3 id="line-by-line-breakdown-7" tabindex="-1">Line-by-Line Breakdown:</h3>
+<ol>
+<li>
+<p><strong>Custom Hook Declaration</strong>: <code>function useInput(initialValue)</code></p>
+<ul>
+<li>Function name must start with 'use' (React convention)</li>
+<li>Takes initial value as parameter</li>
+<li>Will return an object with input-related functionality</li>
+</ul>
+</li>
+<li>
+<p><strong>Internal State</strong>: <code>const [value, setValue] = useState(initialValue);</code></p>
+<ul>
+<li>Each instance of useInput has its own state</li>
+<li>State tracks current value of the input</li>
+<li>Initialized with the provided initial value</li>
+</ul>
+</li>
+<li>
+<p><strong>Change Handler</strong>: <code>const handleChange = (e) =&gt; { ... }</code></p>
+<ul>
+<li>Function to handle input change events</li>
+<li>Will be returned to component for use in onChange prop</li>
+<li>Encapsulates the change logic inside the hook</li>
+</ul>
+</li>
+<li>
+<p><strong>Update Value</strong>: <code>setValue(e.target.value);</code></p>
+<ul>
+<li>Extracts new value from event and updates state</li>
+<li>Standard pattern for controlled input components</li>
+<li>Hidden from component using the hook</li>
+</ul>
+</li>
+<li>
+<p><strong>Reset Function</strong>: <code>const reset = () =&gt; { ... }</code></p>
+<ul>
+<li>Function to reset input back to initial value</li>
+<li>Useful for form reset functionality</li>
+<li>Encapsulates reset logic</li>
+</ul>
+</li>
+<li>
+<p><strong>Reset Implementation</strong>: <code>setValue(initialValue);</code></p>
+<ul>
+<li>Sets state back to the original initial value</li>
+<li>Uses closure to remember initialValue</li>
+<li>Simple but powerful feature</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Object</strong>: <code>return { value, onChange: handleChange, reset }</code></p>
+<ul>
+<li>Returns object with three properties</li>
+<li><code>value</code>: current input value</li>
+<li><code>onChange</code>: event handler function</li>
+<li><code>reset</code>: function to reset to initial value</li>
+<li>Clean API for components to use</li>
+</ul>
+</li>
+<li>
+<p><strong>Component Declaration</strong>: <code>function MyForm()</code></p>
+<ul>
+<li>Component that will use the custom hook</li>
+<li>Demonstrates how to use custom hooks</li>
+</ul>
+</li>
+<li>
+<p><strong>Name Input Hook</strong>: <code>const name = useInput('');</code></p>
+<ul>
+<li>Creates instance of useInput for name field</li>
+<li>Initialized with empty string</li>
+<li><code>name</code> object contains value, onChange, and reset</li>
+</ul>
+</li>
+<li>
+<p><strong>Email Input Hook</strong>: <code>const email = useInput('');</code></p>
+<ul>
+<li>Creates separate instance for email field</li>
+<li>Each hook instance has independent state</li>
+<li>Same interface as name input</li>
+</ul>
+</li>
+<li>
+<p><strong>Form Return</strong>: <code>return ( &lt;form&gt; ... &lt;/form&gt; );</code></p>
+<ul>
+<li>Component returns JSX form structure</li>
+<li>Uses the hook instances for input management</li>
+</ul>
+</li>
+<li>
+<p><strong>Name Input Element</strong>: <code>&lt;input value={name.value} onChange={name.onChange} /&gt;</code></p>
+<ul>
+<li>Uses value and onChange from name hook instance</li>
+<li>Controlled component pattern</li>
+<li>Hook handles all the complexity</li>
+</ul>
+</li>
+<li>
+<p><strong>Email Input Element</strong>: <code>&lt;input value={email.value} onChange={email.onChange} /&gt;</code></p>
+<ul>
+<li>Same pattern as name input</li>
+<li>Separate hook instance with independent state</li>
+<li>Consistent interface</li>
+</ul>
+</li>
+<li>
+<p><strong>Reset Button</strong>: <code>onClick={() =&gt; { name.reset(); email.reset(); }}</code></p>
+<ul>
+<li>Calls reset function on both hook instances</li>
+<li>Clears both inputs simultaneously</li>
+<li>Demonstrates how to use multiple hook instances</li>
+</ul>
+</li>
+</ol>
+<h3 id="benefits-of-custom-hooks" tabindex="-1">Benefits of Custom Hooks:</h3>
+<ul>
+<li><strong>Reusability</strong>: Same logic for multiple inputs</li>
+<li><strong>Encapsulation</strong>: Hide implementation details</li>
+<li><strong>Consistency</strong>: Same interface across components</li>
+<li><strong>Maintainability</strong>: Change logic in one place</li>
+<li><strong>Testability</strong>: Test hooks independently</li>
+</ul>
+<h3 id="custom-hook-rules" tabindex="-1">Custom Hook Rules:</h3>
+<ul>
+<li><strong>Naming</strong>: Must start with 'use'</li>
+<li><strong>Hooks Inside</strong>: Can use other React hooks</li>
+<li><strong>Top Level</strong>: Call at top level of components</li>
+<li><strong>Pure Functions</strong>: Same input should give same output</li>
+<li><strong>Independent State</strong>: Each usage has separate state</li>
+</ul>
+<hr>
+<h2 id="enhancing-movie-buzz" tabindex="-1">Enhancing Movie Buzz</h2>
+<p>Let's add more interactive features to our Movie Buzz application.</p>
+<h3 id="adding-search-functionality" tabindex="-1">Adding Search Functionality</h3>
+<p>Create a new component <code>src/components/SearchBar.js</code>:</p>
+<h3 id="code-structure-explanation-8" tabindex="-1">Code Structure Explanation</h3>
+<p>Before we write the code, let's understand what this component will do:</p>
+<ul>
+<li><strong>Purpose</strong>: Provide search functionality for filtering movies</li>
+<li><strong>State Management</strong>: Track current search term in local state</li>
+<li><strong>Real-time Search</strong>: Call parent function on every keystroke</li>
+<li><strong>Clear Functionality</strong>: Button to reset search when needed</li>
+<li><strong>Controlled Component</strong>: React manages the input value</li>
+</ul>
+<pre><code class="language-jsx">// 1. Import React and useState for search term state
+import React, { useState } from 'react';
+
+// 2. SearchBar component with onSearch prop from parent
+function SearchBar({ onSearch }) {
+  // 3. Local state to track current search term
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // 4. Handler for search input changes
+  const handleSearchChange = (e) =&gt; {
+    // 5. Get new value from input
+    const value = e.target.value;
+    // 6. Update local state
+    setSearchTerm(value);
+    // 7. Notify parent component of search change
+    onSearch(value);
+  };
+
+  // 8. Handler to clear search
+  const handleClearSearch = () =&gt; {
+    // 9. Reset search term to empty
+    setSearchTerm('');
+    // 10. Notify parent that search is cleared
+    onSearch('');
+  };
+
+  // 11. Return search interface JSX
+  return (
+    // 12. Container div with CSS class
+    &lt;div className=&quot;search-bar&quot;&gt;
+      {/* 13. Search input with controlled value */}
+      &lt;input
+        type=&quot;text&quot;
+        placeholder=&quot;Search movies...&quot;
+        value={searchTerm}
+        onChange={handleSearchChange}
+        className=&quot;search-input&quot;
+      /&gt;
+      {/* 14. Conditional clear button */}
+      {searchTerm &amp;&amp; (
+        &lt;button onClick={handleClearSearch} className=&quot;clear-search&quot;&gt;
+          Clear
+        &lt;/button&gt;
+      )}
+    &lt;/div&gt;
+  );
+}
+
+// 15. Export for use in other components
+export default SearchBar;
+</code></pre>
+<h3 id="line-by-line-breakdown-8" tabindex="-1">Line-by-Line Breakdown:</h3>
+<ol>
+<li>
+<p><strong>Import Statement</strong>: <code>import React, { useState } from 'react';</code></p>
+<ul>
+<li>Imports React and useState hook</li>
+<li>useState needed for tracking search term</li>
+</ul>
+</li>
+<li>
+<p><strong>Component Declaration</strong>: <code>function SearchBar({ onSearch })</code></p>
+<ul>
+<li>Component receives <code>onSearch</code> prop from parent</li>
+<li><code>onSearch</code> is a function that parent provides</li>
+<li>Parent will use this to filter movies based on search</li>
+</ul>
+</li>
+<li>
+<p><strong>Search State</strong>: <code>const [searchTerm, setSearchTerm] = useState('');</code></p>
+<ul>
+<li>Local state for current search term</li>
+<li>Initialized to empty string (no search initially)</li>
+<li>Separate from parent's movie list state</li>
+</ul>
+</li>
+<li>
+<p><strong>Change Handler</strong>: <code>const handleSearchChange = (e) =&gt; { ... }</code></p>
+<ul>
+<li>Function called every time user types in search box</li>
+<li>Receives event object from input change</li>
+</ul>
+</li>
+<li>
+<p><strong>Extract Value</strong>: <code>const value = e.target.value;</code></p>
+<ul>
+<li>Gets current value from the input element</li>
+<li>Stores in variable for clarity and reuse</li>
+</ul>
+</li>
+<li>
+<p><strong>Update Local State</strong>: <code>setSearchTerm(value);</code></p>
+<ul>
+<li>Updates component's local state with new search term</li>
+<li>Keeps input display in sync with what user typed</li>
+<li>Triggers re-render to show new value</li>
+</ul>
+</li>
+<li>
+<p><strong>Notify Parent</strong>: <code>onSearch(value);</code></p>
+<ul>
+<li>Calls parent's search function with new search term</li>
+<li>Parent can filter movie list based on this value</li>
+<li>Real-time search - happens on every keystroke</li>
+</ul>
+</li>
+<li>
+<p><strong>Clear Handler</strong>: <code>const handleClearSearch = () =&gt; { ... }</code></p>
+<ul>
+<li>Function to reset search to empty state</li>
+<li>Called when user clicks clear button</li>
+</ul>
+</li>
+<li>
+<p><strong>Reset Search Term</strong>: <code>setSearchTerm('');</code></p>
+<ul>
+<li>Sets local state back to empty string</li>
+<li>Clears the input field visually</li>
+</ul>
+</li>
+<li>
+<p><strong>Notify Clear</strong>: <code>onSearch('');</code></p>
+<ul>
+<li>Tells parent that search is cleared</li>
+<li>Parent should show all movies again (no filtering)</li>
+</ul>
+</li>
+<li>
+<p><strong>Return JSX</strong>: <code>return ( ... )</code></p>
+<ul>
+<li>Component returns JSX describing search interface</li>
+<li>Contains input and conditional clear button</li>
+</ul>
+</li>
+<li>
+<p><strong>Container Div</strong>: <code>&lt;div className=&quot;search-bar&quot;&gt;</code></p>
+<ul>
+<li>Wrapper element for styling purposes</li>
+<li>CSS class allows custom styling of search bar</li>
+</ul>
+</li>
+<li>
+<p><strong>Search Input</strong>: Complex input element with multiple props:</p>
+<ul>
+<li><code>type=&quot;text&quot;</code>: Standard text input</li>
+<li><code>placeholder=&quot;Search movies...&quot;</code>: Hint text for users</li>
+<li><code>value={searchTerm}</code>: Controlled component (React manages value)</li>
+<li><code>onChange={handleSearchChange}</code>: Calls handler on every change</li>
+<li><code>className=&quot;search-input&quot;</code>: CSS class for styling</li>
+</ul>
+</li>
+<li>
+<p><strong>Conditional Clear Button</strong>: <code>{searchTerm &amp;&amp; ( ... )}</code></p>
+<ul>
+<li>Only shows clear button when there's a search term</li>
+<li><code>searchTerm &amp;&amp;</code> is short-circuit evaluation</li>
+<li>If searchTerm is empty (''), button doesn't render</li>
+<li>If searchTerm has content, button appears</li>
+</ul>
+</li>
+<li>
+<p><strong>Export Statement</strong>: <code>export default SearchBar;</code></p>
+<ul>
+<li>Makes component available for import in other files</li>
+</ul>
+</li>
+</ol>
+<h3 id="key-react-patterns-demonstrated" tabindex="-1">Key React Patterns Demonstrated:</h3>
+<ul>
+<li><strong>Props Communication</strong>: Child communicates with parent via props</li>
+<li><strong>Controlled Components</strong>: React controls input value, not DOM</li>
+<li><strong>Real-time Updates</strong>: Search happens as user types</li>
+<li><strong>Conditional Rendering</strong>: Clear button only shows when needed</li>
+<li><strong>Event Handling</strong>: Proper event handler patterns</li>
+<li><strong>State Management</strong>: Local state for UI, props for data flow</li>
+</ul>
+<h3 id="adding-delete-functionality" tabindex="-1">Adding Delete Functionality</h3>
+<p>Update your <code>MovieBlock.js</code> component to include a delete button:</p>
+<h3 id="code-structure-explanation-9" tabindex="-1">Code Structure Explanation</h3>
+<p>Before we write the code, let's understand what this component will do:</p>
+<ul>
+<li><strong>Purpose</strong>: Display movie information with ability to delete</li>
+<li><strong>User Confirmation</strong>: Ask user to confirm before deleting</li>
+<li><strong>Safe Deletion</strong>: Use ID if available, fallback to name</li>
+<li><strong>Parent Communication</strong>: Call parent's delete function</li>
+<li><strong>User Experience</strong>: Clear confirmation dialog</li>
+</ul>
+<pre><code class="language-jsx">// 1. MovieBlock component with movie data and delete handler props
+function MovieBlock({ movie, onDelete }) {
+  // 2. Delete handler with user confirmation
+  const handleDelete = () =&gt; {
+    // 3. Show confirmation dialog with movie name
+    if (window.confirm(`Are you sure you want to delete &quot;${movie.name}&quot;?`)) {
+      // 4. Call parent's delete function with movie identifier
+      onDelete(movie.id || movie.name); // Use id if available, otherwise name
+    }
+  };
+
+  // 5. Return JSX for movie display with delete button
+  return (
+    // 6. Main container for movie information
+    &lt;div className=&quot;movie-block&quot;&gt;
+      {/* 7. Movie title */}
+      &lt;h3&gt;{movie.name}&lt;/h3&gt;
+      {/* 8. Basic movie info in one line */}
+      &lt;p&gt;{movie.year} • {movie.rating} • {movie.length}&lt;/p&gt;
+      {/* 9. Movie description in italics */}
+      &lt;p&gt;&lt;em&gt;{movie.description}&lt;/em&gt;&lt;/p&gt;
+      {/* 10. Genre array joined with commas */}
+      &lt;p&gt;&lt;b&gt;Genre:&lt;/b&gt; {movie.genre.join(', ')}&lt;/p&gt;
+      {/* 11. Stars array joined with commas */}
+      &lt;p&gt;&lt;b&gt;Stars:&lt;/b&gt; {movie.stars.join(', ')}&lt;/p&gt;
+      {/* 12. Director information */}
+      &lt;p&gt;&lt;b&gt;Director:&lt;/b&gt; {movie.director}&lt;/p&gt;
+      {/* 13. Action buttons container */}
+      &lt;div className=&quot;movie-actions&quot;&gt;
+        {/* 14. Delete button with click handler */}
+        &lt;button onClick={handleDelete} className=&quot;delete-btn&quot;&gt;
+          Delete Movie
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<h3 id="line-by-line-breakdown-9" tabindex="-1">Line-by-Line Breakdown:</h3>
+<ol>
+<li>
+<p><strong>Component Props</strong>: <code>function MovieBlock({ movie, onDelete })</code></p>
+<ul>
+<li>Receives <code>movie</code> object with all movie data</li>
+<li>Receives <code>onDelete</code> function from parent component</li>
+<li>Parent provides the delete functionality</li>
+</ul>
+</li>
+<li>
+<p><strong>Delete Handler</strong>: <code>const handleDelete = () =&gt; { ... }</code></p>
+<ul>
+<li>Function that handles delete button clicks</li>
+<li>Contains confirmation logic and calls parent</li>
+</ul>
+</li>
+<li>
+<p><strong>Confirmation Dialog</strong>: <code>if (window.confirm(\</code>Are you sure...`))`</p>
+<ul>
+<li><code>window.confirm()</code> shows browser confirmation dialog</li>
+<li>Template literal includes movie name in message</li>
+<li>Returns true if user clicks OK, false if Cancel</li>
+<li>Good UX practice to confirm destructive actions</li>
+</ul>
+</li>
+<li>
+<p><strong>Call Parent Delete</strong>: <code>onDelete(movie.id || movie.name);</code></p>
+<ul>
+<li>Only executes if user confirmed deletion</li>
+<li>Uses <code>movie.id</code> if available, falls back to <code>movie.name</code></li>
+<li>Flexible approach for different data structures</li>
+<li>Parent handles actual deletion logic</li>
+</ul>
+</li>
+<li>
+<p><strong>Return JSX</strong>: <code>return ( ... )</code></p>
+<ul>
+<li>Component returns JSX describing movie display</li>
+<li>Same structure as before, plus delete button</li>
+</ul>
+</li>
+<li>
+<p><strong>Movie Container</strong>: <code>&lt;div className=&quot;movie-block&quot;&gt;</code></p>
+<ul>
+<li>Main wrapper for movie information</li>
+<li>CSS class for styling the movie card</li>
+</ul>
+</li>
+<li>
+<p><strong>Movie Title</strong>: <code>&lt;h3&gt;{movie.name}&lt;/h3&gt;</code></p>
+<ul>
+<li>Displays movie name as heading</li>
+<li>Most prominent text in the card</li>
+</ul>
+</li>
+<li>
+<p><strong>Basic Info</strong>: <code>&lt;p&gt;{movie.year} • {movie.rating} • {movie.length}&lt;/p&gt;</code></p>
+<ul>
+<li>Key movie info in compact format</li>
+<li>Bullet points separate different pieces of info</li>
+<li>Template literal with embedded expressions</li>
+</ul>
+</li>
+<li>
+<p><strong>Description</strong>: <code>&lt;p&gt;&lt;em&gt;{movie.description}&lt;/em&gt;&lt;/p&gt;</code></p>
+<ul>
+<li>Movie synopsis in italic text</li>
+<li><code>&lt;em&gt;</code> provides semantic emphasis</li>
+</ul>
+</li>
+<li>
+<p><strong>Genre Display</strong>: <code>&lt;p&gt;&lt;b&gt;Genre:&lt;/b&gt; {movie.genre.join(', ')}&lt;/p&gt;</code></p>
+<ul>
+<li>Shows &quot;Genre:&quot; label in bold</li>
+<li><code>movie.genre.join(', ')</code> converts array to string</li>
+<li>Example: <code>[&quot;Action&quot;, &quot;Sci-Fi&quot;]</code> becomes <code>&quot;Action, Sci-Fi&quot;</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Stars Display</strong>: <code>&lt;p&gt;&lt;b&gt;Stars:&lt;/b&gt; {movie.stars.join(', ')}&lt;/p&gt;</code></p>
+<ul>
+<li>Same pattern as genre for actor names</li>
+<li>Joins array elements with comma and space</li>
+</ul>
+</li>
+<li>
+<p><strong>Director Display</strong>: <code>&lt;p&gt;&lt;b&gt;Director:&lt;/b&gt; {movie.director}&lt;/p&gt;</code></p>
+<ul>
+<li>Shows director name with bold label</li>
+<li>Usually single value, not an array</li>
+</ul>
+</li>
+<li>
+<p><strong>Actions Container</strong>: <code>&lt;div className=&quot;movie-actions&quot;&gt;</code></p>
+<ul>
+<li>Wrapper for action buttons (delete, edit, etc.)</li>
+<li>Allows styling buttons as a group</li>
+<li>Could contain multiple buttons in future</li>
+</ul>
+</li>
+<li>
+<p><strong>Delete Button</strong>: <code>&lt;button onClick={handleDelete} className=&quot;delete-btn&quot;&gt;</code></p>
+<ul>
+<li>Button triggers handleDelete when clicked</li>
+<li>CSS class allows styling (red color, etc.)</li>
+<li>Clear label tells user what action will happen</li>
+</ul>
+</li>
+</ol>
+<h3 id="error-handling-considerations" tabindex="-1">Error Handling Considerations:</h3>
+<ul>
+<li><strong>Missing ID</strong>: Fallback to <a href="http://movie.name">movie.name</a> if ID not available</li>
+<li><strong>Array Methods</strong>: .join() safe to use on arrays</li>
+<li><strong>User Confirmation</strong>: Prevents accidental deletions</li>
+<li><strong>Parent Communication</strong>: Relies on parent to handle actual deletion</li>
+</ul>
+<h3 id="why-this-pattern-works-1" tabindex="-1">Why This Pattern Works:</h3>
+<ul>
+<li><strong>Separation of Concerns</strong>: Component displays, parent manages data</li>
+<li><strong>User Safety</strong>: Confirmation prevents accidents</li>
+<li><strong>Flexibility</strong>: Works with different identifier types</li>
+<li><strong>Maintainability</strong>: Delete logic centralized in parent</li>
+<li><strong>Reusability</strong>: Component can be used with different delete handlers</li>
+</ul>
+<h3 id="adding-edit-functionality" tabindex="-1">Adding Edit Functionality</h3>
+<p>Create an edit mode for the MovieForm component. Update <code>MovieForm.jsx</code>:</p>
+<h3 id="code-structure-explanation-10" tabindex="-1">Code Structure Explanation</h3>
+<p>Before we write the code, let's understand what this component will do:</p>
+<ul>
+<li><strong>Purpose</strong>: Handle both adding new movies and editing existing ones</li>
+<li><strong>Dual Mode</strong>: Form works differently based on whether editingMovie is provided</li>
+<li><strong>Data Conversion</strong>: Transform arrays to strings for form display, back to arrays for storage</li>
+<li><strong>useEffect</strong>: Populate form when editing movie changes</li>
+<li><strong>Form Reset</strong>: Clear form after successful submission</li>
+</ul>
+<pre><code class="language-jsx">// 1. Import React hooks for state and effects
+import React, { useState, useEffect } from 'react';
+
+// 2. MovieForm component with multiple handler props
+function MovieForm({ onAddMovie, onUpdateMovie, onCancel, editingMovie }) {
+  // 3. Form state object for all movie fields
+  const [movieData, setMovieData] = useState({
+    name: '',
+    year: '',
+    rating: '',
+    length: '',
+    description: '',
+    genre: '',
+    director: '',
+    stars: ''
+  });
+
+  // 4. Effect to populate form when editing movie changes
+  useEffect(() =&gt; {
+    // 5. Check if we're editing a movie
+    if (editingMovie) {
+      // 6. Convert movie data for form display
+      setMovieData({
+        ...editingMovie,
+        genre: editingMovie.genre.join(', '),
+        stars: editingMovie.stars.join(', '),
+        year: editingMovie.year.toString()
+      });
+    }
+  }, [editingMovie]); // 7. Re-run when editingMovie changes
+
+  // 8. Handler for input field changes
+  const handleInputChange = (e) =&gt; {
+    // 9. Extract field name and value from event
+    const { name, value } = e.target;
+    // 10. Update form state with new value
+    setMovieData({
+      ...movieData,
+      [name]: value
+    });
+  };
+
+  // 11. Handler for form submission
+  const handleSubmit = (e) =&gt; {
+    // 12. Prevent default form submission
+    e.preventDefault();
+
+    // 13. Convert form data back to proper types
+    const processedMovie = {
+      ...movieData,
+      genre: movieData.genre.split(',').map(g =&gt; g.trim()),
+      stars: movieData.stars.split(',').map(s =&gt; s.trim()),
+      year: parseInt(movieData.year)
+    };
+
+    // 14. Choose add or update based on editing mode
+    if (editingMovie) {
+      // 15. Update existing movie with ID preserved
+      onUpdateMovie({ ...processedMovie, id: editingMovie.id });
+    } else {
+      // 16. Add new movie
+      onAddMovie(processedMovie);
+    }
+
+    // 17. Reset form to empty state
+    setMovieData({
+      name: '',
+      year: '',
+      rating: '',
+      length: '',
+      description: '',
+      genre: '',
+      director: '',
+      stars: ''
+    });
+  };
+
+  // 18. Return form JSX
+  return (
+    // 19. Form container with CSS class
+    &lt;div className=&quot;movie-form&quot;&gt;
+      {/* 20. Dynamic heading based on mode */}
+      &lt;h2&gt;{editingMovie ? 'Edit Movie' : 'Add New Movie'}&lt;/h2&gt;
+      {/* 21. Form with submit handler */}
+      &lt;form onSubmit={handleSubmit}&gt;
+        {/* 22. Sample input field (others follow same pattern) */}
+        &lt;input
+          type=&quot;text&quot;
+          name=&quot;name&quot;
+          placeholder=&quot;Movie Name&quot;
+          value={movieData.name}
+          onChange={handleInputChange}
+          required
+        /&gt;
+
+        {/* ... other form fields follow same pattern ... */}
+
+        {/* 23. Button container */}
+        &lt;div className=&quot;form-buttons&quot;&gt;
+          {/* 24. Dynamic submit button text */}
+          &lt;button type=&quot;submit&quot;&gt;
+            {editingMovie ? 'Update Movie' : 'Add Movie'}
+          &lt;/button&gt;
+          {/* 25. Cancel button */}
+          &lt;button type=&quot;button&quot; onClick={onCancel}&gt;Cancel&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  );
+}
+
+// 26. Export for use in other components
+export default MovieForm;
+</code></pre>
+<h3 id="line-by-line-breakdown-10" tabindex="-1">Line-by-Line Breakdown:</h3>
+<ol>
+<li>
+<p><strong>Import Statement</strong>: <code>import React, { useState, useEffect } from 'react';</code></p>
+<ul>
+<li>Imports React with useState and useEffect hooks</li>
+<li>useState for form data, useEffect for populating form when editing</li>
+</ul>
+</li>
+<li>
+<p><strong>Component Props</strong>: <code>function MovieForm({ onAddMovie, onUpdateMovie, onCancel, editingMovie })</code></p>
+<ul>
+<li><code>onAddMovie</code>: Function to handle adding new movies</li>
+<li><code>onUpdateMovie</code>: Function to handle updating existing movies</li>
+<li><code>onCancel</code>: Function to close/cancel form</li>
+<li><code>editingMovie</code>: Movie object when editing, null when adding</li>
+</ul>
+</li>
+<li>
+<p><strong>Form State</strong>: <code>const [movieData, setMovieData] = useState({ ... })</code></p>
+<ul>
+<li>Object containing all form field values</li>
+<li>All fields initialized to empty strings</li>
+<li>Same structure as Week 4, but now handles editing too</li>
+</ul>
+</li>
+<li>
+<p><strong>useEffect Declaration</strong>: <code>useEffect(() =&gt; { ... }, [editingMovie]);</code></p>
+<ul>
+<li>Runs when component mounts or when editingMovie changes</li>
+<li>Used to populate form with existing movie data when editing</li>
+</ul>
+</li>
+<li>
+<p><strong>Edit Check</strong>: <code>if (editingMovie)</code></p>
+<ul>
+<li>Only populate form if we're editing an existing movie</li>
+<li>When adding new movie, editingMovie is null/undefined</li>
+</ul>
+</li>
+<li>
+<p><strong>Data Conversion</strong>: Complex object transformation:</p>
+<ul>
+<li><code>...editingMovie</code>: Spread all existing movie properties</li>
+<li><code>genre: editingMovie.genre.join(', ')</code>: Convert array to comma-separated string</li>
+<li><code>stars: editingMovie.stars.join(', ')</code>: Convert array to comma-separated string</li>
+<li><code>year: editingMovie.year.toString()</code>: Convert number to string for input</li>
+<li>Forms work with strings, but data stored as arrays/numbers</li>
+</ul>
+</li>
+<li>
+<p><strong>Dependency Array</strong>: <code>}, [editingMovie]);</code></p>
+<ul>
+<li>Effect re-runs when editingMovie prop changes</li>
+<li>Ensures form populates when switching between different movies to edit</li>
+</ul>
+</li>
+<li>
+<p><strong>Input Handler</strong>: <code>const handleInputChange = (e) =&gt; { ... }</code></p>
+<ul>
+<li>Same pattern as Week 4 - handles all input changes</li>
+<li>Updates form state as user types</li>
+</ul>
+</li>
+<li>
+<p><strong>Extract Event Data</strong>: <code>const { name, value } = e.target;</code></p>
+<ul>
+<li>Gets field name and new value from changed input</li>
+<li>Same destructuring pattern as previous examples</li>
+</ul>
+</li>
+<li>
+<p><strong>Update State</strong>: <code>setMovieData({ ...movieData, [name]: value })</code></p>
+<ul>
+<li>Spreads existing form data and updates changed field</li>
+<li>Dynamic property name using [name] syntax</li>
+</ul>
+</li>
+<li>
+<p><strong>Submit Handler</strong>: <code>const handleSubmit = (e) =&gt; { ... }</code></p>
+<ul>
+<li>Handles both add and update operations</li>
+<li>Processes form data before sending to parent</li>
+</ul>
+</li>
+<li>
+<p><strong>Prevent Default</strong>: <code>e.preventDefault();</code></p>
+<ul>
+<li>Stops browser from submitting form traditionally</li>
+<li>Allows custom JavaScript handling</li>
+</ul>
+</li>
+<li>
+<p><strong>Data Processing</strong>: Complex data transformation:</p>
+<ul>
+<li><code>...movieData</code>: Spread all form fields</li>
+<li><code>genre: movieData.genre.split(',').map(g =&gt; g.trim())</code>: String → trimmed array</li>
+<li><code>stars: movieData.stars.split(',').map(s =&gt; s.trim())</code>: String → trimmed array</li>
+<li><code>year: parseInt(movieData.year)</code>: String → number</li>
+<li>Converts form strings back to proper data types</li>
+</ul>
+</li>
+<li>
+<p><strong>Mode Check</strong>: <code>if (editingMovie)</code></p>
+<ul>
+<li>Determines whether to add new movie or update existing</li>
+<li>Different parent functions for different operations</li>
+</ul>
+</li>
+<li>
+<p><strong>Update Movie</strong>: <code>onUpdateMovie({ ...processedMovie, id: editingMovie.id });</code></p>
+<ul>
+<li>Calls parent's update function</li>
+<li>Preserves original movie ID</li>
+<li>Sends processed movie data</li>
+</ul>
+</li>
+<li>
+<p><strong>Add Movie</strong>: <code>onAddMovie(processedMovie);</code></p>
+<ul>
+<li>Calls parent's add function</li>
+<li>Parent will assign new ID</li>
+<li>Sends processed movie data</li>
+</ul>
+</li>
+<li>
+<p><strong>Form Reset</strong>: Large object reset to empty values</p>
+<ul>
+<li>Clears all form fields after successful submission</li>
+<li>Returns form to initial state</li>
+<li>Good UX - ready for next operation</li>
+</ul>
+</li>
+<li>
+<p><strong>Return JSX</strong>: <code>return ( ... )</code></p>
+<ul>
+<li>Component returns form interface</li>
+<li>Dynamic content based on editing mode</li>
+</ul>
+</li>
+<li>
+<p><strong>Form Container</strong>: <code>&lt;div className=&quot;movie-form&quot;&gt;</code></p>
+<ul>
+<li>Wrapper for styling purposes</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic Heading</strong>: <code>{editingMovie ? 'Edit Movie' : 'Add New Movie'}</code></p>
+<ul>
+<li>Shows different title based on mode</li>
+<li>Helps user understand what form does</li>
+</ul>
+</li>
+<li>
+<p><strong>Form Element</strong>: <code>&lt;form onSubmit={handleSubmit}&gt;</code></p>
+<ul>
+<li>Form with submit handler attached</li>
+<li>Handles both Enter key and button clicks</li>
+</ul>
+</li>
+<li>
+<p><strong>Sample Input</strong>: Shows controlled input pattern:</p>
+<ul>
+<li><code>value={movieData.name}</code>: Controlled by React state</li>
+<li><code>onChange={handleInputChange}</code>: Updates state on change</li>
+<li><code>required</code>: HTML5 validation</li>
+<li>All other inputs follow same pattern</li>
+</ul>
+</li>
+<li>
+<p><strong>Button Container</strong>: <code>&lt;div className=&quot;form-buttons&quot;&gt;</code></p>
+<ul>
+<li>Groups action buttons for styling</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic Submit Button</strong>: <code>{editingMovie ? 'Update Movie' : 'Add Movie'}</code></p>
+<ul>
+<li>Button text changes based on mode</li>
+<li>Clear indication of what action will happen</li>
+</ul>
+</li>
+<li>
+<p><strong>Cancel Button</strong>: <code>&lt;button type=&quot;button&quot; onClick={onCancel}&gt;</code></p>
+<ul>
+<li><code>type=&quot;button&quot;</code> prevents form submission</li>
+<li>Calls parent's cancel function</li>
+<li>Allows user to exit without saving</li>
+</ul>
+</li>
+<li>
+<p><strong>Export Statement</strong>: <code>export default MovieForm;</code></p>
+<ul>
+<li>Makes component available for import</li>
+</ul>
+</li>
+</ol>
+<h3 id="key-advanced-concepts" tabindex="-1">Key Advanced Concepts:</h3>
+<ul>
+<li><strong>Dual-Mode Component</strong>: Single component handles multiple use cases</li>
+<li><strong>Data Transformation</strong>: Converting between display and storage formats</li>
+<li><strong>Effect Dependencies</strong>: useEffect responds to prop changes</li>
+<li><strong>Conditional Logic</strong>: Different behavior based on props</li>
+<li><strong>Form Reset</strong>: Clearing state after operations</li>
+<li><strong>Type Conversion</strong>: String ↔ Array ↔ Number conversions</li>
+</ul>
+<p>Now update your main <code>App.js</code> to handle all these new features:</p>
+<pre><code class="language-jsx">import React, { useState, useEffect } from 'react';
+import MoviesList from './components/MoviesList';
+import MovieForm from './components/MovieForm';
+import SearchBar from './components/SearchBar';
+import './App.css';
+
+const initialMovies = [
+  {
+    id: 1,
+    name: &quot;The Matrix&quot;,
+    year: 1999,
+    rating: &quot;R&quot;,
+    length: &quot;136 minutes&quot;,
+    description: &quot;A computer hacker learns about the true nature of reality.&quot;,
+    genre: [&quot;Action&quot;, &quot;Sci-Fi&quot;],
+    director: &quot;The Wachowskis&quot;,
+    stars: [&quot;Keanu Reeves&quot;, &quot;Laurence Fishburne&quot;, &quot;Carrie-Anne Moss&quot;]
+  },
+  {
+    id: 2,
+    name: &quot;Inception&quot;,
+    year: 2010,
+    rating: &quot;PG-13&quot;,
+    length: &quot;148 minutes&quot;,
+    description: &quot;A thief who steals corporate secrets through dream-sharing technology.&quot;,
+    genre: [&quot;Action&quot;, &quot;Sci-Fi&quot;, &quot;Thriller&quot;],
+    director: &quot;Christopher Nolan&quot;,
+    stars: [&quot;Leonardo DiCaprio&quot;, &quot;Marion Cotillard&quot;, &quot;Tom Hardy&quot;]
+  }
+];
+
+function App() {
+  const [movies, setMovies] = useState(initialMovies);
+  const [filteredMovies, setFilteredMovies] = useState(initialMovies);
+  const [showForm, setShowForm] = useState(false);
+  const [editingMovie, setEditingMovie] = useState(null);
+  const [nextId, setNextId] = useState(3);
+
+  useEffect(() =&gt; {
+    console.log(`Total movies: ${movies.length}`);
+  }, [movies]);
+
+  const handleAddMovie = (newMovie) =&gt; {
+    const movieWithId = { ...newMovie, id: nextId };
+    const updatedMovies = [...movies, movieWithId];
+    setMovies(updatedMovies);
+    setFilteredMovies(updatedMovies);
+    setNextId(nextId + 1);
+    setShowForm(false);
+  };
+
+  const handleUpdateMovie = (updatedMovie) =&gt; {
+    const updatedMovies = movies.map(movie =&gt;
+      movie.id === updatedMovie.id ? updatedMovie : movie
+    );
+    setMovies(updatedMovies);
+    setFilteredMovies(updatedMovies);
+    setEditingMovie(null);
+    setShowForm(false);
+  };
+
+  const handleDeleteMovie = (movieId) =&gt; {
+    const updatedMovies = movies.filter(movie =&gt; movie.id !== movieId);
+    setMovies(updatedMovies);
+    setFilteredMovies(updatedMovies);
+  };
+
+  const handleEditMovie = (movie) =&gt; {
+    setEditingMovie(movie);
+    setShowForm(true);
+  };
+
+  const handleSearch = (searchTerm) =&gt; {
+    if (searchTerm.trim() === '') {
+      setFilteredMovies(movies);
+    } else {
+      const filtered = movies.filter(movie =&gt;
+        movie.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        movie.director.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        movie.genre.some(g =&gt; g.toLowerCase().includes(searchTerm.toLowerCase()))
+      );
+      setFilteredMovies(filtered);
+    }
+  };
+
+  const handleShowForm = () =&gt; {
+    setEditingMovie(null);
+    setShowForm(true);
+  };
+
+  const handleCancelForm = () =&gt; {
+    setEditingMovie(null);
+    setShowForm(false);
+  };
+
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &lt;header&gt;
+        &lt;div id=&quot;title&quot;&gt;
+          &lt;div id=&quot;title-text&quot;&gt;
+            &lt;h1&gt;🎬 Movie Buzz&lt;/h1&gt;
+            &lt;h4&gt;Where all the best movies live...&lt;/h4&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div id=&quot;add-new&quot;&gt;
+          &lt;button onClick={handleShowForm}&gt;Add New Movie&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/header&gt;
+      
+      {showForm ? (
+        &lt;MovieForm 
+          onAddMovie={handleAddMovie}
+          onUpdateMovie={handleUpdateMovie}
+          onCancel={handleCancelForm}
+          editingMovie={editingMovie}
+        /&gt;
+      ) : (
+        &lt;&gt;
+          &lt;SearchBar onSearch={handleSearch} /&gt;
+          &lt;MoviesList 
+            movies={filteredMovies}
+            onDelete={handleDeleteMovie}
+            onEdit={handleEditMovie}
+          /&gt;
+        &lt;/&gt;
+      )}
+      
+      &lt;footer&gt;&amp;copy; Copyright 2024 Buzzware, Inc.&lt;/footer&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App;
+</code></pre>
+<hr>
+<h2 id="event-handling-best-practices" tabindex="-1">Event Handling Best Practices</h2>
+<ol>
+<li>
+<p><strong>Use descriptive function names</strong>: <code>handleSubmit</code>, <code>handleInputChange</code>, not just <code>onClick</code></p>
+</li>
+<li>
+<p><strong>Prevent memory leaks</strong>: Always clean up event listeners in useEffect</p>
+</li>
+<li>
+<p><strong>Avoid inline functions for complex logic</strong>: Extract to separate functions</p>
+</li>
+<li>
+<p><strong>Use callback functions properly</strong>: Pass functions, not function calls</p>
+<pre><code class="language-jsx">// Good
+&lt;button onClick={handleClick}&gt;Click me&lt;/button&gt;
+
+// Bad (calls function immediately)
+&lt;button onClick={handleClick()}&gt;Click me&lt;/button&gt;
+</code></pre>
+</li>
+<li>
+<p><strong>Handle edge cases</strong>: Check for null values, empty arrays, etc.</p>
+</li>
+</ol>
+<hr>
+<h2 id="state-management-patterns" tabindex="-1">State Management Patterns</h2>
+<p>As your app grows, consider these patterns:</p>
+<ol>
+<li><strong>Lift state up</strong>: Move state to the lowest common ancestor</li>
+<li><strong>Single source of truth</strong>: Don't duplicate state across components</li>
+<li><strong>Immutable updates</strong>: Always create new objects/arrays when updating state</li>
+<li><strong>Separate concerns</strong>: Keep different types of state in different useState calls</li>
+</ol>
+<hr>
+<h2 id="final-thoughts" tabindex="-1">Final Thoughts</h2>
+<p>We've significantly enhanced our Movie Buzz app with advanced React features:</p>
+<ul>
+<li>Complex event handling and user interactions</li>
+<li>Search functionality with real-time filtering</li>
+<li>Full CRUD operations (Create, Read, Update, Delete)</li>
+<li>Custom hooks for reusable logic</li>
+<li>Advanced useEffect patterns with cleanup</li>
+</ul>
+<p>Our app now demonstrates professional-level React development patterns that you'll use in real-world applications.</p>
+<blockquote class="callout callout--reflection-consider">
+<div class="callout-label">🤔 Reflection Prompt — Consider This</div>
+<p><code>Consider This</code><br>
+How has managing multiple pieces of state changed the complexity of our application? What patterns help keep it manageable?</p>
+</blockquote>
+<hr>
+<h2 id="exit-ticket" tabindex="-1">Exit Ticket</h2>
+<p>Please complete the exit ticket in the LMS. You may use the lesson plan for this session, but do not use any additional resources. This exit ticket will not be part of your grade for the course, and rather is used to inform future instruction and curricular releases.</p>
+<hr>
+<h2 id="review" tabindex="-1">Review</h2>
+<ul>
+<li>How do you handle complex user interactions in React?</li>
+<li>What is a custom hook and when would you create one?</li>
+<li>When do you need cleanup functions in useEffect?</li>
+<li>How do you implement search functionality in a React app?</li>
+<li>What are the best practices for event handling in React?</li>
+<li>How do you manage multiple related pieces of state?</li>
+</ul>
+
+<div class="pager">
+<a href="../week_04_react_state_and_hooks/index.html">← Week 04</a>
+<a href="../week_06_react_component_patterns/index.html">Week 06 →</a>
+</div>
+</main>
+</div>
+</body>
+</html>

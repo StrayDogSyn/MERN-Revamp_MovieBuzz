@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { movieService } from '../../services/movieService';
 import './MovieForm.css';
 
 function MovieForm({ addMovie, editMovie, movies }) {
@@ -28,12 +28,12 @@ function MovieForm({ addMovie, editMovie, movies }) {
     } else {
       // Fallback: fetch directly (handles page refresh / direct links)
       setFetchingMovie(true);
-      axios.get(`/api/movie/${movieId}`)
-        .then(res => {
-          populateForm(res.data);
+      movieService.getMovie(movieId)
+        .then(movie => {
+          populateForm(movie);
           setFetchingMovie(false);
         })
-        .catch(err => {
+        .catch(() => {
           setErrors({ fetch: 'Could not load movie data. It may have been deleted.' });
           setFetchingMovie(false);
         });

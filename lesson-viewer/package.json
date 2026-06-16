@@ -1,0 +1,13 @@
+{
+  "name": "tlm-lesson-viewer",
+  "version": "0.1.0",
+  "description": "Static pre-rendering build for the Movie Buzz student.md lesson viewer (TLM Brand Guide 2022)",
+  "private": true,
+  "scripts": {
+    "build": "node build.js"
+  },
+  "dependencies": {
+    "markdown-it": "^14.1.0",
+    "markdown-it-anchor": "^9.2.0"
+  }
+}

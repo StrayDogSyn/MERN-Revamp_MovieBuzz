@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 16 - Frontend-Backend Integration · Movie Buzz Lesson Viewer</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+<label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
+<div class="layout">
+<nav class="sidebar" aria-label="Course weeks">
+<div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
+<a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
+<a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
+<a class="nav-link" href="../week_02_dev_environment/index.html">Week 02 · Dev Environment</a>
+<a class="nav-link" href="../week_03_intro_to_react/index.html">Week 03 · Intro to React</a>
+<a class="nav-link" href="../week_04_react_state_and_hooks/index.html">Week 04 · React State & Hooks</a>
+<a class="nav-link" href="../week_05_react_events_and_hooks/index.html">Week 05 · React Events & Hooks</a>
+<a class="nav-link" href="../week_06_react_component_patterns/index.html">Week 06 · React Component Patterns</a>
+<a class="nav-link" href="../week_07_react_hooks_and_context/index.html">Week 07 · React Hooks & Context</a>
+<div class="nav-phase">Weeks 08–16 · Backend (Node, Express, MongoDB)</div>
+<a class="nav-link" href="../week_08_nodejs_and_http/index.html">Week 08 · Node.js & HTTP</a>
+<a class="nav-link" href="../week_09_express_and_cors/index.html">Week 09 · Express & CORS</a>
+<a class="nav-link" href="../week_10_tic_tac_toe_checkpoint/index.html">Week 10 · Tic-Tac-Toe Checkpoint</a>
+<a class="nav-link" href="../week_11_intro_to_mongodb/index.html">Week 11 · Intro to MongoDB</a>
+<a class="nav-link" href="../week_12_mongoose_and_read/index.html">Week 12 · Mongoose & Read</a>
+<a class="nav-link" href="../week_13_create_functionality/index.html">Week 13 · Create Functionality</a>
+<a class="nav-link" href="../week_14_update_functionality/index.html">Week 14 · Update Functionality</a>
+<a class="nav-link" href="../week_15_delete_functionality/index.html">Week 15 · Delete Functionality</a>
+<a class="nav-link active" href="../week_16_frontend_backend_integration/index.html">Week 16 · Frontend/Backend Integration</a>
+<div class="nav-phase">Optional Modules</div>
+<a class="nav-link" href="../week_optional_search_feature/index.html">Search Feature</a>
+<a class="nav-link" href="../week_optional_testing_suite/index.html">Testing Suite</a>
+</nav>
+<main class="main">
+<div class="page-header">
+<div class="breadcrumb">Weeks 08–16 · Backend (Node, Express, MongoDB)</div>
+</div>
+<h1 id="week-16---frontend-backend-integration" tabindex="-1">Week 16 - Frontend-Backend Integration</h1>
+<ul>
+<li><a href="#week-16---frontend-backend-integration">Week 16 - Frontend-Backend Integration</a>
+<ul>
+<li><a href="#notes-about-this-lesson-plan">Notes About This Lesson Plan</a></li>
+<li><a href="#learning-objectives">Learning Objectives</a></li>
+<li><a href="#glossary">Glossary</a></li>
+<li><a href="#simple-examples---building-understanding">Simple Examples - Building Understanding</a></li>
+<li><a href="#starting-point">Starting Point</a></li>
+<li><a href="#understanding-full-stack-integration">Understanding Full-Stack Integration</a></li>
+<li><a href="#setting-up-the-connection">Setting Up the Connection</a></li>
+<li><a href="#implementing-read-in-react">Implementing READ in React</a></li>
+<li><a href="#implementing-create-in-react">Implementing CREATE in React</a></li>
+<li><a href="#implementing-update-in-react">Implementing UPDATE in React</a></li>
+<li><a href="#implementing-delete-in-react">Implementing DELETE in React</a></li>
+<li><a href="#error-handling-and-loading-states">Error Handling and Loading States</a></li>
+<li><a href="#environment-variables">Environment Variables</a></li>
+<li><a href="#testing-the-full-stack">Testing the Full Stack</a></li>
+<li><a href="#final-thoughts">Final Thoughts</a></li>
+<li><a href="#exit-ticket">Exit Ticket</a></li>
+<li><a href="#review">Review</a></li>
+<li><a href="#independent-practice">Independent Practice</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="notes-about-this-lesson-plan" tabindex="-1">Notes About This Lesson Plan</h2>
+<p>Please review this lesson plan in advance of our RI session. If this plan doesn't align with where you and your classmates are at in the LMS, please send a ticket to Help Desk as soon as possible.</p>
+<p>This code is for instructional purposes only. It should be utilized as an example in developing your own work. No part of it should be directly copied into your own project. As per TLM's plagiarism policy, submitting or misrepresenting code or an idea as your own when it was created by someone else constitutes plagiarism.</p>
+<hr>
+<h2 id="learning-objectives" tabindex="-1">Learning Objectives</h2>
+<p>By the end of this session, learners will be able to:</p>
+<ul>
+<li>Connect a React frontend to an Express/MongoDB backend</li>
+<li>Implement all CRUD operations in a React application</li>
+<li>Handle asynchronous operations with proper loading states</li>
+<li>Manage errors gracefully in the UI</li>
+<li>Use environment variables for API configuration</li>
+<li>Build a complete full-stack movie management application</li>
+<li>Test integration between frontend and backend</li>
+<li>Deploy considerations for full-stack applications</li>
+</ul>
+<hr>
+<h2 id="glossary" tabindex="-1">Glossary</h2>
+<details open class="glossary-disclosure">
+<summary>📖 Click to collapse glossary</summary>
+<ul>
+<li><code>Full-Stack</code>: Application with both frontend (client) and backend (server) components</li>
+<li><code>API Integration</code>: Connecting frontend to backend through API endpoints</li>
+<li><code>Async/Await</code>: Modern JavaScript syntax for handling asynchronous operations</li>
+<li><code>Loading State</code>: UI indication that data is being fetched or processed</li>
+<li><code>Error Boundary</code>: React component that catches JavaScript errors in child components</li>
+<li><code>Environment Variables</code>: Configuration values that change between environments</li>
+<li><code>CORS</code>: Cross-Origin Resource Sharing - allows frontend to communicate with backend</li>
+<li><code>Proxy</code>: Development server configuration to avoid CORS issues</li>
+</ul>
+</details>
+---
+<h2 id="simple-examples---building-understanding" tabindex="-1">Simple Examples - Building Understanding</h2>
+<p>Before diving into the full integration, let's explore some simple, focused examples to build our understanding of how frontend and backend communicate.</p>
+<h3 class="step-heading" id="1step-1-fetch-api-basics" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Fetch API Basics</h3>
+<p>Let's start with the most fundamental concept - making HTTP requests from React to a server:</p>
+<pre><code class="language-javascript">// Simple fetch example
+const fetchExample = async () =&gt; {
+  try {
+    // Make a GET request
+    const response = await fetch('http://localhost:4000/api/movies');
+
+    // Check if request was successful
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    // Convert response to JSON
+    const data = await response.json();
+
+    console.log('Received data:', data);
+    return data;
+  } catch (error) {
+    console.error('Fetch failed:', error);
+    throw error;
+  }
+};
+
+// Use in a React component
+function SimpleExample() {
+  const [data, setData] = useState(null);
+
+  useEffect(() =&gt; {
+    fetchExample()
+      .then(result =&gt; setData(result))
+      .catch(error =&gt; console.error(error));
+  }, []);
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Fetch Example&lt;/h2&gt;
+      {data ? (
+        &lt;pre&gt;{JSON.stringify(data, null, 2)}&lt;/pre&gt;
+      ) : (
+        &lt;p&gt;Loading...&lt;/p&gt;
+      )}
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<p><strong>Try It Out:</strong> Create this simple component and watch the network tab in your browser to see the API call.</p>
+<h3 class="step-heading" id="2step-2-asyncawait-with-apis" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Async/Await with APIs</h3>
+<p>Let's build understanding of handling asynchronous operations properly:</p>
+<pre><code class="language-javascript">// Different ways to handle async operations
+function AsyncExamples() {
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  // Method 1: Basic async/await
+  const loadMoviesBasic = async () =&gt; {
+    const response = await fetch('/api/movies');
+    const data = await response.json();
+    setMovies(data);
+  };
+
+  // Method 2: With error handling
+  const loadMoviesWithErrors = async () =&gt; {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const response = await fetch('/api/movies');
+
+      if (!response.ok) {
+        throw new Error('Failed to load movies');
+      }
+
+      const data = await response.json();
+      setMovies(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Method 3: With loading states
+  const loadMoviesComplete = async () =&gt; {
+    try {
+      setLoading(true);
+      setError(null);
+
+      // Simulate thinking time
+      await new Promise(resolve =&gt; setTimeout(resolve, 1000));
+
+      const response = await fetch('/api/movies');
+
+      if (!response.ok) {
+        throw new Error(`Server error: ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      // Check if we got data in expected format
+      if (result.success &amp;&amp; result.data) {
+        setMovies(result.data);
+      } else {
+        throw new Error('Unexpected response format');
+      }
+
+    } catch (err) {
+      console.error('Load movies failed:', err);
+      setError(err.message);
+      setMovies([]); // Clear any existing data
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Async Examples&lt;/h2&gt;
+
+      &lt;button onClick={loadMoviesBasic}&gt;
+        Load Basic (no error handling)
+      &lt;/button&gt;
+
+      &lt;button onClick={loadMoviesWithErrors}&gt;
+        Load with Error Handling
+      &lt;/button&gt;
+
+      &lt;button onClick={loadMoviesComplete}&gt;
+        Load with Loading States
+      &lt;/button&gt;
+
+      {loading &amp;&amp; &lt;p&gt;Loading movies...&lt;/p&gt;}
+      {error &amp;&amp; &lt;p style={{color: 'red'}}&gt;Error: {error}&lt;/p&gt;}
+      {movies.length &gt; 0 &amp;&amp; (
+        &lt;div&gt;
+          &lt;h3&gt;Movies ({movies.length}):&lt;/h3&gt;
+          &lt;ul&gt;
+            {movies.map(movie =&gt; (
+              &lt;li key={movie._id || movie.id}&gt;
+                {movie.name} ({movie.year})
+              &lt;/li&gt;
+            ))}
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      )}
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<p><strong>Try It Out:</strong> Test each button with your backend running and stopped to see different behaviors.</p>
+<h3 class="step-heading" id="3step-3-error-handling-in-frontend" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Error Handling in Frontend</h3>
+<p>Let's understand different types of errors and how to handle them:</p>
+<pre><code class="language-javascript">function ErrorHandlingExample() {
+  const [status, setStatus] = useState('ready');
+  const [message, setMessage] = useState('');
+
+  const testApiCall = async (scenario) =&gt; {
+    setStatus('loading');
+    setMessage('');
+
+    try {
+      let response;
+
+      switch (scenario) {
+        case 'success':
+          response = await fetch('/api/movies');
+          break;
+        case 'not-found':
+          response = await fetch('/api/movies/invalid-id');
+          break;
+        case 'server-error':
+          response = await fetch('/api/movies/cause-error');
+          break;
+        case 'network-error':
+          response = await fetch('http://nonexistent-server.com/api/movies');
+          break;
+        case 'timeout':
+          // Simulate timeout
+          const controller = new AbortController();
+          setTimeout(() =&gt; controller.abort(), 1000);
+          response = await fetch('/api/movies', {
+            signal: controller.signal
+          });
+          break;
+        default:
+          throw new Error('Unknown scenario');
+      }
+
+      // Handle HTTP errors
+      if (!response.ok) {
+        const errorData = await response.json().catch(() =&gt; ({}));
+        throw new Error(
+          errorData.error || `HTTP ${response.status}: ${response.statusText}`
+        );
+      }
+
+      const data = await response.json();
+      setStatus('success');
+      setMessage(`Success! Loaded ${data.length || 0} items`);
+
+    } catch (error) {
+      setStatus('error');
+
+      // Different error types
+      if (error.name === 'AbortError') {
+        setMessage('Request timed out');
+      } else if (error.message.includes('fetch')) {
+        setMessage('Network error - is the server running?');
+      } else {
+        setMessage(`Error: ${error.message}`);
+      }
+    }
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Error Handling Examples&lt;/h2&gt;
+
+      &lt;div&gt;
+        &lt;button onClick={() =&gt; testApiCall('success')}&gt;
+          Test Success
+        &lt;/button&gt;
+        &lt;button onClick={() =&gt; testApiCall('not-found')}&gt;
+          Test 404 Error
+        &lt;/button&gt;
+        &lt;button onClick={() =&gt; testApiCall('server-error')}&gt;
+          Test Server Error
+        &lt;/button&gt;
+        &lt;button onClick={() =&gt; testApiCall('network-error')}&gt;
+          Test Network Error
+        &lt;/button&gt;
+        &lt;button onClick={() =&gt; testApiCall('timeout')}&gt;
+          Test Timeout
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;div style={{ marginTop: '20px' }}&gt;
+        &lt;strong&gt;Status:&lt;/strong&gt; {status} &lt;br /&gt;
+        &lt;strong&gt;Message:&lt;/strong&gt; {message}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<p><strong>Try It Out:</strong> Test each scenario to see how different types of errors are handled.</p>
+<h3 class="step-heading" id="4step-4-loading-states" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Loading States</h3>
+<p>Let's create proper loading indicators for better user experience:</p>
+<pre><code class="language-javascript">// Loading component variations
+function LoadingIndicator({ type = 'spinner' }) {
+  switch (type) {
+    case 'spinner':
+      return (
+        &lt;div style={{ textAlign: 'center', padding: '20px' }}&gt;
+          &lt;div style={{
+            border: '4px solid #f3f3f3',
+            borderTop: '4px solid #3498db',
+            borderRadius: '50%',
+            width: '40px',
+            height: '40px',
+            animation: 'spin 2s linear infinite',
+            margin: '0 auto'
+          }}&gt;&lt;/div&gt;
+          &lt;p&gt;Loading...&lt;/p&gt;
+        &lt;/div&gt;
+      );
+    case 'dots':
+      return (
+        &lt;div style={{ textAlign: 'center', padding: '20px' }}&gt;
+          &lt;p&gt;Loading&lt;span style={{ animation: 'dots 1.5s infinite' }}&gt;...&lt;/span&gt;&lt;/p&gt;
+        &lt;/div&gt;
+      );
+    case 'skeleton':
+      return (
+        &lt;div style={{ padding: '20px' }}&gt;
+          {[1, 2, 3].map(i =&gt; (
+            &lt;div key={i} style={{
+              height: '20px',
+              backgroundColor: '#f0f0f0',
+              margin: '10px 0',
+              borderRadius: '4px',
+              animation: 'pulse 1.5s infinite'
+            }}&gt;&lt;/div&gt;
+          ))}
+        &lt;/div&gt;
+      );
+    default:
+      return &lt;p&gt;Loading...&lt;/p&gt;;
+  }
+}
+
+function LoadingStatesExample() {
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [loadingType, setLoadingType] = useState('spinner');
+
+  const loadWithDelay = async (delay = 2000) =&gt; {
+    setLoading(true);
+    setMovies([]);
+
+    try {
+      // Simulate slow network
+      await new Promise(resolve =&gt; setTimeout(resolve, delay));
+
+      const response = await fetch('/api/movies');
+      const data = await response.json();
+      setMovies(data.data || data);
+    } catch (error) {
+      console.error('Load failed:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Loading States Examples&lt;/h2&gt;
+
+      &lt;div&gt;
+        &lt;label&gt;Loading Type: &lt;/label&gt;
+        &lt;select
+          value={loadingType}
+          onChange={(e) =&gt; setLoadingType(e.target.value)}
+        &gt;
+          &lt;option value=&quot;spinner&quot;&gt;Spinner&lt;/option&gt;
+          &lt;option value=&quot;dots&quot;&gt;Dots&lt;/option&gt;
+          &lt;option value=&quot;skeleton&quot;&gt;Skeleton&lt;/option&gt;
+        &lt;/select&gt;
+      &lt;/div&gt;
+
+      &lt;button onClick={() =&gt; loadWithDelay(1000)}&gt;
+        Load Movies (1s delay)
+      &lt;/button&gt;
+      &lt;button onClick={() =&gt; loadWithDelay(3000)}&gt;
+        Load Movies (3s delay)
+      &lt;/button&gt;
+
+      &lt;div style={{ border: '1px solid #ccc', minHeight: '200px', marginTop: '20px' }}&gt;
+        {loading ? (
+          &lt;LoadingIndicator type={loadingType} /&gt;
+        ) : (
+          &lt;div&gt;
+            {movies.length &gt; 0 ? (
+              &lt;ul&gt;
+                {movies.map(movie =&gt; (
+                  &lt;li key={movie._id || movie.id}&gt;
+                    {movie.name} ({movie.year})
+                  &lt;/li&gt;
+                ))}
+              &lt;/ul&gt;
+            ) : (
+              &lt;p&gt;No movies loaded&lt;/p&gt;
+            )}
+          &lt;/div&gt;
+        )}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<p><strong>Try It Out:</strong> Test different loading indicators and delays to see the user experience impact.</p>
+<p>These examples build the foundation for understanding how React frontends communicate with APIs before we implement the full integration!</p>
+<hr>
+<h2 id="starting-point" tabindex="-1">Starting Point</h2>
+<p>Before we begin this lesson, ensure you have:</p>
+<p><strong>Backend (from Weeks 9-13):</strong></p>
+<ul>
+<li>Complete Express API with all CRUD endpoints</li>
+<li>MongoDB database with Mongoose models</li>
+<li>CORS configured for frontend access</li>
+<li>All endpoints tested and working</li>
+</ul>
+<p><strong>Frontend (from Weeks 3-5):</strong></p>
+<ul>
+<li>React application with components</li>
+<li>State management with hooks</li>
+<li>Forms for movie input</li>
+<li>Basic styling in place</li>
+</ul>
+<p><strong>Your API should support:</strong></p>
+<ul>
+<li><code>GET /api/movies</code> - Get all movies</li>
+<li><code>GET /api/movies/:id</code> - Get single movie</li>
+<li><code>POST /api/movies</code> - Create movie</li>
+<li><code>PUT /api/movies/:id</code> - Update movie</li>
+<li><code>DELETE /api/movies/:id</code> - Delete movie</li>
+</ul>
+<hr>
+<h2 id="understanding-full-stack-integration" tabindex="-1">Understanding Full-Stack Integration</h2>
+<p>Full-stack integration connects your React frontend to your Express backend, creating a complete application where:</p>
+<ol>
+<li>
+<p><strong>Frontend (React)</strong> handles:</p>
+<ul>
+<li>User interface</li>
+<li>User interactions</li>
+<li>Display logic</li>
+<li>Form validation</li>
+</ul>
+</li>
+<li>
+<p><strong>Backend (Express/MongoDB)</strong> handles:</p>
+<ul>
+<li>Data persistence</li>
+<li>Business logic</li>
+<li>Authentication (future)</li>
+<li>API responses</li>
+</ul>
+</li>
+<li>
+<p><strong>Communication happens through:</strong></p>
+<ul>
+<li>HTTP requests (GET, POST, PUT, DELETE)</li>
+<li>JSON data format</li>
+<li>Async JavaScript operations</li>
+</ul>
+</li>
+</ol>
+<p><strong>Key Principles:</strong></p>
+<ul>
+<li>Separation of concerns</li>
+<li>Single source of truth (database)</li>
+<li>Stateless communication</li>
+<li>Error handling at both layers</li>
+</ul>
+<blockquote class="callout callout--reflection-consider">
+<div class="callout-label">🤔 Reflection Prompt — Consider This</div>
+<p><code>Consider This</code><br>
+Why is it important to separate frontend and backend code into different applications?</p>
+</blockquote>
+<hr>
+<h2 id="setting-up-the-connection" tabindex="-1">Setting Up the Connection</h2>
+<p>First, let's configure our React app to communicate with the backend.</p>
+<p><strong>Step 1: Start Both Servers</strong></p>
+<p>In one terminal (backend):</p>
+<pre><code class="language-bash">cd movie-buzz-backend
+npm install
+npm start
+# Server running on http://localhost:4000
+</code></pre>
+<p>In another terminal (frontend):</p>
+<pre><code class="language-bash">cd movie-buzz-frontend
+npm install
+npm start
+# React running on http://localhost:3000
+</code></pre>
+<p><strong>Step 2: Configure Proxy (Development)</strong></p>
+<p>In your React <code>package.json</code>, add:</p>
+<pre><code class="language-json">&quot;proxy&quot;: &quot;http://localhost:4000&quot;
+</code></pre>
+<p>This tells the development server to proxy API requests to your backend.</p>
+<p><strong>Step 3: Create API Service</strong></p>
+<p>Create <code>src/services/movieService.js</code>:</p>
+<pre><code class="language-javascript">// Base URL for API - will use environment variable in production
+const API_BASE_URL = process.env.REACT_APP_API_URL || '/api';
+
+// Helper function for handling responses
+const handleResponse = async (response) =&gt; {
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || 'Something went wrong');
+  }
+  return response.json();
+};
+
+export const movieService = {
+  // TODO: Implement getAll function to fetch all movies
+  // TODO: Implement getById function to fetch single movie
+  // TODO: Implement create function to add new movie
+  // TODO: Implement update function to update existing movie
+  // TODO: Implement delete function to remove movie
+};
+</code></pre>
+<hr>
+<h2 id="implementing-read-in-react" tabindex="-1">Implementing READ in React</h2>
+<p>Let's start by fetching and displaying movies from our API.</p>
+<p><strong>Step 1: Implement getAll in movieService.js</strong></p>
+<p>Find the TODO for getAll and implement:</p>
+<pre><code class="language-javascript">getAll: async () =&gt; {
+  // TODO: Implement fetch request to GET /api/movies
+  // TODO: Use handleResponse helper
+  // TODO: Return the data
+},
+</code></pre>
+<p><strong>Step 2: Update App.js to Fetch Movies</strong></p>
+<p>In your <code>App.js</code>, add:</p>
+<pre><code class="language-javascript">import { movieService } from './services/movieService';
+
+function App() {
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch movies on component mount
+  useEffect(() =&gt; {
+    fetchMovies();
+  }, []);
+
+  const fetchMovies = async () =&gt; {
+    try {
+      setLoading(true);
+      setError(null);
+      // TODO: Call movieService.getAll()
+      // TODO: Set movies with response data
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Render loading, error, or movies
+  if (loading) return &lt;div className=&quot;loading&quot;&gt;Loading movies...&lt;/div&gt;;
+  if (error) return &lt;div className=&quot;error&quot;&gt;Error: {error}&lt;/div&gt;;
+
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &lt;h1&gt;🎬 Movie Buzz&lt;/h1&gt;
+      &lt;MoviesList movies={movies} /&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<hr>
+<h2 id="implementing-create-in-react" tabindex="-1">Implementing CREATE in React</h2>
+<p>Now let's add the ability to create new movies.</p>
+<p><strong>Step 1: Implement create in movieService.js</strong></p>
+<pre><code class="language-javascript">create: async (movieData) =&gt; {
+  // TODO: Implement POST request to /api/movies
+  // TODO: Set Content-Type header to application/json
+  // TODO: Send movieData in body as JSON
+  // TODO: Use handleResponse helper
+},
+</code></pre>
+<p><strong>Step 2: Update MovieForm Component</strong></p>
+<pre><code class="language-javascript">const handleSubmit = async (e) =&gt; {
+  e.preventDefault();
+  
+  try {
+    setSubmitting(true);
+    // TODO: Call movieService.create with form data
+    // TODO: On success, call onSuccess callback
+    // TODO: Reset form
+  } catch (err) {
+    setError(err.message);
+  } finally {
+    setSubmitting(false);
+  }
+};
+</code></pre>
+<p><strong>Step 3: Connect Form to App</strong></p>
+<pre><code class="language-javascript">const handleAddMovie = async (movieData) =&gt; {
+  try {
+    // TODO: Call movieService.create
+    // TODO: Refresh movie list
+    // TODO: Show success message
+    // TODO: Close form
+  } catch (err) {
+    setError(err.message);
+  }
+};
+</code></pre>
+<hr>
+<h2 id="implementing-update-in-react" tabindex="-1">Implementing UPDATE in React</h2>
+<p>Let's add edit functionality to our movies.</p>
+<p><strong>Step 1: Implement update in movieService.js</strong></p>
+<pre><code class="language-javascript">update: async (id, movieData) =&gt; {
+  // TODO: Implement PUT request to /api/movies/:id
+  // TODO: Send updated data in body
+  // TODO: Use handleResponse helper
+},
+</code></pre>
+<p><strong>Step 2: Add Edit Mode to MovieBlock</strong></p>
+<pre><code class="language-javascript">function MovieBlock({ movie, onEdit, onDelete }) {
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleEdit = () =&gt; {
+    // TODO: Set editing mode
+    // TODO: Call onEdit with movie data
+  };
+
+  return (
+    &lt;div className=&quot;movie-block&quot;&gt;
+      {/* Movie display */}
+      &lt;button onClick={handleEdit}&gt;Edit&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<p><strong>Step 3: Handle Update in App</strong></p>
+<pre><code class="language-javascript">const handleUpdateMovie = async (id, movieData) =&gt; {
+  try {
+    // TODO: Call movieService.update
+    // TODO: Update movie in state
+    // TODO: Show success message
+  } catch (err) {
+    setError(err.message);
+  }
+};
+</code></pre>
+<hr>
+<h2 id="implementing-delete-in-react" tabindex="-1">Implementing DELETE in React</h2>
+<p>Finally, let's add delete functionality.</p>
+<p><strong>Step 1: Implement delete in movieService.js</strong></p>
+<pre><code class="language-javascript">delete: async (id) =&gt; {
+  // TODO: Implement DELETE request to /api/movies/:id
+  // TODO: Use handleResponse helper
+},
+</code></pre>
+<p><strong>Step 2: Add Delete Confirmation</strong></p>
+<pre><code class="language-javascript">function DeleteConfirmation({ movie, onConfirm, onCancel }) {
+  return (
+    &lt;div className=&quot;modal&quot;&gt;
+      &lt;div className=&quot;modal-content&quot;&gt;
+        &lt;h3&gt;Delete Movie?&lt;/h3&gt;
+        &lt;p&gt;Are you sure you want to delete &quot;{movie.name}&quot;?&lt;/p&gt;
+        &lt;button onClick={() =&gt; onConfirm(movie._id)}&gt;Yes, Delete&lt;/button&gt;
+        &lt;button onClick={onCancel}&gt;Cancel&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<p><strong>Step 3: Handle Delete in App</strong></p>
+<pre><code class="language-javascript">const handleDeleteMovie = async (id) =&gt; {
+  try {
+    // TODO: Call movieService.delete
+    // TODO: Remove movie from state
+    // TODO: Show success message
+  } catch (err) {
+    setError(err.message);
+  }
+};
+</code></pre>
+<hr>
+<h2 id="optional-integrating-search-and-filter-features" tabindex="-1">Optional: Integrating Search and Filter Features</h2>
+<p><strong>Note</strong>: This section describes an <strong>optional advanced feature</strong>. If you haven't implemented the optional advanced search feature, you can skip this section. Your Movie Buzz application is complete without it!</p>
+<p>If you've completed the <strong>week_optional_search_feature</strong> module, now is the perfect time to integrate it with your live API data!</p>
+<h3 id="enhanced-app-with-searchfiltersort-optional" tabindex="-1">Enhanced App with Search/Filter/Sort (Optional)</h3>
+<pre><code class="language-javascript">// App.js - Complete integration with Supplemental Search Feature
+import React, { useState, useEffect } from 'react';
+import MoviesList from './components/MoviesList';
+import SearchBar from './components/SearchBar';  // From supplemental module
+import FilterControls from './components/FilterControls';  // From supplemental module
+import movieService from './services/movieService';
+
+function App() {
+  // Core state
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
+  
+  // Search and filter state (from Week 4)
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedGenre, setSelectedGenre] = useState('all');
+  const [selectedRating, setSelectedRating] = useState('all');
+  const [sortBy, setSortBy] = useState('name');
+  
+  // Load movies from API
+  useEffect(() =&gt; {
+    fetchMovies();
+  }, []);
+  
+  const fetchMovies = async () =&gt; {
+    try {
+      setLoading(true);
+      const data = await movieService.getAll();
+      setMovies(data);
+    } catch (err) {
+      console.error('Failed to load movies:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  // Filter and sort movies
+  const getFilteredMovies = () =&gt; {
+    let filtered = [...movies];
+    
+    // Search (handle array fields like stars)
+    if (searchTerm) {
+      filtered = filtered.filter(movie =&gt; {
+        const term = searchTerm.toLowerCase();
+        return (
+          movie.name.toLowerCase().includes(term) ||
+          movie.director.toLowerCase().includes(term) ||
+          (Array.isArray(movie.stars) &amp;&amp; 
+           movie.stars.some(star =&gt; star.toLowerCase().includes(term)))
+        );
+      });
+    }
+    
+    // Filter by genre (MongoDB returns arrays)
+    if (selectedGenre !== 'all') {
+      filtered = filtered.filter(movie =&gt;
+        Array.isArray(movie.genre) &amp;&amp; 
+        movie.genre.some(g =&gt; g.toLowerCase() === selectedGenre.toLowerCase())
+      );
+    }
+    
+    // Filter by rating
+    if (selectedRating !== 'all') {
+      filtered = filtered.filter(movie =&gt; movie.rating === selectedRating);
+    }
+    
+    // Sort
+    filtered.sort((a, b) =&gt; {
+      switch (sortBy) {
+        case 'name':
+          return a.name.localeCompare(b.name);
+        case 'year':
+          return b.year - a.year;
+        case 'rating':
+          return a.rating.localeCompare(b.rating);
+        case 'genre':
+          const genreA = a.genre?.[0] || '';
+          const genreB = b.genre?.[0] || '';
+          return genreA.localeCompare(genreB);
+        default:
+          return 0;
+      }
+    });
+    
+    return filtered;
+  };
+  
+  const filteredMovies = getFilteredMovies();
+  
+  return (
+    &lt;div className=&quot;app&quot;&gt;
+      &lt;h1&gt;🎬 Movie Buzz&lt;/h1&gt;
+      
+      &lt;SearchBar 
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm}
+      /&gt;
+      
+      &lt;FilterControls
+        selectedGenre={selectedGenre}
+        selectedRating={selectedRating}
+        sortBy={sortBy}
+        onGenreChange={setSelectedGenre}
+        onRatingChange={setSelectedRating}
+        onSortChange={setSortBy}
+      /&gt;
+      
+      &lt;div className=&quot;results-info&quot;&gt;
+        Showing {filteredMovies.length} of {movies.length} movies
+      &lt;/div&gt;
+      
+      {loading ? (
+        &lt;div&gt;Loading...&lt;/div&gt;
+      ) : (
+        &lt;MoviesList movies={filteredMovies} /&gt;
+      )}
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<h3 id="key-points-for-array-fields-optional-feature" tabindex="-1">Key Points for Array Fields (Optional Feature)</h3>
+<p><strong>Note</strong>: This applies if you're using the supplemental search feature.</p>
+<p>MongoDB stores <code>genre</code> and <code>stars</code> as arrays. Always check before using array methods:</p>
+<pre><code class="language-javascript">// Safe array handling
+const matchesGenre = Array.isArray(movie.genre) &amp;&amp;
+  movie.genre.some(g =&gt; g === selectedGenre);
+
+// Display arrays properly
+&lt;p&gt;Genres: {movie.genre?.join(', ') || 'None'}&lt;/p&gt;
+&lt;p&gt;Stars: {movie.stars?.join(', ') || 'None'}&lt;/p&gt;
+</code></pre>
+<p>For complete implementation details, see the <strong>week_optional_search_feature</strong> module.</p>
+<hr>
+<h2 id="error-handling-and-loading-states" tabindex="-1">Error Handling and Loading States</h2>
+<p>Professional applications need proper error handling and loading indicators.</p>
+<p><strong>Loading Component:</strong></p>
+<pre><code class="language-javascript">function LoadingSpinner() {
+  return (
+    &lt;div className=&quot;spinner-container&quot;&gt;
+      &lt;div className=&quot;spinner&quot;&gt;&lt;/div&gt;
+      &lt;p&gt;Loading...&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<p><strong>Error Display Component:</strong></p>
+<pre><code class="language-javascript">function ErrorMessage({ error, onRetry }) {
+  return (
+    &lt;div className=&quot;error-container&quot;&gt;
+      &lt;h3&gt;⚠️ Something went wrong&lt;/h3&gt;
+      &lt;p&gt;{error}&lt;/p&gt;
+      &lt;button onClick={onRetry}&gt;Try Again&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<p><strong>Success Notification:</strong></p>
+<pre><code class="language-javascript">function SuccessMessage({ message, onClose }) {
+  useEffect(() =&gt; {
+    const timer = setTimeout(onClose, 3000);
+    return () =&gt; clearTimeout(timer);
+  }, [onClose]);
+
+  return (
+    &lt;div className=&quot;success-message&quot;&gt;
+      ✅ {message}
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<hr>
+<h2 id="environment-variables" tabindex="-1">Environment Variables</h2>
+<p>Use environment variables to manage different configurations.</p>
+<p><strong>Create <code>.env</code> file in React root:</strong></p>
+<pre><code>REACT_APP_API_URL=http://localhost:4000/api
+</code></pre>
+<p><strong>Access in code:</strong></p>
+<pre><code class="language-javascript">const API_URL = process.env.REACT_APP_API_URL || '/api';
+</code></pre>
+<p><strong>Important:</strong></p>
+<ul>
+<li>Never commit <code>.env</code> files</li>
+<li>Add <code>.env</code> to <code>.gitignore</code></li>
+<li>Document required variables in README</li>
+</ul>
+<hr>
+<h2 id="testing-the-full-stack" tabindex="-1">Testing the Full Stack</h2>
+<p>Test your complete application:</p>
+<p><strong>1. Test READ Operations:</strong></p>
+<ul>
+<li>Load the app, movies should display</li>
+<li>Check network tab for API calls</li>
+<li>Verify error handling with stopped backend</li>
+</ul>
+<p><strong>2. Test CREATE:</strong></p>
+<ul>
+<li>Add a new movie</li>
+<li>Verify it appears in the list</li>
+<li>Check database directly</li>
+</ul>
+<p><strong>3. Test UPDATE:</strong></p>
+<ul>
+<li>Edit an existing movie</li>
+<li>Verify changes persist on refresh</li>
+<li>Test validation errors</li>
+</ul>
+<p><strong>4. Test DELETE:</strong></p>
+<ul>
+<li>Delete a movie</li>
+<li>Confirm it's removed from UI</li>
+<li>Verify deletion in database</li>
+</ul>
+<p><strong>5. Test Error Scenarios:</strong></p>
+<ul>
+<li>Stop backend, try operations</li>
+<li>Send invalid data</li>
+<li>Test network failures</li>
+</ul>
+<hr>
+<h2 id="final-thoughts" tabindex="-1">Final Thoughts</h2>
+<p>Congratulations! You've built a complete full-stack MERN application!</p>
+<p><strong>What you've accomplished:</strong></p>
+<ul>
+<li>✅ Connected React frontend to Express backend</li>
+<li>✅ Implemented all CRUD operations (Create, Read, Update, Delete)</li>
+<li>✅ Added proper error handling and loading states</li>
+<li>✅ Created loading states for better UX</li>
+<li>✅ Built a professional movie management system</li>
+<li>✅ <strong>Optional</strong>: Integrated advanced search/filter/sort with real API data</li>
+</ul>
+<p><strong>Core Features Implemented:</strong></p>
+<ul>
+<li>Full CRUD functionality for movies</li>
+<li>Real-time data synchronization with backend</li>
+<li>Professional error handling and user feedback</li>
+<li>Loading indicators for async operations</li>
+<li>Mobile-responsive design</li>
+</ul>
+<p><strong>Optional Features (if completed supplemental module):</strong></p>
+<ul>
+<li>Real-time search across titles, directors, and actors</li>
+<li>Genre and rating filtering</li>
+<li>Multiple sorting options</li>
+<li>Results counter showing filtered results</li>
+<li>Professional empty state handling</li>
+</ul>
+<p><strong>Key Takeaways:</strong></p>
+<ul>
+<li>Separation of concerns keeps code maintainable</li>
+<li>Proper error handling is crucial</li>
+<li>Loading states improve user experience</li>
+<li>Environment variables enable deployment flexibility</li>
+</ul>
+<p><strong>Next Steps:</strong></p>
+<ul>
+<li>Add authentication (user login/signup)</li>
+<li>Implement the <strong>week_optional_search_feature</strong> module (if not done yet)</li>
+<li>Add pagination for large datasets</li>
+<li>Deploy to production</li>
+<li>Explore the <strong>week_optional_testing_suite</strong> module</li>
+</ul>
+<hr>
+<h2 id="exit-ticket" tabindex="-1">Exit Ticket</h2>
+<p>Please complete the exit ticket in the LMS. You may use the lesson plan for this session, but do not use any additional resources. This exit ticket will not be part of your grade for the course, and rather is used to inform future instruction and curricular releases.</p>
+<hr>
+<h2 id="review" tabindex="-1">Review</h2>
+<ul>
+<li>How do you connect a React frontend to an Express backend?</li>
+<li>What is the purpose of CORS in full-stack applications?</li>
+<li>How do you handle asynchronous operations in React?</li>
+<li>What are loading states and why are they important?</li>
+<li>How do you handle errors from API calls?</li>
+<li>What are environment variables used for?</li>
+<li>How do you test full-stack applications?</li>
+<li>What is the difference between development and production configurations?</li>
+</ul>
+<hr>
+<h2 id="independent-practice" tabindex="-1">Independent Practice</h2>
+<ol>
+<li>
+<p><strong>Enhance the UI:</strong></p>
+<ul>
+<li>Complete the <strong>week_optional_search_feature</strong> module</li>
+<li>Implement sorting options</li>
+<li>Add pagination</li>
+</ul>
+</li>
+<li>
+<p><strong>Improve Error Handling:</strong></p>
+<ul>
+<li>Create custom error types</li>
+<li>Add retry logic</li>
+<li>Implement offline detection</li>
+</ul>
+</li>
+<li>
+<p><strong>Add Features:</strong></p>
+<ul>
+<li>Movie ratings</li>
+<li>Favorite movies</li>
+<li>Watch list functionality</li>
+</ul>
+</li>
+<li>
+<p><strong>Performance Optimization:</strong></p>
+<ul>
+<li>Implement caching</li>
+<li>Add debouncing to forms</li>
+<li>Optimize re-renders</li>
+</ul>
+</li>
+<li>
+<p><strong>Deployment Preparation:</strong></p>
+<ul>
+<li>Set up production environment variables</li>
+<li>Build optimized production bundle</li>
+<li>Test with production API</li>
+</ul>
+</li>
+</ol>
+
+<div class="pager">
+<a href="../week_15_delete_functionality/index.html">← Week 15</a>
+<a href="../week_optional_search_feature/index.html">Search Feature →</a>
+</div>
+</main>
+</div>
+</body>
+</html>

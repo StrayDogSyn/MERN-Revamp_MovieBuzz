@@ -38,7 +38,7 @@ function MoviesList({ movies, onDelete }) {
                 {movie.year} | {movie.length} | Rated: {movie.rating}
               </div>
               <div className="card-meta">
-                <span className="card-genre">{movie.genre}</span>
+                <span className="card-genre">{Array.isArray(movie.genre) ? movie.genre.join(', ') : movie.genre}</span>
                 <span className="card-director">Director: {movie.director}</span>
               </div>
               <div className="card-actions">
@@ -56,7 +56,7 @@ function MoviesList({ movies, onDelete }) {
             <h3>{selectedMovie.name} - Description</h3>
             <p>{selectedMovie.description}</p>
             <div className="description-stars">
-              <strong>Stars:</strong> {selectedMovie.stars}
+              <strong>Stars:</strong> {Array.isArray(selectedMovie.stars) ? selectedMovie.stars.join(', ') : selectedMovie.stars}
             </div>
           </>
         ) : (

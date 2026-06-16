@@ -13,8 +13,8 @@ app.use(cors());
 // Home route with API information
 app.get('/', (req, res) => {
   res.json({
-    message: 'Movie Buzz API - Week 13: DELETE Operations',
-    version: '4.0.0',
+    message: 'Movie Buzz API - Week 15: DELETE Operations',
+    version: '5.0.0',
     database: 'MongoDB with Mongoose ODM',
     features: [
       'Complete CRUD operations',
@@ -88,9 +88,9 @@ const startServer = async () => {
     // Start server
     app.listen(PORT, () => {
       console.log(`🚀 Server running on http://localhost:${PORT}`);
-      console.log('📖 Visit http://localhost:${PORT} for API documentation');
+      console.log(`📖 Visit http://localhost:${PORT} for API documentation`);
       console.log('');
-      console.log('🗑️  Week 13 Focus: DELETE Operations');
+      console.log('🗑️  Week 15 Focus: DELETE Operations');
       console.log('   - Implement deleteMovie controller');
       console.log('   - Add DELETE route');
       console.log('   - Test deletion with Postman');

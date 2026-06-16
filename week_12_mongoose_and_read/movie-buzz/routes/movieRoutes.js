@@ -1,3 +1,14 @@
+/**
+ * STARTER FILE — Week 12: Mongoose & READ Operations
+ *
+ * This file is intentionally incomplete. Your task:
+ *   1. Uncomment router.get('/', getMovies) to wire up GET /api/movies
+ *   2. Uncomment router.get('/:id', getMovieById) to wire up GET /api/movies/:id
+ *   3. Keep specific routes (search, test-connection) BEFORE the /:id wildcard
+ *
+ * Reference: movie-buzz-finished/server/routes/movieRoutes.js
+ * Do not copy from the reference — implement it yourself first.
+ */
 const express = require('express');
 const {
   getMovies,

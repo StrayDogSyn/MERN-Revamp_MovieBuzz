@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Student Guide: Advanced Search, Filter, and Sort Feature · Movie Buzz Lesson Viewer</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+<label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
+<div class="layout">
+<nav class="sidebar" aria-label="Course weeks">
+<div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
+<a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
+<a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
+<a class="nav-link" href="../week_02_dev_environment/index.html">Week 02 · Dev Environment</a>
+<a class="nav-link" href="../week_03_intro_to_react/index.html">Week 03 · Intro to React</a>
+<a class="nav-link" href="../week_04_react_state_and_hooks/index.html">Week 04 · React State & Hooks</a>
+<a class="nav-link" href="../week_05_react_events_and_hooks/index.html">Week 05 · React Events & Hooks</a>
+<a class="nav-link" href="../week_06_react_component_patterns/index.html">Week 06 · React Component Patterns</a>
+<a class="nav-link" href="../week_07_react_hooks_and_context/index.html">Week 07 · React Hooks & Context</a>
+<div class="nav-phase">Weeks 08–16 · Backend (Node, Express, MongoDB)</div>
+<a class="nav-link" href="../week_08_nodejs_and_http/index.html">Week 08 · Node.js & HTTP</a>
+<a class="nav-link" href="../week_09_express_and_cors/index.html">Week 09 · Express & CORS</a>
+<a class="nav-link" href="../week_10_tic_tac_toe_checkpoint/index.html">Week 10 · Tic-Tac-Toe Checkpoint</a>
+<a class="nav-link" href="../week_11_intro_to_mongodb/index.html">Week 11 · Intro to MongoDB</a>
+<a class="nav-link" href="../week_12_mongoose_and_read/index.html">Week 12 · Mongoose & Read</a>
+<a class="nav-link" href="../week_13_create_functionality/index.html">Week 13 · Create Functionality</a>
+<a class="nav-link" href="../week_14_update_functionality/index.html">Week 14 · Update Functionality</a>
+<a class="nav-link" href="../week_15_delete_functionality/index.html">Week 15 · Delete Functionality</a>
+<a class="nav-link" href="../week_16_frontend_backend_integration/index.html">Week 16 · Frontend/Backend Integration</a>
+<div class="nav-phase">Optional Modules</div>
+<a class="nav-link active" href="../week_optional_search_feature/index.html">Search Feature</a>
+<a class="nav-link" href="../week_optional_testing_suite/index.html">Testing Suite</a>
+</nav>
+<main class="main">
+<div class="page-header">
+<div class="breadcrumb">Optional Modules</div>
+</div>
+<h1 id="student-guide-advanced-search-filter-and-sort-feature" tabindex="-1">Student Guide: Advanced Search, Filter, and Sort Feature</h1>
+<h2 id="introduction" tabindex="-1">Introduction</h2>
+<p>This guide will walk you through implementing an advanced search, filter, and sort feature for your Movie Buzz application. This is an <strong>optional enhancement</strong> that adds professional-level functionality to your project.</p>
+<hr>
+<h2 id="learning-objectives" tabindex="-1">Learning Objectives</h2>
+<p>By completing this module, you will:</p>
+<ul>
+<li>Build a real-time search feature that works across multiple fields</li>
+<li>Implement filter controls for categorical data (genre, rating)</li>
+<li>Create sort functionality for different data types</li>
+<li>Properly handle MongoDB array fields in JavaScript</li>
+<li>Manage complex UI state with React hooks</li>
+<li>Apply defensive programming for array operations</li>
+</ul>
+<hr>
+<h2 id="prerequisites" tabindex="-1">Prerequisites</h2>
+<p>✅ Completed Week 4 (React State and Hooks)</p>
+<p>✅ Completed Week 5 (React Events and Form Handling)</p>
+<p>✅ Understanding of array methods (.filter, .some, .map, .sort)</p>
+<p>✅ Familiarity with controlled components in React</p>
+<hr>
+<h2 id="overview-of-features" tabindex="-1">Overview of Features</h2>
+<h3 class="step-heading" id="1step-1-search-bar" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Search Bar</h3>
+<p>Users can type to search across:</p>
+<ul>
+<li>Movie name</li>
+<li>Director name</li>
+<li>Actor names (in the stars array)</li>
+</ul>
+<h3 class="step-heading" id="2step-2-filter-controls" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Filter Controls</h3>
+<p>Users can filter by:</p>
+<ul>
+<li>Genre (Action, Comedy, Drama, etc.)</li>
+<li>Rating (G, PG, PG-13, R, etc.)</li>
+</ul>
+<h3 class="step-heading" id="3step-3-sort-options" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Sort Options</h3>
+<p>Users can sort by:</p>
+<ul>
+<li>Name (A-Z)</li>
+<li>Year (Newest first)</li>
+<li>Rating</li>
+<li>Genre (alphabetically by first genre)</li>
+</ul>
+<hr>
+<h2 id="implementation-steps" tabindex="-1">Implementation Steps</h2>
+<h3 class="step-heading" id="1step-1-set-up-state-variables" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Set Up State Variables</h3>
+<p>First, add state to manage search, filter, and sort options in your <code>App.js</code>:</p>
+<pre><code class="language-javascript">import React, { useState } from 'react';
+
+function App() {
+  // Your existing movie state
+  const [movies, setMovies] = useState([]);
+
+  // TODO: Add state for search term
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // TODO: Add state for selected genre filter
+  const [selectedGenre, setSelectedGenre] = useState('all');
+
+  // TODO: Add state for selected rating filter
+  const [selectedRating, setSelectedRating] = useState('all');
+
+  // TODO: Add state for sort option
+  const [sortBy, setSortBy] = useState('name');
+
+  // ... rest of your component
+}
+</code></pre>
+<hr>
+<h3 class="step-heading" id="2step-2-create-the-searchbar-component" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Create the SearchBar Component</h3>
+<p>Create a new file <code>src/components/SearchBar.js</code>:</p>
+<pre><code class="language-javascript">import React from 'react';
+import './SearchBar.css';
+
+function SearchBar({ searchTerm, onSearchChange }) {
+  return (
+    &lt;div className=&quot;search-bar&quot;&gt;
+      &lt;input
+        type=&quot;text&quot;
+        placeholder=&quot;Search movies, directors, or actors...&quot;
+        value={searchTerm}
+        onChange={(e) =&gt; {
+          // TODO: Call onSearchChange with the new value
+        }}
+        className=&quot;search-input&quot;
+      /&gt;
+      {searchTerm &amp;&amp; (
+        &lt;button
+          onClick={() =&gt; {
+            // TODO: Clear the search by calling onSearchChange with empty string
+          }}
+          className=&quot;clear-button&quot;
+        &gt;
+          ✕
+        &lt;/button&gt;
+      )}
+    &lt;/div&gt;
+  );
+}
+
+export default SearchBar;
+</code></pre>
+<p><strong>Your Tasks:</strong></p>
+<ol>
+<li>Complete the onChange handler</li>
+<li>Complete the clear button onClick handler</li>
+<li>Test that typing updates the search term</li>
+</ol>
+<hr>
+<h3 class="step-heading" id="3step-3-create-the-filtercontrols-component" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Create the FilterControls Component</h3>
+<p>Create a new file <code>src/components/FilterControls.js</code>:</p>
+<pre><code class="language-javascript">import React from 'react';
+
+function FilterControls({
+  selectedGenre,
+  selectedRating,
+  sortBy,
+  onGenreChange,
+  onRatingChange,
+  onSortChange
+}) {
+  return (
+    &lt;div className=&quot;filter-controls&quot;&gt;
+      &lt;div className=&quot;filter-group&quot;&gt;
+        &lt;label htmlFor=&quot;genre-filter&quot;&gt;Genre:&lt;/label&gt;
+        &lt;select
+          id=&quot;genre-filter&quot;
+          value={selectedGenre}
+          onChange={(e) =&gt; {
+            // TODO: Call onGenreChange with new value
+          }}
+        &gt;
+          &lt;option value=&quot;all&quot;&gt;All Genres&lt;/option&gt;
+          &lt;option value=&quot;action&quot;&gt;Action&lt;/option&gt;
+          &lt;option value=&quot;comedy&quot;&gt;Comedy&lt;/option&gt;
+          &lt;option value=&quot;drama&quot;&gt;Drama&lt;/option&gt;
+          &lt;option value=&quot;sci-fi&quot;&gt;Sci-Fi&lt;/option&gt;
+          &lt;option value=&quot;thriller&quot;&gt;Thriller&lt;/option&gt;
+          &lt;option value=&quot;horror&quot;&gt;Horror&lt;/option&gt;
+          &lt;option value=&quot;romance&quot;&gt;Romance&lt;/option&gt;
+          &lt;option value=&quot;animation&quot;&gt;Animation&lt;/option&gt;
+        &lt;/select&gt;
+      &lt;/div&gt;
+
+      &lt;div className=&quot;filter-group&quot;&gt;
+        &lt;label htmlFor=&quot;rating-filter&quot;&gt;Rating:&lt;/label&gt;
+        &lt;select
+          id=&quot;rating-filter&quot;
+          value={selectedRating}
+          onChange={(e) =&gt; {
+            // TODO: Call onRatingChange with new value
+          }}
+        &gt;
+          &lt;option value=&quot;all&quot;&gt;All Ratings&lt;/option&gt;
+          &lt;option value=&quot;G&quot;&gt;G&lt;/option&gt;
+          &lt;option value=&quot;PG&quot;&gt;PG&lt;/option&gt;
+          &lt;option value=&quot;PG-13&quot;&gt;PG-13&lt;/option&gt;
+          &lt;option value=&quot;R&quot;&gt;R&lt;/option&gt;
+          &lt;option value=&quot;NC-17&quot;&gt;NC-17&lt;/option&gt;
+          &lt;option value=&quot;NR&quot;&gt;Not Rated&lt;/option&gt;
+        &lt;/select&gt;
+      &lt;/div&gt;
+
+      &lt;div className=&quot;filter-group&quot;&gt;
+        &lt;label htmlFor=&quot;sort-by&quot;&gt;Sort By:&lt;/label&gt;
+        &lt;select
+          id=&quot;sort-by&quot;
+          value={sortBy}
+          onChange={(e) =&gt; {
+            // TODO: Call onSortChange with new value
+          }}
+        &gt;
+          &lt;option value=&quot;name&quot;&gt;Name (A-Z)&lt;/option&gt;
+          &lt;option value=&quot;year&quot;&gt;Year (Newest)&lt;/option&gt;
+          &lt;option value=&quot;rating&quot;&gt;Rating&lt;/option&gt;
+          &lt;option value=&quot;genre&quot;&gt;Genre&lt;/option&gt;
+        &lt;/select&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default FilterControls;
+</code></pre>
+<p><strong>Your Tasks:</strong></p>
+<ol>
+<li>Complete all three onChange handlers</li>
+<li>Import this component in your App.js</li>
+</ol>
+<hr>
+<h3 class="step-heading" id="4step-4-implement-the-filter-logic" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Implement the Filter Logic</h3>
+<p>In your <code>App.js</code>, create a function that applies search, filter, and sort:</p>
+<pre><code class="language-javascript">function App() {
+  // ... your state variables ...
+
+  const getFilteredMovies = () =&gt; {
+    // Start with a copy of all movies
+    let filtered = [...movies];
+
+    // STEP 1: Apply Search Filter
+    if (searchTerm) {
+      filtered = filtered.filter(movie =&gt; {
+        const term = searchTerm.toLowerCase();
+
+        // TODO: Check if name matches
+        const nameMatches = /* your code here */;
+
+        // TODO: Check if director matches
+        const directorMatches = /* your code here */;
+
+        // TODO: Check if any star name matches (ARRAY FIELD!)
+        // HINT: Use Array.isArray() and .some()
+        const starsMatch = /* your code here */;
+
+        // Return true if ANY field matches
+        return nameMatches || directorMatches || starsMatch;
+      });
+    }
+
+    // STEP 2: Apply Genre Filter
+    if (selectedGenre !== 'all') {
+      filtered = filtered.filter(movie =&gt; {
+        // TODO: Check if movie's genre array includes the selected genre
+        // HINT: Use Array.isArray() and .some()
+        // HINT: Remember genre is an array like [&quot;Action&quot;, &quot;Sci-Fi&quot;]
+      });
+    }
+
+    // STEP 3: Apply Rating Filter
+    if (selectedRating !== 'all') {
+      filtered = filtered.filter(movie =&gt; {
+        // TODO: Check if movie's rating matches selectedRating
+      });
+    }
+
+    // STEP 4: Apply Sorting
+    filtered.sort((a, b) =&gt; {
+      switch (sortBy) {
+        case 'name':
+          // TODO: Sort alphabetically by name
+          // HINT: Use localeCompare()
+          return /* your code */;
+
+        case 'year':
+          // TODO: Sort by year (newest first)
+          // HINT: b.year - a.year gives newest first
+          return /* your code */;
+
+        case 'rating':
+          // TODO: Sort alphabetically by rating
+          return /* your code */;
+
+        case 'genre':
+          // TODO: Sort by first genre in array
+          // HINT: Use movie.genre?.[0] || '' to safely get first genre
+          const genreA = /* your code */;
+          const genreB = /* your code */;
+          return genreA.localeCompare(genreB);
+
+        default:
+          return 0;
+      }
+    });
+
+    return filtered;
+  };
+
+  // Use this instead of displaying raw movies
+  const filteredMovies = getFilteredMovies();
+
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &lt;h1&gt;🎬 Movie Buzz&lt;/h1&gt;
+
+      &lt;SearchBar
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm}
+      /&gt;
+
+      &lt;FilterControls
+        selectedGenre={selectedGenre}
+        selectedRating={selectedRating}
+        sortBy={sortBy}
+        onGenreChange={setSelectedGenre}
+        onRatingChange={setSelectedRating}
+        onSortChange={setSortBy}
+      /&gt;
+
+      &lt;div className=&quot;results-info&quot;&gt;
+        Showing {filteredMovies.length} of {movies.length} movies
+      &lt;/div&gt;
+
+      &lt;MoviesList movies={filteredMovies} /&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<hr>
+<h3 class="step-heading" id="5step-5-handle-array-fields-safely" tabindex="-1"><span class="step-badge" aria-hidden="true">5</span><span class="sr-only">Step 5: </span>Handle Array Fields Safely</h3>
+<p>⚠️ <strong>CRITICAL</strong>: MongoDB stores <code>genre</code> and <code>stars</code> as arrays. Always check before using array methods!</p>
+<pre><code class="language-javascript">// ❌ WRONG: Will crash if stars is undefined or not an array
+movie.stars.some(star =&gt; star.includes(searchTerm))
+
+// ✅ CORRECT: Safe with defensive check
+Array.isArray(movie.stars) &amp;&amp; movie.stars.some(star =&gt;
+  star.toLowerCase().includes(searchTerm.toLowerCase())
+)
+</code></pre>
+<p><strong>Complete Search Implementation Example:</strong></p>
+<pre><code class="language-javascript">const starsMatch =
+  Array.isArray(movie.stars) &amp;&amp;
+  movie.stars.some(star =&gt;
+    star.toLowerCase().includes(term)
+  );
+</code></pre>
+<p><strong>Complete Genre Filter Example:</strong></p>
+<pre><code class="language-javascript">const matchesGenre =
+  Array.isArray(movie.genre) &amp;&amp;
+  movie.genre.some(g =&gt;
+    g.toLowerCase() === selectedGenre.toLowerCase()
+  );
+</code></pre>
+<hr>
+<h3 class="step-heading" id="6step-6-add-styling" tabindex="-1"><span class="step-badge" aria-hidden="true">6</span><span class="sr-only">Step 6: </span>Add Styling</h3>
+<p>Create <code>src/components/SearchBar.css</code>:</p>
+<pre><code class="language-css">/* TODO: Add your CSS styles here */
+.search-bar {
+  position: relative;
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 40px 12px 15px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: rgb(194, 143, 41);
+}
+
+.clear-button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #999;
+}
+
+.clear-button:hover {
+  color: #333;
+}
+
+.filter-controls {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-group label {
+  font-weight: bold;
+  color: #333;
+}
+
+.filter-group select {
+  padding: 8px 12px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.results-info {
+  text-align: center;
+  margin: 15px 0;
+  color: #666;
+  font-size: 14px;
+}
+
+/* Mobile responsive */
+@media (max-width: 500px) {
+  .filter-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-group {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .filter-group select {
+    width: 100%;
+  }
+}
+</code></pre>
+<hr>
+<h2 id="testing-your-implementation" tabindex="-1">Testing Your Implementation</h2>
+<h3 id="test-checklist" tabindex="-1">Test Checklist</h3>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>Search by movie name</strong>: Type &quot;Matrix&quot; and see results</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>Search by director</strong>: Type &quot;Nolan&quot; and see Christopher Nolan movies</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>Search by actor</strong>: Type &quot;Keanu&quot; and see movies with Keanu Reeves</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>Filter by genre</strong>: Select &quot;Action&quot; and see only action movies</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>Filter by rating</strong>: Select &quot;PG-13&quot; and see only PG-13 movies</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>Combine search + filter</strong>: Search &quot;action&quot; and filter by &quot;PG-13&quot;</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>Sort by name</strong>: Should be alphabetical A-Z</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>Sort by year</strong>: Should show newest first</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>Clear search</strong>: Click X button to clear search</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>Empty results</strong>: Search for nonsense, show &quot;No movies found&quot;</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>Mobile responsive</strong>: Test on narrow screen</li>
+</ul>
+<h3 id="test-data-scenarios" tabindex="-1">Test Data Scenarios</h3>
+<p>Test with movies that have:</p>
+<ul>
+<li>Multiple genres: <code>[&quot;Action&quot;, &quot;Sci-Fi&quot;, &quot;Thriller&quot;]</code></li>
+<li>Multiple stars: <code>[&quot;Actor One&quot;, &quot;Actor Two&quot;, &quot;Actor Three&quot;]</code></li>
+<li>Edge cases: Empty arrays, single-item arrays</li>
+</ul>
+<hr>
+<h2 id="common-issues-and-solutions" tabindex="-1">Common Issues and Solutions</h2>
+<h3 id="issue-1-cannot-read-property-tolowercase-of-undefined" tabindex="-1">Issue 1: &quot;Cannot read property 'toLowerCase' of undefined&quot;</h3>
+<p><strong>Cause</strong>: Trying to call methods on undefined values
+<strong>Solution</strong>: Add defensive checks</p>
+<pre><code class="language-javascript">movie.name?.toLowerCase() // Safe with optional chaining
+// OR
+movie.name &amp;&amp; movie.name.toLowerCase()
+</code></pre>
+<h3 id="issue-2-typeerror-moviestarssome-is-not-a-function" tabindex="-1">Issue 2: &quot;TypeError: movie.stars.some is not a function&quot;</h3>
+<p><strong>Cause</strong>: stars is not an array (might be undefined or string)
+<strong>Solution</strong>: Always use Array.isArray()</p>
+<pre><code class="language-javascript">Array.isArray(movie.stars) &amp;&amp; movie.stars.some(...)
+</code></pre>
+<h3 id="issue-3-movies-not-filtering-correctly" tabindex="-1">Issue 3: Movies not filtering correctly</h3>
+<p><strong>Cause</strong>: Case sensitivity issues
+<strong>Solution</strong>: Always use .toLowerCase() on both sides</p>
+<pre><code class="language-javascript">genre.toLowerCase() === selectedGenre.toLowerCase()
+</code></pre>
+<h3 id="issue-4-sort-mutating-original-array" tabindex="-1">Issue 4: Sort mutating original array</h3>
+<p><strong>Cause</strong>: .sort() modifies the original array
+<strong>Solution</strong>: Create a copy first</p>
+<pre><code class="language-javascript">let filtered = [...movies]; // Copy first!
+filtered.sort(...);
+</code></pre>
+<hr>
+<h2 id="integration-with-live-api-after-week-16" tabindex="-1">Integration with Live API (After Week 16)</h2>
+<p>If you've completed Week 16, integrate with your API:</p>
+<pre><code class="language-javascript">import { movieService } from './services/movieService';
+
+function App() {
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() =&gt; {
+    movieService.getAll()
+      .then(data =&gt; {
+        setMovies(data.data || data); // Handle different response formats
+      })
+      .catch(error =&gt; console.error('Failed to load movies:', error))
+      .finally(() =&gt; setLoading(false));
+  }, []);
+
+  // Your search/filter/sort logic works the same!
+  const filteredMovies = getFilteredMovies();
+
+  if (loading) return &lt;div&gt;Loading...&lt;/div&gt;;
+
+  return (
+    // Your JSX with SearchBar, FilterControls, etc.
+  );
+}
+</code></pre>
+<hr>
+<h2 id="next-steps" tabindex="-1">Next Steps</h2>
+<p>After completing this module:</p>
+<ol>
+<li>Add more filter options (year range, multiple genres)</li>
+<li>Implement debounced search (wait for user to stop typing)</li>
+<li>Add URL query parameters to save search state</li>
+<li>Create advanced sort (multiple sort fields)</li>
+<li>Add &quot;Clear All Filters&quot; button</li>
+</ol>
+<hr>
+<h2 id="summary" tabindex="-1">Summary</h2>
+<p>You've learned to:
+✅ Implement real-time search across multiple fields
+✅ Build filter controls for categorical data
+✅ Create sorting functionality
+✅ Handle MongoDB array fields safely
+✅ Manage complex UI state
+✅ Apply defensive programming practices</p>
+<p>This advanced feature demonstrates professional-level React development and prepares you for real-world applications!</p>
+
+<div class="pager">
+<a href="../week_16_frontend_backend_integration/index.html">← Week 16</a>
+<a href="../week_optional_testing_suite/index.html">Testing Suite →</a>
+</div>
+</main>
+</div>
+</body>
+</html>

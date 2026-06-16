@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Student Guide: Optional Testing Suite · Movie Buzz Lesson Viewer</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+<label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
+<div class="layout">
+<nav class="sidebar" aria-label="Course weeks">
+<div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
+<a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
+<a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
+<a class="nav-link" href="../week_02_dev_environment/index.html">Week 02 · Dev Environment</a>
+<a class="nav-link" href="../week_03_intro_to_react/index.html">Week 03 · Intro to React</a>
+<a class="nav-link" href="../week_04_react_state_and_hooks/index.html">Week 04 · React State & Hooks</a>
+<a class="nav-link" href="../week_05_react_events_and_hooks/index.html">Week 05 · React Events & Hooks</a>
+<a class="nav-link" href="../week_06_react_component_patterns/index.html">Week 06 · React Component Patterns</a>
+<a class="nav-link" href="../week_07_react_hooks_and_context/index.html">Week 07 · React Hooks & Context</a>
+<div class="nav-phase">Weeks 08–16 · Backend (Node, Express, MongoDB)</div>
+<a class="nav-link" href="../week_08_nodejs_and_http/index.html">Week 08 · Node.js & HTTP</a>
+<a class="nav-link" href="../week_09_express_and_cors/index.html">Week 09 · Express & CORS</a>
+<a class="nav-link" href="../week_10_tic_tac_toe_checkpoint/index.html">Week 10 · Tic-Tac-Toe Checkpoint</a>
+<a class="nav-link" href="../week_11_intro_to_mongodb/index.html">Week 11 · Intro to MongoDB</a>
+<a class="nav-link" href="../week_12_mongoose_and_read/index.html">Week 12 · Mongoose & Read</a>
+<a class="nav-link" href="../week_13_create_functionality/index.html">Week 13 · Create Functionality</a>
+<a class="nav-link" href="../week_14_update_functionality/index.html">Week 14 · Update Functionality</a>
+<a class="nav-link" href="../week_15_delete_functionality/index.html">Week 15 · Delete Functionality</a>
+<a class="nav-link" href="../week_16_frontend_backend_integration/index.html">Week 16 · Frontend/Backend Integration</a>
+<div class="nav-phase">Optional Modules</div>
+<a class="nav-link" href="../week_optional_search_feature/index.html">Search Feature</a>
+<a class="nav-link active" href="../week_optional_testing_suite/index.html">Testing Suite</a>
+</nav>
+<main class="main">
+<div class="page-header">
+<div class="breadcrumb">Optional Modules</div>
+</div>
+<h1 id="student-guide-optional-testing-suite" tabindex="-1">Student Guide: Optional Testing Suite</h1>
+<h2 id="🎯-welcome-to-professional-testing" tabindex="-1">🎯 Welcome to Professional Testing!</h2>
+<p>Congratulations on completing your Movie Buzz application! This optional module introduces you to professional testing practices that will validate your work and prepare you for real-world development environments.</p>
+<hr>
+<h2 id="🤔-why-testing-matters" tabindex="-1">🤔 Why Testing Matters</h2>
+<h3 id="in-your-career" tabindex="-1"><strong>In Your Career</strong></h3>
+<ul>
+<li><strong>Quality Assurance</strong>: Ensure your code works as expected</li>
+<li><strong>Professional Standards</strong>: Show employers you understand industry practices</li>
+<li><strong>Debugging Skills</strong>: Learn systematic approaches to finding and fixing issues</li>
+<li><strong>Confidence Building</strong>: Know your application works before presenting it</li>
+</ul>
+<h3 id="for-your-portfolio" tabindex="-1"><strong>For Your Portfolio</strong></h3>
+<ul>
+<li><strong>Validation</strong>: Prove your Movie Buzz app meets professional standards</li>
+<li><strong>Documentation</strong>: Show comprehensive understanding of your project</li>
+<li><strong>Differentiation</strong>: Stand out with tested, verified code</li>
+<li><strong>Interview Preparation</strong>: Discuss testing approaches with confidence</li>
+</ul>
+<hr>
+<h2 id="📋-before-you-start" tabindex="-1">📋 Before You Start</h2>
+<h3 id="prerequisites-checklist" tabindex="-1"><strong>Prerequisites Checklist</strong></h3>
+<ul>
+<li>✅ Week 14 Movie Buzz application completed and working</li>
+<li>✅ Can add, edit, delete movies through the UI</li>
+<li>✅ Search, filter, and sort functionality working</li>
+<li>✅ Application displays properly on mobile devices</li>
+<li>✅ Both frontend (port 3000) and backend (port 4000) running</li>
+</ul>
+<h3 id="quick-verification" tabindex="-1"><strong>Quick Verification</strong></h3>
+<p>Open your Movie Buzz app and verify these work:</p>
+<ol>
+<li><strong>Movies Display</strong>: Can see list of movies</li>
+<li><strong>Search Movies</strong>: Can search by movie title</li>
+<li><strong>Filter Movies</strong>: Can filter by genre and rating</li>
+<li><strong>Sort Movies</strong>: Can sort by name, year, rating, genre</li>
+<li><strong>Add Movie</strong>: Can create new movies</li>
+<li><strong>Edit Movie</strong>: Can update existing movies</li>
+<li><strong>Delete Movie</strong>: Can remove movies</li>
+</ol>
+<p>If any of these don't work, go back and fix them before proceeding!</p>
+<hr>
+<h2 id="🚀-getting-started" tabindex="-1">🚀 Getting Started</h2>
+<h3 id="step-1-installation" tabindex="-1"><strong>Step 1: Installation</strong></h3>
+<pre><code class="language-bash"># Navigate to the testing suite
+cd week_optional_testing_suite
+
+# Install testing dependencies
+npm install
+</code></pre>
+<h3 id="step-2-start-your-application" tabindex="-1"><strong>Step 2: Start Your Application</strong></h3>
+<p>Open three terminal windows:</p>
+<p><strong>Terminal 1 - Database:</strong></p>
+<pre><code class="language-bash">mongod
+</code></pre>
+<p><strong>Terminal 2 - Backend Server:</strong></p>
+<pre><code class="language-bash">cd week_16_frontend_backend_integration/movie-buzz-fullstack/server
+npm start
+</code></pre>
+<p><strong>Terminal 3 - Frontend App:</strong></p>
+<pre><code class="language-bash">cd week_16_frontend_backend_integration/movie-buzz-fullstack/client
+npm start
+</code></pre>
+<h3 id="step-3-run-your-first-test" tabindex="-1"><strong>Step 3: Run Your First Test</strong></h3>
+<pre><code class="language-bash">cd week_optional_testing_suite
+npm test
+</code></pre>
+<p><strong>What should happen</strong>: You'll see tests running and results appearing. Green checkmarks (✅) mean tests passed, red X's (❌) mean something needs fixing.</p>
+<hr>
+<h2 id="🧪-understanding-the-tests" tabindex="-1">🧪 Understanding the Tests</h2>
+<h3 id="api-tests---testing-your-backend" tabindex="-1"><strong>API Tests - Testing Your Backend</strong></h3>
+<p>These tests check if your backend server works correctly:</p>
+<ul>
+<li>Can it create new movies?</li>
+<li>Can it retrieve movies from the database?</li>
+<li>Can it update existing movies?</li>
+<li>Can it delete movies safely?</li>
+<li>Does it handle errors properly?</li>
+</ul>
+<p><strong>Run only API tests:</strong></p>
+<pre><code class="language-bash">npm run test:api
+</code></pre>
+<h3 id="end-to-end-tests---testing-user-experience" tabindex="-1"><strong>End-to-End Tests - Testing User Experience</strong></h3>
+<p>These tests simulate a real person using your app:</p>
+<ul>
+<li>Does the page load correctly?</li>
+<li>Can users navigate around?</li>
+<li>Do buttons work when clicked?</li>
+<li>Does it look good on mobile phones?</li>
+<li>What happens when things go wrong?</li>
+</ul>
+<p><strong>Run only E2E tests:</strong></p>
+<pre><code class="language-bash">npm run test:e2e
+</code></pre>
+<h3 id="integration-tests---testing-advanced-features" tabindex="-1"><strong>Integration Tests - Testing Advanced Features</strong></h3>
+<p>These tests check your search/filter/sort functionality:</p>
+<ul>
+<li>Does search find the right movies?</li>
+<li>Do filters work with your database?</li>
+<li>Can users sort movies different ways?</li>
+<li>Do multiple filters work together?</li>
+<li>Are results counted correctly?</li>
+</ul>
+<p><strong>Run only integration tests:</strong></p>
+<pre><code class="language-bash">npm run test:integration
+</code></pre>
+<hr>
+<h2 id="📊-reading-test-results" tabindex="-1">📊 Reading Test Results</h2>
+<h3 id="success-output-✅" tabindex="-1"><strong>Success Output</strong> ✅</h3>
+<pre><code>✓ should retrieve all movies (45ms)
+✓ should create a new movie with valid data (123ms)
+✓ should filter movies by genre (89ms)
+</code></pre>
+<p><strong>Meaning</strong>: Your code is working perfectly!</p>
+<h3 id="failure-output-❌" tabindex="-1"><strong>Failure Output</strong> ❌</h3>
+<pre><code>✗ should search movies by title (234ms)
+  Expected: Movies containing &quot;matrix&quot;
+  Received: No movies found
+</code></pre>
+<p><strong>Meaning</strong>: Something needs to be fixed. The test tells you what went wrong.</p>
+<h3 id="test-summary" tabindex="-1"><strong>Test Summary</strong></h3>
+<pre><code>Test Suites: 4 passed, 0 failed, 4 total
+Tests:       23 passed, 0 failed, 23 total
+Time:        1.234s
+</code></pre>
+<p><strong>Goal</strong>: All tests passed = Portfolio ready! 🎉</p>
+<hr>
+<h2 id="🔧-common-issues-and-solutions" tabindex="-1">🔧 Common Issues and Solutions</h2>
+<h3 id="cannot-connect-to-mongodb" tabindex="-1"><strong>&quot;Cannot connect to MongoDB&quot;</strong></h3>
+<p><strong>Problem</strong>: Database isn't running
+<strong>Solution</strong>:</p>
+<pre><code class="language-bash">mongod
+</code></pre>
+<p>Make sure MongoDB starts successfully before running tests.</p>
+<h3 id="api-endpoint-not-found" tabindex="-1"><strong>&quot;API endpoint not found&quot;</strong></h3>
+<p><strong>Problem</strong>: Backend server isn't running or wrong port
+<strong>Solution</strong>:</p>
+<pre><code class="language-bash">cd week_16_frontend_backend_integration/movie-buzz-fullstack/server
+npm start
+</code></pre>
+<p>Should show &quot;Server running on port 4000&quot;</p>
+<h3 id="page-failed-to-load" tabindex="-1"><strong>&quot;Page failed to load&quot;</strong></h3>
+<p><strong>Problem</strong>: Frontend React app isn't running
+<strong>Solution</strong>:</p>
+<pre><code class="language-bash">cd week_16_frontend_backend_integration/movie-buzz-fullstack/client
+npm start
+</code></pre>
+<p>Should show &quot;App running on port 3000&quot;</p>
+<h3 id="moviestarstolowercase-is-not-a-function" tabindex="-1"><strong>&quot;movie.stars.toLowerCase is not a function&quot;</strong></h3>
+<p><strong>Problem</strong>: Array fields not handled correctly in your code
+<strong>Solution</strong>: Check that your components handle arrays properly:</p>
+<pre><code class="language-javascript">// Wrong
+movie.stars.toLowerCase()
+
+// Right  
+movie.stars.some(star =&gt; star.toLowerCase().includes(searchTerm))
+</code></pre>
+<h3 id="searchfilter-tests-failing" tabindex="-1"><strong>Search/Filter Tests Failing</strong></h3>
+<p><strong>Problem</strong>: Advanced features not working with API data
+<strong>Solution</strong>: Verify in your browser that:</p>
+<ul>
+<li>Search finds movies by typing in the search box</li>
+<li>Genre filters change what movies are shown</li>
+<li>Sort options reorder the movies</li>
+<li>Results counter shows correct numbers</li>
+</ul>
+<hr>
+<h2 id="🎓-what-youre-learning" tabindex="-1">🎓 What You're Learning</h2>
+<h3 id="professional-skills" tabindex="-1"><strong>Professional Skills</strong></h3>
+<ul>
+<li><strong>Automated Testing</strong>: How real development teams ensure code quality</li>
+<li><strong>Quality Assurance</strong>: Systematic approaches to verifying functionality</li>
+<li><strong>Debugging</strong>: Using tests to identify and fix problems</li>
+<li><strong>Documentation</strong>: Tests serve as living documentation of what your app does</li>
+</ul>
+<h3 id="technical-concepts" tabindex="-1"><strong>Technical Concepts</strong></h3>
+<ul>
+<li><strong>Unit Testing</strong>: Testing individual functions</li>
+<li><strong>Integration Testing</strong>: Testing how parts work together</li>
+<li><strong>End-to-End Testing</strong>: Testing complete user workflows</li>
+<li><strong>API Testing</strong>: Verifying backend services work correctly</li>
+</ul>
+<h3 id="industry-practices" tabindex="-1"><strong>Industry Practices</strong></h3>
+<ul>
+<li><strong>Test-Driven Development</strong>: Writing tests before/during coding</li>
+<li><strong>Continuous Integration</strong>: Running tests automatically</li>
+<li><strong>Quality Gates</strong>: Tests must pass before deployment</li>
+<li><strong>Regression Testing</strong>: Ensuring new changes don't break existing features</li>
+</ul>
+<hr>
+<h2 id="🏆-success-criteria" tabindex="-1">🏆 Success Criteria</h2>
+<h3 id="minimum-goals-good-portfolio-project" tabindex="-1"><strong>Minimum Goals</strong> (Good Portfolio Project)</h3>
+<ul>
+<li>✅ 80%+ of all tests passing</li>
+<li>✅ All API tests passing (backend works)</li>
+<li>✅ Basic UI functionality working</li>
+<li>✅ No critical errors or crashes</li>
+</ul>
+<h3 id="stretch-goals-exceptional-portfolio-project" tabindex="-1"><strong>Stretch Goals</strong> (Exceptional Portfolio Project)</h3>
+<ul>
+<li>✅ 95%+ of all tests passing</li>
+<li>✅ All advanced search/filter features working</li>
+<li>✅ Perfect mobile responsiveness</li>
+<li>✅ Graceful error handling</li>
+<li>✅ Fast loading and smooth performance</li>
+</ul>
+<h3 id="portfolio-presentation" tabindex="-1"><strong>Portfolio Presentation</strong></h3>
+<p>When your tests pass, you can confidently say:</p>
+<ul>
+<li>&quot;My application has been thoroughly tested&quot;</li>
+<li>&quot;I follow professional development practices&quot;</li>
+<li>&quot;I understand quality assurance processes&quot;</li>
+<li>&quot;My code meets industry standards&quot;</li>
+</ul>
+<hr>
+<h2 id="🚀-next-steps-and-extensions" tabindex="-1">🚀 Next Steps and Extensions</h2>
+<h3 id="if-you-want-to-learn-more" tabindex="-1"><strong>If You Want to Learn More</strong></h3>
+<ol>
+<li><strong>Write Additional Tests</strong>: Add your own test cases for edge cases</li>
+<li><strong>Improve Test Coverage</strong>: Make sure every feature is tested</li>
+<li><strong>Performance Testing</strong>: Add tests that measure speed and responsiveness</li>
+<li><strong>Accessibility Testing</strong>: Ensure your app works for users with disabilities</li>
+</ol>
+<h3 id="career-preparation" tabindex="-1"><strong>Career Preparation</strong></h3>
+<ol>
+<li><strong>Study Test Results</strong>: Understand what each test validates</li>
+<li><strong>Practice Explaining</strong>: Be able to discuss your testing approach</li>
+<li><strong>Document Learnings</strong>: Write about what testing taught you</li>
+<li><strong>Include in Resume</strong>: Mention experience with automated testing</li>
+</ol>
+<h3 id="advanced-challenges" tabindex="-1"><strong>Advanced Challenges</strong></h3>
+<ol>
+<li><strong>Fix All Failing Tests</strong>: Get to 100% pass rate</li>
+<li><strong>Add Custom Features</strong>: Extend your app and write tests for new features</li>
+<li><strong>Cross-Browser Testing</strong>: Verify your app works in different browsers</li>
+<li><strong>Load Testing</strong>: See how your app handles many users</li>
+</ol>
+<hr>
+<h2 id="📚-learning-resources" tabindex="-1">📚 Learning Resources</h2>
+<h3 id="testing-fundamentals" tabindex="-1"><strong>Testing Fundamentals</strong></h3>
+<ul>
+<li><a href="https://www.guru99.com/software-testing-introduction-importance.html">Introduction to Software Testing</a></li>
+<li><a href="https://testautomationu.applitools.com/">Testing Best Practices</a></li>
+</ul>
+<h3 id="javascript-testing" tabindex="-1"><strong>JavaScript Testing</strong></h3>
+<ul>
+<li><a href="https://jestjs.io/docs/getting-started">Jest Testing Framework</a></li>
+<li><a href="https://testing-library.com/docs/react-testing-library/intro/">Testing React Applications</a></li>
+</ul>
+<h3 id="career-resources" tabindex="-1"><strong>Career Resources</strong></h3>
+<ul>
+<li><a href="https://www.coursera.org/articles/qa-engineer">QA Engineer Career Path</a></li>
+<li><a href="https://www.interviewbit.com/software-testing-interview-questions/">Software Testing in Job Interviews</a></li>
+</ul>
+<hr>
+<h2 id="🎉-celebration-time" tabindex="-1">🎉 Celebration Time!</h2>
+<h3 id="when-all-tests-pass-🎊" tabindex="-1"><strong>When All Tests Pass</strong> 🎊</h3>
+<p>You have successfully:</p>
+<ul>
+<li>✅ Built a complete MERN stack application</li>
+<li>✅ Implemented advanced search, filter, and sort features</li>
+<li>✅ Validated your work with professional testing practices</li>
+<li>✅ Created a portfolio-ready, industry-standard project</li>
+</ul>
+<h3 id="what-this-means" tabindex="-1"><strong>What This Means</strong></h3>
+<ul>
+<li><strong>For Job Applications</strong>: You have a tested, verified full-stack project</li>
+<li><strong>For Interviews</strong>: You can discuss testing approaches and quality assurance</li>
+<li><strong>For Your Career</strong>: You understand professional development practices</li>
+<li><strong>For Your Confidence</strong>: You know your code works and works well</li>
+</ul>
+<h3 id="share-your-success" tabindex="-1"><strong>Share Your Success</strong></h3>
+<ul>
+<li>Add test results to your portfolio</li>
+<li>Update your resume with testing experience</li>
+<li>Share screenshots of passing tests</li>
+<li>Discuss your testing approach in interviews</li>
+</ul>
+<h2 id="exit-ticket" tabindex="-1">Exit Ticket</h2>
+<p>Please complete the exit ticket in the LMS. You may use the lesson plan for this session, but do not use any additional resources. This exit ticket will not be part of your grade for the course, and rather is used to inform future instruction and curricular releases.</p>
+<hr>
+<p><strong>🎬 Congratulations! You've completed not just a Movie Buzz application, but a professionally tested, validated, and portfolio-ready full-stack project that demonstrates your mastery of modern web development practices!</strong></p>
+
+<div class="pager">
+<a href="../week_optional_search_feature/index.html">← Search Feature</a>
+<span class="disabled">Next →</span>
+</div>
+</main>
+</div>
+</body>
+</html>

@@ -16,7 +16,7 @@
 │   [IMAGE: Netflix-style movie grid with colorful cards]    │
 │   https://images.unsplash.com/photo-1489599904095-47bcc2e  │
 │                                                             │
-│   💻 13 Weeks of Progressive Learning                       │
+│   💻 17 Weeks of Progressive Learning                       │
 │   🚀 From Beginner to Full-Stack Developer                 │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
@@ -52,15 +52,18 @@
 ```text
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
-│   📚 13-WEEK PROGRESSIVE CURRICULUM                         │
+│   📚 17-WEEK PROGRESSIVE CURRICULUM                         │
 │                                                             │
 │   Week 3-7:   React Fundamentals & Components              │
-│   Week 8:     Interactive Games (Tic-Tac-Toe)             │
-│   Week 9:     Backend Setup (Node.js + Express)            │
-│   Week 10:    Database Integration (MongoDB)               │
-│   Week 11:    CREATE Operations (POST)                     │
-│   Week 12:    UPDATE Operations (PUT)                      │
-│   Week 13:    DELETE Operations (Complete CRUD)            │
+│   Week 8:     Node.js & HTTP Fundamentals                  │
+│   Week 9:     Express & CORS                               │
+│   Week 10:    Tic-Tac-Toe Checkpoint                       │
+│   Week 11:    Intro to MongoDB                             │
+│   Week 12:    Mongoose & READ Operations                   │
+│   Week 13:    CREATE Operations (POST)                     │
+│   Week 14:    UPDATE Operations (PUT)                      │
+│   Week 15:    DELETE Operations (Complete CRUD)            │
+│   Week 16:    Full-Stack Integration                       │
 │                                                             │
 │   [IMAGE: Learning progression roadmap]                    │
 │   https://images.unsplash.com/photo-1516321318423-f06f85  │
@@ -239,10 +242,10 @@
 │                                                             │
 │   Progressive API Building:                                 │
 │                                                             │
-│   Week 10: READ    📖 GET /api/movies                      │
-│   Week 11: CREATE  ➕ POST /api/movies                     │
-│   Week 12: UPDATE  ✏️ PUT /api/movies/:id                  │
-│   Week 13: DELETE  🗑️ DELETE /api/movies/:id               │
+│   Week 12: READ    📖 GET /api/movies                      │
+│   Week 13: CREATE  ➕ POST /api/movies                     │
+│   Week 14: UPDATE  ✏️ PUT /api/movies/:id                  │
+│   Week 15: DELETE  🗑️ DELETE /api/movies/:id               │
 │                                                             │
 │   [IMAGE: API endpoint testing in Postman]                 │
 │   https://images.unsplash.com/photo-1555066931-4365d14bab │
@@ -290,9 +293,10 @@
 │   🏆 YOUR SUCCESS MILESTONES                               │
 │                                                             │
 │   By Week 7:  ✅ React Components & Hooks                  │
-│   By Week 9:  ✅ Express Server & API Routes               │
-│   By Week 11: ✅ Database Integration & CRUD               │
-│   By Week 13: ✅ Complete Full-Stack Application           │
+│   By Week 9:  ✅ Express Server & CORS                     │
+│   By Week 12: ✅ MongoDB & READ Operations                 │
+│   By Week 15: ✅ Complete CRUD API                         │
+│   By Week 16: ✅ Full-Stack Application                    │
 │                                                             │
 │   Final Achievement:                                        │
 │   🎬 Professional Movie Database App                       │
@@ -343,13 +347,13 @@
 - **Starter Code Approach**: You implement TODOs, not copy complete code
 - **Netflix-Style UI**: Modern, responsive design principles
 - **Progressive Learning**: Each week builds on previous knowledge
-- **CRUD Mastery**: Complete database operations by Week 13
+- **CRUD Mastery**: Complete database operations by Week 15, full-stack integration by Week 16
 
 ### Project Structure
 
 - `movie-buzz-finished/` - Complete reference implementation
 - `week_XX_topic/movie-buzz/` - Your weekly starter code
-- `week_08_tic_tac_toe/` - Bonus interactive game project
+- `week_10_tic_tac_toe_checkpoint/` - Interactive game checkpoint project
 
 ### Mobile Design Standards
 
@@ -361,7 +365,7 @@
 
 ```bash
 npm install          # Install dependencies
-npm run dev          # Start development server
+npm start            # Start development server
 npm run seed         # Populate database
 npm test             # Run test suite (where available)
 ```

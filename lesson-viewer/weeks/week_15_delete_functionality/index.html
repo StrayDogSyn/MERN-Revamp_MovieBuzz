@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 15 - DELETE Functionality · Movie Buzz Lesson Viewer</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+<label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
+<div class="layout">
+<nav class="sidebar" aria-label="Course weeks">
+<div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
+<a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
+<a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
+<a class="nav-link" href="../week_02_dev_environment/index.html">Week 02 · Dev Environment</a>
+<a class="nav-link" href="../week_03_intro_to_react/index.html">Week 03 · Intro to React</a>
+<a class="nav-link" href="../week_04_react_state_and_hooks/index.html">Week 04 · React State & Hooks</a>
+<a class="nav-link" href="../week_05_react_events_and_hooks/index.html">Week 05 · React Events & Hooks</a>
+<a class="nav-link" href="../week_06_react_component_patterns/index.html">Week 06 · React Component Patterns</a>
+<a class="nav-link" href="../week_07_react_hooks_and_context/index.html">Week 07 · React Hooks & Context</a>
+<div class="nav-phase">Weeks 08–16 · Backend (Node, Express, MongoDB)</div>
+<a class="nav-link" href="../week_08_nodejs_and_http/index.html">Week 08 · Node.js & HTTP</a>
+<a class="nav-link" href="../week_09_express_and_cors/index.html">Week 09 · Express & CORS</a>
+<a class="nav-link" href="../week_10_tic_tac_toe_checkpoint/index.html">Week 10 · Tic-Tac-Toe Checkpoint</a>
+<a class="nav-link" href="../week_11_intro_to_mongodb/index.html">Week 11 · Intro to MongoDB</a>
+<a class="nav-link" href="../week_12_mongoose_and_read/index.html">Week 12 · Mongoose & Read</a>
+<a class="nav-link" href="../week_13_create_functionality/index.html">Week 13 · Create Functionality</a>
+<a class="nav-link" href="../week_14_update_functionality/index.html">Week 14 · Update Functionality</a>
+<a class="nav-link active" href="../week_15_delete_functionality/index.html">Week 15 · Delete Functionality</a>
+<a class="nav-link" href="../week_16_frontend_backend_integration/index.html">Week 16 · Frontend/Backend Integration</a>
+<div class="nav-phase">Optional Modules</div>
+<a class="nav-link" href="../week_optional_search_feature/index.html">Search Feature</a>
+<a class="nav-link" href="../week_optional_testing_suite/index.html">Testing Suite</a>
+</nav>
+<main class="main">
+<div class="page-header">
+<div class="breadcrumb">Weeks 08–16 · Backend (Node, Express, MongoDB)</div>
+</div>
+<h1 id="week-15---delete-functionality" tabindex="-1">Week 15 - DELETE Functionality</h1>
+<ul>
+<li><a href="#week-15---delete-functionality">Week 15 - DELETE Functionality</a>
+<ul>
+<li><a href="#notes-about-this-lesson-plan">Notes About This Lesson Plan</a></li>
+<li><a href="#learning-objectives">Learning Objectives</a></li>
+<li><a href="#glossary">Glossary</a></li>
+<li><a href="#simple-examples---building-understanding">Simple Examples - Building Understanding</a></li>
+<li><a href="#starting-point">Starting Point</a></li>
+<li><a href="#what-is-delete-in-crud">What is DELETE in CRUD?</a></li>
+<li><a href="#delete-operations">DELETE Operations</a>
+<ul>
+<li><a href="#hard-delete-vs-soft-delete">Hard Delete vs Soft Delete</a></li>
+<li><a href="#implementing-delete-routes">Implementing DELETE Routes</a></li>
+<li><a href="#delete-controller">DELETE Controller</a></li>
+</ul>
+</li>
+<li><a href="#error-handling-for-delete">Error Handling for DELETE</a></li>
+<li><a href="#testing-delete-operations">Testing DELETE Operations</a></li>
+<li><a href="#complete-crud-summary">Complete CRUD Summary</a></li>
+<li><a href="#final-thoughts">Final Thoughts</a></li>
+<li><a href="#exit-ticket">Exit Ticket</a></li>
+<li><a href="#review">Review</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="notes-about-this-lesson-plan" tabindex="-1">Notes About This Lesson Plan</h2>
+<p>Please review this lesson plan in advance of our RI session. If this plan doesn't align with where you and your classmates are at in the LMS, please send a ticket to Help Desk as soon as possible.</p>
+<p>This code is for instructional purposes only. It should be utilized as an example in developing your own work. No part of it should be directly copied into your own project. As per TLM's plagiarism policy, submitting or misrepresenting code or an idea as your own when it was created by someone else constitutes plagiarism.</p>
+<hr>
+<h2 id="learning-objectives" tabindex="-1">Learning Objectives</h2>
+<p>By the end of this session, learners will be able to:</p>
+<ul>
+<li>Implement DELETE routes and controllers in Express</li>
+<li>Use Mongoose findByIdAndDelete for removing documents</li>
+<li>Handle &quot;not found&quot; scenarios gracefully</li>
+<li>Understand the difference between hard delete and soft delete</li>
+<li>Test DELETE operations thoroughly</li>
+<li>Complete full CRUD functionality for the Movie Buzz API</li>
+</ul>
+<hr>
+<h2 id="glossary" tabindex="-1">Glossary</h2>
+<details open class="glossary-disclosure">
+<summary>📖 Click to collapse glossary</summary>
+<ul>
+<li><code>DELETE</code>: HTTP method for removing resources from the server</li>
+<li><code>Hard Delete</code>: Permanently removing data from the database</li>
+<li><code>Soft Delete</code>: Marking data as deleted without actually removing it</li>
+<li><code>findByIdAndDelete</code>: Mongoose method to find and remove a document by ID</li>
+<li><code>404 Not Found</code>: HTTP status for when a resource doesn't exist</li>
+<li><code>CASCADE DELETE</code>: Removing related data when parent data is deleted</li>
+</ul>
+</details>
+---
+<h2 id="simple-examples---building-understanding" tabindex="-1">Simple Examples - Building Understanding</h2>
+<p>Before diving into the full implementation, let's explore some simple, focused examples to build our understanding of DELETE operations step by step.</p>
+<h3 class="step-heading" id="1step-1-delete-request-handling" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>DELETE Request Handling</h3>
+<p>Let's start with a basic DELETE endpoint that processes removal requests:</p>
+<pre><code class="language-javascript">// Simple DELETE endpoint
+app.delete('/api/movies/:id', (req, res) =&gt; {
+  const { id } = req.params;
+
+  console.log(`DELETE request for movie ID: ${id}`);
+
+  // For now, just confirm we received the request
+  res.json({
+    success: true,
+    message: `Received DELETE request for movie ${id}`,
+    operation: 'DELETE',
+    movieId: id
+  });
+});
+</code></pre>
+<p><strong>Try It Out:</strong> Use Postman or curl to send DELETE requests and see how the server processes the request.</p>
+<h3 class="step-heading" id="2step-2-confirming-deletion" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Confirming Deletion</h3>
+<p>Let's add logic to find and &quot;delete&quot; items from an in-memory array:</p>
+<pre><code class="language-javascript">// Sample data
+let movies = [
+  { id: 1, name: 'The Matrix', year: 1999, rating: 'R' },
+  { id: 2, name: 'Inception', year: 2010, rating: 'PG-13' },
+  { id: 3, name: 'Toy Story', year: 1995, rating: 'G' }
+];
+
+app.delete('/api/movies/:id', (req, res) =&gt; {
+  const movieId = parseInt(req.params.id);
+
+  // Step 1: Find the movie
+  const movieIndex = movies.findIndex(movie =&gt; movie.id === movieId);
+
+  if (movieIndex === -1) {
+    return res.status(404).json({
+      success: false,
+      error: 'Movie not found',
+      searchedId: movieId,
+      availableIds: movies.map(m =&gt; m.id)
+    });
+  }
+
+  // Step 2: Get the movie before deletion
+  const movieToDelete = movies[movieIndex];
+
+  // Step 3: Remove from array
+  movies.splice(movieIndex, 1);
+
+  // Step 4: Confirm deletion
+  res.json({
+    success: true,
+    message: 'Movie deleted successfully',
+    deletedMovie: movieToDelete,
+    remainingCount: movies.length
+  });
+});
+
+// Helper endpoint to see current movies
+app.get('/api/movies', (req, res) =&gt; {
+  res.json({
+    success: true,
+    count: movies.length,
+    data: movies
+  });
+});
+</code></pre>
+<p><strong>Try It Out:</strong> Delete movies one by one and use the GET endpoint to see the array shrinking.</p>
+<h3 class="step-heading" id="3step-3-cascade-delete-concepts" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Cascade Delete Concepts</h3>
+<p>Let's explore what happens when deletion affects related data:</p>
+<pre><code class="language-javascript">// Sample data with relationships
+let movies = [
+  { id: 1, name: 'The Matrix', year: 1999, directorId: 101 },
+  { id: 2, name: 'Inception', year: 2010, directorId: 102 }
+];
+
+let directors = [
+  { id: 101, name: 'The Wachowskis', movieCount: 1 },
+  { id: 102, name: 'Christopher Nolan', movieCount: 1 }
+];
+
+let reviews = [
+  { id: 1, movieId: 1, rating: 5, comment: 'Amazing!' },
+  { id: 2, movieId: 1, rating: 4, comment: 'Good movie' },
+  { id: 3, movieId: 2, rating: 5, comment: 'Mind-bending!' }
+];
+
+app.delete('/api/movies/:id', (req, res) =&gt; {
+  const movieId = parseInt(req.params.id);
+
+  // Find the movie
+  const movieIndex = movies.findIndex(movie =&gt; movie.id === movieId);
+  if (movieIndex === -1) {
+    return res.status(404).json({
+      success: false,
+      error: 'Movie not found'
+    });
+  }
+
+  const movieToDelete = movies[movieIndex];
+
+  // Check for related data that would be affected
+  const relatedReviews = reviews.filter(review =&gt; review.movieId === movieId);
+
+  // Option 1: Prevent deletion if related data exists
+  if (relatedReviews.length &gt; 0) {
+    return res.status(400).json({
+      success: false,
+      error: 'Cannot delete movie with existing reviews',
+      relatedReviews: relatedReviews.length,
+      hint: 'Delete reviews first, or use force delete'
+    });
+  }
+
+  // Option 2: Cascade delete (delete related data too)
+  // Remove movie
+  movies.splice(movieIndex, 1);
+
+  // Update director's movie count
+  const director = directors.find(d =&gt; d.id === movieToDelete.directorId);
+  if (director) {
+    director.movieCount -= 1;
+  }
+
+  res.json({
+    success: true,
+    message: 'Movie and related data deleted',
+    deletedMovie: movieToDelete,
+    updatedDirector: director
+  });
+});
+</code></pre>
+<p><strong>Try It Out:</strong> See how deletion can affect related data and try both prevention and cascade approaches.</p>
+<h3 class="step-heading" id="4step-4-soft-delete-vs-hard-delete" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Soft Delete vs Hard Delete</h3>
+<p>Let's implement both approaches to see the difference:</p>
+<pre><code class="language-javascript">// Add deleted field to movies
+let movies = [
+  { id: 1, name: 'The Matrix', year: 1999, deleted: false },
+  { id: 2, name: 'Inception', year: 2010, deleted: false },
+  { id: 3, name: 'Toy Story', year: 1995, deleted: true } // Already soft-deleted
+];
+
+// Soft delete endpoint
+app.delete('/api/movies/:id/soft', (req, res) =&gt; {
+  const movieId = parseInt(req.params.id);
+
+  const movie = movies.find(m =&gt; m.id === movieId &amp;&amp; !m.deleted);
+  if (!movie) {
+    return res.status(404).json({
+      success: false,
+      error: 'Movie not found or already deleted'
+    });
+  }
+
+  // Mark as deleted (soft delete)
+  movie.deleted = true;
+  movie.deletedAt = new Date().toISOString();
+
+  res.json({
+    success: true,
+    message: 'Movie soft-deleted (can be restored)',
+    operation: 'SOFT_DELETE',
+    movie: movie
+  });
+});
+
+// Hard delete endpoint
+app.delete('/api/movies/:id/hard', (req, res) =&gt; {
+  const movieId = parseInt(req.params.id);
+
+  const movieIndex = movies.findIndex(m =&gt; m.id === movieId);
+  if (movieIndex === -1) {
+    return res.status(404).json({
+      success: false,
+      error: 'Movie not found'
+    });
+  }
+
+  // Permanently remove (hard delete)
+  const deletedMovie = movies.splice(movieIndex, 1)[0];
+
+  res.json({
+    success: true,
+    message: 'Movie permanently deleted (cannot be restored)',
+    operation: 'HARD_DELETE',
+    deletedMovie: deletedMovie
+  });
+});
+
+// Restore soft-deleted movie
+app.put('/api/movies/:id/restore', (req, res) =&gt; {
+  const movieId = parseInt(req.params.id);
+
+  const movie = movies.find(m =&gt; m.id === movieId &amp;&amp; m.deleted);
+  if (!movie) {
+    return res.status(404).json({
+      success: false,
+      error: 'No soft-deleted movie found with this ID'
+    });
+  }
+
+  // Restore the movie
+  movie.deleted = false;
+  delete movie.deletedAt;
+
+  res.json({
+    success: true,
+    message: 'Movie restored successfully',
+    movie: movie
+  });
+});
+
+// Get active movies (filters out soft-deleted)
+app.get('/api/movies/active', (req, res) =&gt; {
+  const activeMovies = movies.filter(movie =&gt; !movie.deleted);
+  res.json({
+    success: true,
+    count: activeMovies.length,
+    data: activeMovies
+  });
+});
+</code></pre>
+<p><strong>Try It Out:</strong> Compare soft delete (reversible) vs hard delete (permanent), and try restoring a soft-deleted movie.</p>
+<p>These examples demonstrate the key concepts of DELETE operations and help you understand the different approaches before implementing with MongoDB!</p>
+<hr>
+<h2 id="starting-point" tabindex="-1">Starting Point</h2>
+<p>Before we begin this lesson, ensure your Movie Buzz API from previous weeks includes:</p>
+<ul>
+<li>Week 10: READ operations (GET endpoints)</li>
+<li>Week 11: CREATE operations (POST endpoints)</li>
+<li>Week 12: UPDATE operations (PUT/PATCH endpoints)</li>
+</ul>
+<p>We'll be adding DELETE operations to complete the full CRUD functionality.</p>
+<hr>
+<h2 id="what-is-delete-in-crud" tabindex="-1">What is DELETE in CRUD?</h2>
+<p>DELETE is the &quot;D&quot; in CRUD operations, representing the ability to remove data from your application:</p>
+<ul>
+<li><strong>C</strong>reate - POST requests (Week 11)</li>
+<li><strong>R</strong>ead - GET requests (Week 10)</li>
+<li><strong>U</strong>pdate - PUT/PATCH requests (Week 12)</li>
+<li><strong>D</strong>elete - DELETE requests (Week 13)</li>
+</ul>
+<p>DELETE operations allow users to permanently remove movies from the database.</p>
+<p><strong>Common DELETE Patterns:</strong></p>
+<ul>
+<li>Remove a single item by ID</li>
+<li>Bulk delete multiple items</li>
+<li>Soft delete (mark as inactive)</li>
+<li>Cascade delete (remove related data)</li>
+</ul>
+<hr>
+<h2 id="delete-operations" tabindex="-1">DELETE Operations</h2>
+<h3 id="hard-delete-vs-soft-delete" tabindex="-1">Hard Delete vs Soft Delete</h3>
+<p><strong>Hard Delete:</strong></p>
+<ul>
+<li>Permanently removes data from database</li>
+<li>Cannot be undone</li>
+<li>Frees up storage space</li>
+<li>Simple implementation</li>
+</ul>
+<pre><code class="language-javascript">// Hard delete - permanently removes the document
+const deletedMovie = await Movie.findByIdAndDelete(movieId);
+</code></pre>
+<p><strong>Soft Delete:</strong></p>
+<ul>
+<li>Marks data as &quot;deleted&quot; but keeps it in database</li>
+<li>Can be undone/restored</li>
+<li>Uses more storage</li>
+<li>Requires filtering in queries</li>
+</ul>
+<pre><code class="language-javascript">// Soft delete - marks as deleted
+const deletedMovie = await Movie.findByIdAndUpdate(movieId, {
+  deleted: true,
+  deletedAt: new Date()
+});
+</code></pre>
+<p>For this lesson, we'll implement <strong>hard delete</strong> for simplicity.</p>
+<h3 id="implementing-delete-routes" tabindex="-1">Implementing DELETE Routes</h3>
+<p><strong>Add DELETE route to movieRoutes.js:</strong></p>
+<pre><code class="language-javascript">const express = require('express');
+const {
+  getMovies,
+  getMovieById,
+  createMovie,
+  updateMovie,
+  deleteMovie  // New import
+} = require('../controllers/movieController');
+
+const router = express.Router();
+
+// Existing routes
+router.get('/', getMovies);
+router.get('/:id', getMovieById);
+router.post('/', createMovie);
+router.put('/:id', updateMovie);
+
+// New DELETE route
+router.delete('/:id', deleteMovie);
+
+module.exports = router;
+</code></pre>
+<h3 id="delete-controller" tabindex="-1">DELETE Controller</h3>
+<p><strong>Implement deleteMovie controller:</strong></p>
+<pre><code class="language-javascript">// DELETE /api/movies/:id - Delete a movie
+const deleteMovie = async (req, res) =&gt; {
+  try {
+    const { id } = req.params;
+    
+    // Validate ObjectId format
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid movie ID format'
+      });
+    }
+    
+    // Find and delete the movie
+    const deletedMovie = await Movie.findByIdAndDelete(id);
+    
+    // Check if movie was found
+    if (!deletedMovie) {
+      return res.status(404).json({
+        success: false,
+        error: 'Movie not found'
+      });
+    }
+    
+    res.json({
+      success: true,
+      message: 'Movie deleted successfully',
+      data: deletedMovie
+    });
+    
+  } catch (error) {
+    console.error('Error deleting movie:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to delete movie',
+      message: error.message
+    });
+  }
+};
+</code></pre>
+<hr>
+<h2 id="error-handling-for-delete" tabindex="-1">Error Handling for DELETE</h2>
+<p>Common DELETE error scenarios:</p>
+<p><strong>1. Movie Not Found:</strong></p>
+<pre><code class="language-javascript">if (!deletedMovie) {
+  return res.status(404).json({
+    success: false,
+    error: 'Movie not found'
+  });
+}
+</code></pre>
+<p><strong>2. Invalid ID Format:</strong></p>
+<pre><code class="language-javascript">if (!mongoose.Types.ObjectId.isValid(id)) {
+  return res.status(400).json({
+    success: false,
+    error: 'Invalid movie ID format'
+  });
+}
+</code></pre>
+<p><strong>3. Database Errors:</strong></p>
+<pre><code class="language-javascript">catch (error) {
+  console.error('Error deleting movie:', error);
+  res.status(500).json({
+    success: false,
+    error: 'Failed to delete movie'
+  });
+}
+</code></pre>
+<hr>
+<h2 id="testing-delete-operations" tabindex="-1">Testing DELETE Operations</h2>
+<p><strong>Test with different scenarios:</strong></p>
+<p><strong>1. Successful Delete:</strong></p>
+<pre><code class="language-bash"># DELETE /api/movies/[valid-movie-id]
+curl -X DELETE http://localhost:4000/api/movies/507f1f77bcf86cd799439011
+</code></pre>
+<p>Expected response:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;message&quot;: &quot;Movie deleted successfully&quot;,
+  &quot;data&quot;: {
+    &quot;_id&quot;: &quot;507f1f77bcf86cd799439011&quot;,
+    &quot;name&quot;: &quot;The Matrix&quot;,
+    &quot;year&quot;: 1999
+  }
+}
+</code></pre>
+<p><strong>2. Movie Not Found:</strong></p>
+<pre><code class="language-bash"># DELETE with non-existent ID
+curl -X DELETE http://localhost:4000/api/movies/507f1f77bcf86cd799439099
+</code></pre>
+<p>Expected response:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: false,
+  &quot;error&quot;: &quot;Movie not found&quot;
+}
+</code></pre>
+<p><strong>3. Invalid ID Format:</strong></p>
+<pre><code class="language-bash"># DELETE with invalid ID
+curl -X DELETE http://localhost:4000/api/movies/invalid-id
+</code></pre>
+<p>Expected response:</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: false,
+  &quot;error&quot;: &quot;Invalid movie ID format&quot;
+}
+</code></pre>
+<hr>
+<h2 id="complete-crud-summary" tabindex="-1">Complete CRUD Summary</h2>
+<p>After implementing DELETE, your Movie Buzz API supports full CRUD operations:</p>
+<p><strong>API Endpoints:</strong></p>
+<ul>
+<li><code>GET /api/movies</code> - Get all movies</li>
+<li><code>GET /api/movies/:id</code> - Get movie by ID</li>
+<li><code>POST /api/movies</code> - Create new movie</li>
+<li><code>PUT /api/movies/:id</code> - Replace entire movie</li>
+<li><code>PATCH /api/movies/:id</code> - Update specific fields</li>
+<li><code>DELETE /api/movies/:id</code> - Delete movie</li>
+</ul>
+<p><strong>HTTP Status Codes:</strong></p>
+<ul>
+<li><code>200 OK</code> - Successful GET, PUT, PATCH, DELETE</li>
+<li><code>201 Created</code> - Successful POST</li>
+<li><code>400 Bad Request</code> - Invalid data or ID format</li>
+<li><code>404 Not Found</code> - Resource doesn't exist</li>
+<li><code>500 Internal Server Error</code> - Server errors</li>
+</ul>
+<p><strong>Controller Functions:</strong></p>
+<ul>
+<li><code>getMovies()</code> - List all movies</li>
+<li><code>getMovieById()</code> - Get specific movie</li>
+<li><code>createMovie()</code> - Add new movie</li>
+<li><code>updateMovie()</code> - Modify existing movie</li>
+<li><code>deleteMovie()</code> - Remove movie</li>
+</ul>
+<hr>
+<h2 id="final-thoughts" tabindex="-1">Final Thoughts</h2>
+<p>Congratulations! You've successfully implemented complete CRUD functionality for the Movie Buzz API. Your backend now supports:</p>
+<ul>
+<li><strong>Full Data Management</strong>: Create, read, update, and delete movies</li>
+<li><strong>Proper Error Handling</strong>: Graceful responses for all scenarios</li>
+<li><strong>RESTful Design</strong>: Standard HTTP methods and status codes</li>
+<li><strong>Data Validation</strong>: Mongoose schema validation</li>
+<li><strong>Database Operations</strong>: Efficient MongoDB queries</li>
+</ul>
+<p><strong>Next Steps:</strong></p>
+<ul>
+<li>Week 14 will introduce React frontend to consume this API</li>
+<li>You'll build a complete full-stack application</li>
+<li>React will provide the user interface for all CRUD operations</li>
+</ul>
+<p>This completes the backend-focused portion of the MERN curriculum. You now have a solid foundation for building full-stack applications!</p>
+<hr>
+<h2 id="exit-ticket" tabindex="-1">Exit Ticket</h2>
+<p>Please complete the exit ticket in the LMS. You may use the lesson plan for this session, but do not use any additional resources. This exit ticket will not be part of your grade for the course, and rather is used to inform future instruction and curricular releases.</p>
+<hr>
+<h2 id="review" tabindex="-1">Review</h2>
+<ul>
+<li>What HTTP method is used for DELETE operations?</li>
+<li>How do you handle &quot;not found&quot; scenarios in DELETE controllers?</li>
+<li>What's the difference between hard delete and soft delete?</li>
+<li>How do you validate MongoDB ObjectId format?</li>
+<li>What are the main components of a complete CRUD API?</li>
+<li>How do you test DELETE operations safely?</li>
+</ul>
+
+<div class="pager">
+<a href="../week_14_update_functionality/index.html">← Week 14</a>
+<a href="../week_16_frontend_backend_integration/index.html">Week 16 →</a>
+</div>
+</main>
+</div>
+</body>
+</html>

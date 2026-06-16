@@ -253,7 +253,7 @@ module.exports = Movie;
 ```javascript
 const createMovie = async (req, res) => {
   // TODO: Add logging for debugging
-  console.log('CREATE /api/movie/new - Request body:', req.body);
+  console.log('CREATE /api/movies - Request body:', req.body);
   
   try {
     // ... rest of the create logic
@@ -265,7 +265,7 @@ const createMovie = async (req, res) => {
 
 1. **Create a New Movie**:
    - Method: POST
-   - URL: `http://localhost:4000/api/movie/new`
+   - URL: `http://localhost:4000/api/movies`
    - Headers: `Content-Type: application/json`
    - Body (raw JSON):
    ```json
@@ -297,7 +297,7 @@ const createMovie = async (req, res) => {
 
 ```bash
 # Create a new movie
-curl -X POST http://localhost:4000/api/movie/new \
+curl -X POST http://localhost:4000/api/movies \
   -H "Content-Type: application/json" \
   -d '{
     "name": "The Matrix",
@@ -317,7 +317,7 @@ curl -X POST http://localhost:4000/api/movie/new \
 
 ## RESTful Conventions
 
-- POST `/api/movie/new` or POST `/api/movies` - Create new resource
+- POST `/api/movies` - Create new resource
 - Return 201 (Created) status on success
 - Return 400 (Bad Request) for validation errors
 - Return 409 (Conflict) for duplicates

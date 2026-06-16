@@ -13,7 +13,7 @@ app.use(cors());
 // Home route
 app.get('/', (req, res) => {
   res.json({
-    message: 'Movie Buzz API - Week 11: CREATE Functionality',
+    message: 'Movie Buzz API - Week 13: CREATE Functionality',
     version: '3.0.0',
     database: 'MongoDB with Mongoose ODM',
     features: [
@@ -98,7 +98,7 @@ const startServer = async () => {
     // Start server
     app.listen(PORT, () => {
       console.log(`🚀 Server running on http://localhost:${PORT}`);
-      console.log('📖 Visit http://localhost:${PORT} for API documentation');
+      console.log(`📖 Visit http://localhost:${PORT} for API documentation`);
       console.log('');
       console.log('🔧 TODO for this week:');
       console.log('   - Implement POST /api/movies controller');

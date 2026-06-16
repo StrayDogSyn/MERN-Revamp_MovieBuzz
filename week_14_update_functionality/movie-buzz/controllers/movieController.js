@@ -1,16 +1,23 @@
+/**
+ * STARTER FILE — Week 14: UPDATE Operations
+ *
+ * This file is intentionally incomplete. Your task:
+ *   1. Implement updateMovie: validate the ObjectId, use Movie.findByIdAndUpdate
+ *      with { new: true, runValidators: true }, return the updated document
+ *   2. getMovies, getMovieById, and createMovie are already implemented
+ *
+ * Reference: movie-buzz-finished/server/controllers/movieController.js
+ * Do not copy from the reference — implement it yourself first.
+ */
 const Movie = require('../models/movie');
 const mongoose = require('mongoose');
 
-// GET /api/movies - Get all movies (implemented in Week 10)
+// GET /api/movies - Get all movies (implemented in Week 12)
 const getMovies = async (req, res) => {
   try {
     const movies = await Movie.find().sort({ createdAt: -1 });
-    
-    res.status(200).json({
-      success: true,
-      count: movies.length,
-      data: movies
-    });
+    // Returns bare array — matches reference app and keeps React destructuring simple
+    res.json(movies);
     
   } catch (error) {
     console.error('Error fetching movies:', error);
@@ -22,11 +29,11 @@ const getMovies = async (req, res) => {
   }
 };
 
-// GET /api/movies/:id - Get movie by ID (implemented in Week 10)
+// GET /api/movies/:id - Get movie by ID (implemented in Week 12)
 const getMovieById = async (req, res) => {
   try {
     const { id } = req.params;
-    
+
     // Validate ObjectId
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({
@@ -34,20 +41,18 @@ const getMovieById = async (req, res) => {
         error: 'Invalid movie ID format'
       });
     }
-    
+
     const movie = await Movie.findById(id);
-    
+
     if (!movie) {
       return res.status(404).json({
         success: false,
         error: 'Movie not found'
       });
     }
-    
-    res.status(200).json({
-      success: true,
-      data: movie
-    });
+
+    // Returns bare object — matches reference app
+    res.json(movie);
     
   } catch (error) {
     console.error('Error fetching movie by ID:', error);
@@ -59,22 +64,19 @@ const getMovieById = async (req, res) => {
   }
 };
 
-// POST /api/movies - Create new movie (implemented in Week 11)
+// POST /api/movies - Create new movie (implemented in Week 13)
 const createMovie = async (req, res) => {
   try {
     const movieData = req.body;
-    
+
     // Create new Movie instance with validation
     const movie = new Movie(movieData);
-    
+
     // Save movie to database
     const savedMovie = await movie.save();
-    
-    res.status(201).json({
-      success: true,
-      message: 'Movie created successfully',
-      data: savedMovie
-    });
+
+    // Returns bare object — matches reference app
+    res.status(201).json(savedMovie);
     
   } catch (error) {
     console.error('Error creating movie:', error);
@@ -101,7 +103,7 @@ const createMovie = async (req, res) => {
   }
 };
 
-// PUT /api/movies/:id - Update movie (NEW - Week 12 Focus)
+// PUT /api/movies/:id - Update movie (NEW - Week 14 Focus)
 const updateMovie = async (req, res) => {
   try {
     console.log('updateMovie called - TODO: Students will implement during lesson');
@@ -140,12 +142,8 @@ const updateMovie = async (req, res) => {
     //   });
     // }
     
-    // TODO: Step 6 - Return success response with updated movie
-    // res.status(200).json({
-    //   success: true,
-    //   message: 'Movie updated successfully',
-    //   data: updatedMovie
-    // });
+    // TODO: Step 6 - Return updated movie directly (bare object, no wrapper)
+    // res.json(updatedMovie);
     
     // Placeholder response for students
     res.status(501).json({
@@ -222,7 +220,7 @@ const partialUpdateMovie = async (req, res) => {
   }
 };
 
-// GET /api/test-connection - Test database connection
+// GET /api/movies/test-connection - Test database connection
 const testConnection = async (req, res) => {
   try {
     const movieCount = await Movie.countDocuments();
@@ -281,8 +279,8 @@ module.exports = {
   getMovies,
   getMovieById,
   createMovie,
-  updateMovie,         // NEW - Week 12 focus
-  partialUpdateMovie,  // NEW - Week 12 bonus
+  updateMovie,         // NEW - Week 14 focus
+  partialUpdateMovie,  // NEW - Week 14 bonus
   testConnection,
   searchMovies
 };

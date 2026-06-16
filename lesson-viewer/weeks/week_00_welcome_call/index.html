@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>🎬 Week 00: Welcome to Movie Buzz — Student Guide · Movie Buzz Lesson Viewer</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+<label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
+<div class="layout">
+<nav class="sidebar" aria-label="Course weeks">
+<div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
+<a class="nav-link active" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
+<a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
+<a class="nav-link" href="../week_02_dev_environment/index.html">Week 02 · Dev Environment</a>
+<a class="nav-link" href="../week_03_intro_to_react/index.html">Week 03 · Intro to React</a>
+<a class="nav-link" href="../week_04_react_state_and_hooks/index.html">Week 04 · React State & Hooks</a>
+<a class="nav-link" href="../week_05_react_events_and_hooks/index.html">Week 05 · React Events & Hooks</a>
+<a class="nav-link" href="../week_06_react_component_patterns/index.html">Week 06 · React Component Patterns</a>
+<a class="nav-link" href="../week_07_react_hooks_and_context/index.html">Week 07 · React Hooks & Context</a>
+<div class="nav-phase">Weeks 08–16 · Backend (Node, Express, MongoDB)</div>
+<a class="nav-link" href="../week_08_nodejs_and_http/index.html">Week 08 · Node.js & HTTP</a>
+<a class="nav-link" href="../week_09_express_and_cors/index.html">Week 09 · Express & CORS</a>
+<a class="nav-link" href="../week_10_tic_tac_toe_checkpoint/index.html">Week 10 · Tic-Tac-Toe Checkpoint</a>
+<a class="nav-link" href="../week_11_intro_to_mongodb/index.html">Week 11 · Intro to MongoDB</a>
+<a class="nav-link" href="../week_12_mongoose_and_read/index.html">Week 12 · Mongoose & Read</a>
+<a class="nav-link" href="../week_13_create_functionality/index.html">Week 13 · Create Functionality</a>
+<a class="nav-link" href="../week_14_update_functionality/index.html">Week 14 · Update Functionality</a>
+<a class="nav-link" href="../week_15_delete_functionality/index.html">Week 15 · Delete Functionality</a>
+<a class="nav-link" href="../week_16_frontend_backend_integration/index.html">Week 16 · Frontend/Backend Integration</a>
+<div class="nav-phase">Optional Modules</div>
+<a class="nav-link" href="../week_optional_search_feature/index.html">Search Feature</a>
+<a class="nav-link" href="../week_optional_testing_suite/index.html">Testing Suite</a>
+</nav>
+<main class="main">
+<div class="page-header">
+<div class="breadcrumb">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
+</div>
+<h1 id="🎬-week-00-welcome-to-movie-buzz-—-student-guide" tabindex="-1">🎬 Week 00: Welcome to Movie Buzz — Student Guide</h1>
+<blockquote class="callout callout--meta">
+<p>🔑 <strong>Access Code:</strong> No exit ticket this week — see you at Week 01!   ·   ⏱️ <strong>Estimated Time:</strong> 1 hr   ·   🎯 <strong>Difficulty:</strong> ⭐</p>
+</blockquote>
+<hr>
+<h2 id="🗺️-what-youre-building-this-week" tabindex="-1">🗺️ What You're Building This Week</h2>
+<p>This week is your orientation to the course and the application you'll build over the next 16 weeks: <strong>Movie Buzz</strong>, a full-stack Netflix-style movie database. You won't write code yet — instead, you'll tour the finished application, meet your cohort, confirm your dev environment is ready, and understand the road ahead.</p>
+<blockquote class="callout callout--tip">
+<p>💡 <strong>This week in the arc:</strong> Week 00 is the launchpad. Everything you do here clears the runway so Week 01 can focus entirely on Bash, Git, and your first real code.</p>
+</blockquote>
+<hr>
+<h2 id="🎯-learning-objectives" tabindex="-1">🎯 Learning Objectives</h2>
+<p>By the end of this week you will be able to:</p>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> Describe what &quot;full-stack&quot; means and name the four layers of the MERN stack</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> Explain the 16-week learning arc and where Movie Buzz fits at each stage</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> Verify that Node.js, npm, Git, and VS Code are correctly installed on your machine</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> Introduce yourself to your cohort and instructor</li>
+</ul>
+<hr>
+<h2 id="🔑-key-concepts" tabindex="-1">🔑 Key Concepts</h2>
+<blockquote class="callout callout--concept">
+<p><strong>Full-Stack</strong>
+A full-stack application has both a frontend (what users see in the browser) and a backend (the server and database). Building full-stack means you are responsible for every layer, from the button a user clicks to the record stored in a database.</p>
+</blockquote>
+<blockquote class="callout callout--concept">
+<p><strong>MERN Stack</strong>
+An acronym for MongoDB, Express, React, and Node.js — four technologies that work together to build a complete web application. Think of them as a team: React handles the user interface, Node.js runs the server, Express organizes the server's routes, and MongoDB stores the data.</p>
+</blockquote>
+<blockquote class="callout callout--concept">
+<p><strong>Client / Server</strong>
+The client is the browser — it sends requests. The server is the program running on a computer (or in the cloud) that receives those requests and sends back responses. Almost every website you use follows this model.</p>
+</blockquote>
+<blockquote class="callout callout--concept">
+<p><strong>Learning Arc</strong>
+The 16 weeks of this course are designed progressively. Each week adds exactly one capability to Movie Buzz. By Week 16, the app you started in Week 01 will be fully connected, searchable, and production-ready.</p>
+</blockquote>
+<hr>
+<h2 id="⚙️-setup" tabindex="-1">⚙️ Setup</h2>
+<details>
+<summary>📦 Step-by-step environment verification</summary>
+<p>This week there is no project directory to navigate into. Instead, open a terminal and run these verification commands one at a time.</p>
+<h3 class="step-heading" id="1step-1-check-nodejs" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Check Node.js</h3>
+<pre><code class="language-bash">node --version
+</code></pre>
+<p><strong>Expected output:</strong> A version number like <code>v18.17.0</code> or higher. If you see <code>command not found</code>, Node.js is not installed.</p>
+<h3 class="step-heading" id="2step-2-check-npm" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Check npm</h3>
+<pre><code class="language-bash">npm --version
+</code></pre>
+<p><strong>Expected output:</strong> A version number like <code>9.6.7</code> or higher.</p>
+<h3 class="step-heading" id="3step-3-check-git" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Check Git</h3>
+<pre><code class="language-bash">git --version
+</code></pre>
+<p><strong>Expected output:</strong> Something like <code>git version 2.41.0</code>. If you see <code>command not found</code>, Git is not installed.</p>
+<h3 class="step-heading" id="4step-4-check-git-identity" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Check Git identity</h3>
+<pre><code class="language-bash">git config --global user.name
+git config --global user.email
+</code></pre>
+<p><strong>Expected output:</strong> Your full name and email address. If these are blank, run:</p>
+<pre><code class="language-bash">git config --global user.name &quot;Your Name&quot;
+git config --global user.email &quot;you@example.com&quot;
+</code></pre>
+<h3 class="step-heading" id="5step-5-check-vs-code" tabindex="-1"><span class="step-badge" aria-hidden="true">5</span><span class="sr-only">Step 5: </span>Check VS Code</h3>
+<pre><code class="language-bash">code --version
+</code></pre>
+<p><strong>Expected output:</strong> A version number. If this fails, VS Code may not be in your PATH — open VS Code manually and check the Command Palette for &quot;Shell Command: Install 'code' command in PATH.&quot;</p>
+<h3 class="step-heading" id="6step-6-confirm-nvm-optional-but-strongly-recommended" tabindex="-1"><span class="step-badge" aria-hidden="true">6</span><span class="sr-only">Step 6: </span>Confirm nvm (optional but strongly recommended)</h3>
+<pre><code class="language-bash">nvm --version
+</code></pre>
+<p>If you see <code>command not found</code>, that's okay for now — but nvm (Node Version Manager) will help you manage Node.js versions later in the course. Your instructor can help you install it if needed.</p>
+</details>
+<details>
+<summary>✅ Pre-flight checklist — confirm before your first day of real work</summary>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <code>node --version</code> returns v16 or higher</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <code>npm --version</code> returns a version number</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <code>git --version</code> returns a version number</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <code>git config --global user.name</code> returns your name</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <code>git config --global user.email</code> returns your email</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> VS Code opens and the integrated terminal works</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> You have a GitHub account and can log in at <a href="http://github.com">github.com</a></li>
+</ul>
+</details>
+<hr>
+<h2 id="📚-core-concepts" tabindex="-1">📚 Core Concepts</h2>
+<h3 id="what-is-the-mern-stack" tabindex="-1">What Is the MERN Stack?</h3>
+<p>Most modern web applications are built in layers. The MERN stack names those layers using the tools this course will teach you:</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Technology</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Database</td>
+<td><strong>MongoDB</strong></td>
+<td>Stores data as flexible JSON-like documents</td>
+</tr>
+<tr>
+<td>Backend framework</td>
+<td><strong>Express</strong></td>
+<td>Organizes how the server handles different URLs</td>
+</tr>
+<tr>
+<td>Frontend library</td>
+<td><strong>React</strong></td>
+<td>Builds the interactive UI in the browser</td>
+</tr>
+<tr>
+<td>Runtime</td>
+<td><strong>Node.js</strong></td>
+<td>Lets JavaScript run on the server, outside the browser</td>
+</tr>
+</tbody>
+</table>
+<p>By the end of Week 16, you will have written code at every layer.</p>
+<pre><code class="language-javascript">// This is the kind of code you'll write in Week 12 — a simple Mongoose query
+// (Just a preview — you don't need to understand this yet)
+const movies = await Movie.find({});
+res.status(200).json(movies);
+</code></pre>
+<details>
+<summary>🤔 Comprehension check — think before expanding</summary>
+<p>Before moving on, try to answer:</p>
+<ol>
+<li>Which MERN technology runs in the browser?</li>
+<li>Which MERN technology stores data permanently?</li>
+</ol>
+<p><em>(Discuss with your instructor if you're unsure — no pressure, this is just orientation)</em></p>
+</details>
+<hr>
+<h3 id="the-16-week-arc" tabindex="-1">The 16-Week Arc</h3>
+<p>Here is a simplified view of how Movie Buzz grows over the course:</p>
+<table>
+<thead>
+<tr>
+<th>Weeks</th>
+<th>Theme</th>
+<th>What Movie Buzz can do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>00–02</td>
+<td>Setup</td>
+<td>Environment verified, repo initialized</td>
+</tr>
+<tr>
+<td>03–07</td>
+<td>React</td>
+<td>Static UI with components, state, and events</td>
+</tr>
+<tr>
+<td>08–09</td>
+<td>Node + Express</td>
+<td>A working API server</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Checkpoint</td>
+<td>Tic-Tac-Toe — consolidate everything so far</td>
+</tr>
+<tr>
+<td>11–12</td>
+<td>MongoDB</td>
+<td>Data persists in a real database</td>
+</tr>
+<tr>
+<td>13–15</td>
+<td>CRUD</td>
+<td>Create, update, and delete movies</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Integration</td>
+<td>Frontend talks to backend — full stack complete</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="what-does-the-finished-app-look-like" tabindex="-1">What Does the Finished App Look Like?</h3>
+<p>The finished Movie Buzz application (<code>movie-buzz-finished/</code> in the repo) is a Netflix-dark-themed full-stack application where you can:</p>
+<ul>
+<li>Browse a list of movies displayed as cards</li>
+<li>Add new movies through a form</li>
+<li>Edit existing movie details</li>
+<li>Delete movies from the database</li>
+<li>Search, filter, and sort the movie list (optional advanced feature)</li>
+</ul>
+<p>Your job over 16 weeks is to build this from scratch, one piece at a time.</p>
+<hr>
+<h2 id="🛠️-your-tasks" tabindex="-1">🛠️ Your Tasks</h2>
+<blockquote class="callout callout--warning">
+<p>⚠️ <strong>Reminder:</strong> There are no coding tasks this week. Your job is to verify your environment and ask questions. That is genuinely the entire assignment.</p>
+</blockquote>
+<h3 class="step-heading" id="1step-1-verify-your-environment" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Verify Your Environment</h3>
+<p><strong>What you're doing:</strong> Run each verification command from the Setup section above and confirm every tool responds correctly.</p>
+<pre><code class="language-bash"># Run these one at a time and note the output
+node --version
+npm --version
+git --version
+git config --global user.name
+git config --global user.email
+code --version
+</code></pre>
+<details>
+<summary>💡 Stuck? Expand for a hint — not an answer</summary>
+<ul>
+<li><strong>If <code>node</code> is not found:</strong> Visit <a href="http://nodejs.org">nodejs.org</a> and download the LTS version. Alternatively, ask your instructor about installing nvm first.</li>
+<li><strong>If <code>git</code> is not found:</strong> Visit <a href="http://git-scm.com">git-scm.com</a> and follow the installer for your operating system.</li>
+<li><strong>If <code>git config</code> returns nothing:</strong> You need to set your name and email — the commands are in the Setup section above.</li>
+<li><strong>On Windows:</strong> If <code>code --version</code> fails, open VS Code, press <code>Ctrl+Shift+P</code>, and search for &quot;Shell Command: Install 'code' command in PATH.&quot;</li>
+</ul>
+</details>
+<hr>
+<h3 class="step-heading" id="2step-2-set-up-a-github-account" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Set Up a GitHub Account</h3>
+<p><strong>What you're doing:</strong> Confirm you can log in to GitHub. Starting next week, you'll push code there after every session.</p>
+<pre><code class="language-bash"># Verify Git knows who you are before you create your first repo
+git config --global user.name
+git config --global user.email
+</code></pre>
+<details>
+<summary>💡 Hint</summary>
+<ul>
+<li>Make sure the email in your <code>git config</code> matches the email you used to create your GitHub account. This is how GitHub connects your commits to your profile.</li>
+<li>If you haven't created a GitHub account yet, do it now at <a href="http://github.com">github.com</a> — it's free.</li>
+</ul>
+</details>
+<hr>
+<h3 class="step-heading" id="3step-3-explore-the-finished-app-read-only" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Explore the Finished App (Read-Only)</h3>
+<p><strong>What you're doing:</strong> Navigate to <code>movie-buzz-finished/</code> in the course repo and spend a few minutes reading the file structure. You don't need to run it yet — just look.</p>
+<pre><code class="language-bash"># From the course repo root
+ls movie-buzz-finished/
+ls movie-buzz-finished/client/src/
+ls movie-buzz-finished/server/
+</code></pre>
+<details>
+<summary>💡 Hint</summary>
+<ul>
+<li><strong>Think about:</strong> After exploring the structure, can you guess which folder is the React frontend and which is the Node.js backend?</li>
+<li><strong>Check:</strong> How many files are in <code>client/src/components/</code>? Each one of those is a React component you'll eventually build.</li>
+<li><strong>The pattern:</strong> <code>client/</code> = everything the browser uses, <code>server/</code> = everything Node.js uses.</li>
+</ul>
+</details>
+<hr>
+<h2 id="🐛-common-errors--fixes" tabindex="-1">🐛 Common Errors &amp; Fixes</h2>
+<details>
+<summary>❌ Error: `node: command not found` or `node is not recognized`</summary>
+<p><strong>Why this happens:</strong>
+Node.js is either not installed, or it was installed but your terminal doesn't know where to find it (PATH issue).</p>
+<p><strong>Check these things:</strong></p>
+<ol>
+<li>Open a fresh terminal window and try <code>node --version</code> again — sometimes a terminal opened before installation won't pick up new programs.</li>
+<li>On Windows, check if Node.js appears in &quot;Add or Remove Programs.&quot;</li>
+</ol>
+<p><strong>The fix:</strong></p>
+<pre><code class="language-bash"># Download and install Node.js LTS from:
+# https://nodejs.org/en/download
+
+# OR install nvm first (preferred) and use it to install Node.js:
+# macOS / Linux:
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+# Then close and reopen your terminal, then:
+nvm install --lts
+nvm use --lts
+</code></pre>
+</details>
+<details>
+<summary>❌ Error: `git config` returns blank — no name or email set</summary>
+<p><strong>Why this happens:</strong>
+Git was installed but never configured with your identity. Git requires a name and email attached to every commit.</p>
+<p><strong>Check these things:</strong></p>
+<ol>
+<li>Run <code>git config --list</code> to see all current config values.</li>
+<li>Confirm you are setting global config (use <code>--global</code>), not local config.</li>
+</ol>
+<p><strong>The fix:</strong></p>
+<pre><code class="language-bash"># Wrong (missing --global sets it only for a single repo):
+git config user.name &quot;Your Name&quot;
+
+# Correct (applies everywhere on your machine):
+git config --global user.name &quot;Your Name&quot;
+git config --global user.email &quot;you@example.com&quot;
+</code></pre>
+</details>
+<details>
+<summary>❌ Error: VS Code opens but `code` command doesn't work in the terminal</summary>
+<p><strong>Why this happens:</strong>
+VS Code installs the <code>code</code> command into your PATH as a separate step. If you skipped that step or installed VS Code differently, the command won't be available.</p>
+<p><strong>Check these things:</strong></p>
+<ol>
+<li>Try opening VS Code manually and checking if it opens at all.</li>
+<li>On macOS, confirm you moved VS Code to your Applications folder (not running it from the Downloads folder).</li>
+</ol>
+<p><strong>The fix:</strong></p>
+<pre><code class="language-bash"># In VS Code:
+# 1. Press Cmd+Shift+P (macOS) or Ctrl+Shift+P (Windows/Linux)
+# 2. Type: Shell Command: Install 'code' command in PATH
+# 3. Press Enter
+# 4. Close and reopen your terminal
+code --version  # Should now work
+</code></pre>
+</details>
+<hr>
+<h2 id="✅-deliverables-checklist" tabindex="-1">✅ Deliverables Checklist</h2>
+<p>Before marking this week complete, verify each item:</p>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>Node.js installed:</strong> <code>node --version</code> returns v16 or higher in your terminal</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>npm installed:</strong> <code>npm --version</code> returns a number without errors</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>Git installed and configured:</strong> <code>git config --global user.name</code> returns your name</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>VS Code working:</strong> You can open a file and use the integrated terminal</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>GitHub account exists:</strong> You can log in at <a href="http://github.com">github.com</a></li>
+</ul>
+<hr>
+<h2 id="🚀-stretch-goals" tabindex="-1">🚀 Stretch Goals</h2>
+<blockquote class="callout callout--default">
+<p>These are optional. Attempt them after completing all deliverables. No starter code is provided — that's the point.</p>
+</blockquote>
+<details>
+<summary>⭐ Stretch 1: Customize Your GitHub Profile</summary>
+<p><strong>The challenge:</strong>
+Create a profile README on GitHub. GitHub displays it automatically on your profile page when you create a repo named exactly after your username.</p>
+<p><strong>Why this matters:</strong>
+Employers look at GitHub profiles. A well-written profile README demonstrates initiative and communication skills — both valued in the industry.</p>
+<p><strong>You'll need to research:</strong></p>
+<ul>
+<li>How to create a GitHub profile README (search &quot;github profile readme&quot;)</li>
+<li>Markdown syntax for formatting headers, lists, and links</li>
+</ul>
+</details>
+<details>
+<summary>⭐⭐ Stretch 2: Run the Finished App (harder)</summary>
+<p><strong>The challenge:</strong>
+Get <code>movie-buzz-finished/</code> running locally. This means starting MongoDB, running the server, and running the client — and having the browser display actual movies.</p>
+<p><strong>Why this matters:</strong>
+Seeing the finished product before you build it gives you a concrete mental model to work toward. Every concept in weeks 01–16 will click faster when you already know what the destination looks like.</p>
+<p><strong>You'll need to research:</strong></p>
+<ul>
+<li>How to install and start MongoDB on your operating system</li>
+<li>How to run two npm processes at once (server and client)</li>
+<li>What port each service should run on (check the <a href="http://CLAUDE.md">CLAUDE.md</a> in the repo root)</li>
+</ul>
+</details>
+<hr>
+<h2 id="🎫-exit-ticket" tabindex="-1">🎫 Exit Ticket</h2>
+<blockquote class="callout callout--default">
+<p>No exit ticket this week — see you at Week 01!</p>
+<p>Come prepared next week having verified all items in the Deliverables Checklist above. If anything is broken, flag it before Week 01 so your instructor can help you fix it.</p>
+</blockquote>
+<hr>
+<h2 id="📖-reference--resources" tabindex="-1">📖 Reference &amp; Resources</h2>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Why It's Useful</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://nodejs.org/en/download">Node.js LTS Downloads</a></td>
+<td>Official installer for Node.js on all platforms</td>
+</tr>
+<tr>
+<td><a href="https://git-scm.com/downloads">Git Download</a></td>
+<td>Official Git installer</td>
+</tr>
+<tr>
+<td><a href="https://code.visualstudio.com/">VS Code Download</a></td>
+<td>Official VS Code installer</td>
+</tr>
+<tr>
+<td><a href="https://github.com">GitHub</a></td>
+<td>Where you'll push all your course work</td>
+</tr>
+<tr>
+<td><a href="https://github.com/nvm-sh/nvm">nvm (Node Version Manager)</a></td>
+<td>Recommended way to manage Node.js versions on macOS/Linux</td>
+</tr>
+</tbody>
+</table>
+<blockquote class="callout callout--note">
+<p>📌 <strong>Reminder:</strong> <code>movie-buzz-finished/</code> is the reference implementation for the entire course. Use it to <strong>verify your output</strong>, not to copy code.</p>
+</blockquote>
+
+<div class="pager">
+<span class="disabled">← Previous</span>
+<a href="../week_01_bash_and_git/index.html">Week 01 →</a>
+</div>
+</main>
+</div>
+</body>
+</html>

@@ -1,3 +1,14 @@
+/**
+ * STARTER FILE — Week 14: UPDATE Operations
+ *
+ * This file is intentionally incomplete. Your task:
+ *   1. Implement updateMovie in controllers/movieController.js
+ *   2. Uncomment router.put('/:id', updateMovie) and remove the placeholder route
+ *   3. Bonus: implement partialUpdateMovie and uncomment the PATCH route
+ *
+ * Reference: movie-buzz-finished/server/routes/movieRoutes.js
+ * Do not copy from the reference — implement it yourself first.
+ */
 const express = require('express');
 const {
   getMovies,
@@ -20,7 +31,7 @@ router.get('/test', (req, res) => {
       'GET /api/movies - Get all movies',
       'GET /api/movies/:id - Get movie by ID',
       'POST /api/movies - Create new movie',
-      'PUT /api/movies/:id - Update movie (NEW - Week 12)',
+      'PUT /api/movies/:id - Update movie (NEW - Week 14)',
       'PATCH /api/movies/:id - Partial update (bonus)',
       'GET /api/movies/search/:query - Search movies',
       'GET /api/test-connection - Test database connection'
@@ -28,16 +39,16 @@ router.get('/test', (req, res) => {
   });
 });
 
-// READ routes (implemented in Week 10)
+// READ routes (implemented in Week 12)
 router.get('/', getMovies);                        // GET /api/movies
 router.get('/test-connection', testConnection);    // GET /api/test-connection
 router.get('/search/:query', searchMovies);        // GET /api/movies/search/:query
 router.get('/:id', getMovieById);                  // GET /api/movies/:id
 
-// CREATE route (implemented in Week 11)
+// CREATE route (implemented in Week 13)
 router.post('/', createMovie);                     // POST /api/movies
 
-// UPDATE routes (NEW - Week 12 Focus)
+// UPDATE routes (NEW - Week 14 Focus)
 // TODO: Students will uncomment and test these routes during lesson
 
 // TODO: Implement PUT route for complete update
@@ -46,26 +57,31 @@ router.post('/', createMovie);                     // POST /api/movies
 // TODO: Implement PATCH route for partial update (bonus)
 // router.patch('/:id', partialUpdateMovie);       // PATCH /api/movies/:id
 
-// Placeholder routes with instructions for UPDATE operations
-router.put('/placeholder-update/:id', (req, res) => {
-  res.json({
+// Placeholder PUT route — at the correct path so students see this message, not a 404
+router.put('/:id', (req, res) => {
+  res.status(501).json({
     success: false,
-    message: 'This is a placeholder route for UPDATE',
-    instructions: 'Students will uncomment router.put("/:id", updateMovie)',
-    hint: 'Look for the TODO comment in movieRoutes.js',
+    message: 'UPDATE route not connected yet',
     movieId: req.params.id,
-    updateData: req.body
+    updateData: req.body,
+    instructions: [
+      '1. Implement updateMovie in controllers/movieController.js',
+      '2. Uncomment router.put("/:id", updateMovie) above',
+      '3. Comment out this placeholder route',
+      '4. Test PUT /api/movies/:id with Postman'
+    ],
+    hint: 'Look for the TODO comment in movieRoutes.js'
   });
 });
 
-router.patch('/placeholder-patch/:id', (req, res) => {
-  res.json({
+// Placeholder PATCH route (bonus feature)
+router.patch('/:id', (req, res) => {
+  res.status(501).json({
     success: false,
-    message: 'This is a placeholder route for PATCH (partial update)',
-    instructions: 'Advanced students can uncomment router.patch("/:id", partialUpdateMovie)',
-    hint: 'This is a bonus feature for partial updates',
+    message: 'PATCH (partial update) route not connected yet (bonus feature)',
     movieId: req.params.id,
-    partialData: req.body
+    partialData: req.body,
+    instructions: 'Advanced students can uncomment router.patch("/:id", partialUpdateMovie)'
   });
 });
 

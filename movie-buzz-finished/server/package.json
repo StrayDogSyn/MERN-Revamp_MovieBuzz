@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test nodemon --exec 'mocha --recursive -R min'",
-    "start": "npm run seed && nodemon server.js",
+    "start": "nodemon server.js",
     "seed": "mongosh movie-buzz --eval 'printjson(db.dropDatabase())' && mongoimport --db=movie-buzz --collection=movies --file=db_seed/movies.json"
   },
   "keywords": [],
