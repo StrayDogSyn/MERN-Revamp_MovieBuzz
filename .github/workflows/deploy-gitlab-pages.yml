@@ -26,10 +26,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: npm
-          cache-dependency-path: |
-            source/package-lock.json
-            source/client/package-lock.json
 
       - name: Build static site
         run: |
