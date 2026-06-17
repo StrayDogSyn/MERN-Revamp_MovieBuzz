@@ -18,7 +18,7 @@ module.exports = {
     }
   },
 
-  async getMovieToEdit(req, res) {
+  async getMovieById(req, res) {
     const { id } = req.params;
     if (!isValidId(id)) return res.status(400).json({ error: 'Invalid movie ID' });
     try {

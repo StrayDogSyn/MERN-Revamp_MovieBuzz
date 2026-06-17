@@ -1,0 +1,9 @@
+# CRA sensitive .env variants — never commit these
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Note: .env (without suffix) IS intentionally tracked in this repo.
+# It contains only HOST=localhost and DANGEROUSLY_DISABLE_HOST_CHECK=true —
+# no secrets. See docs/CONVENTIONS.md §8 for rationale.

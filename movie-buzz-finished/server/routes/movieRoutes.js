@@ -5,8 +5,8 @@ const router = express.Router();
 // GET all movies
 router.get('/api/movies', movieController.getMovies);
 
-// GET single movie by ID (for edit form)
-router.get('/api/movies/:id', movieController.getMovieToEdit);
+// GET single movie by ID
+router.get('/api/movies/:id', movieController.getMovieById);
 
 // POST new movie
 router.post('/api/movies', movieController.createMovie);

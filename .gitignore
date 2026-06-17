@@ -3,3 +3,11 @@
 docs/
 .DS_Store
 node_modules/
+
+# Environment files — never commit secrets
+.env
+.env.local
+.env.*.local
+
+# Exception: client/.env is intentionally tracked (CRA DANGEROUSLY_DISABLE_HOST_CHECK, no secrets)
+!movie-buzz-finished/client/.env
