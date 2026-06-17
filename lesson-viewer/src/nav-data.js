@@ -32,12 +32,14 @@ const WEEKS = [
   { id: '16', dirName: 'week_16_frontend_backend_integration', title: 'Frontend/Backend Integration', phase: 'backend', prototype: true },
   { id: 'opt-search', dirName: 'week_optional_search_feature', title: 'Search Feature', phase: 'optional', prototype: true },
   { id: 'opt-testing', dirName: 'week_optional_testing_suite', title: 'Testing Suite', phase: 'optional', prototype: true },
+  { id: 'log-01', dirName: 'log_01_ai_engineering_loop', title: 'Log 01 · AI Engineering Loop', phase: 'logs', prototype: true },
 ];
 
 const PHASE_LABELS = {
   'pre-backend': 'Weeks 00–07 · Pre-Backend (React & Tooling)',
   backend: 'Weeks 08–16 · Backend (Node, Express, MongoDB)',
   optional: 'Optional Modules',
+  logs: 'Engineering Logs',
 };
 
 function studentMdPathFor(week) {

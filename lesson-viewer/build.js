@@ -46,14 +46,14 @@ const md = new MarkdownIt({
 registerRules(md);
 
 function buildSidebarHtml(activeId) {
-  const phases = ['pre-backend', 'backend', 'optional'];
+  const phases = ['pre-backend', 'backend', 'optional', 'logs'];
   return phases.map(phase => {
     const items = WEEKS.filter(w => w.phase === phase).map(w => {
       const isProtoOnly = w.prototype;
       const href = isProtoOnly
         ? `../${w.dirName}/index.html`
         : null;
-      const label = w.id.startsWith('opt-')
+      const label = (w.id.startsWith('opt-') || w.id.startsWith('log-'))
         ? w.title
         : `Week ${w.id} · ${w.title}`;
       const cls = w.id === activeId ? 'nav-link active' : 'nav-link';
@@ -80,7 +80,7 @@ function pagerLink(week, dir) {
 
 /* Deterministic-but-varied page angle: spread weeks across 100–170deg arc */
 function pageGradientAngle(weekId) {
-  const ids = ['00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','opt-search','opt-testing'];
+  const ids = ['00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','opt-search','opt-testing','log-01'];
   const idx = ids.indexOf(weekId);
   const t = idx === -1 ? 0.5 : idx / (ids.length - 1);
   return Math.round(100 + t * 70);
