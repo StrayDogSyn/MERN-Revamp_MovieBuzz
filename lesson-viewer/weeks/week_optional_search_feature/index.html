@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Student Guide: Advanced Search, Filter, and Sort Feature · Movie Buzz Lesson Viewer</title>
 <link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="https://cdn.tlm.cloud/fontawesome/5.15.2/css/all.css">
 <link rel="icon" href="data:,">
 </head>
-<body>
+<body style="--page-gradient-angle:166deg;--animation-seed:0.733">
 <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
 <label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
 <div class="layout">
@@ -62,20 +63,20 @@
 <p>✅ Familiarity with controlled components in React</p>
 <hr>
 <h2 id="overview-of-features" tabindex="-1">Overview of Features</h2>
-<h3 class="step-heading" id="1step-1-search-bar" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Search Bar</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-search-bar" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Search Bar</h3>
 <p>Users can type to search across:</p>
 <ul>
 <li>Movie name</li>
 <li>Director name</li>
 <li>Actor names (in the stars array)</li>
 </ul>
-<h3 class="step-heading" id="2step-2-filter-controls" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Filter Controls</h3>
+<h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-filter-controls" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Filter Controls</h3>
 <p>Users can filter by:</p>
 <ul>
 <li>Genre (Action, Comedy, Drama, etc.)</li>
 <li>Rating (G, PG, PG-13, R, etc.)</li>
 </ul>
-<h3 class="step-heading" id="3step-3-sort-options" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Sort Options</h3>
+<h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-sort-options" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Sort Options</h3>
 <p>Users can sort by:</p>
 <ul>
 <li>Name (A-Z)</li>
@@ -85,7 +86,7 @@
 </ul>
 <hr>
 <h2 id="implementation-steps" tabindex="-1">Implementation Steps</h2>
-<h3 class="step-heading" id="1step-1-set-up-state-variables" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Set Up State Variables</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-set-up-state-variables" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Set Up State Variables</h3>
 <p>First, add state to manage search, filter, and sort options in your <code>App.js</code>:</p>
 <pre><code class="language-javascript">import React, { useState } from 'react';
 
@@ -109,7 +110,7 @@ function App() {
 }
 </code></pre>
 <hr>
-<h3 class="step-heading" id="2step-2-create-the-searchbar-component" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Create the SearchBar Component</h3>
+<h3 class="step-heading" style="--organic-tilt:0.1deg" id="2step-2-create-the-searchbar-component" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Create the SearchBar Component</h3>
 <p>Create a new file <code>src/components/SearchBar.js</code>:</p>
 <pre><code class="language-javascript">import React from 'react';
 import './SearchBar.css';
@@ -149,7 +150,7 @@ export default SearchBar;
 <li>Test that typing updates the search term</li>
 </ol>
 <hr>
-<h3 class="step-heading" id="3step-3-create-the-filtercontrols-component" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Create the FilterControls Component</h3>
+<h3 class="step-heading" style="--organic-tilt:-0.2deg" id="3step-3-create-the-filtercontrols-component" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Create the FilterControls Component</h3>
 <p>Create a new file <code>src/components/FilterControls.js</code>:</p>
 <pre><code class="language-javascript">import React from 'react';
 
@@ -230,7 +231,7 @@ export default FilterControls;
 <li>Import this component in your App.js</li>
 </ol>
 <hr>
-<h3 class="step-heading" id="4step-4-implement-the-filter-logic" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Implement the Filter Logic</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="4step-4-implement-the-filter-logic" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Implement the Filter Logic</h3>
 <p>In your <code>App.js</code>, create a function that applies search, filter, and sort:</p>
 <pre><code class="language-javascript">function App() {
   // ... your state variables ...
@@ -338,7 +339,7 @@ export default FilterControls;
 }
 </code></pre>
 <hr>
-<h3 class="step-heading" id="5step-5-handle-array-fields-safely" tabindex="-1"><span class="step-badge" aria-hidden="true">5</span><span class="sr-only">Step 5: </span>Handle Array Fields Safely</h3>
+<h3 class="step-heading" style="--organic-tilt:-0.1deg" id="5step-5-handle-array-fields-safely" tabindex="-1"><span class="step-badge" aria-hidden="true">5</span><span class="sr-only">Step 5: </span>Handle Array Fields Safely</h3>
 <p>⚠️ <strong>CRITICAL</strong>: MongoDB stores <code>genre</code> and <code>stars</code> as arrays. Always check before using array methods!</p>
 <pre><code class="language-javascript">// ❌ WRONG: Will crash if stars is undefined or not an array
 movie.stars.some(star =&gt; star.includes(searchTerm))
@@ -363,7 +364,7 @@ Array.isArray(movie.stars) &amp;&amp; movie.stars.some(star =&gt;
   );
 </code></pre>
 <hr>
-<h3 class="step-heading" id="6step-6-add-styling" tabindex="-1"><span class="step-badge" aria-hidden="true">6</span><span class="sr-only">Step 6: </span>Add Styling</h3>
+<h3 class="step-heading" style="--organic-tilt:0.2deg" id="6step-6-add-styling" tabindex="-1"><span class="step-badge" aria-hidden="true">6</span><span class="sr-only">Step 6: </span>Add Styling</h3>
 <p>Create <code>src/components/SearchBar.css</code>:</p>
 <pre><code class="language-css">/* TODO: Add your CSS styles here */
 .search-bar {
@@ -554,5 +555,7 @@ function App() {
 </div>
 </main>
 </div>
+<script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
+<script src="../assets/animations.js"></script>
 </body>
 </html>

@@ -62,6 +62,21 @@ function pagerLink(week, dir) {
   return `<a href="../${week.dirName}/index.html">${arrow}</a>`;
 }
 
+/* Deterministic-but-varied page angle: spread weeks across 100–170deg arc */
+function pageGradientAngle(weekId) {
+  const ids = ['00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','opt-search','opt-testing'];
+  const idx = ids.indexOf(weekId);
+  const t = idx === -1 ? 0.5 : idx / (ids.length - 1);
+  return Math.round(100 + t * 70);
+}
+
+/* Deterministic seed per week in [0.3, 0.95] for glow/animation variance */
+function animationSeed(weekId) {
+  let hash = 0;
+  for (let i = 0; i < weekId.length; i++) hash = (hash * 31 + weekId.charCodeAt(i)) & 0xffff;
+  return (0.3 + (hash % 1000) / 1000 * 0.65).toFixed(3);
+}
+
 function renderWeek(week, template) {
   const mdPath = path.join(REPO_ROOT, week.dirName, 'student.md');
   const raw = fs.readFileSync(mdPath, 'utf8');
@@ -75,6 +90,8 @@ function renderWeek(week, template) {
   const prevWeek = idx > 0 ? WEEKS[idx - 1] : null;
   const nextWeek = idx < WEEKS.length - 1 ? WEEKS[idx + 1] : null;
 
+  const bodyStyle = `--page-gradient-angle:${pageGradientAngle(week.id)}deg;--animation-seed:${animationSeed(week.id)}`;
+
   const html = template
     .replace(/{{TITLE}}/g, title)
     .replace(/{{PHASE_LABEL}}/g, PHASE_LABELS[week.phase])
@@ -82,7 +99,9 @@ function renderWeek(week, template) {
     .replace(/{{CONTENT_HTML}}/g, contentHtml)
     .replace(/{{ASSET_PATH}}/g, '../assets/styles.css')
     .replace(/{{PREV_LINK}}/g, pagerLink(prevWeek, 'prev'))
-    .replace(/{{NEXT_LINK}}/g, pagerLink(nextWeek, 'next'));
+    .replace(/{{NEXT_LINK}}/g, pagerLink(nextWeek, 'next'))
+    .replace(/{{BODY_STYLE}}/g, bodyStyle)
+    .replace(/{{ANIMATIONS_PATH}}/g, '../assets/animations.js');
 
   const outDir = path.join(OUT_DIR, week.dirName);
   fs.mkdirSync(outDir, { recursive: true });

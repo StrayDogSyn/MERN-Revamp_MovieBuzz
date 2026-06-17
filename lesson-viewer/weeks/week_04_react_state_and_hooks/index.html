@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>🎬 Week 04: React State & Hooks — Student Guide · Movie Buzz Lesson Viewer</title>
 <link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="https://cdn.tlm.cloud/fontawesome/5.15.2/css/all.css">
 <link rel="icon" href="data:,">
 </head>
-<body>
+<body style="--page-gradient-angle:116deg;--animation-seed:0.651">
 <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
 <label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
 <div class="layout">
@@ -41,13 +42,15 @@
 <div class="breadcrumb">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
 </div>
 <h1 id="🎬-week-04-react-state--hooks-—-student-guide" tabindex="-1">🎬 Week 04: React State &amp; Hooks — Student Guide</h1>
-<blockquote class="callout callout--meta">
+<blockquote class="callout callout--meta" style="--tilt:-0.1deg;--glow-intensity:0.99">
+<div class="callout-label lift"><i class="fas fa-key callout-icon" aria-hidden="true"></i><span>Key Concept</span></div>
 <p>🔑 <strong>Access Code:</strong> <code>loop84</code>   ·   ⏱️ <strong>Estimated Time:</strong> 3–4 hrs   ·   🎯 <strong>Difficulty:</strong> ⭐⭐</p>
 </blockquote>
 <hr>
 <h2 id="🗺️-what-youre-building-this-week" tabindex="-1">🗺️ What You're Building This Week</h2>
 <p>This week you will add interactivity to individual Movie Buzz cards. Each card will gain a favorites toggle — a heart icon that flips between favorited and unfavorited when clicked — and a show/hide description toggle that expands or collapses the movie's description. Both features live entirely in the component; no database is involved yet.</p>
-<blockquote class="callout callout--tip">
+<blockquote class="callout callout--tip" style="--tilt:0.2deg;--glow-intensity:0.68">
+<div class="callout-label lift"><i class="fas fa-lightbulb callout-icon" aria-hidden="true"></i><span>Tip</span></div>
 <p>💡 <strong>This week in the arc:</strong> You've already built static components that display data; now you're making those components respond to user actions, which is the foundation for every interactive feature in the rest of the course.</p>
 </blockquote>
 <hr>
@@ -62,23 +65,28 @@
 </ul>
 <hr>
 <h2 id="🔑-key-concepts" tabindex="-1">🔑 Key Concepts</h2>
-<blockquote class="callout callout--concept">
+<blockquote class="callout callout--concept" style="--tilt:0deg;--glow-intensity:0.80">
+<div class="callout-label lift"><i class="fas fa-cube callout-icon" aria-hidden="true"></i><span>Concept</span></div>
 <p><strong>State</strong>
 A piece of data that a component owns and can change over time. When state changes, React automatically re-renders the component so the UI stays in sync. Think of it as a sticky note on the fridge that React is watching — the moment you change what the note says, React redraws anything that reads from it.</p>
 </blockquote>
-<blockquote class="callout callout--concept">
+<blockquote class="callout callout--concept" style="--tilt:0.2deg;--glow-intensity:0.78">
+<div class="callout-label lift"><i class="fas fa-cube callout-icon" aria-hidden="true"></i><span>Concept</span></div>
 <p><strong>useState</strong>
 The React hook that creates a state variable and a setter function. You call it at the top of your component: <code>const [value, setValue] = useState(initialValue)</code>. You always update state by calling the setter — never by modifying <code>value</code> directly.</p>
 </blockquote>
-<blockquote class="callout callout--concept">
+<blockquote class="callout callout--concept" style="--tilt:0.4deg;--glow-intensity:0.76">
+<div class="callout-label lift"><i class="fas fa-cube callout-icon" aria-hidden="true"></i><span>Concept</span></div>
 <p><strong>useEffect</strong>
 The React hook that lets you run a side effect (anything outside the render itself — fetching data, updating the document title, reading from localStorage) after the component renders. The dependency array controls when the effect re-runs.</p>
 </blockquote>
-<blockquote class="callout callout--concept">
+<blockquote class="callout callout--concept" style="--tilt:0.1deg;--glow-intensity:0.74">
+<div class="callout-label lift"><i class="fas fa-cube callout-icon" aria-hidden="true"></i><span>Concept</span></div>
 <p><strong>Re-render</strong>
 React re-draws a component whenever its state or props change. Re-renders are cheap and intentional — don't be afraid of them. What you must avoid is accidentally preventing them (by mutating state instead of replacing it) or causing infinite loops (by updating state inside an effect with no dependency array).</p>
 </blockquote>
-<blockquote class="callout callout--concept">
+<blockquote class="callout callout--concept" style="--tilt:0.30000000000000004deg;--glow-intensity:0.72">
+<div class="callout-label lift"><i class="fas fa-cube callout-icon" aria-hidden="true"></i><span>Concept</span></div>
 <p><strong>Controlled Component</strong>
 A form element whose <code>value</code> is bound to React state, so React is the single source of truth. Every keystroke calls a setter; the displayed value always reflects state.</p>
 </blockquote>
@@ -86,16 +94,16 @@ A form element whose <code>value</code> is bound to React state, so React is the
 <h2 id="⚙️-setup" tabindex="-1">⚙️ Setup</h2>
 <details>
 <summary>📦 Step-by-step environment setup</summary>
-<h3 class="step-heading" id="1step-1-navigate-to-this-weeks-directory" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Navigate to this week's directory</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-navigate-to-this-weeks-directory" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Navigate to this week's directory</h3>
 <pre><code class="language-bash">cd week_04_react_state_and_hooks/movie-buzz
 </code></pre>
-<h3 class="step-heading" id="2step-2-install-client-dependencies" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Install client dependencies</h3>
+<h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-install-client-dependencies" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Install client dependencies</h3>
 <pre><code class="language-bash">cd client &amp;&amp; npm install
 </code></pre>
-<h3 class="step-heading" id="3step-3-start-the-react-development-server" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Start the React development server</h3>
+<h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-start-the-react-development-server" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Start the React development server</h3>
 <pre><code class="language-bash">npm start
 </code></pre>
-<h3 class="step-heading" id="4step-4-verify-its-working" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Verify it's working</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="4step-4-verify-its-working" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Verify it's working</h3>
 <pre><code class="language-bash"># Expected: browser opens to http://localhost:3000
 # You should see a list of movies rendered from static data
 </code></pre>
@@ -194,10 +202,11 @@ useEffect(() =&gt; {
 </code></pre>
 <hr>
 <h2 id="🛠️-your-tasks" tabindex="-1">🛠️ Your Tasks</h2>
-<blockquote class="callout callout--warning">
+<blockquote class="callout callout--warning" style="--tilt:0.30000000000000004deg;--glow-intensity:0.92">
+<div class="callout-label lift"><i class="fas fa-exclamation-triangle callout-icon" aria-hidden="true"></i><span>Warning</span></div>
 <p>⚠️ <strong>Reminder:</strong> Implement each TODO yourself. Looking at <code>movie-buzz-finished/</code> before you've tried is the fast path to forgetting everything by next week.</p>
 </blockquote>
-<h3 class="step-heading" id="1step-1-add-a-favorites-toggle-to-movieblock" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Add a Favorites Toggle to MovieBlock</h3>
+<h3 class="step-heading" style="--organic-tilt:0.1deg" id="1step-1-add-a-favorites-toggle-to-movieblock" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Add a Favorites Toggle to MovieBlock</h3>
 <p><strong>File to edit:</strong> <code>client/src/components/MovieBlock.js</code></p>
 <p><strong>What you're doing:</strong> Add an <code>isFavorited</code> state variable that flips between <code>true</code> and <code>false</code> each time the user clicks the heart icon.</p>
 <pre><code class="language-javascript">// STARTER CODE — implement the TODO blocks
@@ -234,7 +243,7 @@ export default MovieBlock;
 </ul>
 </details>
 <hr>
-<h3 class="step-heading" id="2step-2-add-an-expandcollapse-description-toggle" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Add an Expand/Collapse Description Toggle</h3>
+<h3 class="step-heading" style="--organic-tilt:-0.2deg" id="2step-2-add-an-expandcollapse-description-toggle" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Add an Expand/Collapse Description Toggle</h3>
 <p><strong>File to edit:</strong> <code>client/src/components/MovieBlock.js</code></p>
 <p><strong>What you're doing:</strong> Add a second piece of state, <code>isExpanded</code>, that controls whether the full movie description is visible. A &quot;Show more&quot; / &quot;Show less&quot; button toggles it.</p>
 <pre><code class="language-javascript">// STARTER CODE — add to your existing MovieBlock component
@@ -276,7 +285,7 @@ function MovieBlock({ movie }) {
 </ul>
 </details>
 <hr>
-<h3 class="step-heading" id="3step-3-verify-both-states-survive-multiple-clicks" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Verify Both States Survive Multiple Clicks</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="3step-3-verify-both-states-survive-multiple-clicks" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Verify Both States Survive Multiple Clicks</h3>
 <p><strong>File to verify:</strong> <code>client/src/components/MovieBlock.js</code></p>
 <p><strong>What you're doing:</strong> This is a testing task, not a coding task. Manually click the heart and expand buttons on multiple movie cards in sequence and answer these questions before moving on:</p>
 <ol>
@@ -294,7 +303,7 @@ function MovieBlock({ movie }) {
 </ul>
 </details>
 <hr>
-<h3 class="step-heading" id="4step-4-use-useeffect-to-log-state-changes" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Use useEffect to Log State Changes</h3>
+<h3 class="step-heading" style="--organic-tilt:-0.1deg" id="4step-4-use-useeffect-to-log-state-changes" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Use useEffect to Log State Changes</h3>
 <p><strong>File to edit:</strong> <code>client/src/components/MovieBlock.js</code></p>
 <p><strong>What you're doing:</strong> Add a <code>useEffect</code> that logs to the console whenever <code>isFavorited</code> changes. This is a diagnostic step — it confirms you understand the dependency array and prepares you for the localStorage stretch goal.</p>
 <pre><code class="language-javascript">// STARTER CODE — add this inside MovieBlock, after your state declarations
@@ -399,7 +408,8 @@ Move the <code>useState</code> calls inside the <code>MovieBlock</code> function
 </ul>
 <hr>
 <h2 id="🚀-stretch-goals" tabindex="-1">🚀 Stretch Goals</h2>
-<blockquote class="callout callout--default">
+<blockquote class="callout callout--default" style="--tilt:0deg;--glow-intensity:0.80">
+<div class="callout-label lift"><i class="fas fa-info-circle callout-icon" aria-hidden="true"></i><span>Note</span></div>
 <p>These are optional. Attempt them after completing all deliverables. No starter code is provided — that's the point.</p>
 </blockquote>
 <details>
@@ -432,7 +442,8 @@ This requires lifting state up — the &quot;show favorites only&quot; toggle li
 </details>
 <hr>
 <h2 id="🎫-exit-ticket" tabindex="-1">🎫 Exit Ticket</h2>
-<blockquote class="callout callout--default">
+<blockquote class="callout callout--default" style="--tilt:0.2deg;--glow-intensity:0.68">
+<div class="callout-label lift"><i class="fas fa-info-circle callout-icon" aria-hidden="true"></i><span>Note</span></div>
 <p>When you're done, submit your exit ticket using access code: <strong><code>loop84</code></strong></p>
 <p>The questions cover: state vs props, useState syntax, toggle patterns, useEffect dependency arrays, and what triggers a re-render.</p>
 </blockquote>
@@ -468,7 +479,8 @@ This requires lifting state up — the &quot;show favorites only&quot; toggle li
 </tr>
 </tbody>
 </table>
-<blockquote class="callout callout--note">
+<blockquote class="callout callout--note" style="--tilt:-0.1deg;--glow-intensity:0.99">
+<div class="callout-label lift"><i class="fas fa-thumbtack callout-icon" aria-hidden="true"></i><span>Note</span></div>
 <p>📌 <strong>Reminder:</strong> <code>movie-buzz-finished/</code> is the reference implementation. Use it to <strong>verify your output</strong>, not to copy code.</p>
 </blockquote>
 
@@ -478,5 +490,7 @@ This requires lifting state up — the &quot;show favorites only&quot; toggle li
 </div>
 </main>
 </div>
+<script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
+<script src="../assets/animations.js"></script>
 </body>
 </html>

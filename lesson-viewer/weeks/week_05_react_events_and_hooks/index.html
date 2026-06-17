@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Week 5 - React Events & Hooks · Movie Buzz Lesson Viewer</title>
 <link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="https://cdn.tlm.cloud/fontawesome/5.15.2/css/all.css">
 <link rel="icon" href="data:,">
 </head>
-<body>
+<body style="--page-gradient-angle:119deg;--animation-seed:0.652">
 <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
 <label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
 <div class="layout">
@@ -116,7 +117,7 @@ npm start
 <hr>
 <h2 id="simple-event-examples---building-understanding" tabindex="-1">Simple Event Examples - Building Understanding</h2>
 <p>Before we add advanced features to Movie Buzz, let's practice with simple event handling examples:</p>
-<h3 class="step-heading" id="1step-1-button-click-handler" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Button Click Handler</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-button-click-handler" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Button Click Handler</h3>
 <p>Create <code>src/components/ClickCounter.js</code>:</p>
 <h3 id="code-structure-explanation" tabindex="-1">Code Structure Explanation</h3>
 <p>Before we write the code, let's understand what this component will do:</p>
@@ -277,7 +278,7 @@ export default ClickCounter;
 <li><strong>State Updates</strong>: Both states update in single event, showing React's batching</li>
 <li><strong>User Experience</strong>: Provides meaningful information (count + timestamp)</li>
 </ul>
-<h3 class="step-heading" id="2step-2-form-with-multiple-inputs" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Form with Multiple Inputs</h3>
+<h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-form-with-multiple-inputs" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Form with Multiple Inputs</h3>
 <p>Create <code>src/components/SimpleForm.js</code>:</p>
 <h3 id="code-structure-explanation-1" tabindex="-1">Code Structure Explanation</h3>
 <p>Before we write the code, let's understand what this component will do:</p>
@@ -498,7 +499,7 @@ export default SimpleForm;
 <li><strong>Debuggable</strong>: All form data in one place</li>
 <li><strong>Flexible</strong>: Same pattern works for any form size</li>
 </ul>
-<h3 class="step-heading" id="3step-3-dynamic-list-with-delete" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Dynamic List with Delete</h3>
+<h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-dynamic-list-with-delete" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Dynamic List with Delete</h3>
 <p>Create <code>src/components/TodoList.js</code>:</p>
 <h3 id="code-structure-explanation-2" tabindex="-1">Code Structure Explanation</h3>
 <p>Before we write the code, let's understand what this component will do:</p>
@@ -744,8 +745,8 @@ export default TodoList;
 <li><strong>User Friendly</strong>: Multiple ways to interact (button, Enter key)</li>
 <li><strong>Data Integrity</strong>: Validation prevents empty todos</li>
 </ul>
-<blockquote class="callout callout--reflection-try">
-<div class="callout-label lift">🛠️ Hands-On — Try It Out</div>
+<blockquote class="callout callout--reflection-try" style="--tilt:-0.30000000000000004deg;--glow-intensity:0.67">
+<div class="callout-label lift"><i class="fas fa-tools callout-icon" aria-hidden="true"></i><span>Hands-On — Try It Out</span></div>
 <p><code>Try It Out</code>
 Create and test these components before moving to Movie Buzz. Notice how:</p>
 <ul>
@@ -2191,8 +2192,8 @@ export default App;
 <li>Advanced useEffect patterns with cleanup</li>
 </ul>
 <p>Our app now demonstrates professional-level React development patterns that you'll use in real-world applications.</p>
-<blockquote class="callout callout--reflection-consider">
-<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
+<blockquote class="callout callout--reflection-consider" style="--tilt:0.30000000000000004deg;--glow-intensity:0.82">
+<div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code><br>
 How has managing multiple pieces of state changed the complexity of our application? What patterns help keep it manageable?</p>
 </blockquote>
@@ -2216,5 +2217,7 @@ How has managing multiple pieces of state changed the complexity of our applicat
 </div>
 </main>
 </div>
+<script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
+<script src="../assets/animations.js"></script>
 </body>
 </html>

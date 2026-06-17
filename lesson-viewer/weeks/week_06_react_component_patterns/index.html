@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Week 6 - React Component Patterns & Composition · Movie Buzz Lesson Viewer</title>
 <link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="https://cdn.tlm.cloud/fontawesome/5.15.2/css/all.css">
 <link rel="icon" href="data:,">
 </head>
-<body>
+<body style="--page-gradient-angle:123deg;--animation-seed:0.652">
 <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
 <label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
 <div class="layout">
@@ -52,7 +53,7 @@
 </ul>
 <h2 id="simple-pattern-examples---building-understanding" tabindex="-1">Simple Pattern Examples - Building Understanding</h2>
 <p>Before applying patterns to Movie Buzz, let's explore simple examples of component patterns:</p>
-<h3 class="step-heading" id="1step-1-basic-container-component" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Basic Container Component</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-basic-container-component" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Basic Container Component</h3>
 <p>Create <code>src/components/Box.js</code>:</p>
 <pre><code class="language-javascript">// A simple container that wraps content
 function Box({ color = 'lightblue', children }) {
@@ -74,7 +75,7 @@ function Box({ color = 'lightblue', children }) {
   &lt;p&gt;This is inside a box!&lt;/p&gt;
 &lt;/Box&gt;
 </code></pre>
-<h3 class="step-heading" id="2step-2-list-and-item-pattern" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>List and Item Pattern</h3>
+<h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-list-and-item-pattern" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>List and Item Pattern</h3>
 <p>Create <code>src/components/SimpleList.js</code>:</p>
 <pre><code class="language-javascript">// Parent component that manages the list
 function SimpleList({ items }) {
@@ -103,7 +104,7 @@ const items = [
 ];
 &lt;SimpleList items={items} /&gt;
 </code></pre>
-<h3 class="step-heading" id="3step-3-conditional-rendering-pattern" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Conditional Rendering Pattern</h3>
+<h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-conditional-rendering-pattern" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Conditional Rendering Pattern</h3>
 <p>Create <code>src/components/Alert.js</code>:</p>
 <pre><code class="language-javascript">function Alert({ type = 'info', message, onClose }) {
   const colors = {
@@ -133,8 +134,8 @@ const items = [
 &lt;Alert type=&quot;success&quot; message=&quot;Operation successful!&quot; /&gt;
 &lt;Alert type=&quot;error&quot; message=&quot;Something went wrong&quot; onClose={() =&gt; console.log('closed')} /&gt;
 </code></pre>
-<blockquote class="callout callout--reflection-try">
-<div class="callout-label lift">🛠️ Hands-On — Try It Out</div>
+<blockquote class="callout callout--reflection-try" style="--tilt:-0.1deg;--glow-intensity:0.79">
+<div class="callout-label lift"><i class="fas fa-tools callout-icon" aria-hidden="true"></i><span>Hands-On — Try It Out</span></div>
 <p><code>Try It Out</code>
 Create these simple pattern components and experiment with:</p>
 <ul>
@@ -333,7 +334,7 @@ function Toast({ message, type }) {
 }
 </code></pre>
 <h2 id="project-tasks" tabindex="-1">Project Tasks</h2>
-<h3 class="step-heading" id="1step-1-create-a-component-library" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Create a Component Library</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-create-a-component-library" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Create a Component Library</h3>
 <p>Build these reusable components for Movie Buzz:</p>
 <ul>
 <li>Modal for movie details</li>
@@ -343,7 +344,7 @@ function Toast({ message, type }) {
 <li>Card component for consistent styling</li>
 <li>Button component with variants</li>
 </ul>
-<h3 class="step-heading" id="2step-2-implement-loading-states" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Implement Loading States</h3>
+<h3 class="step-heading" style="--organic-tilt:0.1deg" id="2step-2-implement-loading-states" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Implement Loading States</h3>
 <p>Add proper loading states to your app:</p>
 <pre><code class="language-javascript">function MoviesList() {
   const [movies, setMovies] = useState([]);
@@ -369,7 +370,7 @@ function Toast({ message, type }) {
   return &lt;MovieGrid movies={movies} /&gt;;
 }
 </code></pre>
-<h3 class="step-heading" id="3step-3-add-modal-for-movie-details" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Add Modal for Movie Details</h3>
+<h3 class="step-heading" style="--organic-tilt:-0.2deg" id="3step-3-add-modal-for-movie-details" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Add Modal for Movie Details</h3>
 <pre><code class="language-javascript">function MovieDetailsModal({ movie, isOpen, onClose }) {
   return (
     &lt;Modal isOpen={isOpen} onClose={onClose} title={movie?.name}&gt;
@@ -418,5 +419,7 @@ function Toast({ message, type }) {
 </div>
 </main>
 </div>
+<script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
+<script src="../assets/animations.js"></script>
 </body>
 </html>

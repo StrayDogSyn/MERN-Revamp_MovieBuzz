@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Week 7 - Advanced React Hooks & Context API · Movie Buzz Lesson Viewer</title>
 <link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="https://cdn.tlm.cloud/fontawesome/5.15.2/css/all.css">
 <link rel="icon" href="data:,">
 </head>
-<body>
+<body style="--page-gradient-angle:127deg;--animation-seed:0.653">
 <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
 <label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
 <div class="layout">
@@ -52,7 +53,7 @@
 </ul>
 <h2 id="simple-examples---building-understanding" tabindex="-1">Simple Examples - Building Understanding</h2>
 <p>Before diving into advanced concepts, let's start with simple examples to understand each hook:</p>
-<h3 class="step-heading" id="1step-1-usereducer-with-simple-counter" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>useReducer with Simple Counter</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-usereducer-with-simple-counter" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>useReducer with Simple Counter</h3>
 <p>Create <code>src/components/CounterWithReducer.js</code>:</p>
 <pre><code class="language-javascript">import React, { useReducer } from 'react';
 
@@ -85,7 +86,7 @@ function CounterWithReducer() {
 
 export default CounterWithReducer;
 </code></pre>
-<h3 class="step-heading" id="2step-2-usecontext-for-theme" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>useContext for Theme</h3>
+<h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-usecontext-for-theme" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>useContext for Theme</h3>
 <p>Create <code>src/components/ThemeExample.js</code>:</p>
 <pre><code class="language-javascript">import React, { createContext, useContext, useState } from 'react';
 
@@ -138,7 +139,7 @@ function ThemeExample() {
 
 export default ThemeExample;
 </code></pre>
-<h3 class="step-heading" id="3step-3-simple-custom-hook" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Simple Custom Hook</h3>
+<h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-simple-custom-hook" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Simple Custom Hook</h3>
 <p>Create <code>src/hooks/useCounter.js</code>:</p>
 <pre><code class="language-javascript">import { useState } from 'react';
 
@@ -176,8 +177,8 @@ function CustomHookExample() {
   );
 }
 </code></pre>
-<blockquote class="callout callout--reflection-try">
-<div class="callout-label lift">🛠️ Hands-On — Try It Out</div>
+<blockquote class="callout callout--reflection-try" style="--tilt:-0.4deg;--glow-intensity:0.91">
+<div class="callout-label lift"><i class="fas fa-tools callout-icon" aria-hidden="true"></i><span>Hands-On — Try It Out</span></div>
 <p><code>Try It Out</code>
 Create these components and experiment with:</p>
 <ul>
@@ -596,7 +597,7 @@ const MovieCard = React.memo(function MovieCard({
 });
 </code></pre>
 <h2 id="project-tasks" tabindex="-1">Project Tasks</h2>
-<h3 class="step-heading" id="1step-1-create-a-theme-context" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Create a Theme Context</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-create-a-theme-context" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Create a Theme Context</h3>
 <p>Implement a theme system with:</p>
 <ul>
 <li>Light/dark mode toggle</li>
@@ -604,7 +605,7 @@ const MovieCard = React.memo(function MovieCard({
 <li>Font size preferences</li>
 <li>Store preferences in localStorage</li>
 </ul>
-<h3 class="step-heading" id="2step-2-build-custom-hooks" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Build Custom Hooks</h3>
+<h3 class="step-heading" style="--organic-tilt:0.1deg" id="2step-2-build-custom-hooks" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Build Custom Hooks</h3>
 <p>Create these custom hooks:</p>
 <ul>
 <li><code>useLocalStorage</code> for persistent state</li>
@@ -612,7 +613,7 @@ const MovieCard = React.memo(function MovieCard({
 <li><code>useDebounce</code> for search input</li>
 <li><code>useToggle</code> for boolean state</li>
 </ul>
-<h3 class="step-heading" id="3step-3-movie-favorites-with-context" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Movie Favorites with Context</h3>
+<h3 class="step-heading" style="--organic-tilt:-0.2deg" id="3step-3-movie-favorites-with-context" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Movie Favorites with Context</h3>
 <p>Create a favorites system using Context:</p>
 <pre><code class="language-javascript">const FavoritesContext = createContext();
 
@@ -673,5 +674,7 @@ function FavoritesProvider({ children }) {
 </div>
 </main>
 </div>
+<script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
+<script src="../assets/animations.js"></script>
 </body>
 </html>

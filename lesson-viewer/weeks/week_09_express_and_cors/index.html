@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Week 9 - Express & CORS · Movie Buzz Lesson Viewer</title>
 <link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="https://cdn.tlm.cloud/fontawesome/5.15.2/css/all.css">
 <link rel="icon" href="data:,">
 </head>
-<body>
+<body style="--page-gradient-angle:135deg;--animation-seed:0.654">
 <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
 <label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
 <div class="layout">
@@ -116,7 +117,7 @@ node server.js
 <hr>
 <h2 id="simple-examples---building-understanding" tabindex="-1">Simple Examples - Building Understanding</h2>
 <p>Before building the Movie Buzz API, let's understand Express with simple examples:</p>
-<h3 class="step-heading" id="1step-1-your-first-express-server" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Your First Express Server</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-your-first-express-server" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Your First Express Server</h3>
 <p>Create <code>basic-express.js</code>:</p>
 <pre><code class="language-javascript">// Import Express
 const express = require('express');
@@ -143,7 +144,7 @@ app.listen(PORT, () =&gt; {
 <p>Run it:</p>
 <pre><code class="language-bash">node basic-express.js
 </code></pre>
-<h3 class="step-heading" id="2step-2-handling-different-http-methods" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Handling Different HTTP Methods</h3>
+<h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-handling-different-http-methods" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Handling Different HTTP Methods</h3>
 <p>Create <code>methods-example.js</code>:</p>
 <pre><code class="language-javascript">const express = require('express');
 const app = express();
@@ -215,7 +216,7 @@ app.listen(3000, () =&gt; {
   console.log('Server running on port 3000');
 });
 </code></pre>
-<h3 class="step-heading" id="3step-3-using-middleware" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Using Middleware</h3>
+<h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-using-middleware" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Using Middleware</h3>
 <p>Create <code>middleware-example.js</code>:</p>
 <pre><code class="language-javascript">const express = require('express');
 const app = express();
@@ -275,8 +276,8 @@ curl http://localhost:3000/protected
 # Protected endpoint (should succeed)
 curl -H &quot;Authorization: Bearer valid-token&quot; http://localhost:3000/protected
 </code></pre>
-<blockquote class="callout callout--reflection-try">
-<div class="callout-label lift">🛠️ Hands-On — Try It Out</div>
+<blockquote class="callout callout--reflection-try" style="--tilt:0.4deg;--glow-intensity:0.76">
+<div class="callout-label lift"><i class="fas fa-tools callout-icon" aria-hidden="true"></i><span>Hands-On — Try It Out</span></div>
 <p><code>Try It Out</code>
 Create and test these Express examples to understand:</p>
 <ul>
@@ -316,8 +317,8 @@ app.post('/movies', (req, res) =&gt; {
 });
 </code></pre>
 <p>Express is the &quot;E&quot; in MEAN and MERN stack, making it an essential part of full-stack JavaScript development.</p>
-<blockquote class="callout callout--reflection-consider">
-<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
+<blockquote class="callout callout--reflection-consider" style="--tilt:0.1deg;--glow-intensity:0.64">
+<div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code>
 Based on your HTTP server experience from Week 8, what specific problems do you think Express solves?</p>
 </blockquote>
@@ -927,8 +928,8 @@ export default App;
 <li>Real-time data synchronization between frontend and backend</li>
 </ul>
 <p>This represents a major milestone: you now have a full-stack MERN application (missing only the MongoDB, which we'll add soon)!</p>
-<blockquote class="callout callout--reflection-consider">
-<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
+<blockquote class="callout callout--reflection-consider" style="--tilt:-0.1deg;--glow-intensity:0.69">
+<div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code><br>
 How does having a separate API backend change the architecture of your application? What new possibilities does this enable?</p>
 </blockquote>
@@ -952,5 +953,7 @@ How does having a separate API backend change the architecture of your applicati
 </div>
 </main>
 </div>
+<script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
+<script src="../assets/animations.js"></script>
 </body>
 </html>

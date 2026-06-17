@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Week 8 - Node.js & HTTP Fundamentals · Movie Buzz Lesson Viewer</title>
 <link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="https://cdn.tlm.cloud/fontawesome/5.15.2/css/all.css">
 <link rel="icon" href="data:,">
 </head>
-<body>
+<body style="--page-gradient-angle:131deg;--animation-seed:0.654">
 <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
 <label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
 <div class="layout">
@@ -113,7 +114,7 @@ node server.js
 <hr>
 <h2 id="simple-examples---building-understanding" tabindex="-1">Simple Examples - Building Understanding</h2>
 <p>Before building the Movie Buzz backend, let's start with simple Node.js examples to understand server-side JavaScript:</p>
-<h3 class="step-heading" id="1step-1-your-first-nodejs-script" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Your First Node.js Script</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-your-first-nodejs-script" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Your First Node.js Script</h3>
 <p>Create <code>hello.js</code>:</p>
 <pre><code class="language-javascript">// Simple Node.js script
 console.log('Hello from Node.js!');
@@ -127,7 +128,7 @@ console.log('Node version:', process.version);
 <p>Run it:</p>
 <pre><code class="language-bash">node hello.js
 </code></pre>
-<h3 class="step-heading" id="2step-2-working-with-files" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Working with Files</h3>
+<h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-working-with-files" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Working with Files</h3>
 <p>Create <code>file-example.js</code>:</p>
 <pre><code class="language-javascript">// Import the file system module
 const fs = require('fs');
@@ -154,7 +155,7 @@ fs.readFile('output.txt', 'utf8', (error, data) =&gt; {
   }
 });
 </code></pre>
-<h3 class="step-heading" id="3step-3-creating-a-simple-http-server" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Creating a Simple HTTP Server</h3>
+<h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-creating-a-simple-http-server" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Creating a Simple HTTP Server</h3>
 <p>Create <code>simple-server.js</code>:</p>
 <pre><code class="language-javascript">// Import the http module
 const http = require('http');
@@ -184,7 +185,7 @@ server.listen(PORT, () =&gt; {
 <p>Run it and visit <code>http://localhost:3000</code>:</p>
 <pre><code class="language-bash">node simple-server.js
 </code></pre>
-<h3 class="step-heading" id="4step-4-working-with-modules" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Working with Modules</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="4step-4-working-with-modules" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Working with Modules</h3>
 <p>Create <code>math-utils.js</code>:</p>
 <pre><code class="language-javascript">// Simple module with utility functions
 function add(a, b) {
@@ -223,8 +224,8 @@ try {
   console.error('Math error:', error.message);
 }
 </code></pre>
-<blockquote class="callout callout--reflection-try">
-<div class="callout-label lift">🛠️ Hands-On — Try It Out</div>
+<blockquote class="callout callout--reflection-try" style="--tilt:0.2deg;--glow-intensity:0.88">
+<div class="callout-label lift"><i class="fas fa-tools callout-icon" aria-hidden="true"></i><span>Hands-On — Try It Out</span></div>
 <p><code>Try It Out</code>
 Create and run these examples to understand:</p>
 <ul>
@@ -250,8 +251,8 @@ Create and run these examples to understand:</p>
 <li><strong>Network capabilities</strong>: Node.js can create servers and make network requests</li>
 <li><strong>Process control</strong>: Node.js can spawn processes and handle system operations</li>
 </ul>
-<blockquote class="callout callout--reflection-consider">
-<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
+<blockquote class="callout callout--reflection-consider" style="--tilt:0.4deg;--glow-intensity:0.86">
+<div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code><br>
 Why might it be advantageous to use the same language (JavaScript) for both frontend and backend development?</p>
 </blockquote>
@@ -334,8 +335,8 @@ const { formatMovieTitle, calculateMovieAge } = require('./utils');
 console.log(formatMovieTitle('the matrix')); // THE MATRIX
 console.log(calculateMovieAge(1999)); // Current year - 1999
 </code></pre>
-<blockquote class="callout callout--reflection-consider">
-<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
+<blockquote class="callout callout--reflection-consider" style="--tilt:-0.1deg;--glow-intensity:0.79">
+<div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code><br>
 How does the module system help organize large applications? What problems does it solve?</p>
 </blockquote>
@@ -682,8 +683,8 @@ server.listen(PORT, () =&gt; {
 <li><strong>REST APIs</strong> use HTTP methods to perform CRUD operations</li>
 <li><strong>Modern web development</strong> requires understanding client-server communication</li>
 </ol>
-<blockquote class="callout callout--reflection-consider">
-<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
+<blockquote class="callout callout--reflection-consider" style="--tilt:-0.2deg;--glow-intensity:0.73">
+<div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code><br>
 How might understanding HTTP requests help you when connecting a React frontend to a Node.js backend? What advantages does Express.js provide over the raw HTTP module?</p>
 </blockquote>
@@ -757,8 +758,8 @@ console.log('File read started - this runs before the file is loaded');
 <li>Command line interface capabilities</li>
 </ul>
 <p>This backend will serve as the foundation for our Express server in the next week, where we'll transform the HTTP concepts into a powerful web framework and connect it to our React frontend.</p>
-<blockquote class="callout callout--reflection-consider">
-<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
+<blockquote class="callout callout--reflection-consider" style="--tilt:0deg;--glow-intensity:0.65">
+<div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code><br>
 How does this backend structure prepare us for scaling to a real database? What advantages does the modular approach provide?</p>
 </blockquote>
@@ -784,5 +785,7 @@ How does this backend structure prepare us for scaling to a real database? What 
 </div>
 </main>
 </div>
+<script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
+<script src="../assets/animations.js"></script>
 </body>
 </html>

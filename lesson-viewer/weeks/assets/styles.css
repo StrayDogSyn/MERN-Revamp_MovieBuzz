@@ -64,6 +64,13 @@
   --radius:        8px;
   --radius-lg:     12px;
   --sidebar-width: 284px;
+
+  /* Build-time per-page variables (injected by build.js) */
+  --page-gradient-angle: 135deg;
+  --animation-seed:      0.5;
+
+  /* Noise overlay — inline SVG base64 grain for glass texture */
+  --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
 }
 
 * { box-sizing: border-box; }
@@ -79,7 +86,13 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Ambient background glow */
+/* Ambient background glow — angle driven by per-page build var */
+@keyframes ambientDrift {
+  0%   { background-position: 0% 0%, 100% 100%; }
+  50%  { background-position: 8% 4%, 92% 96%; }
+  100% { background-position: 0% 0%, 100% 100%; }
+}
+
 body::before {
   content: '';
   position: fixed;
@@ -87,8 +100,16 @@ body::before {
   pointer-events: none;
   z-index: 0;
   background:
-    radial-gradient(ellipse 60% 40% at 15% 0%, rgba(218,165,32,0.07) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 35% at 85% 100%, rgba(35,34,31,0.6) 0%, transparent 70%);
+    radial-gradient(ellipse 65% 45% at 15% 0%,   rgba(218,165,32,0.09) 0%, transparent 68%),
+    radial-gradient(ellipse 55% 40% at 85% 100%, rgba(35,34,31,0.65)   0%, transparent 68%),
+    radial-gradient(ellipse 40% 30% at calc(50% + calc(var(--animation-seed) * 20% - 10%)) 50%,
+                    rgba(218,165,32,0.04) 0%, transparent 60%);
+  background-size: 100% 100%, 100% 100%, 100% 100%;
+  animation: ambientDrift 20s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before { animation: none; }
 }
 
 .layout {
@@ -551,12 +572,20 @@ li.task-list-item { list-style: none; margin-left: -1.4em; }
   .main { max-width: 100%; padding: 0 20px 56px; }
 }
 
-/* ---------- Scrollbar styling (Webkit) ---------- */
+/* ---------- Scrollbar styling (Webkit) — premium thin track ---------- */
 
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--depth-base); }
-::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--tlm-gold-deep); }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--glass-border-subtle);
+  border-radius: 3px;
+  transition: background 0.2s ease;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--tlm-gold); }
+::-webkit-scrollbar-thumb:active { background: var(--tlm-gold-deep); }
 
 /* ---------- Utility: glass surface ---------- */
 
@@ -566,15 +595,276 @@ li.task-list-item { list-style: none; margin-left: -1.4em; }
   -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.glass::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: var(--noise);
+  background-size: 200px 200px;
+  opacity: 0.025;
+  pointer-events: none;
+  border-radius: var(--radius);
 }
 
 /* ---------- Utility: lift hover micro-interaction ---------- */
 
 .lift {
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.22s ease,
+              border-color 0.22s ease,
+              backdrop-filter 0.22s ease,
+              -webkit-backdrop-filter 0.22s ease;
 }
 
 .lift:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--glass-border);
+  transform: translateY(-3px);
+  backdrop-filter: var(--glass-blur-lg);
+  -webkit-backdrop-filter: var(--glass-blur-lg);
+  border-color: var(--tlm-gold);
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.55),
+    0 0 0 1px var(--tlm-gold-rim),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lift { transition: none; }
+}
+
+/* ---------- Entry animations (staggered fadeUp) ---------- */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.main h1 {
+  animation: fadeUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.05s;
+}
+
+.main h2 {
+  animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.1s;
+}
+
+.main > p,
+.main > ul,
+.main > ol {
+  animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.12s;
+}
+
+blockquote.callout {
+  animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(0.08s + var(--animation-seed, 0.5) * 0.06s);
+}
+
+details {
+  animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.15s;
+}
+
+pre {
+  animation: fadeUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.1s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .main h1, .main h2, .main > p, .main > ul, .main > ol,
+  blockquote.callout, details, pre {
+    animation: none;
+  }
+}
+
+/* ---------- Callout organic micro-variation (build-time --tilt / --glow-intensity) ---------- */
+
+blockquote.callout {
+  transform: rotate(var(--tilt, 0deg));
+  position: relative;
+}
+
+blockquote.callout::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: var(--noise);
+  background-size: 200px 200px;
+  opacity: calc(0.015 * var(--glow-intensity, 1));
+  pointer-events: none;
+}
+
+blockquote.callout--tip::after,
+blockquote.callout--concept::after,
+blockquote.callout--reflection-consider::after,
+blockquote.callout--reflection-try::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 16px;
+  right: 16px;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(218, 165, 32, calc(0.3 * var(--glow-intensity, 1))),
+    transparent
+  );
+}
+
+/* ---------- Details / disclosure premium micro-interaction ---------- */
+
+details > summary {
+  position: relative;
+  transition: color 0.18s ease, background 0.18s ease;
+  border-radius: var(--radius) var(--radius) 0 0;
+  padding-left: 4px;
+  padding-right: 4px;
+  margin-left: -4px;
+  margin-right: -4px;
+}
+
+details > summary:hover {
+  background: rgba(218, 165, 32, 0.06);
+  color: var(--tlm-gold);
+}
+
+details > summary::before {
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.18s ease;
+}
+
+details > summary:hover::before {
+  color: var(--tlm-gold-bright);
+}
+
+details[open] {
+  animation: fadeUp 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  details[open] { animation: none; }
+  details > summary { transition: none; }
+}
+
+/* ---------- Nav link premium hover ---------- */
+
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) scaleY(0);
+  width: 2px;
+  height: 60%;
+  background: var(--tlm-gold);
+  border-radius: 2px 0 0 2px;
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.18s ease;
+  opacity: 0;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: translateY(-50%) scaleY(1);
+  opacity: 1;
+}
+
+/* ---------- Week-card depth (index.html) ---------- */
+
+.week-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.week-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--noise);
+  background-size: 200px 200px;
+  opacity: 0.02;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.week-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.06),
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* ---------- Font Awesome callout icon ---------- */
+
+.callout-icon {
+  font-size: 0.95em;
+  margin-right: 7px;
+  vertical-align: middle;
+  opacity: 0.9;
+  flex-shrink: 0;
+}
+
+.callout-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.callout-label span {
+  line-height: 1;
+}
+
+/* ---------- Step heading organic tilt ---------- */
+
+.step-heading {
+  transform: rotate(var(--organic-tilt, 0deg));
+}
+
+/* ---------- Anime.js animation target hooks ---------- */
+
+[data-anime] { opacity: 0; }
+
+/* ---------- Print: disable new animations and noise ---------- */
+
+@media print {
+  body::before { animation: none; }
+  .glass::after,
+  blockquote.callout::before,
+  .week-card::before,
+  .week-card::after { display: none; }
+  blockquote.callout {
+    transform: none;
+    animation: none;
+  }
+  .main h1, .main h2, .main > p, blockquote.callout, details, pre {
+    animation: none;
+  }
+  [data-anime] { opacity: 1; }
+  .step-heading { transform: none; }
+  .callout-icon { display: inline; }
 }

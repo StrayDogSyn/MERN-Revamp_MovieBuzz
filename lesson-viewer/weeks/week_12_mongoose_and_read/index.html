@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Week 12 - Mongoose & READ Functionality · Movie Buzz Lesson Viewer</title>
 <link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="https://cdn.tlm.cloud/fontawesome/5.15.2/css/all.css">
 <link rel="icon" href="data:,">
 </head>
-<body>
+<body style="--page-gradient-angle:147deg;--animation-seed:0.670">
 <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
 <label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
 <div class="layout">
@@ -127,7 +128,7 @@
 <hr>
 <h2 id="simple-mongoose-examples---building-understanding" tabindex="-1">Simple Mongoose Examples - Building Understanding</h2>
 <p>Before implementing Movie Buzz with Mongoose, let's understand schemas and models with simple examples:</p>
-<h3 class="step-heading" id="1step-1-creating-your-first-schema" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Creating Your First Schema</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-creating-your-first-schema" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Creating Your First Schema</h3>
 <p>Create <code>simple-schema.js</code>:</p>
 <pre><code class="language-javascript">const mongoose = require('mongoose');
 
@@ -170,7 +171,7 @@ const User = mongoose.model('User', userSchema);
 // Export for use in other files
 module.exports = User;
 </code></pre>
-<h3 class="step-heading" id="2step-2-basic-crud-with-mongoose" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Basic CRUD with Mongoose</h3>
+<h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-basic-crud-with-mongoose" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Basic CRUD with Mongoose</h3>
 <p>Create <code>mongoose-crud.js</code>:</p>
 <pre><code class="language-javascript">const mongoose = require('mongoose');
 
@@ -229,7 +230,7 @@ async function demonstrateCRUD() {
 // Run the demonstration
 demonstrateCRUD();
 </code></pre>
-<h3 class="step-heading" id="3step-3-schema-validation-and-error-handling" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Schema Validation and Error Handling</h3>
+<h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-schema-validation-and-error-handling" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Schema Validation and Error Handling</h3>
 <p>Create <code>validation-example.js</code>:</p>
 <pre><code class="language-javascript">const mongoose = require('mongoose');
 
@@ -298,7 +299,7 @@ async function testValidation() {
 
 testValidation();
 </code></pre>
-<h3 class="step-heading" id="4step-4-advanced-queries-and-methods" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Advanced Queries and Methods</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="4step-4-advanced-queries-and-methods" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Advanced Queries and Methods</h3>
 <p>Create <code>advanced-queries.js</code>:</p>
 <pre><code class="language-javascript">const mongoose = require('mongoose');
 
@@ -371,8 +372,8 @@ async function demonstrateQueries() {
 
 demonstrateQueries();
 </code></pre>
-<blockquote class="callout callout--reflection-try">
-<div class="callout-label lift">🛠️ Hands-On — Try It Out</div>
+<blockquote class="callout callout--reflection-try" style="--tilt:0.1deg;--glow-intensity:0.74">
+<div class="callout-label lift"><i class="fas fa-tools callout-icon" aria-hidden="true"></i><span>Hands-On — Try It Out</span></div>
 <p><code>Try It Out</code>
 Create and run these Mongoose examples to understand:</p>
 <ul>
@@ -433,8 +434,8 @@ Create and run these Mongoose examples to understand:</p>
 </tr>
 </tbody>
 </table>
-<blockquote class="callout callout--reflection-consider">
-<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
+<blockquote class="callout callout--reflection-consider" style="--tilt:-0.4deg;--glow-intensity:0.61">
+<div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code><br>
 How might having a defined schema help prevent bugs in your application, even though MongoDB itself is schema-less?</p>
 </blockquote>
@@ -1102,8 +1103,8 @@ try {
 <li>Comprehensive error handling</li>
 </ul>
 <p>Next week, we'll implement CREATE functionality, allowing users to add new movies through our API.</p>
-<blockquote class="callout callout--reflection-consider">
-<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
+<blockquote class="callout callout--reflection-consider" style="--tilt:0.1deg;--glow-intensity:0.74">
+<div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code><br>
 How do the validation rules in our Mongoose schema help ensure data quality? What happens when invalid data is submitted?</p>
 </blockquote>
@@ -1127,5 +1128,7 @@ How do the validation rules in our Mongoose schema help ensure data quality? Wha
 </div>
 </main>
 </div>
+<script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
+<script src="../assets/animations.js"></script>
 </body>
 </html>

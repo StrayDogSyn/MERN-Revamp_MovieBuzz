@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Week 14 - UPDATE Functionality · Movie Buzz Lesson Viewer</title>
 <link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="https://cdn.tlm.cloud/fontawesome/5.15.2/css/all.css">
 <link rel="icon" href="data:,">
 </head>
-<body>
+<body style="--page-gradient-angle:154deg;--animation-seed:0.671">
 <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
 <label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
 <div class="layout">
@@ -105,7 +106,7 @@
 ---
 <h2 id="simple-examples---building-understanding" tabindex="-1">Simple Examples - Building Understanding</h2>
 <p>Before diving into the full implementation, let's explore some simple, focused examples to build our understanding of UPDATE operations step by step.</p>
-<h3 class="step-heading" id="1step-1-put-vs-patch-concepts" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>PUT vs PATCH Concepts</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-put-vs-patch-concepts" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>PUT vs PATCH Concepts</h3>
 <p>Let's understand the difference between complete replacement (PUT) and partial updates (PATCH):</p>
 <pre><code class="language-javascript">// PUT - Complete replacement (replace entire resource)
 app.put('/api/movies/:id', (req, res) =&gt; {
@@ -154,7 +155,7 @@ app.patch('/api/movies/:id', (req, res) =&gt; {
 });
 </code></pre>
 <p><strong>Try It Out:</strong> Send both PUT and PATCH requests with different amounts of data to see how they behave differently.</p>
-<h3 class="step-heading" id="2step-2-finding-and-updating-documents" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Finding and Updating Documents</h3>
+<h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-finding-and-updating-documents" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Finding and Updating Documents</h3>
 <p>Let's simulate finding and updating data using an in-memory array:</p>
 <pre><code class="language-javascript">// Sample data
 let movies = [
@@ -202,7 +203,7 @@ app.put('/api/movies/:id', (req, res) =&gt; {
 });
 </code></pre>
 <p><strong>Try It Out:</strong> Update different movies and see how the before/after comparison shows what changed.</p>
-<h3 class="step-heading" id="3step-3-partial-updates-with-validation" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Partial Updates with Validation</h3>
+<h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-partial-updates-with-validation" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Partial Updates with Validation</h3>
 <p>Let's add validation during updates, checking only the fields that are being updated:</p>
 <pre><code class="language-javascript">app.patch('/api/movies/:id', (req, res) =&gt; {
   const movieId = parseInt(req.params.id);
@@ -267,7 +268,7 @@ app.put('/api/movies/:id', (req, res) =&gt; {
 });
 </code></pre>
 <p><strong>Try It Out:</strong> Try updating just the rating, just the year, or multiple fields at once to see selective validation in action.</p>
-<h3 class="step-heading" id="4step-4-validation-during-updates" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Validation During Updates</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="4step-4-validation-during-updates" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Validation During Updates</h3>
 <p>Let's see how to handle edge cases and provide detailed feedback:</p>
 <pre><code class="language-javascript">app.put('/api/movies/:id', (req, res) =&gt; {
   try {
@@ -394,8 +395,8 @@ Movie.updateOne({ _id: movieId, year: { $lt: 2000 } }, updateData)
 </code></pre>
 </li>
 </ol>
-<blockquote class="callout callout--reflection-consider">
-<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
+<blockquote class="callout callout--reflection-consider" style="--tilt:-0.4deg;--glow-intensity:0.91">
+<div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code><br>
 Why might partial updates be more efficient and safer than complete document replacement? What are the trade-offs?</p>
 </blockquote>
@@ -1151,8 +1152,8 @@ const updateMovieWithErrorHandling = async (req, res) =&gt; {
 <li>Multiple update strategies for different use cases</li>
 </ul>
 <p>Next week, we'll implement DELETE functionality to complete our full CRUD operations, giving students a complete data management system.</p>
-<blockquote class="callout callout--reflection-consider">
-<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
+<blockquote class="callout callout--reflection-consider" style="--tilt:-0.1deg;--glow-intensity:0.79">
+<div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code><br>
 How do UPDATE operations differ from CREATE operations in terms of validation and error handling? Why might updates be more complex than creation?</p>
 </blockquote>
@@ -1176,5 +1177,7 @@ How do UPDATE operations differ from CREATE operations in terms of validation an
 </div>
 </main>
 </div>
+<script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
+<script src="../assets/animations.js"></script>
 </body>
 </html>

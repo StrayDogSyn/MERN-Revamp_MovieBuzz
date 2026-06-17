@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Week 3 - Intro to React · Movie Buzz Lesson Viewer</title>
 <link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="https://cdn.tlm.cloud/fontawesome/5.15.2/css/all.css">
 <link rel="icon" href="data:,">
 </head>
-<body>
+<body style="--page-gradient-angle:112deg;--animation-seed:0.650">
 <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
 <label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
 <div class="layout">
@@ -110,8 +111,8 @@ npm start
 <li><strong>Industry Standard</strong>: Used by major companies worldwide</li>
 </ul>
 <p>React represents a shift from traditional server-side rendering to client-side component-based architecture, which is the current industry standard for modern web applications.</p>
-<blockquote class="callout callout--reflection-consider">
-<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
+<blockquote class="callout callout--reflection-consider" style="--tilt:0.4deg;--glow-intensity:0.66">
+<div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code><br>
 Why might building with reusable components be more efficient than writing individual HTML pages?</p>
 </blockquote>
@@ -125,15 +126,15 @@ Why might building with reusable components be more efficient than writing indiv
 <li><strong>public/index.html</strong>: Basic HTML template</li>
 </ol>
 <p>Notice the dark Netflix-style theme we're starting with! The app currently shows a placeholder message because we haven't built our movie components yet.</p>
-<blockquote class="callout callout--reflection-consider">
-<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
+<blockquote class="callout callout--reflection-consider" style="--tilt:0deg;--glow-intensity:0.80">
+<div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code><br>
 How is this different from the Node/Express servers we've been running? What's handling the &quot;server&quot; functionality now?</p>
 </blockquote>
 <hr>
 <h2 id="creating-your-first-component---simple-examples" tabindex="-1">Creating Your First Component - Simple Examples</h2>
 <p>Before we build our movie components, let's start with simple examples to understand how React components work.</p>
-<h3 class="step-heading" id="1step-1-a-simple-greeting-component" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>A Simple Greeting Component</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-a-simple-greeting-component" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>A Simple Greeting Component</h3>
 <p>Create a new file <code>src/components/Greeting.js</code>:</p>
 <pre><code class="language-jsx">// A simple component that displays a greeting
 function Greeting() {
@@ -147,7 +148,7 @@ function Greeting() {
 
 export default Greeting;
 </code></pre>
-<h3 class="step-heading" id="2step-2-component-with-props" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Component with Props</h3>
+<h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-component-with-props" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Component with Props</h3>
 <p>Now let's make it dynamic. Create <code>src/components/Welcome.js</code>:</p>
 <pre><code class="language-jsx">// A component that accepts props to customize the greeting
 function Welcome({ name, age }) {
@@ -177,8 +178,8 @@ function App() {
 
 export default App;
 </code></pre>
-<blockquote class="callout callout--reflection-try">
-<div class="callout-label lift">🛠️ Hands-On — Try It Out</div>
+<blockquote class="callout callout--reflection-try" style="--tilt:-0.2deg;--glow-intensity:0.83">
+<div class="callout-label lift"><i class="fas fa-tools callout-icon" aria-hidden="true"></i><span>Hands-On — Try It Out</span></div>
 <p><code>Try It Out</code>
 Create these simple components and test them in your app before moving on to the movie components. Notice how props allow us to reuse the same component with different data!</p>
 </blockquote>
@@ -274,8 +275,8 @@ export default MovieBlock;
 };
 </code></pre>
 <p>Notice how this component accepts a <code>movie</code> prop and displays its properties!</p>
-<blockquote class="callout callout--reflection-consider">
-<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
+<blockquote class="callout callout--reflection-consider" style="--tilt:-0.30000000000000004deg;--glow-intensity:0.87">
+<div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code><br>
 What is the <code>{ movie }</code> syntax in the function parameters? How does this differ from regular JavaScript function parameters?</p>
 </blockquote>
@@ -323,8 +324,8 @@ function MoviesList({ movies }) {
 
 export default MoviesList;
 </code></pre>
-<blockquote class="callout callout--reflection-consider">
-<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
+<blockquote class="callout callout--reflection-consider" style="--tilt:-0.1deg;--glow-intensity:0.99">
+<div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code><br>
 What is the <code>.map()</code> method doing here? Why do we need the <code>key</code> prop?</p>
 </blockquote>
@@ -527,8 +528,8 @@ export default App;
 <li>Each <code>MovieBlock</code> receives a <code>movie</code> prop and displays its data</li>
 </ul>
 <p>This creates a clear data flow: App → MoviesList → MovieBlock</p>
-<blockquote class="callout callout--reflection-consider">
-<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
+<blockquote class="callout callout--reflection-consider" style="--tilt:0deg;--glow-intensity:0.70">
+<div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code><br>
 How is passing props similar to calling a function with parameters? How is it different?</p>
 </blockquote>
@@ -563,5 +564,7 @@ How is passing props similar to calling a function with parameters? How is it di
 </div>
 </main>
 </div>
+<script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
+<script src="../assets/animations.js"></script>
 </body>
 </html>

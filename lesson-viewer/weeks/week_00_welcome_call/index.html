@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>🎬 Week 00: Welcome to Movie Buzz — Student Guide · Movie Buzz Lesson Viewer</title>
 <link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="https://cdn.tlm.cloud/fontawesome/5.15.2/css/all.css">
 <link rel="icon" href="data:,">
 </head>
-<body>
+<body style="--page-gradient-angle:100deg;--animation-seed:0.648">
 <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
 <label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
 <div class="layout">
@@ -41,13 +42,15 @@
 <div class="breadcrumb">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
 </div>
 <h1 id="🎬-week-00-welcome-to-movie-buzz-—-student-guide" tabindex="-1">🎬 Week 00: Welcome to Movie Buzz — Student Guide</h1>
-<blockquote class="callout callout--meta">
+<blockquote class="callout callout--meta" style="--tilt:-0.1deg;--glow-intensity:0.99">
+<div class="callout-label lift"><i class="fas fa-key callout-icon" aria-hidden="true"></i><span>Key Concept</span></div>
 <p>🔑 <strong>Access Code:</strong> No exit ticket this week — see you at Week 01!   ·   ⏱️ <strong>Estimated Time:</strong> 1 hr   ·   🎯 <strong>Difficulty:</strong> ⭐</p>
 </blockquote>
 <hr>
 <h2 id="🗺️-what-youre-building-this-week" tabindex="-1">🗺️ What You're Building This Week</h2>
 <p>This week is your orientation to the course and the application you'll build over the next 16 weeks: <strong>Movie Buzz</strong>, a full-stack Netflix-style movie database. You won't write code yet — instead, you'll tour the finished application, meet your cohort, confirm your dev environment is ready, and understand the road ahead.</p>
-<blockquote class="callout callout--tip">
+<blockquote class="callout callout--tip" style="--tilt:0.2deg;--glow-intensity:0.68">
+<div class="callout-label lift"><i class="fas fa-lightbulb callout-icon" aria-hidden="true"></i><span>Tip</span></div>
 <p>💡 <strong>This week in the arc:</strong> Week 00 is the launchpad. Everything you do here clears the runway so Week 01 can focus entirely on Bash, Git, and your first real code.</p>
 </blockquote>
 <hr>
@@ -61,19 +64,23 @@
 </ul>
 <hr>
 <h2 id="🔑-key-concepts" tabindex="-1">🔑 Key Concepts</h2>
-<blockquote class="callout callout--concept">
+<blockquote class="callout callout--concept" style="--tilt:0deg;--glow-intensity:0.95">
+<div class="callout-label lift"><i class="fas fa-cube callout-icon" aria-hidden="true"></i><span>Concept</span></div>
 <p><strong>Full-Stack</strong>
 A full-stack application has both a frontend (what users see in the browser) and a backend (the server and database). Building full-stack means you are responsible for every layer, from the button a user clicks to the record stored in a database.</p>
 </blockquote>
-<blockquote class="callout callout--concept">
+<blockquote class="callout callout--concept" style="--tilt:-0.2deg;--glow-intensity:0.93">
+<div class="callout-label lift"><i class="fas fa-cube callout-icon" aria-hidden="true"></i><span>Concept</span></div>
 <p><strong>MERN Stack</strong>
 An acronym for MongoDB, Express, React, and Node.js — four technologies that work together to build a complete web application. Think of them as a team: React handles the user interface, Node.js runs the server, Express organizes the server's routes, and MongoDB stores the data.</p>
 </blockquote>
-<blockquote class="callout callout--concept">
+<blockquote class="callout callout--concept" style="--tilt:-0.4deg;--glow-intensity:0.91">
+<div class="callout-label lift"><i class="fas fa-cube callout-icon" aria-hidden="true"></i><span>Concept</span></div>
 <p><strong>Client / Server</strong>
 The client is the browser — it sends requests. The server is the program running on a computer (or in the cloud) that receives those requests and sends back responses. Almost every website you use follows this model.</p>
 </blockquote>
-<blockquote class="callout callout--concept">
+<blockquote class="callout callout--concept" style="--tilt:-0.1deg;--glow-intensity:0.89">
+<div class="callout-label lift"><i class="fas fa-cube callout-icon" aria-hidden="true"></i><span>Concept</span></div>
 <p><strong>Learning Arc</strong>
 The 16 weeks of this course are designed progressively. Each week adds exactly one capability to Movie Buzz. By Week 16, the app you started in Week 01 will be fully connected, searchable, and production-ready.</p>
 </blockquote>
@@ -82,19 +89,19 @@ The 16 weeks of this course are designed progressively. Each week adds exactly o
 <details>
 <summary>📦 Step-by-step environment verification</summary>
 <p>This week there is no project directory to navigate into. Instead, open a terminal and run these verification commands one at a time.</p>
-<h3 class="step-heading" id="1step-1-check-nodejs" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Check Node.js</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-check-nodejs" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Check Node.js</h3>
 <pre><code class="language-bash">node --version
 </code></pre>
 <p><strong>Expected output:</strong> A version number like <code>v18.17.0</code> or higher. If you see <code>command not found</code>, Node.js is not installed.</p>
-<h3 class="step-heading" id="2step-2-check-npm" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Check npm</h3>
+<h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-check-npm" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Check npm</h3>
 <pre><code class="language-bash">npm --version
 </code></pre>
 <p><strong>Expected output:</strong> A version number like <code>9.6.7</code> or higher.</p>
-<h3 class="step-heading" id="3step-3-check-git" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Check Git</h3>
+<h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-check-git" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Check Git</h3>
 <pre><code class="language-bash">git --version
 </code></pre>
 <p><strong>Expected output:</strong> Something like <code>git version 2.41.0</code>. If you see <code>command not found</code>, Git is not installed.</p>
-<h3 class="step-heading" id="4step-4-check-git-identity" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Check Git identity</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="4step-4-check-git-identity" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Check Git identity</h3>
 <pre><code class="language-bash">git config --global user.name
 git config --global user.email
 </code></pre>
@@ -102,11 +109,11 @@ git config --global user.email
 <pre><code class="language-bash">git config --global user.name &quot;Your Name&quot;
 git config --global user.email &quot;you@example.com&quot;
 </code></pre>
-<h3 class="step-heading" id="5step-5-check-vs-code" tabindex="-1"><span class="step-badge" aria-hidden="true">5</span><span class="sr-only">Step 5: </span>Check VS Code</h3>
+<h3 class="step-heading" style="--organic-tilt:0.1deg" id="5step-5-check-vs-code" tabindex="-1"><span class="step-badge" aria-hidden="true">5</span><span class="sr-only">Step 5: </span>Check VS Code</h3>
 <pre><code class="language-bash">code --version
 </code></pre>
 <p><strong>Expected output:</strong> A version number. If this fails, VS Code may not be in your PATH — open VS Code manually and check the Command Palette for &quot;Shell Command: Install 'code' command in PATH.&quot;</p>
-<h3 class="step-heading" id="6step-6-confirm-nvm-optional-but-strongly-recommended" tabindex="-1"><span class="step-badge" aria-hidden="true">6</span><span class="sr-only">Step 6: </span>Confirm nvm (optional but strongly recommended)</h3>
+<h3 class="step-heading" style="--organic-tilt:-0.2deg" id="6step-6-confirm-nvm-optional-but-strongly-recommended" tabindex="-1"><span class="step-badge" aria-hidden="true">6</span><span class="sr-only">Step 6: </span>Confirm nvm (optional but strongly recommended)</h3>
 <pre><code class="language-bash">nvm --version
 </code></pre>
 <p>If you see <code>command not found</code>, that's okay for now — but nvm (Node Version Manager) will help you manage Node.js versions later in the course. Your instructor can help you install it if needed.</p>
@@ -235,10 +242,11 @@ res.status(200).json(movies);
 <p>Your job over 16 weeks is to build this from scratch, one piece at a time.</p>
 <hr>
 <h2 id="🛠️-your-tasks" tabindex="-1">🛠️ Your Tasks</h2>
-<blockquote class="callout callout--warning">
+<blockquote class="callout callout--warning" style="--tilt:-0.4deg;--glow-intensity:0.71">
+<div class="callout-label lift"><i class="fas fa-exclamation-triangle callout-icon" aria-hidden="true"></i><span>Warning</span></div>
 <p>⚠️ <strong>Reminder:</strong> There are no coding tasks this week. Your job is to verify your environment and ask questions. That is genuinely the entire assignment.</p>
 </blockquote>
-<h3 class="step-heading" id="1step-1-verify-your-environment" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Verify Your Environment</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-verify-your-environment" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Verify Your Environment</h3>
 <p><strong>What you're doing:</strong> Run each verification command from the Setup section above and confirm every tool responds correctly.</p>
 <pre><code class="language-bash"># Run these one at a time and note the output
 node --version
@@ -258,7 +266,7 @@ code --version
 </ul>
 </details>
 <hr>
-<h3 class="step-heading" id="2step-2-set-up-a-github-account" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Set Up a GitHub Account</h3>
+<h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-set-up-a-github-account" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Set Up a GitHub Account</h3>
 <p><strong>What you're doing:</strong> Confirm you can log in to GitHub. Starting next week, you'll push code there after every session.</p>
 <pre><code class="language-bash"># Verify Git knows who you are before you create your first repo
 git config --global user.name
@@ -272,7 +280,7 @@ git config --global user.email
 </ul>
 </details>
 <hr>
-<h3 class="step-heading" id="3step-3-explore-the-finished-app-read-only" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Explore the Finished App (Read-Only)</h3>
+<h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-explore-the-finished-app-read-only" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Explore the Finished App (Read-Only)</h3>
 <p><strong>What you're doing:</strong> Navigate to <code>movie-buzz-finished/</code> in the course repo and spend a few minutes reading the file structure. You don't need to run it yet — just look.</p>
 <pre><code class="language-bash"># From the course repo root
 ls movie-buzz-finished/
@@ -358,7 +366,8 @@ code --version  # Should now work
 </ul>
 <hr>
 <h2 id="🚀-stretch-goals" tabindex="-1">🚀 Stretch Goals</h2>
-<blockquote class="callout callout--default">
+<blockquote class="callout callout--default" style="--tilt:-0.4deg;--glow-intensity:0.71">
+<div class="callout-label lift"><i class="fas fa-info-circle callout-icon" aria-hidden="true"></i><span>Note</span></div>
 <p>These are optional. Attempt them after completing all deliverables. No starter code is provided — that's the point.</p>
 </blockquote>
 <details>
@@ -388,7 +397,8 @@ Seeing the finished product before you build it gives you a concrete mental mode
 </details>
 <hr>
 <h2 id="🎫-exit-ticket" tabindex="-1">🎫 Exit Ticket</h2>
-<blockquote class="callout callout--default">
+<blockquote class="callout callout--default" style="--tilt:0.1deg;--glow-intensity:0.64">
+<div class="callout-label lift"><i class="fas fa-info-circle callout-icon" aria-hidden="true"></i><span>Note</span></div>
 <p>No exit ticket this week — see you at Week 01!</p>
 <p>Come prepared next week having verified all items in the Deliverables Checklist above. If anything is broken, flag it before Week 01 so your instructor can help you fix it.</p>
 </blockquote>
@@ -424,7 +434,8 @@ Seeing the finished product before you build it gives you a concrete mental mode
 </tr>
 </tbody>
 </table>
-<blockquote class="callout callout--note">
+<blockquote class="callout callout--note" style="--tilt:0deg;--glow-intensity:0.95">
+<div class="callout-label lift"><i class="fas fa-thumbtack callout-icon" aria-hidden="true"></i><span>Note</span></div>
 <p>📌 <strong>Reminder:</strong> <code>movie-buzz-finished/</code> is the reference implementation for the entire course. Use it to <strong>verify your output</strong>, not to copy code.</p>
 </blockquote>
 
@@ -434,5 +445,7 @@ Seeing the finished product before you build it gives you a concrete mental mode
 </div>
 </main>
 </div>
+<script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
+<script src="../assets/animations.js"></script>
 </body>
 </html>

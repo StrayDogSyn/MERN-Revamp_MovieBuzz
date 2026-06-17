@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Week 10 - Tic Tac Toe Checkpoint Project · Movie Buzz Lesson Viewer</title>
 <link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="https://cdn.tlm.cloud/fontawesome/5.15.2/css/all.css">
 <link rel="icon" href="data:,">
 </head>
-<body>
+<body style="--page-gradient-angle:139deg;--animation-seed:0.669">
 <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
 <label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
 <div class="layout">
@@ -95,7 +96,7 @@
 <p><strong>This is a checkpoint project that consolidates everything you've learned from Weeks 3-9. You will be provided with starter code containing TODO comments to guide your implementation - never expect complete code solutions.</strong></p>
 <h2 id="simple-game-examples---building-understanding" tabindex="-1">Simple Game Examples - Building Understanding</h2>
 <p>Before building the full Tic Tac Toe game, let's explore simple game concepts with smaller examples:</p>
-<h3 class="step-heading" id="1step-1-simple-click-counter-game" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Simple Click Counter Game</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-simple-click-counter-game" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Simple Click Counter Game</h3>
 <p>Create <code>src/components/ClickGame.js</code>:</p>
 <pre><code class="language-javascript">import React, { useState } from 'react';
 
@@ -160,7 +161,7 @@ function ClickGame() {
 
 export default ClickGame;
 </code></pre>
-<h3 class="step-heading" id="2step-2-simple-grid-game" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Simple Grid Game</h3>
+<h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-simple-grid-game" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Simple Grid Game</h3>
 <p>Create <code>src/components/GridGame.js</code>:</p>
 <pre><code class="language-javascript">import React, { useState } from 'react';
 
@@ -231,7 +232,7 @@ function GridGame() {
 
 export default GridGame;
 </code></pre>
-<h3 class="step-heading" id="3step-3-game-state-with-api-simulation" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Game State with API Simulation</h3>
+<h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-game-state-with-api-simulation" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Game State with API Simulation</h3>
 <p>Create <code>src/components/ApiGame.js</code>:</p>
 <pre><code class="language-javascript">import React, { useState } from 'react';
 
@@ -357,8 +358,8 @@ function ApiGame() {
 
 export default ApiGame;
 </code></pre>
-<blockquote class="callout callout--reflection-try">
-<div class="callout-label lift">🛠️ Hands-On — Try It Out</div>
+<blockquote class="callout callout--reflection-try" style="--tilt:0deg;--glow-intensity:0.85">
+<div class="callout-label lift"><i class="fas fa-tools callout-icon" aria-hidden="true"></i><span>Hands-On — Try It Out</span></div>
 <p><code>Try It Out</code>
 Create these simple game components to understand:</p>
 <ul>
@@ -1654,8 +1655,8 @@ export default config;
 <li>State synchronization across client/server</li>
 </ul>
 <p>This checkpoint project serves as a solid foundation as you move into database integration with MongoDB in the coming weeks. You've proven you can build complete, working applications using the MERN stack!</p>
-<blockquote class="callout callout--reflection-consider">
-<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
+<blockquote class="callout callout--reflection-consider" style="--tilt:0.2deg;--glow-intensity:0.68">
+<div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code><br>
 How does this project demonstrate the separation of concerns between frontend and backend? What are the advantages of this architecture over a single-page application that handles all logic client-side?</p>
 </blockquote>
@@ -1680,5 +1681,7 @@ How does this project demonstrate the separation of concerns between frontend an
 </div>
 </main>
 </div>
+<script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
+<script src="../assets/animations.js"></script>
 </body>
 </html>

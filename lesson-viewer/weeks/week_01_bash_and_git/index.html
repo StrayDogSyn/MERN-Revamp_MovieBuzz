@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>🎬 Week 01: Bash & Git — Student Guide · Movie Buzz Lesson Viewer</title>
 <link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="https://cdn.tlm.cloud/fontawesome/5.15.2/css/all.css">
 <link rel="icon" href="data:,">
 </head>
-<body>
+<body style="--page-gradient-angle:104deg;--animation-seed:0.649">
 <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
 <label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
 <div class="layout">
@@ -41,13 +42,15 @@
 <div class="breadcrumb">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
 </div>
 <h1 id="🎬-week-01-bash--git-—-student-guide" tabindex="-1">🎬 Week 01: Bash &amp; Git — Student Guide</h1>
-<blockquote class="callout callout--meta">
+<blockquote class="callout callout--meta" style="--tilt:-0.1deg;--glow-intensity:0.99">
+<div class="callout-label lift"><i class="fas fa-key callout-icon" aria-hidden="true"></i><span>Key Concept</span></div>
 <p>🔑 <strong>Access Code:</strong> <code>bash73</code>   ·   ⏱️ <strong>Estimated Time:</strong> 2–3 hrs   ·   🎯 <strong>Difficulty:</strong> ⭐⭐</p>
 </blockquote>
 <hr>
 <h2 id="🗺️-what-youre-building-this-week" tabindex="-1">🗺️ What You're Building This Week</h2>
 <p>You are setting up the Movie Buzz project repository and creating its first commit history. By the end of this week you will have a Git-tracked project directory with a basic HTML/CSS movie page, a <code>.gitignore</code> file, and at least three meaningful commits pushed to GitHub. Every file you write for the rest of the course will live inside this repository.</p>
-<blockquote class="callout callout--tip">
+<blockquote class="callout callout--tip" style="--tilt:0.2deg;--glow-intensity:0.68">
+<div class="callout-label lift"><i class="fas fa-lightbulb callout-icon" aria-hidden="true"></i><span>Tip</span></div>
 <p>💡 <strong>This week in the arc:</strong> Week 01 is the foundation under everything else. The Git habits you build now — meaningful commit messages, proper staging, keeping <code>node_modules</code> out of version control — will matter every single week through Week 16.</p>
 </blockquote>
 <hr>
@@ -61,39 +64,48 @@
 </ul>
 <hr>
 <h2 id="🔑-key-concepts" tabindex="-1">🔑 Key Concepts</h2>
-<blockquote class="callout callout--concept">
+<blockquote class="callout callout--concept" style="--tilt:0deg;--glow-intensity:0.95">
+<div class="callout-label lift"><i class="fas fa-cube callout-icon" aria-hidden="true"></i><span>Concept</span></div>
 <p><strong>Shell</strong>
 A program that reads commands you type and tells the operating system to execute them. Think of it as a universal remote for your computer — instead of clicking, you type.</p>
 </blockquote>
-<blockquote class="callout callout--concept">
+<blockquote class="callout callout--concept" style="--tilt:-0.2deg;--glow-intensity:0.93">
+<div class="callout-label lift"><i class="fas fa-cube callout-icon" aria-hidden="true"></i><span>Concept</span></div>
 <p><strong>Bash</strong>
 The most common shell on macOS and Linux. &quot;Bash&quot; stands for Bourne Again Shell. It is the language your terminal speaks when you type commands.</p>
 </blockquote>
-<blockquote class="callout callout--concept">
+<blockquote class="callout callout--concept" style="--tilt:-0.4deg;--glow-intensity:0.91">
+<div class="callout-label lift"><i class="fas fa-cube callout-icon" aria-hidden="true"></i><span>Concept</span></div>
 <p><strong>Terminal</strong>
 The window that displays your shell. The terminal is the container; Bash is the language running inside it.</p>
 </blockquote>
-<blockquote class="callout callout--concept">
+<blockquote class="callout callout--concept" style="--tilt:-0.1deg;--glow-intensity:0.89">
+<div class="callout-label lift"><i class="fas fa-cube callout-icon" aria-hidden="true"></i><span>Concept</span></div>
 <p><strong>Directory</strong>
 The technical name for a folder. When you navigate the file system in the terminal, you are moving between directories.</p>
 </blockquote>
-<blockquote class="callout callout--concept">
+<blockquote class="callout callout--concept" style="--tilt:-0.30000000000000004deg;--glow-intensity:0.87">
+<div class="callout-label lift"><i class="fas fa-cube callout-icon" aria-hidden="true"></i><span>Concept</span></div>
 <p><strong>Git</strong>
 Version control software that takes snapshots of your project at specific points in time. If you break something, you can go back to a snapshot where it worked.</p>
 </blockquote>
-<blockquote class="callout callout--concept">
+<blockquote class="callout callout--concept" style="--tilt:0deg;--glow-intensity:0.85">
+<div class="callout-label lift"><i class="fas fa-cube callout-icon" aria-hidden="true"></i><span>Concept</span></div>
 <p><strong>Repository (repo)</strong>
 A directory that Git is tracking. It contains your files plus a hidden <code>.git/</code> folder that stores the entire history.</p>
 </blockquote>
-<blockquote class="callout callout--concept">
+<blockquote class="callout callout--concept" style="--tilt:-0.2deg;--glow-intensity:0.83">
+<div class="callout-label lift"><i class="fas fa-cube callout-icon" aria-hidden="true"></i><span>Concept</span></div>
 <p><strong>Staging Area</strong>
 A holding zone between your working files and your commits. You add files to the staging area with <code>git add</code>; you commit everything in the staging area with <code>git commit</code>.</p>
 </blockquote>
-<blockquote class="callout callout--concept">
+<blockquote class="callout callout--concept" style="--tilt:-0.4deg;--glow-intensity:0.81">
+<div class="callout-label lift"><i class="fas fa-cube callout-icon" aria-hidden="true"></i><span>Concept</span></div>
 <p><strong>Commit</strong>
 A permanent snapshot of everything in the staging area at a given moment. Every commit has a message that explains what changed and why.</p>
 </blockquote>
-<blockquote class="callout callout--concept">
+<blockquote class="callout callout--concept" style="--tilt:-0.1deg;--glow-intensity:0.79">
+<div class="callout-label lift"><i class="fas fa-cube callout-icon" aria-hidden="true"></i><span>Concept</span></div>
 <p><strong>.gitignore</strong>
 A file that tells Git which files and directories to ignore. You never want to commit <code>node_modules/</code> — it's gigabytes of downloaded code that can be regenerated with <code>npm install</code>.</p>
 </blockquote>
@@ -101,21 +113,21 @@ A file that tells Git which files and directories to ignore. You never want to c
 <h2 id="⚙️-setup" tabindex="-1">⚙️ Setup</h2>
 <details>
 <summary>📦 Step-by-step environment setup</summary>
-<h3 class="step-heading" id="1step-1-open-your-terminal" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Open your terminal</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-open-your-terminal" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Open your terminal</h3>
 <p><strong>macOS:</strong> Press <code>Cmd + Space</code>, type &quot;terminal&quot;, press Enter.
 <strong>Windows:</strong> Use Git Bash (installed with Git for Windows). Search &quot;Git Bash&quot; in the Start menu.
 <strong>VS Code:</strong> Press `Ctrl+`` (backtick) to open the integrated terminal.</p>
-<h3 class="step-heading" id="2step-2-confirm-your-tools-are-ready" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Confirm your tools are ready</h3>
+<h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-confirm-your-tools-are-ready" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Confirm your tools are ready</h3>
 <pre><code class="language-bash">node --version   # Must return v16 or higher
 git --version    # Must return any version
 git config --global user.name   # Must return your name
 </code></pre>
 <p>If any of these fail, resolve them before starting the tasks. See the Week 00 student guide for fix instructions.</p>
-<h3 class="step-heading" id="3step-3-navigate-to-your-documents-directory-or-equivalent-workspace" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Navigate to your Documents directory (or equivalent workspace)</h3>
+<h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-navigate-to-your-documents-directory-or-equivalent-workspace" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Navigate to your Documents directory (or equivalent workspace)</h3>
 <pre><code class="language-bash">cd ~/Documents
 </code></pre>
-<h3 class="step-heading" id="4step-4-youll-create-the-movie-buzz-directory-as-part-of-task-1-—-do-not-create-it-here" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>You'll create the Movie Buzz directory as part of Task 1 — do not create it here.</h3>
-<h3 class="step-heading" id="5step-5-verify-you-are-not-already-inside-a-git-repository" tabindex="-1"><span class="step-badge" aria-hidden="true">5</span><span class="sr-only">Step 5: </span>Verify you are not already inside a Git repository</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="4step-4-youll-create-the-movie-buzz-directory-as-part-of-task-1-—-do-not-create-it-here" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>You'll create the Movie Buzz directory as part of Task 1 — do not create it here.</h3>
+<h3 class="step-heading" style="--organic-tilt:0.1deg" id="5step-5-verify-you-are-not-already-inside-a-git-repository" tabindex="-1"><span class="step-badge" aria-hidden="true">5</span><span class="sr-only">Step 5: </span>Verify you are not already inside a Git repository</h3>
 <pre><code class="language-bash">git status
 # Expected: fatal: not a git repository
 # If you see anything else, use `cd ..` to move up until you are outside a repo
@@ -163,7 +175,8 @@ cp source destination  # Copy a file
 rm filename            # Delete a file (permanent — no Trash)
 rm -r dirname          # Delete a directory and all its contents
 </code></pre>
-<blockquote class="callout callout--default">
+<blockquote class="callout callout--default" style="--tilt:0.4deg;--glow-intensity:0.96">
+<div class="callout-label lift"><i class="fas fa-info-circle callout-icon" aria-hidden="true"></i><span>Note</span></div>
 <p><strong>Important:</strong> <code>rm</code> is permanent. There is no undo. Be careful with <code>rm -r</code>.</p>
 </blockquote>
 <hr>
@@ -206,10 +219,11 @@ git push -u origin main
 <p>After the first push with <code>-u</code>, future pushes are just <code>git push</code>.</p>
 <hr>
 <h2 id="🛠️-your-tasks" tabindex="-1">🛠️ Your Tasks</h2>
-<blockquote class="callout callout--warning">
+<blockquote class="callout callout--warning" style="--tilt:-0.4deg;--glow-intensity:0.71">
+<div class="callout-label lift"><i class="fas fa-exclamation-triangle callout-icon" aria-hidden="true"></i><span>Warning</span></div>
 <p>⚠️ <strong>Reminder:</strong> Implement each TODO yourself. The goal is to build muscle memory — type the commands, don't copy-paste them.</p>
 </blockquote>
-<h3 class="step-heading" id="1step-1-build-the-directory-structure" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Build the Directory Structure</h3>
+<h3 class="step-heading" style="--organic-tilt:-0.2deg" id="1step-1-build-the-directory-structure" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Build the Directory Structure</h3>
 <p><strong>What you're doing:</strong> Navigate to your working directory and create the Movie Buzz project structure using only terminal commands — no Finder or File Explorer.</p>
 <pre><code class="language-bash"># TODO: Navigate to your Documents directory (or wherever you keep projects)
 # TODO: Create a directory called movie-buzz
@@ -231,7 +245,7 @@ git push -u origin main
 </ul>
 </details>
 <hr>
-<h3 class="step-heading" id="2step-2-add-basic-html-content" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Add Basic HTML Content</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="2step-2-add-basic-html-content" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Add Basic HTML Content</h3>
 <p><strong>File to edit:</strong> <code>movie-buzz/index.html</code></p>
 <p><strong>What you're doing:</strong> Open <code>index.html</code> in VS Code and write a simple HTML page that links to your CSS and JS files. This is a placeholder — we'll replace it with React in Week 03.</p>
 <pre><code class="language-html">&lt;!-- STARTER CODE — fill in the TODO sections --&gt;
@@ -259,7 +273,7 @@ git push -u origin main
 </ul>
 </details>
 <hr>
-<h3 class="step-heading" id="3step-3-initialize-git-and-make-your-first-commits" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Initialize Git and Make Your First Commits</h3>
+<h3 class="step-heading" style="--organic-tilt:-0.1deg" id="3step-3-initialize-git-and-make-your-first-commits" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Initialize Git and Make Your First Commits</h3>
 <p><strong>What you're doing:</strong> Turn <code>movie-buzz/</code> into a Git repository and record your work with three separate, meaningful commits.</p>
 <pre><code class="language-bash"># TODO: Confirm you are inside the movie-buzz directory (use pwd)
 # TODO: Verify you are NOT already in a Git repo (use git status — expect an error)
@@ -285,7 +299,7 @@ git push -u origin main
 </ul>
 </details>
 <hr>
-<h3 class="step-heading" id="4step-4-push-to-github" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Push to GitHub</h3>
+<h3 class="step-heading" style="--organic-tilt:0.2deg" id="4step-4-push-to-github" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Push to GitHub</h3>
 <p><strong>What you're doing:</strong> Create a new repository on GitHub and push your local commits there.</p>
 <pre><code class="language-bash"># TODO: Go to github.com and create a new repository named &quot;movie-buzz&quot;
 #       - Set it to Public
@@ -308,7 +322,7 @@ git push -u origin main
 </ul>
 </details>
 <hr>
-<h3 class="step-heading" id="5step-5-create-a-gitignore" tabindex="-1"><span class="step-badge" aria-hidden="true">5</span><span class="sr-only">Step 5: </span>Create a .gitignore</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="5step-5-create-a-gitignore" tabindex="-1"><span class="step-badge" aria-hidden="true">5</span><span class="sr-only">Step 5: </span>Create a .gitignore</h3>
 <p><strong>File to edit:</strong> <code>movie-buzz/.gitignore</code></p>
 <p><strong>What you're doing:</strong> Ensure that <code>node_modules/</code> (and other generated files) will never be committed accidentally.</p>
 <pre><code class="language-bash"># STARTER — your .gitignore should contain at minimum:
@@ -395,7 +409,8 @@ git push -u origin main   # Now works
 </ul>
 <hr>
 <h2 id="🚀-stretch-goals" tabindex="-1">🚀 Stretch Goals</h2>
-<blockquote class="callout callout--default">
+<blockquote class="callout callout--default" style="--tilt:-0.4deg;--glow-intensity:0.91">
+<div class="callout-label lift"><i class="fas fa-info-circle callout-icon" aria-hidden="true"></i><span>Note</span></div>
 <p>These are optional. Attempt them after completing all deliverables. No starter code is provided — that's the point.</p>
 </blockquote>
 <details>
@@ -426,7 +441,8 @@ Shell scripts are how professional developers automate repetitive setup tasks. E
 </details>
 <hr>
 <h2 id="🎫-exit-ticket" tabindex="-1">🎫 Exit Ticket</h2>
-<blockquote class="callout callout--default">
+<blockquote class="callout callout--default" style="--tilt:-0.1deg;--glow-intensity:0.69">
+<div class="callout-label lift"><i class="fas fa-info-circle callout-icon" aria-hidden="true"></i><span>Note</span></div>
 <p>When you're done, submit your exit ticket using access code: <strong><code>bash73</code></strong></p>
 <p>The questions cover: Bash navigation commands, Git staging concepts, the purpose of <code>.gitignore</code>, and Git commit messages.</p>
 </blockquote>
@@ -462,7 +478,8 @@ Shell scripts are how professional developers automate repetitive setup tasks. E
 </tr>
 </tbody>
 </table>
-<blockquote class="callout callout--note">
+<blockquote class="callout callout--note" style="--tilt:0deg;--glow-intensity:0.60">
+<div class="callout-label lift"><i class="fas fa-thumbtack callout-icon" aria-hidden="true"></i><span>Note</span></div>
 <p>📌 <strong>Reminder:</strong> <code>movie-buzz-finished/</code> is the reference implementation for the full application. Use it to <strong>verify your output</strong>, not to copy code.</p>
 </blockquote>
 
@@ -472,5 +489,7 @@ Shell scripts are how professional developers automate repetitive setup tasks. E
 </div>
 </main>
 </div>
+<script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
+<script src="../assets/animations.js"></script>
 </body>
 </html>

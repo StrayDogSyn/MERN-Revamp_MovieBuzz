@@ -33,12 +33,33 @@ const EMOJI_CALLOUT_MAP = {
   '📖': 'reference',
 };
 
+/* Maps callout types to Font Awesome icon classes + display labels */
+const FA_ICON_MAP = {
+  'tip':                  { icon: 'fas fa-lightbulb',      text: 'Tip' },
+  'warning':              { icon: 'fas fa-exclamation-triangle', text: 'Warning' },
+  'meta':                 { icon: 'fas fa-key',             text: 'Key Concept' },
+  'note':                 { icon: 'fas fa-thumbtack',       text: 'Note' },
+  'ticket':               { icon: 'fas fa-ticket-alt',      text: 'Ticket' },
+  'orientation':          { icon: 'fas fa-map-signs',       text: 'Orientation' },
+  'stretch':              { icon: 'fas fa-rocket',          text: 'Stretch Goal' },
+  'reference':            { icon: 'fas fa-book-open',       text: 'Reference' },
+  'reflection-consider':  { icon: 'fas fa-brain',           text: 'Reflection — Consider This' },
+  'reflection-try':       { icon: 'fas fa-tools',           text: 'Hands-On — Try It Out' },
+  'concept':              { icon: 'fas fa-cube',            text: 'Concept' },
+  'default':              { icon: 'fas fa-info-circle',     text: 'Note' },
+};
+
+function faLabel(type) {
+  const fa = FA_ICON_MAP[type] || FA_ICON_MAP['default'];
+  return `<i class="${fa.icon} callout-icon" aria-hidden="true"></i><span>${fa.text}</span>`;
+}
+
 function classifyBlockquoteLead(content) {
   if (/^`Consider This`/.test(content)) {
-    return { type: 'reflection-consider', label: '🤔 Reflection Prompt — Consider This' };
+    return { type: 'reflection-consider', label: faLabel('reflection-consider') };
   }
   if (/^`Try It Out`/.test(content)) {
-    return { type: 'reflection-try', label: '🛠️ Hands-On — Try It Out' };
+    return { type: 'reflection-try', label: faLabel('reflection-try') };
   }
   // "**Term**\nDefinition" on its own, e.g. Key Concepts blocks — the bold
   // term IS the label, so no extra HTML needs to be injected.
@@ -47,7 +68,8 @@ function classifyBlockquoteLead(content) {
   }
   const emojiMatch = content.match(/^(\p{Extended_Pictographic}️?)/u);
   if (emojiMatch && EMOJI_CALLOUT_MAP[emojiMatch[1]]) {
-    return { type: EMOJI_CALLOUT_MAP[emojiMatch[1]], label: null };
+    const type = EMOJI_CALLOUT_MAP[emojiMatch[1]];
+    return { type, label: faLabel(type) };
   }
   return { type: 'default', label: null };
 }
@@ -70,12 +92,18 @@ function classifyCallouts(state) {
     }
     const { type, label } = classifyBlockquoteLead(firstContent);
     tokens[i].attrJoin('class', `callout callout--${type}`);
-    if (label) {
-      const labelToken = new state.Token('html_block', '', 0);
-      labelToken.content = `<div class="callout-label lift">${label}</div>\n`;
-      tokens.splice(i + 1, 0, labelToken);
-      i++;
-    }
+    // Organic micro-variation: deterministic tilt + glow from token position
+    const tiltSign = i % 2 === 0 ? 1 : -1;
+    const tiltMag  = ((i * 17) % 5) * 0.1; // 0.0–0.4deg
+    const glowInt  = (0.6 + ((i * 13) % 40) / 100).toFixed(2); // 0.60–1.00
+    tokens[i].attrSet('style',
+      `--tilt:${tiltSign * tiltMag}deg;--glow-intensity:${glowInt}`);
+    /* Inject a label strip for every callout type, not just Socratic prompts */
+    const effectiveLabel = label || faLabel(type);
+    const labelToken = new state.Token('html_block', '', 0);
+    labelToken.content = `<div class="callout-label lift">${effectiveLabel}</div>\n`;
+    tokens.splice(i + 1, 0, labelToken);
+    i++
   }
 }
 
@@ -89,6 +117,7 @@ const STEP_HEADING_RE = /^(?:(?:Step|Task|Example)\s+(\d+)[:.]\s*|(\d+)\.\s+)(.+
  */
 function addStepBadges(state) {
   const tokens = state.tokens;
+  let stepCount = 0;
   for (let i = 0; i < tokens.length; i++) {
     if (tokens[i].type !== 'heading_open' || tokens[i].tag !== 'h3') continue;
     const inline = tokens[i + 1];
@@ -97,9 +126,14 @@ function addStepBadges(state) {
     if (!match) continue;
     const num = match[1] || match[2];
     const rest = match[3];
+    /* Organic tilt: alternate subtle direction, constrained to ±0.3deg */
+    const tiltSign = stepCount % 2 === 0 ? 1 : -1;
+    const tiltMag  = (stepCount % 3) * 0.1; // 0.0, 0.1, 0.2deg
     tokens[i].attrJoin('class', 'step-heading');
+    tokens[i].attrSet('style', `--organic-tilt:${tiltSign * tiltMag}deg`);
     inline.content = `<span class="step-badge" aria-hidden="true">${num}</span>` +
       `<span class="sr-only">Step ${num}: </span>${rest}`;
+    stepCount++;
   }
 }
 

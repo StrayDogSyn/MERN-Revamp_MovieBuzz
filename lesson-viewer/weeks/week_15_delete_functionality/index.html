@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Week 15 - DELETE Functionality · Movie Buzz Lesson Viewer</title>
 <link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="https://cdn.tlm.cloud/fontawesome/5.15.2/css/all.css">
 <link rel="icon" href="data:,">
 </head>
-<body>
+<body style="--page-gradient-angle:158deg;--animation-seed:0.672">
 <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
 <label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
 <div class="layout">
@@ -97,7 +98,7 @@
 ---
 <h2 id="simple-examples---building-understanding" tabindex="-1">Simple Examples - Building Understanding</h2>
 <p>Before diving into the full implementation, let's explore some simple, focused examples to build our understanding of DELETE operations step by step.</p>
-<h3 class="step-heading" id="1step-1-delete-request-handling" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>DELETE Request Handling</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-delete-request-handling" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>DELETE Request Handling</h3>
 <p>Let's start with a basic DELETE endpoint that processes removal requests:</p>
 <pre><code class="language-javascript">// Simple DELETE endpoint
 app.delete('/api/movies/:id', (req, res) =&gt; {
@@ -115,7 +116,7 @@ app.delete('/api/movies/:id', (req, res) =&gt; {
 });
 </code></pre>
 <p><strong>Try It Out:</strong> Use Postman or curl to send DELETE requests and see how the server processes the request.</p>
-<h3 class="step-heading" id="2step-2-confirming-deletion" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Confirming Deletion</h3>
+<h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-confirming-deletion" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Confirming Deletion</h3>
 <p>Let's add logic to find and &quot;delete&quot; items from an in-memory array:</p>
 <pre><code class="language-javascript">// Sample data
 let movies = [
@@ -164,7 +165,7 @@ app.get('/api/movies', (req, res) =&gt; {
 });
 </code></pre>
 <p><strong>Try It Out:</strong> Delete movies one by one and use the GET endpoint to see the array shrinking.</p>
-<h3 class="step-heading" id="3step-3-cascade-delete-concepts" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Cascade Delete Concepts</h3>
+<h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-cascade-delete-concepts" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Cascade Delete Concepts</h3>
 <p>Let's explore what happens when deletion affects related data:</p>
 <pre><code class="language-javascript">// Sample data with relationships
 let movies = [
@@ -229,7 +230,7 @@ app.delete('/api/movies/:id', (req, res) =&gt; {
 });
 </code></pre>
 <p><strong>Try It Out:</strong> See how deletion can affect related data and try both prevention and cascade approaches.</p>
-<h3 class="step-heading" id="4step-4-soft-delete-vs-hard-delete" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Soft Delete vs Hard Delete</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="4step-4-soft-delete-vs-hard-delete" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Soft Delete vs Hard Delete</h3>
 <p>Let's implement both approaches to see the difference:</p>
 <pre><code class="language-javascript">// Add deleted field to movies
 let movies = [
@@ -570,5 +571,7 @@ curl -X DELETE http://localhost:4000/api/movies/invalid-id
 </div>
 </main>
 </div>
+<script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
+<script src="../assets/animations.js"></script>
 </body>
 </html>

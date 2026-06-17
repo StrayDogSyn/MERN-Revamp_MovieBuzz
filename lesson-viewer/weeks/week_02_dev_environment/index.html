@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Week 2 - Development Environment & React Setup · Movie Buzz Lesson Viewer</title>
 <link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="https://cdn.tlm.cloud/fontawesome/5.15.2/css/all.css">
 <link rel="icon" href="data:,">
 </head>
-<body>
+<body style="--page-gradient-angle:108deg;--animation-seed:0.650">
 <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
 <label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
 <div class="layout">
@@ -127,8 +128,8 @@ cd react-projects
 <li><strong>Testing Frameworks</strong>: Ensuring your code works correctly</li>
 </ul>
 <p>Today, we'll set up all these tools so you can build professional React applications!</p>
-<blockquote class="callout callout--reflection-consider">
-<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
+<blockquote class="callout callout--reflection-consider" style="--tilt:-0.30000000000000004deg;--glow-intensity:0.97">
+<div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code><br>
 Why do you think companies like Netflix and Facebook created tools like React instead of using plain HTML/CSS/JavaScript?</p>
 </blockquote>
@@ -182,8 +183,8 @@ cat package.json
   &quot;license&quot;: &quot;ISC&quot;
 }
 </code></pre>
-<blockquote class="callout callout--reflection-consider">
-<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
+<blockquote class="callout callout--reflection-consider" style="--tilt:0deg;--glow-intensity:0.85">
+<div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code><br>
 The <code>package.json</code> file is like a recipe card for your project. What information does it contain?</p>
 </blockquote>
@@ -251,8 +252,8 @@ npm install
 <li><code>npm test</code> - Runs test suite</li>
 <li><code>npm run eject</code> - (Don't use!) Removes Create React App wrapper</li>
 </ul>
-<blockquote class="callout callout--reflection-consider">
-<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
+<blockquote class="callout callout--reflection-consider" style="--tilt:0deg;--glow-intensity:0.90">
+<div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code><br>
 Try editing <code>src/App.js</code> and save. What happens in the browser? This is called &quot;hot reloading&quot;!</p>
 </blockquote>
@@ -393,5 +394,7 @@ git commit -m &quot;Initial React setup for Movie Buzz&quot;
 </div>
 </main>
 </div>
+<script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
+<script src="../assets/animations.js"></script>
 </body>
 </html>

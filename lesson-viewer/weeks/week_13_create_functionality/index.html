@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Week 13 - CREATE Functionality · Movie Buzz Lesson Viewer</title>
 <link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="https://cdn.tlm.cloud/fontawesome/5.15.2/css/all.css">
 <link rel="icon" href="data:,">
 </head>
-<body>
+<body style="--page-gradient-angle:151deg;--animation-seed:0.670">
 <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
 <label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
 <div class="layout">
@@ -104,7 +105,7 @@
 ---
 <h2 id="simple-examples---building-understanding" tabindex="-1">Simple Examples - Building Understanding</h2>
 <p>Before diving into the full implementation, let's explore some simple, focused examples to build our understanding of CREATE operations step by step.</p>
-<h3 class="step-heading" id="1step-1-basic-post-request-handling" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Basic POST Request Handling</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-basic-post-request-handling" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Basic POST Request Handling</h3>
 <p>Let's start with a minimal POST endpoint that accepts data:</p>
 <pre><code class="language-javascript">// Simple POST endpoint
 app.post('/api/movies', (req, res) =&gt; {
@@ -119,7 +120,7 @@ app.post('/api/movies', (req, res) =&gt; {
 });
 </code></pre>
 <p><strong>Try It Out:</strong> Use Postman or curl to send POST data to this endpoint and see how it handles the request body.</p>
-<h3 class="step-heading" id="2step-2-request-body-validation" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Request Body Validation</h3>
+<h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-request-body-validation" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Request Body Validation</h3>
 <p>Now let's add some basic validation to ensure we receive the required data:</p>
 <pre><code class="language-javascript">// POST endpoint with validation
 app.post('/api/movies', (req, res) =&gt; {
@@ -142,7 +143,7 @@ app.post('/api/movies', (req, res) =&gt; {
 });
 </code></pre>
 <p><strong>Try It Out:</strong> Test this endpoint with both complete and incomplete data to see how validation works.</p>
-<h3 class="step-heading" id="3step-3-simple-data-creation-no-database" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Simple Data Creation (No Database)</h3>
+<h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-simple-data-creation-no-database" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Simple Data Creation (No Database)</h3>
 <p>Let's simulate creating data by storing it in an array (before we connect to MongoDB):</p>
 <pre><code class="language-javascript">// In-memory storage for testing
 let movies = [];
@@ -191,7 +192,7 @@ app.get('/api/movies', (req, res) =&gt; {
 });
 </code></pre>
 <p><strong>Try It Out:</strong> Create several movies using POST, then use GET to see your created data persist in memory.</p>
-<h3 class="step-heading" id="4step-4-error-handling-for-invalid-data" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Error Handling for Invalid Data</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="4step-4-error-handling-for-invalid-data" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Error Handling for Invalid Data</h3>
 <p>Let's handle common error scenarios that occur during creation:</p>
 <pre><code class="language-javascript">app.post('/api/movies', (req, res) =&gt; {
   try {
@@ -297,8 +298,8 @@ app.get('/api/movies', (req, res) =&gt; {
 <li><strong>UPDATE</strong>: Modifies existing data (changes existing records)</li>
 <li><strong>DELETE</strong>: Removes existing data (modifies database by removing)</li>
 </ul>
-<blockquote class="callout callout--reflection-consider">
-<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
+<blockquote class="callout callout--reflection-consider" style="--tilt:-0.2deg;--glow-intensity:0.63">
+<div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code><br>
 Why is validation especially important for CREATE operations compared to READ operations? What could go wrong if we don't validate data properly?</p>
 </blockquote>
@@ -1133,8 +1134,8 @@ router.post('/', authenticateUser, createMovie);
 <li>Security best practices</li>
 </ul>
 <p>Next week, we'll implement UPDATE functionality, allowing users to modify existing movies while maintaining data integrity.</p>
-<blockquote class="callout callout--reflection-consider">
-<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
+<blockquote class="callout callout--reflection-consider" style="--tilt:0.1deg;--glow-intensity:0.84">
+<div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code><br>
 How does proper validation and error handling in CREATE operations improve the user experience? What would happen without these safeguards?</p>
 </blockquote>
@@ -1158,5 +1159,7 @@ How does proper validation and error handling in CREATE operations improve the u
 </div>
 </main>
 </div>
+<script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
+<script src="../assets/animations.js"></script>
 </body>
 </html>

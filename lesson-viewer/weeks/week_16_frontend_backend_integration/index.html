@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Week 16 - Frontend-Backend Integration · Movie Buzz Lesson Viewer</title>
 <link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="https://cdn.tlm.cloud/fontawesome/5.15.2/css/all.css">
 <link rel="icon" href="data:,">
 </head>
-<body>
+<body style="--page-gradient-angle:162deg;--animation-seed:0.672">
 <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
 <label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
 <div class="layout">
@@ -100,7 +101,7 @@
 ---
 <h2 id="simple-examples---building-understanding" tabindex="-1">Simple Examples - Building Understanding</h2>
 <p>Before diving into the full integration, let's explore some simple, focused examples to build our understanding of how frontend and backend communicate.</p>
-<h3 class="step-heading" id="1step-1-fetch-api-basics" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Fetch API Basics</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-fetch-api-basics" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Fetch API Basics</h3>
 <p>Let's start with the most fundamental concept - making HTTP requests from React to a server:</p>
 <pre><code class="language-javascript">// Simple fetch example
 const fetchExample = async () =&gt; {
@@ -147,7 +148,7 @@ function SimpleExample() {
 }
 </code></pre>
 <p><strong>Try It Out:</strong> Create this simple component and watch the network tab in your browser to see the API call.</p>
-<h3 class="step-heading" id="2step-2-asyncawait-with-apis" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Async/Await with APIs</h3>
+<h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-asyncawait-with-apis" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Async/Await with APIs</h3>
 <p>Let's build understanding of handling asynchronous operations properly:</p>
 <pre><code class="language-javascript">// Different ways to handle async operations
 function AsyncExamples() {
@@ -251,7 +252,7 @@ function AsyncExamples() {
 }
 </code></pre>
 <p><strong>Try It Out:</strong> Test each button with your backend running and stopped to see different behaviors.</p>
-<h3 class="step-heading" id="3step-3-error-handling-in-frontend" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Error Handling in Frontend</h3>
+<h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-error-handling-in-frontend" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Error Handling in Frontend</h3>
 <p>Let's understand different types of errors and how to handle them:</p>
 <pre><code class="language-javascript">function ErrorHandlingExample() {
   const [status, setStatus] = useState('ready');
@@ -346,7 +347,7 @@ function AsyncExamples() {
 }
 </code></pre>
 <p><strong>Try It Out:</strong> Test each scenario to see how different types of errors are handled.</p>
-<h3 class="step-heading" id="4step-4-loading-states" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Loading States</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="4step-4-loading-states" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Loading States</h3>
 <p>Let's create proper loading indicators for better user experience:</p>
 <pre><code class="language-javascript">// Loading component variations
 function LoadingIndicator({ type = 'spinner' }) {
@@ -525,8 +526,8 @@ function LoadingStatesExample() {
 <li>Stateless communication</li>
 <li>Error handling at both layers</li>
 </ul>
-<blockquote class="callout callout--reflection-consider">
-<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
+<blockquote class="callout callout--reflection-consider" style="--tilt:0deg;--glow-intensity:0.95">
+<div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code><br>
 Why is it important to separate frontend and backend code into different applications?</p>
 </blockquote>
@@ -1065,5 +1066,7 @@ const matchesGenre = Array.isArray(movie.genre) &amp;&amp;
 </div>
 </main>
 </div>
+<script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
+<script src="../assets/animations.js"></script>
 </body>
 </html>

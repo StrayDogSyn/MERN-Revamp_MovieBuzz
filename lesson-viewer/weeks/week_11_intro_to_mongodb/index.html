@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Week 11 - Intro to MongoDB · Movie Buzz Lesson Viewer</title>
 <link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="https://cdn.tlm.cloud/fontawesome/5.15.2/css/all.css">
 <link rel="icon" href="data:,">
 </head>
-<body>
+<body style="--page-gradient-angle:143deg;--animation-seed:0.669">
 <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
 <label for="nav-toggle" class="nav-toggle-label">&#9776; Course Weeks</label>
 <div class="layout">
@@ -119,7 +120,7 @@
 <hr>
 <h2 id="simple-database-examples---building-understanding" tabindex="-1">Simple Database Examples - Building Understanding</h2>
 <p>Before working with Movie Buzz database, let's understand MongoDB with simple examples:</p>
-<h3 class="step-heading" id="1step-1-understanding-documents-vs-tables" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Understanding Documents vs Tables</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-understanding-documents-vs-tables" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Understanding Documents vs Tables</h3>
 <p><strong>Traditional SQL Table (Users):</strong></p>
 <pre><code class="language-sql">CREATE TABLE users (
   id INT PRIMARY KEY,
@@ -145,7 +146,7 @@ INSERT INTO users VALUES (1, 'John', 'john@email.com', 25);
   }
 }
 </code></pre>
-<h3 class="step-heading" id="2step-2-basic-mongodb-shell-commands" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Basic MongoDB Shell Commands</h3>
+<h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-basic-mongodb-shell-commands" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Basic MongoDB Shell Commands</h3>
 <p>Open your MongoDB shell and try these commands:</p>
 <pre><code class="language-javascript">// Switch to a practice database
 use practice_db
@@ -180,7 +181,7 @@ db.students.find({ subjects: &quot;Math&quot; })
 db.students.countDocuments()
 db.students.countDocuments({ grade: &quot;A&quot; })
 </code></pre>
-<h3 class="step-heading" id="3step-3-working-with-different-data-types" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Working with Different Data Types</h3>
+<h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-working-with-different-data-types" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Working with Different Data Types</h3>
 <pre><code class="language-javascript">// Switch to sample database
 use sample_db
 
@@ -215,7 +216,7 @@ db.products.find({ price: { $lt: 50 } })  // Price less than 50
 db.products.find({ tags: &quot;electronics&quot; })
 db.products.find({ &quot;specs.cpu&quot;: &quot;Intel i7&quot; })  // Query nested fields
 </code></pre>
-<h3 class="step-heading" id="4step-4-basic-crud-operations" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Basic CRUD Operations</h3>
+<h3 class="step-heading" style="--organic-tilt:0deg" id="4step-4-basic-crud-operations" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Basic CRUD Operations</h3>
 <pre><code class="language-javascript">// CREATE (Insert)
 db.books.insertOne({
   title: &quot;JavaScript Basics&quot;,
@@ -246,7 +247,7 @@ db.books.deleteOne({ title: &quot;JavaScript Basics&quot; })
 // Verify deletion
 db.books.find()
 </code></pre>
-<h3 class="step-heading" id="5step-5-arrays-and-complex-queries" tabindex="-1"><span class="step-badge" aria-hidden="true">5</span><span class="sr-only">Step 5: </span>Arrays and Complex Queries</h3>
+<h3 class="step-heading" style="--organic-tilt:0.1deg" id="5step-5-arrays-and-complex-queries" tabindex="-1"><span class="step-badge" aria-hidden="true">5</span><span class="sr-only">Step 5: </span>Arrays and Complex Queries</h3>
 <pre><code class="language-javascript">// Insert movies with array data (similar to our Movie Buzz app)
 db.movies.insertMany([
   {
@@ -281,8 +282,8 @@ db.movies.find({
   year: { $gte: 2000 }
 })  // Multiple conditions
 </code></pre>
-<blockquote class="callout callout--reflection-try">
-<div class="callout-label lift">🛠️ Hands-On — Try It Out</div>
+<blockquote class="callout callout--reflection-try" style="--tilt:0.30000000000000004deg;--glow-intensity:0.82">
+<div class="callout-label lift"><i class="fas fa-tools callout-icon" aria-hidden="true"></i><span>Hands-On — Try It Out</span></div>
 <p><code>Try It Out</code>
 Practice these MongoDB shell commands to understand:</p>
 <ul>
@@ -310,8 +311,8 @@ Practice these MongoDB shell commands to understand:</p>
 <li>Active community and extensive documentation</li>
 </ul>
 <p>MongoDB is the &quot;M&quot; in MERN, completing our full-stack JavaScript solution.</p>
-<blockquote class="callout callout--reflection-consider">
-<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
+<blockquote class="callout callout--reflection-consider" style="--tilt:0.1deg;--glow-intensity:0.64">
+<div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code><br>
 How might a flexible document structure be advantageous for a movie database where different movies might have different types of information?</p>
 </blockquote>
@@ -391,8 +392,8 @@ connecting to: mongodb://127.0.0.1:27017
   }
 }
 </code></pre>
-<blockquote class="callout callout--reflection-consider">
-<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
+<blockquote class="callout callout--reflection-consider" style="--tilt:-0.1deg;--glow-intensity:0.89">
+<div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code><br>
 What advantages might the MongoDB document structure have for storing movie information compared to a traditional SQL table?</p>
 </blockquote>
@@ -728,8 +729,8 @@ connectToDatabase().then(() =&gt; {
 <li>How to connect Node.js applications to MongoDB</li>
 </ul>
 <p>Next week, we'll introduce Mongoose, an Object Document Mapper (ODM) that makes working with MongoDB in Node.js much easier and more structured. We'll also implement our first database READ functionality.</p>
-<blockquote class="callout callout--reflection-consider">
-<div class="callout-label lift">🤔 Reflection Prompt — Consider This</div>
+<blockquote class="callout callout--reflection-consider" style="--tilt:-0.30000000000000004deg;--glow-intensity:0.87">
+<div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code><br>
 How does using a real database like MongoDB change the scalability and reliability of our Movie Buzz application compared to file storage?</p>
 </blockquote>
@@ -753,5 +754,7 @@ How does using a real database like MongoDB change the scalability and reliabili
 </div>
 </main>
 </div>
+<script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
+<script src="../assets/animations.js"></script>
 </body>
 </html>
