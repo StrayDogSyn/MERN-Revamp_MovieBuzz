@@ -61,7 +61,7 @@
     fetch('../assets/search-index.json')
       .then(function (r) { return r.json(); })
       .then(function (data) { index = data; loading = false; callback(); })
-      .catch(function () { loading = false; });
+      .catch(function () { loading = false; render([], input.value.trim()); });
   }
 
   input.addEventListener('input', function () {

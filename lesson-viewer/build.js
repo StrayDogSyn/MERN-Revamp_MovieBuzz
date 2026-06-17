@@ -28,7 +28,7 @@ function markdownSlugify(str) {
 
 const md = new MarkdownIt({
   html: true,
-  linkify: true,
+  linkify: false,
   typographer: false,
   highlight(code, lang) {
     if (lang && hljs.getLanguage(lang)) {
