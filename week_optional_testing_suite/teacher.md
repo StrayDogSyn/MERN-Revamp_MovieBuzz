@@ -230,7 +230,7 @@ npm run cleanup
 4. **Security Tests**: Input validation, XSS prevention
 
 ### **CI/CD Integration**
-1. **GitHub Actions**: Automated testing on code changes  
+1. **GitLab CI/CD**: Automated testing on code changes  
 2. **Test Reporting**: Automated pass/fail notifications
 3. **Deploy Validation**: Tests must pass before deployment
 
@@ -246,8 +246,8 @@ npm run cleanup
 ### **Testing Documentation**
 - [Jest Testing Framework](https://jestjs.io/docs/getting-started)
 - [Puppeteer E2E Testing](https://pptr.dev/)
-- [Supertest API Testing](https://github.com/visionmedia/supertest)
-- [MongoDB Memory Server](https://github.com/nodkz/mongodb-memory-server)
+- [Supertest API Testing](https://www.npmjs.com/package/supertest)
+- [MongoDB Memory Server](https://www.npmjs.com/package/mongodb-memory-server)
 
 ### **Best Practices**
 - Write descriptive test names that explain what is being tested

@@ -14,6 +14,10 @@
 <div class="layout">
 <nav class="sidebar" aria-label="Course weeks">
 <div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="sidebar-search">
+<input type="search" id="sidebar-search-input" class="search-input" placeholder="&#xf002; Search lessons…" aria-label="Search lessons">
+<div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+</div>
 <div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
 <a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
 <a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
@@ -114,9 +118,9 @@
 <li>Node.js installed on your system (verify with <code>node --version</code>)</li>
 </ul>
 <p>Navigate to your Documents directory and create a workspace for our React journey:</p>
-<pre><code class="language-bash">cd ~/Documents
-mkdir react-projects
-cd react-projects
+<pre class="hljs"><code><span class="hljs-built_in">cd</span> ~/Documents
+<span class="hljs-built_in">mkdir</span> react-projects
+<span class="hljs-built_in">cd</span> react-projects
 </code></pre>
 <hr>
 <h2 id="understanding-modern-web-development" tabindex="-1">Understanding Modern Web Development</h2>
@@ -152,36 +156,36 @@ Why do you think companies like Netflix and Facebook created tools like React in
 <hr>
 <h2 id="setting-up-for-react-development" tabindex="-1">Setting Up for React Development</h2>
 <p>Let's verify npm is installed and ready:</p>
-<pre><code class="language-bash"># Check npm version
+<pre class="hljs"><code><span class="hljs-comment"># Check npm version</span>
 npm --version
 
-# See npm configuration
+<span class="hljs-comment"># See npm configuration</span>
 npm config list
 </code></pre>
 <p>Now let's understand how npm works by creating a simple project:</p>
-<pre><code class="language-bash"># Create a test project
-mkdir npm-practice
-cd npm-practice
+<pre class="hljs"><code><span class="hljs-comment"># Create a test project</span>
+<span class="hljs-built_in">mkdir</span> npm-practice
+<span class="hljs-built_in">cd</span> npm-practice
 
-# Initialize npm (creates package.json)
+<span class="hljs-comment"># Initialize npm (creates package.json)</span>
 npm init -y
 
-# Look at the created file
-cat package.json
+<span class="hljs-comment"># Look at the created file</span>
+<span class="hljs-built_in">cat</span> package.json
 </code></pre>
 <p>Your <code>package.json</code> should look like:</p>
-<pre><code class="language-json">{
-  &quot;name&quot;: &quot;npm-practice&quot;,
-  &quot;version&quot;: &quot;1.0.0&quot;,
-  &quot;description&quot;: &quot;&quot;,
-  &quot;main&quot;: &quot;index.js&quot;,
-  &quot;scripts&quot;: {
-    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;
-  },
-  &quot;keywords&quot;: [],
-  &quot;author&quot;: &quot;&quot;,
-  &quot;license&quot;: &quot;ISC&quot;
-}
+<pre class="hljs"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;npm-practice&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1.0.0&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;main&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;index.js&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;test&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;keywords&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;author&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;license&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ISC&quot;</span>
+<span class="hljs-punctuation">}</span>
 </code></pre>
 <blockquote class="callout callout--reflection-consider" style="--tilt:0deg;--glow-intensity:0.85">
 <div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
@@ -191,13 +195,13 @@ The <code>package.json</code> file is like a recipe card for your project. What 
 <hr>
 <h2 id="building-your-react-app-structure" tabindex="-1">Building Your React App Structure</h2>
 <p>Since we don't have direct internet access, we'll build our Movie Buzz React application step by step using the provided starter files. Let's navigate to our pre-configured React project:</p>
-<pre><code class="language-bash"># Navigate to the provided Week 2 starter files
-cd week_02_dev_environment/movie-buzz-react
+<pre class="hljs"><code><span class="hljs-comment"># Navigate to the provided Week 2 starter files</span>
+<span class="hljs-built_in">cd</span> week_02_dev_environment/movie-buzz-react
 
-# Look at the structure
-ls -la
+<span class="hljs-comment"># Look at the structure</span>
+<span class="hljs-built_in">ls</span> -la
 
-# Install dependencies (generates node_modules and package-lock.json)
+<span class="hljs-comment"># Install dependencies (generates node_modules and package-lock.json)</span>
 npm install
 </code></pre>
 <p><strong>What's provided for you:</strong></p>
@@ -210,8 +214,8 @@ npm install
 <hr>
 <h2 id="understanding-the-react-project-structure" tabindex="-1">Understanding the React Project Structure</h2>
 <p>Your pre-configured React app has this structure:</p>
-<pre><code class="language-text">movie-buzz/
-├── node_modules/        # All the packages (don't edit or commit!)
+<pre class="hljs"><code>movie-buzz/
+├── node_modules/        # All the packages (don&#x27;t edit or commit!)
 ├── public/             # Static files
 │   ├── index.html      # The single HTML page
 │   └── manifest.json   # App metadata
@@ -234,15 +238,15 @@ npm install
 <hr>
 <h2 id="npm-scripts-for-react" tabindex="-1">npm Scripts for React</h2>
 <p>Open <code>package.json</code> and look at the scripts section:</p>
-<pre><code class="language-json">&quot;scripts&quot;: {
-  &quot;start&quot;: &quot;react-scripts start&quot;,
-  &quot;build&quot;: &quot;react-scripts build&quot;,
-  &quot;test&quot;: &quot;react-scripts test&quot;,
-  &quot;eject&quot;: &quot;react-scripts eject&quot;
-}
+<pre class="hljs"><code><span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;start&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;react-scripts start&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;build&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;react-scripts build&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;test&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;react-scripts test&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;eject&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;react-scripts eject&quot;</span>
+<span class="hljs-punctuation">}</span>
 </code></pre>
 <p>Let's run our React app:</p>
-<pre><code class="language-bash">npm start
+<pre class="hljs"><code>npm start
 </code></pre>
 <p>🎉 <strong>Your React app should open in the browser at <a href="http://localhost:3000">http://localhost:3000</a>!</strong></p>
 <p><strong>What these scripts do:</strong></p>
@@ -264,21 +268,21 @@ Try editing <code>src/App.js</code> and save. What happens in the browser? This 
 <li>Open <code>src/App.js</code> in VS Code</li>
 <li>Replace the content with:</li>
 </ol>
-<pre><code class="language-javascript">import './App.css';
+<pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./App.css&#x27;</span>;
 
-function App() {
-  return (
-    &lt;div className=&quot;App&quot;&gt;
-      &lt;header className=&quot;App-header&quot;&gt;
-        &lt;h1&gt;🎬 Movie Buzz&lt;/h1&gt;
-        &lt;p&gt;Coming Soon: Your Netflix-Style Movie Database!&lt;/p&gt;
-        &lt;p&gt;Week 2: Environment Setup ✅&lt;/p&gt;
-      &lt;/header&gt;
-    &lt;/div&gt;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;App&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;App-header&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>🎬 Movie Buzz<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Coming Soon: Your Netflix-Style Movie Database!<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Week 2: Environment Setup ✅<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-export default App;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">App</span>;
 </code></pre>
 <ol>
 <li>Save the file and watch it update in the browser!</li>
@@ -286,18 +290,18 @@ export default App;
 <hr>
 <h2 id="version-control-for-react-projects" tabindex="-1">Version Control for React Projects</h2>
 <p>Let's set up Git for our React project:</p>
-<pre><code class="language-bash"># Initialize git for our project
+<pre class="hljs"><code><span class="hljs-comment"># Initialize git for our project</span>
 git init
 
-# Notice node_modules is already in .gitignore!
-cat .gitignore
+<span class="hljs-comment"># Notice node_modules is already in .gitignore!</span>
+<span class="hljs-built_in">cat</span> .gitignore
 
-# Check status - node_modules should not appear
+<span class="hljs-comment"># Check status - node_modules should not appear</span>
 git status
 
-# Make our first commit
+<span class="hljs-comment"># Make our first commit</span>
 git add .
-git commit -m &quot;Initial React setup for Movie Buzz&quot;
+git commit -m <span class="hljs-string">&quot;Initial React setup for Movie Buzz&quot;</span>
 </code></pre>
 <p><strong>Important:</strong> Never commit <code>node_modules/</code>! It's huge and can be regenerated with <code>npm install</code>.</p>
 <hr>
@@ -396,5 +400,6 @@ git commit -m &quot;Initial React setup for Movie Buzz&quot;
 </div>
 <script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
 <script src="../assets/animations.js"></script>
+<script src="../assets/search.js"></script>
 </body>
 </html>

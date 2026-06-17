@@ -14,6 +14,10 @@
 <div class="layout">
 <nav class="sidebar" aria-label="Course weeks">
 <div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="sidebar-search">
+<input type="search" id="sidebar-search-input" class="search-input" placeholder="&#xf002; Search lessons…" aria-label="Search lessons">
+<div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+</div>
 <div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
 <a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
 <a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
@@ -111,266 +115,266 @@
 <li>React frontend that can consume API endpoints</li>
 </ul>
 <p>Your project structure should look like:</p>
-<pre><code>movie-buzz-backend/
+<pre class="hljs"><code>movie-buzz-backend/
 ├── config/
-│   └── database.js
+│   └── database<span class="hljs-selector-class">.js</span>
 ├── controllers/
-│   └── movieController.js
+│   └── movieController<span class="hljs-selector-class">.js</span>
 ├── models/
-│   └── Movie.js
+│   └── Movie<span class="hljs-selector-class">.js</span>
 ├── routes/
-│   └── movieRoutes.js
+│   └── movieRoutes<span class="hljs-selector-class">.js</span>
 ├── data/
-│   └── movies.json
-├── server.js
-└── package.json
+│   └── movies<span class="hljs-selector-class">.json</span>
+├── server<span class="hljs-selector-class">.js</span>
+└── package<span class="hljs-selector-class">.json</span>
 </code></pre>
 <hr>
 <h2 id="simple-mongoose-examples---building-understanding" tabindex="-1">Simple Mongoose Examples - Building Understanding</h2>
 <p>Before implementing Movie Buzz with Mongoose, let's understand schemas and models with simple examples:</p>
 <h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-creating-your-first-schema" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Creating Your First Schema</h3>
 <p>Create <code>simple-schema.js</code>:</p>
-<pre><code class="language-javascript">const mongoose = require('mongoose');
+<pre class="hljs"><code><span class="hljs-keyword">const</span> mongoose = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;mongoose&#x27;</span>);
 
-// Connect to MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/practice_db');
+<span class="hljs-comment">// Connect to MongoDB</span>
+mongoose.<span class="hljs-title function_">connect</span>(<span class="hljs-string">&#x27;mongodb://127.0.0.1:27017/practice_db&#x27;</span>);
 
-// Define a simple schema
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    minlength: 2,
-    maxlength: 50
+<span class="hljs-comment">// Define a simple schema</span>
+<span class="hljs-keyword">const</span> userSchema = <span class="hljs-keyword">new</span> mongoose.<span class="hljs-title class_">Schema</span>({
+  <span class="hljs-attr">name</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-title class_">String</span>,
+    <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">minlength</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">maxlength</span>: <span class="hljs-number">50</span>
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    lowercase: true
+  <span class="hljs-attr">email</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-title class_">String</span>,
+    <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">unique</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">lowercase</span>: <span class="hljs-literal">true</span>
   },
-  age: {
-    type: Number,
-    min: 0,
-    max: 120
+  <span class="hljs-attr">age</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-title class_">Number</span>,
+    <span class="hljs-attr">min</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">max</span>: <span class="hljs-number">120</span>
   },
-  isActive: {
-    type: Boolean,
-    default: true
+  <span class="hljs-attr">isActive</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-title class_">Boolean</span>,
+    <span class="hljs-attr">default</span>: <span class="hljs-literal">true</span>
   },
-  tags: [String],  // Array of strings
-  createdAt: {
-    type: Date,
-    default: Date.now
+  <span class="hljs-attr">tags</span>: [<span class="hljs-title class_">String</span>],  <span class="hljs-comment">// Array of strings</span>
+  <span class="hljs-attr">createdAt</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-title class_">Date</span>,
+    <span class="hljs-attr">default</span>: <span class="hljs-title class_">Date</span>.<span class="hljs-property">now</span>
   }
 });
 
-// Create a model
-const User = mongoose.model('User', userSchema);
+<span class="hljs-comment">// Create a model</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">User</span> = mongoose.<span class="hljs-title function_">model</span>(<span class="hljs-string">&#x27;User&#x27;</span>, userSchema);
 
-// Export for use in other files
-module.exports = User;
+<span class="hljs-comment">// Export for use in other files</span>
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = <span class="hljs-title class_">User</span>;
 </code></pre>
 <h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-basic-crud-with-mongoose" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Basic CRUD with Mongoose</h3>
 <p>Create <code>mongoose-crud.js</code>:</p>
-<pre><code class="language-javascript">const mongoose = require('mongoose');
+<pre class="hljs"><code><span class="hljs-keyword">const</span> mongoose = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;mongoose&#x27;</span>);
 
-// Simple schema
-const bookSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  author: { type: String, required: true },
-  pages: { type: Number, min: 1 },
-  genre: [String],
-  published: Date,
-  rating: { type: Number, min: 1, max: 5 }
+<span class="hljs-comment">// Simple schema</span>
+<span class="hljs-keyword">const</span> bookSchema = <span class="hljs-keyword">new</span> mongoose.<span class="hljs-title class_">Schema</span>({
+  <span class="hljs-attr">title</span>: { <span class="hljs-attr">type</span>: <span class="hljs-title class_">String</span>, <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span> },
+  <span class="hljs-attr">author</span>: { <span class="hljs-attr">type</span>: <span class="hljs-title class_">String</span>, <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span> },
+  <span class="hljs-attr">pages</span>: { <span class="hljs-attr">type</span>: <span class="hljs-title class_">Number</span>, <span class="hljs-attr">min</span>: <span class="hljs-number">1</span> },
+  <span class="hljs-attr">genre</span>: [<span class="hljs-title class_">String</span>],
+  <span class="hljs-attr">published</span>: <span class="hljs-title class_">Date</span>,
+  <span class="hljs-attr">rating</span>: { <span class="hljs-attr">type</span>: <span class="hljs-title class_">Number</span>, <span class="hljs-attr">min</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">max</span>: <span class="hljs-number">5</span> }
 });
 
-const Book = mongoose.model('Book', bookSchema);
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">Book</span> = mongoose.<span class="hljs-title function_">model</span>(<span class="hljs-string">&#x27;Book&#x27;</span>, bookSchema);
 
-async function demonstrateCRUD() {
-  try {
-    // Connect
-    await mongoose.connect('mongodb://127.0.0.1:27017/book_db');
-    console.log('Connected to MongoDB');
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">demonstrateCRUD</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-comment">// Connect</span>
+    <span class="hljs-keyword">await</span> mongoose.<span class="hljs-title function_">connect</span>(<span class="hljs-string">&#x27;mongodb://127.0.0.1:27017/book_db&#x27;</span>);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Connected to MongoDB&#x27;</span>);
 
-    // CREATE - Add a new book
-    const newBook = new Book({
-      title: 'JavaScript Guide',
-      author: 'Jane Doe',
-      pages: 400,
-      genre: ['Programming', 'Education'],
-      published: new Date('2023-01-01'),
-      rating: 4.5
+    <span class="hljs-comment">// CREATE - Add a new book</span>
+    <span class="hljs-keyword">const</span> newBook = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Book</span>({
+      <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;JavaScript Guide&#x27;</span>,
+      <span class="hljs-attr">author</span>: <span class="hljs-string">&#x27;Jane Doe&#x27;</span>,
+      <span class="hljs-attr">pages</span>: <span class="hljs-number">400</span>,
+      <span class="hljs-attr">genre</span>: [<span class="hljs-string">&#x27;Programming&#x27;</span>, <span class="hljs-string">&#x27;Education&#x27;</span>],
+      <span class="hljs-attr">published</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(<span class="hljs-string">&#x27;2023-01-01&#x27;</span>),
+      <span class="hljs-attr">rating</span>: <span class="hljs-number">4.5</span>
     });
 
-    const savedBook = await newBook.save();
-    console.log('Created book:', savedBook);
+    <span class="hljs-keyword">const</span> savedBook = <span class="hljs-keyword">await</span> newBook.<span class="hljs-title function_">save</span>();
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Created book:&#x27;</span>, savedBook);
 
-    // READ - Find books
-    const allBooks = await Book.find();
-    console.log('All books:', allBooks);
+    <span class="hljs-comment">// READ - Find books</span>
+    <span class="hljs-keyword">const</span> allBooks = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Book</span>.<span class="hljs-title function_">find</span>();
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;All books:&#x27;</span>, allBooks);
 
-    const programmingBooks = await Book.find({ genre: 'Programming' });
-    console.log('Programming books:', programmingBooks);
+    <span class="hljs-keyword">const</span> programmingBooks = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Book</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">genre</span>: <span class="hljs-string">&#x27;Programming&#x27;</span> });
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Programming books:&#x27;</span>, programmingBooks);
 
-    const oneBook = await Book.findOne({ title: 'JavaScript Guide' });
-    console.log('Found book:', oneBook);
+    <span class="hljs-keyword">const</span> oneBook = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Book</span>.<span class="hljs-title function_">findOne</span>({ <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;JavaScript Guide&#x27;</span> });
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Found book:&#x27;</span>, oneBook);
 
-    // More complex queries
-    const highRatedBooks = await Book.find({ rating: { $gte: 4 } });
-    console.log('High rated books:', highRatedBooks);
+    <span class="hljs-comment">// More complex queries</span>
+    <span class="hljs-keyword">const</span> highRatedBooks = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Book</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">rating</span>: { <span class="hljs-attr">$gte</span>: <span class="hljs-number">4</span> } });
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;High rated books:&#x27;</span>, highRatedBooks);
 
-  } catch (error) {
-    console.error('Error:', error);
-  } finally {
-    mongoose.connection.close();
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error:&#x27;</span>, error);
+  } <span class="hljs-keyword">finally</span> {
+    mongoose.<span class="hljs-property">connection</span>.<span class="hljs-title function_">close</span>();
   }
 }
 
-// Run the demonstration
-demonstrateCRUD();
+<span class="hljs-comment">// Run the demonstration</span>
+<span class="hljs-title function_">demonstrateCRUD</span>();
 </code></pre>
 <h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-schema-validation-and-error-handling" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Schema Validation and Error Handling</h3>
 <p>Create <code>validation-example.js</code>:</p>
-<pre><code class="language-javascript">const mongoose = require('mongoose');
+<pre class="hljs"><code><span class="hljs-keyword">const</span> mongoose = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;mongoose&#x27;</span>);
 
-const productSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'Product name is required'],
-    trim: true,
-    maxlength: [100, 'Name cannot exceed 100 characters']
+<span class="hljs-keyword">const</span> productSchema = <span class="hljs-keyword">new</span> mongoose.<span class="hljs-title class_">Schema</span>({
+  <span class="hljs-attr">name</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-title class_">String</span>,
+    <span class="hljs-attr">required</span>: [<span class="hljs-literal">true</span>, <span class="hljs-string">&#x27;Product name is required&#x27;</span>],
+    <span class="hljs-attr">trim</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">maxlength</span>: [<span class="hljs-number">100</span>, <span class="hljs-string">&#x27;Name cannot exceed 100 characters&#x27;</span>]
   },
-  price: {
-    type: Number,
-    required: [true, 'Price is required'],
-    min: [0, 'Price cannot be negative']
+  <span class="hljs-attr">price</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-title class_">Number</span>,
+    <span class="hljs-attr">required</span>: [<span class="hljs-literal">true</span>, <span class="hljs-string">&#x27;Price is required&#x27;</span>],
+    <span class="hljs-attr">min</span>: [<span class="hljs-number">0</span>, <span class="hljs-string">&#x27;Price cannot be negative&#x27;</span>]
   },
-  category: {
-    type: String,
-    required: true,
-    enum: {
-      values: ['Electronics', 'Clothing', 'Books', 'Sports'],
-      message: 'Category must be Electronics, Clothing, Books, or Sports'
+  <span class="hljs-attr">category</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-title class_">String</span>,
+    <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">enum</span>: {
+      <span class="hljs-attr">values</span>: [<span class="hljs-string">&#x27;Electronics&#x27;</span>, <span class="hljs-string">&#x27;Clothing&#x27;</span>, <span class="hljs-string">&#x27;Books&#x27;</span>, <span class="hljs-string">&#x27;Sports&#x27;</span>],
+      <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Category must be Electronics, Clothing, Books, or Sports&#x27;</span>
     }
   },
-  inStock: {
-    type: Boolean,
-    default: true
+  <span class="hljs-attr">inStock</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-title class_">Boolean</span>,
+    <span class="hljs-attr">default</span>: <span class="hljs-literal">true</span>
   }
 });
 
-const Product = mongoose.model('Product', productSchema);
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">Product</span> = mongoose.<span class="hljs-title function_">model</span>(<span class="hljs-string">&#x27;Product&#x27;</span>, productSchema);
 
-async function testValidation() {
-  try {
-    await mongoose.connect('mongodb://127.0.0.1:27017/validation_db');
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">testValidation</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">await</span> mongoose.<span class="hljs-title function_">connect</span>(<span class="hljs-string">&#x27;mongodb://127.0.0.1:27017/validation_db&#x27;</span>);
 
-    // Valid product
-    const validProduct = new Product({
-      name: 'Gaming Laptop',
-      price: 999.99,
-      category: 'Electronics'
+    <span class="hljs-comment">// Valid product</span>
+    <span class="hljs-keyword">const</span> validProduct = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Product</span>({
+      <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Gaming Laptop&#x27;</span>,
+      <span class="hljs-attr">price</span>: <span class="hljs-number">999.99</span>,
+      <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;Electronics&#x27;</span>
     });
 
-    const saved = await validProduct.save();
-    console.log('Valid product saved:', saved);
+    <span class="hljs-keyword">const</span> saved = <span class="hljs-keyword">await</span> validProduct.<span class="hljs-title function_">save</span>();
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Valid product saved:&#x27;</span>, saved);
 
-    // Invalid product (will cause validation errors)
-    const invalidProduct = new Product({
-      name: '',  // Required field missing
-      price: -50,  // Negative price
-      category: 'InvalidCategory'  // Not in enum
+    <span class="hljs-comment">// Invalid product (will cause validation errors)</span>
+    <span class="hljs-keyword">const</span> invalidProduct = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Product</span>({
+      <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;&#x27;</span>,  <span class="hljs-comment">// Required field missing</span>
+      <span class="hljs-attr">price</span>: -<span class="hljs-number">50</span>,  <span class="hljs-comment">// Negative price</span>
+      <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;InvalidCategory&#x27;</span>  <span class="hljs-comment">// Not in enum</span>
     });
 
-    await invalidProduct.save();
+    <span class="hljs-keyword">await</span> invalidProduct.<span class="hljs-title function_">save</span>();
 
-  } catch (error) {
-    console.log('Validation errors:');
-    if (error.errors) {
-      Object.keys(error.errors).forEach(key =&gt; {
-        console.log(`${key}: ${error.errors[key].message}`);
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Validation errors:&#x27;</span>);
+    <span class="hljs-keyword">if</span> (error.<span class="hljs-property">errors</span>) {
+      <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(error.<span class="hljs-property">errors</span>).<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">key</span> =&gt;</span> {
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`<span class="hljs-subst">${key}</span>: <span class="hljs-subst">${error.errors[key].message}</span>`</span>);
       });
     }
-  } finally {
-    mongoose.connection.close();
+  } <span class="hljs-keyword">finally</span> {
+    mongoose.<span class="hljs-property">connection</span>.<span class="hljs-title function_">close</span>();
   }
 }
 
-testValidation();
+<span class="hljs-title function_">testValidation</span>();
 </code></pre>
 <h3 class="step-heading" style="--organic-tilt:0deg" id="4step-4-advanced-queries-and-methods" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Advanced Queries and Methods</h3>
 <p>Create <code>advanced-queries.js</code>:</p>
-<pre><code class="language-javascript">const mongoose = require('mongoose');
+<pre class="hljs"><code><span class="hljs-keyword">const</span> mongoose = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;mongoose&#x27;</span>);
 
-const studentSchema = new mongoose.Schema({
-  name: String,
-  grade: String,
-  subjects: [String],
-  gpa: Number,
-  graduationYear: Number
+<span class="hljs-keyword">const</span> studentSchema = <span class="hljs-keyword">new</span> mongoose.<span class="hljs-title class_">Schema</span>({
+  <span class="hljs-attr">name</span>: <span class="hljs-title class_">String</span>,
+  <span class="hljs-attr">grade</span>: <span class="hljs-title class_">String</span>,
+  <span class="hljs-attr">subjects</span>: [<span class="hljs-title class_">String</span>],
+  <span class="hljs-attr">gpa</span>: <span class="hljs-title class_">Number</span>,
+  <span class="hljs-attr">graduationYear</span>: <span class="hljs-title class_">Number</span>
 });
 
-// Add custom methods to schema
-studentSchema.methods.getFullInfo = function() {
-  return `${this.name} - Grade: ${this.grade}, GPA: ${this.gpa}`;
+<span class="hljs-comment">// Add custom methods to schema</span>
+studentSchema.<span class="hljs-property">methods</span>.<span class="hljs-property">getFullInfo</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-variable language_">this</span>.name}</span> - Grade: <span class="hljs-subst">${<span class="hljs-variable language_">this</span>.grade}</span>, GPA: <span class="hljs-subst">${<span class="hljs-variable language_">this</span>.gpa}</span>`</span>;
 };
 
-// Add static methods to schema
-studentSchema.statics.findByGrade = function(grade) {
-  return this.find({ grade: grade });
+<span class="hljs-comment">// Add static methods to schema</span>
+studentSchema.<span class="hljs-property">statics</span>.<span class="hljs-property">findByGrade</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params">grade</span>) {
+  <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">grade</span>: grade });
 };
 
-const Student = mongoose.model('Student', studentSchema);
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">Student</span> = mongoose.<span class="hljs-title function_">model</span>(<span class="hljs-string">&#x27;Student&#x27;</span>, studentSchema);
 
-async function demonstrateQueries() {
-  try {
-    await mongoose.connect('mongodb://127.0.0.1:27017/school_db');
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">demonstrateQueries</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">await</span> mongoose.<span class="hljs-title function_">connect</span>(<span class="hljs-string">&#x27;mongodb://127.0.0.1:27017/school_db&#x27;</span>);
 
-    // Insert sample data
-    await Student.deleteMany({}); // Clear existing data
+    <span class="hljs-comment">// Insert sample data</span>
+    <span class="hljs-keyword">await</span> <span class="hljs-title class_">Student</span>.<span class="hljs-title function_">deleteMany</span>({}); <span class="hljs-comment">// Clear existing data</span>
 
-    const students = [
-      { name: 'Alice', grade: 'A', subjects: ['Math', 'Science'], gpa: 3.8, graduationYear: 2024 },
-      { name: 'Bob', grade: 'B', subjects: ['History', 'English'], gpa: 3.2, graduationYear: 2024 },
-      { name: 'Carol', grade: 'A', subjects: ['Math', 'Physics'], gpa: 3.9, graduationYear: 2025 }
+    <span class="hljs-keyword">const</span> students = [
+      { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Alice&#x27;</span>, <span class="hljs-attr">grade</span>: <span class="hljs-string">&#x27;A&#x27;</span>, <span class="hljs-attr">subjects</span>: [<span class="hljs-string">&#x27;Math&#x27;</span>, <span class="hljs-string">&#x27;Science&#x27;</span>], <span class="hljs-attr">gpa</span>: <span class="hljs-number">3.8</span>, <span class="hljs-attr">graduationYear</span>: <span class="hljs-number">2024</span> },
+      { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Bob&#x27;</span>, <span class="hljs-attr">grade</span>: <span class="hljs-string">&#x27;B&#x27;</span>, <span class="hljs-attr">subjects</span>: [<span class="hljs-string">&#x27;History&#x27;</span>, <span class="hljs-string">&#x27;English&#x27;</span>], <span class="hljs-attr">gpa</span>: <span class="hljs-number">3.2</span>, <span class="hljs-attr">graduationYear</span>: <span class="hljs-number">2024</span> },
+      { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Carol&#x27;</span>, <span class="hljs-attr">grade</span>: <span class="hljs-string">&#x27;A&#x27;</span>, <span class="hljs-attr">subjects</span>: [<span class="hljs-string">&#x27;Math&#x27;</span>, <span class="hljs-string">&#x27;Physics&#x27;</span>], <span class="hljs-attr">gpa</span>: <span class="hljs-number">3.9</span>, <span class="hljs-attr">graduationYear</span>: <span class="hljs-number">2025</span> }
     ];
 
-    await Student.insertMany(students);
+    <span class="hljs-keyword">await</span> <span class="hljs-title class_">Student</span>.<span class="hljs-title function_">insertMany</span>(students);
 
-    // Various query methods
-    console.log('--- All Students ---');
-    const all = await Student.find();
-    all.forEach(student =&gt; console.log(student.getFullInfo()));
+    <span class="hljs-comment">// Various query methods</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;--- All Students ---&#x27;</span>);
+    <span class="hljs-keyword">const</span> all = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Student</span>.<span class="hljs-title function_">find</span>();
+    all.<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">student</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(student.<span class="hljs-title function_">getFullInfo</span>()));
 
-    console.log('\n--- A Grade Students ---');
-    const aGradeStudents = await Student.findByGrade('A');
-    console.log(aGradeStudents);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;\n--- A Grade Students ---&#x27;</span>);
+    <span class="hljs-keyword">const</span> aGradeStudents = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Student</span>.<span class="hljs-title function_">findByGrade</span>(<span class="hljs-string">&#x27;A&#x27;</span>);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(aGradeStudents);
 
-    console.log('\n--- Math Students ---');
-    const mathStudents = await Student.find({ subjects: 'Math' });
-    console.log(mathStudents);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;\n--- Math Students ---&#x27;</span>);
+    <span class="hljs-keyword">const</span> mathStudents = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Student</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">subjects</span>: <span class="hljs-string">&#x27;Math&#x27;</span> });
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(mathStudents);
 
-    console.log('\n--- High GPA Students ---');
-    const highGPA = await Student.find({ gpa: { $gte: 3.5 } });
-    console.log(highGPA);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;\n--- High GPA Students ---&#x27;</span>);
+    <span class="hljs-keyword">const</span> highGPA = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Student</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">gpa</span>: { <span class="hljs-attr">$gte</span>: <span class="hljs-number">3.5</span> } });
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(highGPA);
 
-    console.log('\n--- Sorted by GPA ---');
-    const sorted = await Student.find().sort({ gpa: -1 }); // -1 for descending
-    console.log(sorted);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;\n--- Sorted by GPA ---&#x27;</span>);
+    <span class="hljs-keyword">const</span> sorted = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Student</span>.<span class="hljs-title function_">find</span>().<span class="hljs-title function_">sort</span>({ <span class="hljs-attr">gpa</span>: -<span class="hljs-number">1</span> }); <span class="hljs-comment">// -1 for descending</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(sorted);
 
-    console.log('\n--- Limited Results ---');
-    const limited = await Student.find().limit(2);
-    console.log(limited);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;\n--- Limited Results ---&#x27;</span>);
+    <span class="hljs-keyword">const</span> limited = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Student</span>.<span class="hljs-title function_">find</span>().<span class="hljs-title function_">limit</span>(<span class="hljs-number">2</span>);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(limited);
 
-  } catch (error) {
-    console.error('Error:', error);
-  } finally {
-    mongoose.connection.close();
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error:&#x27;</span>, error);
+  } <span class="hljs-keyword">finally</span> {
+    mongoose.<span class="hljs-property">connection</span>.<span class="hljs-title function_">close</span>();
   }
 }
 
-demonstrateQueries();
+<span class="hljs-title function_">demonstrateQueries</span>();
 </code></pre>
 <blockquote class="callout callout--reflection-try" style="--tilt:0.1deg;--glow-intensity:0.74">
 <div class="callout-label lift"><i class="fas fa-tools callout-icon" aria-hidden="true"></i><span>Hands-On — Try It Out</span></div>
@@ -442,95 +446,95 @@ How might having a defined schema help prevent bugs in your application, even th
 <hr>
 <h2 id="installing-and-setting-up-mongoose" tabindex="-1">Installing and Setting Up Mongoose</h2>
 <p>First, let's install Mongoose in our project:</p>
-<pre><code class="language-bash">cd movie-buzz-backend
+<pre class="hljs"><code><span class="hljs-built_in">cd</span> movie-buzz-backend
 npm install mongoose
 </code></pre>
 <p>Now, let's update our database connection to use Mongoose. Replace your <code>config/database.js</code> file:</p>
-<pre><code class="language-javascript">const mongoose = require('mongoose');
+<pre class="hljs"><code><span class="hljs-keyword">const</span> mongoose = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;mongoose&#x27;</span>);
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/movie-buzz';
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">MONGODB_URI</span> = process.<span class="hljs-property">env</span>.<span class="hljs-property">MONGODB_URI</span> || <span class="hljs-string">&#x27;mongodb://localhost:27017/movie-buzz&#x27;</span>;
 
-const connectToDatabase = async () =&gt; {
-  try {
-    const connection = await mongoose.connect(MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">connectToDatabase</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> connection = <span class="hljs-keyword">await</span> mongoose.<span class="hljs-title function_">connect</span>(<span class="hljs-variable constant_">MONGODB_URI</span>, {
+      <span class="hljs-attr">useNewUrlParser</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">useUnifiedTopology</span>: <span class="hljs-literal">true</span>,
     });
 
-    console.log(`🍃 MongoDB connected: ${connection.connection.host}`);
-    return connection;
-  } catch (error) {
-    console.error('MongoDB connection error:', error);
-    process.exit(1);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`🍃 MongoDB connected: <span class="hljs-subst">${connection.connection.host}</span>`</span>);
+    <span class="hljs-keyword">return</span> connection;
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;MongoDB connection error:&#x27;</span>, error);
+    process.<span class="hljs-title function_">exit</span>(<span class="hljs-number">1</span>);
   }
 };
 
-// Handle connection events
-mongoose.connection.on('connected', () =&gt; {
-  console.log('Mongoose connected to MongoDB');
+<span class="hljs-comment">// Handle connection events</span>
+mongoose.<span class="hljs-property">connection</span>.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;connected&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Mongoose connected to MongoDB&#x27;</span>);
 });
 
-mongoose.connection.on('error', (error) =&gt; {
-  console.error('Mongoose connection error:', error);
+mongoose.<span class="hljs-property">connection</span>.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;error&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Mongoose connection error:&#x27;</span>, error);
 });
 
-mongoose.connection.on('disconnected', () =&gt; {
-  console.log('Mongoose disconnected from MongoDB');
+mongoose.<span class="hljs-property">connection</span>.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;disconnected&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Mongoose disconnected from MongoDB&#x27;</span>);
 });
 
-// Handle process termination
-process.on('SIGINT', async () =&gt; {
-  await mongoose.connection.close();
-  console.log('Mongoose connection closed through app termination');
-  process.exit(0);
+<span class="hljs-comment">// Handle process termination</span>
+process.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;SIGINT&#x27;</span>, <span class="hljs-title function_">async</span> () =&gt; {
+  <span class="hljs-keyword">await</span> mongoose.<span class="hljs-property">connection</span>.<span class="hljs-title function_">close</span>();
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Mongoose connection closed through app termination&#x27;</span>);
+  process.<span class="hljs-title function_">exit</span>(<span class="hljs-number">0</span>);
 });
 
-module.exports = connectToDatabase;
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = connectToDatabase;
 </code></pre>
 <p>Update your <code>server.js</code> to use the new connection:</p>
-<pre><code class="language-javascript">const express = require('express');
-const cors = require('cors');
-const connectToDatabase = require('./config/database');
-const movieRoutes = require('./routes/movieRoutes');
+<pre class="hljs"><code><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);
+<span class="hljs-keyword">const</span> cors = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;cors&#x27;</span>);
+<span class="hljs-keyword">const</span> connectToDatabase = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./config/database&#x27;</span>);
+<span class="hljs-keyword">const</span> movieRoutes = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./routes/movieRoutes&#x27;</span>);
 
-const app = express();
-const PORT = process.env.PORT || 4000;
+<span class="hljs-keyword">const</span> app = <span class="hljs-title function_">express</span>();
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">PORT</span> = process.<span class="hljs-property">env</span>.<span class="hljs-property">PORT</span> || <span class="hljs-number">4000</span>;
 
-// Middleware
-app.use(express.json());
-app.use(cors());
+<span class="hljs-comment">// Middleware</span>
+app.<span class="hljs-title function_">use</span>(express.<span class="hljs-title function_">json</span>());
+app.<span class="hljs-title function_">use</span>(<span class="hljs-title function_">cors</span>());
 
-// Routes
-app.get('/', (req, res) =&gt; {
-  res.json({
-    message: 'Welcome to Movie Buzz API',
-    version: '2.0.0',
-    database: 'MongoDB with Mongoose',
-    endpoints: [
-      'GET /api/movies - Get all movies',
-      'GET /api/movies/:id - Get movie by ID',
-      'POST /api/movies - Create new movie',
-      'PUT /api/movies/:id - Update movie',
-      'DELETE /api/movies/:id - Delete movie'
+<span class="hljs-comment">// Routes</span>
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Welcome to Movie Buzz API&#x27;</span>,
+    <span class="hljs-attr">version</span>: <span class="hljs-string">&#x27;2.0.0&#x27;</span>,
+    <span class="hljs-attr">database</span>: <span class="hljs-string">&#x27;MongoDB with Mongoose&#x27;</span>,
+    <span class="hljs-attr">endpoints</span>: [
+      <span class="hljs-string">&#x27;GET /api/movies - Get all movies&#x27;</span>,
+      <span class="hljs-string">&#x27;GET /api/movies/:id - Get movie by ID&#x27;</span>,
+      <span class="hljs-string">&#x27;POST /api/movies - Create new movie&#x27;</span>,
+      <span class="hljs-string">&#x27;PUT /api/movies/:id - Update movie&#x27;</span>,
+      <span class="hljs-string">&#x27;DELETE /api/movies/:id - Delete movie&#x27;</span>
     ]
   });
 });
 
-// API routes
-app.use('/api/movies', movieRoutes);
+<span class="hljs-comment">// API routes</span>
+app.<span class="hljs-title function_">use</span>(<span class="hljs-string">&#x27;/api/movies&#x27;</span>, movieRoutes);
 
-// 404 handler
-app.use('*', (req, res) =&gt; {
-  res.status(404).json({
-    success: false,
-    error: 'Route not found'
+<span class="hljs-comment">// 404 handler</span>
+app.<span class="hljs-title function_">use</span>(<span class="hljs-string">&#x27;*&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Route not found&#x27;</span>
   });
 });
 
-// Connect to database and start server
-connectToDatabase().then(() =&gt; {
-  app.listen(PORT, () =&gt; {
-    console.log(`🎬 Movie Buzz API running on http://localhost:${PORT}`);
+<span class="hljs-comment">// Connect to database and start server</span>
+<span class="hljs-title function_">connectToDatabase</span>().<span class="hljs-title function_">then</span>(<span class="hljs-function">() =&gt;</span> {
+  app.<span class="hljs-title function_">listen</span>(<span class="hljs-variable constant_">PORT</span>, <span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`🎬 Movie Buzz API running on http://localhost:<span class="hljs-subst">${PORT}</span>`</span>);
   });
 });
 </code></pre>
@@ -538,140 +542,140 @@ connectToDatabase().then(() =&gt; {
 <h2 id="creating-mongoose-schemas" tabindex="-1">Creating Mongoose Schemas</h2>
 <p>A Mongoose schema defines the structure of documents in a collection. Let's create a comprehensive schema for our movies.</p>
 <p>Replace your <code>models/Movie.js</code> file with a Mongoose model:</p>
-<pre><code class="language-javascript">const mongoose = require('mongoose');
+<pre class="hljs"><code><span class="hljs-keyword">const</span> mongoose = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;mongoose&#x27;</span>);
 
-// Define the movie schema
-const movieSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'Movie name is required'],
-    trim: true,
-    maxlength: [200, 'Movie name cannot exceed 200 characters']
+<span class="hljs-comment">// Define the movie schema</span>
+<span class="hljs-keyword">const</span> movieSchema = <span class="hljs-keyword">new</span> mongoose.<span class="hljs-title class_">Schema</span>({
+  <span class="hljs-attr">name</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-title class_">String</span>,
+    <span class="hljs-attr">required</span>: [<span class="hljs-literal">true</span>, <span class="hljs-string">&#x27;Movie name is required&#x27;</span>],
+    <span class="hljs-attr">trim</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">maxlength</span>: [<span class="hljs-number">200</span>, <span class="hljs-string">&#x27;Movie name cannot exceed 200 characters&#x27;</span>]
   },
-  year: {
-    type: Number,
-    required: [true, 'Release year is required'],
-    min: [1800, 'Year must be after 1800'],
-    max: [new Date().getFullYear() + 5, 'Year cannot be more than 5 years in the future']
+  <span class="hljs-attr">year</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-title class_">Number</span>,
+    <span class="hljs-attr">required</span>: [<span class="hljs-literal">true</span>, <span class="hljs-string">&#x27;Release year is required&#x27;</span>],
+    <span class="hljs-attr">min</span>: [<span class="hljs-number">1800</span>, <span class="hljs-string">&#x27;Year must be after 1800&#x27;</span>],
+    <span class="hljs-attr">max</span>: [<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">getFullYear</span>() + <span class="hljs-number">5</span>, <span class="hljs-string">&#x27;Year cannot be more than 5 years in the future&#x27;</span>]
   },
-  rating: {
-    type: String,
-    required: [true, 'Rating is required'],
-    enum: {
-      values: ['G', 'PG', 'PG-13', 'R', 'NC-17', 'NR'],
-      message: 'Rating must be G, PG, PG-13, R, NC-17, or NR'
+  <span class="hljs-attr">rating</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-title class_">String</span>,
+    <span class="hljs-attr">required</span>: [<span class="hljs-literal">true</span>, <span class="hljs-string">&#x27;Rating is required&#x27;</span>],
+    <span class="hljs-attr">enum</span>: {
+      <span class="hljs-attr">values</span>: [<span class="hljs-string">&#x27;G&#x27;</span>, <span class="hljs-string">&#x27;PG&#x27;</span>, <span class="hljs-string">&#x27;PG-13&#x27;</span>, <span class="hljs-string">&#x27;R&#x27;</span>, <span class="hljs-string">&#x27;NC-17&#x27;</span>, <span class="hljs-string">&#x27;NR&#x27;</span>],
+      <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Rating must be G, PG, PG-13, R, NC-17, or NR&#x27;</span>
     }
   },
-  length: {
-    type: String,
-    required: [true, 'Movie length is required'],
-    validate: {
-      validator: function(v) {
-        return /^\d+\s+minutes?$/.test(v);
+  <span class="hljs-attr">length</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-title class_">String</span>,
+    <span class="hljs-attr">required</span>: [<span class="hljs-literal">true</span>, <span class="hljs-string">&#x27;Movie length is required&#x27;</span>],
+    <span class="hljs-attr">validate</span>: {
+      <span class="hljs-attr">validator</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">v</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-regexp">/^\d+\s+minutes?$/</span>.<span class="hljs-title function_">test</span>(v);
       },
-      message: 'Length must be in format &quot;120 minutes&quot;'
+      <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Length must be in format &quot;120 minutes&quot;&#x27;</span>
     }
   },
-  description: {
-    type: String,
-    required: [true, 'Description is required'],
-    trim: true,
-    minlength: [10, 'Description must be at least 10 characters'],
-    maxlength: [1000, 'Description cannot exceed 1000 characters']
+  <span class="hljs-attr">description</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-title class_">String</span>,
+    <span class="hljs-attr">required</span>: [<span class="hljs-literal">true</span>, <span class="hljs-string">&#x27;Description is required&#x27;</span>],
+    <span class="hljs-attr">trim</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">minlength</span>: [<span class="hljs-number">10</span>, <span class="hljs-string">&#x27;Description must be at least 10 characters&#x27;</span>],
+    <span class="hljs-attr">maxlength</span>: [<span class="hljs-number">1000</span>, <span class="hljs-string">&#x27;Description cannot exceed 1000 characters&#x27;</span>]
   },
-  genre: [{
-    type: String,
-    required: true,
-    trim: true
+  <span class="hljs-attr">genre</span>: [{
+    <span class="hljs-attr">type</span>: <span class="hljs-title class_">String</span>,
+    <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">trim</span>: <span class="hljs-literal">true</span>
   }],
-  director: {
-    type: String,
-    required: [true, 'Director is required'],
-    trim: true,
-    maxlength: [100, 'Director name cannot exceed 100 characters']
+  <span class="hljs-attr">director</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-title class_">String</span>,
+    <span class="hljs-attr">required</span>: [<span class="hljs-literal">true</span>, <span class="hljs-string">&#x27;Director is required&#x27;</span>],
+    <span class="hljs-attr">trim</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">maxlength</span>: [<span class="hljs-number">100</span>, <span class="hljs-string">&#x27;Director name cannot exceed 100 characters&#x27;</span>]
   },
-  stars: [{
-    type: String,
-    trim: true,
-    maxlength: [100, 'Actor name cannot exceed 100 characters']
+  <span class="hljs-attr">stars</span>: [{
+    <span class="hljs-attr">type</span>: <span class="hljs-title class_">String</span>,
+    <span class="hljs-attr">trim</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">maxlength</span>: [<span class="hljs-number">100</span>, <span class="hljs-string">&#x27;Actor name cannot exceed 100 characters&#x27;</span>]
   }],
-  poster: {
-    type: String,
-    validate: {
-      validator: function(v) {
-        return !v || /^https?:\/\/.+\.(jpg|jpeg|png|gif)$/i.test(v);
+  <span class="hljs-attr">poster</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-title class_">String</span>,
+    <span class="hljs-attr">validate</span>: {
+      <span class="hljs-attr">validator</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">v</span>) {
+        <span class="hljs-keyword">return</span> !v || <span class="hljs-regexp">/^https?:\/\/.+\.(jpg|jpeg|png|gif)$/i</span>.<span class="hljs-title function_">test</span>(v);
       },
-      message: 'Poster must be a valid image URL'
+      <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Poster must be a valid image URL&#x27;</span>
     }
   },
-  boxOffice: {
-    type: String,
-    validate: {
-      validator: function(v) {
-        return !v || /^\$[\d,]+(\.\d{1,2})?\s*(million|billion)?$/i.test(v);
+  <span class="hljs-attr">boxOffice</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-title class_">String</span>,
+    <span class="hljs-attr">validate</span>: {
+      <span class="hljs-attr">validator</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">v</span>) {
+        <span class="hljs-keyword">return</span> !v || <span class="hljs-regexp">/^\$[\d,]+(\.\d{1,2})?\s*(million|billion)?$/i</span>.<span class="hljs-title function_">test</span>(v);
       },
-      message: 'Box office must be in format &quot;$123.45 million&quot;'
+      <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Box office must be in format &quot;$123.45 million&quot;&#x27;</span>
     }
   },
-  awards: {
-    oscars: {
-      type: Number,
-      min: 0,
-      default: 0
+  <span class="hljs-attr">awards</span>: {
+    <span class="hljs-attr">oscars</span>: {
+      <span class="hljs-attr">type</span>: <span class="hljs-title class_">Number</span>,
+      <span class="hljs-attr">min</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-attr">default</span>: <span class="hljs-number">0</span>
     },
-    nominations: {
-      type: Number,
-      min: 0,
-      default: 0
+    <span class="hljs-attr">nominations</span>: {
+      <span class="hljs-attr">type</span>: <span class="hljs-title class_">Number</span>,
+      <span class="hljs-attr">min</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-attr">default</span>: <span class="hljs-number">0</span>
     }
   }
 }, {
-  timestamps: true, // Automatically adds createdAt and updatedAt
-  toJSON: { virtuals: true },
-  toObject: { virtuals: true }
+  <span class="hljs-attr">timestamps</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// Automatically adds createdAt and updatedAt</span>
+  <span class="hljs-attr">toJSON</span>: { <span class="hljs-attr">virtuals</span>: <span class="hljs-literal">true</span> },
+  <span class="hljs-attr">toObject</span>: { <span class="hljs-attr">virtuals</span>: <span class="hljs-literal">true</span> }
 });
 
-// Virtual for movie age
-movieSchema.virtual('age').get(function() {
-  const currentYear = new Date().getFullYear();
-  return currentYear - this.year;
+<span class="hljs-comment">// Virtual for movie age</span>
+movieSchema.<span class="hljs-title function_">virtual</span>(<span class="hljs-string">&#x27;age&#x27;</span>).<span class="hljs-title function_">get</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> currentYear = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">getFullYear</span>();
+  <span class="hljs-keyword">return</span> currentYear - <span class="hljs-variable language_">this</span>.<span class="hljs-property">year</span>;
 });
 
-// Virtual for full movie info
-movieSchema.virtual('fullInfo').get(function() {
-  return `${this.name} (${this.year}) - Directed by ${this.director}`;
+<span class="hljs-comment">// Virtual for full movie info</span>
+movieSchema.<span class="hljs-title function_">virtual</span>(<span class="hljs-string">&#x27;fullInfo&#x27;</span>).<span class="hljs-title function_">get</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-variable language_">this</span>.name}</span> (<span class="hljs-subst">${<span class="hljs-variable language_">this</span>.year}</span>) - Directed by <span class="hljs-subst">${<span class="hljs-variable language_">this</span>.director}</span>`</span>;
 });
 
-// Instance method to check if movie is classic (over 25 years old)
-movieSchema.methods.isClassic = function() {
-  return this.age &gt; 25;
+<span class="hljs-comment">// Instance method to check if movie is classic (over 25 years old)</span>
+movieSchema.<span class="hljs-property">methods</span>.<span class="hljs-property">isClassic</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">age</span> &gt; <span class="hljs-number">25</span>;
 };
 
-// Static method to find movies by genre
-movieSchema.statics.findByGenre = function(genre) {
-  return this.find({ genre: { $in: [genre] } });
+<span class="hljs-comment">// Static method to find movies by genre</span>
+movieSchema.<span class="hljs-property">statics</span>.<span class="hljs-property">findByGenre</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params">genre</span>) {
+  <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">genre</span>: { <span class="hljs-attr">$in</span>: [genre] } });
 };
 
-// Static method to find recent movies
-movieSchema.statics.findRecent = function(years = 5) {
-  const cutoffYear = new Date().getFullYear() - years;
-  return this.find({ year: { $gte: cutoffYear } });
+<span class="hljs-comment">// Static method to find recent movies</span>
+movieSchema.<span class="hljs-property">statics</span>.<span class="hljs-property">findRecent</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params">years = <span class="hljs-number">5</span></span>) {
+  <span class="hljs-keyword">const</span> cutoffYear = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">getFullYear</span>() - years;
+  <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">year</span>: { <span class="hljs-attr">$gte</span>: cutoffYear } });
 };
 
-// Pre-save middleware to capitalize first letter of genre
-movieSchema.pre('save', function(next) {
-  if (this.genre &amp;&amp; Array.isArray(this.genre)) {
-    this.genre = this.genre.map(g =&gt; 
-      g.charAt(0).toUpperCase() + g.slice(1).toLowerCase()
+<span class="hljs-comment">// Pre-save middleware to capitalize first letter of genre</span>
+movieSchema.<span class="hljs-title function_">pre</span>(<span class="hljs-string">&#x27;save&#x27;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params">next</span>) {
+  <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">genre</span> &amp;&amp; <span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">genre</span>)) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">genre</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">genre</span>.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">g</span> =&gt;</span> 
+      g.<span class="hljs-title function_">charAt</span>(<span class="hljs-number">0</span>).<span class="hljs-title function_">toUpperCase</span>() + g.<span class="hljs-title function_">slice</span>(<span class="hljs-number">1</span>).<span class="hljs-title function_">toLowerCase</span>()
     );
   }
-  next();
+  <span class="hljs-title function_">next</span>();
 });
 
-// Create and export the model
-const Movie = mongoose.model('Movie', movieSchema);
+<span class="hljs-comment">// Create and export the model</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">Movie</span> = mongoose.<span class="hljs-title function_">model</span>(<span class="hljs-string">&#x27;Movie&#x27;</span>, movieSchema);
 
-module.exports = Movie;
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = <span class="hljs-title class_">Movie</span>;
 </code></pre>
 <hr>
 <h2 id="understanding-mongoose-models" tabindex="-1">Understanding Mongoose Models</h2>
@@ -686,278 +690,278 @@ module.exports = Movie;
 <li><strong>Timestamps</strong>: Automatic createdAt and updatedAt fields</li>
 </ol>
 <p><strong>Example Usage:</strong></p>
-<pre><code class="language-javascript">// Create a new movie instance
-const movie = new Movie({
-  name: &quot;The Matrix&quot;,
-  year: 1999,
-  rating: &quot;R&quot;,
-  // ... other fields
+<pre class="hljs"><code><span class="hljs-comment">// Create a new movie instance</span>
+<span class="hljs-keyword">const</span> movie = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Movie</span>({
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;The Matrix&quot;</span>,
+  <span class="hljs-attr">year</span>: <span class="hljs-number">1999</span>,
+  <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;R&quot;</span>,
+  <span class="hljs-comment">// ... other fields</span>
 });
 
-// Use instance method
-console.log(movie.isClassic()); // true or false
+<span class="hljs-comment">// Use instance method</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(movie.<span class="hljs-title function_">isClassic</span>()); <span class="hljs-comment">// true or false</span>
 
-// Use virtual property
-console.log(movie.age); // Current year - 1999
-console.log(movie.fullInfo); // &quot;The Matrix (1999) - Directed by The Wachowskis&quot;
+<span class="hljs-comment">// Use virtual property</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(movie.<span class="hljs-property">age</span>); <span class="hljs-comment">// Current year - 1999</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(movie.<span class="hljs-property">fullInfo</span>); <span class="hljs-comment">// &quot;The Matrix (1999) - Directed by The Wachowskis&quot;</span>
 
-// Use static method
-const actionMovies = await Movie.findByGenre('Action');
-const recentMovies = await Movie.findRecent(10);
+<span class="hljs-comment">// Use static method</span>
+<span class="hljs-keyword">const</span> actionMovies = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findByGenre</span>(<span class="hljs-string">&#x27;Action&#x27;</span>);
+<span class="hljs-keyword">const</span> recentMovies = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findRecent</span>(<span class="hljs-number">10</span>);
 </code></pre>
 <hr>
 <h2 id="implementing-read-operations" tabindex="-1">Implementing READ Operations</h2>
 <p>Now let's implement READ operations using Mongoose. This is the &quot;R&quot; in CRUD.</p>
 <h3 id="finding-all-movies" tabindex="-1">Finding All Movies</h3>
-<pre><code class="language-javascript">// Basic find all
-const movies = await Movie.find();
+<pre class="hljs"><code><span class="hljs-comment">// Basic find all</span>
+<span class="hljs-keyword">const</span> movies = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">find</span>();
 
-// Find all with specific fields only
-const movies = await Movie.find({}, 'name year director rating');
+<span class="hljs-comment">// Find all with specific fields only</span>
+<span class="hljs-keyword">const</span> movies = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">find</span>({}, <span class="hljs-string">&#x27;name year director rating&#x27;</span>);
 
-// Find all sorted by year (newest first)
-const movies = await Movie.find().sort({ year: -1 });
+<span class="hljs-comment">// Find all sorted by year (newest first)</span>
+<span class="hljs-keyword">const</span> movies = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">find</span>().<span class="hljs-title function_">sort</span>({ <span class="hljs-attr">year</span>: -<span class="hljs-number">1</span> });
 
-// Find all with pagination
-const movies = await Movie.find()
-  .skip(10)        // Skip first 10 results
-  .limit(5)        // Return only 5 results
-  .sort({ name: 1 }); // Sort alphabetically
+<span class="hljs-comment">// Find all with pagination</span>
+<span class="hljs-keyword">const</span> movies = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">find</span>()
+  .<span class="hljs-title function_">skip</span>(<span class="hljs-number">10</span>)        <span class="hljs-comment">// Skip first 10 results</span>
+  .<span class="hljs-title function_">limit</span>(<span class="hljs-number">5</span>)        <span class="hljs-comment">// Return only 5 results</span>
+  .<span class="hljs-title function_">sort</span>({ <span class="hljs-attr">name</span>: <span class="hljs-number">1</span> }); <span class="hljs-comment">// Sort alphabetically</span>
 
-// Find all with population (we'll cover this more later)
-const movies = await Movie.find().select('name year director');
+<span class="hljs-comment">// Find all with population (we&#x27;ll cover this more later)</span>
+<span class="hljs-keyword">const</span> movies = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">find</span>().<span class="hljs-title function_">select</span>(<span class="hljs-string">&#x27;name year director&#x27;</span>);
 </code></pre>
 <h3 id="finding-single-movies" tabindex="-1">Finding Single Movies</h3>
-<pre><code class="language-javascript">// Find by ID
-const movie = await Movie.findById('507f1f77bcf86cd799439011');
+<pre class="hljs"><code><span class="hljs-comment">// Find by ID</span>
+<span class="hljs-keyword">const</span> movie = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findById</span>(<span class="hljs-string">&#x27;507f1f77bcf86cd799439011&#x27;</span>);
 
-// Find one by condition
-const movie = await Movie.findOne({ name: 'The Matrix' });
+<span class="hljs-comment">// Find one by condition</span>
+<span class="hljs-keyword">const</span> movie = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findOne</span>({ <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;The Matrix&#x27;</span> });
 
-// Find one with multiple conditions
-const movie = await Movie.findOne({ 
-  year: 1999, 
-  director: 'The Wachowskis' 
+<span class="hljs-comment">// Find one with multiple conditions</span>
+<span class="hljs-keyword">const</span> movie = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findOne</span>({ 
+  <span class="hljs-attr">year</span>: <span class="hljs-number">1999</span>, 
+  <span class="hljs-attr">director</span>: <span class="hljs-string">&#x27;The Wachowskis&#x27;</span> 
 });
 </code></pre>
 <h3 id="advanced-query-methods" tabindex="-1">Advanced Query Methods</h3>
-<pre><code class="language-javascript">// Find movies by genre
-const actionMovies = await Movie.find({ 
-  genre: { $in: ['Action'] } 
+<pre class="hljs"><code><span class="hljs-comment">// Find movies by genre</span>
+<span class="hljs-keyword">const</span> actionMovies = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">find</span>({ 
+  <span class="hljs-attr">genre</span>: { <span class="hljs-attr">$in</span>: [<span class="hljs-string">&#x27;Action&#x27;</span>] } 
 });
 
-// Find movies within year range
-const nineties = await Movie.find({ 
-  year: { $gte: 1990, $lte: 1999 } 
+<span class="hljs-comment">// Find movies within year range</span>
+<span class="hljs-keyword">const</span> nineties = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">find</span>({ 
+  <span class="hljs-attr">year</span>: { <span class="hljs-attr">$gte</span>: <span class="hljs-number">1990</span>, <span class="hljs-attr">$lte</span>: <span class="hljs-number">1999</span> } 
 });
 
-// Find movies with text search
-const matrixMovies = await Movie.find({
-  name: { $regex: 'Matrix', $options: 'i' }
+<span class="hljs-comment">// Find movies with text search</span>
+<span class="hljs-keyword">const</span> matrixMovies = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">find</span>({
+  <span class="hljs-attr">name</span>: { <span class="hljs-attr">$regex</span>: <span class="hljs-string">&#x27;Matrix&#x27;</span>, <span class="hljs-attr">$options</span>: <span class="hljs-string">&#x27;i&#x27;</span> }
 });
 
-// Find movies with complex conditions
-const epicMovies = await Movie.find({
-  $and: [
-    { year: { $gte: 2000 } },
-    { 'awards.oscars': { $gte: 3 } },
-    { genre: { $in: ['Action', 'Adventure'] } }
+<span class="hljs-comment">// Find movies with complex conditions</span>
+<span class="hljs-keyword">const</span> epicMovies = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">find</span>({
+  <span class="hljs-attr">$and</span>: [
+    { <span class="hljs-attr">year</span>: { <span class="hljs-attr">$gte</span>: <span class="hljs-number">2000</span> } },
+    { <span class="hljs-string">&#x27;awards.oscars&#x27;</span>: { <span class="hljs-attr">$gte</span>: <span class="hljs-number">3</span> } },
+    { <span class="hljs-attr">genre</span>: { <span class="hljs-attr">$in</span>: [<span class="hljs-string">&#x27;Action&#x27;</span>, <span class="hljs-string">&#x27;Adventure&#x27;</span>] } }
   ]
 });
 
-// Count documents
-const totalMovies = await Movie.countDocuments();
-const actionCount = await Movie.countDocuments({ genre: 'Action' });
+<span class="hljs-comment">// Count documents</span>
+<span class="hljs-keyword">const</span> totalMovies = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">countDocuments</span>();
+<span class="hljs-keyword">const</span> actionCount = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">countDocuments</span>({ <span class="hljs-attr">genre</span>: <span class="hljs-string">&#x27;Action&#x27;</span> });
 </code></pre>
 <hr>
 <h2 id="updating-express-controllers" tabindex="-1">Updating Express Controllers</h2>
 <p>Now let's update our Express controllers to use Mongoose instead of file operations.</p>
 <p>Update your <code>controllers/movieController.js</code>:</p>
-<pre><code class="language-javascript">const Movie = require('../models/Movie');
+<pre class="hljs"><code><span class="hljs-keyword">const</span> <span class="hljs-title class_">Movie</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;../models/Movie&#x27;</span>);
 
-// Get all movies
-const getAllMovies = async (req, res) =&gt; {
-  try {
-    // Extract query parameters for filtering and pagination
-    const { 
-      page = 1, 
-      limit = 10, 
-      sortBy = 'year', 
-      sortOrder = 'desc',
+<span class="hljs-comment">// Get all movies</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">getAllMovies</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">req, res</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-comment">// Extract query parameters for filtering and pagination</span>
+    <span class="hljs-keyword">const</span> { 
+      page = <span class="hljs-number">1</span>, 
+      limit = <span class="hljs-number">10</span>, 
+      sortBy = <span class="hljs-string">&#x27;year&#x27;</span>, 
+      sortOrder = <span class="hljs-string">&#x27;desc&#x27;</span>,
       genre,
       year,
       rating,
       search
-    } = req.query;
+    } = req.<span class="hljs-property">query</span>;
 
-    // Build query object
-    let query = {};
+    <span class="hljs-comment">// Build query object</span>
+    <span class="hljs-keyword">let</span> query = {};
     
-    if (genre) {
-      query.genre = { $in: [genre] };
+    <span class="hljs-keyword">if</span> (genre) {
+      query.<span class="hljs-property">genre</span> = { <span class="hljs-attr">$in</span>: [genre] };
     }
     
-    if (year) {
-      query.year = parseInt(year);
+    <span class="hljs-keyword">if</span> (year) {
+      query.<span class="hljs-property">year</span> = <span class="hljs-built_in">parseInt</span>(year);
     }
     
-    if (rating) {
-      query.rating = rating;
+    <span class="hljs-keyword">if</span> (rating) {
+      query.<span class="hljs-property">rating</span> = rating;
     }
     
-    if (search) {
-      query.$or = [
-        { name: { $regex: search, $options: 'i' } },
-        { director: { $regex: search, $options: 'i' } },
-        { description: { $regex: search, $options: 'i' } }
+    <span class="hljs-keyword">if</span> (search) {
+      query.<span class="hljs-property">$or</span> = [
+        { <span class="hljs-attr">name</span>: { <span class="hljs-attr">$regex</span>: search, <span class="hljs-attr">$options</span>: <span class="hljs-string">&#x27;i&#x27;</span> } },
+        { <span class="hljs-attr">director</span>: { <span class="hljs-attr">$regex</span>: search, <span class="hljs-attr">$options</span>: <span class="hljs-string">&#x27;i&#x27;</span> } },
+        { <span class="hljs-attr">description</span>: { <span class="hljs-attr">$regex</span>: search, <span class="hljs-attr">$options</span>: <span class="hljs-string">&#x27;i&#x27;</span> } }
       ];
     }
 
-    // Execute query with pagination and sorting
-    const movies = await Movie.find(query)
-      .sort({ [sortBy]: sortOrder === 'desc' ? -1 : 1 })
-      .skip((page - 1) * limit)
-      .limit(parseInt(limit));
+    <span class="hljs-comment">// Execute query with pagination and sorting</span>
+    <span class="hljs-keyword">const</span> movies = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">find</span>(query)
+      .<span class="hljs-title function_">sort</span>({ [sortBy]: sortOrder === <span class="hljs-string">&#x27;desc&#x27;</span> ? -<span class="hljs-number">1</span> : <span class="hljs-number">1</span> })
+      .<span class="hljs-title function_">skip</span>((page - <span class="hljs-number">1</span>) * limit)
+      .<span class="hljs-title function_">limit</span>(<span class="hljs-built_in">parseInt</span>(limit));
 
-    // Get total count for pagination info
-    const totalCount = await Movie.countDocuments(query);
-    const totalPages = Math.ceil(totalCount / limit);
+    <span class="hljs-comment">// Get total count for pagination info</span>
+    <span class="hljs-keyword">const</span> totalCount = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">countDocuments</span>(query);
+    <span class="hljs-keyword">const</span> totalPages = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">ceil</span>(totalCount / limit);
 
-    res.json({
-      success: true,
-      data: movies,
-      pagination: {
-        currentPage: parseInt(page),
+    res.<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">data</span>: movies,
+      <span class="hljs-attr">pagination</span>: {
+        <span class="hljs-attr">currentPage</span>: <span class="hljs-built_in">parseInt</span>(page),
         totalPages,
         totalCount,
-        hasNextPage: page &lt; totalPages,
-        hasPrevPage: page &gt; 1
+        <span class="hljs-attr">hasNextPage</span>: page &lt; totalPages,
+        <span class="hljs-attr">hasPrevPage</span>: page &gt; <span class="hljs-number">1</span>
       }
     });
-  } catch (error) {
-    console.error('Error fetching movies:', error);
-    res.status(500).json({
-      success: false,
-      error: 'Failed to retrieve movies',
-      details: error.message
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error fetching movies:&#x27;</span>, error);
+    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Failed to retrieve movies&#x27;</span>,
+      <span class="hljs-attr">details</span>: error.<span class="hljs-property">message</span>
     });
   }
 };
 
-// Get single movie by ID
-const getMovieById = async (req, res) =&gt; {
-  try {
-    const { id } = req.params;
+<span class="hljs-comment">// Get single movie by ID</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">getMovieById</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">req, res</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> { id } = req.<span class="hljs-property">params</span>;
 
-    // Validate MongoDB ObjectId format
-    if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-      return res.status(400).json({
-        success: false,
-        error: 'Invalid movie ID format'
+    <span class="hljs-comment">// Validate MongoDB ObjectId format</span>
+    <span class="hljs-keyword">if</span> (!id.<span class="hljs-title function_">match</span>(<span class="hljs-regexp">/^[0-9a-fA-F]{24}$/</span>)) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Invalid movie ID format&#x27;</span>
       });
     }
 
-    const movie = await Movie.findById(id);
+    <span class="hljs-keyword">const</span> movie = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findById</span>(id);
     
-    if (!movie) {
-      return res.status(404).json({
-        success: false,
-        error: 'Movie not found'
+    <span class="hljs-keyword">if</span> (!movie) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Movie not found&#x27;</span>
       });
     }
     
-    res.json({
-      success: true,
-      data: movie
+    res.<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">data</span>: movie
     });
-  } catch (error) {
-    console.error('Error fetching movie:', error);
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error fetching movie:&#x27;</span>, error);
     
-    // Handle specific Mongoose errors
-    if (error.name === 'CastError') {
-      return res.status(400).json({
-        success: false,
-        error: 'Invalid movie ID format'
+    <span class="hljs-comment">// Handle specific Mongoose errors</span>
+    <span class="hljs-keyword">if</span> (error.<span class="hljs-property">name</span> === <span class="hljs-string">&#x27;CastError&#x27;</span>) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Invalid movie ID format&#x27;</span>
       });
     }
     
-    res.status(500).json({
-      success: false,
-      error: 'Failed to retrieve movie',
-      details: error.message
+    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Failed to retrieve movie&#x27;</span>,
+      <span class="hljs-attr">details</span>: error.<span class="hljs-property">message</span>
     });
   }
 };
 
-// Get movies by genre
-const getMoviesByGenre = async (req, res) =&gt; {
-  try {
-    const { genre } = req.params;
+<span class="hljs-comment">// Get movies by genre</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">getMoviesByGenre</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">req, res</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> { genre } = req.<span class="hljs-property">params</span>;
     
-    const movies = await Movie.findByGenre(genre);
+    <span class="hljs-keyword">const</span> movies = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findByGenre</span>(genre);
     
-    res.json({
-      success: true,
-      data: movies,
-      count: movies.length,
-      genre: genre
+    res.<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">data</span>: movies,
+      <span class="hljs-attr">count</span>: movies.<span class="hljs-property">length</span>,
+      <span class="hljs-attr">genre</span>: genre
     });
-  } catch (error) {
-    console.error('Error fetching movies by genre:', error);
-    res.status(500).json({
-      success: false,
-      error: 'Failed to retrieve movies by genre',
-      details: error.message
-    });
-  }
-};
-
-// Get recent movies
-const getRecentMovies = async (req, res) =&gt; {
-  try {
-    const { years = 5 } = req.query;
-    
-    const movies = await Movie.findRecent(parseInt(years));
-    
-    res.json({
-      success: true,
-      data: movies,
-      count: movies.length,
-      yearsBack: parseInt(years)
-    });
-  } catch (error) {
-    console.error('Error fetching recent movies:', error);
-    res.status(500).json({
-      success: false,
-      error: 'Failed to retrieve recent movies',
-      details: error.message
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error fetching movies by genre:&#x27;</span>, error);
+    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Failed to retrieve movies by genre&#x27;</span>,
+      <span class="hljs-attr">details</span>: error.<span class="hljs-property">message</span>
     });
   }
 };
 
-// Placeholder functions for other CRUD operations (we'll implement these in coming weeks)
-const createMovie = (req, res) =&gt; {
-  res.status(501).json({
-    success: false,
-    error: 'Create functionality not yet implemented'
+<span class="hljs-comment">// Get recent movies</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">getRecentMovies</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">req, res</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> { years = <span class="hljs-number">5</span> } = req.<span class="hljs-property">query</span>;
+    
+    <span class="hljs-keyword">const</span> movies = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findRecent</span>(<span class="hljs-built_in">parseInt</span>(years));
+    
+    res.<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">data</span>: movies,
+      <span class="hljs-attr">count</span>: movies.<span class="hljs-property">length</span>,
+      <span class="hljs-attr">yearsBack</span>: <span class="hljs-built_in">parseInt</span>(years)
+    });
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error fetching recent movies:&#x27;</span>, error);
+    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Failed to retrieve recent movies&#x27;</span>,
+      <span class="hljs-attr">details</span>: error.<span class="hljs-property">message</span>
+    });
+  }
+};
+
+<span class="hljs-comment">// Placeholder functions for other CRUD operations (we&#x27;ll implement these in coming weeks)</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">createMovie</span> = (<span class="hljs-params">req, res</span>) =&gt; {
+  res.<span class="hljs-title function_">status</span>(<span class="hljs-number">501</span>).<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Create functionality not yet implemented&#x27;</span>
   });
 };
 
-const updateMovie = (req, res) =&gt; {
-  res.status(501).json({
-    success: false,
-    error: 'Update functionality not yet implemented'
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">updateMovie</span> = (<span class="hljs-params">req, res</span>) =&gt; {
+  res.<span class="hljs-title function_">status</span>(<span class="hljs-number">501</span>).<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Update functionality not yet implemented&#x27;</span>
   });
 };
 
-const deleteMovie = (req, res) =&gt; {
-  res.status(501).json({
-    success: false,
-    error: 'Delete functionality not yet implemented'
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">deleteMovie</span> = (<span class="hljs-params">req, res</span>) =&gt; {
+  res.<span class="hljs-title function_">status</span>(<span class="hljs-number">501</span>).<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Delete functionality not yet implemented&#x27;</span>
   });
 };
 
-module.exports = {
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = {
   getAllMovies,
   getMovieById,
   getMoviesByGenre,
@@ -968,8 +972,8 @@ module.exports = {
 };
 </code></pre>
 <p>Update your routes to include the new endpoints in <code>routes/movieRoutes.js</code>:</p>
-<pre><code class="language-javascript">const express = require('express');
-const {
+<pre class="hljs"><code><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);
+<span class="hljs-keyword">const</span> {
   getAllMovies,
   getMovieById,
   getMoviesByGenre,
@@ -977,22 +981,22 @@ const {
   createMovie,
   updateMovie,
   deleteMovie
-} = require('../controllers/movieController');
+} = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;../controllers/movieController&#x27;</span>);
 
-const router = express.Router();
+<span class="hljs-keyword">const</span> router = express.<span class="hljs-title class_">Router</span>();
 
-// READ routes
-router.get('/', getAllMovies);                    // GET /api/movies
-router.get('/genre/:genre', getMoviesByGenre);    // GET /api/movies/genre/Action
-router.get('/recent', getRecentMovies);           // GET /api/movies/recent
-router.get('/:id', getMovieById);                 // GET /api/movies/:id
+<span class="hljs-comment">// READ routes</span>
+router.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/&#x27;</span>, getAllMovies);                    <span class="hljs-comment">// GET /api/movies</span>
+router.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/genre/:genre&#x27;</span>, getMoviesByGenre);    <span class="hljs-comment">// GET /api/movies/genre/Action</span>
+router.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/recent&#x27;</span>, getRecentMovies);           <span class="hljs-comment">// GET /api/movies/recent</span>
+router.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/:id&#x27;</span>, getMovieById);                 <span class="hljs-comment">// GET /api/movies/:id</span>
 
-// Other CRUD routes (placeholders for now)
-router.post('/', createMovie);                    // POST /api/movies
-router.put('/:id', updateMovie);                  // PUT /api/movies/:id
-router.delete('/:id', deleteMovie);               // DELETE /api/movies/:id
+<span class="hljs-comment">// Other CRUD routes (placeholders for now)</span>
+router.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/&#x27;</span>, createMovie);                    <span class="hljs-comment">// POST /api/movies</span>
+router.<span class="hljs-title function_">put</span>(<span class="hljs-string">&#x27;/:id&#x27;</span>, updateMovie);                  <span class="hljs-comment">// PUT /api/movies/:id</span>
+router.<span class="hljs-title function_">delete</span>(<span class="hljs-string">&#x27;/:id&#x27;</span>, deleteMovie);               <span class="hljs-comment">// DELETE /api/movies/:id</span>
 
-module.exports = router;
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = router;
 </code></pre>
 <hr>
 <h2 id="testing-read-functionality" tabindex="-1">Testing READ Functionality</h2>
@@ -1007,80 +1011,80 @@ module.exports = router;
 <li><code>http://localhost:4000/api/movies/recent?years=10</code> - Recent movies</li>
 </ul>
 <h3 id="using-curl" tabindex="-1">Using curl</h3>
-<pre><code class="language-bash"># Get all movies with pagination
-curl &quot;http://localhost:4000/api/movies?page=1&amp;limit=3&quot;
+<pre class="hljs"><code><span class="hljs-comment"># Get all movies with pagination</span>
+curl <span class="hljs-string">&quot;http://localhost:4000/api/movies?page=1&amp;limit=3&quot;</span>
 
-# Search movies
-curl &quot;http://localhost:4000/api/movies?search=Matrix&quot;
+<span class="hljs-comment"># Search movies</span>
+curl <span class="hljs-string">&quot;http://localhost:4000/api/movies?search=Matrix&quot;</span>
 
-# Get movies by genre
-curl &quot;http://localhost:4000/api/movies/genre/Action&quot;
+<span class="hljs-comment"># Get movies by genre</span>
+curl <span class="hljs-string">&quot;http://localhost:4000/api/movies/genre/Action&quot;</span>
 
-# Get recent movies
-curl &quot;http://localhost:4000/api/movies/recent?years=5&quot;
+<span class="hljs-comment"># Get recent movies</span>
+curl <span class="hljs-string">&quot;http://localhost:4000/api/movies/recent?years=5&quot;</span>
 
-# Get specific movie by ID (replace with actual ID)
-curl &quot;http://localhost:4000/api/movies/507f1f77bcf86cd799439011&quot;
+<span class="hljs-comment"># Get specific movie by ID (replace with actual ID)</span>
+curl <span class="hljs-string">&quot;http://localhost:4000/api/movies/507f1f77bcf86cd799439011&quot;</span>
 </code></pre>
 <h3 id="testing-with-your-react-frontend" tabindex="-1">Testing with Your React Frontend</h3>
 <p>Your React frontend should continue to work with the new API, but now with enhanced features:</p>
-<pre><code class="language-javascript">// In your React App.js, you can now use additional query parameters
-const fetchMovies = async (params = {}) =&gt; {
-  try {
-    const queryString = new URLSearchParams(params).toString();
-    const url = queryString ? 
-      `${API_BASE_URL}/movies?${queryString}` : 
-      `${API_BASE_URL}/movies`;
+<pre class="hljs"><code><span class="hljs-comment">// In your React App.js, you can now use additional query parameters</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">fetchMovies</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">params = {}</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> queryString = <span class="hljs-keyword">new</span> <span class="hljs-title class_">URLSearchParams</span>(params).<span class="hljs-title function_">toString</span>();
+    <span class="hljs-keyword">const</span> url = queryString ? 
+      <span class="hljs-string">`<span class="hljs-subst">${API_BASE_URL}</span>/movies?<span class="hljs-subst">${queryString}</span>`</span> : 
+      <span class="hljs-string">`<span class="hljs-subst">${API_BASE_URL}</span>/movies`</span>;
     
-    const response = await fetch(url);
-    const result = await response.json();
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(url);
+    <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
     
-    if (result.success) {
-      setMovies(result.data);
-      setPagination(result.pagination); // If you want to implement pagination
+    <span class="hljs-keyword">if</span> (result.<span class="hljs-property">success</span>) {
+      <span class="hljs-title function_">setMovies</span>(result.<span class="hljs-property">data</span>);
+      <span class="hljs-title function_">setPagination</span>(result.<span class="hljs-property">pagination</span>); <span class="hljs-comment">// If you want to implement pagination</span>
     }
-  } catch (error) {
-    console.error('Error fetching movies:', error);
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error fetching movies:&#x27;</span>, error);
   }
 };
 
-// Example usage
-fetchMovies({ search: 'Matrix', limit: 10 });
-fetchMovies({ genre: 'Action', sortBy: 'year' });
+<span class="hljs-comment">// Example usage</span>
+<span class="hljs-title function_">fetchMovies</span>({ <span class="hljs-attr">search</span>: <span class="hljs-string">&#x27;Matrix&#x27;</span>, <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span> });
+<span class="hljs-title function_">fetchMovies</span>({ <span class="hljs-attr">genre</span>: <span class="hljs-string">&#x27;Action&#x27;</span>, <span class="hljs-attr">sortBy</span>: <span class="hljs-string">&#x27;year&#x27;</span> });
 </code></pre>
 <hr>
 <h2 id="error-handling-with-mongoose" tabindex="-1">Error Handling with Mongoose</h2>
 <p>Mongoose provides detailed error information. Here are common error types and how to handle them:</p>
-<pre><code class="language-javascript">// In your controller functions
-try {
-  const movie = await Movie.findById(id);
-} catch (error) {
-  console.error('Error details:', error);
+<pre class="hljs"><code><span class="hljs-comment">// In your controller functions</span>
+<span class="hljs-keyword">try</span> {
+  <span class="hljs-keyword">const</span> movie = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findById</span>(id);
+} <span class="hljs-keyword">catch</span> (error) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error details:&#x27;</span>, error);
   
-  // Handle specific Mongoose error types
-  if (error.name === 'CastError') {
-    // Invalid ObjectId format
-    return res.status(400).json({
-      success: false,
-      error: 'Invalid ID format'
+  <span class="hljs-comment">// Handle specific Mongoose error types</span>
+  <span class="hljs-keyword">if</span> (error.<span class="hljs-property">name</span> === <span class="hljs-string">&#x27;CastError&#x27;</span>) {
+    <span class="hljs-comment">// Invalid ObjectId format</span>
+    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Invalid ID format&#x27;</span>
     });
   }
   
-  if (error.name === 'ValidationError') {
-    // Schema validation failed
-    const errors = Object.values(error.errors).map(e =&gt; e.message);
-    return res.status(400).json({
-      success: false,
-      error: 'Validation failed',
-      details: errors
+  <span class="hljs-keyword">if</span> (error.<span class="hljs-property">name</span> === <span class="hljs-string">&#x27;ValidationError&#x27;</span>) {
+    <span class="hljs-comment">// Schema validation failed</span>
+    <span class="hljs-keyword">const</span> errors = <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">values</span>(error.<span class="hljs-property">errors</span>).<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> e.<span class="hljs-property">message</span>);
+    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Validation failed&#x27;</span>,
+      <span class="hljs-attr">details</span>: errors
     });
   }
   
-  // Generic server error
-  res.status(500).json({
-    success: false,
-    error: 'Internal server error',
-    details: error.message
+  <span class="hljs-comment">// Generic server error</span>
+  res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Internal server error&#x27;</span>,
+    <span class="hljs-attr">details</span>: error.<span class="hljs-property">message</span>
   });
 }
 </code></pre>
@@ -1130,5 +1134,6 @@ How do the validation rules in our Mongoose schema help ensure data quality? Wha
 </div>
 <script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
 <script src="../assets/animations.js"></script>
+<script src="../assets/search.js"></script>
 </body>
 </html>

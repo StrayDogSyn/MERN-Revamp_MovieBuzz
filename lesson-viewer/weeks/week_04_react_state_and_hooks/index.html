@@ -14,6 +14,10 @@
 <div class="layout">
 <nav class="sidebar" aria-label="Course weeks">
 <div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="sidebar-search">
+<input type="search" id="sidebar-search-input" class="search-input" placeholder="&#xf002; Search lessons…" aria-label="Search lessons">
+<div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+</div>
 <div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
 <a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
 <a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
@@ -95,17 +99,17 @@ A form element whose <code>value</code> is bound to React state, so React is the
 <details>
 <summary>📦 Step-by-step environment setup</summary>
 <h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-navigate-to-this-weeks-directory" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Navigate to this week's directory</h3>
-<pre><code class="language-bash">cd week_04_react_state_and_hooks/movie-buzz
+<pre class="hljs"><code><span class="hljs-built_in">cd</span> week_04_react_state_and_hooks/movie-buzz
 </code></pre>
 <h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-install-client-dependencies" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Install client dependencies</h3>
-<pre><code class="language-bash">cd client &amp;&amp; npm install
+<pre class="hljs"><code><span class="hljs-built_in">cd</span> client &amp;&amp; npm install
 </code></pre>
 <h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-start-the-react-development-server" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Start the React development server</h3>
-<pre><code class="language-bash">npm start
+<pre class="hljs"><code>npm start
 </code></pre>
 <h3 class="step-heading" style="--organic-tilt:0deg" id="4step-4-verify-its-working" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Verify it's working</h3>
-<pre><code class="language-bash"># Expected: browser opens to http://localhost:3000
-# You should see a list of movies rendered from static data
+<pre class="hljs"><code><span class="hljs-comment"># Expected: browser opens to http://localhost:3000</span>
+<span class="hljs-comment"># You should see a list of movies rendered from static data</span>
 </code></pre>
 </details>
 <details>
@@ -121,17 +125,17 @@ A form element whose <code>value</code> is bound to React state, so React is the
 <h2 id="📚-core-concepts" tabindex="-1">📚 Core Concepts</h2>
 <h3 id="what-is-state-—-and-why-does-it-matter" tabindex="-1">What is State — and Why Does It Matter?</h3>
 <p>Props flow down from parent to child and are read-only inside the component that receives them. State is different: it belongs to the component that declares it, and only that component can change it. When you call a setter function, React schedules a re-render and then calls your component function again with the new value, producing updated JSX.</p>
-<pre><code class="language-javascript">// A simple example — NOT a task solution
-import { useState } from 'react';
+<pre class="hljs"><code><span class="hljs-comment">// A simple example — NOT a task solution</span>
+<span class="hljs-keyword">import</span> { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 
-function Counter() {
-  const [count, setCount] = useState(0);
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">Counter</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> [count, setCount] = <span class="hljs-title function_">useState</span>(<span class="hljs-number">0</span>);
 
-  return (
-    &lt;div&gt;
-      &lt;p&gt;Count: {count}&lt;/p&gt;
-      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;Increment&lt;/button&gt;
-    &lt;/div&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Count: {count}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> setCount(count + 1)}&gt;Increment<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 </code></pre>
@@ -148,34 +152,34 @@ function Counter() {
 <hr>
 <h3 id="the-usestate-hook-—-destructuring-the-pair" tabindex="-1">The useState Hook — Destructuring the Pair</h3>
 <p><code>useState</code> returns a two-element array. The convention is to destructure it immediately. The first element is the current value; the second is the function you call to update it.</p>
-<pre><code class="language-javascript">// ✅ Correct — destructure at declaration
-const [isFavorited, setIsFavorited] = useState(false);
+<pre class="hljs"><code><span class="hljs-comment">// ✅ Correct — destructure at declaration</span>
+<span class="hljs-keyword">const</span> [isFavorited, setIsFavorited] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">false</span>);
 
-// ✅ Calling the setter toggles the boolean
-const handleFavoriteClick = () =&gt; {
-  setIsFavorited(!isFavorited);
+<span class="hljs-comment">// ✅ Calling the setter toggles the boolean</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">handleFavoriteClick</span> = (<span class="hljs-params"></span>) =&gt; {
+  <span class="hljs-title function_">setIsFavorited</span>(!isFavorited);
 };
 
-// ❌ Wrong — mutating the variable does nothing
-isFavorited = true; // React never sees this change
+<span class="hljs-comment">// ❌ Wrong — mutating the variable does nothing</span>
+isFavorited = <span class="hljs-literal">true</span>; <span class="hljs-comment">// React never sees this change</span>
 </code></pre>
 <p>You can call <code>useState</code> multiple times in one component to manage multiple independent pieces of state.</p>
 <hr>
 <h3 id="the-useeffect-hook-—-running-code-after-render" tabindex="-1">The useEffect Hook — Running Code After Render</h3>
 <p><code>useEffect</code> takes two arguments: a callback function and a dependency array. React runs the callback after every render by default. The dependency array limits when it runs:</p>
-<pre><code class="language-javascript">// Runs once on mount only (empty dependency array)
-useEffect(() =&gt; {
-  console.log('Component mounted');
+<pre class="hljs"><code><span class="hljs-comment">// Runs once on mount only (empty dependency array)</span>
+<span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Component mounted&#x27;</span>);
 }, []);
 
-// Runs every time `isFavorited` changes
-useEffect(() =&gt; {
-  console.log('Favorite status changed to:', isFavorited);
+<span class="hljs-comment">// Runs every time `isFavorited` changes</span>
+<span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Favorite status changed to:&#x27;</span>, isFavorited);
 }, [isFavorited]);
 
-// Runs after EVERY render (no dependency array — usually a mistake)
-useEffect(() =&gt; {
-  console.log('This runs constantly');
+<span class="hljs-comment">// Runs after EVERY render (no dependency array — usually a mistake)</span>
+<span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;This runs constantly&#x27;</span>);
 });
 </code></pre>
 <p>This week you will use <code>useEffect</code> to synchronize a side effect (writing to <code>localStorage</code>) with your favorites state.</p>
@@ -191,14 +195,14 @@ useEffect(() =&gt; {
 <hr>
 <h3 id="event-handlers-—-where-state-changes-happen" tabindex="-1">Event Handlers — Where State Changes Happen</h3>
 <p>Event handlers are plain JavaScript functions that you pass to JSX event props like <code>onClick</code> and <code>onChange</code>. The key rules:</p>
-<pre><code class="language-javascript">// ✅ Pass the function reference — React calls it on click
-&lt;button onClick={handleClick}&gt;Click me&lt;/button&gt;
+<pre class="hljs"><code><span class="hljs-comment">// ✅ Pass the function reference — React calls it on click</span>
+&lt;button onClick={handleClick}&gt;<span class="hljs-title class_">Click</span> me&lt;/button&gt;
 
-// ✅ Arrow function in JSX is fine for simple cases
-&lt;button onClick={() =&gt; setCount(count + 1)}&gt;+&lt;/button&gt;
+<span class="hljs-comment">// ✅ Arrow function in JSX is fine for simple cases</span>
+<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> setCount(count + 1)}&gt;+<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
 
-// ❌ Wrong — calling the function immediately on render
-&lt;button onClick={handleClick()}&gt;This runs immediately, not on click&lt;/button&gt;
+<span class="hljs-comment">// ❌ Wrong — calling the function immediately on render</span>
+<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handleClick()}</span>&gt;</span>This runs immediately, not on click<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
 </code></pre>
 <hr>
 <h2 id="🛠️-your-tasks" tabindex="-1">🛠️ Your Tasks</h2>
@@ -209,30 +213,30 @@ useEffect(() =&gt; {
 <h3 class="step-heading" style="--organic-tilt:0.1deg" id="1step-1-add-a-favorites-toggle-to-movieblock" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Add a Favorites Toggle to MovieBlock</h3>
 <p><strong>File to edit:</strong> <code>client/src/components/MovieBlock.js</code></p>
 <p><strong>What you're doing:</strong> Add an <code>isFavorited</code> state variable that flips between <code>true</code> and <code>false</code> each time the user clicks the heart icon.</p>
-<pre><code class="language-javascript">// STARTER CODE — implement the TODO blocks
-import { useState } from 'react';
+<pre class="hljs"><code><span class="hljs-comment">// STARTER CODE — implement the TODO blocks</span>
+<span class="hljs-keyword">import</span> { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 
-function MovieBlock({ movie }) {
-  // TODO: Declare an isFavorited state variable, initialized to false
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">MovieBlock</span>(<span class="hljs-params">{ movie }</span>) {
+  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Declare an isFavorited state variable, initialized to false</span>
 
-  // TODO: Write a handleFavoriteClick function that toggles isFavorited
+  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Write a handleFavoriteClick function that toggles isFavorited</span>
 
-  return (
-    &lt;div className=&quot;movie-block&quot;&gt;
-      &lt;div className=&quot;movie-info&quot;&gt;
-        &lt;h3&gt;{movie.name}&lt;/h3&gt;
-        &lt;p&gt;{movie.year} · {movie.director}&lt;/p&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;movie-block&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;movie-info&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>{movie.name}<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{movie.year} · {movie.director}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
         {/* TODO: Render a heart button that:
               - Calls handleFavoriteClick when clicked
               - Displays &quot;❤️&quot; when isFavorited is true
               - Displays &quot;🤍&quot; when isFavorited is false
         */}
-      &lt;/div&gt;
-    &lt;/div&gt;
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-export default MovieBlock;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">MovieBlock</span>;
 </code></pre>
 <details>
 <summary>💡 Stuck? Expand for a hint — not an answer</summary>
@@ -246,21 +250,21 @@ export default MovieBlock;
 <h3 class="step-heading" style="--organic-tilt:-0.2deg" id="2step-2-add-an-expandcollapse-description-toggle" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Add an Expand/Collapse Description Toggle</h3>
 <p><strong>File to edit:</strong> <code>client/src/components/MovieBlock.js</code></p>
 <p><strong>What you're doing:</strong> Add a second piece of state, <code>isExpanded</code>, that controls whether the full movie description is visible. A &quot;Show more&quot; / &quot;Show less&quot; button toggles it.</p>
-<pre><code class="language-javascript">// STARTER CODE — add to your existing MovieBlock component
-// (This is a continuation of Task 1 — both states live in MovieBlock)
+<pre class="hljs"><code><span class="hljs-comment">// STARTER CODE — add to your existing MovieBlock component</span>
+<span class="hljs-comment">// (This is a continuation of Task 1 — both states live in MovieBlock)</span>
 
-function MovieBlock({ movie }) {
-  // (your isFavorited state from Task 1 is here)
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">MovieBlock</span>(<span class="hljs-params">{ movie }</span>) {
+  <span class="hljs-comment">// (your isFavorited state from Task 1 is here)</span>
 
-  // TODO: Declare an isExpanded state variable, initialized to false
+  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Declare an isExpanded state variable, initialized to false</span>
 
-  // TODO: Write a handleExpandClick function that toggles isExpanded
+  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Write a handleExpandClick function that toggles isExpanded</span>
 
-  return (
-    &lt;div className=&quot;movie-block&quot;&gt;
-      &lt;div className=&quot;movie-info&quot;&gt;
-        &lt;h3&gt;{movie.name}&lt;/h3&gt;
-        &lt;p&gt;{movie.year} · {movie.director}&lt;/p&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;movie-block&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;movie-info&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>{movie.name}<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{movie.year} · {movie.director}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 
         {/* TODO: Conditionally render movie.description only when isExpanded is true */}
 
@@ -271,8 +275,8 @@ function MovieBlock({ movie }) {
         */}
 
         {/* Your heart button from Task 1 goes here */}
-      &lt;/div&gt;
-    &lt;/div&gt;
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 </code></pre>
@@ -306,12 +310,12 @@ function MovieBlock({ movie }) {
 <h3 class="step-heading" style="--organic-tilt:-0.1deg" id="4step-4-use-useeffect-to-log-state-changes" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Use useEffect to Log State Changes</h3>
 <p><strong>File to edit:</strong> <code>client/src/components/MovieBlock.js</code></p>
 <p><strong>What you're doing:</strong> Add a <code>useEffect</code> that logs to the console whenever <code>isFavorited</code> changes. This is a diagnostic step — it confirms you understand the dependency array and prepares you for the localStorage stretch goal.</p>
-<pre><code class="language-javascript">// STARTER CODE — add this inside MovieBlock, after your state declarations
+<pre class="hljs"><code><span class="hljs-comment">// STARTER CODE — add this inside MovieBlock, after your state declarations</span>
 
-// TODO: Add a useEffect that:
-//   - Runs only when isFavorited changes (not on every render)
-//   - Logs: &quot;Favorite status changed: true&quot; or &quot;Favorite status changed: false&quot;
-//   - Uses the correct dependency array
+<span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Add a useEffect that:</span>
+<span class="hljs-comment">//   - Runs only when isFavorited changes (not on every render)</span>
+<span class="hljs-comment">//   - Logs: &quot;Favorite status changed: true&quot; or &quot;Favorite status changed: false&quot;</span>
+<span class="hljs-comment">//   - Uses the correct dependency array</span>
 </code></pre>
 <details>
 <summary>💡 Stuck? Expand for a hint — not an answer</summary>
@@ -333,14 +337,14 @@ You are modifying the variable directly instead of calling the setter function. 
 <li>Is your handler function actually connected to the button's <code>onClick</code> prop?</li>
 </ol>
 <p><strong>The fix:</strong></p>
-<pre><code class="language-javascript">// Wrong — mutating state directly:
-const handleClick = () =&gt; {
-  isFavorited = !isFavorited; // React never sees this
+<pre class="hljs"><code><span class="hljs-comment">// Wrong — mutating state directly:</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">handleClick</span> = (<span class="hljs-params"></span>) =&gt; {
+  isFavorited = !isFavorited; <span class="hljs-comment">// React never sees this</span>
 };
 
-// Correct — calling the setter:
-const handleClick = () =&gt; {
-  setIsFavorited(!isFavorited); // React sees this and re-renders
+<span class="hljs-comment">// Correct — calling the setter:</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">handleClick</span> = (<span class="hljs-params"></span>) =&gt; {
+  <span class="hljs-title function_">setIsFavorited</span>(!isFavorited); <span class="hljs-comment">// React sees this and re-renders</span>
 };
 </code></pre>
 </details>
@@ -354,14 +358,14 @@ You are calling the function in the JSX (<code>onClick={handleClick()}</code>) i
 <li>Are you seeing console logs or state changes on initial render before any clicking?</li>
 </ol>
 <p><strong>The fix:</strong></p>
-<pre><code class="language-javascript">// Wrong — calling the function immediately:
-&lt;button onClick={handleFavoriteClick()}&gt;Heart&lt;/button&gt;
+<pre class="hljs"><code><span class="hljs-comment">// Wrong — calling the function immediately:</span>
+&lt;button onClick={<span class="hljs-title function_">handleFavoriteClick</span>()}&gt;<span class="hljs-title class_">Heart</span>&lt;/button&gt;
 
-// Correct — passing the reference:
-&lt;button onClick={handleFavoriteClick}&gt;Heart&lt;/button&gt;
+<span class="hljs-comment">// Correct — passing the reference:</span>
+<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handleFavoriteClick}</span>&gt;</span>Heart<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
 
-// Also correct — arrow function wrapper:
-&lt;button onClick={() =&gt; handleFavoriteClick()}&gt;Heart&lt;/button&gt;
+<span class="hljs-comment">// Also correct — arrow function wrapper:</span>
+<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> handleFavoriteClick()}&gt;Heart<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
 </code></pre>
 </details>
 <details>
@@ -374,14 +378,14 @@ You are calling a state setter inside a <code>useEffect</code> that lists that s
 <li>Does the same state variable appear in both the effect body and the dependency array?</li>
 </ol>
 <p><strong>The fix:</strong></p>
-<pre><code class="language-javascript">// Wrong — infinite loop:
-useEffect(() =&gt; {
-  setIsFavorited(!isFavorited); // changes isFavorited...
-}, [isFavorited]); // ...which re-runs this effect
+<pre class="hljs"><code><span class="hljs-comment">// Wrong — infinite loop:</span>
+<span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-title function_">setIsFavorited</span>(!isFavorited); <span class="hljs-comment">// changes isFavorited...</span>
+}, [isFavorited]); <span class="hljs-comment">// ...which re-runs this effect</span>
 
-// Correct — just logging, no state mutation:
-useEffect(() =&gt; {
-  console.log('Favorite status changed:', isFavorited);
+<span class="hljs-comment">// Correct — just logging, no state mutation:</span>
+<span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Favorite status changed:&#x27;</span>, isFavorited);
 }, [isFavorited]);
 </code></pre>
 </details>
@@ -492,5 +496,6 @@ This requires lifting state up — the &quot;show favorites only&quot; toggle li
 </div>
 <script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
 <script src="../assets/animations.js"></script>
+<script src="../assets/search.js"></script>
 </body>
 </html>

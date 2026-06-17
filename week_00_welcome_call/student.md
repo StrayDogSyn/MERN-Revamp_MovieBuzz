@@ -98,7 +98,7 @@ If you see `command not found`, that's okay for now — but nvm (Node Version Ma
 - [ ] `git config --global user.name` returns your name
 - [ ] `git config --global user.email` returns your email
 - [ ] VS Code opens and the integrated terminal works
-- [ ] You have a GitHub account and can log in at github.com
+- [ ] You have a GitLab account and can log in at gitlab.tlm.cloud
 
 </details>
 
@@ -199,9 +199,9 @@ code --version
 
 ---
 
-### Task 2: Set Up a GitHub Account
+### Task 2: Set Up a GitLab Account
 
-**What you're doing:** Confirm you can log in to GitHub. Starting next week, you'll push code there after every session.
+**What you're doing:** Confirm you can log in to GitLab. Starting next week, you'll push code there after every session.
 
 ```bash
 # Verify Git knows who you are before you create your first repo
@@ -212,8 +212,8 @@ git config --global user.email
 <details>
 <summary>💡 Hint</summary>
 
-- Make sure the email in your `git config` matches the email you used to create your GitHub account. This is how GitHub connects your commits to your profile.
-- If you haven't created a GitHub account yet, do it now at github.com — it's free.
+- Make sure the email in your `git config` matches the email you used to create your GitLab account. This is how GitLab connects your commits to your profile.
+- If you haven't created a GitLab account yet, ask your instructor — accounts are provisioned through the TLM intranet.
 
 </details>
 
@@ -322,7 +322,7 @@ Before marking this week complete, verify each item:
 - [ ] **npm installed:** `npm --version` returns a number without errors
 - [ ] **Git installed and configured:** `git config --global user.name` returns your name
 - [ ] **VS Code working:** You can open a file and use the integrated terminal
-- [ ] **GitHub account exists:** You can log in at github.com
+- [ ] **GitLab account exists:** You can log in at gitlab.tlm.cloud
 
 ---
 
@@ -331,16 +331,16 @@ Before marking this week complete, verify each item:
 > These are optional. Attempt them after completing all deliverables. No starter code is provided — that's the point.
 
 <details>
-<summary>⭐ Stretch 1: Customize Your GitHub Profile</summary>
+<summary>⭐ Stretch 1: Customize Your GitLab Profile</summary>
 
 **The challenge:**
-Create a profile README on GitHub. GitHub displays it automatically on your profile page when you create a repo named exactly after your username.
+Create a profile README on GitLab. GitLab displays it on your profile page when you add a README to your personal namespace project.
 
 **Why this matters:**
-Employers look at GitHub profiles. A well-written profile README demonstrates initiative and communication skills — both valued in the industry.
+Employers look at GitLab profiles. A well-written profile README demonstrates initiative and communication skills — both valued in the industry.
 
 **You'll need to research:**
-- How to create a GitHub profile README (search "github profile readme")
+- How to create a GitLab profile README (ask your instructor for the TLM intranet guide)
 - Markdown syntax for formatting headers, lists, and links
 
 </details>
@@ -378,7 +378,7 @@ Seeing the finished product before you build it gives you a concrete mental mode
 | [Node.js LTS Downloads](https://nodejs.org/en/download) | Official installer for Node.js on all platforms |
 | [Git Download](https://git-scm.com/downloads) | Official Git installer |
 | [VS Code Download](https://code.visualstudio.com/) | Official VS Code installer |
-| [GitHub](https://github.com) | Where you'll push all your course work |
-| [nvm (Node Version Manager)](https://github.com/nvm-sh/nvm) | Recommended way to manage Node.js versions on macOS/Linux |
+| [GitLab](https://gitlab.tlm.cloud) | Where you'll push all your course work |
+| [nvm (Node Version Manager)](https://www.npmjs.com/package/nvm) | Recommended way to manage Node.js versions on macOS/Linux |
 
 > 📌 **Reminder:** `movie-buzz-finished/` is the reference implementation for the entire course. Use it to **verify your output**, not to copy code.

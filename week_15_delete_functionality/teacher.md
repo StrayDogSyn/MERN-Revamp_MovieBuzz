@@ -151,7 +151,7 @@ Soft Delete:  [Movie] --UPDATE--> [Movie (isDeleted: true)] --RESTORE--> [Movie]
 
 **Real-World Examples:**
 - **Gmail**: Uses soft delete (Trash folder, 30-day recovery)
-- **GitHub**: Repository deletion has confirmation + grace period
+- **GitLab**: Repository deletion has confirmation + grace period
 - **Slack**: Messages can be deleted but admins may still see them
 - **Banking**: Transactions are NEVER hard deleted (regulatory requirement)
 

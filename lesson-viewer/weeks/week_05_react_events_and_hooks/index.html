@@ -14,6 +14,10 @@
 <div class="layout">
 <nav class="sidebar" aria-label="Course weeks">
 <div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="sidebar-search">
+<input type="search" id="sidebar-search-input" class="search-input" placeholder="&#xf002; Search lessons…" aria-label="Search lessons">
+<div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+</div>
 <div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
 <a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
 <a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
@@ -102,7 +106,7 @@
 ---
 <h2 id="starting-point" tabindex="-1">Starting Point</h2>
 <p>Before we begin this lesson, navigate to the <code>week_05_react_events_and_hooks/movie-buzz</code> directory. This contains your Movie Buzz app from Week 4, with basic state management and form functionality already working.</p>
-<pre><code class="language-bash">cd week_05_react_events_and_hooks/movie-buzz
+<pre class="hljs"><code><span class="hljs-built_in">cd</span> week_05_react_events_and_hooks/movie-buzz
 npm install
 npm start
 </code></pre>
@@ -127,42 +131,42 @@ npm start
 <li><strong>Event Handling</strong>: A click handler that updates both pieces of state</li>
 <li><strong>Real-time Updates</strong>: Display live feedback to the user about their interactions</li>
 </ul>
-<pre><code class="language-jsx">// 1. Import React and useState hook for state management
-import React, { useState } from 'react';
+<pre class="hljs"><code><span class="hljs-comment">// 1. Import React and useState hook for state management</span>
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 
-// 2. Function component definition
-function ClickCounter() {
-  // 3. State for tracking total number of clicks
-  const [clicks, setClicks] = useState(0);
-  // 4. State for tracking when the last click occurred
-  const [lastClickTime, setLastClickTime] = useState('Never');
+<span class="hljs-comment">// 2. Function component definition</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">ClickCounter</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-comment">// 3. State for tracking total number of clicks</span>
+  <span class="hljs-keyword">const</span> [clicks, setClicks] = <span class="hljs-title function_">useState</span>(<span class="hljs-number">0</span>);
+  <span class="hljs-comment">// 4. State for tracking when the last click occurred</span>
+  <span class="hljs-keyword">const</span> [lastClickTime, setLastClickTime] = <span class="hljs-title function_">useState</span>(<span class="hljs-string">&#x27;Never&#x27;</span>);
 
-  // 5. Event handler function for button clicks
-  const handleClick = () =&gt; {
-    // 6. Increment click counter using current value + 1
-    setClicks(clicks + 1);
-    // 7. Update timestamp with current time formatted as readable string
-    setLastClickTime(new Date().toLocaleTimeString());
+  <span class="hljs-comment">// 5. Event handler function for button clicks</span>
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleClick</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-comment">// 6. Increment click counter using current value + 1</span>
+    <span class="hljs-title function_">setClicks</span>(clicks + <span class="hljs-number">1</span>);
+    <span class="hljs-comment">// 7. Update timestamp with current time formatted as readable string</span>
+    <span class="hljs-title function_">setLastClickTime</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">toLocaleTimeString</span>());
   };
 
-  // 8. Return JSX that describes the UI structure
-  return (
-    // 9. Container div for all counter elements
-    &lt;div&gt;
+  <span class="hljs-comment">// 8. Return JSX that describes the UI structure</span>
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-comment">// 9. Container div for all counter elements</span>
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
       {/* 10. Button element with onClick event listener */}
-      &lt;button onClick={handleClick}&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handleClick}</span>&gt;</span>
         Click Me!
-      &lt;/button&gt;
+      <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
       {/* 11. Display current click count using JSX expression */}
-      &lt;p&gt;Total Clicks: {clicks}&lt;/p&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Total Clicks: {clicks}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
       {/* 12. Display last click time using JSX expression */}
-      &lt;p&gt;Last Click: {lastClickTime}&lt;/p&gt;
-    &lt;/div&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Last Click: {lastClickTime}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-// 13. Export component for use in other files
-export default ClickCounter;
+<span class="hljs-comment">// 13. Export component for use in other files</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">ClickCounter</span>;
 </code></pre>
 <h3 id="line-by-line-breakdown" tabindex="-1">Line-by-Line Breakdown:</h3>
 <ol>
@@ -289,75 +293,75 @@ export default ClickCounter;
 <li><strong>Form Submission</strong>: Prevent default browser behavior and show user feedback</li>
 <li><strong>Controlled Components</strong>: React controls all input values (not the DOM)</li>
 </ul>
-<pre><code class="language-jsx">// 1. Import React and useState for managing form state
-import React, { useState } from 'react';
+<pre class="hljs"><code><span class="hljs-comment">// 1. Import React and useState for managing form state</span>
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 
-// 2. Function component definition
-function SimpleForm() {
-  // 3. Single state object containing all form fields
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    age: ''
+<span class="hljs-comment">// 2. Function component definition</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">SimpleForm</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-comment">// 3. Single state object containing all form fields</span>
+  <span class="hljs-keyword">const</span> [formData, setFormData] = <span class="hljs-title function_">useState</span>({
+    <span class="hljs-attr">username</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+    <span class="hljs-attr">email</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+    <span class="hljs-attr">age</span>: <span class="hljs-string">&#x27;&#x27;</span>
   });
 
-  // 4. Generic change handler for all form inputs
-  const handleChange = (e) =&gt; {
-    // 5. Extract name and value from the input that triggered the event
-    const { name, value } = e.target;
-    // 6. Update state by spreading previous state and updating changed field
-    setFormData(prev =&gt; ({
+  <span class="hljs-comment">// 4. Generic change handler for all form inputs</span>
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleChange</span> = (<span class="hljs-params">e</span>) =&gt; {
+    <span class="hljs-comment">// 5. Extract name and value from the input that triggered the event</span>
+    <span class="hljs-keyword">const</span> { name, value } = e.<span class="hljs-property">target</span>;
+    <span class="hljs-comment">// 6. Update state by spreading previous state and updating changed field</span>
+    <span class="hljs-title function_">setFormData</span>(<span class="hljs-function"><span class="hljs-params">prev</span> =&gt;</span> ({
       ...prev,
       [name]: value
     }));
   };
 
-  // 7. Form submission handler
-  const handleSubmit = (e) =&gt; {
-    // 8. Prevent default form submission (page refresh)
-    e.preventDefault();
-    // 9. Log form data to console for debugging
-    console.log('Form submitted:', formData);
-    // 10. Show user feedback with alert
-    alert(`Welcome ${formData.username}!`);
+  <span class="hljs-comment">// 7. Form submission handler</span>
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleSubmit</span> = (<span class="hljs-params">e</span>) =&gt; {
+    <span class="hljs-comment">// 8. Prevent default form submission (page refresh)</span>
+    e.<span class="hljs-title function_">preventDefault</span>();
+    <span class="hljs-comment">// 9. Log form data to console for debugging</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Form submitted:&#x27;</span>, formData);
+    <span class="hljs-comment">// 10. Show user feedback with alert</span>
+    <span class="hljs-title function_">alert</span>(<span class="hljs-string">`Welcome <span class="hljs-subst">${formData.username}</span>!`</span>);
   };
 
-  // 11. Return JSX form structure
-  return (
-    // 12. Form element with submit handler
-    &lt;form onSubmit={handleSubmit}&gt;
+  <span class="hljs-comment">// 11. Return JSX form structure</span>
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-comment">// 12. Form element with submit handler</span>
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">onSubmit</span>=<span class="hljs-string">{handleSubmit}</span>&gt;</span>
       {/* 13. Username input with controlled value */}
-      &lt;input
-        type=&quot;text&quot;
-        name=&quot;username&quot;
-        value={formData.username}
-        onChange={handleChange}
-        placeholder=&quot;Username&quot;
-      /&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+        <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span>
+        <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;username&quot;</span>
+        <span class="hljs-attr">value</span>=<span class="hljs-string">{formData.username}</span>
+        <span class="hljs-attr">onChange</span>=<span class="hljs-string">{handleChange}</span>
+        <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;Username&quot;</span>
+      /&gt;</span>
       {/* 14. Email input with controlled value */}
-      &lt;input
-        type=&quot;email&quot;
-        name=&quot;email&quot;
-        value={formData.email}
-        onChange={handleChange}
-        placeholder=&quot;Email&quot;
-      /&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+        <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;email&quot;</span>
+        <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;email&quot;</span>
+        <span class="hljs-attr">value</span>=<span class="hljs-string">{formData.email}</span>
+        <span class="hljs-attr">onChange</span>=<span class="hljs-string">{handleChange}</span>
+        <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;Email&quot;</span>
+      /&gt;</span>
       {/* 15. Age input with controlled value */}
-      &lt;input
-        type=&quot;number&quot;
-        name=&quot;age&quot;
-        value={formData.age}
-        onChange={handleChange}
-        placeholder=&quot;Age&quot;
-      /&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+        <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;number&quot;</span>
+        <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;age&quot;</span>
+        <span class="hljs-attr">value</span>=<span class="hljs-string">{formData.age}</span>
+        <span class="hljs-attr">onChange</span>=<span class="hljs-string">{handleChange}</span>
+        <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;Age&quot;</span>
+      /&gt;</span>
       {/* 16. Submit button */}
-      &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
-    &lt;/form&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span>&gt;</span>Submit<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span></span>
   );
 }
 
-// 17. Export component for use in other files
-export default SimpleForm;
+<span class="hljs-comment">// 17. Export component for use in other files</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">SimpleForm</span>;
 </code></pre>
 <h3 id="line-by-line-breakdown-1" tabindex="-1">Line-by-Line Breakdown:</h3>
 <ol>
@@ -510,70 +514,70 @@ export default SimpleForm;
 <li><strong>User Experience</strong>: Support both button clicks and Enter key for adding</li>
 <li><strong>Data Structure</strong>: Each todo is an object with unique ID and text</li>
 </ul>
-<pre><code class="language-jsx">// 1. Import React and useState for state management
-import React, { useState } from 'react';
+<pre class="hljs"><code><span class="hljs-comment">// 1. Import React and useState for state management</span>
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 
-// 2. Function component definition
-function TodoList() {
-  // 3. State for the list of todos with initial sample data
-  const [todos, setTodos] = useState([
-    { id: 1, text: 'Learn React' },
-    { id: 2, text: 'Build an app' }
+<span class="hljs-comment">// 2. Function component definition</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">TodoList</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-comment">// 3. State for the list of todos with initial sample data</span>
+  <span class="hljs-keyword">const</span> [todos, setTodos] = <span class="hljs-title function_">useState</span>([
+    { <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">&#x27;Learn React&#x27;</span> },
+    { <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">&#x27;Build an app&#x27;</span> }
   ]);
-  // 4. State for the current input field value
-  const [inputValue, setInputValue] = useState('');
+  <span class="hljs-comment">// 4. State for the current input field value</span>
+  <span class="hljs-keyword">const</span> [inputValue, setInputValue] = <span class="hljs-title function_">useState</span>(<span class="hljs-string">&#x27;&#x27;</span>);
 
-  // 5. Function to add a new todo to the list
-  const addTodo = () =&gt; {
-    // 6. Check if input has actual content (not just whitespace)
-    if (inputValue.trim()) {
-      // 7. Add new todo to existing list using spread operator
-      setTodos([...todos, {
-        id: Date.now(),
-        text: inputValue
+  <span class="hljs-comment">// 5. Function to add a new todo to the list</span>
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">addTodo</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-comment">// 6. Check if input has actual content (not just whitespace)</span>
+    <span class="hljs-keyword">if</span> (inputValue.<span class="hljs-title function_">trim</span>()) {
+      <span class="hljs-comment">// 7. Add new todo to existing list using spread operator</span>
+      <span class="hljs-title function_">setTodos</span>([...todos, {
+        <span class="hljs-attr">id</span>: <span class="hljs-title class_">Date</span>.<span class="hljs-title function_">now</span>(),
+        <span class="hljs-attr">text</span>: inputValue
       }]);
-      // 8. Clear the input field after adding
-      setInputValue('');
+      <span class="hljs-comment">// 8. Clear the input field after adding</span>
+      <span class="hljs-title function_">setInputValue</span>(<span class="hljs-string">&#x27;&#x27;</span>);
     }
   };
 
-  // 9. Function to delete a todo by its ID
-  const deleteTodo = (id) =&gt; {
-    // 10. Filter out the todo with matching ID
-    setTodos(todos.filter(todo =&gt; todo.id !== id));
+  <span class="hljs-comment">// 9. Function to delete a todo by its ID</span>
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">deleteTodo</span> = (<span class="hljs-params">id</span>) =&gt; {
+    <span class="hljs-comment">// 10. Filter out the todo with matching ID</span>
+    <span class="hljs-title function_">setTodos</span>(todos.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">todo</span> =&gt;</span> todo.<span class="hljs-property">id</span> !== id));
   };
 
-  // 11. Return JSX describing the UI
-  return (
-    // 12. Container div for entire todo interface
-    &lt;div&gt;
+  <span class="hljs-comment">// 11. Return JSX describing the UI</span>
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-comment">// 12. Container div for entire todo interface</span>
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
       {/* 13. Input field with multiple event handlers */}
-      &lt;input
-        value={inputValue}
-        onChange={(e) =&gt; setInputValue(e.target.value)}
-        onKeyPress={(e) =&gt; e.key === 'Enter' &amp;&amp; addTodo()}
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+        <span class="hljs-attr">value</span>=<span class="hljs-string">{inputValue}</span>
+        <span class="hljs-attr">onChange</span>=<span class="hljs-string">{(e)</span> =&gt;</span> setInputValue(e.target.value)}
+        onKeyPress={(e) =&gt; e.key === &#x27;Enter&#x27; &amp;&amp; addTodo()}
         placeholder=&quot;Add a todo...&quot;
       /&gt;
       {/* 14. Button to add new todo */}
-      &lt;button onClick={addTodo}&gt;Add&lt;/button&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{addTodo}</span>&gt;</span>Add<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
       {/* 15. Unordered list to display todos */}
-      &lt;ul&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
         {/* 16. Map over todos array to create list items */}
         {todos.map(todo =&gt; (
-          &lt;li key={todo.id}&gt;
+          <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{todo.id}</span>&gt;</span>
             {/* 17. Display todo text */}
             {todo.text}
             {/* 18. Delete button for each todo */}
-            &lt;button onClick={() =&gt; deleteTodo(todo.id)}&gt;Delete&lt;/button&gt;
-          &lt;/li&gt;
+            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> deleteTodo(todo.id)}&gt;Delete<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
         ))}
-      &lt;/ul&gt;
-    &lt;/div&gt;
+      <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-// 19. Export component for use in other files
-export default TodoList;
+<span class="hljs-comment">// 19. Export component for use in other files</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">TodoList</span>;
 </code></pre>
 <h3 id="line-by-line-breakdown-2" tabindex="-1">Line-by-Line Breakdown:</h3>
 <ol>
@@ -768,16 +772,16 @@ Create and test these components before moving to Movie Buzz. Notice how:</p>
 <li><strong>Event Properties</strong>: Different data available in the event object</li>
 <li><strong>Cross-browser Compatibility</strong>: Same interface regardless of browser</li>
 </ul>
-<pre><code class="language-jsx">// 1. Event handler function that receives event object
-function handleInputChange(e) {
-  // 2. Log the type of event that occurred
-  console.log('Event type:', e.type);
-  // 3. Log the actual DOM element that triggered the event
-  console.log('Target element:', e.target);
-  // 4. Log the current value of the input field
-  console.log('Current value:', e.target.value);
-  // 5. Log the name attribute of the element
-  console.log('Element name:', e.target.name);
+<pre class="hljs"><code><span class="hljs-comment">// 1. Event handler function that receives event object</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">handleInputChange</span>(<span class="hljs-params">e</span>) {
+  <span class="hljs-comment">// 2. Log the type of event that occurred</span>
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Event type:&#x27;</span>, e.<span class="hljs-property">type</span>);
+  <span class="hljs-comment">// 3. Log the actual DOM element that triggered the event</span>
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Target element:&#x27;</span>, e.<span class="hljs-property">target</span>);
+  <span class="hljs-comment">// 4. Log the current value of the input field</span>
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Current value:&#x27;</span>, e.<span class="hljs-property">target</span>.<span class="hljs-property">value</span>);
+  <span class="hljs-comment">// 5. Log the name attribute of the element</span>
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Element name:&#x27;</span>, e.<span class="hljs-property">target</span>.<span class="hljs-property">name</span>);
 }
 </code></pre>
 <h3 id="line-by-line-breakdown-3" tabindex="-1">Line-by-Line Breakdown:</h3>
@@ -834,20 +838,20 @@ function handleInputChange(e) {
 <li><strong>Link Navigation</strong>: Prevent browser navigation on link clicks</li>
 <li><strong>SPA Behavior</strong>: Essential for Single Page Applications</li>
 </ul>
-<pre><code class="language-jsx">// 1. Form submission handler
-function handleSubmit(e) {
-  // 2. Prevent the form from refreshing the page
-  e.preventDefault(); // Prevents form from refreshing the page
-  // 3. Your custom logic here instead of browser default
-  // Your custom logic here
+<pre class="hljs"><code><span class="hljs-comment">// 1. Form submission handler</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">handleSubmit</span>(<span class="hljs-params">e</span>) {
+  <span class="hljs-comment">// 2. Prevent the form from refreshing the page</span>
+  e.<span class="hljs-title function_">preventDefault</span>(); <span class="hljs-comment">// Prevents form from refreshing the page</span>
+  <span class="hljs-comment">// 3. Your custom logic here instead of browser default</span>
+  <span class="hljs-comment">// Your custom logic here</span>
 }
 
-// 4. Link click handler
-function handleLinkClick(e) {
-  // 5. Prevent the browser from navigating to href
-  e.preventDefault(); // Prevents navigation
-  // 6. Implement custom navigation (like React Router)
-  // Custom navigation logic
+<span class="hljs-comment">// 4. Link click handler</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">handleLinkClick</span>(<span class="hljs-params">e</span>) {
+  <span class="hljs-comment">// 5. Prevent the browser from navigating to href</span>
+  e.<span class="hljs-title function_">preventDefault</span>(); <span class="hljs-comment">// Prevents navigation</span>
+  <span class="hljs-comment">// 6. Implement custom navigation (like React Router)</span>
+  <span class="hljs-comment">// Custom navigation logic</span>
 }
 </code></pre>
 <h3 id="line-by-line-breakdown-4" tabindex="-1">Line-by-Line Breakdown:</h3>
@@ -919,12 +923,12 @@ function handleLinkClick(e) {
 <li><strong>Use Case</strong>: When child and parent both have event handlers</li>
 <li><strong>Event Isolation</strong>: Ensure only specific handlers run</li>
 </ul>
-<pre><code class="language-jsx">// 1. Event handler that stops propagation
-function handleButtonClick(e) {
-  // 2. Stop event from bubbling up to parent elements
-  e.stopPropagation(); // Stops event from reaching parent
-  // 3. Only this handler will execute
-  console.log('Only this handler runs');
+<pre class="hljs"><code><span class="hljs-comment">// 1. Event handler that stops propagation</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">handleButtonClick</span>(<span class="hljs-params">e</span>) {
+  <span class="hljs-comment">// 2. Stop event from bubbling up to parent elements</span>
+  e.<span class="hljs-title function_">stopPropagation</span>(); <span class="hljs-comment">// Stops event from reaching parent</span>
+  <span class="hljs-comment">// 3. Only this handler will execute</span>
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Only this handler runs&#x27;</span>);
 }
 </code></pre>
 <h3 id="line-by-line-breakdown-5" tabindex="-1">Line-by-Line Breakdown:</h3>
@@ -955,24 +959,24 @@ function handleButtonClick(e) {
 </li>
 </ol>
 <h3 id="event-propagation-example" tabindex="-1">Event Propagation Example:</h3>
-<pre><code class="language-jsx">// Without stopPropagation:
-&lt;div onClick={() =&gt; console.log('Parent clicked')}&gt;
-  &lt;button onClick={() =&gt; console.log('Button clicked')}&gt;
+<pre class="hljs"><code><span class="hljs-comment">// Without stopPropagation:</span>
+&lt;div onClick={<span class="hljs-function">() =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Parent clicked&#x27;</span>)}&gt;
+  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> console.log(&#x27;Button clicked&#x27;)}&gt;
     Click me
-  &lt;/button&gt;
+  <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
 &lt;/div&gt;
-// Result: Both &quot;Button clicked&quot; and &quot;Parent clicked&quot; logged
+<span class="hljs-comment">// Result: Both &quot;Button clicked&quot; and &quot;Parent clicked&quot; logged</span>
 
-// With stopPropagation:
-&lt;div onClick={() =&gt; console.log('Parent clicked')}&gt;
-  &lt;button onClick={(e) =&gt; {
+<span class="hljs-comment">// With stopPropagation:</span>
+<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> console.log(&#x27;Parent clicked&#x27;)}&gt;
+  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{(e)</span> =&gt;</span> {
     e.stopPropagation();
-    console.log('Button clicked');
+    console.log(&#x27;Button clicked&#x27;);
   }}&gt;
     Click me
-  &lt;/button&gt;
-&lt;/div&gt;
-// Result: Only &quot;Button clicked&quot; logged
+  <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+<span class="hljs-comment">// Result: Only &quot;Button clicked&quot; logged</span>
 </code></pre>
 <h3 id="when-to-use-stoppropagation" tabindex="-1">When to Use stopPropagation():</h3>
 <ul>
@@ -994,28 +998,28 @@ function handleButtonClick(e) {
 <li><strong>setInterval</strong>: Browser API for running code repeatedly</li>
 <li><strong>Dependency Array</strong>: Control when effect runs</li>
 </ul>
-<pre><code class="language-jsx">// 1. Import React hooks for state and effects
-import React, { useState, useEffect } from 'react';
+<pre class="hljs"><code><span class="hljs-comment">// 1. Import React hooks for state and effects</span>
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { useState, useEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 
-// 2. Function component definition
-function Timer() {
-  // 3. State to track elapsed seconds
-  const [seconds, setSeconds] = useState(0);
+<span class="hljs-comment">// 2. Function component definition</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">Timer</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-comment">// 3. State to track elapsed seconds</span>
+  <span class="hljs-keyword">const</span> [seconds, setSeconds] = <span class="hljs-title function_">useState</span>(<span class="hljs-number">0</span>);
 
-  // 4. useEffect to set up timer and cleanup
-  useEffect(() =&gt; {
-    // 5. Create interval that runs every 1000ms (1 second)
-    const interval = setInterval(() =&gt; {
-      // 6. Update seconds using functional state update
-      setSeconds(seconds =&gt; seconds + 1);
-    }, 1000);
+  <span class="hljs-comment">// 4. useEffect to set up timer and cleanup</span>
+  <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-comment">// 5. Create interval that runs every 1000ms (1 second)</span>
+    <span class="hljs-keyword">const</span> interval = <span class="hljs-built_in">setInterval</span>(<span class="hljs-function">() =&gt;</span> {
+      <span class="hljs-comment">// 6. Update seconds using functional state update</span>
+      <span class="hljs-title function_">setSeconds</span>(<span class="hljs-function"><span class="hljs-params">seconds</span> =&gt;</span> seconds + <span class="hljs-number">1</span>);
+    }, <span class="hljs-number">1000</span>);
 
-    // 7. Cleanup function returned by useEffect
-    return () =&gt; clearInterval(interval);
-  }, []); // 8. Empty dependency array means this runs once on mount
+    <span class="hljs-comment">// 7. Cleanup function returned by useEffect</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">clearInterval</span>(interval);
+  }, []); <span class="hljs-comment">// 8. Empty dependency array means this runs once on mount</span>
 
-  // 9. Render current seconds count
-  return &lt;div&gt;Seconds: {seconds}&lt;/div&gt;;
+  <span class="hljs-comment">// 9. Render current seconds count</span>
+  <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Seconds: {seconds}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
 }
 </code></pre>
 <h3 id="line-by-line-breakdown-6" tabindex="-1">Line-by-Line Breakdown:</h3>
@@ -1126,63 +1130,63 @@ function Timer() {
 <li><strong>Multiple Instances</strong>: Use same hook for different form fields</li>
 <li><strong>Encapsulation</strong>: Hide implementation details, expose clean interface</li>
 </ul>
-<pre><code class="language-jsx">// 1. Custom hook definition (must start with 'use')
-function useInput(initialValue) {
-  // 2. State for the input's current value
-  const [value, setValue] = useState(initialValue);
+<pre class="hljs"><code><span class="hljs-comment">// 1. Custom hook definition (must start with &#x27;use&#x27;)</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">useInput</span>(<span class="hljs-params">initialValue</span>) {
+  <span class="hljs-comment">// 2. State for the input&#x27;s current value</span>
+  <span class="hljs-keyword">const</span> [value, setValue] = <span class="hljs-title function_">useState</span>(initialValue);
 
-  // 3. Change handler function
-  const handleChange = (e) =&gt; {
-    // 4. Update value from event target
-    setValue(e.target.value);
+  <span class="hljs-comment">// 3. Change handler function</span>
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleChange</span> = (<span class="hljs-params">e</span>) =&gt; {
+    <span class="hljs-comment">// 4. Update value from event target</span>
+    <span class="hljs-title function_">setValue</span>(e.<span class="hljs-property">target</span>.<span class="hljs-property">value</span>);
   };
 
-  // 5. Reset function to return to initial value
-  const reset = () =&gt; {
-    // 6. Set value back to initial value
-    setValue(initialValue);
+  <span class="hljs-comment">// 5. Reset function to return to initial value</span>
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">reset</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-comment">// 6. Set value back to initial value</span>
+    <span class="hljs-title function_">setValue</span>(initialValue);
   };
 
-  // 7. Return object with value and functions
-  return {
+  <span class="hljs-comment">// 7. Return object with value and functions</span>
+  <span class="hljs-keyword">return</span> {
     value,
-    onChange: handleChange,
+    <span class="hljs-attr">onChange</span>: handleChange,
     reset
   };
 }
 
-// 8. Component using the custom hook
-function MyForm() {
-  // 9. Create name input with custom hook
-  const name = useInput('');
-  // 10. Create email input with custom hook
-  const email = useInput('');
+<span class="hljs-comment">// 8. Component using the custom hook</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">MyForm</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-comment">// 9. Create name input with custom hook</span>
+  <span class="hljs-keyword">const</span> name = <span class="hljs-title function_">useInput</span>(<span class="hljs-string">&#x27;&#x27;</span>);
+  <span class="hljs-comment">// 10. Create email input with custom hook</span>
+  <span class="hljs-keyword">const</span> email = <span class="hljs-title function_">useInput</span>(<span class="hljs-string">&#x27;&#x27;</span>);
 
-  // 11. Return form JSX
-  return (
-    &lt;form&gt;
-      {/* 12. Name input using hook's returned properties */}
-      &lt;input
-        type=&quot;text&quot;
-        placeholder=&quot;Name&quot;
-        value={name.value}
-        onChange={name.onChange}
-      /&gt;
-      {/* 13. Email input using hook's returned properties */}
-      &lt;input
-        type=&quot;email&quot;
-        placeholder=&quot;Email&quot;
-        value={email.value}
-        onChange={email.onChange}
-      /&gt;
+  <span class="hljs-comment">// 11. Return form JSX</span>
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">form</span>&gt;</span>
+      {/* 12. Name input using hook&#x27;s returned properties */}
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+        <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span>
+        <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;Name&quot;</span>
+        <span class="hljs-attr">value</span>=<span class="hljs-string">{name.value}</span>
+        <span class="hljs-attr">onChange</span>=<span class="hljs-string">{name.onChange}</span>
+      /&gt;</span>
+      {/* 13. Email input using hook&#x27;s returned properties */}
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+        <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;email&quot;</span>
+        <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;Email&quot;</span>
+        <span class="hljs-attr">value</span>=<span class="hljs-string">{email.value}</span>
+        <span class="hljs-attr">onChange</span>=<span class="hljs-string">{email.onChange}</span>
+      /&gt;</span>
       {/* 14. Reset button that calls both reset functions */}
-      &lt;button type=&quot;button&quot; onClick={() =&gt; {
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;button&quot;</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> {
         name.reset();
         email.reset();
       }}&gt;
         Reset Form
-      &lt;/button&gt;
-    &lt;/form&gt;
+      <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span></span>
   );
 }
 </code></pre>
@@ -1331,56 +1335,56 @@ function MyForm() {
 <li><strong>Clear Functionality</strong>: Button to reset search when needed</li>
 <li><strong>Controlled Component</strong>: React manages the input value</li>
 </ul>
-<pre><code class="language-jsx">// 1. Import React and useState for search term state
-import React, { useState } from 'react';
+<pre class="hljs"><code><span class="hljs-comment">// 1. Import React and useState for search term state</span>
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 
-// 2. SearchBar component with onSearch prop from parent
-function SearchBar({ onSearch }) {
-  // 3. Local state to track current search term
-  const [searchTerm, setSearchTerm] = useState('');
+<span class="hljs-comment">// 2. SearchBar component with onSearch prop from parent</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">SearchBar</span>(<span class="hljs-params">{ onSearch }</span>) {
+  <span class="hljs-comment">// 3. Local state to track current search term</span>
+  <span class="hljs-keyword">const</span> [searchTerm, setSearchTerm] = <span class="hljs-title function_">useState</span>(<span class="hljs-string">&#x27;&#x27;</span>);
 
-  // 4. Handler for search input changes
-  const handleSearchChange = (e) =&gt; {
-    // 5. Get new value from input
-    const value = e.target.value;
-    // 6. Update local state
-    setSearchTerm(value);
-    // 7. Notify parent component of search change
-    onSearch(value);
+  <span class="hljs-comment">// 4. Handler for search input changes</span>
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleSearchChange</span> = (<span class="hljs-params">e</span>) =&gt; {
+    <span class="hljs-comment">// 5. Get new value from input</span>
+    <span class="hljs-keyword">const</span> value = e.<span class="hljs-property">target</span>.<span class="hljs-property">value</span>;
+    <span class="hljs-comment">// 6. Update local state</span>
+    <span class="hljs-title function_">setSearchTerm</span>(value);
+    <span class="hljs-comment">// 7. Notify parent component of search change</span>
+    <span class="hljs-title function_">onSearch</span>(value);
   };
 
-  // 8. Handler to clear search
-  const handleClearSearch = () =&gt; {
-    // 9. Reset search term to empty
-    setSearchTerm('');
-    // 10. Notify parent that search is cleared
-    onSearch('');
+  <span class="hljs-comment">// 8. Handler to clear search</span>
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleClearSearch</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-comment">// 9. Reset search term to empty</span>
+    <span class="hljs-title function_">setSearchTerm</span>(<span class="hljs-string">&#x27;&#x27;</span>);
+    <span class="hljs-comment">// 10. Notify parent that search is cleared</span>
+    <span class="hljs-title function_">onSearch</span>(<span class="hljs-string">&#x27;&#x27;</span>);
   };
 
-  // 11. Return search interface JSX
-  return (
-    // 12. Container div with CSS class
-    &lt;div className=&quot;search-bar&quot;&gt;
+  <span class="hljs-comment">// 11. Return search interface JSX</span>
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-comment">// 12. Container div with CSS class</span>
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;search-bar&quot;</span>&gt;</span>
       {/* 13. Search input with controlled value */}
-      &lt;input
-        type=&quot;text&quot;
-        placeholder=&quot;Search movies...&quot;
-        value={searchTerm}
-        onChange={handleSearchChange}
-        className=&quot;search-input&quot;
-      /&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+        <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span>
+        <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;Search movies...&quot;</span>
+        <span class="hljs-attr">value</span>=<span class="hljs-string">{searchTerm}</span>
+        <span class="hljs-attr">onChange</span>=<span class="hljs-string">{handleSearchChange}</span>
+        <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;search-input&quot;</span>
+      /&gt;</span>
       {/* 14. Conditional clear button */}
       {searchTerm &amp;&amp; (
-        &lt;button onClick={handleClearSearch} className=&quot;clear-search&quot;&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handleClearSearch}</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;clear-search&quot;</span>&gt;</span>
           Clear
-        &lt;/button&gt;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
       )}
-    &lt;/div&gt;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-// 15. Export for use in other components
-export default SearchBar;
+<span class="hljs-comment">// 15. Export for use in other components</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">SearchBar</span>;
 </code></pre>
 <h3 id="line-by-line-breakdown-8" tabindex="-1">Line-by-Line Breakdown:</h3>
 <ol>
@@ -1518,41 +1522,41 @@ export default SearchBar;
 <li><strong>Parent Communication</strong>: Call parent's delete function</li>
 <li><strong>User Experience</strong>: Clear confirmation dialog</li>
 </ul>
-<pre><code class="language-jsx">// 1. MovieBlock component with movie data and delete handler props
-function MovieBlock({ movie, onDelete }) {
-  // 2. Delete handler with user confirmation
-  const handleDelete = () =&gt; {
-    // 3. Show confirmation dialog with movie name
-    if (window.confirm(`Are you sure you want to delete &quot;${movie.name}&quot;?`)) {
-      // 4. Call parent's delete function with movie identifier
-      onDelete(movie.id || movie.name); // Use id if available, otherwise name
+<pre class="hljs"><code><span class="hljs-comment">// 1. MovieBlock component with movie data and delete handler props</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">MovieBlock</span>(<span class="hljs-params">{ movie, onDelete }</span>) {
+  <span class="hljs-comment">// 2. Delete handler with user confirmation</span>
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleDelete</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-comment">// 3. Show confirmation dialog with movie name</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">window</span>.<span class="hljs-title function_">confirm</span>(<span class="hljs-string">`Are you sure you want to delete &quot;<span class="hljs-subst">${movie.name}</span>&quot;?`</span>)) {
+      <span class="hljs-comment">// 4. Call parent&#x27;s delete function with movie identifier</span>
+      <span class="hljs-title function_">onDelete</span>(movie.<span class="hljs-property">id</span> || movie.<span class="hljs-property">name</span>); <span class="hljs-comment">// Use id if available, otherwise name</span>
     }
   };
 
-  // 5. Return JSX for movie display with delete button
-  return (
-    // 6. Main container for movie information
-    &lt;div className=&quot;movie-block&quot;&gt;
+  <span class="hljs-comment">// 5. Return JSX for movie display with delete button</span>
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-comment">// 6. Main container for movie information</span>
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;movie-block&quot;</span>&gt;</span>
       {/* 7. Movie title */}
-      &lt;h3&gt;{movie.name}&lt;/h3&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>{movie.name}<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
       {/* 8. Basic movie info in one line */}
-      &lt;p&gt;{movie.year} • {movie.rating} • {movie.length}&lt;/p&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{movie.year} • {movie.rating} • {movie.length}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
       {/* 9. Movie description in italics */}
-      &lt;p&gt;&lt;em&gt;{movie.description}&lt;/em&gt;&lt;/p&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">em</span>&gt;</span>{movie.description}<span class="hljs-tag">&lt;/<span class="hljs-name">em</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
       {/* 10. Genre array joined with commas */}
-      &lt;p&gt;&lt;b&gt;Genre:&lt;/b&gt; {movie.genre.join(', ')}&lt;/p&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">b</span>&gt;</span>Genre:<span class="hljs-tag">&lt;/<span class="hljs-name">b</span>&gt;</span> {movie.genre.join(&#x27;, &#x27;)}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
       {/* 11. Stars array joined with commas */}
-      &lt;p&gt;&lt;b&gt;Stars:&lt;/b&gt; {movie.stars.join(', ')}&lt;/p&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">b</span>&gt;</span>Stars:<span class="hljs-tag">&lt;/<span class="hljs-name">b</span>&gt;</span> {movie.stars.join(&#x27;, &#x27;)}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
       {/* 12. Director information */}
-      &lt;p&gt;&lt;b&gt;Director:&lt;/b&gt; {movie.director}&lt;/p&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">b</span>&gt;</span>Director:<span class="hljs-tag">&lt;/<span class="hljs-name">b</span>&gt;</span> {movie.director}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
       {/* 13. Action buttons container */}
-      &lt;div className=&quot;movie-actions&quot;&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;movie-actions&quot;</span>&gt;</span>
         {/* 14. Delete button with click handler */}
-        &lt;button onClick={handleDelete} className=&quot;delete-btn&quot;&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handleDelete}</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;delete-btn&quot;</span>&gt;</span>
           Delete Movie
-        &lt;/button&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 </code></pre>
@@ -1692,119 +1696,119 @@ function MovieBlock({ movie, onDelete }) {
 <li><strong>useEffect</strong>: Populate form when editing movie changes</li>
 <li><strong>Form Reset</strong>: Clear form after successful submission</li>
 </ul>
-<pre><code class="language-jsx">// 1. Import React hooks for state and effects
-import React, { useState, useEffect } from 'react';
+<pre class="hljs"><code><span class="hljs-comment">// 1. Import React hooks for state and effects</span>
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { useState, useEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 
-// 2. MovieForm component with multiple handler props
-function MovieForm({ onAddMovie, onUpdateMovie, onCancel, editingMovie }) {
-  // 3. Form state object for all movie fields
-  const [movieData, setMovieData] = useState({
-    name: '',
-    year: '',
-    rating: '',
-    length: '',
-    description: '',
-    genre: '',
-    director: '',
-    stars: ''
+<span class="hljs-comment">// 2. MovieForm component with multiple handler props</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">MovieForm</span>(<span class="hljs-params">{ onAddMovie, onUpdateMovie, onCancel, editingMovie }</span>) {
+  <span class="hljs-comment">// 3. Form state object for all movie fields</span>
+  <span class="hljs-keyword">const</span> [movieData, setMovieData] = <span class="hljs-title function_">useState</span>({
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+    <span class="hljs-attr">year</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+    <span class="hljs-attr">rating</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+    <span class="hljs-attr">length</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+    <span class="hljs-attr">genre</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+    <span class="hljs-attr">director</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+    <span class="hljs-attr">stars</span>: <span class="hljs-string">&#x27;&#x27;</span>
   });
 
-  // 4. Effect to populate form when editing movie changes
-  useEffect(() =&gt; {
-    // 5. Check if we're editing a movie
-    if (editingMovie) {
-      // 6. Convert movie data for form display
-      setMovieData({
+  <span class="hljs-comment">// 4. Effect to populate form when editing movie changes</span>
+  <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-comment">// 5. Check if we&#x27;re editing a movie</span>
+    <span class="hljs-keyword">if</span> (editingMovie) {
+      <span class="hljs-comment">// 6. Convert movie data for form display</span>
+      <span class="hljs-title function_">setMovieData</span>({
         ...editingMovie,
-        genre: editingMovie.genre.join(', '),
-        stars: editingMovie.stars.join(', '),
-        year: editingMovie.year.toString()
+        <span class="hljs-attr">genre</span>: editingMovie.<span class="hljs-property">genre</span>.<span class="hljs-title function_">join</span>(<span class="hljs-string">&#x27;, &#x27;</span>),
+        <span class="hljs-attr">stars</span>: editingMovie.<span class="hljs-property">stars</span>.<span class="hljs-title function_">join</span>(<span class="hljs-string">&#x27;, &#x27;</span>),
+        <span class="hljs-attr">year</span>: editingMovie.<span class="hljs-property">year</span>.<span class="hljs-title function_">toString</span>()
       });
     }
-  }, [editingMovie]); // 7. Re-run when editingMovie changes
+  }, [editingMovie]); <span class="hljs-comment">// 7. Re-run when editingMovie changes</span>
 
-  // 8. Handler for input field changes
-  const handleInputChange = (e) =&gt; {
-    // 9. Extract field name and value from event
-    const { name, value } = e.target;
-    // 10. Update form state with new value
-    setMovieData({
+  <span class="hljs-comment">// 8. Handler for input field changes</span>
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleInputChange</span> = (<span class="hljs-params">e</span>) =&gt; {
+    <span class="hljs-comment">// 9. Extract field name and value from event</span>
+    <span class="hljs-keyword">const</span> { name, value } = e.<span class="hljs-property">target</span>;
+    <span class="hljs-comment">// 10. Update form state with new value</span>
+    <span class="hljs-title function_">setMovieData</span>({
       ...movieData,
       [name]: value
     });
   };
 
-  // 11. Handler for form submission
-  const handleSubmit = (e) =&gt; {
-    // 12. Prevent default form submission
-    e.preventDefault();
+  <span class="hljs-comment">// 11. Handler for form submission</span>
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleSubmit</span> = (<span class="hljs-params">e</span>) =&gt; {
+    <span class="hljs-comment">// 12. Prevent default form submission</span>
+    e.<span class="hljs-title function_">preventDefault</span>();
 
-    // 13. Convert form data back to proper types
-    const processedMovie = {
+    <span class="hljs-comment">// 13. Convert form data back to proper types</span>
+    <span class="hljs-keyword">const</span> processedMovie = {
       ...movieData,
-      genre: movieData.genre.split(',').map(g =&gt; g.trim()),
-      stars: movieData.stars.split(',').map(s =&gt; s.trim()),
-      year: parseInt(movieData.year)
+      <span class="hljs-attr">genre</span>: movieData.<span class="hljs-property">genre</span>.<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;,&#x27;</span>).<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">g</span> =&gt;</span> g.<span class="hljs-title function_">trim</span>()),
+      <span class="hljs-attr">stars</span>: movieData.<span class="hljs-property">stars</span>.<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;,&#x27;</span>).<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">s</span> =&gt;</span> s.<span class="hljs-title function_">trim</span>()),
+      <span class="hljs-attr">year</span>: <span class="hljs-built_in">parseInt</span>(movieData.<span class="hljs-property">year</span>)
     };
 
-    // 14. Choose add or update based on editing mode
-    if (editingMovie) {
-      // 15. Update existing movie with ID preserved
-      onUpdateMovie({ ...processedMovie, id: editingMovie.id });
-    } else {
-      // 16. Add new movie
-      onAddMovie(processedMovie);
+    <span class="hljs-comment">// 14. Choose add or update based on editing mode</span>
+    <span class="hljs-keyword">if</span> (editingMovie) {
+      <span class="hljs-comment">// 15. Update existing movie with ID preserved</span>
+      <span class="hljs-title function_">onUpdateMovie</span>({ ...processedMovie, <span class="hljs-attr">id</span>: editingMovie.<span class="hljs-property">id</span> });
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-comment">// 16. Add new movie</span>
+      <span class="hljs-title function_">onAddMovie</span>(processedMovie);
     }
 
-    // 17. Reset form to empty state
-    setMovieData({
-      name: '',
-      year: '',
-      rating: '',
-      length: '',
-      description: '',
-      genre: '',
-      director: '',
-      stars: ''
+    <span class="hljs-comment">// 17. Reset form to empty state</span>
+    <span class="hljs-title function_">setMovieData</span>({
+      <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+      <span class="hljs-attr">year</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+      <span class="hljs-attr">rating</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+      <span class="hljs-attr">length</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+      <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+      <span class="hljs-attr">genre</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+      <span class="hljs-attr">director</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+      <span class="hljs-attr">stars</span>: <span class="hljs-string">&#x27;&#x27;</span>
     });
   };
 
-  // 18. Return form JSX
-  return (
-    // 19. Form container with CSS class
-    &lt;div className=&quot;movie-form&quot;&gt;
+  <span class="hljs-comment">// 18. Return form JSX</span>
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-comment">// 19. Form container with CSS class</span>
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;movie-form&quot;</span>&gt;</span>
       {/* 20. Dynamic heading based on mode */}
-      &lt;h2&gt;{editingMovie ? 'Edit Movie' : 'Add New Movie'}&lt;/h2&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>{editingMovie ? &#x27;Edit Movie&#x27; : &#x27;Add New Movie&#x27;}<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
       {/* 21. Form with submit handler */}
-      &lt;form onSubmit={handleSubmit}&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">onSubmit</span>=<span class="hljs-string">{handleSubmit}</span>&gt;</span>
         {/* 22. Sample input field (others follow same pattern) */}
-        &lt;input
-          type=&quot;text&quot;
-          name=&quot;name&quot;
-          placeholder=&quot;Movie Name&quot;
-          value={movieData.name}
-          onChange={handleInputChange}
-          required
-        /&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+          <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span>
+          <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;name&quot;</span>
+          <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;Movie Name&quot;</span>
+          <span class="hljs-attr">value</span>=<span class="hljs-string">{movieData.name}</span>
+          <span class="hljs-attr">onChange</span>=<span class="hljs-string">{handleInputChange}</span>
+          <span class="hljs-attr">required</span>
+        /&gt;</span>
 
         {/* ... other form fields follow same pattern ... */}
 
         {/* 23. Button container */}
-        &lt;div className=&quot;form-buttons&quot;&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;form-buttons&quot;</span>&gt;</span>
           {/* 24. Dynamic submit button text */}
-          &lt;button type=&quot;submit&quot;&gt;
-            {editingMovie ? 'Update Movie' : 'Add Movie'}
-          &lt;/button&gt;
+          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span>&gt;</span>
+            {editingMovie ? &#x27;Update Movie&#x27; : &#x27;Add Movie&#x27;}
+          <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
           {/* 25. Cancel button */}
-          &lt;button type=&quot;button&quot; onClick={onCancel}&gt;Cancel&lt;/button&gt;
-        &lt;/div&gt;
-      &lt;/form&gt;
-    &lt;/div&gt;
+          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;button&quot;</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{onCancel}</span>&gt;</span>Cancel<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-// 26. Export for use in other components
-export default MovieForm;
+<span class="hljs-comment">// 26. Export for use in other components</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">MovieForm</span>;
 </code></pre>
 <h3 id="line-by-line-breakdown-10" tabindex="-1">Line-by-Line Breakdown:</h3>
 <ol>
@@ -2013,139 +2017,139 @@ export default MovieForm;
 <li><strong>Type Conversion</strong>: String ↔ Array ↔ Number conversions</li>
 </ul>
 <p>Now update your main <code>App.js</code> to handle all these new features:</p>
-<pre><code class="language-jsx">import React, { useState, useEffect } from 'react';
-import MoviesList from './components/MoviesList';
-import MovieForm from './components/MovieForm';
-import SearchBar from './components/SearchBar';
-import './App.css';
+<pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { useState, useEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">MoviesList</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./components/MoviesList&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">MovieForm</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./components/MovieForm&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">SearchBar</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./components/SearchBar&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./App.css&#x27;</span>;
 
-const initialMovies = [
+<span class="hljs-keyword">const</span> initialMovies = [
   {
-    id: 1,
-    name: &quot;The Matrix&quot;,
-    year: 1999,
-    rating: &quot;R&quot;,
-    length: &quot;136 minutes&quot;,
-    description: &quot;A computer hacker learns about the true nature of reality.&quot;,
-    genre: [&quot;Action&quot;, &quot;Sci-Fi&quot;],
-    director: &quot;The Wachowskis&quot;,
-    stars: [&quot;Keanu Reeves&quot;, &quot;Laurence Fishburne&quot;, &quot;Carrie-Anne Moss&quot;]
+    <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;The Matrix&quot;</span>,
+    <span class="hljs-attr">year</span>: <span class="hljs-number">1999</span>,
+    <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;R&quot;</span>,
+    <span class="hljs-attr">length</span>: <span class="hljs-string">&quot;136 minutes&quot;</span>,
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;A computer hacker learns about the true nature of reality.&quot;</span>,
+    <span class="hljs-attr">genre</span>: [<span class="hljs-string">&quot;Action&quot;</span>, <span class="hljs-string">&quot;Sci-Fi&quot;</span>],
+    <span class="hljs-attr">director</span>: <span class="hljs-string">&quot;The Wachowskis&quot;</span>,
+    <span class="hljs-attr">stars</span>: [<span class="hljs-string">&quot;Keanu Reeves&quot;</span>, <span class="hljs-string">&quot;Laurence Fishburne&quot;</span>, <span class="hljs-string">&quot;Carrie-Anne Moss&quot;</span>]
   },
   {
-    id: 2,
-    name: &quot;Inception&quot;,
-    year: 2010,
-    rating: &quot;PG-13&quot;,
-    length: &quot;148 minutes&quot;,
-    description: &quot;A thief who steals corporate secrets through dream-sharing technology.&quot;,
-    genre: [&quot;Action&quot;, &quot;Sci-Fi&quot;, &quot;Thriller&quot;],
-    director: &quot;Christopher Nolan&quot;,
-    stars: [&quot;Leonardo DiCaprio&quot;, &quot;Marion Cotillard&quot;, &quot;Tom Hardy&quot;]
+    <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Inception&quot;</span>,
+    <span class="hljs-attr">year</span>: <span class="hljs-number">2010</span>,
+    <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;PG-13&quot;</span>,
+    <span class="hljs-attr">length</span>: <span class="hljs-string">&quot;148 minutes&quot;</span>,
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;A thief who steals corporate secrets through dream-sharing technology.&quot;</span>,
+    <span class="hljs-attr">genre</span>: [<span class="hljs-string">&quot;Action&quot;</span>, <span class="hljs-string">&quot;Sci-Fi&quot;</span>, <span class="hljs-string">&quot;Thriller&quot;</span>],
+    <span class="hljs-attr">director</span>: <span class="hljs-string">&quot;Christopher Nolan&quot;</span>,
+    <span class="hljs-attr">stars</span>: [<span class="hljs-string">&quot;Leonardo DiCaprio&quot;</span>, <span class="hljs-string">&quot;Marion Cotillard&quot;</span>, <span class="hljs-string">&quot;Tom Hardy&quot;</span>]
   }
 ];
 
-function App() {
-  const [movies, setMovies] = useState(initialMovies);
-  const [filteredMovies, setFilteredMovies] = useState(initialMovies);
-  const [showForm, setShowForm] = useState(false);
-  const [editingMovie, setEditingMovie] = useState(null);
-  const [nextId, setNextId] = useState(3);
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> [movies, setMovies] = <span class="hljs-title function_">useState</span>(initialMovies);
+  <span class="hljs-keyword">const</span> [filteredMovies, setFilteredMovies] = <span class="hljs-title function_">useState</span>(initialMovies);
+  <span class="hljs-keyword">const</span> [showForm, setShowForm] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">false</span>);
+  <span class="hljs-keyword">const</span> [editingMovie, setEditingMovie] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">null</span>);
+  <span class="hljs-keyword">const</span> [nextId, setNextId] = <span class="hljs-title function_">useState</span>(<span class="hljs-number">3</span>);
 
-  useEffect(() =&gt; {
-    console.log(`Total movies: ${movies.length}`);
+  <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Total movies: <span class="hljs-subst">${movies.length}</span>`</span>);
   }, [movies]);
 
-  const handleAddMovie = (newMovie) =&gt; {
-    const movieWithId = { ...newMovie, id: nextId };
-    const updatedMovies = [...movies, movieWithId];
-    setMovies(updatedMovies);
-    setFilteredMovies(updatedMovies);
-    setNextId(nextId + 1);
-    setShowForm(false);
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleAddMovie</span> = (<span class="hljs-params">newMovie</span>) =&gt; {
+    <span class="hljs-keyword">const</span> movieWithId = { ...newMovie, <span class="hljs-attr">id</span>: nextId };
+    <span class="hljs-keyword">const</span> updatedMovies = [...movies, movieWithId];
+    <span class="hljs-title function_">setMovies</span>(updatedMovies);
+    <span class="hljs-title function_">setFilteredMovies</span>(updatedMovies);
+    <span class="hljs-title function_">setNextId</span>(nextId + <span class="hljs-number">1</span>);
+    <span class="hljs-title function_">setShowForm</span>(<span class="hljs-literal">false</span>);
   };
 
-  const handleUpdateMovie = (updatedMovie) =&gt; {
-    const updatedMovies = movies.map(movie =&gt;
-      movie.id === updatedMovie.id ? updatedMovie : movie
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleUpdateMovie</span> = (<span class="hljs-params">updatedMovie</span>) =&gt; {
+    <span class="hljs-keyword">const</span> updatedMovies = movies.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">movie</span> =&gt;</span>
+      movie.<span class="hljs-property">id</span> === updatedMovie.<span class="hljs-property">id</span> ? updatedMovie : movie
     );
-    setMovies(updatedMovies);
-    setFilteredMovies(updatedMovies);
-    setEditingMovie(null);
-    setShowForm(false);
+    <span class="hljs-title function_">setMovies</span>(updatedMovies);
+    <span class="hljs-title function_">setFilteredMovies</span>(updatedMovies);
+    <span class="hljs-title function_">setEditingMovie</span>(<span class="hljs-literal">null</span>);
+    <span class="hljs-title function_">setShowForm</span>(<span class="hljs-literal">false</span>);
   };
 
-  const handleDeleteMovie = (movieId) =&gt; {
-    const updatedMovies = movies.filter(movie =&gt; movie.id !== movieId);
-    setMovies(updatedMovies);
-    setFilteredMovies(updatedMovies);
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleDeleteMovie</span> = (<span class="hljs-params">movieId</span>) =&gt; {
+    <span class="hljs-keyword">const</span> updatedMovies = movies.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">movie</span> =&gt;</span> movie.<span class="hljs-property">id</span> !== movieId);
+    <span class="hljs-title function_">setMovies</span>(updatedMovies);
+    <span class="hljs-title function_">setFilteredMovies</span>(updatedMovies);
   };
 
-  const handleEditMovie = (movie) =&gt; {
-    setEditingMovie(movie);
-    setShowForm(true);
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleEditMovie</span> = (<span class="hljs-params">movie</span>) =&gt; {
+    <span class="hljs-title function_">setEditingMovie</span>(movie);
+    <span class="hljs-title function_">setShowForm</span>(<span class="hljs-literal">true</span>);
   };
 
-  const handleSearch = (searchTerm) =&gt; {
-    if (searchTerm.trim() === '') {
-      setFilteredMovies(movies);
-    } else {
-      const filtered = movies.filter(movie =&gt;
-        movie.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        movie.director.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        movie.genre.some(g =&gt; g.toLowerCase().includes(searchTerm.toLowerCase()))
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleSearch</span> = (<span class="hljs-params">searchTerm</span>) =&gt; {
+    <span class="hljs-keyword">if</span> (searchTerm.<span class="hljs-title function_">trim</span>() === <span class="hljs-string">&#x27;&#x27;</span>) {
+      <span class="hljs-title function_">setFilteredMovies</span>(movies);
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">const</span> filtered = movies.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">movie</span> =&gt;</span>
+        movie.<span class="hljs-property">name</span>.<span class="hljs-title function_">toLowerCase</span>().<span class="hljs-title function_">includes</span>(searchTerm.<span class="hljs-title function_">toLowerCase</span>()) ||
+        movie.<span class="hljs-property">director</span>.<span class="hljs-title function_">toLowerCase</span>().<span class="hljs-title function_">includes</span>(searchTerm.<span class="hljs-title function_">toLowerCase</span>()) ||
+        movie.<span class="hljs-property">genre</span>.<span class="hljs-title function_">some</span>(<span class="hljs-function"><span class="hljs-params">g</span> =&gt;</span> g.<span class="hljs-title function_">toLowerCase</span>().<span class="hljs-title function_">includes</span>(searchTerm.<span class="hljs-title function_">toLowerCase</span>()))
       );
-      setFilteredMovies(filtered);
+      <span class="hljs-title function_">setFilteredMovies</span>(filtered);
     }
   };
 
-  const handleShowForm = () =&gt; {
-    setEditingMovie(null);
-    setShowForm(true);
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleShowForm</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-title function_">setEditingMovie</span>(<span class="hljs-literal">null</span>);
+    <span class="hljs-title function_">setShowForm</span>(<span class="hljs-literal">true</span>);
   };
 
-  const handleCancelForm = () =&gt; {
-    setEditingMovie(null);
-    setShowForm(false);
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleCancelForm</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-title function_">setEditingMovie</span>(<span class="hljs-literal">null</span>);
+    <span class="hljs-title function_">setShowForm</span>(<span class="hljs-literal">false</span>);
   };
 
-  return (
-    &lt;div className=&quot;App&quot;&gt;
-      &lt;header&gt;
-        &lt;div id=&quot;title&quot;&gt;
-          &lt;div id=&quot;title-text&quot;&gt;
-            &lt;h1&gt;🎬 Movie Buzz&lt;/h1&gt;
-            &lt;h4&gt;Where all the best movies live...&lt;/h4&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div id=&quot;add-new&quot;&gt;
-          &lt;button onClick={handleShowForm}&gt;Add New Movie&lt;/button&gt;
-        &lt;/div&gt;
-      &lt;/header&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;App&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">header</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;title&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;title-text&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>🎬 Movie Buzz<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>Where all the best movies live...<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;add-new&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handleShowForm}</span>&gt;</span>Add New Movie<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span>
       
       {showForm ? (
-        &lt;MovieForm 
-          onAddMovie={handleAddMovie}
-          onUpdateMovie={handleUpdateMovie}
-          onCancel={handleCancelForm}
-          editingMovie={editingMovie}
-        /&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">MovieForm</span> 
+          <span class="hljs-attr">onAddMovie</span>=<span class="hljs-string">{handleAddMovie}</span>
+          <span class="hljs-attr">onUpdateMovie</span>=<span class="hljs-string">{handleUpdateMovie}</span>
+          <span class="hljs-attr">onCancel</span>=<span class="hljs-string">{handleCancelForm}</span>
+          <span class="hljs-attr">editingMovie</span>=<span class="hljs-string">{editingMovie}</span>
+        /&gt;</span>
       ) : (
-        &lt;&gt;
-          &lt;SearchBar onSearch={handleSearch} /&gt;
-          &lt;MoviesList 
-            movies={filteredMovies}
-            onDelete={handleDeleteMovie}
-            onEdit={handleEditMovie}
-          /&gt;
-        &lt;/&gt;
+        <span class="hljs-tag">&lt;&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">SearchBar</span> <span class="hljs-attr">onSearch</span>=<span class="hljs-string">{handleSearch}</span> /&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">MoviesList</span> 
+            <span class="hljs-attr">movies</span>=<span class="hljs-string">{filteredMovies}</span>
+            <span class="hljs-attr">onDelete</span>=<span class="hljs-string">{handleDeleteMovie}</span>
+            <span class="hljs-attr">onEdit</span>=<span class="hljs-string">{handleEditMovie}</span>
+          /&gt;</span>
+        <span class="hljs-tag">&lt;/&gt;</span></span>
       )}
       
-      &lt;footer&gt;&amp;copy; Copyright 2024 Buzzware, Inc.&lt;/footer&gt;
+      &lt;footer&gt;&amp;copy; <span class="hljs-title class_">Copyright</span> <span class="hljs-number">2024</span> <span class="hljs-title class_">Buzzware</span>, <span class="hljs-title class_">Inc</span>.&lt;/footer&gt;
     &lt;/div&gt;
   );
 }
 
-export default App;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">App</span>;
 </code></pre>
 <hr>
 <h2 id="event-handling-best-practices" tabindex="-1">Event Handling Best Practices</h2>
@@ -2161,11 +2165,11 @@ export default App;
 </li>
 <li>
 <p><strong>Use callback functions properly</strong>: Pass functions, not function calls</p>
-<pre><code class="language-jsx">// Good
-&lt;button onClick={handleClick}&gt;Click me&lt;/button&gt;
+<pre class="hljs"><code><span class="hljs-comment">// Good</span>
+&lt;button onClick={handleClick}&gt;<span class="hljs-title class_">Click</span> me&lt;/button&gt;
 
-// Bad (calls function immediately)
-&lt;button onClick={handleClick()}&gt;Click me&lt;/button&gt;
+<span class="hljs-comment">// Bad (calls function immediately)</span>
+<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handleClick()}</span>&gt;</span>Click me<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
 </code></pre>
 </li>
 <li>
@@ -2219,5 +2223,6 @@ How has managing multiple pieces of state changed the complexity of our applicat
 </div>
 <script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
 <script src="../assets/animations.js"></script>
+<script src="../assets/search.js"></script>
 </body>
 </html>

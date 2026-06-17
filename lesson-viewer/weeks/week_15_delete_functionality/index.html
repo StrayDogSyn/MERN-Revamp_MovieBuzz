@@ -14,6 +14,10 @@
 <div class="layout">
 <nav class="sidebar" aria-label="Course weeks">
 <div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="sidebar-search">
+<input type="search" id="sidebar-search-input" class="search-input" placeholder="&#xf002; Search lessons…" aria-label="Search lessons">
+<div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+</div>
 <div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
 <a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
 <a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
@@ -100,222 +104,222 @@
 <p>Before diving into the full implementation, let's explore some simple, focused examples to build our understanding of DELETE operations step by step.</p>
 <h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-delete-request-handling" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>DELETE Request Handling</h3>
 <p>Let's start with a basic DELETE endpoint that processes removal requests:</p>
-<pre><code class="language-javascript">// Simple DELETE endpoint
-app.delete('/api/movies/:id', (req, res) =&gt; {
-  const { id } = req.params;
+<pre class="hljs"><code><span class="hljs-comment">// Simple DELETE endpoint</span>
+app.<span class="hljs-title function_">delete</span>(<span class="hljs-string">&#x27;/api/movies/:id&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> { id } = req.<span class="hljs-property">params</span>;
 
-  console.log(`DELETE request for movie ID: ${id}`);
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`DELETE request for movie ID: <span class="hljs-subst">${id}</span>`</span>);
 
-  // For now, just confirm we received the request
-  res.json({
-    success: true,
-    message: `Received DELETE request for movie ${id}`,
-    operation: 'DELETE',
-    movieId: id
+  <span class="hljs-comment">// For now, just confirm we received the request</span>
+  res.<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">message</span>: <span class="hljs-string">`Received DELETE request for movie <span class="hljs-subst">${id}</span>`</span>,
+    <span class="hljs-attr">operation</span>: <span class="hljs-string">&#x27;DELETE&#x27;</span>,
+    <span class="hljs-attr">movieId</span>: id
   });
 });
 </code></pre>
 <p><strong>Try It Out:</strong> Use Postman or curl to send DELETE requests and see how the server processes the request.</p>
 <h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-confirming-deletion" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Confirming Deletion</h3>
 <p>Let's add logic to find and &quot;delete&quot; items from an in-memory array:</p>
-<pre><code class="language-javascript">// Sample data
-let movies = [
-  { id: 1, name: 'The Matrix', year: 1999, rating: 'R' },
-  { id: 2, name: 'Inception', year: 2010, rating: 'PG-13' },
-  { id: 3, name: 'Toy Story', year: 1995, rating: 'G' }
+<pre class="hljs"><code><span class="hljs-comment">// Sample data</span>
+<span class="hljs-keyword">let</span> movies = [
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;The Matrix&#x27;</span>, <span class="hljs-attr">year</span>: <span class="hljs-number">1999</span>, <span class="hljs-attr">rating</span>: <span class="hljs-string">&#x27;R&#x27;</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Inception&#x27;</span>, <span class="hljs-attr">year</span>: <span class="hljs-number">2010</span>, <span class="hljs-attr">rating</span>: <span class="hljs-string">&#x27;PG-13&#x27;</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Toy Story&#x27;</span>, <span class="hljs-attr">year</span>: <span class="hljs-number">1995</span>, <span class="hljs-attr">rating</span>: <span class="hljs-string">&#x27;G&#x27;</span> }
 ];
 
-app.delete('/api/movies/:id', (req, res) =&gt; {
-  const movieId = parseInt(req.params.id);
+app.<span class="hljs-title function_">delete</span>(<span class="hljs-string">&#x27;/api/movies/:id&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> movieId = <span class="hljs-built_in">parseInt</span>(req.<span class="hljs-property">params</span>.<span class="hljs-property">id</span>);
 
-  // Step 1: Find the movie
-  const movieIndex = movies.findIndex(movie =&gt; movie.id === movieId);
+  <span class="hljs-comment">// Step 1: Find the movie</span>
+  <span class="hljs-keyword">const</span> movieIndex = movies.<span class="hljs-title function_">findIndex</span>(<span class="hljs-function"><span class="hljs-params">movie</span> =&gt;</span> movie.<span class="hljs-property">id</span> === movieId);
 
-  if (movieIndex === -1) {
-    return res.status(404).json({
-      success: false,
-      error: 'Movie not found',
-      searchedId: movieId,
-      availableIds: movies.map(m =&gt; m.id)
+  <span class="hljs-keyword">if</span> (movieIndex === -<span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Movie not found&#x27;</span>,
+      <span class="hljs-attr">searchedId</span>: movieId,
+      <span class="hljs-attr">availableIds</span>: movies.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">m</span> =&gt;</span> m.<span class="hljs-property">id</span>)
     });
   }
 
-  // Step 2: Get the movie before deletion
-  const movieToDelete = movies[movieIndex];
+  <span class="hljs-comment">// Step 2: Get the movie before deletion</span>
+  <span class="hljs-keyword">const</span> movieToDelete = movies[movieIndex];
 
-  // Step 3: Remove from array
-  movies.splice(movieIndex, 1);
+  <span class="hljs-comment">// Step 3: Remove from array</span>
+  movies.<span class="hljs-title function_">splice</span>(movieIndex, <span class="hljs-number">1</span>);
 
-  // Step 4: Confirm deletion
-  res.json({
-    success: true,
-    message: 'Movie deleted successfully',
-    deletedMovie: movieToDelete,
-    remainingCount: movies.length
+  <span class="hljs-comment">// Step 4: Confirm deletion</span>
+  res.<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Movie deleted successfully&#x27;</span>,
+    <span class="hljs-attr">deletedMovie</span>: movieToDelete,
+    <span class="hljs-attr">remainingCount</span>: movies.<span class="hljs-property">length</span>
   });
 });
 
-// Helper endpoint to see current movies
-app.get('/api/movies', (req, res) =&gt; {
-  res.json({
-    success: true,
-    count: movies.length,
-    data: movies
+<span class="hljs-comment">// Helper endpoint to see current movies</span>
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/api/movies&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">count</span>: movies.<span class="hljs-property">length</span>,
+    <span class="hljs-attr">data</span>: movies
   });
 });
 </code></pre>
 <p><strong>Try It Out:</strong> Delete movies one by one and use the GET endpoint to see the array shrinking.</p>
 <h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-cascade-delete-concepts" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Cascade Delete Concepts</h3>
 <p>Let's explore what happens when deletion affects related data:</p>
-<pre><code class="language-javascript">// Sample data with relationships
-let movies = [
-  { id: 1, name: 'The Matrix', year: 1999, directorId: 101 },
-  { id: 2, name: 'Inception', year: 2010, directorId: 102 }
+<pre class="hljs"><code><span class="hljs-comment">// Sample data with relationships</span>
+<span class="hljs-keyword">let</span> movies = [
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;The Matrix&#x27;</span>, <span class="hljs-attr">year</span>: <span class="hljs-number">1999</span>, <span class="hljs-attr">directorId</span>: <span class="hljs-number">101</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Inception&#x27;</span>, <span class="hljs-attr">year</span>: <span class="hljs-number">2010</span>, <span class="hljs-attr">directorId</span>: <span class="hljs-number">102</span> }
 ];
 
-let directors = [
-  { id: 101, name: 'The Wachowskis', movieCount: 1 },
-  { id: 102, name: 'Christopher Nolan', movieCount: 1 }
+<span class="hljs-keyword">let</span> directors = [
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">101</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;The Wachowskis&#x27;</span>, <span class="hljs-attr">movieCount</span>: <span class="hljs-number">1</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">102</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Christopher Nolan&#x27;</span>, <span class="hljs-attr">movieCount</span>: <span class="hljs-number">1</span> }
 ];
 
-let reviews = [
-  { id: 1, movieId: 1, rating: 5, comment: 'Amazing!' },
-  { id: 2, movieId: 1, rating: 4, comment: 'Good movie' },
-  { id: 3, movieId: 2, rating: 5, comment: 'Mind-bending!' }
+<span class="hljs-keyword">let</span> reviews = [
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">movieId</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">rating</span>: <span class="hljs-number">5</span>, <span class="hljs-attr">comment</span>: <span class="hljs-string">&#x27;Amazing!&#x27;</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">movieId</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">rating</span>: <span class="hljs-number">4</span>, <span class="hljs-attr">comment</span>: <span class="hljs-string">&#x27;Good movie&#x27;</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">movieId</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">rating</span>: <span class="hljs-number">5</span>, <span class="hljs-attr">comment</span>: <span class="hljs-string">&#x27;Mind-bending!&#x27;</span> }
 ];
 
-app.delete('/api/movies/:id', (req, res) =&gt; {
-  const movieId = parseInt(req.params.id);
+app.<span class="hljs-title function_">delete</span>(<span class="hljs-string">&#x27;/api/movies/:id&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> movieId = <span class="hljs-built_in">parseInt</span>(req.<span class="hljs-property">params</span>.<span class="hljs-property">id</span>);
 
-  // Find the movie
-  const movieIndex = movies.findIndex(movie =&gt; movie.id === movieId);
-  if (movieIndex === -1) {
-    return res.status(404).json({
-      success: false,
-      error: 'Movie not found'
+  <span class="hljs-comment">// Find the movie</span>
+  <span class="hljs-keyword">const</span> movieIndex = movies.<span class="hljs-title function_">findIndex</span>(<span class="hljs-function"><span class="hljs-params">movie</span> =&gt;</span> movie.<span class="hljs-property">id</span> === movieId);
+  <span class="hljs-keyword">if</span> (movieIndex === -<span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Movie not found&#x27;</span>
     });
   }
 
-  const movieToDelete = movies[movieIndex];
+  <span class="hljs-keyword">const</span> movieToDelete = movies[movieIndex];
 
-  // Check for related data that would be affected
-  const relatedReviews = reviews.filter(review =&gt; review.movieId === movieId);
+  <span class="hljs-comment">// Check for related data that would be affected</span>
+  <span class="hljs-keyword">const</span> relatedReviews = reviews.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">review</span> =&gt;</span> review.<span class="hljs-property">movieId</span> === movieId);
 
-  // Option 1: Prevent deletion if related data exists
-  if (relatedReviews.length &gt; 0) {
-    return res.status(400).json({
-      success: false,
-      error: 'Cannot delete movie with existing reviews',
-      relatedReviews: relatedReviews.length,
-      hint: 'Delete reviews first, or use force delete'
+  <span class="hljs-comment">// Option 1: Prevent deletion if related data exists</span>
+  <span class="hljs-keyword">if</span> (relatedReviews.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Cannot delete movie with existing reviews&#x27;</span>,
+      <span class="hljs-attr">relatedReviews</span>: relatedReviews.<span class="hljs-property">length</span>,
+      <span class="hljs-attr">hint</span>: <span class="hljs-string">&#x27;Delete reviews first, or use force delete&#x27;</span>
     });
   }
 
-  // Option 2: Cascade delete (delete related data too)
-  // Remove movie
-  movies.splice(movieIndex, 1);
+  <span class="hljs-comment">// Option 2: Cascade delete (delete related data too)</span>
+  <span class="hljs-comment">// Remove movie</span>
+  movies.<span class="hljs-title function_">splice</span>(movieIndex, <span class="hljs-number">1</span>);
 
-  // Update director's movie count
-  const director = directors.find(d =&gt; d.id === movieToDelete.directorId);
-  if (director) {
-    director.movieCount -= 1;
+  <span class="hljs-comment">// Update director&#x27;s movie count</span>
+  <span class="hljs-keyword">const</span> director = directors.<span class="hljs-title function_">find</span>(<span class="hljs-function"><span class="hljs-params">d</span> =&gt;</span> d.<span class="hljs-property">id</span> === movieToDelete.<span class="hljs-property">directorId</span>);
+  <span class="hljs-keyword">if</span> (director) {
+    director.<span class="hljs-property">movieCount</span> -= <span class="hljs-number">1</span>;
   }
 
-  res.json({
-    success: true,
-    message: 'Movie and related data deleted',
-    deletedMovie: movieToDelete,
-    updatedDirector: director
+  res.<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Movie and related data deleted&#x27;</span>,
+    <span class="hljs-attr">deletedMovie</span>: movieToDelete,
+    <span class="hljs-attr">updatedDirector</span>: director
   });
 });
 </code></pre>
 <p><strong>Try It Out:</strong> See how deletion can affect related data and try both prevention and cascade approaches.</p>
 <h3 class="step-heading" style="--organic-tilt:0deg" id="4step-4-soft-delete-vs-hard-delete" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Soft Delete vs Hard Delete</h3>
 <p>Let's implement both approaches to see the difference:</p>
-<pre><code class="language-javascript">// Add deleted field to movies
-let movies = [
-  { id: 1, name: 'The Matrix', year: 1999, deleted: false },
-  { id: 2, name: 'Inception', year: 2010, deleted: false },
-  { id: 3, name: 'Toy Story', year: 1995, deleted: true } // Already soft-deleted
+<pre class="hljs"><code><span class="hljs-comment">// Add deleted field to movies</span>
+<span class="hljs-keyword">let</span> movies = [
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;The Matrix&#x27;</span>, <span class="hljs-attr">year</span>: <span class="hljs-number">1999</span>, <span class="hljs-attr">deleted</span>: <span class="hljs-literal">false</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Inception&#x27;</span>, <span class="hljs-attr">year</span>: <span class="hljs-number">2010</span>, <span class="hljs-attr">deleted</span>: <span class="hljs-literal">false</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Toy Story&#x27;</span>, <span class="hljs-attr">year</span>: <span class="hljs-number">1995</span>, <span class="hljs-attr">deleted</span>: <span class="hljs-literal">true</span> } <span class="hljs-comment">// Already soft-deleted</span>
 ];
 
-// Soft delete endpoint
-app.delete('/api/movies/:id/soft', (req, res) =&gt; {
-  const movieId = parseInt(req.params.id);
+<span class="hljs-comment">// Soft delete endpoint</span>
+app.<span class="hljs-title function_">delete</span>(<span class="hljs-string">&#x27;/api/movies/:id/soft&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> movieId = <span class="hljs-built_in">parseInt</span>(req.<span class="hljs-property">params</span>.<span class="hljs-property">id</span>);
 
-  const movie = movies.find(m =&gt; m.id === movieId &amp;&amp; !m.deleted);
-  if (!movie) {
-    return res.status(404).json({
-      success: false,
-      error: 'Movie not found or already deleted'
+  <span class="hljs-keyword">const</span> movie = movies.<span class="hljs-title function_">find</span>(<span class="hljs-function"><span class="hljs-params">m</span> =&gt;</span> m.<span class="hljs-property">id</span> === movieId &amp;&amp; !m.<span class="hljs-property">deleted</span>);
+  <span class="hljs-keyword">if</span> (!movie) {
+    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Movie not found or already deleted&#x27;</span>
     });
   }
 
-  // Mark as deleted (soft delete)
-  movie.deleted = true;
-  movie.deletedAt = new Date().toISOString();
+  <span class="hljs-comment">// Mark as deleted (soft delete)</span>
+  movie.<span class="hljs-property">deleted</span> = <span class="hljs-literal">true</span>;
+  movie.<span class="hljs-property">deletedAt</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">toISOString</span>();
 
-  res.json({
-    success: true,
-    message: 'Movie soft-deleted (can be restored)',
-    operation: 'SOFT_DELETE',
-    movie: movie
+  res.<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Movie soft-deleted (can be restored)&#x27;</span>,
+    <span class="hljs-attr">operation</span>: <span class="hljs-string">&#x27;SOFT_DELETE&#x27;</span>,
+    <span class="hljs-attr">movie</span>: movie
   });
 });
 
-// Hard delete endpoint
-app.delete('/api/movies/:id/hard', (req, res) =&gt; {
-  const movieId = parseInt(req.params.id);
+<span class="hljs-comment">// Hard delete endpoint</span>
+app.<span class="hljs-title function_">delete</span>(<span class="hljs-string">&#x27;/api/movies/:id/hard&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> movieId = <span class="hljs-built_in">parseInt</span>(req.<span class="hljs-property">params</span>.<span class="hljs-property">id</span>);
 
-  const movieIndex = movies.findIndex(m =&gt; m.id === movieId);
-  if (movieIndex === -1) {
-    return res.status(404).json({
-      success: false,
-      error: 'Movie not found'
+  <span class="hljs-keyword">const</span> movieIndex = movies.<span class="hljs-title function_">findIndex</span>(<span class="hljs-function"><span class="hljs-params">m</span> =&gt;</span> m.<span class="hljs-property">id</span> === movieId);
+  <span class="hljs-keyword">if</span> (movieIndex === -<span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Movie not found&#x27;</span>
     });
   }
 
-  // Permanently remove (hard delete)
-  const deletedMovie = movies.splice(movieIndex, 1)[0];
+  <span class="hljs-comment">// Permanently remove (hard delete)</span>
+  <span class="hljs-keyword">const</span> deletedMovie = movies.<span class="hljs-title function_">splice</span>(movieIndex, <span class="hljs-number">1</span>)[<span class="hljs-number">0</span>];
 
-  res.json({
-    success: true,
-    message: 'Movie permanently deleted (cannot be restored)',
-    operation: 'HARD_DELETE',
-    deletedMovie: deletedMovie
+  res.<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Movie permanently deleted (cannot be restored)&#x27;</span>,
+    <span class="hljs-attr">operation</span>: <span class="hljs-string">&#x27;HARD_DELETE&#x27;</span>,
+    <span class="hljs-attr">deletedMovie</span>: deletedMovie
   });
 });
 
-// Restore soft-deleted movie
-app.put('/api/movies/:id/restore', (req, res) =&gt; {
-  const movieId = parseInt(req.params.id);
+<span class="hljs-comment">// Restore soft-deleted movie</span>
+app.<span class="hljs-title function_">put</span>(<span class="hljs-string">&#x27;/api/movies/:id/restore&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> movieId = <span class="hljs-built_in">parseInt</span>(req.<span class="hljs-property">params</span>.<span class="hljs-property">id</span>);
 
-  const movie = movies.find(m =&gt; m.id === movieId &amp;&amp; m.deleted);
-  if (!movie) {
-    return res.status(404).json({
-      success: false,
-      error: 'No soft-deleted movie found with this ID'
+  <span class="hljs-keyword">const</span> movie = movies.<span class="hljs-title function_">find</span>(<span class="hljs-function"><span class="hljs-params">m</span> =&gt;</span> m.<span class="hljs-property">id</span> === movieId &amp;&amp; m.<span class="hljs-property">deleted</span>);
+  <span class="hljs-keyword">if</span> (!movie) {
+    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;No soft-deleted movie found with this ID&#x27;</span>
     });
   }
 
-  // Restore the movie
-  movie.deleted = false;
-  delete movie.deletedAt;
+  <span class="hljs-comment">// Restore the movie</span>
+  movie.<span class="hljs-property">deleted</span> = <span class="hljs-literal">false</span>;
+  <span class="hljs-keyword">delete</span> movie.<span class="hljs-property">deletedAt</span>;
 
-  res.json({
-    success: true,
-    message: 'Movie restored successfully',
-    movie: movie
+  res.<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Movie restored successfully&#x27;</span>,
+    <span class="hljs-attr">movie</span>: movie
   });
 });
 
-// Get active movies (filters out soft-deleted)
-app.get('/api/movies/active', (req, res) =&gt; {
-  const activeMovies = movies.filter(movie =&gt; !movie.deleted);
-  res.json({
-    success: true,
-    count: activeMovies.length,
-    data: activeMovies
+<span class="hljs-comment">// Get active movies (filters out soft-deleted)</span>
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/api/movies/active&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> activeMovies = movies.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">movie</span> =&gt;</span> !movie.<span class="hljs-property">deleted</span>);
+  res.<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">count</span>: activeMovies.<span class="hljs-property">length</span>,
+    <span class="hljs-attr">data</span>: activeMovies
   });
 });
 </code></pre>
@@ -357,8 +361,8 @@ app.get('/api/movies/active', (req, res) =&gt; {
 <li>Frees up storage space</li>
 <li>Simple implementation</li>
 </ul>
-<pre><code class="language-javascript">// Hard delete - permanently removes the document
-const deletedMovie = await Movie.findByIdAndDelete(movieId);
+<pre class="hljs"><code><span class="hljs-comment">// Hard delete - permanently removes the document</span>
+<span class="hljs-keyword">const</span> deletedMovie = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findByIdAndDelete</span>(movieId);
 </code></pre>
 <p><strong>Soft Delete:</strong></p>
 <ul>
@@ -367,75 +371,75 @@ const deletedMovie = await Movie.findByIdAndDelete(movieId);
 <li>Uses more storage</li>
 <li>Requires filtering in queries</li>
 </ul>
-<pre><code class="language-javascript">// Soft delete - marks as deleted
-const deletedMovie = await Movie.findByIdAndUpdate(movieId, {
-  deleted: true,
-  deletedAt: new Date()
+<pre class="hljs"><code><span class="hljs-comment">// Soft delete - marks as deleted</span>
+<span class="hljs-keyword">const</span> deletedMovie = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findByIdAndUpdate</span>(movieId, {
+  <span class="hljs-attr">deleted</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">deletedAt</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>()
 });
 </code></pre>
 <p>For this lesson, we'll implement <strong>hard delete</strong> for simplicity.</p>
 <h3 id="implementing-delete-routes" tabindex="-1">Implementing DELETE Routes</h3>
 <p><strong>Add DELETE route to movieRoutes.js:</strong></p>
-<pre><code class="language-javascript">const express = require('express');
-const {
+<pre class="hljs"><code><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);
+<span class="hljs-keyword">const</span> {
   getMovies,
   getMovieById,
   createMovie,
   updateMovie,
-  deleteMovie  // New import
-} = require('../controllers/movieController');
+  deleteMovie  <span class="hljs-comment">// New import</span>
+} = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;../controllers/movieController&#x27;</span>);
 
-const router = express.Router();
+<span class="hljs-keyword">const</span> router = express.<span class="hljs-title class_">Router</span>();
 
-// Existing routes
-router.get('/', getMovies);
-router.get('/:id', getMovieById);
-router.post('/', createMovie);
-router.put('/:id', updateMovie);
+<span class="hljs-comment">// Existing routes</span>
+router.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/&#x27;</span>, getMovies);
+router.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/:id&#x27;</span>, getMovieById);
+router.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/&#x27;</span>, createMovie);
+router.<span class="hljs-title function_">put</span>(<span class="hljs-string">&#x27;/:id&#x27;</span>, updateMovie);
 
-// New DELETE route
-router.delete('/:id', deleteMovie);
+<span class="hljs-comment">// New DELETE route</span>
+router.<span class="hljs-title function_">delete</span>(<span class="hljs-string">&#x27;/:id&#x27;</span>, deleteMovie);
 
-module.exports = router;
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = router;
 </code></pre>
 <h3 id="delete-controller" tabindex="-1">DELETE Controller</h3>
 <p><strong>Implement deleteMovie controller:</strong></p>
-<pre><code class="language-javascript">// DELETE /api/movies/:id - Delete a movie
-const deleteMovie = async (req, res) =&gt; {
-  try {
-    const { id } = req.params;
+<pre class="hljs"><code><span class="hljs-comment">// DELETE /api/movies/:id - Delete a movie</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">deleteMovie</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">req, res</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> { id } = req.<span class="hljs-property">params</span>;
     
-    // Validate ObjectId format
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({
-        success: false,
-        error: 'Invalid movie ID format'
+    <span class="hljs-comment">// Validate ObjectId format</span>
+    <span class="hljs-keyword">if</span> (!mongoose.<span class="hljs-property">Types</span>.<span class="hljs-property">ObjectId</span>.<span class="hljs-title function_">isValid</span>(id)) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Invalid movie ID format&#x27;</span>
       });
     }
     
-    // Find and delete the movie
-    const deletedMovie = await Movie.findByIdAndDelete(id);
+    <span class="hljs-comment">// Find and delete the movie</span>
+    <span class="hljs-keyword">const</span> deletedMovie = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findByIdAndDelete</span>(id);
     
-    // Check if movie was found
-    if (!deletedMovie) {
-      return res.status(404).json({
-        success: false,
-        error: 'Movie not found'
+    <span class="hljs-comment">// Check if movie was found</span>
+    <span class="hljs-keyword">if</span> (!deletedMovie) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Movie not found&#x27;</span>
       });
     }
     
-    res.json({
-      success: true,
-      message: 'Movie deleted successfully',
-      data: deletedMovie
+    res.<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Movie deleted successfully&#x27;</span>,
+      <span class="hljs-attr">data</span>: deletedMovie
     });
     
-  } catch (error) {
-    console.error('Error deleting movie:', error);
-    res.status(500).json({
-      success: false,
-      error: 'Failed to delete movie',
-      message: error.message
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error deleting movie:&#x27;</span>, error);
+    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Failed to delete movie&#x27;</span>,
+      <span class="hljs-attr">message</span>: error.<span class="hljs-property">message</span>
     });
   }
 };
@@ -444,27 +448,27 @@ const deleteMovie = async (req, res) =&gt; {
 <h2 id="error-handling-for-delete" tabindex="-1">Error Handling for DELETE</h2>
 <p>Common DELETE error scenarios:</p>
 <p><strong>1. Movie Not Found:</strong></p>
-<pre><code class="language-javascript">if (!deletedMovie) {
-  return res.status(404).json({
-    success: false,
-    error: 'Movie not found'
+<pre class="hljs"><code><span class="hljs-keyword">if</span> (!deletedMovie) {
+  <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Movie not found&#x27;</span>
   });
 }
 </code></pre>
 <p><strong>2. Invalid ID Format:</strong></p>
-<pre><code class="language-javascript">if (!mongoose.Types.ObjectId.isValid(id)) {
-  return res.status(400).json({
-    success: false,
-    error: 'Invalid movie ID format'
+<pre class="hljs"><code><span class="hljs-keyword">if</span> (!mongoose.<span class="hljs-property">Types</span>.<span class="hljs-property">ObjectId</span>.<span class="hljs-title function_">isValid</span>(id)) {
+  <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Invalid movie ID format&#x27;</span>
   });
 }
 </code></pre>
 <p><strong>3. Database Errors:</strong></p>
-<pre><code class="language-javascript">catch (error) {
-  console.error('Error deleting movie:', error);
-  res.status(500).json({
-    success: false,
-    error: 'Failed to delete movie'
+<pre class="hljs"><code><span class="hljs-keyword">catch</span> (error) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error deleting movie:&#x27;</span>, error);
+  res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Failed to delete movie&#x27;</span>
   });
 }
 </code></pre>
@@ -472,39 +476,39 @@ const deleteMovie = async (req, res) =&gt; {
 <h2 id="testing-delete-operations" tabindex="-1">Testing DELETE Operations</h2>
 <p><strong>Test with different scenarios:</strong></p>
 <p><strong>1. Successful Delete:</strong></p>
-<pre><code class="language-bash"># DELETE /api/movies/[valid-movie-id]
+<pre class="hljs"><code><span class="hljs-comment"># DELETE /api/movies/[valid-movie-id]</span>
 curl -X DELETE http://localhost:4000/api/movies/507f1f77bcf86cd799439011
 </code></pre>
 <p>Expected response:</p>
-<pre><code class="language-json">{
-  &quot;success&quot;: true,
-  &quot;message&quot;: &quot;Movie deleted successfully&quot;,
-  &quot;data&quot;: {
-    &quot;_id&quot;: &quot;507f1f77bcf86cd799439011&quot;,
-    &quot;name&quot;: &quot;The Matrix&quot;,
-    &quot;year&quot;: 1999
-  }
-}
+<pre class="hljs"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;success&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;message&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Movie deleted successfully&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;507f1f77bcf86cd799439011&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;The Matrix&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;year&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1999</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
 </code></pre>
 <p><strong>2. Movie Not Found:</strong></p>
-<pre><code class="language-bash"># DELETE with non-existent ID
+<pre class="hljs"><code><span class="hljs-comment"># DELETE with non-existent ID</span>
 curl -X DELETE http://localhost:4000/api/movies/507f1f77bcf86cd799439099
 </code></pre>
 <p>Expected response:</p>
-<pre><code class="language-json">{
-  &quot;success&quot;: false,
-  &quot;error&quot;: &quot;Movie not found&quot;
-}
+<pre class="hljs"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;success&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;error&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Movie not found&quot;</span>
+<span class="hljs-punctuation">}</span>
 </code></pre>
 <p><strong>3. Invalid ID Format:</strong></p>
-<pre><code class="language-bash"># DELETE with invalid ID
+<pre class="hljs"><code><span class="hljs-comment"># DELETE with invalid ID</span>
 curl -X DELETE http://localhost:4000/api/movies/invalid-id
 </code></pre>
 <p>Expected response:</p>
-<pre><code class="language-json">{
-  &quot;success&quot;: false,
-  &quot;error&quot;: &quot;Invalid movie ID format&quot;
-}
+<pre class="hljs"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;success&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;error&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Invalid movie ID format&quot;</span>
+<span class="hljs-punctuation">}</span>
 </code></pre>
 <hr>
 <h2 id="complete-crud-summary" tabindex="-1">Complete CRUD Summary</h2>
@@ -573,5 +577,6 @@ curl -X DELETE http://localhost:4000/api/movies/invalid-id
 </div>
 <script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
 <script src="../assets/animations.js"></script>
+<script src="../assets/search.js"></script>
 </body>
 </html>

@@ -14,6 +14,10 @@
 <div class="layout">
 <nav class="sidebar" aria-label="Course weeks">
 <div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="sidebar-search">
+<input type="search" id="sidebar-search-input" class="search-input" placeholder="&#xf002; Search lessons…" aria-label="Search lessons">
+<div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+</div>
 <div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
 <a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
 <a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
@@ -103,361 +107,361 @@
 <p>Before diving into the full integration, let's explore some simple, focused examples to build our understanding of how frontend and backend communicate.</p>
 <h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-fetch-api-basics" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Fetch API Basics</h3>
 <p>Let's start with the most fundamental concept - making HTTP requests from React to a server:</p>
-<pre><code class="language-javascript">// Simple fetch example
-const fetchExample = async () =&gt; {
-  try {
-    // Make a GET request
-    const response = await fetch('http://localhost:4000/api/movies');
+<pre class="hljs"><code><span class="hljs-comment">// Simple fetch example</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">fetchExample</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-comment">// Make a GET request</span>
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;http://localhost:4000/api/movies&#x27;</span>);
 
-    // Check if request was successful
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    <span class="hljs-comment">// Check if request was successful</span>
+    <span class="hljs-keyword">if</span> (!response.<span class="hljs-property">ok</span>) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">`HTTP error! status: <span class="hljs-subst">${response.status}</span>`</span>);
     }
 
-    // Convert response to JSON
-    const data = await response.json();
+    <span class="hljs-comment">// Convert response to JSON</span>
+    <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
 
-    console.log('Received data:', data);
-    return data;
-  } catch (error) {
-    console.error('Fetch failed:', error);
-    throw error;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Received data:&#x27;</span>, data);
+    <span class="hljs-keyword">return</span> data;
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Fetch failed:&#x27;</span>, error);
+    <span class="hljs-keyword">throw</span> error;
   }
 };
 
-// Use in a React component
-function SimpleExample() {
-  const [data, setData] = useState(null);
+<span class="hljs-comment">// Use in a React component</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">SimpleExample</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> [data, setData] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">null</span>);
 
-  useEffect(() =&gt; {
-    fetchExample()
-      .then(result =&gt; setData(result))
-      .catch(error =&gt; console.error(error));
+  <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-title function_">fetchExample</span>()
+      .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">result</span> =&gt;</span> <span class="hljs-title function_">setData</span>(result))
+      .<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(error));
   }, []);
 
-  return (
-    &lt;div&gt;
-      &lt;h2&gt;Fetch Example&lt;/h2&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Fetch Example<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
       {data ? (
-        &lt;pre&gt;{JSON.stringify(data, null, 2)}&lt;/pre&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">pre</span>&gt;</span>{JSON.stringify(data, null, 2)}<span class="hljs-tag">&lt;/<span class="hljs-name">pre</span>&gt;</span>
       ) : (
-        &lt;p&gt;Loading...&lt;/p&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Loading...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
       )}
-    &lt;/div&gt;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 </code></pre>
 <p><strong>Try It Out:</strong> Create this simple component and watch the network tab in your browser to see the API call.</p>
 <h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-asyncawait-with-apis" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Async/Await with APIs</h3>
 <p>Let's build understanding of handling asynchronous operations properly:</p>
-<pre><code class="language-javascript">// Different ways to handle async operations
-function AsyncExamples() {
-  const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+<pre class="hljs"><code><span class="hljs-comment">// Different ways to handle async operations</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">AsyncExamples</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> [movies, setMovies] = <span class="hljs-title function_">useState</span>([]);
+  <span class="hljs-keyword">const</span> [loading, setLoading] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">false</span>);
+  <span class="hljs-keyword">const</span> [error, setError] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">null</span>);
 
-  // Method 1: Basic async/await
-  const loadMoviesBasic = async () =&gt; {
-    const response = await fetch('/api/movies');
-    const data = await response.json();
-    setMovies(data);
+  <span class="hljs-comment">// Method 1: Basic async/await</span>
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">loadMoviesBasic</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;/api/movies&#x27;</span>);
+    <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
+    <span class="hljs-title function_">setMovies</span>(data);
   };
 
-  // Method 2: With error handling
-  const loadMoviesWithErrors = async () =&gt; {
-    try {
-      setLoading(true);
-      setError(null);
+  <span class="hljs-comment">// Method 2: With error handling</span>
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">loadMoviesWithErrors</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">true</span>);
+      <span class="hljs-title function_">setError</span>(<span class="hljs-literal">null</span>);
 
-      const response = await fetch('/api/movies');
+      <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;/api/movies&#x27;</span>);
 
-      if (!response.ok) {
-        throw new Error('Failed to load movies');
+      <span class="hljs-keyword">if</span> (!response.<span class="hljs-property">ok</span>) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&#x27;Failed to load movies&#x27;</span>);
       }
 
-      const data = await response.json();
-      setMovies(data);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+      <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
+      <span class="hljs-title function_">setMovies</span>(data);
+    } <span class="hljs-keyword">catch</span> (err) {
+      <span class="hljs-title function_">setError</span>(err.<span class="hljs-property">message</span>);
+    } <span class="hljs-keyword">finally</span> {
+      <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">false</span>);
     }
   };
 
-  // Method 3: With loading states
-  const loadMoviesComplete = async () =&gt; {
-    try {
-      setLoading(true);
-      setError(null);
+  <span class="hljs-comment">// Method 3: With loading states</span>
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">loadMoviesComplete</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">true</span>);
+      <span class="hljs-title function_">setError</span>(<span class="hljs-literal">null</span>);
 
-      // Simulate thinking time
-      await new Promise(resolve =&gt; setTimeout(resolve, 1000));
+      <span class="hljs-comment">// Simulate thinking time</span>
+      <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> <span class="hljs-built_in">setTimeout</span>(resolve, <span class="hljs-number">1000</span>));
 
-      const response = await fetch('/api/movies');
+      <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;/api/movies&#x27;</span>);
 
-      if (!response.ok) {
-        throw new Error(`Server error: ${response.status}`);
+      <span class="hljs-keyword">if</span> (!response.<span class="hljs-property">ok</span>) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">`Server error: <span class="hljs-subst">${response.status}</span>`</span>);
       }
 
-      const result = await response.json();
+      <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
 
-      // Check if we got data in expected format
-      if (result.success &amp;&amp; result.data) {
-        setMovies(result.data);
-      } else {
-        throw new Error('Unexpected response format');
+      <span class="hljs-comment">// Check if we got data in expected format</span>
+      <span class="hljs-keyword">if</span> (result.<span class="hljs-property">success</span> &amp;&amp; result.<span class="hljs-property">data</span>) {
+        <span class="hljs-title function_">setMovies</span>(result.<span class="hljs-property">data</span>);
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&#x27;Unexpected response format&#x27;</span>);
       }
 
-    } catch (err) {
-      console.error('Load movies failed:', err);
-      setError(err.message);
-      setMovies([]); // Clear any existing data
-    } finally {
-      setLoading(false);
+    } <span class="hljs-keyword">catch</span> (err) {
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Load movies failed:&#x27;</span>, err);
+      <span class="hljs-title function_">setError</span>(err.<span class="hljs-property">message</span>);
+      <span class="hljs-title function_">setMovies</span>([]); <span class="hljs-comment">// Clear any existing data</span>
+    } <span class="hljs-keyword">finally</span> {
+      <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">false</span>);
     }
   };
 
-  return (
-    &lt;div&gt;
-      &lt;h2&gt;Async Examples&lt;/h2&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Async Examples<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
 
-      &lt;button onClick={loadMoviesBasic}&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{loadMoviesBasic}</span>&gt;</span>
         Load Basic (no error handling)
-      &lt;/button&gt;
+      <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
 
-      &lt;button onClick={loadMoviesWithErrors}&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{loadMoviesWithErrors}</span>&gt;</span>
         Load with Error Handling
-      &lt;/button&gt;
+      <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
 
-      &lt;button onClick={loadMoviesComplete}&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{loadMoviesComplete}</span>&gt;</span>
         Load with Loading States
-      &lt;/button&gt;
+      <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
 
-      {loading &amp;&amp; &lt;p&gt;Loading movies...&lt;/p&gt;}
-      {error &amp;&amp; &lt;p style={{color: 'red'}}&gt;Error: {error}&lt;/p&gt;}
+      {loading &amp;&amp; <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Loading movies...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>}
+      {error &amp;&amp; <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{color:</span> &#x27;<span class="hljs-attr">red</span>&#x27;}}&gt;</span>Error: {error}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>}
       {movies.length &gt; 0 &amp;&amp; (
-        &lt;div&gt;
-          &lt;h3&gt;Movies ({movies.length}):&lt;/h3&gt;
-          &lt;ul&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Movies ({movies.length}):<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
             {movies.map(movie =&gt; (
-              &lt;li key={movie._id || movie.id}&gt;
+              <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{movie._id</span> || <span class="hljs-attr">movie.id</span>}&gt;</span>
                 {movie.name} ({movie.year})
-              &lt;/li&gt;
+              <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
             ))}
-          &lt;/ul&gt;
-        &lt;/div&gt;
+          <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
       )}
-    &lt;/div&gt;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 </code></pre>
 <p><strong>Try It Out:</strong> Test each button with your backend running and stopped to see different behaviors.</p>
 <h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-error-handling-in-frontend" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Error Handling in Frontend</h3>
 <p>Let's understand different types of errors and how to handle them:</p>
-<pre><code class="language-javascript">function ErrorHandlingExample() {
-  const [status, setStatus] = useState('ready');
-  const [message, setMessage] = useState('');
+<pre class="hljs"><code><span class="hljs-keyword">function</span> <span class="hljs-title function_">ErrorHandlingExample</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> [status, setStatus] = <span class="hljs-title function_">useState</span>(<span class="hljs-string">&#x27;ready&#x27;</span>);
+  <span class="hljs-keyword">const</span> [message, setMessage] = <span class="hljs-title function_">useState</span>(<span class="hljs-string">&#x27;&#x27;</span>);
 
-  const testApiCall = async (scenario) =&gt; {
-    setStatus('loading');
-    setMessage('');
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">testApiCall</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">scenario</span>) =&gt; {
+    <span class="hljs-title function_">setStatus</span>(<span class="hljs-string">&#x27;loading&#x27;</span>);
+    <span class="hljs-title function_">setMessage</span>(<span class="hljs-string">&#x27;&#x27;</span>);
 
-    try {
-      let response;
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-keyword">let</span> response;
 
-      switch (scenario) {
-        case 'success':
-          response = await fetch('/api/movies');
-          break;
-        case 'not-found':
-          response = await fetch('/api/movies/invalid-id');
-          break;
-        case 'server-error':
-          response = await fetch('/api/movies/cause-error');
-          break;
-        case 'network-error':
-          response = await fetch('http://nonexistent-server.com/api/movies');
-          break;
-        case 'timeout':
-          // Simulate timeout
-          const controller = new AbortController();
-          setTimeout(() =&gt; controller.abort(), 1000);
-          response = await fetch('/api/movies', {
-            signal: controller.signal
+      <span class="hljs-keyword">switch</span> (scenario) {
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;success&#x27;</span>:
+          response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;/api/movies&#x27;</span>);
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;not-found&#x27;</span>:
+          response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;/api/movies/invalid-id&#x27;</span>);
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;server-error&#x27;</span>:
+          response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;/api/movies/cause-error&#x27;</span>);
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;network-error&#x27;</span>:
+          response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;http://nonexistent-server.com/api/movies&#x27;</span>);
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;timeout&#x27;</span>:
+          <span class="hljs-comment">// Simulate timeout</span>
+          <span class="hljs-keyword">const</span> controller = <span class="hljs-keyword">new</span> <span class="hljs-title class_">AbortController</span>();
+          <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> controller.<span class="hljs-title function_">abort</span>(), <span class="hljs-number">1000</span>);
+          response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;/api/movies&#x27;</span>, {
+            <span class="hljs-attr">signal</span>: controller.<span class="hljs-property">signal</span>
           });
-          break;
-        default:
-          throw new Error('Unknown scenario');
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-attr">default</span>:
+          <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&#x27;Unknown scenario&#x27;</span>);
       }
 
-      // Handle HTTP errors
-      if (!response.ok) {
-        const errorData = await response.json().catch(() =&gt; ({}));
-        throw new Error(
-          errorData.error || `HTTP ${response.status}: ${response.statusText}`
+      <span class="hljs-comment">// Handle HTTP errors</span>
+      <span class="hljs-keyword">if</span> (!response.<span class="hljs-property">ok</span>) {
+        <span class="hljs-keyword">const</span> errorData = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>().<span class="hljs-title function_">catch</span>(<span class="hljs-function">() =&gt;</span> ({}));
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(
+          errorData.<span class="hljs-property">error</span> || <span class="hljs-string">`HTTP <span class="hljs-subst">${response.status}</span>: <span class="hljs-subst">${response.statusText}</span>`</span>
         );
       }
 
-      const data = await response.json();
-      setStatus('success');
-      setMessage(`Success! Loaded ${data.length || 0} items`);
+      <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
+      <span class="hljs-title function_">setStatus</span>(<span class="hljs-string">&#x27;success&#x27;</span>);
+      <span class="hljs-title function_">setMessage</span>(<span class="hljs-string">`Success! Loaded <span class="hljs-subst">${data.length || <span class="hljs-number">0</span>}</span> items`</span>);
 
-    } catch (error) {
-      setStatus('error');
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-title function_">setStatus</span>(<span class="hljs-string">&#x27;error&#x27;</span>);
 
-      // Different error types
-      if (error.name === 'AbortError') {
-        setMessage('Request timed out');
-      } else if (error.message.includes('fetch')) {
-        setMessage('Network error - is the server running?');
-      } else {
-        setMessage(`Error: ${error.message}`);
+      <span class="hljs-comment">// Different error types</span>
+      <span class="hljs-keyword">if</span> (error.<span class="hljs-property">name</span> === <span class="hljs-string">&#x27;AbortError&#x27;</span>) {
+        <span class="hljs-title function_">setMessage</span>(<span class="hljs-string">&#x27;Request timed out&#x27;</span>);
+      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (error.<span class="hljs-property">message</span>.<span class="hljs-title function_">includes</span>(<span class="hljs-string">&#x27;fetch&#x27;</span>)) {
+        <span class="hljs-title function_">setMessage</span>(<span class="hljs-string">&#x27;Network error - is the server running?&#x27;</span>);
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-title function_">setMessage</span>(<span class="hljs-string">`Error: <span class="hljs-subst">${error.message}</span>`</span>);
       }
     }
   };
 
-  return (
-    &lt;div&gt;
-      &lt;h2&gt;Error Handling Examples&lt;/h2&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Error Handling Examples<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
 
-      &lt;div&gt;
-        &lt;button onClick={() =&gt; testApiCall('success')}&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> testApiCall(&#x27;success&#x27;)}&gt;
           Test Success
-        &lt;/button&gt;
-        &lt;button onClick={() =&gt; testApiCall('not-found')}&gt;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> testApiCall(&#x27;not-found&#x27;)}&gt;
           Test 404 Error
-        &lt;/button&gt;
-        &lt;button onClick={() =&gt; testApiCall('server-error')}&gt;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> testApiCall(&#x27;server-error&#x27;)}&gt;
           Test Server Error
-        &lt;/button&gt;
-        &lt;button onClick={() =&gt; testApiCall('network-error')}&gt;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> testApiCall(&#x27;network-error&#x27;)}&gt;
           Test Network Error
-        &lt;/button&gt;
-        &lt;button onClick={() =&gt; testApiCall('timeout')}&gt;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> testApiCall(&#x27;timeout&#x27;)}&gt;
           Test Timeout
-        &lt;/button&gt;
-      &lt;/div&gt;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
-      &lt;div style={{ marginTop: '20px' }}&gt;
-        &lt;strong&gt;Status:&lt;/strong&gt; {status} &lt;br /&gt;
-        &lt;strong&gt;Message:&lt;/strong&gt; {message}
-      &lt;/div&gt;
-    &lt;/div&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">marginTop:</span> &#x27;<span class="hljs-attr">20px</span>&#x27; }}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>Status:<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span> {status} <span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>Message:<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span> {message}
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 </code></pre>
 <p><strong>Try It Out:</strong> Test each scenario to see how different types of errors are handled.</p>
 <h3 class="step-heading" style="--organic-tilt:0deg" id="4step-4-loading-states" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Loading States</h3>
 <p>Let's create proper loading indicators for better user experience:</p>
-<pre><code class="language-javascript">// Loading component variations
-function LoadingIndicator({ type = 'spinner' }) {
-  switch (type) {
-    case 'spinner':
-      return (
-        &lt;div style={{ textAlign: 'center', padding: '20px' }}&gt;
-          &lt;div style={{
-            border: '4px solid #f3f3f3',
-            borderTop: '4px solid #3498db',
-            borderRadius: '50%',
-            width: '40px',
-            height: '40px',
-            animation: 'spin 2s linear infinite',
-            margin: '0 auto'
-          }}&gt;&lt;/div&gt;
-          &lt;p&gt;Loading...&lt;/p&gt;
-        &lt;/div&gt;
+<pre class="hljs"><code><span class="hljs-comment">// Loading component variations</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">LoadingIndicator</span>(<span class="hljs-params">{ type = <span class="hljs-string">&#x27;spinner&#x27;</span> }</span>) {
+  <span class="hljs-keyword">switch</span> (type) {
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;spinner&#x27;</span>:
+      <span class="hljs-keyword">return</span> (
+        <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">textAlign:</span> &#x27;<span class="hljs-attr">center</span>&#x27;, <span class="hljs-attr">padding:</span> &#x27;<span class="hljs-attr">20px</span>&#x27; }}&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span>
+            <span class="hljs-attr">border:</span> &#x27;<span class="hljs-attr">4px</span> <span class="hljs-attr">solid</span> #<span class="hljs-attr">f3f3f3</span>&#x27;,
+            <span class="hljs-attr">borderTop:</span> &#x27;<span class="hljs-attr">4px</span> <span class="hljs-attr">solid</span> #<span class="hljs-attr">3498db</span>&#x27;,
+            <span class="hljs-attr">borderRadius:</span> &#x27;<span class="hljs-attr">50</span>%&#x27;,
+            <span class="hljs-attr">width:</span> &#x27;<span class="hljs-attr">40px</span>&#x27;,
+            <span class="hljs-attr">height:</span> &#x27;<span class="hljs-attr">40px</span>&#x27;,
+            <span class="hljs-attr">animation:</span> &#x27;<span class="hljs-attr">spin</span> <span class="hljs-attr">2s</span> <span class="hljs-attr">linear</span> <span class="hljs-attr">infinite</span>&#x27;,
+            <span class="hljs-attr">margin:</span> &#x27;<span class="hljs-attr">0</span> <span class="hljs-attr">auto</span>&#x27;
+          }}&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Loading...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
       );
-    case 'dots':
-      return (
-        &lt;div style={{ textAlign: 'center', padding: '20px' }}&gt;
-          &lt;p&gt;Loading&lt;span style={{ animation: 'dots 1.5s infinite' }}&gt;...&lt;/span&gt;&lt;/p&gt;
-        &lt;/div&gt;
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;dots&#x27;</span>:
+      <span class="hljs-keyword">return</span> (
+        <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">textAlign:</span> &#x27;<span class="hljs-attr">center</span>&#x27;, <span class="hljs-attr">padding:</span> &#x27;<span class="hljs-attr">20px</span>&#x27; }}&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Loading<span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">animation:</span> &#x27;<span class="hljs-attr">dots</span> <span class="hljs-attr">1.5s</span> <span class="hljs-attr">infinite</span>&#x27; }}&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
       );
-    case 'skeleton':
-      return (
-        &lt;div style={{ padding: '20px' }}&gt;
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;skeleton&#x27;</span>:
+      <span class="hljs-keyword">return</span> (
+        <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">padding:</span> &#x27;<span class="hljs-attr">20px</span>&#x27; }}&gt;</span>
           {[1, 2, 3].map(i =&gt; (
-            &lt;div key={i} style={{
-              height: '20px',
-              backgroundColor: '#f0f0f0',
-              margin: '10px 0',
-              borderRadius: '4px',
-              animation: 'pulse 1.5s infinite'
-            }}&gt;&lt;/div&gt;
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{i}</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span>
+              <span class="hljs-attr">height:</span> &#x27;<span class="hljs-attr">20px</span>&#x27;,
+              <span class="hljs-attr">backgroundColor:</span> &#x27;#<span class="hljs-attr">f0f0f0</span>&#x27;,
+              <span class="hljs-attr">margin:</span> &#x27;<span class="hljs-attr">10px</span> <span class="hljs-attr">0</span>&#x27;,
+              <span class="hljs-attr">borderRadius:</span> &#x27;<span class="hljs-attr">4px</span>&#x27;,
+              <span class="hljs-attr">animation:</span> &#x27;<span class="hljs-attr">pulse</span> <span class="hljs-attr">1.5s</span> <span class="hljs-attr">infinite</span>&#x27;
+            }}&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
           ))}
-        &lt;/div&gt;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
       );
-    default:
-      return &lt;p&gt;Loading...&lt;/p&gt;;
+    <span class="hljs-attr">default</span>:
+      <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Loading...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span>;
   }
 }
 
-function LoadingStatesExample() {
-  const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [loadingType, setLoadingType] = useState('spinner');
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">LoadingStatesExample</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> [movies, setMovies] = <span class="hljs-title function_">useState</span>([]);
+  <span class="hljs-keyword">const</span> [loading, setLoading] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">false</span>);
+  <span class="hljs-keyword">const</span> [loadingType, setLoadingType] = <span class="hljs-title function_">useState</span>(<span class="hljs-string">&#x27;spinner&#x27;</span>);
 
-  const loadWithDelay = async (delay = 2000) =&gt; {
-    setLoading(true);
-    setMovies([]);
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">loadWithDelay</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">delay = <span class="hljs-number">2000</span></span>) =&gt; {
+    <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">true</span>);
+    <span class="hljs-title function_">setMovies</span>([]);
 
-    try {
-      // Simulate slow network
-      await new Promise(resolve =&gt; setTimeout(resolve, delay));
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-comment">// Simulate slow network</span>
+      <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> <span class="hljs-built_in">setTimeout</span>(resolve, delay));
 
-      const response = await fetch('/api/movies');
-      const data = await response.json();
-      setMovies(data.data || data);
-    } catch (error) {
-      console.error('Load failed:', error);
-    } finally {
-      setLoading(false);
+      <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;/api/movies&#x27;</span>);
+      <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
+      <span class="hljs-title function_">setMovies</span>(data.<span class="hljs-property">data</span> || data);
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Load failed:&#x27;</span>, error);
+    } <span class="hljs-keyword">finally</span> {
+      <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">false</span>);
     }
   };
 
-  return (
-    &lt;div&gt;
-      &lt;h2&gt;Loading States Examples&lt;/h2&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Loading States Examples<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
 
-      &lt;div&gt;
-        &lt;label&gt;Loading Type: &lt;/label&gt;
-        &lt;select
-          value={loadingType}
-          onChange={(e) =&gt; setLoadingType(e.target.value)}
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>Loading Type: <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">select</span>
+          <span class="hljs-attr">value</span>=<span class="hljs-string">{loadingType}</span>
+          <span class="hljs-attr">onChange</span>=<span class="hljs-string">{(e)</span> =&gt;</span> setLoadingType(e.target.value)}
         &gt;
-          &lt;option value=&quot;spinner&quot;&gt;Spinner&lt;/option&gt;
-          &lt;option value=&quot;dots&quot;&gt;Dots&lt;/option&gt;
-          &lt;option value=&quot;skeleton&quot;&gt;Skeleton&lt;/option&gt;
-        &lt;/select&gt;
-      &lt;/div&gt;
+          <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;spinner&quot;</span>&gt;</span>Spinner<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;dots&quot;</span>&gt;</span>Dots<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;skeleton&quot;</span>&gt;</span>Skeleton<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
-      &lt;button onClick={() =&gt; loadWithDelay(1000)}&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> loadWithDelay(1000)}&gt;
         Load Movies (1s delay)
-      &lt;/button&gt;
-      &lt;button onClick={() =&gt; loadWithDelay(3000)}&gt;
+      <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> loadWithDelay(3000)}&gt;
         Load Movies (3s delay)
-      &lt;/button&gt;
+      <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
 
-      &lt;div style={{ border: '1px solid #ccc', minHeight: '200px', marginTop: '20px' }}&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">border:</span> &#x27;<span class="hljs-attr">1px</span> <span class="hljs-attr">solid</span> #<span class="hljs-attr">ccc</span>&#x27;, <span class="hljs-attr">minHeight:</span> &#x27;<span class="hljs-attr">200px</span>&#x27;, <span class="hljs-attr">marginTop:</span> &#x27;<span class="hljs-attr">20px</span>&#x27; }}&gt;</span>
         {loading ? (
-          &lt;LoadingIndicator type={loadingType} /&gt;
+          <span class="hljs-tag">&lt;<span class="hljs-name">LoadingIndicator</span> <span class="hljs-attr">type</span>=<span class="hljs-string">{loadingType}</span> /&gt;</span>
         ) : (
-          &lt;div&gt;
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
             {movies.length &gt; 0 ? (
-              &lt;ul&gt;
+              <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
                 {movies.map(movie =&gt; (
-                  &lt;li key={movie._id || movie.id}&gt;
+                  <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{movie._id</span> || <span class="hljs-attr">movie.id</span>}&gt;</span>
                     {movie.name} ({movie.year})
-                  &lt;/li&gt;
+                  <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
                 ))}
-              &lt;/ul&gt;
+              <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
             ) : (
-              &lt;p&gt;No movies loaded&lt;/p&gt;
+              <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>No movies loaded<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
             )}
-          &lt;/div&gt;
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
         )}
-      &lt;/div&gt;
-    &lt;/div&gt;
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 </code></pre>
@@ -536,42 +540,42 @@ Why is it important to separate frontend and backend code into different applica
 <p>First, let's configure our React app to communicate with the backend.</p>
 <p><strong>Step 1: Start Both Servers</strong></p>
 <p>In one terminal (backend):</p>
-<pre><code class="language-bash">cd movie-buzz-backend
+<pre class="hljs"><code><span class="hljs-built_in">cd</span> movie-buzz-backend
 npm install
 npm start
-# Server running on http://localhost:4000
+<span class="hljs-comment"># Server running on http://localhost:4000</span>
 </code></pre>
 <p>In another terminal (frontend):</p>
-<pre><code class="language-bash">cd movie-buzz-frontend
+<pre class="hljs"><code><span class="hljs-built_in">cd</span> movie-buzz-frontend
 npm install
 npm start
-# React running on http://localhost:3000
+<span class="hljs-comment"># React running on http://localhost:3000</span>
 </code></pre>
 <p><strong>Step 2: Configure Proxy (Development)</strong></p>
 <p>In your React <code>package.json</code>, add:</p>
-<pre><code class="language-json">&quot;proxy&quot;: &quot;http://localhost:4000&quot;
+<pre class="hljs"><code><span class="hljs-attr">&quot;proxy&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;http://localhost:4000&quot;</span>
 </code></pre>
 <p>This tells the development server to proxy API requests to your backend.</p>
 <p><strong>Step 3: Create API Service</strong></p>
 <p>Create <code>src/services/movieService.js</code>:</p>
-<pre><code class="language-javascript">// Base URL for API - will use environment variable in production
-const API_BASE_URL = process.env.REACT_APP_API_URL || '/api';
+<pre class="hljs"><code><span class="hljs-comment">// Base URL for API - will use environment variable in production</span>
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">API_BASE_URL</span> = process.<span class="hljs-property">env</span>.<span class="hljs-property">REACT_APP_API_URL</span> || <span class="hljs-string">&#x27;/api&#x27;</span>;
 
-// Helper function for handling responses
-const handleResponse = async (response) =&gt; {
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message || 'Something went wrong');
+<span class="hljs-comment">// Helper function for handling responses</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">handleResponse</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">response</span>) =&gt; {
+  <span class="hljs-keyword">if</span> (!response.<span class="hljs-property">ok</span>) {
+    <span class="hljs-keyword">const</span> error = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(error.<span class="hljs-property">message</span> || <span class="hljs-string">&#x27;Something went wrong&#x27;</span>);
   }
-  return response.json();
+  <span class="hljs-keyword">return</span> response.<span class="hljs-title function_">json</span>();
 };
 
-export const movieService = {
-  // TODO: Implement getAll function to fetch all movies
-  // TODO: Implement getById function to fetch single movie
-  // TODO: Implement create function to add new movie
-  // TODO: Implement update function to update existing movie
-  // TODO: Implement delete function to remove movie
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> movieService = {
+  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Implement getAll function to fetch all movies</span>
+  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Implement getById function to fetch single movie</span>
+  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Implement create function to add new movie</span>
+  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Implement update function to update existing movie</span>
+  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Implement delete function to remove movie</span>
 };
 </code></pre>
 <hr>
@@ -579,48 +583,48 @@ export const movieService = {
 <p>Let's start by fetching and displaying movies from our API.</p>
 <p><strong>Step 1: Implement getAll in movieService.js</strong></p>
 <p>Find the TODO for getAll and implement:</p>
-<pre><code class="language-javascript">getAll: async () =&gt; {
-  // TODO: Implement fetch request to GET /api/movies
-  // TODO: Use handleResponse helper
-  // TODO: Return the data
+<pre class="hljs"><code><span class="hljs-attr">getAll</span>: <span class="hljs-title function_">async</span> () =&gt; {
+  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Implement fetch request to GET /api/movies</span>
+  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Use handleResponse helper</span>
+  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Return the data</span>
 },
 </code></pre>
 <p><strong>Step 2: Update App.js to Fetch Movies</strong></p>
 <p>In your <code>App.js</code>, add:</p>
-<pre><code class="language-javascript">import { movieService } from './services/movieService';
+<pre class="hljs"><code><span class="hljs-keyword">import</span> { movieService } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./services/movieService&#x27;</span>;
 
-function App() {
-  const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> [movies, setMovies] = <span class="hljs-title function_">useState</span>([]);
+  <span class="hljs-keyword">const</span> [loading, setLoading] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">true</span>);
+  <span class="hljs-keyword">const</span> [error, setError] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">null</span>);
 
-  // Fetch movies on component mount
-  useEffect(() =&gt; {
-    fetchMovies();
+  <span class="hljs-comment">// Fetch movies on component mount</span>
+  <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-title function_">fetchMovies</span>();
   }, []);
 
-  const fetchMovies = async () =&gt; {
-    try {
-      setLoading(true);
-      setError(null);
-      // TODO: Call movieService.getAll()
-      // TODO: Set movies with response data
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">fetchMovies</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">true</span>);
+      <span class="hljs-title function_">setError</span>(<span class="hljs-literal">null</span>);
+      <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Call movieService.getAll()</span>
+      <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set movies with response data</span>
+    } <span class="hljs-keyword">catch</span> (err) {
+      <span class="hljs-title function_">setError</span>(err.<span class="hljs-property">message</span>);
+    } <span class="hljs-keyword">finally</span> {
+      <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">false</span>);
     }
   };
 
-  // Render loading, error, or movies
-  if (loading) return &lt;div className=&quot;loading&quot;&gt;Loading movies...&lt;/div&gt;;
-  if (error) return &lt;div className=&quot;error&quot;&gt;Error: {error}&lt;/div&gt;;
+  <span class="hljs-comment">// Render loading, error, or movies</span>
+  <span class="hljs-keyword">if</span> (loading) <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;loading&quot;</span>&gt;</span>Loading movies...<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+  <span class="hljs-keyword">if</span> (error) <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;error&quot;</span>&gt;</span>Error: {error}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
 
-  return (
-    &lt;div className=&quot;App&quot;&gt;
-      &lt;h1&gt;🎬 Movie Buzz&lt;/h1&gt;
-      &lt;MoviesList movies={movies} /&gt;
-    &lt;/div&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;App&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>🎬 Movie Buzz<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">MoviesList</span> <span class="hljs-attr">movies</span>=<span class="hljs-string">{movies}</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 </code></pre>
@@ -628,38 +632,38 @@ function App() {
 <h2 id="implementing-create-in-react" tabindex="-1">Implementing CREATE in React</h2>
 <p>Now let's add the ability to create new movies.</p>
 <p><strong>Step 1: Implement create in movieService.js</strong></p>
-<pre><code class="language-javascript">create: async (movieData) =&gt; {
-  // TODO: Implement POST request to /api/movies
-  // TODO: Set Content-Type header to application/json
-  // TODO: Send movieData in body as JSON
-  // TODO: Use handleResponse helper
+<pre class="hljs"><code><span class="hljs-attr">create</span>: <span class="hljs-title function_">async</span> (movieData) =&gt; {
+  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Implement POST request to /api/movies</span>
+  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set Content-Type header to application/json</span>
+  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Send movieData in body as JSON</span>
+  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Use handleResponse helper</span>
 },
 </code></pre>
 <p><strong>Step 2: Update MovieForm Component</strong></p>
-<pre><code class="language-javascript">const handleSubmit = async (e) =&gt; {
-  e.preventDefault();
+<pre class="hljs"><code><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleSubmit</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">e</span>) =&gt; {
+  e.<span class="hljs-title function_">preventDefault</span>();
   
-  try {
-    setSubmitting(true);
-    // TODO: Call movieService.create with form data
-    // TODO: On success, call onSuccess callback
-    // TODO: Reset form
-  } catch (err) {
-    setError(err.message);
-  } finally {
-    setSubmitting(false);
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-title function_">setSubmitting</span>(<span class="hljs-literal">true</span>);
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Call movieService.create with form data</span>
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> On success, call onSuccess callback</span>
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Reset form</span>
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-title function_">setError</span>(err.<span class="hljs-property">message</span>);
+  } <span class="hljs-keyword">finally</span> {
+    <span class="hljs-title function_">setSubmitting</span>(<span class="hljs-literal">false</span>);
   }
 };
 </code></pre>
 <p><strong>Step 3: Connect Form to App</strong></p>
-<pre><code class="language-javascript">const handleAddMovie = async (movieData) =&gt; {
-  try {
-    // TODO: Call movieService.create
-    // TODO: Refresh movie list
-    // TODO: Show success message
-    // TODO: Close form
-  } catch (err) {
-    setError(err.message);
+<pre class="hljs"><code><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleAddMovie</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">movieData</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Call movieService.create</span>
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Refresh movie list</span>
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Show success message</span>
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Close form</span>
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-title function_">setError</span>(err.<span class="hljs-property">message</span>);
   }
 };
 </code></pre>
@@ -667,37 +671,37 @@ function App() {
 <h2 id="implementing-update-in-react" tabindex="-1">Implementing UPDATE in React</h2>
 <p>Let's add edit functionality to our movies.</p>
 <p><strong>Step 1: Implement update in movieService.js</strong></p>
-<pre><code class="language-javascript">update: async (id, movieData) =&gt; {
-  // TODO: Implement PUT request to /api/movies/:id
-  // TODO: Send updated data in body
-  // TODO: Use handleResponse helper
+<pre class="hljs"><code><span class="hljs-attr">update</span>: <span class="hljs-title function_">async</span> (id, movieData) =&gt; {
+  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Implement PUT request to /api/movies/:id</span>
+  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Send updated data in body</span>
+  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Use handleResponse helper</span>
 },
 </code></pre>
 <p><strong>Step 2: Add Edit Mode to MovieBlock</strong></p>
-<pre><code class="language-javascript">function MovieBlock({ movie, onEdit, onDelete }) {
-  const [isEditing, setIsEditing] = useState(false);
+<pre class="hljs"><code><span class="hljs-keyword">function</span> <span class="hljs-title function_">MovieBlock</span>(<span class="hljs-params">{ movie, onEdit, onDelete }</span>) {
+  <span class="hljs-keyword">const</span> [isEditing, setIsEditing] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">false</span>);
 
-  const handleEdit = () =&gt; {
-    // TODO: Set editing mode
-    // TODO: Call onEdit with movie data
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleEdit</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set editing mode</span>
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Call onEdit with movie data</span>
   };
 
-  return (
-    &lt;div className=&quot;movie-block&quot;&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;movie-block&quot;</span>&gt;</span>
       {/* Movie display */}
-      &lt;button onClick={handleEdit}&gt;Edit&lt;/button&gt;
-    &lt;/div&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handleEdit}</span>&gt;</span>Edit<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 </code></pre>
 <p><strong>Step 3: Handle Update in App</strong></p>
-<pre><code class="language-javascript">const handleUpdateMovie = async (id, movieData) =&gt; {
-  try {
-    // TODO: Call movieService.update
-    // TODO: Update movie in state
-    // TODO: Show success message
-  } catch (err) {
-    setError(err.message);
+<pre class="hljs"><code><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleUpdateMovie</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">id, movieData</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Call movieService.update</span>
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Update movie in state</span>
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Show success message</span>
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-title function_">setError</span>(err.<span class="hljs-property">message</span>);
   }
 };
 </code></pre>
@@ -705,33 +709,33 @@ function App() {
 <h2 id="implementing-delete-in-react" tabindex="-1">Implementing DELETE in React</h2>
 <p>Finally, let's add delete functionality.</p>
 <p><strong>Step 1: Implement delete in movieService.js</strong></p>
-<pre><code class="language-javascript">delete: async (id) =&gt; {
-  // TODO: Implement DELETE request to /api/movies/:id
-  // TODO: Use handleResponse helper
+<pre class="hljs"><code><span class="hljs-attr">delete</span>: <span class="hljs-title function_">async</span> (id) =&gt; {
+  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Implement DELETE request to /api/movies/:id</span>
+  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Use handleResponse helper</span>
 },
 </code></pre>
 <p><strong>Step 2: Add Delete Confirmation</strong></p>
-<pre><code class="language-javascript">function DeleteConfirmation({ movie, onConfirm, onCancel }) {
-  return (
-    &lt;div className=&quot;modal&quot;&gt;
-      &lt;div className=&quot;modal-content&quot;&gt;
-        &lt;h3&gt;Delete Movie?&lt;/h3&gt;
-        &lt;p&gt;Are you sure you want to delete &quot;{movie.name}&quot;?&lt;/p&gt;
-        &lt;button onClick={() =&gt; onConfirm(movie._id)}&gt;Yes, Delete&lt;/button&gt;
-        &lt;button onClick={onCancel}&gt;Cancel&lt;/button&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
+<pre class="hljs"><code><span class="hljs-keyword">function</span> <span class="hljs-title function_">DeleteConfirmation</span>(<span class="hljs-params">{ movie, onConfirm, onCancel }</span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;modal&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;modal-content&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Delete Movie?<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Are you sure you want to delete &quot;{movie.name}&quot;?<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> onConfirm(movie._id)}&gt;Yes, Delete<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{onCancel}</span>&gt;</span>Cancel<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 </code></pre>
 <p><strong>Step 3: Handle Delete in App</strong></p>
-<pre><code class="language-javascript">const handleDeleteMovie = async (id) =&gt; {
-  try {
-    // TODO: Call movieService.delete
-    // TODO: Remove movie from state
-    // TODO: Show success message
-  } catch (err) {
-    setError(err.message);
+<pre class="hljs"><code><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleDeleteMovie</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">id</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Call movieService.delete</span>
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Remove movie from state</span>
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Show success message</span>
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-title function_">setError</span>(err.<span class="hljs-property">message</span>);
   }
 };
 </code></pre>
@@ -740,172 +744,172 @@ function App() {
 <p><strong>Note</strong>: This section describes an <strong>optional advanced feature</strong>. If you haven't implemented the optional advanced search feature, you can skip this section. Your Movie Buzz application is complete without it!</p>
 <p>If you've completed the <strong>week_optional_search_feature</strong> module, now is the perfect time to integrate it with your live API data!</p>
 <h3 id="enhanced-app-with-searchfiltersort-optional" tabindex="-1">Enhanced App with Search/Filter/Sort (Optional)</h3>
-<pre><code class="language-javascript">// App.js - Complete integration with Supplemental Search Feature
-import React, { useState, useEffect } from 'react';
-import MoviesList from './components/MoviesList';
-import SearchBar from './components/SearchBar';  // From supplemental module
-import FilterControls from './components/FilterControls';  // From supplemental module
-import movieService from './services/movieService';
+<pre class="hljs"><code><span class="hljs-comment">// App.js - Complete integration with Supplemental Search Feature</span>
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { useState, useEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">MoviesList</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./components/MoviesList&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">SearchBar</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./components/SearchBar&#x27;</span>;  <span class="hljs-comment">// From supplemental module</span>
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">FilterControls</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./components/FilterControls&#x27;</span>;  <span class="hljs-comment">// From supplemental module</span>
+<span class="hljs-keyword">import</span> movieService <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./services/movieService&#x27;</span>;
 
-function App() {
-  // Core state
-  const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-comment">// Core state</span>
+  <span class="hljs-keyword">const</span> [movies, setMovies] = <span class="hljs-title function_">useState</span>([]);
+  <span class="hljs-keyword">const</span> [loading, setLoading] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">true</span>);
   
-  // Search and filter state (from Week 4)
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedGenre, setSelectedGenre] = useState('all');
-  const [selectedRating, setSelectedRating] = useState('all');
-  const [sortBy, setSortBy] = useState('name');
+  <span class="hljs-comment">// Search and filter state (from Week 4)</span>
+  <span class="hljs-keyword">const</span> [searchTerm, setSearchTerm] = <span class="hljs-title function_">useState</span>(<span class="hljs-string">&#x27;&#x27;</span>);
+  <span class="hljs-keyword">const</span> [selectedGenre, setSelectedGenre] = <span class="hljs-title function_">useState</span>(<span class="hljs-string">&#x27;all&#x27;</span>);
+  <span class="hljs-keyword">const</span> [selectedRating, setSelectedRating] = <span class="hljs-title function_">useState</span>(<span class="hljs-string">&#x27;all&#x27;</span>);
+  <span class="hljs-keyword">const</span> [sortBy, setSortBy] = <span class="hljs-title function_">useState</span>(<span class="hljs-string">&#x27;name&#x27;</span>);
   
-  // Load movies from API
-  useEffect(() =&gt; {
-    fetchMovies();
+  <span class="hljs-comment">// Load movies from API</span>
+  <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-title function_">fetchMovies</span>();
   }, []);
   
-  const fetchMovies = async () =&gt; {
-    try {
-      setLoading(true);
-      const data = await movieService.getAll();
-      setMovies(data);
-    } catch (err) {
-      console.error('Failed to load movies:', err);
-    } finally {
-      setLoading(false);
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">fetchMovies</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">true</span>);
+      <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> movieService.<span class="hljs-title function_">getAll</span>();
+      <span class="hljs-title function_">setMovies</span>(data);
+    } <span class="hljs-keyword">catch</span> (err) {
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Failed to load movies:&#x27;</span>, err);
+    } <span class="hljs-keyword">finally</span> {
+      <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">false</span>);
     }
   };
   
-  // Filter and sort movies
-  const getFilteredMovies = () =&gt; {
-    let filtered = [...movies];
+  <span class="hljs-comment">// Filter and sort movies</span>
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">getFilteredMovies</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">let</span> filtered = [...movies];
     
-    // Search (handle array fields like stars)
-    if (searchTerm) {
-      filtered = filtered.filter(movie =&gt; {
-        const term = searchTerm.toLowerCase();
-        return (
-          movie.name.toLowerCase().includes(term) ||
-          movie.director.toLowerCase().includes(term) ||
-          (Array.isArray(movie.stars) &amp;&amp; 
-           movie.stars.some(star =&gt; star.toLowerCase().includes(term)))
+    <span class="hljs-comment">// Search (handle array fields like stars)</span>
+    <span class="hljs-keyword">if</span> (searchTerm) {
+      filtered = filtered.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">movie</span> =&gt;</span> {
+        <span class="hljs-keyword">const</span> term = searchTerm.<span class="hljs-title function_">toLowerCase</span>();
+        <span class="hljs-keyword">return</span> (
+          movie.<span class="hljs-property">name</span>.<span class="hljs-title function_">toLowerCase</span>().<span class="hljs-title function_">includes</span>(term) ||
+          movie.<span class="hljs-property">director</span>.<span class="hljs-title function_">toLowerCase</span>().<span class="hljs-title function_">includes</span>(term) ||
+          (<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(movie.<span class="hljs-property">stars</span>) &amp;&amp; 
+           movie.<span class="hljs-property">stars</span>.<span class="hljs-title function_">some</span>(<span class="hljs-function"><span class="hljs-params">star</span> =&gt;</span> star.<span class="hljs-title function_">toLowerCase</span>().<span class="hljs-title function_">includes</span>(term)))
         );
       });
     }
     
-    // Filter by genre (MongoDB returns arrays)
-    if (selectedGenre !== 'all') {
-      filtered = filtered.filter(movie =&gt;
-        Array.isArray(movie.genre) &amp;&amp; 
-        movie.genre.some(g =&gt; g.toLowerCase() === selectedGenre.toLowerCase())
+    <span class="hljs-comment">// Filter by genre (MongoDB returns arrays)</span>
+    <span class="hljs-keyword">if</span> (selectedGenre !== <span class="hljs-string">&#x27;all&#x27;</span>) {
+      filtered = filtered.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">movie</span> =&gt;</span>
+        <span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(movie.<span class="hljs-property">genre</span>) &amp;&amp; 
+        movie.<span class="hljs-property">genre</span>.<span class="hljs-title function_">some</span>(<span class="hljs-function"><span class="hljs-params">g</span> =&gt;</span> g.<span class="hljs-title function_">toLowerCase</span>() === selectedGenre.<span class="hljs-title function_">toLowerCase</span>())
       );
     }
     
-    // Filter by rating
-    if (selectedRating !== 'all') {
-      filtered = filtered.filter(movie =&gt; movie.rating === selectedRating);
+    <span class="hljs-comment">// Filter by rating</span>
+    <span class="hljs-keyword">if</span> (selectedRating !== <span class="hljs-string">&#x27;all&#x27;</span>) {
+      filtered = filtered.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">movie</span> =&gt;</span> movie.<span class="hljs-property">rating</span> === selectedRating);
     }
     
-    // Sort
-    filtered.sort((a, b) =&gt; {
-      switch (sortBy) {
-        case 'name':
-          return a.name.localeCompare(b.name);
-        case 'year':
-          return b.year - a.year;
-        case 'rating':
-          return a.rating.localeCompare(b.rating);
-        case 'genre':
-          const genreA = a.genre?.[0] || '';
-          const genreB = b.genre?.[0] || '';
-          return genreA.localeCompare(genreB);
-        default:
-          return 0;
+    <span class="hljs-comment">// Sort</span>
+    filtered.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> {
+      <span class="hljs-keyword">switch</span> (sortBy) {
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;name&#x27;</span>:
+          <span class="hljs-keyword">return</span> a.<span class="hljs-property">name</span>.<span class="hljs-title function_">localeCompare</span>(b.<span class="hljs-property">name</span>);
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;year&#x27;</span>:
+          <span class="hljs-keyword">return</span> b.<span class="hljs-property">year</span> - a.<span class="hljs-property">year</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;rating&#x27;</span>:
+          <span class="hljs-keyword">return</span> a.<span class="hljs-property">rating</span>.<span class="hljs-title function_">localeCompare</span>(b.<span class="hljs-property">rating</span>);
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;genre&#x27;</span>:
+          <span class="hljs-keyword">const</span> genreA = a.<span class="hljs-property">genre</span>?.[<span class="hljs-number">0</span>] || <span class="hljs-string">&#x27;&#x27;</span>;
+          <span class="hljs-keyword">const</span> genreB = b.<span class="hljs-property">genre</span>?.[<span class="hljs-number">0</span>] || <span class="hljs-string">&#x27;&#x27;</span>;
+          <span class="hljs-keyword">return</span> genreA.<span class="hljs-title function_">localeCompare</span>(genreB);
+        <span class="hljs-attr">default</span>:
+          <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
       }
     });
     
-    return filtered;
+    <span class="hljs-keyword">return</span> filtered;
   };
   
-  const filteredMovies = getFilteredMovies();
+  <span class="hljs-keyword">const</span> filteredMovies = <span class="hljs-title function_">getFilteredMovies</span>();
   
-  return (
-    &lt;div className=&quot;app&quot;&gt;
-      &lt;h1&gt;🎬 Movie Buzz&lt;/h1&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>🎬 Movie Buzz<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
       
-      &lt;SearchBar 
-        searchTerm={searchTerm}
-        onSearchChange={setSearchTerm}
-      /&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">SearchBar</span> 
+        <span class="hljs-attr">searchTerm</span>=<span class="hljs-string">{searchTerm}</span>
+        <span class="hljs-attr">onSearchChange</span>=<span class="hljs-string">{setSearchTerm}</span>
+      /&gt;</span>
       
-      &lt;FilterControls
-        selectedGenre={selectedGenre}
-        selectedRating={selectedRating}
-        sortBy={sortBy}
-        onGenreChange={setSelectedGenre}
-        onRatingChange={setSelectedRating}
-        onSortChange={setSortBy}
-      /&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">FilterControls</span>
+        <span class="hljs-attr">selectedGenre</span>=<span class="hljs-string">{selectedGenre}</span>
+        <span class="hljs-attr">selectedRating</span>=<span class="hljs-string">{selectedRating}</span>
+        <span class="hljs-attr">sortBy</span>=<span class="hljs-string">{sortBy}</span>
+        <span class="hljs-attr">onGenreChange</span>=<span class="hljs-string">{setSelectedGenre}</span>
+        <span class="hljs-attr">onRatingChange</span>=<span class="hljs-string">{setSelectedRating}</span>
+        <span class="hljs-attr">onSortChange</span>=<span class="hljs-string">{setSortBy}</span>
+      /&gt;</span>
       
-      &lt;div className=&quot;results-info&quot;&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;results-info&quot;</span>&gt;</span>
         Showing {filteredMovies.length} of {movies.length} movies
-      &lt;/div&gt;
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
       
       {loading ? (
-        &lt;div&gt;Loading...&lt;/div&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Loading...<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
       ) : (
-        &lt;MoviesList movies={filteredMovies} /&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">MoviesList</span> <span class="hljs-attr">movies</span>=<span class="hljs-string">{filteredMovies}</span> /&gt;</span>
       )}
-    &lt;/div&gt;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 </code></pre>
 <h3 id="key-points-for-array-fields-optional-feature" tabindex="-1">Key Points for Array Fields (Optional Feature)</h3>
 <p><strong>Note</strong>: This applies if you're using the supplemental search feature.</p>
 <p>MongoDB stores <code>genre</code> and <code>stars</code> as arrays. Always check before using array methods:</p>
-<pre><code class="language-javascript">// Safe array handling
-const matchesGenre = Array.isArray(movie.genre) &amp;&amp;
-  movie.genre.some(g =&gt; g === selectedGenre);
+<pre class="hljs"><code><span class="hljs-comment">// Safe array handling</span>
+<span class="hljs-keyword">const</span> matchesGenre = <span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(movie.<span class="hljs-property">genre</span>) &amp;&amp;
+  movie.<span class="hljs-property">genre</span>.<span class="hljs-title function_">some</span>(<span class="hljs-function"><span class="hljs-params">g</span> =&gt;</span> g === selectedGenre);
 
-// Display arrays properly
-&lt;p&gt;Genres: {movie.genre?.join(', ') || 'None'}&lt;/p&gt;
-&lt;p&gt;Stars: {movie.stars?.join(', ') || 'None'}&lt;/p&gt;
+<span class="hljs-comment">// Display arrays properly</span>
+<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Genres: {movie.genre?.join(&#x27;, &#x27;) || &#x27;None&#x27;}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span>
+<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Stars: {movie.stars?.join(&#x27;, &#x27;) || &#x27;None&#x27;}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span>
 </code></pre>
 <p>For complete implementation details, see the <strong>week_optional_search_feature</strong> module.</p>
 <hr>
 <h2 id="error-handling-and-loading-states" tabindex="-1">Error Handling and Loading States</h2>
 <p>Professional applications need proper error handling and loading indicators.</p>
 <p><strong>Loading Component:</strong></p>
-<pre><code class="language-javascript">function LoadingSpinner() {
-  return (
-    &lt;div className=&quot;spinner-container&quot;&gt;
-      &lt;div className=&quot;spinner&quot;&gt;&lt;/div&gt;
-      &lt;p&gt;Loading...&lt;/p&gt;
-    &lt;/div&gt;
+<pre class="hljs"><code><span class="hljs-keyword">function</span> <span class="hljs-title function_">LoadingSpinner</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;spinner-container&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;spinner&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Loading...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 </code></pre>
 <p><strong>Error Display Component:</strong></p>
-<pre><code class="language-javascript">function ErrorMessage({ error, onRetry }) {
-  return (
-    &lt;div className=&quot;error-container&quot;&gt;
-      &lt;h3&gt;⚠️ Something went wrong&lt;/h3&gt;
-      &lt;p&gt;{error}&lt;/p&gt;
-      &lt;button onClick={onRetry}&gt;Try Again&lt;/button&gt;
-    &lt;/div&gt;
+<pre class="hljs"><code><span class="hljs-keyword">function</span> <span class="hljs-title function_">ErrorMessage</span>(<span class="hljs-params">{ error, onRetry }</span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;error-container&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>⚠️ Something went wrong<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{error}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{onRetry}</span>&gt;</span>Try Again<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 </code></pre>
 <p><strong>Success Notification:</strong></p>
-<pre><code class="language-javascript">function SuccessMessage({ message, onClose }) {
-  useEffect(() =&gt; {
-    const timer = setTimeout(onClose, 3000);
-    return () =&gt; clearTimeout(timer);
+<pre class="hljs"><code><span class="hljs-keyword">function</span> <span class="hljs-title function_">SuccessMessage</span>(<span class="hljs-params">{ message, onClose }</span>) {
+  <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-keyword">const</span> timer = <span class="hljs-built_in">setTimeout</span>(onClose, <span class="hljs-number">3000</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">clearTimeout</span>(timer);
   }, [onClose]);
 
-  return (
-    &lt;div className=&quot;success-message&quot;&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;success-message&quot;</span>&gt;</span>
       ✅ {message}
-    &lt;/div&gt;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 </code></pre>
@@ -913,10 +917,10 @@ const matchesGenre = Array.isArray(movie.genre) &amp;&amp;
 <h2 id="environment-variables" tabindex="-1">Environment Variables</h2>
 <p>Use environment variables to manage different configurations.</p>
 <p><strong>Create <code>.env</code> file in React root:</strong></p>
-<pre><code>REACT_APP_API_URL=http://localhost:4000/api
+<pre class="hljs"><code>REACT_APP_API_URL=http://localhost:4000/api
 </code></pre>
 <p><strong>Access in code:</strong></p>
-<pre><code class="language-javascript">const API_URL = process.env.REACT_APP_API_URL || '/api';
+<pre class="hljs"><code><span class="hljs-keyword">const</span> <span class="hljs-variable constant_">API_URL</span> = process.<span class="hljs-property">env</span>.<span class="hljs-property">REACT_APP_API_URL</span> || <span class="hljs-string">&#x27;/api&#x27;</span>;
 </code></pre>
 <p><strong>Important:</strong></p>
 <ul>
@@ -1068,5 +1072,6 @@ const matchesGenre = Array.isArray(movie.genre) &amp;&amp;
 </div>
 <script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
 <script src="../assets/animations.js"></script>
+<script src="../assets/search.js"></script>
 </body>
 </html>

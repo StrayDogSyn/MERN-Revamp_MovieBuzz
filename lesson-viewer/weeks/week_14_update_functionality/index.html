@@ -14,6 +14,10 @@
 <div class="layout">
 <nav class="sidebar" aria-label="Course weeks">
 <div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="sidebar-search">
+<input type="search" id="sidebar-search-input" class="search-input" placeholder="&#xf002; Search lessons…" aria-label="Search lessons">
+<div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+</div>
 <div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
 <a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
 <a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
@@ -108,238 +112,238 @@
 <p>Before diving into the full implementation, let's explore some simple, focused examples to build our understanding of UPDATE operations step by step.</p>
 <h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-put-vs-patch-concepts" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>PUT vs PATCH Concepts</h3>
 <p>Let's understand the difference between complete replacement (PUT) and partial updates (PATCH):</p>
-<pre><code class="language-javascript">// PUT - Complete replacement (replace entire resource)
-app.put('/api/movies/:id', (req, res) =&gt; {
-  const { id } = req.params;
-  const movieData = req.body;
+<pre class="hljs"><code><span class="hljs-comment">// PUT - Complete replacement (replace entire resource)</span>
+app.<span class="hljs-title function_">put</span>(<span class="hljs-string">&#x27;/api/movies/:id&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> { id } = req.<span class="hljs-property">params</span>;
+  <span class="hljs-keyword">const</span> movieData = req.<span class="hljs-property">body</span>;
 
-  console.log(`PUT request for movie ${id}`);
-  console.log('Complete new data:', movieData);
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`PUT request for movie <span class="hljs-subst">${id}</span>`</span>);
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Complete new data:&#x27;</span>, movieData);
 
-  // PUT expects ALL fields to be provided
-  const requiredFields = ['name', 'year', 'rating', 'description', 'genre', 'director'];
-  const missingFields = requiredFields.filter(field =&gt; !movieData[field]);
+  <span class="hljs-comment">// PUT expects ALL fields to be provided</span>
+  <span class="hljs-keyword">const</span> requiredFields = [<span class="hljs-string">&#x27;name&#x27;</span>, <span class="hljs-string">&#x27;year&#x27;</span>, <span class="hljs-string">&#x27;rating&#x27;</span>, <span class="hljs-string">&#x27;description&#x27;</span>, <span class="hljs-string">&#x27;genre&#x27;</span>, <span class="hljs-string">&#x27;director&#x27;</span>];
+  <span class="hljs-keyword">const</span> missingFields = requiredFields.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">field</span> =&gt;</span> !movieData[field]);
 
-  if (missingFields.length &gt; 0) {
-    return res.status(400).json({
-      success: false,
-      error: 'PUT requires all fields',
-      missingFields: missingFields
+  <span class="hljs-keyword">if</span> (missingFields.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;PUT requires all fields&#x27;</span>,
+      <span class="hljs-attr">missingFields</span>: missingFields
     });
   }
 
-  res.json({
-    success: true,
-    message: 'Movie would be completely replaced',
-    operation: 'PUT - Complete replacement',
-    data: movieData
+  res.<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Movie would be completely replaced&#x27;</span>,
+    <span class="hljs-attr">operation</span>: <span class="hljs-string">&#x27;PUT - Complete replacement&#x27;</span>,
+    <span class="hljs-attr">data</span>: movieData
   });
 });
 
-// PATCH - Partial update (modify specific fields only)
-app.patch('/api/movies/:id', (req, res) =&gt; {
-  const { id } = req.params;
-  const updateFields = req.body;
+<span class="hljs-comment">// PATCH - Partial update (modify specific fields only)</span>
+app.<span class="hljs-title function_">patch</span>(<span class="hljs-string">&#x27;/api/movies/:id&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> { id } = req.<span class="hljs-property">params</span>;
+  <span class="hljs-keyword">const</span> updateFields = req.<span class="hljs-property">body</span>;
 
-  console.log(`PATCH request for movie ${id}`);
-  console.log('Fields to update:', Object.keys(updateFields));
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`PATCH request for movie <span class="hljs-subst">${id}</span>`</span>);
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Fields to update:&#x27;</span>, <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(updateFields));
 
-  // PATCH accepts any subset of fields
-  res.json({
-    success: true,
-    message: 'Movie would be partially updated',
-    operation: 'PATCH - Partial update',
-    fieldsToUpdate: Object.keys(updateFields),
-    data: updateFields
+  <span class="hljs-comment">// PATCH accepts any subset of fields</span>
+  res.<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Movie would be partially updated&#x27;</span>,
+    <span class="hljs-attr">operation</span>: <span class="hljs-string">&#x27;PATCH - Partial update&#x27;</span>,
+    <span class="hljs-attr">fieldsToUpdate</span>: <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(updateFields),
+    <span class="hljs-attr">data</span>: updateFields
   });
 });
 </code></pre>
 <p><strong>Try It Out:</strong> Send both PUT and PATCH requests with different amounts of data to see how they behave differently.</p>
 <h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-finding-and-updating-documents" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Finding and Updating Documents</h3>
 <p>Let's simulate finding and updating data using an in-memory array:</p>
-<pre><code class="language-javascript">// Sample data
-let movies = [
-  { id: 1, name: 'The Matrix', year: 1999, rating: 'R' },
-  { id: 2, name: 'Inception', year: 2010, rating: 'PG-13' },
-  { id: 3, name: 'Toy Story', year: 1995, rating: 'G' }
+<pre class="hljs"><code><span class="hljs-comment">// Sample data</span>
+<span class="hljs-keyword">let</span> movies = [
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;The Matrix&#x27;</span>, <span class="hljs-attr">year</span>: <span class="hljs-number">1999</span>, <span class="hljs-attr">rating</span>: <span class="hljs-string">&#x27;R&#x27;</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Inception&#x27;</span>, <span class="hljs-attr">year</span>: <span class="hljs-number">2010</span>, <span class="hljs-attr">rating</span>: <span class="hljs-string">&#x27;PG-13&#x27;</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Toy Story&#x27;</span>, <span class="hljs-attr">year</span>: <span class="hljs-number">1995</span>, <span class="hljs-attr">rating</span>: <span class="hljs-string">&#x27;G&#x27;</span> }
 ];
 
-// Find and update endpoint
-app.put('/api/movies/:id', (req, res) =&gt; {
-  const movieId = parseInt(req.params.id);
-  const updateData = req.body;
+<span class="hljs-comment">// Find and update endpoint</span>
+app.<span class="hljs-title function_">put</span>(<span class="hljs-string">&#x27;/api/movies/:id&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> movieId = <span class="hljs-built_in">parseInt</span>(req.<span class="hljs-property">params</span>.<span class="hljs-property">id</span>);
+  <span class="hljs-keyword">const</span> updateData = req.<span class="hljs-property">body</span>;
 
-  // Step 1: Find the movie
-  const movieIndex = movies.findIndex(movie =&gt; movie.id === movieId);
+  <span class="hljs-comment">// Step 1: Find the movie</span>
+  <span class="hljs-keyword">const</span> movieIndex = movies.<span class="hljs-title function_">findIndex</span>(<span class="hljs-function"><span class="hljs-params">movie</span> =&gt;</span> movie.<span class="hljs-property">id</span> === movieId);
 
-  if (movieIndex === -1) {
-    return res.status(404).json({
-      success: false,
-      error: 'Movie not found',
-      searchedId: movieId
+  <span class="hljs-keyword">if</span> (movieIndex === -<span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Movie not found&#x27;</span>,
+      <span class="hljs-attr">searchedId</span>: movieId
     });
   }
 
-  // Step 2: Get the current movie
-  const currentMovie = movies[movieIndex];
-  console.log('Found movie:', currentMovie);
+  <span class="hljs-comment">// Step 2: Get the current movie</span>
+  <span class="hljs-keyword">const</span> currentMovie = movies[movieIndex];
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Found movie:&#x27;</span>, currentMovie);
 
-  // Step 3: Update the movie
-  const updatedMovie = {
-    ...currentMovie,  // Keep existing data
-    ...updateData,    // Override with new data
-    updatedAt: new Date().toISOString()
+  <span class="hljs-comment">// Step 3: Update the movie</span>
+  <span class="hljs-keyword">const</span> updatedMovie = {
+    ...currentMovie,  <span class="hljs-comment">// Keep existing data</span>
+    ...updateData,    <span class="hljs-comment">// Override with new data</span>
+    <span class="hljs-attr">updatedAt</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">toISOString</span>()
   };
 
-  // Step 4: Replace in array
+  <span class="hljs-comment">// Step 4: Replace in array</span>
   movies[movieIndex] = updatedMovie;
 
-  res.json({
-    success: true,
-    message: 'Movie updated successfully',
-    before: currentMovie,
-    after: updatedMovie
+  res.<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Movie updated successfully&#x27;</span>,
+    <span class="hljs-attr">before</span>: currentMovie,
+    <span class="hljs-attr">after</span>: updatedMovie
   });
 });
 </code></pre>
 <p><strong>Try It Out:</strong> Update different movies and see how the before/after comparison shows what changed.</p>
 <h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-partial-updates-with-validation" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Partial Updates with Validation</h3>
 <p>Let's add validation during updates, checking only the fields that are being updated:</p>
-<pre><code class="language-javascript">app.patch('/api/movies/:id', (req, res) =&gt; {
-  const movieId = parseInt(req.params.id);
-  const updateFields = req.body;
+<pre class="hljs"><code>app.<span class="hljs-title function_">patch</span>(<span class="hljs-string">&#x27;/api/movies/:id&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> movieId = <span class="hljs-built_in">parseInt</span>(req.<span class="hljs-property">params</span>.<span class="hljs-property">id</span>);
+  <span class="hljs-keyword">const</span> updateFields = req.<span class="hljs-property">body</span>;
 
-  // Find movie
-  const movieIndex = movies.findIndex(movie =&gt; movie.id === movieId);
-  if (movieIndex === -1) {
-    return res.status(404).json({
-      success: false,
-      error: 'Movie not found'
+  <span class="hljs-comment">// Find movie</span>
+  <span class="hljs-keyword">const</span> movieIndex = movies.<span class="hljs-title function_">findIndex</span>(<span class="hljs-function"><span class="hljs-params">movie</span> =&gt;</span> movie.<span class="hljs-property">id</span> === movieId);
+  <span class="hljs-keyword">if</span> (movieIndex === -<span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Movie not found&#x27;</span>
     });
   }
 
-  const currentMovie = movies[movieIndex];
-  const validationErrors = [];
+  <span class="hljs-keyword">const</span> currentMovie = movies[movieIndex];
+  <span class="hljs-keyword">const</span> validationErrors = [];
 
-  // Validate only the fields being updated
-  if (updateFields.hasOwnProperty('year')) {
-    if (isNaN(updateFields.year) || updateFields.year &lt; 1800) {
-      validationErrors.push('Year must be a valid number after 1800');
+  <span class="hljs-comment">// Validate only the fields being updated</span>
+  <span class="hljs-keyword">if</span> (updateFields.<span class="hljs-title function_">hasOwnProperty</span>(<span class="hljs-string">&#x27;year&#x27;</span>)) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">isNaN</span>(updateFields.<span class="hljs-property">year</span>) || updateFields.<span class="hljs-property">year</span> &lt; <span class="hljs-number">1800</span>) {
+      validationErrors.<span class="hljs-title function_">push</span>(<span class="hljs-string">&#x27;Year must be a valid number after 1800&#x27;</span>);
     }
   }
 
-  if (updateFields.hasOwnProperty('rating')) {
-    const validRatings = ['G', 'PG', 'PG-13', 'R', 'NC-17'];
-    if (!validRatings.includes(updateFields.rating)) {
-      validationErrors.push('Rating must be one of: ' + validRatings.join(', '));
+  <span class="hljs-keyword">if</span> (updateFields.<span class="hljs-title function_">hasOwnProperty</span>(<span class="hljs-string">&#x27;rating&#x27;</span>)) {
+    <span class="hljs-keyword">const</span> validRatings = [<span class="hljs-string">&#x27;G&#x27;</span>, <span class="hljs-string">&#x27;PG&#x27;</span>, <span class="hljs-string">&#x27;PG-13&#x27;</span>, <span class="hljs-string">&#x27;R&#x27;</span>, <span class="hljs-string">&#x27;NC-17&#x27;</span>];
+    <span class="hljs-keyword">if</span> (!validRatings.<span class="hljs-title function_">includes</span>(updateFields.<span class="hljs-property">rating</span>)) {
+      validationErrors.<span class="hljs-title function_">push</span>(<span class="hljs-string">&#x27;Rating must be one of: &#x27;</span> + validRatings.<span class="hljs-title function_">join</span>(<span class="hljs-string">&#x27;, &#x27;</span>));
     }
   }
 
-  if (updateFields.hasOwnProperty('name')) {
-    if (!updateFields.name || updateFields.name.trim().length === 0) {
-      validationErrors.push('Name cannot be empty');
+  <span class="hljs-keyword">if</span> (updateFields.<span class="hljs-title function_">hasOwnProperty</span>(<span class="hljs-string">&#x27;name&#x27;</span>)) {
+    <span class="hljs-keyword">if</span> (!updateFields.<span class="hljs-property">name</span> || updateFields.<span class="hljs-property">name</span>.<span class="hljs-title function_">trim</span>().<span class="hljs-property">length</span> === <span class="hljs-number">0</span>) {
+      validationErrors.<span class="hljs-title function_">push</span>(<span class="hljs-string">&#x27;Name cannot be empty&#x27;</span>);
     }
   }
 
-  // If validation failed, return errors
-  if (validationErrors.length &gt; 0) {
-    return res.status(400).json({
-      success: false,
-      error: 'Validation failed',
-      details: validationErrors
+  <span class="hljs-comment">// If validation failed, return errors</span>
+  <span class="hljs-keyword">if</span> (validationErrors.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Validation failed&#x27;</span>,
+      <span class="hljs-attr">details</span>: validationErrors
     });
   }
 
-  // Update only the provided fields
-  const updatedMovie = {
+  <span class="hljs-comment">// Update only the provided fields</span>
+  <span class="hljs-keyword">const</span> updatedMovie = {
     ...currentMovie,
     ...updateFields,
-    updatedAt: new Date().toISOString()
+    <span class="hljs-attr">updatedAt</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">toISOString</span>()
   };
 
   movies[movieIndex] = updatedMovie;
 
-  res.json({
-    success: true,
-    message: 'Movie partially updated',
-    fieldsUpdated: Object.keys(updateFields),
-    data: updatedMovie
+  res.<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Movie partially updated&#x27;</span>,
+    <span class="hljs-attr">fieldsUpdated</span>: <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(updateFields),
+    <span class="hljs-attr">data</span>: updatedMovie
   });
 });
 </code></pre>
 <p><strong>Try It Out:</strong> Try updating just the rating, just the year, or multiple fields at once to see selective validation in action.</p>
 <h3 class="step-heading" style="--organic-tilt:0deg" id="4step-4-validation-during-updates" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Validation During Updates</h3>
 <p>Let's see how to handle edge cases and provide detailed feedback:</p>
-<pre><code class="language-javascript">app.put('/api/movies/:id', (req, res) =&gt; {
-  try {
-    const movieId = parseInt(req.params.id);
-    const updateData = req.body;
+<pre class="hljs"><code>app.<span class="hljs-title function_">put</span>(<span class="hljs-string">&#x27;/api/movies/:id&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> movieId = <span class="hljs-built_in">parseInt</span>(req.<span class="hljs-property">params</span>.<span class="hljs-property">id</span>);
+    <span class="hljs-keyword">const</span> updateData = req.<span class="hljs-property">body</span>;
 
-    // Validate ID format
-    if (isNaN(movieId) || movieId &lt; 1) {
-      return res.status(400).json({
-        success: false,
-        error: 'Invalid movie ID format',
-        hint: 'ID must be a positive number'
+    <span class="hljs-comment">// Validate ID format</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">isNaN</span>(movieId) || movieId &lt; <span class="hljs-number">1</span>) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Invalid movie ID format&#x27;</span>,
+        <span class="hljs-attr">hint</span>: <span class="hljs-string">&#x27;ID must be a positive number&#x27;</span>
       });
     }
 
-    // Check if request body is empty
-    if (!updateData || Object.keys(updateData).length === 0) {
-      return res.status(400).json({
-        success: false,
-        error: 'Update data is required',
-        hint: 'Send JSON data with fields to update'
+    <span class="hljs-comment">// Check if request body is empty</span>
+    <span class="hljs-keyword">if</span> (!updateData || <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(updateData).<span class="hljs-property">length</span> === <span class="hljs-number">0</span>) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Update data is required&#x27;</span>,
+        <span class="hljs-attr">hint</span>: <span class="hljs-string">&#x27;Send JSON data with fields to update&#x27;</span>
       });
     }
 
-    // Find movie
-    const movieIndex = movies.findIndex(movie =&gt; movie.id === movieId);
-    if (movieIndex === -1) {
-      return res.status(404).json({
-        success: false,
-        error: 'Movie not found',
-        availableIds: movies.map(m =&gt; m.id)
+    <span class="hljs-comment">// Find movie</span>
+    <span class="hljs-keyword">const</span> movieIndex = movies.<span class="hljs-title function_">findIndex</span>(<span class="hljs-function"><span class="hljs-params">movie</span> =&gt;</span> movie.<span class="hljs-property">id</span> === movieId);
+    <span class="hljs-keyword">if</span> (movieIndex === -<span class="hljs-number">1</span>) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Movie not found&#x27;</span>,
+        <span class="hljs-attr">availableIds</span>: movies.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">m</span> =&gt;</span> m.<span class="hljs-property">id</span>)
       });
     }
 
-    const currentMovie = movies[movieIndex];
+    <span class="hljs-keyword">const</span> currentMovie = movies[movieIndex];
 
-    // Check if any data is actually changing
-    const changedFields = Object.keys(updateData).filter(key =&gt;
+    <span class="hljs-comment">// Check if any data is actually changing</span>
+    <span class="hljs-keyword">const</span> changedFields = <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(updateData).<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">key</span> =&gt;</span>
       currentMovie[key] !== updateData[key]
     );
 
-    if (changedFields.length === 0) {
-      return res.status(200).json({
-        success: true,
-        message: 'No changes detected',
-        data: currentMovie
+    <span class="hljs-keyword">if</span> (changedFields.<span class="hljs-property">length</span> === <span class="hljs-number">0</span>) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">200</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;No changes detected&#x27;</span>,
+        <span class="hljs-attr">data</span>: currentMovie
       });
     }
 
-    // Apply update
-    const updatedMovie = {
+    <span class="hljs-comment">// Apply update</span>
+    <span class="hljs-keyword">const</span> updatedMovie = {
       ...currentMovie,
       ...updateData,
-      updatedAt: new Date().toISOString()
+      <span class="hljs-attr">updatedAt</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">toISOString</span>()
     };
 
     movies[movieIndex] = updatedMovie;
 
-    res.json({
-      success: true,
-      message: `Successfully updated ${changedFields.length} field(s)`,
-      changedFields: changedFields,
-      data: updatedMovie
+    res.<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">message</span>: <span class="hljs-string">`Successfully updated <span class="hljs-subst">${changedFields.length}</span> field(s)`</span>,
+      <span class="hljs-attr">changedFields</span>: changedFields,
+      <span class="hljs-attr">data</span>: updatedMovie
     });
 
-  } catch (error) {
-    console.error('Update error:', error);
-    res.status(500).json({
-      success: false,
-      error: 'Internal server error',
-      message: 'Something went wrong during update'
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Update error:&#x27;</span>, error);
+    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Internal server error&#x27;</span>,
+      <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Something went wrong during update&#x27;</span>
     });
   }
 });
@@ -378,20 +382,20 @@ app.put('/api/movies/:id', (req, res) =&gt; {
 <ol>
 <li>
 <p><strong>Partial Update</strong>: Update specific fields only</p>
-<pre><code class="language-javascript">// Update only the rating and description
-{ rating: &quot;PG-13&quot;, description: &quot;Updated description&quot; }
+<pre class="hljs"><code><span class="hljs-comment">// Update only the rating and description</span>
+{ <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;PG-13&quot;</span>, <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;Updated description&quot;</span> }
 </code></pre>
 </li>
 <li>
 <p><strong>Complete Update</strong>: Replace entire document</p>
-<pre><code class="language-javascript">// Replace entire movie object
-{ name: &quot;New Name&quot;, year: 2024, rating: &quot;R&quot;, /* all fields */ }
+<pre class="hljs"><code><span class="hljs-comment">// Replace entire movie object</span>
+{ <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;New Name&quot;</span>, <span class="hljs-attr">year</span>: <span class="hljs-number">2024</span>, <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;R&quot;</span>, <span class="hljs-comment">/* all fields */</span> }
 </code></pre>
 </li>
 <li>
 <p><strong>Conditional Update</strong>: Update only if certain conditions are met</p>
-<pre><code class="language-javascript">// Update only if year is less than 2000
-Movie.updateOne({ _id: movieId, year: { $lt: 2000 } }, updateData)
+<pre class="hljs"><code><span class="hljs-comment">// Update only if year is less than 2000</span>
+<span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">updateOne</span>({ <span class="hljs-attr">_id</span>: movieId, <span class="hljs-attr">year</span>: { <span class="hljs-attr">$lt</span>: <span class="hljs-number">2000</span> } }, updateData)
 </code></pre>
 </li>
 </ol>
@@ -404,39 +408,39 @@ Why might partial updates be more efficient and safer than complete document rep
 <h2 id="mongoose-update-methods" tabindex="-1">Mongoose UPDATE Methods</h2>
 <p>Mongoose provides several methods for updating documents:</p>
 <h3 id="findbyidandupdate-vs-updateone" tabindex="-1">findByIdAndUpdate vs updateOne</h3>
-<pre><code class="language-javascript">// Method 1: findByIdAndUpdate (most common for single documents)
-const updatedMovie = await Movie.findByIdAndUpdate(
-  movieId,                    // Document ID
-  { rating: &quot;PG-13&quot; },       // Update data
+<pre class="hljs"><code><span class="hljs-comment">// Method 1: findByIdAndUpdate (most common for single documents)</span>
+<span class="hljs-keyword">const</span> updatedMovie = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findByIdAndUpdate</span>(
+  movieId,                    <span class="hljs-comment">// Document ID</span>
+  { <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;PG-13&quot;</span> },       <span class="hljs-comment">// Update data</span>
   { 
-    new: true,               // Return updated document
-    runValidators: true      // Run schema validation
+    <span class="hljs-attr">new</span>: <span class="hljs-literal">true</span>,               <span class="hljs-comment">// Return updated document</span>
+    <span class="hljs-attr">runValidators</span>: <span class="hljs-literal">true</span>      <span class="hljs-comment">// Run schema validation</span>
   }
 );
 
-// Method 2: updateOne (updates first matching document)
-const result = await Movie.updateOne(
-  { _id: movieId },          // Filter condition
-  { rating: &quot;PG-13&quot; },       // Update data
-  { runValidators: true }    // Options
+<span class="hljs-comment">// Method 2: updateOne (updates first matching document)</span>
+<span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">updateOne</span>(
+  { <span class="hljs-attr">_id</span>: movieId },          <span class="hljs-comment">// Filter condition</span>
+  { <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;PG-13&quot;</span> },       <span class="hljs-comment">// Update data</span>
+  { <span class="hljs-attr">runValidators</span>: <span class="hljs-literal">true</span> }    <span class="hljs-comment">// Options</span>
 );
-// Returns: { acknowledged: true, modifiedCount: 1, ... }
+<span class="hljs-comment">// Returns: { acknowledged: true, modifiedCount: 1, ... }</span>
 
-// Method 3: findOneAndUpdate (with custom conditions)
-const updatedMovie = await Movie.findOneAndUpdate(
-  { name: &quot;The Matrix&quot; },    // Find condition
-  { rating: &quot;R&quot; },           // Update data
+<span class="hljs-comment">// Method 3: findOneAndUpdate (with custom conditions)</span>
+<span class="hljs-keyword">const</span> updatedMovie = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findOneAndUpdate</span>(
+  { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;The Matrix&quot;</span> },    <span class="hljs-comment">// Find condition</span>
+  { <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;R&quot;</span> },           <span class="hljs-comment">// Update data</span>
   { 
-    new: true,
-    runValidators: true
+    <span class="hljs-attr">new</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">runValidators</span>: <span class="hljs-literal">true</span>
   }
 );
 
-// Method 4: updateMany (updates multiple documents)
-const result = await Movie.updateMany(
-  { year: { $lt: 1980 } },   // All movies before 1980
-  { category: &quot;Classic&quot; },   // Add category field
-  { runValidators: true }
+<span class="hljs-comment">// Method 4: updateMany (updates multiple documents)</span>
+<span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">updateMany</span>(
+  { <span class="hljs-attr">year</span>: { <span class="hljs-attr">$lt</span>: <span class="hljs-number">1980</span> } },   <span class="hljs-comment">// All movies before 1980</span>
+  { <span class="hljs-attr">category</span>: <span class="hljs-string">&quot;Classic&quot;</span> },   <span class="hljs-comment">// Add category field</span>
+  { <span class="hljs-attr">runValidators</span>: <span class="hljs-literal">true</span> }
 );
 </code></pre>
 <p><strong>When to Use Each:</strong></p>
@@ -448,80 +452,80 @@ const result = await Movie.updateMany(
 </ul>
 <h3 id="update-operators" tabindex="-1">Update Operators</h3>
 <p>MongoDB provides special operators for complex updates:</p>
-<pre><code class="language-javascript">// $set - Set field values
-await Movie.findByIdAndUpdate(movieId, {
-  $set: { 
-    rating: &quot;PG-13&quot;,
-    &quot;awards.oscars&quot;: 3 
+<pre class="hljs"><code><span class="hljs-comment">// $set - Set field values</span>
+<span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findByIdAndUpdate</span>(movieId, {
+  <span class="hljs-attr">$set</span>: { 
+    <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;PG-13&quot;</span>,
+    <span class="hljs-string">&quot;awards.oscars&quot;</span>: <span class="hljs-number">3</span> 
   }
 });
 
-// $unset - Remove fields
-await Movie.findByIdAndUpdate(movieId, {
-  $unset: { poster: &quot;&quot; }  // Remove poster field
+<span class="hljs-comment">// $unset - Remove fields</span>
+<span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findByIdAndUpdate</span>(movieId, {
+  <span class="hljs-attr">$unset</span>: { <span class="hljs-attr">poster</span>: <span class="hljs-string">&quot;&quot;</span> }  <span class="hljs-comment">// Remove poster field</span>
 });
 
-// $push - Add to arrays
-await Movie.findByIdAndUpdate(movieId, {
-  $push: { 
-    genre: &quot;Thriller&quot;,      // Add single genre
-    stars: { 
-      $each: [&quot;Actor A&quot;, &quot;Actor B&quot;]  // Add multiple stars
+<span class="hljs-comment">// $push - Add to arrays</span>
+<span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findByIdAndUpdate</span>(movieId, {
+  <span class="hljs-attr">$push</span>: { 
+    <span class="hljs-attr">genre</span>: <span class="hljs-string">&quot;Thriller&quot;</span>,      <span class="hljs-comment">// Add single genre</span>
+    <span class="hljs-attr">stars</span>: { 
+      <span class="hljs-attr">$each</span>: [<span class="hljs-string">&quot;Actor A&quot;</span>, <span class="hljs-string">&quot;Actor B&quot;</span>]  <span class="hljs-comment">// Add multiple stars</span>
     }
   }
 });
 
-// $pull - Remove from arrays
-await Movie.findByIdAndUpdate(movieId, {
-  $pull: { 
-    genre: &quot;Horror&quot;         // Remove specific genre
+<span class="hljs-comment">// $pull - Remove from arrays</span>
+<span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findByIdAndUpdate</span>(movieId, {
+  <span class="hljs-attr">$pull</span>: { 
+    <span class="hljs-attr">genre</span>: <span class="hljs-string">&quot;Horror&quot;</span>         <span class="hljs-comment">// Remove specific genre</span>
   }
 });
 
-// $addToSet - Add to array if not already present
-await Movie.findByIdAndUpdate(movieId, {
-  $addToSet: { 
-    genre: &quot;Drama&quot;          // Only add if not already in array
+<span class="hljs-comment">// $addToSet - Add to array if not already present</span>
+<span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findByIdAndUpdate</span>(movieId, {
+  <span class="hljs-attr">$addToSet</span>: { 
+    <span class="hljs-attr">genre</span>: <span class="hljs-string">&quot;Drama&quot;</span>          <span class="hljs-comment">// Only add if not already in array</span>
   }
 });
 
-// $inc - Increment numeric values
-await Movie.findByIdAndUpdate(movieId, {
-  $inc: { 
-    &quot;awards.nominations&quot;: 1  // Increment nominations by 1
+<span class="hljs-comment">// $inc - Increment numeric values</span>
+<span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findByIdAndUpdate</span>(movieId, {
+  <span class="hljs-attr">$inc</span>: { 
+    <span class="hljs-string">&quot;awards.nominations&quot;</span>: <span class="hljs-number">1</span>  <span class="hljs-comment">// Increment nominations by 1</span>
   }
 });
 
-// $currentDate - Set current date
-await Movie.findByIdAndUpdate(movieId, {
-  $currentDate: {
-    updatedAt: true         // Set to current date
+<span class="hljs-comment">// $currentDate - Set current date</span>
+<span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findByIdAndUpdate</span>(movieId, {
+  <span class="hljs-attr">$currentDate</span>: {
+    <span class="hljs-attr">updatedAt</span>: <span class="hljs-literal">true</span>         <span class="hljs-comment">// Set to current date</span>
   }
 });
 </code></pre>
 <h3 id="validation-during-updates" tabindex="-1">Validation During Updates</h3>
-<pre><code class="language-javascript">// Enable validation during updates
-const updatedMovie = await Movie.findByIdAndUpdate(
+<pre class="hljs"><code><span class="hljs-comment">// Enable validation during updates</span>
+<span class="hljs-keyword">const</span> updatedMovie = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findByIdAndUpdate</span>(
   movieId,
-  { year: &quot;invalid year&quot; }, // This will fail validation
+  { <span class="hljs-attr">year</span>: <span class="hljs-string">&quot;invalid year&quot;</span> }, <span class="hljs-comment">// This will fail validation</span>
   { 
-    new: true,
-    runValidators: true,    // Important: Run schema validation
-    context: 'query'        // Set validation context
+    <span class="hljs-attr">new</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">runValidators</span>: <span class="hljs-literal">true</span>,    <span class="hljs-comment">// Important: Run schema validation</span>
+    <span class="hljs-attr">context</span>: <span class="hljs-string">&#x27;query&#x27;</span>        <span class="hljs-comment">// Set validation context</span>
   }
 );
 
-// Handle validation errors
-try {
-  const updatedMovie = await Movie.findByIdAndUpdate(
+<span class="hljs-comment">// Handle validation errors</span>
+<span class="hljs-keyword">try</span> {
+  <span class="hljs-keyword">const</span> updatedMovie = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findByIdAndUpdate</span>(
     movieId,
     updateData,
-    { new: true, runValidators: true }
+    { <span class="hljs-attr">new</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">runValidators</span>: <span class="hljs-literal">true</span> }
   );
-} catch (error) {
-  if (error.name === 'ValidationError') {
-    // Handle validation errors
-    console.log('Update validation failed:', error.errors);
+} <span class="hljs-keyword">catch</span> (error) {
+  <span class="hljs-keyword">if</span> (error.<span class="hljs-property">name</span> === <span class="hljs-string">&#x27;ValidationError&#x27;</span>) {
+    <span class="hljs-comment">// Handle validation errors</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Update validation failed:&#x27;</span>, error.<span class="hljs-property">errors</span>);
   }
 }
 </code></pre>
@@ -530,272 +534,272 @@ try {
 <p>Open your <code>controllers/movieController.js</code> file. You'll see that READ and CREATE operations are already implemented from previous weeks. Now we'll implement the UPDATE functionality.</p>
 <p>Look for the <code>updateMovie</code> function with TODO comments. Let's implement it step by step:</p>
 <p><strong>Step 1: Extract the movie ID and update data</strong></p>
-<pre><code class="language-javascript">// Inside the updateMovie function, uncomment:
-const { id } = req.params;
+<pre class="hljs"><code><span class="hljs-comment">// Inside the updateMovie function, uncomment:</span>
+<span class="hljs-keyword">const</span> { id } = req.<span class="hljs-property">params</span>;
 </code></pre>
 <p><strong>Step 2: Validate the ObjectId format</strong></p>
-<pre><code class="language-javascript">// Uncomment and implement:
-if (!mongoose.Types.ObjectId.isValid(id)) {
-  return res.status(400).json({
-    success: false,
-    error: 'Invalid movie ID format'
+<pre class="hljs"><code><span class="hljs-comment">// Uncomment and implement:</span>
+<span class="hljs-keyword">if</span> (!mongoose.<span class="hljs-property">Types</span>.<span class="hljs-property">ObjectId</span>.<span class="hljs-title function_">isValid</span>(id)) {
+  <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Invalid movie ID format&#x27;</span>
   });
 }
 </code></pre>
 <p><strong>Step 3: Extract update data from request body</strong></p>
-<pre><code class="language-javascript">// Uncomment:
-const updateData = req.body;
+<pre class="hljs"><code><span class="hljs-comment">// Uncomment:</span>
+<span class="hljs-keyword">const</span> updateData = req.<span class="hljs-property">body</span>;
 </code></pre>
 <p><strong>Step 4: Use findByIdAndUpdate with proper options</strong></p>
-<pre><code class="language-javascript">// Uncomment and complete:
-const updatedMovie = await Movie.findByIdAndUpdate(
+<pre class="hljs"><code><span class="hljs-comment">// Uncomment and complete:</span>
+<span class="hljs-keyword">const</span> updatedMovie = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findByIdAndUpdate</span>(
   id,
   updateData,
   {
-    new: true,        // Return the updated document
-    runValidators: true  // Run model validators
+    <span class="hljs-attr">new</span>: <span class="hljs-literal">true</span>,        <span class="hljs-comment">// Return the updated document</span>
+    <span class="hljs-attr">runValidators</span>: <span class="hljs-literal">true</span>  <span class="hljs-comment">// Run model validators</span>
   }
 );
 </code></pre>
 <p><strong>Step 5: Handle movie not found</strong></p>
-<pre><code class="language-javascript">// Uncomment:
-if (!updatedMovie) {
-  return res.status(404).json({
-    success: false,
-    error: 'Movie not found'
+<pre class="hljs"><code><span class="hljs-comment">// Uncomment:</span>
+<span class="hljs-keyword">if</span> (!updatedMovie) {
+  <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Movie not found&#x27;</span>
   });
 }
 </code></pre>
 <p><strong>Step 6: Return success response</strong></p>
-<pre><code class="language-javascript">// Uncomment:
-res.status(200).json({
-  success: true,
-  message: 'Movie updated successfully',
-  data: updatedMovie
+<pre class="hljs"><code><span class="hljs-comment">// Uncomment:</span>
+res.<span class="hljs-title function_">status</span>(<span class="hljs-number">200</span>).<span class="hljs-title function_">json</span>({
+  <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Movie updated successfully&#x27;</span>,
+  <span class="hljs-attr">data</span>: updatedMovie
 });
 </code></pre>
 <p><strong>Bonus: Partial Update Function</strong></p>
 <p>The <code>partialUpdateMovie</code> function is also provided with TODOs for advanced students who want to implement PATCH functionality.</p>
 <hr>
 <p>Open <code>routes/movieRoutes.js</code> and find the UPDATE routes section with TODO comments:</p>
-<pre><code class="language-javascript">// UPDATE routes (NEW - Week 12 Focus)
-// TODO: Students will uncomment and test these routes during lesson
+<pre class="hljs"><code><span class="hljs-comment">// UPDATE routes (NEW - Week 12 Focus)</span>
+<span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Students will uncomment and test these routes during lesson</span>
 
-// TODO: Implement PUT route for complete update
-// router.put('/:id', updateMovie);                // PUT /api/movies/:id
+<span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Implement PUT route for complete update</span>
+<span class="hljs-comment">// router.put(&#x27;/:id&#x27;, updateMovie);                // PUT /api/movies/:id</span>
 
-// TODO: Implement PATCH route for partial update (bonus)
-// router.patch('/:id', partialUpdateMovie);       // PATCH /api/movies/:id
+<span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Implement PATCH route for partial update (bonus)</span>
+<span class="hljs-comment">// router.patch(&#x27;/:id&#x27;, partialUpdateMovie);       // PATCH /api/movies/:id</span>
 </code></pre>
 <p><strong>Uncomment the router.put line to enable your UPDATE endpoint!</strong></p>
 <hr>
 <h2 id="frontend-integration" tabindex="-1">Frontend Integration</h2>
 <p>Now let's update your React frontend to handle movie updates. First, let's enhance the App.js to support editing:</p>
-<pre><code class="language-javascript">// In App.js, update the handleUpdateMovie function
-const handleUpdateMovie = async (movieData) =&gt; {
-  try {
-    setLoading(true);
-    setError(null);
+<pre class="hljs"><code><span class="hljs-comment">// In App.js, update the handleUpdateMovie function</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">handleUpdateMovie</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">movieData</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">true</span>);
+    <span class="hljs-title function_">setError</span>(<span class="hljs-literal">null</span>);
 
-    const { _id, ...updateData } = movieData;
+    <span class="hljs-keyword">const</span> { _id, ...updateData } = movieData;
     
-    const response = await fetch(`${API_BASE_URL}/movies/${_id}`, {
-      method: 'PUT',  // Use PUT for complete updates
-      headers: {
-        'Content-Type': 'application/json',
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`<span class="hljs-subst">${API_BASE_URL}</span>/movies/<span class="hljs-subst">${_id}</span>`</span>, {
+      <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;PUT&#x27;</span>,  <span class="hljs-comment">// Use PUT for complete updates</span>
+      <span class="hljs-attr">headers</span>: {
+        <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
       },
-      body: JSON.stringify(updateData),
+      <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(updateData),
     });
 
-    const result = await response.json();
+    <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
 
-    if (result.success) {
-      // Success: refresh the movie list and close form
-      await fetchMovies();
-      setEditingMovie(null);
-      setShowForm(false);
+    <span class="hljs-keyword">if</span> (result.<span class="hljs-property">success</span>) {
+      <span class="hljs-comment">// Success: refresh the movie list and close form</span>
+      <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetchMovies</span>();
+      <span class="hljs-title function_">setEditingMovie</span>(<span class="hljs-literal">null</span>);
+      <span class="hljs-title function_">setShowForm</span>(<span class="hljs-literal">false</span>);
       
-      // Show success message
-      setSuccessMessage(`&quot;${result.data.name}&quot; has been updated successfully!`);
-      setTimeout(() =&gt; setSuccessMessage(''), 3000);
-    } else {
-      // Handle API errors
-      if (result.details &amp;&amp; Array.isArray(result.details)) {
-        const errorMessages = result.details.map(err =&gt; 
-          `${err.field}: ${err.message}`
-        ).join(', ');
-        setError(`Validation failed: ${errorMessages}`);
-      } else {
-        setError(result.error || 'Failed to update movie');
+      <span class="hljs-comment">// Show success message</span>
+      <span class="hljs-title function_">setSuccessMessage</span>(<span class="hljs-string">`&quot;<span class="hljs-subst">${result.data.name}</span>&quot; has been updated successfully!`</span>);
+      <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">setSuccessMessage</span>(<span class="hljs-string">&#x27;&#x27;</span>), <span class="hljs-number">3000</span>);
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-comment">// Handle API errors</span>
+      <span class="hljs-keyword">if</span> (result.<span class="hljs-property">details</span> &amp;&amp; <span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(result.<span class="hljs-property">details</span>)) {
+        <span class="hljs-keyword">const</span> errorMessages = result.<span class="hljs-property">details</span>.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> 
+          <span class="hljs-string">`<span class="hljs-subst">${err.field}</span>: <span class="hljs-subst">${err.message}</span>`</span>
+        ).<span class="hljs-title function_">join</span>(<span class="hljs-string">&#x27;, &#x27;</span>);
+        <span class="hljs-title function_">setError</span>(<span class="hljs-string">`Validation failed: <span class="hljs-subst">${errorMessages}</span>`</span>);
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-title function_">setError</span>(result.<span class="hljs-property">error</span> || <span class="hljs-string">&#x27;Failed to update movie&#x27;</span>);
       }
     }
-  } catch (error) {
-    console.error('Error updating movie:', error);
-    setError('Failed to connect to server. Please try again.');
-  } finally {
-    setLoading(false);
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error updating movie:&#x27;</span>, error);
+    <span class="hljs-title function_">setError</span>(<span class="hljs-string">&#x27;Failed to connect to server. Please try again.&#x27;</span>);
+  } <span class="hljs-keyword">finally</span> {
+    <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">false</span>);
   }
 };
 
-// Add a function for partial updates (optional)
-const handlePartialUpdate = async (movieId, fieldUpdates) =&gt; {
-  try {
-    const response = await fetch(`${API_BASE_URL}/movies/${movieId}`, {
-      method: 'PATCH',  // Use PATCH for partial updates
-      headers: {
-        'Content-Type': 'application/json',
+<span class="hljs-comment">// Add a function for partial updates (optional)</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">handlePartialUpdate</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">movieId, fieldUpdates</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`<span class="hljs-subst">${API_BASE_URL}</span>/movies/<span class="hljs-subst">${movieId}</span>`</span>, {
+      <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;PATCH&#x27;</span>,  <span class="hljs-comment">// Use PATCH for partial updates</span>
+      <span class="hljs-attr">headers</span>: {
+        <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
       },
-      body: JSON.stringify(fieldUpdates),
+      <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(fieldUpdates),
     });
 
-    const result = await response.json();
+    <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
 
-    if (result.success) {
-      // Refresh movie list
-      await fetchMovies();
-      setSuccessMessage('Movie updated successfully!');
-      setTimeout(() =&gt; setSuccessMessage(''), 3000);
-    } else {
-      setError(result.error || 'Failed to update movie');
+    <span class="hljs-keyword">if</span> (result.<span class="hljs-property">success</span>) {
+      <span class="hljs-comment">// Refresh movie list</span>
+      <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetchMovies</span>();
+      <span class="hljs-title function_">setSuccessMessage</span>(<span class="hljs-string">&#x27;Movie updated successfully!&#x27;</span>);
+      <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">setSuccessMessage</span>(<span class="hljs-string">&#x27;&#x27;</span>), <span class="hljs-number">3000</span>);
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-title function_">setError</span>(result.<span class="hljs-property">error</span> || <span class="hljs-string">&#x27;Failed to update movie&#x27;</span>);
     }
-  } catch (error) {
-    console.error('Error in partial update:', error);
-    setError('Failed to update movie');
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error in partial update:&#x27;</span>, error);
+    <span class="hljs-title function_">setError</span>(<span class="hljs-string">&#x27;Failed to update movie&#x27;</span>);
   }
 };
 </code></pre>
 <p>Enhance your MovieBlock component to include edit functionality:</p>
-<pre><code class="language-javascript">// In MovieBlock.js, add quick edit features
-import React, { useState } from 'react';
+<pre class="hljs"><code><span class="hljs-comment">// In MovieBlock.js, add quick edit features</span>
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 
-function MovieBlock({ movie, onDelete, onEdit, onPartialUpdate }) {
-  const [isEditingRating, setIsEditingRating] = useState(false);
-  const [newRating, setNewRating] = useState(movie.rating);
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">MovieBlock</span>(<span class="hljs-params">{ movie, onDelete, onEdit, onPartialUpdate }</span>) {
+  <span class="hljs-keyword">const</span> [isEditingRating, setIsEditingRating] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">false</span>);
+  <span class="hljs-keyword">const</span> [newRating, setNewRating] = <span class="hljs-title function_">useState</span>(movie.<span class="hljs-property">rating</span>);
 
-  const handleDelete = () =&gt; {
-    if (window.confirm(`Are you sure you want to delete &quot;${movie.name}&quot;?`)) {
-      onDelete(movie._id);
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleDelete</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">window</span>.<span class="hljs-title function_">confirm</span>(<span class="hljs-string">`Are you sure you want to delete &quot;<span class="hljs-subst">${movie.name}</span>&quot;?`</span>)) {
+      <span class="hljs-title function_">onDelete</span>(movie.<span class="hljs-property">_id</span>);
     }
   };
 
-  const handleEdit = () =&gt; {
-    onEdit(movie);
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleEdit</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-title function_">onEdit</span>(movie);
   };
 
-  const handleRatingEdit = () =&gt; {
-    setIsEditingRating(true);
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleRatingEdit</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-title function_">setIsEditingRating</span>(<span class="hljs-literal">true</span>);
   };
 
-  const handleRatingSave = async () =&gt; {
-    if (newRating !== movie.rating) {
-      await onPartialUpdate(movie._id, { rating: newRating });
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleRatingSave</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">if</span> (newRating !== movie.<span class="hljs-property">rating</span>) {
+      <span class="hljs-keyword">await</span> <span class="hljs-title function_">onPartialUpdate</span>(movie.<span class="hljs-property">_id</span>, { <span class="hljs-attr">rating</span>: newRating });
     }
-    setIsEditingRating(false);
+    <span class="hljs-title function_">setIsEditingRating</span>(<span class="hljs-literal">false</span>);
   };
 
-  const handleRatingCancel = () =&gt; {
-    setNewRating(movie.rating);
-    setIsEditingRating(false);
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleRatingCancel</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-title function_">setNewRating</span>(movie.<span class="hljs-property">rating</span>);
+    <span class="hljs-title function_">setIsEditingRating</span>(<span class="hljs-literal">false</span>);
   };
 
-  return (
-    &lt;div className=&quot;movie-block&quot;&gt;
-      &lt;h3&gt;{movie.name}&lt;/h3&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;movie-block&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>{movie.name}<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
       
-      &lt;p&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>
         {movie.year} • 
         {isEditingRating ? (
-          &lt;span className=&quot;inline-edit&quot;&gt;
-            &lt;select 
-              value={newRating} 
-              onChange={(e) =&gt; setNewRating(e.target.value)}
+          <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;inline-edit&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">select</span> 
+              <span class="hljs-attr">value</span>=<span class="hljs-string">{newRating}</span> 
+              <span class="hljs-attr">onChange</span>=<span class="hljs-string">{(e)</span> =&gt;</span> setNewRating(e.target.value)}
               onBlur={handleRatingSave}
             &gt;
-              &lt;option value=&quot;G&quot;&gt;G&lt;/option&gt;
-              &lt;option value=&quot;PG&quot;&gt;PG&lt;/option&gt;
-              &lt;option value=&quot;PG-13&quot;&gt;PG-13&lt;/option&gt;
-              &lt;option value=&quot;R&quot;&gt;R&lt;/option&gt;
-              &lt;option value=&quot;NC-17&quot;&gt;NC-17&lt;/option&gt;
-              &lt;option value=&quot;NR&quot;&gt;NR&lt;/option&gt;
-            &lt;/select&gt;
-            &lt;button onClick={handleRatingSave} className=&quot;save-btn&quot;&gt;✓&lt;/button&gt;
-            &lt;button onClick={handleRatingCancel} className=&quot;cancel-btn&quot;&gt;✗&lt;/button&gt;
-          &lt;/span&gt;
+              <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;G&quot;</span>&gt;</span>G<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;PG&quot;</span>&gt;</span>PG<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;PG-13&quot;</span>&gt;</span>PG-13<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;R&quot;</span>&gt;</span>R<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;NC-17&quot;</span>&gt;</span>NC-17<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;NR&quot;</span>&gt;</span>NR<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handleRatingSave}</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;save-btn&quot;</span>&gt;</span>✓<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handleRatingCancel}</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;cancel-btn&quot;</span>&gt;</span>✗<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
         ) : (
-          &lt;span onClick={handleRatingEdit} className=&quot;editable-field&quot;&gt;
+          <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handleRatingEdit}</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;editable-field&quot;</span>&gt;</span>
             {movie.rating}
-          &lt;/span&gt;
+          <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
         )}
         • {movie.length}
-      &lt;/p&gt;
+      <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
       
-      &lt;p&gt;&lt;em&gt;{movie.description}&lt;/em&gt;&lt;/p&gt;
-      &lt;p&gt;&lt;b&gt;Genre:&lt;/b&gt; {movie.genre.join(', ')}&lt;/p&gt;
-      &lt;p&gt;&lt;b&gt;Stars:&lt;/b&gt; {movie.stars.join(', ')}&lt;/p&gt;
-      &lt;p&gt;&lt;b&gt;Director:&lt;/b&gt; {movie.director}&lt;/p&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">em</span>&gt;</span>{movie.description}<span class="hljs-tag">&lt;/<span class="hljs-name">em</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">b</span>&gt;</span>Genre:<span class="hljs-tag">&lt;/<span class="hljs-name">b</span>&gt;</span> {movie.genre.join(&#x27;, &#x27;)}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">b</span>&gt;</span>Stars:<span class="hljs-tag">&lt;/<span class="hljs-name">b</span>&gt;</span> {movie.stars.join(&#x27;, &#x27;)}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">b</span>&gt;</span>Director:<span class="hljs-tag">&lt;/<span class="hljs-name">b</span>&gt;</span> {movie.director}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
       
-      &lt;div className=&quot;movie-actions&quot;&gt;
-        &lt;button onClick={handleEdit} className=&quot;edit-btn&quot;&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;movie-actions&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handleEdit}</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;edit-btn&quot;</span>&gt;</span>
           Edit Movie
-        &lt;/button&gt;
-        &lt;button onClick={handleDelete} className=&quot;delete-btn&quot;&gt;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handleDelete}</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;delete-btn&quot;</span>&gt;</span>
           Delete Movie
-        &lt;/button&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-export default MovieBlock;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">MovieBlock</span>;
 </code></pre>
 <p>Update MoviesList to pass the new props:</p>
-<pre><code class="language-javascript">// In MoviesList.js
-function MoviesList({ movies, onDelete, onEdit, onPartialUpdate }) {
-  return (
-    &lt;div id=&quot;movies&quot;&gt;
+<pre class="hljs"><code><span class="hljs-comment">// In MoviesList.js</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">MoviesList</span>(<span class="hljs-params">{ movies, onDelete, onEdit, onPartialUpdate }</span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;movies&quot;</span>&gt;</span>
       {movies.map((movie) =&gt; (
-        &lt;MovieBlock 
-          key={movie._id} 
-          movie={movie} 
-          onDelete={onDelete}
-          onEdit={onEdit}
-          onPartialUpdate={onPartialUpdate}  // New prop
-        /&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">MovieBlock</span> 
+          <span class="hljs-attr">key</span>=<span class="hljs-string">{movie._id}</span> 
+          <span class="hljs-attr">movie</span>=<span class="hljs-string">{movie}</span> 
+          <span class="hljs-attr">onDelete</span>=<span class="hljs-string">{onDelete}</span>
+          <span class="hljs-attr">onEdit</span>=<span class="hljs-string">{onEdit}</span>
+          <span class="hljs-attr">onPartialUpdate</span>=<span class="hljs-string">{onPartialUpdate}</span>  // <span class="hljs-attr">New</span> <span class="hljs-attr">prop</span>
+        /&gt;</span>
       ))}
-    &lt;/div&gt;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-export default MoviesList;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">MoviesList</span>;
 </code></pre>
 <hr>
 <h2 id="partial-vs-complete-updates" tabindex="-1">Partial vs Complete Updates</h2>
 <p>Understanding when to use partial vs complete updates is important:</p>
 <p><strong>Complete Updates (PUT)</strong>:</p>
-<pre><code class="language-javascript">// Replace entire document
-const updateData = {
-  name: &quot;Updated Movie Name&quot;,
-  year: 2024,
-  rating: &quot;PG-13&quot;,
-  length: &quot;130 minutes&quot;,
-  description: &quot;Updated description&quot;,
-  genre: [&quot;Drama&quot;, &quot;Thriller&quot;],
-  director: &quot;New Director&quot;,
-  stars: [&quot;Actor 1&quot;, &quot;Actor 2&quot;]
-  // Must provide ALL fields
+<pre class="hljs"><code><span class="hljs-comment">// Replace entire document</span>
+<span class="hljs-keyword">const</span> updateData = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Updated Movie Name&quot;</span>,
+  <span class="hljs-attr">year</span>: <span class="hljs-number">2024</span>,
+  <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;PG-13&quot;</span>,
+  <span class="hljs-attr">length</span>: <span class="hljs-string">&quot;130 minutes&quot;</span>,
+  <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;Updated description&quot;</span>,
+  <span class="hljs-attr">genre</span>: [<span class="hljs-string">&quot;Drama&quot;</span>, <span class="hljs-string">&quot;Thriller&quot;</span>],
+  <span class="hljs-attr">director</span>: <span class="hljs-string">&quot;New Director&quot;</span>,
+  <span class="hljs-attr">stars</span>: [<span class="hljs-string">&quot;Actor 1&quot;</span>, <span class="hljs-string">&quot;Actor 2&quot;</span>]
+  <span class="hljs-comment">// Must provide ALL fields</span>
 };
 
-await Movie.findByIdAndUpdate(movieId, updateData, { new: true });
+<span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findByIdAndUpdate</span>(movieId, updateData, { <span class="hljs-attr">new</span>: <span class="hljs-literal">true</span> });
 </code></pre>
 <p><strong>Partial Updates (PATCH)</strong>:</p>
-<pre><code class="language-javascript">// Update only specific fields
-const updateData = {
-  rating: &quot;R&quot;,
-  description: &quot;New description&quot;
-  // Only fields being changed
+<pre class="hljs"><code><span class="hljs-comment">// Update only specific fields</span>
+<span class="hljs-keyword">const</span> updateData = {
+  <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;R&quot;</span>,
+  <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;New description&quot;</span>
+  <span class="hljs-comment">// Only fields being changed</span>
 };
 
-await Movie.findByIdAndUpdate(movieId, { $set: updateData }, { new: true });
+<span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findByIdAndUpdate</span>(movieId, { <span class="hljs-attr">$set</span>: updateData }, { <span class="hljs-attr">new</span>: <span class="hljs-literal">true</span> });
 </code></pre>
 <p><strong>When to Use Each:</strong></p>
 <ul>
@@ -807,55 +811,55 @@ await Movie.findByIdAndUpdate(movieId, { $set: updateData }, { new: true });
 <hr>
 <h2 id="optimistic-vs-pessimistic-updates" tabindex="-1">Optimistic vs Pessimistic Updates</h2>
 <p><strong>Optimistic Updates</strong> (update UI immediately):</p>
-<pre><code class="language-javascript">const handleOptimisticUpdate = async (movieId, updates) =&gt; {
-  // 1. Update UI immediately
-  setMovies(movies.map(movie =&gt; 
-    movie._id === movieId ? { ...movie, ...updates } : movie
+<pre class="hljs"><code><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleOptimisticUpdate</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">movieId, updates</span>) =&gt; {
+  <span class="hljs-comment">// 1. Update UI immediately</span>
+  <span class="hljs-title function_">setMovies</span>(movies.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">movie</span> =&gt;</span> 
+    movie.<span class="hljs-property">_id</span> === movieId ? { ...movie, ...updates } : movie
   ));
 
-  try {
-    // 2. Send update to server
-    const response = await fetch(`${API_BASE_URL}/movies/${movieId}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updates)
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-comment">// 2. Send update to server</span>
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`<span class="hljs-subst">${API_BASE_URL}</span>/movies/<span class="hljs-subst">${movieId}</span>`</span>, {
+      <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;PATCH&#x27;</span>,
+      <span class="hljs-attr">headers</span>: { <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span> },
+      <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(updates)
     });
 
-    if (!response.ok) {
-      throw new Error('Update failed');
+    <span class="hljs-keyword">if</span> (!response.<span class="hljs-property">ok</span>) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&#x27;Update failed&#x27;</span>);
     }
-  } catch (error) {
-    // 3. Revert UI changes if server update failed
-    console.error('Update failed, reverting changes:', error);
-    await fetchMovies(); // Reload from server
-    setError('Update failed. Changes have been reverted.');
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-comment">// 3. Revert UI changes if server update failed</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Update failed, reverting changes:&#x27;</span>, error);
+    <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetchMovies</span>(); <span class="hljs-comment">// Reload from server</span>
+    <span class="hljs-title function_">setError</span>(<span class="hljs-string">&#x27;Update failed. Changes have been reverted.&#x27;</span>);
   }
 };
 </code></pre>
 <p><strong>Pessimistic Updates</strong> (wait for server confirmation):</p>
-<pre><code class="language-javascript">const handlePessimisticUpdate = async (movieId, updates) =&gt; {
-  try {
-    setLoading(true);
+<pre class="hljs"><code><span class="hljs-keyword">const</span> <span class="hljs-title function_">handlePessimisticUpdate</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">movieId, updates</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">true</span>);
     
-    // 1. Send update to server first
-    const response = await fetch(`${API_BASE_URL}/movies/${movieId}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updates)
+    <span class="hljs-comment">// 1. Send update to server first</span>
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`<span class="hljs-subst">${API_BASE_URL}</span>/movies/<span class="hljs-subst">${movieId}</span>`</span>, {
+      <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;PATCH&#x27;</span>,
+      <span class="hljs-attr">headers</span>: { <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span> },
+      <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(updates)
     });
 
-    if (response.ok) {
-      // 2. Update UI only after server confirms
-      await fetchMovies(); // Reload from server
-      setSuccessMessage('Movie updated successfully!');
-    } else {
-      throw new Error('Update failed');
+    <span class="hljs-keyword">if</span> (response.<span class="hljs-property">ok</span>) {
+      <span class="hljs-comment">// 2. Update UI only after server confirms</span>
+      <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetchMovies</span>(); <span class="hljs-comment">// Reload from server</span>
+      <span class="hljs-title function_">setSuccessMessage</span>(<span class="hljs-string">&#x27;Movie updated successfully!&#x27;</span>);
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&#x27;Update failed&#x27;</span>);
     }
-  } catch (error) {
-    console.error('Update failed:', error);
-    setError('Failed to update movie');
-  } finally {
-    setLoading(false);
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Update failed:&#x27;</span>, error);
+    <span class="hljs-title function_">setError</span>(<span class="hljs-string">&#x27;Failed to update movie&#x27;</span>);
+  } <span class="hljs-keyword">finally</span> {
+    <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">false</span>);
   }
 };
 </code></pre>
@@ -867,10 +871,10 @@ await Movie.findByIdAndUpdate(movieId, { $set: updateData }, { new: true });
 <hr>
 <h2 id="testing-update-operations" tabindex="-1">Testing UPDATE Operations</h2>
 <h3 id="using-curl" tabindex="-1">Using curl</h3>
-<pre><code class="language-bash"># Test complete update (PUT)
+<pre class="hljs"><code><span class="hljs-comment"># Test complete update (PUT)</span>
 curl -X PUT http://localhost:4000/api/movies/MOVIE_ID_HERE \
-  -H &quot;Content-Type: application/json&quot; \
-  -d '{
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -d <span class="hljs-string">&#x27;{
     &quot;name&quot;: &quot;Updated Movie Name&quot;,
     &quot;year&quot;: 2024,
     &quot;rating&quot;: &quot;R&quot;,
@@ -879,33 +883,33 @@ curl -X PUT http://localhost:4000/api/movies/MOVIE_ID_HERE \
     &quot;genre&quot;: [&quot;Action&quot;, &quot;Drama&quot;],
     &quot;director&quot;: &quot;Updated Director&quot;,
     &quot;stars&quot;: [&quot;New Actor 1&quot;, &quot;New Actor 2&quot;]
-  }'
+  }&#x27;</span>
 
-# Test partial update (PATCH)
+<span class="hljs-comment"># Test partial update (PATCH)</span>
 curl -X PATCH http://localhost:4000/api/movies/MOVIE_ID_HERE \
-  -H &quot;Content-Type: application/json&quot; \
-  -d '{
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -d <span class="hljs-string">&#x27;{
     &quot;rating&quot;: &quot;PG-13&quot;,
     &quot;description&quot;: &quot;Just updating the description and rating&quot;
-  }'
+  }&#x27;</span>
 
-# Test validation errors
+<span class="hljs-comment"># Test validation errors</span>
 curl -X PUT http://localhost:4000/api/movies/MOVIE_ID_HERE \
-  -H &quot;Content-Type: application/json&quot; \
-  -d '{
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -d <span class="hljs-string">&#x27;{
     &quot;name&quot;: &quot;&quot;,
     &quot;year&quot;: &quot;not a number&quot;
-  }'
+  }&#x27;</span>
 
-# Test invalid ID
+<span class="hljs-comment"># Test invalid ID</span>
 curl -X PUT http://localhost:4000/api/movies/invalid-id \
-  -H &quot;Content-Type: application/json&quot; \
-  -d '{&quot;name&quot;: &quot;Test&quot;}'
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -d <span class="hljs-string">&#x27;{&quot;name&quot;: &quot;Test&quot;}&#x27;</span>
 
-# Test non-existent movie
+<span class="hljs-comment"># Test non-existent movie</span>
 curl -X PUT http://localhost:4000/api/movies/507f1f77bcf86cd799439011 \
-  -H &quot;Content-Type: application/json&quot; \
-  -d '{&quot;name&quot;: &quot;Test Movie&quot;}'
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -d <span class="hljs-string">&#x27;{&quot;name&quot;: &quot;Test Movie&quot;}&#x27;</span>
 </code></pre>
 <h3 id="frontend-testing-checklist" tabindex="-1">Frontend Testing Checklist</h3>
 <ol>
@@ -919,215 +923,215 @@ curl -X PUT http://localhost:4000/api/movies/507f1f77bcf86cd799439011 \
 <hr>
 <h2 id="advanced-update-patterns" tabindex="-1">Advanced UPDATE Patterns</h2>
 <h3 id="versioning-for-concurrent-updates" tabindex="-1">Versioning for Concurrent Updates</h3>
-<pre><code class="language-javascript">// Add version field to schema (optional advanced feature)
-const movieSchema = new mongoose.Schema({
-  // ... existing fields
-  version: { type: Number, default: 0 }
-}, { timestamps: true });
+<pre class="hljs"><code><span class="hljs-comment">// Add version field to schema (optional advanced feature)</span>
+<span class="hljs-keyword">const</span> movieSchema = <span class="hljs-keyword">new</span> mongoose.<span class="hljs-title class_">Schema</span>({
+  <span class="hljs-comment">// ... existing fields</span>
+  <span class="hljs-attr">version</span>: { <span class="hljs-attr">type</span>: <span class="hljs-title class_">Number</span>, <span class="hljs-attr">default</span>: <span class="hljs-number">0</span> }
+}, { <span class="hljs-attr">timestamps</span>: <span class="hljs-literal">true</span> });
 
-// Increment version on save
-movieSchema.pre('save', function(next) {
-  this.increment();  // Automatically increments version
-  next();
+<span class="hljs-comment">// Increment version on save</span>
+movieSchema.<span class="hljs-title function_">pre</span>(<span class="hljs-string">&#x27;save&#x27;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params">next</span>) {
+  <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">increment</span>();  <span class="hljs-comment">// Automatically increments version</span>
+  <span class="hljs-title function_">next</span>();
 });
 
-// Update with version checking
-const updateMovieWithVersionCheck = async (req, res) =&gt; {
-  try {
-    const { id } = req.params;
-    const { version, ...updateData } = req.body;
+<span class="hljs-comment">// Update with version checking</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">updateMovieWithVersionCheck</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">req, res</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> { id } = req.<span class="hljs-property">params</span>;
+    <span class="hljs-keyword">const</span> { version, ...updateData } = req.<span class="hljs-property">body</span>;
 
-    const updatedMovie = await Movie.findOneAndUpdate(
-      { _id: id, version: version }, // Only update if version matches
-      { ...updateData, $inc: { version: 1 } }, // Increment version
-      { new: true, runValidators: true }
+    <span class="hljs-keyword">const</span> updatedMovie = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findOneAndUpdate</span>(
+      { <span class="hljs-attr">_id</span>: id, <span class="hljs-attr">version</span>: version }, <span class="hljs-comment">// Only update if version matches</span>
+      { ...updateData, <span class="hljs-attr">$inc</span>: { <span class="hljs-attr">version</span>: <span class="hljs-number">1</span> } }, <span class="hljs-comment">// Increment version</span>
+      { <span class="hljs-attr">new</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">runValidators</span>: <span class="hljs-literal">true</span> }
     );
 
-    if (!updatedMovie) {
-      return res.status(409).json({
-        success: false,
-        error: 'Movie has been updated by another user. Please refresh and try again.',
-        code: 'VERSION_CONFLICT'
+    <span class="hljs-keyword">if</span> (!updatedMovie) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">409</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Movie has been updated by another user. Please refresh and try again.&#x27;</span>,
+        <span class="hljs-attr">code</span>: <span class="hljs-string">&#x27;VERSION_CONFLICT&#x27;</span>
       });
     }
 
-    res.json({
-      success: true,
-      data: updatedMovie
+    res.<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">data</span>: updatedMovie
     });
-  } catch (error) {
-    // Handle errors...
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-comment">// Handle errors...</span>
   }
 };
 </code></pre>
 <h3 id="batch-updates" tabindex="-1">Batch Updates</h3>
-<pre><code class="language-javascript">// Update multiple movies at once
-const batchUpdateMovies = async (req, res) =&gt; {
-  try {
-    const { updates } = req.body; // Array of {id, data} objects
+<pre class="hljs"><code><span class="hljs-comment">// Update multiple movies at once</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">batchUpdateMovies</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">req, res</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> { updates } = req.<span class="hljs-property">body</span>; <span class="hljs-comment">// Array of {id, data} objects</span>
 
-    if (!Array.isArray(updates) || updates.length === 0) {
-      return res.status(400).json({
-        success: false,
-        error: 'Updates array is required'
+    <span class="hljs-keyword">if</span> (!<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(updates) || updates.<span class="hljs-property">length</span> === <span class="hljs-number">0</span>) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Updates array is required&#x27;</span>
       });
     }
 
-    // Limit batch size
-    if (updates.length &gt; 20) {
-      return res.status(400).json({
-        success: false,
-        error: 'Cannot update more than 20 movies at once'
+    <span class="hljs-comment">// Limit batch size</span>
+    <span class="hljs-keyword">if</span> (updates.<span class="hljs-property">length</span> &gt; <span class="hljs-number">20</span>) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Cannot update more than 20 movies at once&#x27;</span>
       });
     }
 
-    const results = [];
-    const errors = [];
+    <span class="hljs-keyword">const</span> results = [];
+    <span class="hljs-keyword">const</span> errors = [];
 
-    // Process each update
-    for (let i = 0; i &lt; updates.length; i++) {
-      const { id, data } = updates[i];
+    <span class="hljs-comment">// Process each update</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; updates.<span class="hljs-property">length</span>; i++) {
+      <span class="hljs-keyword">const</span> { id, data } = updates[i];
       
-      try {
-        const updatedMovie = await Movie.findByIdAndUpdate(
+      <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">const</span> updatedMovie = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findByIdAndUpdate</span>(
           id,
           data,
-          { new: true, runValidators: true }
+          { <span class="hljs-attr">new</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">runValidators</span>: <span class="hljs-literal">true</span> }
         );
 
-        if (updatedMovie) {
-          results.push({ id, status: 'success', data: updatedMovie });
-        } else {
-          errors.push({ id, status: 'not_found', error: 'Movie not found' });
+        <span class="hljs-keyword">if</span> (updatedMovie) {
+          results.<span class="hljs-title function_">push</span>({ id, <span class="hljs-attr">status</span>: <span class="hljs-string">&#x27;success&#x27;</span>, <span class="hljs-attr">data</span>: updatedMovie });
+        } <span class="hljs-keyword">else</span> {
+          errors.<span class="hljs-title function_">push</span>({ id, <span class="hljs-attr">status</span>: <span class="hljs-string">&#x27;not_found&#x27;</span>, <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Movie not found&#x27;</span> });
         }
-      } catch (error) {
-        errors.push({ 
+      } <span class="hljs-keyword">catch</span> (error) {
+        errors.<span class="hljs-title function_">push</span>({ 
           id, 
-          status: 'error', 
-          error: error.message 
+          <span class="hljs-attr">status</span>: <span class="hljs-string">&#x27;error&#x27;</span>, 
+          <span class="hljs-attr">error</span>: error.<span class="hljs-property">message</span> 
         });
       }
     }
 
-    res.json({
-      success: errors.length === 0,
-      message: `Updated ${results.length} movies, ${errors.length} errors`,
-      results: results,
-      errors: errors,
-      total: updates.length
+    res.<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: errors.<span class="hljs-property">length</span> === <span class="hljs-number">0</span>,
+      <span class="hljs-attr">message</span>: <span class="hljs-string">`Updated <span class="hljs-subst">${results.length}</span> movies, <span class="hljs-subst">${errors.length}</span> errors`</span>,
+      <span class="hljs-attr">results</span>: results,
+      <span class="hljs-attr">errors</span>: errors,
+      <span class="hljs-attr">total</span>: updates.<span class="hljs-property">length</span>
     });
 
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: 'Batch update failed',
-      details: error.message
+  } <span class="hljs-keyword">catch</span> (error) {
+    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Batch update failed&#x27;</span>,
+      <span class="hljs-attr">details</span>: error.<span class="hljs-property">message</span>
     });
   }
 };
 </code></pre>
 <hr>
 <h2 id="error-handling-and-edge-cases" tabindex="-1">Error Handling and Edge Cases</h2>
-<pre><code class="language-javascript">// Comprehensive error handling for updates
-const updateMovieWithErrorHandling = async (req, res) =&gt; {
-  try {
-    const { id } = req.params;
-    const updateData = req.body;
+<pre class="hljs"><code><span class="hljs-comment">// Comprehensive error handling for updates</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">updateMovieWithErrorHandling</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">req, res</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> { id } = req.<span class="hljs-property">params</span>;
+    <span class="hljs-keyword">const</span> updateData = req.<span class="hljs-property">body</span>;
 
-    // Check if movie exists first (optional - prevents unnecessary processing)
-    const existingMovie = await Movie.findById(id);
-    if (!existingMovie) {
-      return res.status(404).json({
-        success: false,
-        error: 'Movie not found',
-        code: 'MOVIE_NOT_FOUND'
+    <span class="hljs-comment">// Check if movie exists first (optional - prevents unnecessary processing)</span>
+    <span class="hljs-keyword">const</span> existingMovie = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findById</span>(id);
+    <span class="hljs-keyword">if</span> (!existingMovie) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Movie not found&#x27;</span>,
+        <span class="hljs-attr">code</span>: <span class="hljs-string">&#x27;MOVIE_NOT_FOUND&#x27;</span>
       });
     }
 
-    // Check if user is authorized to update this movie (placeholder)
-    // if (!canUserUpdateMovie(req.user, existingMovie)) {
-    //   return res.status(403).json({
-    //     success: false,
-    //     error: 'Not authorized to update this movie',
-    //     code: 'UNAUTHORIZED'
-    //   });
-    // }
+    <span class="hljs-comment">// Check if user is authorized to update this movie (placeholder)</span>
+    <span class="hljs-comment">// if (!canUserUpdateMovie(req.user, existingMovie)) {</span>
+    <span class="hljs-comment">//   return res.status(403).json({</span>
+    <span class="hljs-comment">//     success: false,</span>
+    <span class="hljs-comment">//     error: &#x27;Not authorized to update this movie&#x27;,</span>
+    <span class="hljs-comment">//     code: &#x27;UNAUTHORIZED&#x27;</span>
+    <span class="hljs-comment">//   });</span>
+    <span class="hljs-comment">// }</span>
 
-    // Perform update
-    const updatedMovie = await Movie.findByIdAndUpdate(
+    <span class="hljs-comment">// Perform update</span>
+    <span class="hljs-keyword">const</span> updatedMovie = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findByIdAndUpdate</span>(
       id,
       updateData,
       { 
-        new: true, 
-        runValidators: true,
-        context: 'query'
+        <span class="hljs-attr">new</span>: <span class="hljs-literal">true</span>, 
+        <span class="hljs-attr">runValidators</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">context</span>: <span class="hljs-string">&#x27;query&#x27;</span>
       }
     );
 
-    // Log the update for audit trail
-    console.log(`Movie ${id} updated:`, {
-      timestamp: new Date().toISOString(),
-      changes: Object.keys(updateData),
-      // userId: req.user?.id
+    <span class="hljs-comment">// Log the update for audit trail</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Movie <span class="hljs-subst">${id}</span> updated:`</span>, {
+      <span class="hljs-attr">timestamp</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">toISOString</span>(),
+      <span class="hljs-attr">changes</span>: <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(updateData),
+      <span class="hljs-comment">// userId: req.user?.id</span>
     });
 
-    res.json({
-      success: true,
-      message: 'Movie updated successfully',
-      data: updatedMovie
+    res.<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Movie updated successfully&#x27;</span>,
+      <span class="hljs-attr">data</span>: updatedMovie
     });
 
-  } catch (error) {
-    // Log detailed error information
-    console.error('Update error:', {
-      movieId: req.params.id,
-      error: error.message,
-      stack: error.stack,
-      updateData: req.body
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-comment">// Log detailed error information</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Update error:&#x27;</span>, {
+      <span class="hljs-attr">movieId</span>: req.<span class="hljs-property">params</span>.<span class="hljs-property">id</span>,
+      <span class="hljs-attr">error</span>: error.<span class="hljs-property">message</span>,
+      <span class="hljs-attr">stack</span>: error.<span class="hljs-property">stack</span>,
+      <span class="hljs-attr">updateData</span>: req.<span class="hljs-property">body</span>
     });
 
-    // Handle various error types
-    if (error.name === 'ValidationError') {
-      return res.status(400).json({
-        success: false,
-        error: 'Validation failed',
-        code: 'VALIDATION_ERROR',
-        details: Object.values(error.errors).map(err =&gt; ({
-          field: err.path,
-          message: err.message,
-          rejectedValue: err.value
+    <span class="hljs-comment">// Handle various error types</span>
+    <span class="hljs-keyword">if</span> (error.<span class="hljs-property">name</span> === <span class="hljs-string">&#x27;ValidationError&#x27;</span>) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Validation failed&#x27;</span>,
+        <span class="hljs-attr">code</span>: <span class="hljs-string">&#x27;VALIDATION_ERROR&#x27;</span>,
+        <span class="hljs-attr">details</span>: <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">values</span>(error.<span class="hljs-property">errors</span>).<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> ({
+          <span class="hljs-attr">field</span>: err.<span class="hljs-property">path</span>,
+          <span class="hljs-attr">message</span>: err.<span class="hljs-property">message</span>,
+          <span class="hljs-attr">rejectedValue</span>: err.<span class="hljs-property">value</span>
         }))
       });
     }
 
-    if (error.name === 'CastError') {
-      return res.status(400).json({
-        success: false,
-        error: 'Invalid data format',
-        code: 'CAST_ERROR',
-        details: {
-          field: error.path,
-          expectedType: error.kind,
-          receivedValue: error.value
+    <span class="hljs-keyword">if</span> (error.<span class="hljs-property">name</span> === <span class="hljs-string">&#x27;CastError&#x27;</span>) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Invalid data format&#x27;</span>,
+        <span class="hljs-attr">code</span>: <span class="hljs-string">&#x27;CAST_ERROR&#x27;</span>,
+        <span class="hljs-attr">details</span>: {
+          <span class="hljs-attr">field</span>: error.<span class="hljs-property">path</span>,
+          <span class="hljs-attr">expectedType</span>: error.<span class="hljs-property">kind</span>,
+          <span class="hljs-attr">receivedValue</span>: error.<span class="hljs-property">value</span>
         }
       });
     }
 
-    if (error.code === 11000) {
-      return res.status(409).json({
-        success: false,
-        error: 'Duplicate value',
-        code: 'DUPLICATE_KEY',
-        field: Object.keys(error.keyPattern)[0]
+    <span class="hljs-keyword">if</span> (error.<span class="hljs-property">code</span> === <span class="hljs-number">11000</span>) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">409</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Duplicate value&#x27;</span>,
+        <span class="hljs-attr">code</span>: <span class="hljs-string">&#x27;DUPLICATE_KEY&#x27;</span>,
+        <span class="hljs-attr">field</span>: <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(error.<span class="hljs-property">keyPattern</span>)[<span class="hljs-number">0</span>]
       });
     }
 
-    // Generic server error
-    res.status(500).json({
-      success: false,
-      error: 'Internal server error',
-      code: 'INTERNAL_ERROR',
-      message: process.env.NODE_ENV === 'development' ? error.message : 'Update failed'
+    <span class="hljs-comment">// Generic server error</span>
+    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Internal server error&#x27;</span>,
+      <span class="hljs-attr">code</span>: <span class="hljs-string">&#x27;INTERNAL_ERROR&#x27;</span>,
+      <span class="hljs-attr">message</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">NODE_ENV</span> === <span class="hljs-string">&#x27;development&#x27;</span> ? error.<span class="hljs-property">message</span> : <span class="hljs-string">&#x27;Update failed&#x27;</span>
     });
   }
 };
@@ -1179,5 +1183,6 @@ How do UPDATE operations differ from CREATE operations in terms of validation an
 </div>
 <script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
 <script src="../assets/animations.js"></script>
+<script src="../assets/search.js"></script>
 </body>
 </html>

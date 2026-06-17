@@ -14,6 +14,10 @@
 <div class="layout">
 <nav class="sidebar" aria-label="Course weeks">
 <div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="sidebar-search">
+<input type="search" id="sidebar-search-input" class="search-input" placeholder="&#xf002; Search lessons…" aria-label="Search lessons">
+<div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+</div>
 <div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
 <a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
 <a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
@@ -55,84 +59,84 @@
 <p>Before applying patterns to Movie Buzz, let's explore simple examples of component patterns:</p>
 <h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-basic-container-component" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Basic Container Component</h3>
 <p>Create <code>src/components/Box.js</code>:</p>
-<pre><code class="language-javascript">// A simple container that wraps content
-function Box({ color = 'lightblue', children }) {
-  return (
-    &lt;div style={{
-      backgroundColor: color,
-      padding: '20px',
-      margin: '10px',
-      borderRadius: '8px'
-    }}&gt;
+<pre class="hljs"><code><span class="hljs-comment">// A simple container that wraps content</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">Box</span>(<span class="hljs-params">{ color = <span class="hljs-string">&#x27;lightblue&#x27;</span>, children }</span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span>
+      <span class="hljs-attr">backgroundColor:</span> <span class="hljs-attr">color</span>,
+      <span class="hljs-attr">padding:</span> &#x27;<span class="hljs-attr">20px</span>&#x27;,
+      <span class="hljs-attr">margin:</span> &#x27;<span class="hljs-attr">10px</span>&#x27;,
+      <span class="hljs-attr">borderRadius:</span> &#x27;<span class="hljs-attr">8px</span>&#x27;
+    }}&gt;</span>
       {children}
-    &lt;/div&gt;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-// Usage
-&lt;Box color=&quot;lightgreen&quot;&gt;
-  &lt;h3&gt;Hello World&lt;/h3&gt;
-  &lt;p&gt;This is inside a box!&lt;/p&gt;
-&lt;/Box&gt;
+<span class="hljs-comment">// Usage</span>
+&lt;<span class="hljs-title class_">Box</span> color=<span class="hljs-string">&quot;lightgreen&quot;</span>&gt;
+  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Hello World<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></span>
+  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>This is inside a box!<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span>
+&lt;/<span class="hljs-title class_">Box</span>&gt;
 </code></pre>
 <h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-list-and-item-pattern" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>List and Item Pattern</h3>
 <p>Create <code>src/components/SimpleList.js</code>:</p>
-<pre><code class="language-javascript">// Parent component that manages the list
-function SimpleList({ items }) {
-  return (
-    &lt;ul&gt;
+<pre class="hljs"><code><span class="hljs-comment">// Parent component that manages the list</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">SimpleList</span>(<span class="hljs-params">{ items }</span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
       {items.map(item =&gt; (
-        &lt;SimpleListItem key={item.id} item={item} /&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">SimpleListItem</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{item.id}</span> <span class="hljs-attr">item</span>=<span class="hljs-string">{item}</span> /&gt;</span>
       ))}
-    &lt;/ul&gt;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span>
   );
 }
 
-// Child component for individual items
-function SimpleListItem({ item }) {
-  return (
-    &lt;li&gt;
-      &lt;strong&gt;{item.title}:&lt;/strong&gt; {item.description}
-    &lt;/li&gt;
+<span class="hljs-comment">// Child component for individual items</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">SimpleListItem</span>(<span class="hljs-params">{ item }</span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>{item.title}:<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span> {item.description}
+    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span>
   );
 }
 
-// Usage
-const items = [
-  { id: 1, title: 'First', description: 'First item' },
-  { id: 2, title: 'Second', description: 'Second item' }
+<span class="hljs-comment">// Usage</span>
+<span class="hljs-keyword">const</span> items = [
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;First&#x27;</span>, <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;First item&#x27;</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;Second&#x27;</span>, <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;Second item&#x27;</span> }
 ];
-&lt;SimpleList items={items} /&gt;
+<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">SimpleList</span> <span class="hljs-attr">items</span>=<span class="hljs-string">{items}</span> /&gt;</span></span>
 </code></pre>
 <h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-conditional-rendering-pattern" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Conditional Rendering Pattern</h3>
 <p>Create <code>src/components/Alert.js</code>:</p>
-<pre><code class="language-javascript">function Alert({ type = 'info', message, onClose }) {
-  const colors = {
-    info: 'blue',
-    success: 'green',
-    warning: 'orange',
-    error: 'red'
+<pre class="hljs"><code><span class="hljs-keyword">function</span> <span class="hljs-title function_">Alert</span>(<span class="hljs-params">{ type = <span class="hljs-string">&#x27;info&#x27;</span>, message, onClose }</span>) {
+  <span class="hljs-keyword">const</span> colors = {
+    <span class="hljs-attr">info</span>: <span class="hljs-string">&#x27;blue&#x27;</span>,
+    <span class="hljs-attr">success</span>: <span class="hljs-string">&#x27;green&#x27;</span>,
+    <span class="hljs-attr">warning</span>: <span class="hljs-string">&#x27;orange&#x27;</span>,
+    <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;red&#x27;</span>
   };
 
-  return (
-    &lt;div style={{
-      color: colors[type],
-      padding: '10px',
-      border: `1px solid ${colors[type]}`
-    }}&gt;
-      &lt;span&gt;{message}&lt;/span&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span>
+      <span class="hljs-attr">color:</span> <span class="hljs-attr">colors</span>[<span class="hljs-attr">type</span>],
+      <span class="hljs-attr">padding:</span> &#x27;<span class="hljs-attr">10px</span>&#x27;,
+      <span class="hljs-attr">border:</span> `<span class="hljs-attr">1px</span> <span class="hljs-attr">solid</span> ${<span class="hljs-attr">colors</span>[<span class="hljs-attr">type</span>]}`
+    }}&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{message}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
       {onClose &amp;&amp; (
-        &lt;button onClick={onClose} style={{ marginLeft: '10px' }}&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{onClose}</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">marginLeft:</span> &#x27;<span class="hljs-attr">10px</span>&#x27; }}&gt;</span>
           Dismiss
-        &lt;/button&gt;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
       )}
-    &lt;/div&gt;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-// Usage examples
-&lt;Alert type=&quot;success&quot; message=&quot;Operation successful!&quot; /&gt;
-&lt;Alert type=&quot;error&quot; message=&quot;Something went wrong&quot; onClose={() =&gt; console.log('closed')} /&gt;
+<span class="hljs-comment">// Usage examples</span>
+&lt;<span class="hljs-title class_">Alert</span> type=<span class="hljs-string">&quot;success&quot;</span> message=<span class="hljs-string">&quot;Operation successful!&quot;</span> /&gt;
+<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Alert</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;error&quot;</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;Something went wrong&quot;</span> <span class="hljs-attr">onClose</span>=<span class="hljs-string">{()</span> =&gt;</span> console.log(&#x27;closed&#x27;)} /&gt;</span>
 </code></pre>
 <blockquote class="callout callout--reflection-try" style="--tilt:-0.1deg;--glow-intensity:0.79">
 <div class="callout-label lift"><i class="fas fa-tools callout-icon" aria-hidden="true"></i><span>Hands-On — Try It Out</span></div>
@@ -148,188 +152,188 @@ Create these simple pattern components and experiment with:</p>
 <h2 id="component-composition" tabindex="-1">Component Composition</h2>
 <h3 id="what-is-composition" tabindex="-1">What is Composition?</h3>
 <p>Now that you've seen simple examples, let's understand composition more deeply. Composition is about building components from other components. Instead of using inheritance, React uses composition to share code between components.</p>
-<pre><code class="language-javascript">// Instead of inheritance
-class SpecialButton extends Button { }
+<pre class="hljs"><code><span class="hljs-comment">// Instead of inheritance</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">SpecialButton</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Button</span> { }
 
-// React uses composition
-function SpecialButton(props) {
-  return &lt;Button color=&quot;red&quot; {...props} /&gt;;
+<span class="hljs-comment">// React uses composition</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">SpecialButton</span>(<span class="hljs-params">props</span>) {
+  <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">color</span>=<span class="hljs-string">&quot;red&quot;</span> {<span class="hljs-attr">...props</span>} /&gt;</span></span>;
 }
 </code></pre>
 <h3 id="children-prop" tabindex="-1">Children Prop</h3>
 <p>The <code>children</code> prop allows you to pass components as data to other components:</p>
-<pre><code class="language-javascript">function Card({ children, title }) {
-  return (
-    &lt;div className=&quot;card&quot;&gt;
-      &lt;h2&gt;{title}&lt;/h2&gt;
-      &lt;div className=&quot;card-content&quot;&gt;
+<pre class="hljs"><code><span class="hljs-keyword">function</span> <span class="hljs-title function_">Card</span>(<span class="hljs-params">{ children, title }</span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;card&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>{title}<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;card-content&quot;</span>&gt;</span>
         {children}
-      &lt;/div&gt;
-    &lt;/div&gt;
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-// Usage
-&lt;Card title=&quot;Movie Details&quot;&gt;
-  &lt;p&gt;Any content can go here!&lt;/p&gt;
-  &lt;button&gt;Click me&lt;/button&gt;
-&lt;/Card&gt;
+<span class="hljs-comment">// Usage</span>
+&lt;<span class="hljs-title class_">Card</span> title=<span class="hljs-string">&quot;Movie Details&quot;</span>&gt;
+  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Any content can go here!<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span>
+  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span>&gt;</span>Click me<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+&lt;/<span class="hljs-title class_">Card</span>&gt;
 </code></pre>
 <h2 id="building-reusable-components" tabindex="-1">Building Reusable Components</h2>
 <h3 id="modal-component" tabindex="-1">Modal Component</h3>
-<pre><code class="language-javascript">function Modal({ isOpen, onClose, title, children }) {
-  if (!isOpen) return null;
+<pre class="hljs"><code><span class="hljs-keyword">function</span> <span class="hljs-title function_">Modal</span>(<span class="hljs-params">{ isOpen, onClose, title, children }</span>) {
+  <span class="hljs-keyword">if</span> (!isOpen) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
 
-  return (
-    &lt;div className=&quot;modal-overlay&quot; onClick={onClose}&gt;
-      &lt;div className=&quot;modal-content&quot; onClick={(e) =&gt; e.stopPropagation()}&gt;
-        &lt;div className=&quot;modal-header&quot;&gt;
-          &lt;h2&gt;{title}&lt;/h2&gt;
-          &lt;button onClick={onClose}&gt;×&lt;/button&gt;
-        &lt;/div&gt;
-        &lt;div className=&quot;modal-body&quot;&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;modal-overlay&quot;</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{onClose}</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;modal-content&quot;</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{(e)</span> =&gt;</span> e.stopPropagation()}&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;modal-header&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>{title}<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{onClose}</span>&gt;</span>×<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;modal-body&quot;</span>&gt;</span>
           {children}
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 </code></pre>
 <h3 id="loading-component" tabindex="-1">Loading Component</h3>
-<pre><code class="language-javascript">function LoadingSpinner({ size = &quot;medium&quot;, message = &quot;Loading...&quot; }) {
-  return (
-    &lt;div className={`loading-spinner ${size}`}&gt;
-      &lt;div className=&quot;spinner&quot;&gt;&lt;/div&gt;
-      &lt;p&gt;{message}&lt;/p&gt;
-    &lt;/div&gt;
+<pre class="hljs"><code><span class="hljs-keyword">function</span> <span class="hljs-title function_">LoadingSpinner</span>(<span class="hljs-params">{ size = <span class="hljs-string">&quot;medium&quot;</span>, message = <span class="hljs-string">&quot;Loading...&quot;</span> }</span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{</span>`<span class="hljs-attr">loading-spinner</span> ${<span class="hljs-attr">size</span>}`}&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;spinner&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{message}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 </code></pre>
 <h3 id="error-boundary" tabindex="-1">Error Boundary</h3>
-<pre><code class="language-javascript">class ErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { hasError: false, error: null };
+<pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title class_">ErrorBoundary</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">React.Component</span> {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">props</span>) {
+    <span class="hljs-variable language_">super</span>(props);
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span> = { <span class="hljs-attr">hasError</span>: <span class="hljs-literal">false</span>, <span class="hljs-attr">error</span>: <span class="hljs-literal">null</span> };
   }
 
-  static getDerivedStateFromError(error) {
-    return { hasError: true, error };
+  <span class="hljs-keyword">static</span> <span class="hljs-title function_">getDerivedStateFromError</span>(<span class="hljs-params">error</span>) {
+    <span class="hljs-keyword">return</span> { <span class="hljs-attr">hasError</span>: <span class="hljs-literal">true</span>, error };
   }
 
-  componentDidCatch(error, errorInfo) {
-    console.error('Error caught:', error, errorInfo);
+  <span class="hljs-title function_">componentDidCatch</span>(<span class="hljs-params">error, errorInfo</span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error caught:&#x27;</span>, error, errorInfo);
   }
 
-  render() {
-    if (this.state.hasError) {
-      return (
-        &lt;div className=&quot;error-fallback&quot;&gt;
-          &lt;h2&gt;Something went wrong&lt;/h2&gt;
-          &lt;p&gt;{this.state.error?.message}&lt;/p&gt;
-          &lt;button onClick={() =&gt; this.setState({ hasError: false })}&gt;
+  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span>.<span class="hljs-property">hasError</span>) {
+      <span class="hljs-keyword">return</span> (
+        <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;error-fallback&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Something went wrong<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{this.state.error?.message}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> this.setState({ hasError: false })}&gt;
             Try again
-          &lt;/button&gt;
-        &lt;/div&gt;
+          <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
       );
     }
 
-    return this.props.children;
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">props</span>.<span class="hljs-property">children</span>;
   }
 }
 </code></pre>
 <h2 id="compound-components-pattern" tabindex="-1">Compound Components Pattern</h2>
 <p>Compound components work together to form a complete UI:</p>
-<pre><code class="language-javascript">function Tabs({ children, defaultTab }) {
-  const [activeTab, setActiveTab] = useState(defaultTab);
+<pre class="hljs"><code><span class="hljs-keyword">function</span> <span class="hljs-title function_">Tabs</span>(<span class="hljs-params">{ children, defaultTab }</span>) {
+  <span class="hljs-keyword">const</span> [activeTab, setActiveTab] = <span class="hljs-title function_">useState</span>(defaultTab);
 
-  return (
-    &lt;div className=&quot;tabs&quot;&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;tabs&quot;</span>&gt;</span>
       {React.Children.map(children, child =&gt;
         React.cloneElement(child, { activeTab, setActiveTab })
       )}
-    &lt;/div&gt;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-function TabList({ children, activeTab, setActiveTab }) {
-  return (
-    &lt;div className=&quot;tab-list&quot;&gt;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">TabList</span>(<span class="hljs-params">{ children, activeTab, setActiveTab }</span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;tab-list&quot;</span>&gt;</span>
       {React.Children.map(children, child =&gt;
         React.cloneElement(child, { activeTab, setActiveTab })
       )}
-    &lt;/div&gt;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-function Tab({ id, children, activeTab, setActiveTab }) {
-  return (
-    &lt;button
-      className={`tab ${activeTab === id ? 'active' : ''}`}
-      onClick={() =&gt; setActiveTab(id)}
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">Tab</span>(<span class="hljs-params">{ id, children, activeTab, setActiveTab }</span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span>
+      <span class="hljs-attr">className</span>=<span class="hljs-string">{</span>`<span class="hljs-attr">tab</span> ${<span class="hljs-attr">activeTab</span> === <span class="hljs-string">id</span> ? &#x27;<span class="hljs-attr">active</span>&#x27; <span class="hljs-attr">:</span> &#x27;&#x27;}`}
+      <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> setActiveTab(id)}
     &gt;
       {children}
-    &lt;/button&gt;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
   );
 }
 
-function TabPanels({ children, activeTab }) {
-  return (
-    &lt;div className=&quot;tab-panels&quot;&gt;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">TabPanels</span>(<span class="hljs-params">{ children, activeTab }</span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;tab-panels&quot;</span>&gt;</span>
       {React.Children.map(children, child =&gt;
         child.props.id === activeTab ? child : null
       )}
-    &lt;/div&gt;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-function TabPanel({ children }) {
-  return &lt;div className=&quot;tab-panel&quot;&gt;{children}&lt;/div&gt;;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">TabPanel</span>(<span class="hljs-params">{ children }</span>) {
+  <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;tab-panel&quot;</span>&gt;</span>{children}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
 }
 
-// Usage
-&lt;Tabs defaultTab=&quot;cast&quot;&gt;
-  &lt;TabList&gt;
-    &lt;Tab id=&quot;cast&quot;&gt;Cast&lt;/Tab&gt;
-    &lt;Tab id=&quot;crew&quot;&gt;Crew&lt;/Tab&gt;
-    &lt;Tab id=&quot;details&quot;&gt;Details&lt;/Tab&gt;
-  &lt;/TabList&gt;
-  &lt;TabPanels&gt;
-    &lt;TabPanel id=&quot;cast&quot;&gt;Cast information...&lt;/TabPanel&gt;
-    &lt;TabPanel id=&quot;crew&quot;&gt;Crew information...&lt;/TabPanel&gt;
-    &lt;TabPanel id=&quot;details&quot;&gt;Movie details...&lt;/TabPanel&gt;
-  &lt;/TabPanels&gt;
-&lt;/Tabs&gt;
+<span class="hljs-comment">// Usage</span>
+&lt;<span class="hljs-title class_">Tabs</span> defaultTab=<span class="hljs-string">&quot;cast&quot;</span>&gt;
+  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">TabList</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Tab</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;cast&quot;</span>&gt;</span>Cast<span class="hljs-tag">&lt;/<span class="hljs-name">Tab</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Tab</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;crew&quot;</span>&gt;</span>Crew<span class="hljs-tag">&lt;/<span class="hljs-name">Tab</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Tab</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;details&quot;</span>&gt;</span>Details<span class="hljs-tag">&lt;/<span class="hljs-name">Tab</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">TabList</span>&gt;</span></span>
+  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">TabPanels</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">TabPanel</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;cast&quot;</span>&gt;</span>Cast information...<span class="hljs-tag">&lt;/<span class="hljs-name">TabPanel</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">TabPanel</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;crew&quot;</span>&gt;</span>Crew information...<span class="hljs-tag">&lt;/<span class="hljs-name">TabPanel</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">TabPanel</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;details&quot;</span>&gt;</span>Movie details...<span class="hljs-tag">&lt;/<span class="hljs-name">TabPanel</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">TabPanels</span>&gt;</span></span>
+&lt;/<span class="hljs-title class_">Tabs</span>&gt;
 </code></pre>
 <h2 id="toast-notifications" tabindex="-1">Toast Notifications</h2>
-<pre><code class="language-javascript">function ToastProvider({ children }) {
-  const [toasts, setToasts] = useState([]);
+<pre class="hljs"><code><span class="hljs-keyword">function</span> <span class="hljs-title function_">ToastProvider</span>(<span class="hljs-params">{ children }</span>) {
+  <span class="hljs-keyword">const</span> [toasts, setToasts] = <span class="hljs-title function_">useState</span>([]);
 
-  const addToast = (message, type = 'info') =&gt; {
-    const id = Date.now();
-    setToasts(prev =&gt; [...prev, { id, message, type }]);
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">addToast</span> = (<span class="hljs-params">message, type = <span class="hljs-string">&#x27;info&#x27;</span></span>) =&gt; {
+    <span class="hljs-keyword">const</span> id = <span class="hljs-title class_">Date</span>.<span class="hljs-title function_">now</span>();
+    <span class="hljs-title function_">setToasts</span>(<span class="hljs-function"><span class="hljs-params">prev</span> =&gt;</span> [...prev, { id, message, type }]);
     
-    setTimeout(() =&gt; {
-      setToasts(prev =&gt; prev.filter(toast =&gt; toast.id !== id));
-    }, 3000);
+    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+      <span class="hljs-title function_">setToasts</span>(<span class="hljs-function"><span class="hljs-params">prev</span> =&gt;</span> prev.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">toast</span> =&gt;</span> toast.<span class="hljs-property">id</span> !== id));
+    }, <span class="hljs-number">3000</span>);
   };
 
-  return (
-    &lt;&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;&gt;</span>
       {children({ addToast })}
-      &lt;div className=&quot;toast-container&quot;&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;toast-container&quot;</span>&gt;</span>
         {toasts.map(toast =&gt; (
-          &lt;Toast key={toast.id} {...toast} /&gt;
+          <span class="hljs-tag">&lt;<span class="hljs-name">Toast</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{toast.id}</span> {<span class="hljs-attr">...toast</span>} /&gt;</span>
         ))}
-      &lt;/div&gt;
-    &lt;/&gt;
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/&gt;</span></span>
   );
 }
 
-function Toast({ message, type }) {
-  return (
-    &lt;div className={`toast toast-${type}`}&gt;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">Toast</span>(<span class="hljs-params">{ message, type }</span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{</span>`<span class="hljs-attr">toast</span> <span class="hljs-attr">toast-</span>${<span class="hljs-attr">type</span>}`}&gt;</span>
       {message}
-    &lt;/div&gt;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 </code></pre>
@@ -346,47 +350,47 @@ function Toast({ message, type }) {
 </ul>
 <h3 class="step-heading" style="--organic-tilt:0.1deg" id="2step-2-implement-loading-states" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Implement Loading States</h3>
 <p>Add proper loading states to your app:</p>
-<pre><code class="language-javascript">function MoviesList() {
-  const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+<pre class="hljs"><code><span class="hljs-keyword">function</span> <span class="hljs-title function_">MoviesList</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> [movies, setMovies] = <span class="hljs-title function_">useState</span>([]);
+  <span class="hljs-keyword">const</span> [loading, setLoading] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">true</span>);
+  <span class="hljs-keyword">const</span> [error, setError] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">null</span>);
 
-  useEffect(() =&gt; {
-    fetchMovies()
-      .then(data =&gt; {
-        setMovies(data);
-        setLoading(false);
+  <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-title function_">fetchMovies</span>()
+      .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+        <span class="hljs-title function_">setMovies</span>(data);
+        <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">false</span>);
       })
-      .catch(err =&gt; {
-        setError(err.message);
-        setLoading(false);
+      .<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+        <span class="hljs-title function_">setError</span>(err.<span class="hljs-property">message</span>);
+        <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">false</span>);
       });
   }, []);
 
-  if (loading) return &lt;LoadingSpinner /&gt;;
-  if (error) return &lt;ErrorMessage message={error} /&gt;;
-  if (movies.length === 0) return &lt;EmptyState /&gt;;
+  <span class="hljs-keyword">if</span> (loading) <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">LoadingSpinner</span> /&gt;</span></span>;
+  <span class="hljs-keyword">if</span> (error) <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ErrorMessage</span> <span class="hljs-attr">message</span>=<span class="hljs-string">{error}</span> /&gt;</span></span>;
+  <span class="hljs-keyword">if</span> (movies.<span class="hljs-property">length</span> === <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">EmptyState</span> /&gt;</span></span>;
 
-  return &lt;MovieGrid movies={movies} /&gt;;
+  <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">MovieGrid</span> <span class="hljs-attr">movies</span>=<span class="hljs-string">{movies}</span> /&gt;</span></span>;
 }
 </code></pre>
 <h3 class="step-heading" style="--organic-tilt:-0.2deg" id="3step-3-add-modal-for-movie-details" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Add Modal for Movie Details</h3>
-<pre><code class="language-javascript">function MovieDetailsModal({ movie, isOpen, onClose }) {
-  return (
-    &lt;Modal isOpen={isOpen} onClose={onClose} title={movie?.name}&gt;
+<pre class="hljs"><code><span class="hljs-keyword">function</span> <span class="hljs-title function_">MovieDetailsModal</span>(<span class="hljs-params">{ movie, isOpen, onClose }</span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Modal</span> <span class="hljs-attr">isOpen</span>=<span class="hljs-string">{isOpen}</span> <span class="hljs-attr">onClose</span>=<span class="hljs-string">{onClose}</span> <span class="hljs-attr">title</span>=<span class="hljs-string">{movie?.name}</span>&gt;</span>
       {movie &amp;&amp; (
-        &lt;&gt;
-          &lt;img src={movie.poster} alt={movie.name} /&gt;
-          &lt;p&gt;{movie.description}&lt;/p&gt;
-          &lt;div&gt;
-            &lt;strong&gt;Director:&lt;/strong&gt; {movie.director}
-          &lt;/div&gt;
-          &lt;div&gt;
-            &lt;strong&gt;Stars:&lt;/strong&gt; {movie.stars.join(', ')}
-          &lt;/div&gt;
-        &lt;/&gt;
+        <span class="hljs-tag">&lt;&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">{movie.poster}</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">{movie.name}</span> /&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{movie.description}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>Director:<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span> {movie.director}
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>Stars:<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span> {movie.stars.join(&#x27;, &#x27;)}
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/&gt;</span></span>
       )}
-    &lt;/Modal&gt;
+    &lt;/<span class="hljs-title class_">Modal</span>&gt;
   );
 }
 </code></pre>
@@ -421,5 +425,6 @@ function Toast({ message, type }) {
 </div>
 <script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
 <script src="../assets/animations.js"></script>
+<script src="../assets/search.js"></script>
 </body>
 </html>

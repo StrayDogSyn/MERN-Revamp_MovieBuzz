@@ -14,6 +14,10 @@
 <div class="layout">
 <nav class="sidebar" aria-label="Course weeks">
 <div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="sidebar-search">
+<input type="search" id="sidebar-search-input" class="search-input" placeholder="&#xf002; Search lessons…" aria-label="Search lessons">
+<div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+</div>
 <div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
 <a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
 <a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
@@ -109,7 +113,7 @@
 <li>Basic HTTP server creation with the <code>http</code> module</li>
 </ul>
 <p>Navigate to the <code>week_09_express_and_cors/movie-buzz-api</code> directory. This builds on your Week 8 Node.js and HTTP knowledge by adding the Express framework.</p>
-<pre><code class="language-bash">cd week_09_express_and_cors/movie-buzz-api
+<pre class="hljs"><code><span class="hljs-built_in">cd</span> week_09_express_and_cors/movie-buzz-api
 npm install
 node server.js
 </code></pre>
@@ -119,162 +123,162 @@ node server.js
 <p>Before building the Movie Buzz API, let's understand Express with simple examples:</p>
 <h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-your-first-express-server" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Your First Express Server</h3>
 <p>Create <code>basic-express.js</code>:</p>
-<pre><code class="language-javascript">// Import Express
-const express = require('express');
+<pre class="hljs"><code><span class="hljs-comment">// Import Express</span>
+<span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);
 
-// Create an Express application
-const app = express();
+<span class="hljs-comment">// Create an Express application</span>
+<span class="hljs-keyword">const</span> app = <span class="hljs-title function_">express</span>();
 
-// Define a simple route
-app.get('/', (req, res) =&gt; {
-  res.send('&lt;h1&gt;Hello from Express!&lt;/h1&gt;');
+<span class="hljs-comment">// Define a simple route</span>
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.<span class="hljs-title function_">send</span>(<span class="hljs-string">&#x27;&lt;h1&gt;Hello from Express!&lt;/h1&gt;&#x27;</span>);
 });
 
-// Define another route
-app.get('/about', (req, res) =&gt; {
-  res.send('&lt;h1&gt;About Page&lt;/h1&gt;&lt;p&gt;This is an Express server&lt;/p&gt;');
+<span class="hljs-comment">// Define another route</span>
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/about&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.<span class="hljs-title function_">send</span>(<span class="hljs-string">&#x27;&lt;h1&gt;About Page&lt;/h1&gt;&lt;p&gt;This is an Express server&lt;/p&gt;&#x27;</span>);
 });
 
-// Start the server
-const PORT = 3000;
-app.listen(PORT, () =&gt; {
-  console.log(`Express server running at http://localhost:${PORT}`);
+<span class="hljs-comment">// Start the server</span>
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">PORT</span> = <span class="hljs-number">3000</span>;
+app.<span class="hljs-title function_">listen</span>(<span class="hljs-variable constant_">PORT</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Express server running at http://localhost:<span class="hljs-subst">${PORT}</span>`</span>);
 });
 </code></pre>
 <p>Run it:</p>
-<pre><code class="language-bash">node basic-express.js
+<pre class="hljs"><code>node basic-express.js
 </code></pre>
 <h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-handling-different-http-methods" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Handling Different HTTP Methods</h3>
 <p>Create <code>methods-example.js</code>:</p>
-<pre><code class="language-javascript">const express = require('express');
-const app = express();
+<pre class="hljs"><code><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);
+<span class="hljs-keyword">const</span> app = <span class="hljs-title function_">express</span>();
 
-// Middleware to parse JSON
-app.use(express.json());
+<span class="hljs-comment">// Middleware to parse JSON</span>
+app.<span class="hljs-title function_">use</span>(express.<span class="hljs-title function_">json</span>());
 
-// Sample data
-let users = [
-  { id: 1, name: 'John' },
-  { id: 2, name: 'Jane' }
+<span class="hljs-comment">// Sample data</span>
+<span class="hljs-keyword">let</span> users = [
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;John&#x27;</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Jane&#x27;</span> }
 ];
 
-// GET - Read all users
-app.get('/users', (req, res) =&gt; {
-  res.json(users);
+<span class="hljs-comment">// GET - Read all users</span>
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/users&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.<span class="hljs-title function_">json</span>(users);
 });
 
-// GET - Read single user
-app.get('/users/:id', (req, res) =&gt; {
-  const id = parseInt(req.params.id);
-  const user = users.find(u =&gt; u.id === id);
+<span class="hljs-comment">// GET - Read single user</span>
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/users/:id&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> id = <span class="hljs-built_in">parseInt</span>(req.<span class="hljs-property">params</span>.<span class="hljs-property">id</span>);
+  <span class="hljs-keyword">const</span> user = users.<span class="hljs-title function_">find</span>(<span class="hljs-function"><span class="hljs-params">u</span> =&gt;</span> u.<span class="hljs-property">id</span> === id);
 
-  if (!user) {
-    return res.status(404).json({ error: 'User not found' });
+  <span class="hljs-keyword">if</span> (!user) {
+    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">json</span>({ <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;User not found&#x27;</span> });
   }
 
-  res.json(user);
+  res.<span class="hljs-title function_">json</span>(user);
 });
 
-// POST - Create new user
-app.post('/users', (req, res) =&gt; {
-  const newUser = {
-    id: users.length + 1,
-    name: req.body.name
+<span class="hljs-comment">// POST - Create new user</span>
+app.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/users&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> newUser = {
+    <span class="hljs-attr">id</span>: users.<span class="hljs-property">length</span> + <span class="hljs-number">1</span>,
+    <span class="hljs-attr">name</span>: req.<span class="hljs-property">body</span>.<span class="hljs-property">name</span>
   };
 
-  users.push(newUser);
-  res.status(201).json(newUser);
+  users.<span class="hljs-title function_">push</span>(newUser);
+  res.<span class="hljs-title function_">status</span>(<span class="hljs-number">201</span>).<span class="hljs-title function_">json</span>(newUser);
 });
 
-// PUT - Update user
-app.put('/users/:id', (req, res) =&gt; {
-  const id = parseInt(req.params.id);
-  const user = users.find(u =&gt; u.id === id);
+<span class="hljs-comment">// PUT - Update user</span>
+app.<span class="hljs-title function_">put</span>(<span class="hljs-string">&#x27;/users/:id&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> id = <span class="hljs-built_in">parseInt</span>(req.<span class="hljs-property">params</span>.<span class="hljs-property">id</span>);
+  <span class="hljs-keyword">const</span> user = users.<span class="hljs-title function_">find</span>(<span class="hljs-function"><span class="hljs-params">u</span> =&gt;</span> u.<span class="hljs-property">id</span> === id);
 
-  if (!user) {
-    return res.status(404).json({ error: 'User not found' });
+  <span class="hljs-keyword">if</span> (!user) {
+    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">json</span>({ <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;User not found&#x27;</span> });
   }
 
-  user.name = req.body.name;
-  res.json(user);
+  user.<span class="hljs-property">name</span> = req.<span class="hljs-property">body</span>.<span class="hljs-property">name</span>;
+  res.<span class="hljs-title function_">json</span>(user);
 });
 
-// DELETE - Remove user
-app.delete('/users/:id', (req, res) =&gt; {
-  const id = parseInt(req.params.id);
-  const index = users.findIndex(u =&gt; u.id === id);
+<span class="hljs-comment">// DELETE - Remove user</span>
+app.<span class="hljs-title function_">delete</span>(<span class="hljs-string">&#x27;/users/:id&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> id = <span class="hljs-built_in">parseInt</span>(req.<span class="hljs-property">params</span>.<span class="hljs-property">id</span>);
+  <span class="hljs-keyword">const</span> index = users.<span class="hljs-title function_">findIndex</span>(<span class="hljs-function"><span class="hljs-params">u</span> =&gt;</span> u.<span class="hljs-property">id</span> === id);
 
-  if (index === -1) {
-    return res.status(404).json({ error: 'User not found' });
+  <span class="hljs-keyword">if</span> (index === -<span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">json</span>({ <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;User not found&#x27;</span> });
   }
 
-  users.splice(index, 1);
-  res.json({ message: 'User deleted' });
+  users.<span class="hljs-title function_">splice</span>(index, <span class="hljs-number">1</span>);
+  res.<span class="hljs-title function_">json</span>({ <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;User deleted&#x27;</span> });
 });
 
-app.listen(3000, () =&gt; {
-  console.log('Server running on port 3000');
+app.<span class="hljs-title function_">listen</span>(<span class="hljs-number">3000</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Server running on port 3000&#x27;</span>);
 });
 </code></pre>
 <h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-using-middleware" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Using Middleware</h3>
 <p>Create <code>middleware-example.js</code>:</p>
-<pre><code class="language-javascript">const express = require('express');
-const app = express();
+<pre class="hljs"><code><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);
+<span class="hljs-keyword">const</span> app = <span class="hljs-title function_">express</span>();
 
-// Built-in middleware for JSON parsing
-app.use(express.json());
+<span class="hljs-comment">// Built-in middleware for JSON parsing</span>
+app.<span class="hljs-title function_">use</span>(express.<span class="hljs-title function_">json</span>());
 
-// Custom middleware - Logger
-app.use((req, res, next) =&gt; {
-  console.log(`${req.method} ${req.url} - ${new Date().toISOString()}`);
-  next(); // Call next() to continue to the next middleware/route
+<span class="hljs-comment">// Custom middleware - Logger</span>
+app.<span class="hljs-title function_">use</span>(<span class="hljs-function">(<span class="hljs-params">req, res, next</span>) =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`<span class="hljs-subst">${req.method}</span> <span class="hljs-subst">${req.url}</span> - <span class="hljs-subst">${<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().toISOString()}</span>`</span>);
+  <span class="hljs-title function_">next</span>(); <span class="hljs-comment">// Call next() to continue to the next middleware/route</span>
 });
 
-// Custom middleware - Authentication simulation
-function authenticate(req, res, next) {
-  const token = req.headers.authorization;
+<span class="hljs-comment">// Custom middleware - Authentication simulation</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">authenticate</span>(<span class="hljs-params">req, res, next</span>) {
+  <span class="hljs-keyword">const</span> token = req.<span class="hljs-property">headers</span>.<span class="hljs-property">authorization</span>;
 
-  if (!token) {
-    return res.status(401).json({ error: 'No token provided' });
+  <span class="hljs-keyword">if</span> (!token) {
+    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">401</span>).<span class="hljs-title function_">json</span>({ <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;No token provided&#x27;</span> });
   }
 
-  // Simulate token validation
-  if (token === 'Bearer valid-token') {
-    next(); // Token is valid, continue
-  } else {
-    res.status(401).json({ error: 'Invalid token' });
+  <span class="hljs-comment">// Simulate token validation</span>
+  <span class="hljs-keyword">if</span> (token === <span class="hljs-string">&#x27;Bearer valid-token&#x27;</span>) {
+    <span class="hljs-title function_">next</span>(); <span class="hljs-comment">// Token is valid, continue</span>
+  } <span class="hljs-keyword">else</span> {
+    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">401</span>).<span class="hljs-title function_">json</span>({ <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Invalid token&#x27;</span> });
   }
 }
 
-// Public route (no authentication)
-app.get('/public', (req, res) =&gt; {
-  res.json({ message: 'This is a public endpoint' });
+<span class="hljs-comment">// Public route (no authentication)</span>
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/public&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.<span class="hljs-title function_">json</span>({ <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;This is a public endpoint&#x27;</span> });
 });
 
-// Protected route (requires authentication)
-app.get('/protected', authenticate, (req, res) =&gt; {
-  res.json({ message: 'This is a protected endpoint', secret: 'Only authenticated users see this' });
+<span class="hljs-comment">// Protected route (requires authentication)</span>
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/protected&#x27;</span>, authenticate, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.<span class="hljs-title function_">json</span>({ <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;This is a protected endpoint&#x27;</span>, <span class="hljs-attr">secret</span>: <span class="hljs-string">&#x27;Only authenticated users see this&#x27;</span> });
 });
 
-// Error handling middleware
-app.use((err, req, res, next) =&gt; {
-  console.error(err.stack);
-  res.status(500).json({ error: 'Something went wrong!' });
+<span class="hljs-comment">// Error handling middleware</span>
+app.<span class="hljs-title function_">use</span>(<span class="hljs-function">(<span class="hljs-params">err, req, res, next</span>) =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(err.<span class="hljs-property">stack</span>);
+  res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({ <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Something went wrong!&#x27;</span> });
 });
 
-app.listen(3000, () =&gt; {
-  console.log('Server with middleware running on port 3000');
+app.<span class="hljs-title function_">listen</span>(<span class="hljs-number">3000</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Server with middleware running on port 3000&#x27;</span>);
 });
 </code></pre>
 <p>Test with:</p>
-<pre><code class="language-bash"># Public endpoint
+<pre class="hljs"><code><span class="hljs-comment"># Public endpoint</span>
 curl http://localhost:3000/public
 
-# Protected endpoint (should fail)
+<span class="hljs-comment"># Protected endpoint (should fail)</span>
 curl http://localhost:3000/protected
 
-# Protected endpoint (should succeed)
-curl -H &quot;Authorization: Bearer valid-token&quot; http://localhost:3000/protected
+<span class="hljs-comment"># Protected endpoint (should succeed)</span>
+curl -H <span class="hljs-string">&quot;Authorization: Bearer valid-token&quot;</span> http://localhost:3000/protected
 </code></pre>
 <blockquote class="callout callout--reflection-try" style="--tilt:0.4deg;--glow-intensity:0.76">
 <div class="callout-label lift"><i class="fas fa-tools callout-icon" aria-hidden="true"></i><span>Hands-On — Try It Out</span></div>
@@ -299,21 +303,21 @@ Create and test these Express examples to understand:</p>
 <li><strong>Better error handling</strong>: Centralized error management</li>
 </ul>
 <p><strong>Compare what you built in Week 8 vs Express:</strong></p>
-<pre><code class="language-javascript">// Week 8's HTTP server
-if (request.url === '/movies' &amp;&amp; request.method === 'GET') {
-  response.writeHead(200, { 'Content-Type': 'application/json' });
-  response.end(JSON.stringify(movies));
-} else if (request.url === '/movies' &amp;&amp; request.method === 'POST') {
-  // Handle POST...
+<pre class="hljs"><code><span class="hljs-comment">// Week 8&#x27;s HTTP server</span>
+<span class="hljs-keyword">if</span> (request.<span class="hljs-property">url</span> === <span class="hljs-string">&#x27;/movies&#x27;</span> &amp;&amp; request.<span class="hljs-property">method</span> === <span class="hljs-string">&#x27;GET&#x27;</span>) {
+  response.<span class="hljs-title function_">writeHead</span>(<span class="hljs-number">200</span>, { <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span> });
+  response.<span class="hljs-title function_">end</span>(<span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(movies));
+} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (request.<span class="hljs-property">url</span> === <span class="hljs-string">&#x27;/movies&#x27;</span> &amp;&amp; request.<span class="hljs-property">method</span> === <span class="hljs-string">&#x27;POST&#x27;</span>) {
+  <span class="hljs-comment">// Handle POST...</span>
 }
 
-// This week's Express server
-app.get('/movies', (req, res) =&gt; {
-  res.json(movies);
+<span class="hljs-comment">// This week&#x27;s Express server</span>
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/movies&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.<span class="hljs-title function_">json</span>(movies);
 });
 
-app.post('/movies', (req, res) =&gt; {
-  // Handle POST...
+app.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/movies&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-comment">// Handle POST...</span>
 });
 </code></pre>
 <p>Express is the &quot;E&quot; in MEAN and MERN stack, making it an essential part of full-stack JavaScript development.</p>
@@ -325,220 +329,220 @@ Based on your HTTP server experience from Week 8, what specific problems do you 
 <hr>
 <h2 id="setting-up-express" tabindex="-1">Setting Up Express</h2>
 <p>First, let's install Express and other necessary packages:</p>
-<pre><code class="language-bash">npm install express cors
+<pre class="hljs"><code>npm install express cors
 npm install --save-dev nodemon
 </code></pre>
 <p>Update your <code>package.json</code> scripts to include development server with auto-restart:</p>
-<pre><code class="language-json">{
-  &quot;scripts&quot;: {
-    &quot;start&quot;: &quot;node server.js&quot;,
-    &quot;dev&quot;: &quot;nodemon server.js&quot;,
-    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;
-  }
-}
+<pre class="hljs"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;start&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;node server.js&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;dev&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;nodemon server.js&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;test&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
 </code></pre>
 <p>Create a basic Express server by updating your <code>server.js</code>:</p>
-<pre><code class="language-javascript">const express = require('express');
-const cors = require('cors');
-const Movie = require('./models/Movie');
+<pre class="hljs"><code><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);
+<span class="hljs-keyword">const</span> cors = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;cors&#x27;</span>);
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">Movie</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./models/Movie&#x27;</span>);
 
-// Create Express application
-const app = express();
-const PORT = process.env.PORT || 4000;
+<span class="hljs-comment">// Create Express application</span>
+<span class="hljs-keyword">const</span> app = <span class="hljs-title function_">express</span>();
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">PORT</span> = process.<span class="hljs-property">env</span>.<span class="hljs-property">PORT</span> || <span class="hljs-number">4000</span>;
 
-// Middleware
-app.use(express.json()); // Parse JSON request bodies
-app.use(cors()); // Enable CORS for all routes
+<span class="hljs-comment">// Middleware</span>
+app.<span class="hljs-title function_">use</span>(express.<span class="hljs-title function_">json</span>()); <span class="hljs-comment">// Parse JSON request bodies</span>
+app.<span class="hljs-title function_">use</span>(<span class="hljs-title function_">cors</span>()); <span class="hljs-comment">// Enable CORS for all routes</span>
 
-// Basic route
-app.get('/', (req, res) =&gt; {
-  res.json({
-    message: 'Welcome to Movie Buzz API',
-    version: '1.0.0',
-    endpoints: [
-      'GET /api/movies - Get all movies',
-      'GET /api/movies/:id - Get movie by ID',
-      'POST /api/movies - Create new movie',
-      'PUT /api/movies/:id - Update movie',
-      'DELETE /api/movies/:id - Delete movie'
+<span class="hljs-comment">// Basic route</span>
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Welcome to Movie Buzz API&#x27;</span>,
+    <span class="hljs-attr">version</span>: <span class="hljs-string">&#x27;1.0.0&#x27;</span>,
+    <span class="hljs-attr">endpoints</span>: [
+      <span class="hljs-string">&#x27;GET /api/movies - Get all movies&#x27;</span>,
+      <span class="hljs-string">&#x27;GET /api/movies/:id - Get movie by ID&#x27;</span>,
+      <span class="hljs-string">&#x27;POST /api/movies - Create new movie&#x27;</span>,
+      <span class="hljs-string">&#x27;PUT /api/movies/:id - Update movie&#x27;</span>,
+      <span class="hljs-string">&#x27;DELETE /api/movies/:id - Delete movie&#x27;</span>
     ]
   });
 });
 
-// Test route
-app.get('/api/test', (req, res) =&gt; {
-  res.json({ message: 'API is working!' });
+<span class="hljs-comment">// Test route</span>
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/api/test&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.<span class="hljs-title function_">json</span>({ <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;API is working!&#x27;</span> });
 });
 
-// Start server
-app.listen(PORT, () =&gt; {
-  console.log(`🎬 Movie Buzz API running on http://localhost:${PORT}`);
+<span class="hljs-comment">// Start server</span>
+app.<span class="hljs-title function_">listen</span>(<span class="hljs-variable constant_">PORT</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`🎬 Movie Buzz API running on http://localhost:<span class="hljs-subst">${PORT}</span>`</span>);
 });
 </code></pre>
 <p>Test your server:</p>
-<pre><code class="language-bash">npm run dev
+<pre class="hljs"><code>npm run dev
 </code></pre>
 <p>Visit <code>http://localhost:4000</code> in your browser to see the API documentation.</p>
 <hr>
 <h2 id="creating-api-routes" tabindex="-1">Creating API Routes</h2>
 <p>Let's create proper REST API routes for our Movie operations. First, create a controllers directory:</p>
-<pre><code class="language-bash">mkdir controllers
-touch controllers/movieController.js
+<pre class="hljs"><code><span class="hljs-built_in">mkdir</span> controllers
+<span class="hljs-built_in">touch</span> controllers/movieController.js
 </code></pre>
 <p>Create the movie controller in <code>controllers/movieController.js</code>:</p>
-<pre><code class="language-javascript">const Movie = require('../models/Movie');
+<pre class="hljs"><code><span class="hljs-keyword">const</span> <span class="hljs-title class_">Movie</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;../models/Movie&#x27;</span>);
 
-// Get all movies
-const getAllMovies = (req, res) =&gt; {
-  try {
-    const movies = Movie.getAll();
-    res.json({
-      success: true,
-      count: movies.length,
-      data: movies
+<span class="hljs-comment">// Get all movies</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">getAllMovies</span> = (<span class="hljs-params">req, res</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> movies = <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">getAll</span>();
+    res.<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">count</span>: movies.<span class="hljs-property">length</span>,
+      <span class="hljs-attr">data</span>: movies
     });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: 'Failed to retrieve movies'
+  } <span class="hljs-keyword">catch</span> (error) {
+    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Failed to retrieve movies&#x27;</span>
     });
   }
 };
 
-// Get single movie by ID
-const getMovieById = (req, res) =&gt; {
-  try {
-    const { id } = req.params;
-    const movie = Movie.findById(id);
+<span class="hljs-comment">// Get single movie by ID</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">getMovieById</span> = (<span class="hljs-params">req, res</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> { id } = req.<span class="hljs-property">params</span>;
+    <span class="hljs-keyword">const</span> movie = <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findById</span>(id);
     
-    if (!movie) {
-      return res.status(404).json({
-        success: false,
-        error: 'Movie not found'
+    <span class="hljs-keyword">if</span> (!movie) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Movie not found&#x27;</span>
       });
     }
     
-    res.json({
-      success: true,
-      data: movie
+    res.<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">data</span>: movie
     });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: 'Failed to retrieve movie'
-    });
-  }
-};
-
-// Create new movie
-const createMovie = (req, res) =&gt; {
-  try {
-    const movieData = req.body;
-    
-    // Basic validation
-    if (!movieData.name || !movieData.year || !movieData.director) {
-      return res.status(400).json({
-        success: false,
-        error: 'Name, year, and director are required fields'
-      });
-    }
-    
-    const newMovie = new Movie(movieData);
-    const saved = newMovie.save();
-    
-    if (saved) {
-      res.status(201).json({
-        success: true,
-        data: newMovie
-      });
-    } else {
-      res.status(500).json({
-        success: false,
-        error: 'Failed to create movie'
-      });
-    }
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: 'Failed to create movie'
+  } <span class="hljs-keyword">catch</span> (error) {
+    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Failed to retrieve movie&#x27;</span>
     });
   }
 };
 
-// Update existing movie
-const updateMovie = (req, res) =&gt; {
-  try {
-    const { id } = req.params;
-    const updateData = req.body;
+<span class="hljs-comment">// Create new movie</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">createMovie</span> = (<span class="hljs-params">req, res</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> movieData = req.<span class="hljs-property">body</span>;
     
-    // Check if movie exists
-    const existingMovie = Movie.findById(id);
-    if (!existingMovie) {
-      return res.status(404).json({
-        success: false,
-        error: 'Movie not found'
+    <span class="hljs-comment">// Basic validation</span>
+    <span class="hljs-keyword">if</span> (!movieData.<span class="hljs-property">name</span> || !movieData.<span class="hljs-property">year</span> || !movieData.<span class="hljs-property">director</span>) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Name, year, and director are required fields&#x27;</span>
       });
     }
     
-    // Create updated movie object
-    const updatedMovie = new Movie({ ...existingMovie, ...updateData, id: parseInt(id) });
-    const saved = updatedMovie.save();
+    <span class="hljs-keyword">const</span> newMovie = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Movie</span>(movieData);
+    <span class="hljs-keyword">const</span> saved = newMovie.<span class="hljs-title function_">save</span>();
     
-    if (saved) {
-      res.json({
-        success: true,
-        data: updatedMovie
+    <span class="hljs-keyword">if</span> (saved) {
+      res.<span class="hljs-title function_">status</span>(<span class="hljs-number">201</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">data</span>: newMovie
       });
-    } else {
-      res.status(500).json({
-        success: false,
-        error: 'Failed to update movie'
+    } <span class="hljs-keyword">else</span> {
+      res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Failed to create movie&#x27;</span>
       });
     }
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: 'Failed to update movie'
+  } <span class="hljs-keyword">catch</span> (error) {
+    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Failed to create movie&#x27;</span>
     });
   }
 };
 
-// Delete movie
-const deleteMovie = (req, res) =&gt; {
-  try {
-    const { id } = req.params;
+<span class="hljs-comment">// Update existing movie</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">updateMovie</span> = (<span class="hljs-params">req, res</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> { id } = req.<span class="hljs-property">params</span>;
+    <span class="hljs-keyword">const</span> updateData = req.<span class="hljs-property">body</span>;
     
-    // Check if movie exists
-    const existingMovie = Movie.findById(id);
-    if (!existingMovie) {
-      return res.status(404).json({
-        success: false,
-        error: 'Movie not found'
+    <span class="hljs-comment">// Check if movie exists</span>
+    <span class="hljs-keyword">const</span> existingMovie = <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findById</span>(id);
+    <span class="hljs-keyword">if</span> (!existingMovie) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Movie not found&#x27;</span>
       });
     }
     
-    const deleted = Movie.delete(id);
+    <span class="hljs-comment">// Create updated movie object</span>
+    <span class="hljs-keyword">const</span> updatedMovie = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Movie</span>({ ...existingMovie, ...updateData, <span class="hljs-attr">id</span>: <span class="hljs-built_in">parseInt</span>(id) });
+    <span class="hljs-keyword">const</span> saved = updatedMovie.<span class="hljs-title function_">save</span>();
     
-    if (deleted) {
-      res.json({
-        success: true,
-        message: 'Movie deleted successfully'
+    <span class="hljs-keyword">if</span> (saved) {
+      res.<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">data</span>: updatedMovie
       });
-    } else {
-      res.status(500).json({
-        success: false,
-        error: 'Failed to delete movie'
+    } <span class="hljs-keyword">else</span> {
+      res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Failed to update movie&#x27;</span>
       });
     }
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: 'Failed to delete movie'
+  } <span class="hljs-keyword">catch</span> (error) {
+    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Failed to update movie&#x27;</span>
     });
   }
 };
 
-module.exports = {
+<span class="hljs-comment">// Delete movie</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">deleteMovie</span> = (<span class="hljs-params">req, res</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> { id } = req.<span class="hljs-property">params</span>;
+    
+    <span class="hljs-comment">// Check if movie exists</span>
+    <span class="hljs-keyword">const</span> existingMovie = <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findById</span>(id);
+    <span class="hljs-keyword">if</span> (!existingMovie) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Movie not found&#x27;</span>
+      });
+    }
+    
+    <span class="hljs-keyword">const</span> deleted = <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">delete</span>(id);
+    
+    <span class="hljs-keyword">if</span> (deleted) {
+      res.<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Movie deleted successfully&#x27;</span>
+      });
+    } <span class="hljs-keyword">else</span> {
+      res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Failed to delete movie&#x27;</span>
+      });
+    }
+  } <span class="hljs-keyword">catch</span> (error) {
+    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Failed to delete movie&#x27;</span>
+    });
+  }
+};
+
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = {
   getAllMovies,
   getMovieById,
   createMovie,
@@ -547,72 +551,72 @@ module.exports = {
 };
 </code></pre>
 <p>Now create routes in a new file <code>routes/movieRoutes.js</code>:</p>
-<pre><code class="language-bash">mkdir routes
-touch routes/movieRoutes.js
+<pre class="hljs"><code><span class="hljs-built_in">mkdir</span> routes
+<span class="hljs-built_in">touch</span> routes/movieRoutes.js
 </code></pre>
-<pre><code class="language-javascript">const express = require('express');
-const {
+<pre class="hljs"><code><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);
+<span class="hljs-keyword">const</span> {
   getAllMovies,
   getMovieById,
   createMovie,
   updateMovie,
   deleteMovie
-} = require('../controllers/movieController');
+} = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;../controllers/movieController&#x27;</span>);
 
-const router = express.Router();
+<span class="hljs-keyword">const</span> router = express.<span class="hljs-title class_">Router</span>();
 
-// Movie routes
-router.get('/', getAllMovies);           // GET /api/movies
-router.get('/:id', getMovieById);        // GET /api/movies/:id
-router.post('/', createMovie);           // POST /api/movies
-router.put('/:id', updateMovie);         // PUT /api/movies/:id
-router.delete('/:id', deleteMovie);      // DELETE /api/movies/:id
+<span class="hljs-comment">// Movie routes</span>
+router.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/&#x27;</span>, getAllMovies);           <span class="hljs-comment">// GET /api/movies</span>
+router.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/:id&#x27;</span>, getMovieById);        <span class="hljs-comment">// GET /api/movies/:id</span>
+router.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/&#x27;</span>, createMovie);           <span class="hljs-comment">// POST /api/movies</span>
+router.<span class="hljs-title function_">put</span>(<span class="hljs-string">&#x27;/:id&#x27;</span>, updateMovie);         <span class="hljs-comment">// PUT /api/movies/:id</span>
+router.<span class="hljs-title function_">delete</span>(<span class="hljs-string">&#x27;/:id&#x27;</span>, deleteMovie);      <span class="hljs-comment">// DELETE /api/movies/:id</span>
 
-module.exports = router;
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = router;
 </code></pre>
 <p>Update your main <code>server.js</code> to use the routes:</p>
-<pre><code class="language-javascript">const express = require('express');
-const cors = require('cors');
-const movieRoutes = require('./routes/movieRoutes');
+<pre class="hljs"><code><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);
+<span class="hljs-keyword">const</span> cors = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;cors&#x27;</span>);
+<span class="hljs-keyword">const</span> movieRoutes = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./routes/movieRoutes&#x27;</span>);
 
-// Create Express application
-const app = express();
-const PORT = process.env.PORT || 4000;
+<span class="hljs-comment">// Create Express application</span>
+<span class="hljs-keyword">const</span> app = <span class="hljs-title function_">express</span>();
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">PORT</span> = process.<span class="hljs-property">env</span>.<span class="hljs-property">PORT</span> || <span class="hljs-number">4000</span>;
 
-// Middleware
-app.use(express.json());
-app.use(cors());
+<span class="hljs-comment">// Middleware</span>
+app.<span class="hljs-title function_">use</span>(express.<span class="hljs-title function_">json</span>());
+app.<span class="hljs-title function_">use</span>(<span class="hljs-title function_">cors</span>());
 
-// Routes
-app.get('/', (req, res) =&gt; {
-  res.json({
-    message: 'Welcome to Movie Buzz API',
-    version: '1.0.0',
-    endpoints: [
-      'GET /api/movies - Get all movies',
-      'GET /api/movies/:id - Get movie by ID',
-      'POST /api/movies - Create new movie',
-      'PUT /api/movies/:id - Update movie',
-      'DELETE /api/movies/:id - Delete movie'
+<span class="hljs-comment">// Routes</span>
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Welcome to Movie Buzz API&#x27;</span>,
+    <span class="hljs-attr">version</span>: <span class="hljs-string">&#x27;1.0.0&#x27;</span>,
+    <span class="hljs-attr">endpoints</span>: [
+      <span class="hljs-string">&#x27;GET /api/movies - Get all movies&#x27;</span>,
+      <span class="hljs-string">&#x27;GET /api/movies/:id - Get movie by ID&#x27;</span>,
+      <span class="hljs-string">&#x27;POST /api/movies - Create new movie&#x27;</span>,
+      <span class="hljs-string">&#x27;PUT /api/movies/:id - Update movie&#x27;</span>,
+      <span class="hljs-string">&#x27;DELETE /api/movies/:id - Delete movie&#x27;</span>
     ]
   });
 });
 
-// API routes
-app.use('/api/movies', movieRoutes);
+<span class="hljs-comment">// API routes</span>
+app.<span class="hljs-title function_">use</span>(<span class="hljs-string">&#x27;/api/movies&#x27;</span>, movieRoutes);
 
-// 404 handler
-app.use('*', (req, res) =&gt; {
-  res.status(404).json({
-    success: false,
-    error: 'Route not found'
+<span class="hljs-comment">// 404 handler</span>
+app.<span class="hljs-title function_">use</span>(<span class="hljs-string">&#x27;*&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Route not found&#x27;</span>
   });
 });
 
-// Start server
-app.listen(PORT, () =&gt; {
-  console.log(`🎬 Movie Buzz API running on http://localhost:${PORT}`);
-  console.log(`📖 API documentation available at http://localhost:${PORT}`);
+<span class="hljs-comment">// Start server</span>
+app.<span class="hljs-title function_">listen</span>(<span class="hljs-variable constant_">PORT</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`🎬 Movie Buzz API running on http://localhost:<span class="hljs-subst">${PORT}</span>`</span>);
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`📖 API documentation available at http://localhost:<span class="hljs-subst">${PORT}</span>`</span>);
 });
 </code></pre>
 <hr>
@@ -620,14 +624,14 @@ app.listen(PORT, () =&gt; {
 <p>CORS (Cross-Origin Resource Sharing) is a security feature implemented by web browsers that restricts web pages from making requests to a different domain, protocol, or port than the one serving the web page.</p>
 <p><strong>The Problem</strong>: Your React app runs on <code>http://localhost:3000</code> but your API runs on <code>http://localhost:4000</code>. Without CORS, browsers will block these requests.</p>
 <p><strong>The Solution</strong>: Configure your Express server to allow cross-origin requests:</p>
-<pre><code class="language-javascript">// Basic CORS (allows all origins)
-app.use(cors());
+<pre class="hljs"><code><span class="hljs-comment">// Basic CORS (allows all origins)</span>
+app.<span class="hljs-title function_">use</span>(<span class="hljs-title function_">cors</span>());
 
-// Configured CORS (more secure for production)
-app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:3001'],
-  credentials: true,
-  optionsSuccessStatus: 200
+<span class="hljs-comment">// Configured CORS (more secure for production)</span>
+app.<span class="hljs-title function_">use</span>(<span class="hljs-title function_">cors</span>({
+  <span class="hljs-attr">origin</span>: [<span class="hljs-string">&#x27;http://localhost:3000&#x27;</span>, <span class="hljs-string">&#x27;http://localhost:3001&#x27;</span>],
+  <span class="hljs-attr">credentials</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">optionsSuccessStatus</span>: <span class="hljs-number">200</span>
 }));
 </code></pre>
 <p>For development, we'll use the basic configuration, but in production, you should specify exact origins.</p>
@@ -645,16 +649,16 @@ app.use(cors({
 <h3 id="delete-apimoviesid" tabindex="-1">DELETE /api/movies/:id</h3>
 <p>Deletes a movie. Returns 404 if movie doesn't exist.</p>
 <p>All endpoints return JSON with consistent structure:</p>
-<pre><code class="language-json">{
-  &quot;success&quot;: true,
-  &quot;data&quot;: { ... }
-}
+<pre class="hljs"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;success&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> ... <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
 </code></pre>
 <p>Or for errors:</p>
-<pre><code class="language-json">{
-  &quot;success&quot;: false,
-  &quot;error&quot;: &quot;Error message&quot;
-}
+<pre class="hljs"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;success&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;error&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Error message&quot;</span>
+<span class="hljs-punctuation">}</span>
 </code></pre>
 <hr>
 <h2 id="testing-api-endpoints" tabindex="-1">Testing API Endpoints</h2>
@@ -665,228 +669,228 @@ app.use(cors({
 <li><code>http://localhost:4000/api/movies/1</code> - Get movie with ID 1</li>
 </ul>
 <h3 id="using-curl-command-line" tabindex="-1">Using curl (command line)</h3>
-<pre><code class="language-bash"># Get all movies
+<pre class="hljs"><code><span class="hljs-comment"># Get all movies</span>
 curl http://localhost:4000/api/movies
 
-# Get movie by ID
+<span class="hljs-comment"># Get movie by ID</span>
 curl http://localhost:4000/api/movies/1
 
-# Create new movie
+<span class="hljs-comment"># Create new movie</span>
 curl -X POST http://localhost:4000/api/movies \
-  -H &quot;Content-Type: application/json&quot; \
-  -d '{&quot;name&quot;:&quot;New Movie&quot;,&quot;year&quot;:2024,&quot;director&quot;:&quot;Test Director&quot;,&quot;rating&quot;:&quot;PG&quot;,&quot;length&quot;:&quot;120 minutes&quot;,&quot;description&quot;:&quot;A test movie&quot;,&quot;genre&quot;:[&quot;Drama&quot;],&quot;stars&quot;:[&quot;Actor One&quot;,&quot;Actor Two&quot;]}'
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -d <span class="hljs-string">&#x27;{&quot;name&quot;:&quot;New Movie&quot;,&quot;year&quot;:2024,&quot;director&quot;:&quot;Test Director&quot;,&quot;rating&quot;:&quot;PG&quot;,&quot;length&quot;:&quot;120 minutes&quot;,&quot;description&quot;:&quot;A test movie&quot;,&quot;genre&quot;:[&quot;Drama&quot;],&quot;stars&quot;:[&quot;Actor One&quot;,&quot;Actor Two&quot;]}&#x27;</span>
 
-# Update movie
+<span class="hljs-comment"># Update movie</span>
 curl -X PUT http://localhost:4000/api/movies/1 \
-  -H &quot;Content-Type: application/json&quot; \
-  -d '{&quot;name&quot;:&quot;Updated Movie Title&quot;}'
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -d <span class="hljs-string">&#x27;{&quot;name&quot;:&quot;Updated Movie Title&quot;}&#x27;</span>
 
-# Delete movie
+<span class="hljs-comment"># Delete movie</span>
 curl -X DELETE http://localhost:4000/api/movies/1
 </code></pre>
 <h3 id="using-javascript-fetch" tabindex="-1">Using JavaScript fetch()</h3>
-<pre><code class="language-javascript">// Test in browser console
-fetch('http://localhost:4000/api/movies')
-  .then(response =&gt; response.json())
-  .then(data =&gt; console.log(data));
+<pre class="hljs"><code><span class="hljs-comment">// Test in browser console</span>
+<span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;http://localhost:4000/api/movies&#x27;</span>)
+  .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> response.<span class="hljs-title function_">json</span>())
+  .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data));
 </code></pre>
 <hr>
 <h2 id="connecting-react-frontend" tabindex="-1">Connecting React Frontend</h2>
 <p>Now let's update your React frontend to use the new API. Update your React <code>App.js</code>:</p>
-<pre><code class="language-javascript">import React, { useState, useEffect } from 'react';
-import MoviesList from './components/MoviesList';
-import MovieForm from './components/MovieForm';
-import SearchBar from './components/SearchBar';
-import './App.css';
+<pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { useState, useEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">MoviesList</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./components/MoviesList&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">MovieForm</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./components/MovieForm&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">SearchBar</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./components/SearchBar&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./App.css&#x27;</span>;
 
-const API_BASE_URL = 'http://localhost:4000/api';
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">API_BASE_URL</span> = <span class="hljs-string">&#x27;http://localhost:4000/api&#x27;</span>;
 
-function App() {
-  const [movies, setMovies] = useState([]);
-  const [filteredMovies, setFilteredMovies] = useState([]);
-  const [showForm, setShowForm] = useState(false);
-  const [editingMovie, setEditingMovie] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> [movies, setMovies] = <span class="hljs-title function_">useState</span>([]);
+  <span class="hljs-keyword">const</span> [filteredMovies, setFilteredMovies] = <span class="hljs-title function_">useState</span>([]);
+  <span class="hljs-keyword">const</span> [showForm, setShowForm] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">false</span>);
+  <span class="hljs-keyword">const</span> [editingMovie, setEditingMovie] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">null</span>);
+  <span class="hljs-keyword">const</span> [loading, setLoading] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">true</span>);
+  <span class="hljs-keyword">const</span> [error, setError] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">null</span>);
 
-  // Load movies from API on component mount
-  useEffect(() =&gt; {
-    fetchMovies();
+  <span class="hljs-comment">// Load movies from API on component mount</span>
+  <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-title function_">fetchMovies</span>();
   }, []);
 
-  const fetchMovies = async () =&gt; {
-    try {
-      setLoading(true);
-      setError(null);
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">fetchMovies</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">true</span>);
+      <span class="hljs-title function_">setError</span>(<span class="hljs-literal">null</span>);
       
-      const response = await fetch(`${API_BASE_URL}/movies`);
-      const result = await response.json();
+      <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`<span class="hljs-subst">${API_BASE_URL}</span>/movies`</span>);
+      <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
       
-      if (result.success) {
-        setMovies(result.data);
-        setFilteredMovies(result.data);
-      } else {
-        setError('Failed to load movies');
+      <span class="hljs-keyword">if</span> (result.<span class="hljs-property">success</span>) {
+        <span class="hljs-title function_">setMovies</span>(result.<span class="hljs-property">data</span>);
+        <span class="hljs-title function_">setFilteredMovies</span>(result.<span class="hljs-property">data</span>);
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-title function_">setError</span>(<span class="hljs-string">&#x27;Failed to load movies&#x27;</span>);
       }
-    } catch (error) {
-      setError('Failed to connect to server');
-      console.error('Error fetching movies:', error);
-    } finally {
-      setLoading(false);
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-title function_">setError</span>(<span class="hljs-string">&#x27;Failed to connect to server&#x27;</span>);
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error fetching movies:&#x27;</span>, error);
+    } <span class="hljs-keyword">finally</span> {
+      <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">false</span>);
     }
   };
 
-  const handleAddMovie = async (movieData) =&gt; {
-    try {
-      const response = await fetch(`${API_BASE_URL}/movies`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleAddMovie</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">movieData</span>) =&gt; {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`<span class="hljs-subst">${API_BASE_URL}</span>/movies`</span>, {
+        <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
+        <span class="hljs-attr">headers</span>: {
+          <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
         },
-        body: JSON.stringify(movieData),
+        <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(movieData),
       });
 
-      const result = await response.json();
+      <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
       
-      if (result.success) {
-        fetchMovies(); // Refresh the list
-        setShowForm(false);
-      } else {
-        setError(result.error || 'Failed to add movie');
+      <span class="hljs-keyword">if</span> (result.<span class="hljs-property">success</span>) {
+        <span class="hljs-title function_">fetchMovies</span>(); <span class="hljs-comment">// Refresh the list</span>
+        <span class="hljs-title function_">setShowForm</span>(<span class="hljs-literal">false</span>);
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-title function_">setError</span>(result.<span class="hljs-property">error</span> || <span class="hljs-string">&#x27;Failed to add movie&#x27;</span>);
       }
-    } catch (error) {
-      setError('Failed to add movie');
-      console.error('Error adding movie:', error);
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-title function_">setError</span>(<span class="hljs-string">&#x27;Failed to add movie&#x27;</span>);
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error adding movie:&#x27;</span>, error);
     }
   };
 
-  const handleUpdateMovie = async (movieData) =&gt; {
-    try {
-      const response = await fetch(`${API_BASE_URL}/movies/${movieData.id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleUpdateMovie</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">movieData</span>) =&gt; {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`<span class="hljs-subst">${API_BASE_URL}</span>/movies/<span class="hljs-subst">${movieData.id}</span>`</span>, {
+        <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;PUT&#x27;</span>,
+        <span class="hljs-attr">headers</span>: {
+          <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
         },
-        body: JSON.stringify(movieData),
+        <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(movieData),
       });
 
-      const result = await response.json();
+      <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
       
-      if (result.success) {
-        fetchMovies(); // Refresh the list
-        setEditingMovie(null);
-        setShowForm(false);
-      } else {
-        setError(result.error || 'Failed to update movie');
+      <span class="hljs-keyword">if</span> (result.<span class="hljs-property">success</span>) {
+        <span class="hljs-title function_">fetchMovies</span>(); <span class="hljs-comment">// Refresh the list</span>
+        <span class="hljs-title function_">setEditingMovie</span>(<span class="hljs-literal">null</span>);
+        <span class="hljs-title function_">setShowForm</span>(<span class="hljs-literal">false</span>);
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-title function_">setError</span>(result.<span class="hljs-property">error</span> || <span class="hljs-string">&#x27;Failed to update movie&#x27;</span>);
       }
-    } catch (error) {
-      setError('Failed to update movie');
-      console.error('Error updating movie:', error);
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-title function_">setError</span>(<span class="hljs-string">&#x27;Failed to update movie&#x27;</span>);
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error updating movie:&#x27;</span>, error);
     }
   };
 
-  const handleDeleteMovie = async (movieId) =&gt; {
-    if (!window.confirm('Are you sure you want to delete this movie?')) {
-      return;
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleDeleteMovie</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">movieId</span>) =&gt; {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-variable language_">window</span>.<span class="hljs-title function_">confirm</span>(<span class="hljs-string">&#x27;Are you sure you want to delete this movie?&#x27;</span>)) {
+      <span class="hljs-keyword">return</span>;
     }
 
-    try {
-      const response = await fetch(`${API_BASE_URL}/movies/${movieId}`, {
-        method: 'DELETE',
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`<span class="hljs-subst">${API_BASE_URL}</span>/movies/<span class="hljs-subst">${movieId}</span>`</span>, {
+        <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;DELETE&#x27;</span>,
       });
 
-      const result = await response.json();
+      <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
       
-      if (result.success) {
-        fetchMovies(); // Refresh the list
-      } else {
-        setError(result.error || 'Failed to delete movie');
+      <span class="hljs-keyword">if</span> (result.<span class="hljs-property">success</span>) {
+        <span class="hljs-title function_">fetchMovies</span>(); <span class="hljs-comment">// Refresh the list</span>
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-title function_">setError</span>(result.<span class="hljs-property">error</span> || <span class="hljs-string">&#x27;Failed to delete movie&#x27;</span>);
       }
-    } catch (error) {
-      setError('Failed to delete movie');
-      console.error('Error deleting movie:', error);
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-title function_">setError</span>(<span class="hljs-string">&#x27;Failed to delete movie&#x27;</span>);
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error deleting movie:&#x27;</span>, error);
     }
   };
 
-  const handleEditMovie = (movie) =&gt; {
-    setEditingMovie(movie);
-    setShowForm(true);
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleEditMovie</span> = (<span class="hljs-params">movie</span>) =&gt; {
+    <span class="hljs-title function_">setEditingMovie</span>(movie);
+    <span class="hljs-title function_">setShowForm</span>(<span class="hljs-literal">true</span>);
   };
 
-  const handleSearch = (searchTerm) =&gt; {
-    if (searchTerm.trim() === '') {
-      setFilteredMovies(movies);
-    } else {
-      const filtered = movies.filter(movie =&gt;
-        movie.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        movie.director.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        movie.genre.some(g =&gt; g.toLowerCase().includes(searchTerm.toLowerCase()))
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleSearch</span> = (<span class="hljs-params">searchTerm</span>) =&gt; {
+    <span class="hljs-keyword">if</span> (searchTerm.<span class="hljs-title function_">trim</span>() === <span class="hljs-string">&#x27;&#x27;</span>) {
+      <span class="hljs-title function_">setFilteredMovies</span>(movies);
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">const</span> filtered = movies.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">movie</span> =&gt;</span>
+        movie.<span class="hljs-property">name</span>.<span class="hljs-title function_">toLowerCase</span>().<span class="hljs-title function_">includes</span>(searchTerm.<span class="hljs-title function_">toLowerCase</span>()) ||
+        movie.<span class="hljs-property">director</span>.<span class="hljs-title function_">toLowerCase</span>().<span class="hljs-title function_">includes</span>(searchTerm.<span class="hljs-title function_">toLowerCase</span>()) ||
+        movie.<span class="hljs-property">genre</span>.<span class="hljs-title function_">some</span>(<span class="hljs-function"><span class="hljs-params">g</span> =&gt;</span> g.<span class="hljs-title function_">toLowerCase</span>().<span class="hljs-title function_">includes</span>(searchTerm.<span class="hljs-title function_">toLowerCase</span>()))
       );
-      setFilteredMovies(filtered);
+      <span class="hljs-title function_">setFilteredMovies</span>(filtered);
     }
   };
 
-  const handleShowForm = () =&gt; {
-    setEditingMovie(null);
-    setShowForm(true);
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleShowForm</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-title function_">setEditingMovie</span>(<span class="hljs-literal">null</span>);
+    <span class="hljs-title function_">setShowForm</span>(<span class="hljs-literal">true</span>);
   };
 
-  const handleCancelForm = () =&gt; {
-    setEditingMovie(null);
-    setShowForm(false);
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleCancelForm</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-title function_">setEditingMovie</span>(<span class="hljs-literal">null</span>);
+    <span class="hljs-title function_">setShowForm</span>(<span class="hljs-literal">false</span>);
   };
 
-  if (loading) {
-    return &lt;div className=&quot;App&quot;&gt;&lt;p&gt;Loading movies...&lt;/p&gt;&lt;/div&gt;;
+  <span class="hljs-keyword">if</span> (loading) {
+    <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;App&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Loading movies...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
   }
 
-  if (error) {
-    return (
-      &lt;div className=&quot;App&quot;&gt;
-        &lt;p&gt;Error: {error}&lt;/p&gt;
-        &lt;button onClick={fetchMovies}&gt;Try Again&lt;/button&gt;
-      &lt;/div&gt;
+  <span class="hljs-keyword">if</span> (error) {
+    <span class="hljs-keyword">return</span> (
+      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;App&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Error: {error}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{fetchMovies}</span>&gt;</span>Try Again<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
     );
   }
 
-  return (
-    &lt;div className=&quot;App&quot;&gt;
-      &lt;header&gt;
-        &lt;div id=&quot;title&quot;&gt;
-          &lt;div id=&quot;title-text&quot;&gt;
-            &lt;h1&gt;🎬 Movie Buzz&lt;/h1&gt;
-            &lt;h4&gt;Where all the best movies live...&lt;/h4&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div id=&quot;add-new&quot;&gt;
-          &lt;button onClick={handleShowForm}&gt;Add New Movie&lt;/button&gt;
-        &lt;/div&gt;
-      &lt;/header&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;App&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">header</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;title&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;title-text&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>🎬 Movie Buzz<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>Where all the best movies live...<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;add-new&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handleShowForm}</span>&gt;</span>Add New Movie<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span>
       
       {showForm ? (
-        &lt;MovieForm 
-          onAddMovie={handleAddMovie}
-          onUpdateMovie={handleUpdateMovie}
-          onCancel={handleCancelForm}
-          editingMovie={editingMovie}
-        /&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">MovieForm</span> 
+          <span class="hljs-attr">onAddMovie</span>=<span class="hljs-string">{handleAddMovie}</span>
+          <span class="hljs-attr">onUpdateMovie</span>=<span class="hljs-string">{handleUpdateMovie}</span>
+          <span class="hljs-attr">onCancel</span>=<span class="hljs-string">{handleCancelForm}</span>
+          <span class="hljs-attr">editingMovie</span>=<span class="hljs-string">{editingMovie}</span>
+        /&gt;</span>
       ) : (
-        &lt;&gt;
-          &lt;SearchBar onSearch={handleSearch} /&gt;
-          &lt;MoviesList 
-            movies={filteredMovies}
-            onDelete={handleDeleteMovie}
-            onEdit={handleEditMovie}
-          /&gt;
-        &lt;/&gt;
+        <span class="hljs-tag">&lt;&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">SearchBar</span> <span class="hljs-attr">onSearch</span>=<span class="hljs-string">{handleSearch}</span> /&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">MoviesList</span> 
+            <span class="hljs-attr">movies</span>=<span class="hljs-string">{filteredMovies}</span>
+            <span class="hljs-attr">onDelete</span>=<span class="hljs-string">{handleDeleteMovie}</span>
+            <span class="hljs-attr">onEdit</span>=<span class="hljs-string">{handleEditMovie}</span>
+          /&gt;</span>
+        <span class="hljs-tag">&lt;/&gt;</span></span>
       )}
       
-      &lt;footer&gt;&amp;copy; Copyright 2024 Buzzware, Inc.&lt;/footer&gt;
+      &lt;footer&gt;&amp;copy; <span class="hljs-title class_">Copyright</span> <span class="hljs-number">2024</span> <span class="hljs-title class_">Buzzware</span>, <span class="hljs-title class_">Inc</span>.&lt;/footer&gt;
     &lt;/div&gt;
   );
 }
 
-export default App;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">App</span>;
 </code></pre>
 <hr>
 <h2 id="error-handling" tabindex="-1">Error Handling</h2>
@@ -899,23 +903,23 @@ export default App;
 <li><strong>404 handler</strong> for unknown routes</li>
 </ol>
 <p>Example error responses:</p>
-<pre><code class="language-json">// 400 Bad Request
-{
-  &quot;success&quot;: false,
-  &quot;error&quot;: &quot;Name, year, and director are required fields&quot;
-}
+<pre class="hljs"><code><span class="hljs-comment">// 400 Bad Request</span>
+<span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;success&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;error&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Name, year, and director are required fields&quot;</span>
+<span class="hljs-punctuation">}</span>
 
-// 404 Not Found
-{
-  &quot;success&quot;: false,
-  &quot;error&quot;: &quot;Movie not found&quot;
-}
+<span class="hljs-comment">// 404 Not Found</span>
+<span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;success&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;error&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Movie not found&quot;</span>
+<span class="hljs-punctuation">}</span>
 
-// 500 Server Error
-{
-  &quot;success&quot;: false,
-  &quot;error&quot;: &quot;Failed to retrieve movies&quot;
-}
+<span class="hljs-comment">// 500 Server Error</span>
+<span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;success&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;error&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Failed to retrieve movies&quot;</span>
+<span class="hljs-punctuation">}</span>
 </code></pre>
 <hr>
 <h2 id="final-thoughts" tabindex="-1">Final Thoughts</h2>
@@ -955,5 +959,6 @@ How does having a separate API backend change the architecture of your applicati
 </div>
 <script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
 <script src="../assets/animations.js"></script>
+<script src="../assets/search.js"></script>
 </body>
 </html>

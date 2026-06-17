@@ -14,6 +14,10 @@
 <div class="layout">
 <nav class="sidebar" aria-label="Course weeks">
 <div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="sidebar-search">
+<input type="search" id="sidebar-search-input" class="search-input" placeholder="&#xf002; Search lessons…" aria-label="Search lessons">
+<div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+</div>
 <div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
 <a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
 <a class="nav-link active" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
@@ -48,7 +52,7 @@
 </blockquote>
 <hr>
 <h2 id="🗺️-what-youre-building-this-week" tabindex="-1">🗺️ What You're Building This Week</h2>
-<p>You are setting up the Movie Buzz project repository and creating its first commit history. By the end of this week you will have a Git-tracked project directory with a basic HTML/CSS movie page, a <code>.gitignore</code> file, and at least three meaningful commits pushed to GitHub. Every file you write for the rest of the course will live inside this repository.</p>
+<p>You are setting up the Movie Buzz project repository and creating its first commit history. By the end of this week you will have a Git-tracked project directory with a basic HTML/CSS movie page, a <code>.gitignore</code> file, and at least three meaningful commits pushed to the course GitLab repository. Every file you write for the rest of the course will live inside this repository.</p>
 <blockquote class="callout callout--tip" style="--tilt:0.2deg;--glow-intensity:0.68">
 <div class="callout-label lift"><i class="fas fa-lightbulb callout-icon" aria-hidden="true"></i><span>Tip</span></div>
 <p>💡 <strong>This week in the arc:</strong> Week 01 is the foundation under everything else. The Git habits you build now — meaningful commit messages, proper staging, keeping <code>node_modules</code> out of version control — will matter every single week through Week 16.</p>
@@ -60,7 +64,7 @@
 <li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> Navigate the file system using <code>cd</code>, <code>ls</code>, and <code>pwd</code> without looking up the syntax</li>
 <li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> Create and move files and directories using <code>mkdir</code>, <code>touch</code>, and <code>mv</code></li>
 <li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> Initialize a Git repository, stage files, and create descriptive commits</li>
-<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> Push a local repository to GitHub and verify the push succeeded</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> Push a local repository to GitLab and verify the push succeeded</li>
 </ul>
 <hr>
 <h2 id="🔑-key-concepts" tabindex="-1">🔑 Key Concepts</h2>
@@ -118,19 +122,19 @@ A file that tells Git which files and directories to ignore. You never want to c
 <strong>Windows:</strong> Use Git Bash (installed with Git for Windows). Search &quot;Git Bash&quot; in the Start menu.
 <strong>VS Code:</strong> Press `Ctrl+`` (backtick) to open the integrated terminal.</p>
 <h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-confirm-your-tools-are-ready" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Confirm your tools are ready</h3>
-<pre><code class="language-bash">node --version   # Must return v16 or higher
-git --version    # Must return any version
-git config --global user.name   # Must return your name
+<pre class="hljs"><code>node --version   <span class="hljs-comment"># Must return v16 or higher</span>
+git --version    <span class="hljs-comment"># Must return any version</span>
+git config --global user.name   <span class="hljs-comment"># Must return your name</span>
 </code></pre>
 <p>If any of these fail, resolve them before starting the tasks. See the Week 00 student guide for fix instructions.</p>
 <h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-navigate-to-your-documents-directory-or-equivalent-workspace" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Navigate to your Documents directory (or equivalent workspace)</h3>
-<pre><code class="language-bash">cd ~/Documents
+<pre class="hljs"><code><span class="hljs-built_in">cd</span> ~/Documents
 </code></pre>
 <h3 class="step-heading" style="--organic-tilt:0deg" id="4step-4-youll-create-the-movie-buzz-directory-as-part-of-task-1-—-do-not-create-it-here" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>You'll create the Movie Buzz directory as part of Task 1 — do not create it here.</h3>
 <h3 class="step-heading" style="--organic-tilt:0.1deg" id="5step-5-verify-you-are-not-already-inside-a-git-repository" tabindex="-1"><span class="step-badge" aria-hidden="true">5</span><span class="sr-only">Step 5: </span>Verify you are not already inside a Git repository</h3>
-<pre><code class="language-bash">git status
-# Expected: fatal: not a git repository
-# If you see anything else, use `cd ..` to move up until you are outside a repo
+<pre class="hljs"><code>git status
+<span class="hljs-comment"># Expected: fatal: not a git repository</span>
+<span class="hljs-comment"># If you see anything else, use `cd ..` to move up until you are outside a repo</span>
 </code></pre>
 </details>
 <details>
@@ -141,18 +145,18 @@ git config --global user.name   # Must return your name
 <li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <code>git --version</code> returns a version number</li>
 <li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <code>git config --global user.name</code> returns your name (not blank)</li>
 <li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <code>git config --global user.email</code> returns your email (not blank)</li>
-<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> You have a GitHub account and are logged in at <a href="http://github.com">github.com</a></li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> You have a GitLab account and are logged in at gitlab.tlm.cloud</li>
 </ul>
 </details>
 <hr>
 <h2 id="📚-core-concepts" tabindex="-1">📚 Core Concepts</h2>
 <h3 id="navigating-the-file-system" tabindex="-1">Navigating the File System</h3>
 <p>The terminal gives you a text interface to your file system. You are always &quot;inside&quot; one directory at a time — this is called your <strong>current working directory</strong>. The three most important navigation commands are:</p>
-<pre><code class="language-bash">pwd          # Print Working Directory — tells you where you are right now
-ls           # List contents of the current directory
-cd dirname   # Change Directory — move into dirname
-cd ..        # Move up one level to the parent directory
-cd ~         # Jump directly to your home directory
+<pre class="hljs"><code><span class="hljs-built_in">pwd</span>          <span class="hljs-comment"># Print Working Directory — tells you where you are right now</span>
+<span class="hljs-built_in">ls</span>           <span class="hljs-comment"># List contents of the current directory</span>
+<span class="hljs-built_in">cd</span> <span class="hljs-built_in">dirname</span>   <span class="hljs-comment"># Change Directory — move into dirname</span>
+<span class="hljs-built_in">cd</span> ..        <span class="hljs-comment"># Move up one level to the parent directory</span>
+<span class="hljs-built_in">cd</span> ~         <span class="hljs-comment"># Jump directly to your home directory</span>
 </code></pre>
 <p>Think of <code>pwd</code> as &quot;where am I?&quot;, <code>ls</code> as &quot;what's in here?&quot;, and <code>cd</code> as &quot;take me there.&quot;</p>
 <details>
@@ -166,14 +170,14 @@ cd ~         # Jump directly to your home directory
 </details>
 <hr>
 <h3 id="creating-and-moving-files" tabindex="-1">Creating and Moving Files</h3>
-<pre><code class="language-bash">mkdir dirname          # Make a new directory called dirname
-mkdir dir1 dir2 dir3   # Make multiple directories at once
-touch filename.txt     # Create an empty file
-mv file destination    # Move a file to a destination directory
-mv oldname newname     # Rename a file (move to a new name)
-cp source destination  # Copy a file
-rm filename            # Delete a file (permanent — no Trash)
-rm -r dirname          # Delete a directory and all its contents
+<pre class="hljs"><code><span class="hljs-built_in">mkdir</span> <span class="hljs-built_in">dirname</span>          <span class="hljs-comment"># Make a new directory called dirname</span>
+<span class="hljs-built_in">mkdir</span> dir1 dir2 dir3   <span class="hljs-comment"># Make multiple directories at once</span>
+<span class="hljs-built_in">touch</span> filename.txt     <span class="hljs-comment"># Create an empty file</span>
+<span class="hljs-built_in">mv</span> file destination    <span class="hljs-comment"># Move a file to a destination directory</span>
+<span class="hljs-built_in">mv</span> oldname newname     <span class="hljs-comment"># Rename a file (move to a new name)</span>
+<span class="hljs-built_in">cp</span> <span class="hljs-built_in">source</span> destination  <span class="hljs-comment"># Copy a file</span>
+<span class="hljs-built_in">rm</span> filename            <span class="hljs-comment"># Delete a file (permanent — no Trash)</span>
+<span class="hljs-built_in">rm</span> -r <span class="hljs-built_in">dirname</span>          <span class="hljs-comment"># Delete a directory and all its contents</span>
 </code></pre>
 <blockquote class="callout callout--default" style="--tilt:0.4deg;--glow-intensity:0.96">
 <div class="callout-label lift"><i class="fas fa-info-circle callout-icon" aria-hidden="true"></i><span>Note</span></div>
@@ -182,15 +186,15 @@ rm -r dirname          # Delete a directory and all its contents
 <hr>
 <h3 id="the-git-workflow" tabindex="-1">The Git Workflow</h3>
 <p>Every change you track with Git follows this three-step rhythm:</p>
-<pre><code>Working Directory → Staging Area → Repository (commit)
+<pre class="hljs"><code>Working Directory → Staging Area → Repository (commit)
      (your files)    (git add)       (git commit)
 </code></pre>
-<pre><code class="language-bash">git status                     # See what has changed since last commit
-git add filename               # Stage a specific file
-git add .                      # Stage all changed files in current directory
-git commit -m &quot;message here&quot;   # Commit everything staged, with a message
-git log                        # View commit history
-git log --oneline              # View history in compact form
+<pre class="hljs"><code>git status                     <span class="hljs-comment"># See what has changed since last commit</span>
+git add filename               <span class="hljs-comment"># Stage a specific file</span>
+git add .                      <span class="hljs-comment"># Stage all changed files in current directory</span>
+git commit -m <span class="hljs-string">&quot;message here&quot;</span>   <span class="hljs-comment"># Commit everything staged, with a message</span>
+git <span class="hljs-built_in">log</span>                        <span class="hljs-comment"># View commit history</span>
+git <span class="hljs-built_in">log</span> --oneline              <span class="hljs-comment"># View history in compact form</span>
 </code></pre>
 <p><strong>What makes a good commit message?</strong>
 Write it in the imperative mood, as if completing the sentence &quot;This commit will...&quot;:</p>
@@ -205,14 +209,14 @@ Write it in the imperative mood, as if completing the sentence &quot;This commit
 <p>Before moving on, try to answer:</p>
 <ol>
 <li>What is the difference between <code>git add .</code> and <code>git commit</code>? Why are they two separate commands instead of one?</li>
-<li>After you run <code>git commit</code>, where does the snapshot live — on your computer or on GitHub?</li>
+<li>After you run <code>git commit</code>, where does the snapshot live — on your computer or on GitLab?</li>
 </ol>
 <p><em>(The answer to #2 is important — understand it before Task 3)</em></p>
 </details>
 <hr>
-<h3 id="connecting-to-github" tabindex="-1">Connecting to GitHub</h3>
-<p><code>git push</code> uploads your local commits to a remote repository (on GitHub). Before you can push, you need to connect your local repo to a remote:</p>
-<pre><code class="language-bash">git remote add origin https://github.com/yourusername/movie-buzz.git
+<h3 id="connecting-to-gitlab" tabindex="-1">Connecting to GitLab</h3>
+<p><code>git push</code> uploads your local commits to a remote repository (on GitLab). Before you can push, you need to connect your local repo to a remote:</p>
+<pre class="hljs"><code>git remote add origin https://gitlab.tlm.cloud/yourusername/movie-buzz.git
 git branch -M main
 git push -u origin main
 </code></pre>
@@ -225,16 +229,16 @@ git push -u origin main
 </blockquote>
 <h3 class="step-heading" style="--organic-tilt:-0.2deg" id="1step-1-build-the-directory-structure" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Build the Directory Structure</h3>
 <p><strong>What you're doing:</strong> Navigate to your working directory and create the Movie Buzz project structure using only terminal commands — no Finder or File Explorer.</p>
-<pre><code class="language-bash"># TODO: Navigate to your Documents directory (or wherever you keep projects)
-# TODO: Create a directory called movie-buzz
-# TODO: Navigate into movie-buzz
-# TODO: Create the following subdirectories: assets, js, style
-# TODO: Create these files in their correct locations:
-#   - index.html (in the root of movie-buzz)
-#   - style/main.css
-#   - js/main.js
-#   - assets/.gitkeep (an empty file so the assets folder gets committed)
-# TODO: Verify everything was created using pwd and ls
+<pre class="hljs"><code><span class="hljs-comment"># TODO: Navigate to your Documents directory (or wherever you keep projects)</span>
+<span class="hljs-comment"># TODO: Create a directory called movie-buzz</span>
+<span class="hljs-comment"># TODO: Navigate into movie-buzz</span>
+<span class="hljs-comment"># TODO: Create the following subdirectories: assets, js, style</span>
+<span class="hljs-comment"># TODO: Create these files in their correct locations:</span>
+<span class="hljs-comment">#   - index.html (in the root of movie-buzz)</span>
+<span class="hljs-comment">#   - style/main.css</span>
+<span class="hljs-comment">#   - js/main.js</span>
+<span class="hljs-comment">#   - assets/.gitkeep (an empty file so the assets folder gets committed)</span>
+<span class="hljs-comment"># TODO: Verify everything was created using pwd and ls</span>
 </code></pre>
 <details>
 <summary>💡 Stuck? Expand for a hint — not an answer</summary>
@@ -248,21 +252,21 @@ git push -u origin main
 <h3 class="step-heading" style="--organic-tilt:0deg" id="2step-2-add-basic-html-content" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Add Basic HTML Content</h3>
 <p><strong>File to edit:</strong> <code>movie-buzz/index.html</code></p>
 <p><strong>What you're doing:</strong> Open <code>index.html</code> in VS Code and write a simple HTML page that links to your CSS and JS files. This is a placeholder — we'll replace it with React in Week 03.</p>
-<pre><code class="language-html">&lt;!-- STARTER CODE — fill in the TODO sections --&gt;
-&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-  &lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot; /&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
-    &lt;title&gt;Movie Buzz&lt;/title&gt;
-    &lt;!-- TODO: Add a link tag connecting to style/main.css --&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;!-- TODO: Add an h1 with the text &quot;Movie Buzz&quot; --&gt;
-    &lt;!-- TODO: Add a p tag with a one-sentence description of the app --&gt;
-    &lt;!-- TODO: Add a script tag connecting to js/main.js --&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+<pre class="hljs"><code><span class="hljs-comment">&lt;!-- STARTER CODE — fill in the TODO sections --&gt;</span>
+<span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Movie Buzz<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-comment">&lt;!-- <span class="hljs-doctag">TODO:</span> Add a link tag connecting to style/main.css --&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-comment">&lt;!-- <span class="hljs-doctag">TODO:</span> Add an h1 with the text &quot;Movie Buzz&quot; --&gt;</span>
+    <span class="hljs-comment">&lt;!-- <span class="hljs-doctag">TODO:</span> Add a p tag with a one-sentence description of the app --&gt;</span>
+    <span class="hljs-comment">&lt;!-- <span class="hljs-doctag">TODO:</span> Add a script tag connecting to js/main.js --&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
 </code></pre>
 <details>
 <summary>💡 Hint</summary>
@@ -275,20 +279,20 @@ git push -u origin main
 <hr>
 <h3 class="step-heading" style="--organic-tilt:-0.1deg" id="3step-3-initialize-git-and-make-your-first-commits" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Initialize Git and Make Your First Commits</h3>
 <p><strong>What you're doing:</strong> Turn <code>movie-buzz/</code> into a Git repository and record your work with three separate, meaningful commits.</p>
-<pre><code class="language-bash"># TODO: Confirm you are inside the movie-buzz directory (use pwd)
-# TODO: Verify you are NOT already in a Git repo (use git status — expect an error)
-# TODO: Initialize a new Git repository
-# TODO: Check git status to see your untracked files
-# TODO: Create a .gitignore file and add node_modules/ to it
-# TODO: Stage all files and make your first commit
-#       Commit message: &quot;Initialize Movie Buzz project structure&quot;
-# TODO: Add some CSS to style/main.css (even just a body background color)
-# TODO: Stage just main.css and commit it
-#       Commit message: &quot;Add base styles to main.css&quot;
-# TODO: Add a console.log to js/main.js
-# TODO: Stage main.js and commit it
-#       Commit message: &quot;Add initial JS entry point&quot;
-# TODO: Run git log to confirm you have three commits
+<pre class="hljs"><code><span class="hljs-comment"># TODO: Confirm you are inside the movie-buzz directory (use pwd)</span>
+<span class="hljs-comment"># TODO: Verify you are NOT already in a Git repo (use git status — expect an error)</span>
+<span class="hljs-comment"># TODO: Initialize a new Git repository</span>
+<span class="hljs-comment"># TODO: Check git status to see your untracked files</span>
+<span class="hljs-comment"># TODO: Create a .gitignore file and add node_modules/ to it</span>
+<span class="hljs-comment"># TODO: Stage all files and make your first commit</span>
+<span class="hljs-comment">#       Commit message: &quot;Initialize Movie Buzz project structure&quot;</span>
+<span class="hljs-comment"># TODO: Add some CSS to style/main.css (even just a body background color)</span>
+<span class="hljs-comment"># TODO: Stage just main.css and commit it</span>
+<span class="hljs-comment">#       Commit message: &quot;Add base styles to main.css&quot;</span>
+<span class="hljs-comment"># TODO: Add a console.log to js/main.js</span>
+<span class="hljs-comment"># TODO: Stage main.js and commit it</span>
+<span class="hljs-comment">#       Commit message: &quot;Add initial JS entry point&quot;</span>
+<span class="hljs-comment"># TODO: Run git log to confirm you have three commits</span>
 </code></pre>
 <details>
 <summary>💡 Hint</summary>
@@ -299,38 +303,38 @@ git push -u origin main
 </ul>
 </details>
 <hr>
-<h3 class="step-heading" style="--organic-tilt:0.2deg" id="4step-4-push-to-github" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Push to GitHub</h3>
-<p><strong>What you're doing:</strong> Create a new repository on GitHub and push your local commits there.</p>
-<pre><code class="language-bash"># TODO: Go to github.com and create a new repository named &quot;movie-buzz&quot;
-#       - Set it to Public
-#       - Do NOT initialize it with a README (you already have local commits)
-# TODO: Copy the repository URL (HTTPS format)
-# TODO: Back in your terminal, connect your local repo to GitHub:
-git remote add origin https://github.com/YOUR_USERNAME/movie-buzz.git
+<h3 class="step-heading" style="--organic-tilt:0.2deg" id="4step-4-push-to-gitlab" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Push to GitLab</h3>
+<p><strong>What you're doing:</strong> Create a new repository on GitLab and push your local commits there.</p>
+<pre class="hljs"><code><span class="hljs-comment"># TODO: Go to gitlab.tlm.cloud and create a new repository named &quot;movie-buzz&quot;</span>
+<span class="hljs-comment">#       - Set it to Public</span>
+<span class="hljs-comment">#       - Do NOT initialize it with a README (you already have local commits)</span>
+<span class="hljs-comment"># TODO: Copy the repository URL (HTTPS format)</span>
+<span class="hljs-comment"># TODO: Back in your terminal, connect your local repo to GitLab:</span>
+git remote add origin https://gitlab.tlm.cloud/YOUR_USERNAME/movie-buzz.git
 git branch -M main
 git push -u origin main
 
-# TODO: Refresh github.com/YOUR_USERNAME/movie-buzz and verify your files appear
-# TODO: Click on &quot;Commits&quot; and confirm all three commits appear with your messages
+<span class="hljs-comment"># TODO: Refresh gitlab.tlm.cloud/YOUR_USERNAME/movie-buzz and verify your files appear</span>
+<span class="hljs-comment"># TODO: Click on &quot;Commits&quot; and confirm all three commits appear with your messages</span>
 </code></pre>
 <details>
 <summary>💡 Hint</summary>
 <ul>
-<li><strong>Think about:</strong> After <code>git push</code>, GitHub is a backup of your local repo. Any commit that exists locally but hasn't been pushed yet is not on GitHub.</li>
+<li><strong>Think about:</strong> After <code>git push</code>, GitLab is a backup of your local repo. Any commit that exists locally but has not been pushed yet is not on GitLab.</li>
 <li><strong>Check:</strong> If <code>git push</code> fails with &quot;remote origin already exists,&quot; you already ran <code>git remote add origin</code> once. Skip that command and run <code>git push -u origin main</code> directly.</li>
-<li><strong>The pattern looks like:</strong> Create repo on GitHub → copy the URL → run the three commands in your terminal → refresh GitHub to verify.</li>
+<li><strong>The pattern looks like:</strong> Create repo on GitLab → copy the URL → run the three commands in your terminal → refresh GitLab to verify.</li>
 </ul>
 </details>
 <hr>
 <h3 class="step-heading" style="--organic-tilt:0deg" id="5step-5-create-a-gitignore" tabindex="-1"><span class="step-badge" aria-hidden="true">5</span><span class="sr-only">Step 5: </span>Create a .gitignore</h3>
 <p><strong>File to edit:</strong> <code>movie-buzz/.gitignore</code></p>
 <p><strong>What you're doing:</strong> Ensure that <code>node_modules/</code> (and other generated files) will never be committed accidentally.</p>
-<pre><code class="language-bash"># STARTER — your .gitignore should contain at minimum:
-# TODO: Add node_modules/ on its own line
-# TODO: Add .DS_Store (macOS system file) on its own line
-# TODO: Add .env on its own line (for secret keys you'll add later)
-# TODO: Commit the .gitignore file with message: &quot;Add .gitignore&quot;
-# TODO: Push the update to GitHub
+<pre class="hljs"><code><span class="hljs-comment"># STARTER — your .gitignore should contain at minimum:</span>
+<span class="hljs-comment"># TODO: Add node_modules/ on its own line</span>
+<span class="hljs-comment"># TODO: Add .DS_Store (macOS system file) on its own line</span>
+<span class="hljs-comment"># TODO: Add .env on its own line (for secret keys you&#x27;ll add later)</span>
+<span class="hljs-comment"># TODO: Commit the .gitignore file with message: &quot;Add .gitignore&quot;</span>
+<span class="hljs-comment"># TODO: Push the update to GitLab</span>
 </code></pre>
 <details>
 <summary>💡 Hint</summary>
@@ -352,14 +356,14 @@ You ran <code>git add</code> or <code>git commit</code> without running <code>gi
 <li>Run <code>ls -la</code> and look for a <code>.git/</code> directory. If it's not there, you haven't initialized yet.</li>
 </ol>
 <p><strong>The fix:</strong></p>
-<pre><code class="language-bash"># Wrong (running git commands outside the repo):
-cd ~/Documents
-git status   # This fails — you're not in a repo
+<pre class="hljs"><code><span class="hljs-comment"># Wrong (running git commands outside the repo):</span>
+<span class="hljs-built_in">cd</span> ~/Documents
+git status   <span class="hljs-comment"># This fails — you&#x27;re not in a repo</span>
 
-# Correct (navigate into the project first):
-cd ~/Documents/movie-buzz
+<span class="hljs-comment"># Correct (navigate into the project first):</span>
+<span class="hljs-built_in">cd</span> ~/Documents/movie-buzz
 git init
-git status   # Now it works
+git status   <span class="hljs-comment"># Now it works</span>
 </code></pre>
 </details>
 <details>
@@ -372,29 +376,29 @@ You ran <code>git add .</code> before creating the <code>.gitignore</code> file,
 <li>Run <code>git status</code> — if <code>node_modules</code> is green (staged), it hasn't been committed yet.</li>
 </ol>
 <p><strong>The fix:</strong></p>
-<pre><code class="language-bash"># If not yet committed — unstage it:
-git rm -r --cached node_modules/
-# Then add node_modules/ to .gitignore and commit the .gitignore
+<pre class="hljs"><code><span class="hljs-comment"># If not yet committed — unstage it:</span>
+git <span class="hljs-built_in">rm</span> -r --cached node_modules/
+<span class="hljs-comment"># Then add node_modules/ to .gitignore and commit the .gitignore</span>
 
-# Prevention: Always create .gitignore BEFORE running git add for the first time
+<span class="hljs-comment"># Prevention: Always create .gitignore BEFORE running git add for the first time</span>
 </code></pre>
 </details>
 <details>
 <summary>❌ Error: `git push` fails with `src refspec main does not match any`</summary>
 <p><strong>Why this happens:</strong>
-Your local branch is named <code>master</code> (the old Git default) but you're trying to push to <code>main</code>. GitHub now uses <code>main</code> as the default.</p>
+Your local branch is named <code>master</code> (the old Git default) but you are trying to push to <code>main</code>. GitLab uses <code>main</code> as the default branch name.</p>
 <p><strong>Check these things:</strong></p>
 <ol>
 <li>Run <code>git branch</code> to see what your current branch is named.</li>
 <li>If it says <code>master</code>, you need to rename it.</li>
 </ol>
 <p><strong>The fix:</strong></p>
-<pre><code class="language-bash"># Wrong: trying to push main when branch is named master
-git push -u origin main   # Fails
+<pre class="hljs"><code><span class="hljs-comment"># Wrong: trying to push main when branch is named master</span>
+git push -u origin main   <span class="hljs-comment"># Fails</span>
 
-# Correct: rename the branch first
-git branch -M main        # Rename master → main
-git push -u origin main   # Now works
+<span class="hljs-comment"># Correct: rename the branch first</span>
+git branch -M main        <span class="hljs-comment"># Rename master → main</span>
+git push -u origin main   <span class="hljs-comment"># Now works</span>
 </code></pre>
 </details>
 <hr>
@@ -403,7 +407,7 @@ git push -u origin main   # Now works
 <ul>
 <li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>Directory structure built:</strong> <code>ls movie-buzz</code> shows <code>index.html</code>, <code>assets/</code>, <code>js/</code>, <code>style/</code>, <code>.gitignore</code></li>
 <li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>Three commits in history:</strong> <code>git log --oneline</code> in <code>movie-buzz/</code> shows three commits with descriptive messages</li>
-<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>Pushed to GitHub:</strong> Refresh <code>github.com/YOUR_USERNAME/movie-buzz</code> — files and commits appear</li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> **Pushed to GitLab: Refresh <code>gitlab.tlm.cloud/YOUR_USERNAME/movie-buzz</code> — files and commits appear</li>
 <li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong><code>.gitignore</code> working:</strong> Create a test <code>node_modules/</code> directory, run <code>git status</code>, confirm it does not appear as untracked</li>
 <li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <strong>TLM Roadtrip (optional but encouraged):</strong> Complete the bash navigation challenge in <code>TLM_Roadtrip/</code> — see its README for instructions</li>
 </ul>
@@ -461,8 +465,8 @@ Shell scripts are how professional developers automate repetitive setup tasks. E
 <td>Authoritative reference for every Git command</td>
 </tr>
 <tr>
-<td><a href="https://docs.github.com/en/get-started/quickstart/create-a-repo">GitHub Docs: Creating a repo</a></td>
-<td>Step-by-step for setting up your first GitHub repo</td>
+<td><a href="https://docs.gitlab.tlm.cloud/en/get-started/quickstart/create-a-repo">GitLab Docs: Creating a repo</a></td>
+<td>Step-by-step for setting up your first GitLab repo</td>
 </tr>
 <tr>
 <td><a href="https://www.atlassian.com/git/tutorials">Atlassian Git Tutorial</a></td>
@@ -491,5 +495,6 @@ Shell scripts are how professional developers automate repetitive setup tasks. E
 </div>
 <script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
 <script src="../assets/animations.js"></script>
+<script src="../assets/search.js"></script>
 </body>
 </html>

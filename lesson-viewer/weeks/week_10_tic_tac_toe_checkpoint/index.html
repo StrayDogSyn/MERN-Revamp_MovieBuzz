@@ -14,6 +14,10 @@
 <div class="layout">
 <nav class="sidebar" aria-label="Course weeks">
 <div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="sidebar-search">
+<input type="search" id="sidebar-search-input" class="search-input" placeholder="&#xf002; Search lessons…" aria-label="Search lessons">
+<div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+</div>
 <div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
 <a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
 <a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
@@ -98,265 +102,265 @@
 <p>Before building the full Tic Tac Toe game, let's explore simple game concepts with smaller examples:</p>
 <h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-simple-click-counter-game" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Simple Click Counter Game</h3>
 <p>Create <code>src/components/ClickGame.js</code>:</p>
-<pre><code class="language-javascript">import React, { useState } from 'react';
+<pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 
-function ClickGame() {
-  const [score, setScore] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(10);
-  const [gameActive, setGameActive] = useState(false);
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">ClickGame</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> [score, setScore] = <span class="hljs-title function_">useState</span>(<span class="hljs-number">0</span>);
+  <span class="hljs-keyword">const</span> [timeLeft, setTimeLeft] = <span class="hljs-title function_">useState</span>(<span class="hljs-number">10</span>);
+  <span class="hljs-keyword">const</span> [gameActive, setGameActive] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">false</span>);
 
-  const startGame = () =&gt; {
-    setScore(0);
-    setTimeLeft(10);
-    setGameActive(true);
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">startGame</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-title function_">setScore</span>(<span class="hljs-number">0</span>);
+    <span class="hljs-title function_">setTimeLeft</span>(<span class="hljs-number">10</span>);
+    <span class="hljs-title function_">setGameActive</span>(<span class="hljs-literal">true</span>);
 
-    // Timer countdown
-    const timer = setInterval(() =&gt; {
-      setTimeLeft(prev =&gt; {
-        if (prev &lt;= 1) {
-          clearInterval(timer);
-          setGameActive(false);
-          return 0;
+    <span class="hljs-comment">// Timer countdown</span>
+    <span class="hljs-keyword">const</span> timer = <span class="hljs-built_in">setInterval</span>(<span class="hljs-function">() =&gt;</span> {
+      <span class="hljs-title function_">setTimeLeft</span>(<span class="hljs-function"><span class="hljs-params">prev</span> =&gt;</span> {
+        <span class="hljs-keyword">if</span> (prev &lt;= <span class="hljs-number">1</span>) {
+          <span class="hljs-built_in">clearInterval</span>(timer);
+          <span class="hljs-title function_">setGameActive</span>(<span class="hljs-literal">false</span>);
+          <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
         }
-        return prev - 1;
+        <span class="hljs-keyword">return</span> prev - <span class="hljs-number">1</span>;
       });
-    }, 1000);
+    }, <span class="hljs-number">1000</span>);
   };
 
-  const handleClick = () =&gt; {
-    if (gameActive) {
-      setScore(score + 1);
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleClick</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">if</span> (gameActive) {
+      <span class="hljs-title function_">setScore</span>(score + <span class="hljs-number">1</span>);
     }
   };
 
-  return (
-    &lt;div style={{ textAlign: 'center', padding: '20px' }}&gt;
-      &lt;h2&gt;Click Game&lt;/h2&gt;
-      &lt;p&gt;Score: {score}&lt;/p&gt;
-      &lt;p&gt;Time Left: {timeLeft}s&lt;/p&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">textAlign:</span> &#x27;<span class="hljs-attr">center</span>&#x27;, <span class="hljs-attr">padding:</span> &#x27;<span class="hljs-attr">20px</span>&#x27; }}&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Click Game<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Score: {score}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Time Left: {timeLeft}s<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 
       {!gameActive &amp;&amp; timeLeft === 10 &amp;&amp; (
-        &lt;button onClick={startGame}&gt;Start Game&lt;/button&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{startGame}</span>&gt;</span>Start Game<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
       )}
 
       {gameActive &amp;&amp; (
-        &lt;button onClick={handleClick} style={{
-          padding: '20px',
-          fontSize: '18px',
-          backgroundColor: 'lightblue'
-        }}&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handleClick}</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span>
+          <span class="hljs-attr">padding:</span> &#x27;<span class="hljs-attr">20px</span>&#x27;,
+          <span class="hljs-attr">fontSize:</span> &#x27;<span class="hljs-attr">18px</span>&#x27;,
+          <span class="hljs-attr">backgroundColor:</span> &#x27;<span class="hljs-attr">lightblue</span>&#x27;
+        }}&gt;</span>
           Click Me!
-        &lt;/button&gt;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
       )}
 
       {!gameActive &amp;&amp; timeLeft === 0 &amp;&amp; (
-        &lt;div&gt;
-          &lt;p&gt;Game Over! Final Score: {score}&lt;/p&gt;
-          &lt;button onClick={startGame}&gt;Play Again&lt;/button&gt;
-        &lt;/div&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Game Over! Final Score: {score}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{startGame}</span>&gt;</span>Play Again<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
       )}
-    &lt;/div&gt;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-export default ClickGame;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">ClickGame</span>;
 </code></pre>
 <h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-simple-grid-game" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Simple Grid Game</h3>
 <p>Create <code>src/components/GridGame.js</code>:</p>
-<pre><code class="language-javascript">import React, { useState } from 'react';
+<pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 
-function GridGame() {
-  const [grid, setGrid] = useState(Array(9).fill(''));
-  const [currentPlayer, setCurrentPlayer] = useState('X');
-  const [gameStatus, setGameStatus] = useState('playing');
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">GridGame</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> [grid, setGrid] = <span class="hljs-title function_">useState</span>(<span class="hljs-title class_">Array</span>(<span class="hljs-number">9</span>).<span class="hljs-title function_">fill</span>(<span class="hljs-string">&#x27;&#x27;</span>));
+  <span class="hljs-keyword">const</span> [currentPlayer, setCurrentPlayer] = <span class="hljs-title function_">useState</span>(<span class="hljs-string">&#x27;X&#x27;</span>);
+  <span class="hljs-keyword">const</span> [gameStatus, setGameStatus] = <span class="hljs-title function_">useState</span>(<span class="hljs-string">&#x27;playing&#x27;</span>);
 
-  const handleCellClick = (index) =&gt; {
-    if (grid[index] !== '' || gameStatus !== 'playing') {
-      return; // Cell already filled or game over
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleCellClick</span> = (<span class="hljs-params">index</span>) =&gt; {
+    <span class="hljs-keyword">if</span> (grid[index] !== <span class="hljs-string">&#x27;&#x27;</span> || gameStatus !== <span class="hljs-string">&#x27;playing&#x27;</span>) {
+      <span class="hljs-keyword">return</span>; <span class="hljs-comment">// Cell already filled or game over</span>
     }
 
-    const newGrid = [...grid];
+    <span class="hljs-keyword">const</span> newGrid = [...grid];
     newGrid[index] = currentPlayer;
-    setGrid(newGrid);
+    <span class="hljs-title function_">setGrid</span>(newGrid);
 
-    // Check for simple win (just first row for demo)
-    if (newGrid[0] === newGrid[1] &amp;&amp; newGrid[1] === newGrid[2] &amp;&amp; newGrid[0] !== '') {
-      setGameStatus(`${newGrid[0]} wins!`);
-    } else if (newGrid.every(cell =&gt; cell !== '')) {
-      setGameStatus('Draw!');
-    } else {
-      setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
+    <span class="hljs-comment">// Check for simple win (just first row for demo)</span>
+    <span class="hljs-keyword">if</span> (newGrid[<span class="hljs-number">0</span>] === newGrid[<span class="hljs-number">1</span>] &amp;&amp; newGrid[<span class="hljs-number">1</span>] === newGrid[<span class="hljs-number">2</span>] &amp;&amp; newGrid[<span class="hljs-number">0</span>] !== <span class="hljs-string">&#x27;&#x27;</span>) {
+      <span class="hljs-title function_">setGameStatus</span>(<span class="hljs-string">`<span class="hljs-subst">${newGrid[<span class="hljs-number">0</span>]}</span> wins!`</span>);
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (newGrid.<span class="hljs-title function_">every</span>(<span class="hljs-function"><span class="hljs-params">cell</span> =&gt;</span> cell !== <span class="hljs-string">&#x27;&#x27;</span>)) {
+      <span class="hljs-title function_">setGameStatus</span>(<span class="hljs-string">&#x27;Draw!&#x27;</span>);
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-title function_">setCurrentPlayer</span>(currentPlayer === <span class="hljs-string">&#x27;X&#x27;</span> ? <span class="hljs-string">&#x27;O&#x27;</span> : <span class="hljs-string">&#x27;X&#x27;</span>);
     }
   };
 
-  const resetGame = () =&gt; {
-    setGrid(Array(9).fill(''));
-    setCurrentPlayer('X');
-    setGameStatus('playing');
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">resetGame</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-title function_">setGrid</span>(<span class="hljs-title class_">Array</span>(<span class="hljs-number">9</span>).<span class="hljs-title function_">fill</span>(<span class="hljs-string">&#x27;&#x27;</span>));
+    <span class="hljs-title function_">setCurrentPlayer</span>(<span class="hljs-string">&#x27;X&#x27;</span>);
+    <span class="hljs-title function_">setGameStatus</span>(<span class="hljs-string">&#x27;playing&#x27;</span>);
   };
 
-  return (
-    &lt;div style={{ textAlign: 'center' }}&gt;
-      &lt;h3&gt;Simple Grid Game&lt;/h3&gt;
-      &lt;p&gt;Current Player: {currentPlayer}&lt;/p&gt;
-      &lt;p&gt;Status: {gameStatus}&lt;/p&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">textAlign:</span> &#x27;<span class="hljs-attr">center</span>&#x27; }}&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Simple Grid Game<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Current Player: {currentPlayer}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Status: {gameStatus}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 
-      &lt;div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(3, 80px)',
-        gap: '2px',
-        justifyContent: 'center',
-        margin: '20px 0'
-      }}&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span>
+        <span class="hljs-attr">display:</span> &#x27;<span class="hljs-attr">grid</span>&#x27;,
+        <span class="hljs-attr">gridTemplateColumns:</span> &#x27;<span class="hljs-attr">repeat</span>(<span class="hljs-attr">3</span>, <span class="hljs-attr">80px</span>)&#x27;,
+        <span class="hljs-attr">gap:</span> &#x27;<span class="hljs-attr">2px</span>&#x27;,
+        <span class="hljs-attr">justifyContent:</span> &#x27;<span class="hljs-attr">center</span>&#x27;,
+        <span class="hljs-attr">margin:</span> &#x27;<span class="hljs-attr">20px</span> <span class="hljs-attr">0</span>&#x27;
+      }}&gt;</span>
         {grid.map((cell, index) =&gt; (
-          &lt;button
-            key={index}
-            onClick={() =&gt; handleCellClick(index)}
+          <span class="hljs-tag">&lt;<span class="hljs-name">button</span>
+            <span class="hljs-attr">key</span>=<span class="hljs-string">{index}</span>
+            <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> handleCellClick(index)}
             style={{
-              width: '80px',
-              height: '80px',
-              fontSize: '24px',
-              fontWeight: 'bold',
-              backgroundColor: cell ? 'lightgreen' : 'lightgray'
+              width: &#x27;80px&#x27;,
+              height: &#x27;80px&#x27;,
+              fontSize: &#x27;24px&#x27;,
+              fontWeight: &#x27;bold&#x27;,
+              backgroundColor: cell ? &#x27;lightgreen&#x27; : &#x27;lightgray&#x27;
             }}
           &gt;
             {cell}
-          &lt;/button&gt;
+          <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
         ))}
-      &lt;/div&gt;
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
-      &lt;button onClick={resetGame}&gt;Reset Game&lt;/button&gt;
-    &lt;/div&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{resetGame}</span>&gt;</span>Reset Game<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-export default GridGame;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">GridGame</span>;
 </code></pre>
 <h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-game-state-with-api-simulation" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Game State with API Simulation</h3>
 <p>Create <code>src/components/ApiGame.js</code>:</p>
-<pre><code class="language-javascript">import React, { useState } from 'react';
+<pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 
-function ApiGame() {
-  const [gameData, setGameData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">ApiGame</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> [gameData, setGameData] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">null</span>);
+  <span class="hljs-keyword">const</span> [loading, setLoading] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">false</span>);
+  <span class="hljs-keyword">const</span> [error, setError] = <span class="hljs-title function_">useState</span>(<span class="hljs-string">&#x27;&#x27;</span>);
 
-  // Simulate API calls
-  const simulateApiCall = (data) =&gt; {
-    return new Promise((resolve, reject) =&gt; {
-      setTimeout(() =&gt; {
-        if (Math.random() &gt; 0.8) {
-          reject(new Error('Random API error'));
-        } else {
-          resolve({ success: true, data });
+  <span class="hljs-comment">// Simulate API calls</span>
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">simulateApiCall</span> = (<span class="hljs-params">data</span>) =&gt; {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> {
+      <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+        <span class="hljs-keyword">if</span> (<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() &gt; <span class="hljs-number">0.8</span>) {
+          <span class="hljs-title function_">reject</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&#x27;Random API error&#x27;</span>));
+        } <span class="hljs-keyword">else</span> {
+          <span class="hljs-title function_">resolve</span>({ <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>, data });
         }
-      }, 1000);
+      }, <span class="hljs-number">1000</span>);
     });
   };
 
-  const startNewGame = async () =&gt; {
-    setLoading(true);
-    setError('');
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">startNewGame</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">true</span>);
+    <span class="hljs-title function_">setError</span>(<span class="hljs-string">&#x27;&#x27;</span>);
 
-    try {
-      const response = await simulateApiCall({
-        id: Date.now(),
-        board: Array(9).fill(''),
-        currentPlayer: 'X',
-        status: 'active'
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">simulateApiCall</span>({
+        <span class="hljs-attr">id</span>: <span class="hljs-title class_">Date</span>.<span class="hljs-title function_">now</span>(),
+        <span class="hljs-attr">board</span>: <span class="hljs-title class_">Array</span>(<span class="hljs-number">9</span>).<span class="hljs-title function_">fill</span>(<span class="hljs-string">&#x27;&#x27;</span>),
+        <span class="hljs-attr">currentPlayer</span>: <span class="hljs-string">&#x27;X&#x27;</span>,
+        <span class="hljs-attr">status</span>: <span class="hljs-string">&#x27;active&#x27;</span>
       });
 
-      setGameData(response.data);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+      <span class="hljs-title function_">setGameData</span>(response.<span class="hljs-property">data</span>);
+    } <span class="hljs-keyword">catch</span> (err) {
+      <span class="hljs-title function_">setError</span>(err.<span class="hljs-property">message</span>);
+    } <span class="hljs-keyword">finally</span> {
+      <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">false</span>);
     }
   };
 
-  const makeMove = async (position) =&gt; {
-    if (!gameData || loading) return;
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">makeMove</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">position</span>) =&gt; {
+    <span class="hljs-keyword">if</span> (!gameData || loading) <span class="hljs-keyword">return</span>;
 
-    setLoading(true);
+    <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">true</span>);
 
-    try {
-      const newBoard = [...gameData.board];
-      newBoard[position] = gameData.currentPlayer;
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-keyword">const</span> newBoard = [...gameData.<span class="hljs-property">board</span>];
+      newBoard[position] = gameData.<span class="hljs-property">currentPlayer</span>;
 
-      const response = await simulateApiCall({
+      <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">simulateApiCall</span>({
         ...gameData,
-        board: newBoard,
-        currentPlayer: gameData.currentPlayer === 'X' ? 'O' : 'X'
+        <span class="hljs-attr">board</span>: newBoard,
+        <span class="hljs-attr">currentPlayer</span>: gameData.<span class="hljs-property">currentPlayer</span> === <span class="hljs-string">&#x27;X&#x27;</span> ? <span class="hljs-string">&#x27;O&#x27;</span> : <span class="hljs-string">&#x27;X&#x27;</span>
       });
 
-      setGameData(response.data);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+      <span class="hljs-title function_">setGameData</span>(response.<span class="hljs-property">data</span>);
+    } <span class="hljs-keyword">catch</span> (err) {
+      <span class="hljs-title function_">setError</span>(err.<span class="hljs-property">message</span>);
+    } <span class="hljs-keyword">finally</span> {
+      <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">false</span>);
     }
   };
 
-  return (
-    &lt;div style={{ textAlign: 'center', padding: '20px' }}&gt;
-      &lt;h3&gt;Game with API Simulation&lt;/h3&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">textAlign:</span> &#x27;<span class="hljs-attr">center</span>&#x27;, <span class="hljs-attr">padding:</span> &#x27;<span class="hljs-attr">20px</span>&#x27; }}&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Game with API Simulation<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
 
       {!gameData &amp;&amp; (
-        &lt;button onClick={startNewGame} disabled={loading}&gt;
-          {loading ? 'Starting...' : 'Start New Game'}
-        &lt;/button&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{startNewGame}</span> <span class="hljs-attr">disabled</span>=<span class="hljs-string">{loading}</span>&gt;</span>
+          {loading ? &#x27;Starting...&#x27; : &#x27;Start New Game&#x27;}
+        <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
       )}
 
       {error &amp;&amp; (
-        &lt;div style={{ color: 'red', margin: '10px 0' }}&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">color:</span> &#x27;<span class="hljs-attr">red</span>&#x27;, <span class="hljs-attr">margin:</span> &#x27;<span class="hljs-attr">10px</span> <span class="hljs-attr">0</span>&#x27; }}&gt;</span>
           Error: {error}
-          &lt;button onClick={() =&gt; setError('')} style={{ marginLeft: '10px' }}&gt;
+          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> setError(&#x27;&#x27;)} style={{ marginLeft: &#x27;10px&#x27; }}&gt;
             Dismiss
-          &lt;/button&gt;
-        &lt;/div&gt;
+          <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
       )}
 
       {gameData &amp;&amp; (
-        &lt;div&gt;
-          &lt;p&gt;Game ID: {gameData.id}&lt;/p&gt;
-          &lt;p&gt;Current Player: {gameData.currentPlayer}&lt;/p&gt;
-          &lt;p&gt;Status: {gameData.status}&lt;/p&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Game ID: {gameData.id}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Current Player: {gameData.currentPlayer}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Status: {gameData.status}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 
-          &lt;div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 60px)',
-            gap: '2px',
-            justifyContent: 'center',
-            margin: '20px 0'
-          }}&gt;
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span>
+            <span class="hljs-attr">display:</span> &#x27;<span class="hljs-attr">grid</span>&#x27;,
+            <span class="hljs-attr">gridTemplateColumns:</span> &#x27;<span class="hljs-attr">repeat</span>(<span class="hljs-attr">3</span>, <span class="hljs-attr">60px</span>)&#x27;,
+            <span class="hljs-attr">gap:</span> &#x27;<span class="hljs-attr">2px</span>&#x27;,
+            <span class="hljs-attr">justifyContent:</span> &#x27;<span class="hljs-attr">center</span>&#x27;,
+            <span class="hljs-attr">margin:</span> &#x27;<span class="hljs-attr">20px</span> <span class="hljs-attr">0</span>&#x27;
+          }}&gt;</span>
             {gameData.board.map((cell, index) =&gt; (
-              &lt;button
-                key={index}
-                onClick={() =&gt; makeMove(index)}
-                disabled={loading || cell !== ''}
+              <span class="hljs-tag">&lt;<span class="hljs-name">button</span>
+                <span class="hljs-attr">key</span>=<span class="hljs-string">{index}</span>
+                <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> makeMove(index)}
+                disabled={loading || cell !== &#x27;&#x27;}
                 style={{
-                  width: '60px',
-                  height: '60px',
-                  fontSize: '20px'
+                  width: &#x27;60px&#x27;,
+                  height: &#x27;60px&#x27;,
+                  fontSize: &#x27;20px&#x27;
                 }}
               &gt;
                 {cell}
-              &lt;/button&gt;
+              <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
             ))}
-          &lt;/div&gt;
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
-          &lt;button onClick={startNewGame} disabled={loading}&gt;
+          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{startNewGame}</span> <span class="hljs-attr">disabled</span>=<span class="hljs-string">{loading}</span>&gt;</span>
             New Game
-          &lt;/button&gt;
-        &lt;/div&gt;
+          <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
       )}
 
-      {loading &amp;&amp; &lt;p&gt;Loading...&lt;/p&gt;}
-    &lt;/div&gt;
+      {loading &amp;&amp; <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Loading...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>}
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-export default ApiGame;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">ApiGame</span>;
 </code></pre>
 <blockquote class="callout callout--reflection-try" style="--tilt:0deg;--glow-intensity:0.85">
 <div class="callout-label lift"><i class="fas fa-tools callout-icon" aria-hidden="true"></i><span>Hands-On — Try It Out</span></div>
@@ -464,10 +468,10 @@ Create these simple game components to understand:</p>
 <h2 id="project-setup" tabindex="-1">Project Setup</h2>
 <h3 id="directory-structure" tabindex="-1">Directory Structure</h3>
 <p>Create the following project structure:</p>
-<pre><code>tic-tac-toe-checkpoint/
+<pre class="hljs"><code>tic-tac-toe-<span class="hljs-keyword">checkpoint</span>/
 ├── client/
-│   ├── public/
-│   │   └── index.html
+│   ├── <span class="hljs-built_in">public</span>/
+│   │   └── <span class="hljs-keyword">index</span>.html
 │   ├── src/
 │   │   ├── components/
 │   │   │   ├── GameBoard.js
@@ -477,451 +481,451 @@ Create these simple game components to understand:</p>
 │   │   │   └── GameControls.js
 │   │   ├── App.js
 │   │   ├── App.css
-│   │   └── index.js
+│   │   └── <span class="hljs-keyword">index</span>.js
 │   └── package.json
-├── server/
+├── <span class="hljs-keyword">server</span>/
 │   ├── controllers/
 │   │   └── gameController.js
 │   ├── routes/
 │   │   └── gameRoutes.js
 │   ├── utils/
 │   │   └── gameLogic.js
-│   ├── server.js
+│   ├── <span class="hljs-keyword">server</span>.js
 │   └── package.json
 └── README.md
 </code></pre>
 <h3 id="initialize-the-project" tabindex="-1">Initialize the Project</h3>
-<pre><code class="language-bash"># Create main project directory
-mkdir tic-tac-toe-checkpoint
-cd tic-tac-toe-checkpoint
+<pre class="hljs"><code><span class="hljs-comment"># Create main project directory</span>
+<span class="hljs-built_in">mkdir</span> tic-tac-toe-checkpoint
+<span class="hljs-built_in">cd</span> tic-tac-toe-checkpoint
 
-# Initialize client
-mkdir client
-cd client
+<span class="hljs-comment"># Initialize client</span>
+<span class="hljs-built_in">mkdir</span> client
+<span class="hljs-built_in">cd</span> client
 npm init -y
 npm install react react-dom
 
-# Initialize server
-cd ..
-mkdir server
-cd server
+<span class="hljs-comment"># Initialize server</span>
+<span class="hljs-built_in">cd</span> ..
+<span class="hljs-built_in">mkdir</span> server
+<span class="hljs-built_in">cd</span> server
 npm init -y
 npm install express cors
 
-# Return to project root
-cd ..
+<span class="hljs-comment"># Return to project root</span>
+<span class="hljs-built_in">cd</span> ..
 </code></pre>
 <hr>
 <h2 id="phase-1-react-frontend-development" tabindex="-1">Phase 1: React Frontend Development</h2>
 <h3 id="component-architecture" tabindex="-1">Component Architecture</h3>
 <p><strong>App Component (src/App.js) - STARTER CODE</strong>:</p>
-<pre><code class="language-javascript">import React, { useState, useEffect } from 'react';
-import GameBoard from './components/GameBoard';
-import GameStatus from './components/GameStatus';
-import GameStats from './components/GameStats';
-import GameControls from './components/GameControls';
-import './App.css';
+<pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { useState, useEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">GameBoard</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./components/GameBoard&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">GameStatus</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./components/GameStatus&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">GameStats</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./components/GameStats&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">GameControls</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./components/GameControls&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./App.css&#x27;</span>;
 
-const API_BASE_URL = 'http://localhost:4000/api';
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">API_BASE_URL</span> = <span class="hljs-string">&#x27;http://localhost:4000/api&#x27;</span>;
 
-function App() {
-  // TODO: Set up game state with useState
-  // Include: board (Array(9).fill(null)), currentPlayer ('X'), winner, isDraw, gameActive
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set up game state with useState</span>
+  <span class="hljs-comment">// Include: board (Array(9).fill(null)), currentPlayer (&#x27;X&#x27;), winner, isDraw, gameActive</span>
   
-  // TODO: Set up statistics state
-  // Include: xWins, oWins, draws, totalGames (all start at 0)
+  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set up statistics state</span>
+  <span class="hljs-comment">// Include: xWins, oWins, draws, totalGames (all start at 0)</span>
 
-  // TODO: Set up UI state  
-  // Include: loading (false), error (null)
+  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set up UI state  </span>
+  <span class="hljs-comment">// Include: loading (false), error (null)</span>
 
-  // TODO: Set up useEffect to initialize game on component mount
-  // Call initializeGame() and loadStats()
+  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set up useEffect to initialize game on component mount</span>
+  <span class="hljs-comment">// Call initializeGame() and loadStats()</span>
 
-  const initializeGame = async () =&gt; {
-    try {
-      // TODO: Set loading to true
-      // TODO: Make POST request to ${API_BASE_URL}/game/new
-      // TODO: Parse JSON response
-      // TODO: If successful, update gameState and clear errors
-      // TODO: Handle errors appropriately
-    } catch (error) {
-      // TODO: Handle fetch errors
-    } finally {
-      // TODO: Reset loading state
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">initializeGame</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set loading to true</span>
+      <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Make POST request to ${API_BASE_URL}/game/new</span>
+      <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Parse JSON response</span>
+      <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> If successful, update gameState and clear errors</span>
+      <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Handle errors appropriately</span>
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Handle fetch errors</span>
+    } <span class="hljs-keyword">finally</span> {
+      <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Reset loading state</span>
     }
   };
 
-  const loadStats = async () =&gt; {
-    try {
-      // TODO: Make GET request to ${API_BASE_URL}/game/stats
-      // TODO: Update stats state if successful
-      // TODO: Don't show errors for stats (not critical)
-    } catch (error) {
-      // TODO: Log error but don't show to user
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">loadStats</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Make GET request to ${API_BASE_URL}/game/stats</span>
+      <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Update stats state if successful</span>
+      <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Don&#x27;t show errors for stats (not critical)</span>
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Log error but don&#x27;t show to user</span>
     }
   };
 
-  const handleSquareClick = async (index) =&gt; {
-    // TODO: Validate move (check gameActive, board[index], loading)
-    // Return early if invalid
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleSquareClick</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">index</span>) =&gt; {
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Validate move (check gameActive, board[index], loading)</span>
+    <span class="hljs-comment">// Return early if invalid</span>
 
-    try {
-      // TODO: Set loading and clear errors
-      // TODO: Make POST request to /game/move with board, position, player
-      // TODO: Handle successful response - update gameState
-      // TODO: Load stats if game ended (winner or draw)
-      // TODO: Handle API errors
-    } catch (error) {
-      // TODO: Handle network errors
-    } finally {
-      // TODO: Reset loading
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set loading and clear errors</span>
+      <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Make POST request to /game/move with board, position, player</span>
+      <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Handle successful response - update gameState</span>
+      <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Load stats if game ended (winner or draw)</span>
+      <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Handle API errors</span>
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Handle network errors</span>
+    } <span class="hljs-keyword">finally</span> {
+      <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Reset loading</span>
     }
   };
 
-  const handleNewGame = () =&gt; {
-    // TODO: Call initializeGame
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleNewGame</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Call initializeGame</span>
   };
 
-  const handleResetStats = async () =&gt; {
-    try {
-      // TODO: Make POST request to /game/reset-stats
-      // TODO: Reset local stats state if successful
-    } catch (error) {
-      // TODO: Handle errors
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleResetStats</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Make POST request to /game/reset-stats</span>
+      <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Reset local stats state if successful</span>
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Handle errors</span>
     }
   };
 
-  return (
-    &lt;div className=&quot;app&quot;&gt;
-      &lt;header className=&quot;app-header&quot;&gt;
-        &lt;h1&gt;Tic Tac Toe&lt;/h1&gt;
-        &lt;p&gt;React + Express Checkpoint Project&lt;/p&gt;
-      &lt;/header&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;app-header&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Tic Tac Toe<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>React + Express Checkpoint Project<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span>
 
-      &lt;main className=&quot;app-main&quot;&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">main</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;app-main&quot;</span>&gt;</span>
         {/* TODO: Add error message display with dismiss button */}
 
-        &lt;div className=&quot;game-container&quot;&gt;
-          &lt;div className=&quot;game-section&quot;&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;game-container&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;game-section&quot;</span>&gt;</span>
             {/* TODO: Add GameStatus component with gameState and loading props */}
             {/* TODO: Add GameBoard component with board, onSquareClick, disabled props */}
             {/* TODO: Add GameControls component with event handlers and loading */}
-          &lt;/div&gt;
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
-          &lt;div className=&quot;stats-section&quot;&gt;
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;stats-section&quot;</span>&gt;</span>
             {/* TODO: Add GameStats component with stats prop */}
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/main&gt;
-    &lt;/div&gt;
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-export default App;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">App</span>;
 </code></pre>
 <p><strong>GameBoard Component (src/components/GameBoard.js) - STARTER CODE</strong>:</p>
-<pre><code class="language-javascript">import React from 'react';
-import GameSquare from './GameSquare';
+<pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">GameSquare</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./GameSquare&#x27;</span>;
 
-function GameBoard({ board, onSquareClick, disabled }) {
-  return (
-    &lt;div className=&quot;game-board&quot;&gt;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">GameBoard</span>(<span class="hljs-params">{ board, onSquareClick, disabled }</span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;game-board&quot;</span>&gt;</span>
       {/* TODO: Map over board array to create GameSquare components */}
       {/* Each GameSquare needs: key, value, onClick, disabled, position props */}
       {/* Use arrow function for onClick: () =&gt; onSquareClick(index) */}
-    &lt;/div&gt;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-export default GameBoard;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">GameBoard</span>;
 </code></pre>
 <p><strong>GameSquare Component (src/components/GameSquare.js) - STARTER CODE</strong>:</p>
-<pre><code class="language-javascript">import React from 'react';
+<pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 
-function GameSquare({ value, onClick, disabled, position }) {
-  const handleClick = () =&gt; {
-    // TODO: Implement click validation
-    // Only call onClick if square is not disabled and has no value
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">GameSquare</span>(<span class="hljs-params">{ value, onClick, disabled, position }</span>) {
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleClick</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Implement click validation</span>
+    <span class="hljs-comment">// Only call onClick if square is not disabled and has no value</span>
   };
 
-  const getSquareClass = () =&gt; {
-    // TODO: Build dynamic className string
-    // Start with 'game-square'
-    // Add 'occupied' and value.toLowerCase() if value exists
-    // Add 'disabled' if disabled
-    // Add 'clickable' if no value and not disabled
-    // Return the complete className
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">getSquareClass</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Build dynamic className string</span>
+    <span class="hljs-comment">// Start with &#x27;game-square&#x27;</span>
+    <span class="hljs-comment">// Add &#x27;occupied&#x27; and value.toLowerCase() if value exists</span>
+    <span class="hljs-comment">// Add &#x27;disabled&#x27; if disabled</span>
+    <span class="hljs-comment">// Add &#x27;clickable&#x27; if no value and not disabled</span>
+    <span class="hljs-comment">// Return the complete className</span>
   };
 
-  return (
-    // TODO: Implement button element
-    // Include: className (from getSquareClass), onClick (handleClick), disabled prop
-    // Add aria-label for accessibility: `Square ${position + 1}${value ? `, occupied by ${value}` : ', empty'}`
-    // Display the value as button content
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Implement button element</span>
+    <span class="hljs-comment">// Include: className (from getSquareClass), onClick (handleClick), disabled prop</span>
+    <span class="hljs-comment">// Add aria-label for accessibility: `Square ${position + 1}${value ? `, occupied by ${value}` : &#x27;, empty&#x27;}`</span>
+    <span class="hljs-comment">// Display the value as button content</span>
   );
 }
 
-export default GameSquare;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">GameSquare</span>;
 </code></pre>
 <h3 id="game-state-management" tabindex="-1">Game State Management</h3>
 <p><strong>GameStatus Component (src/components/GameStatus.js)</strong>:</p>
-<pre><code class="language-javascript">import React from 'react';
+<pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 
-function GameStatus({ gameState, loading }) {
-  const getStatusMessage = () =&gt; {
-    if (loading) {
-      return 'Processing...';
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">GameStatus</span>(<span class="hljs-params">{ gameState, loading }</span>) {
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">getStatusMessage</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">if</span> (loading) {
+      <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Processing...&#x27;</span>;
     }
 
-    if (gameState.winner) {
-      return `🎉 Player ${gameState.winner} Wins!`;
+    <span class="hljs-keyword">if</span> (gameState.<span class="hljs-property">winner</span>) {
+      <span class="hljs-keyword">return</span> <span class="hljs-string">`🎉 Player <span class="hljs-subst">${gameState.winner}</span> Wins!`</span>;
     }
 
-    if (gameState.isDraw) {
-      return '🤝 It\'s a Draw!';
+    <span class="hljs-keyword">if</span> (gameState.<span class="hljs-property">isDraw</span>) {
+      <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;🤝 It\&#x27;s a Draw!&#x27;</span>;
     }
 
-    if (gameState.gameActive) {
-      return `Current Player: ${gameState.currentPlayer}`;
+    <span class="hljs-keyword">if</span> (gameState.<span class="hljs-property">gameActive</span>) {
+      <span class="hljs-keyword">return</span> <span class="hljs-string">`Current Player: <span class="hljs-subst">${gameState.currentPlayer}</span>`</span>;
     }
 
-    return 'Game Over';
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Game Over&#x27;</span>;
   };
 
-  const getStatusClass = () =&gt; {
-    let className = 'game-status';
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">getStatusClass</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">let</span> className = <span class="hljs-string">&#x27;game-status&#x27;</span>;
     
-    if (loading) {
-      className += ' loading';
-    } else if (gameState.winner) {
-      className += ' winner';
-    } else if (gameState.isDraw) {
-      className += ' draw';
+    <span class="hljs-keyword">if</span> (loading) {
+      className += <span class="hljs-string">&#x27; loading&#x27;</span>;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (gameState.<span class="hljs-property">winner</span>) {
+      className += <span class="hljs-string">&#x27; winner&#x27;</span>;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (gameState.<span class="hljs-property">isDraw</span>) {
+      className += <span class="hljs-string">&#x27; draw&#x27;</span>;
     }
 
-    return className;
+    <span class="hljs-keyword">return</span> className;
   };
 
-  return (
-    &lt;div className={getStatusClass()}&gt;
-      &lt;h2&gt;{getStatusMessage()}&lt;/h2&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{getStatusClass()}</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>{getStatusMessage()}<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
       {gameState.winner &amp;&amp; (
-        &lt;p className=&quot;winner-celebration&quot;&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;winner-celebration&quot;</span>&gt;</span>
           Congratulations! 🏆
-        &lt;/p&gt;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
       )}
-    &lt;/div&gt;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-export default GameStatus;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">GameStatus</span>;
 </code></pre>
 <h3 id="event-handling" tabindex="-1">Event Handling</h3>
 <p><strong>GameControls Component (src/components/GameControls.js)</strong>:</p>
-<pre><code class="language-javascript">import React from 'react';
+<pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 
-function GameControls({ onNewGame, onResetStats, loading }) {
-  return (
-    &lt;div className=&quot;game-controls&quot;&gt;
-      &lt;button 
-        onClick={onNewGame}
-        disabled={loading}
-        className=&quot;btn btn-primary&quot;
-      &gt;
-        {loading ? 'Starting...' : 'New Game'}
-      &lt;/button&gt;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">GameControls</span>(<span class="hljs-params">{ onNewGame, onResetStats, loading }</span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;game-controls&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> 
+        <span class="hljs-attr">onClick</span>=<span class="hljs-string">{onNewGame}</span>
+        <span class="hljs-attr">disabled</span>=<span class="hljs-string">{loading}</span>
+        <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;btn btn-primary&quot;</span>
+      &gt;</span>
+        {loading ? &#x27;Starting...&#x27; : &#x27;New Game&#x27;}
+      <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
       
-      &lt;button 
-        onClick={onResetStats}
-        disabled={loading}
-        className=&quot;btn btn-secondary&quot;
-      &gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> 
+        <span class="hljs-attr">onClick</span>=<span class="hljs-string">{onResetStats}</span>
+        <span class="hljs-attr">disabled</span>=<span class="hljs-string">{loading}</span>
+        <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;btn btn-secondary&quot;</span>
+      &gt;</span>
         Reset Stats
-      &lt;/button&gt;
-    &lt;/div&gt;
+      <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-export default GameControls;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">GameControls</span>;
 </code></pre>
 <p><strong>GameStats Component (src/components/GameStats.js)</strong>:</p>
-<pre><code class="language-javascript">import React from 'react';
+<pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 
-function GameStats({ stats }) {
-  const getWinPercentage = (wins) =&gt; {
-    if (stats.totalGames === 0) return 0;
-    return Math.round((wins / stats.totalGames) * 100);
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">GameStats</span>(<span class="hljs-params">{ stats }</span>) {
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">getWinPercentage</span> = (<span class="hljs-params">wins</span>) =&gt; {
+    <span class="hljs-keyword">if</span> (stats.<span class="hljs-property">totalGames</span> === <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">round</span>((wins / stats.<span class="hljs-property">totalGames</span>) * <span class="hljs-number">100</span>);
   };
 
-  return (
-    &lt;div className=&quot;game-stats&quot;&gt;
-      &lt;h3&gt;Game Statistics&lt;/h3&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;game-stats&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Game Statistics<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
       
-      &lt;div className=&quot;stats-grid&quot;&gt;
-        &lt;div className=&quot;stat-item&quot;&gt;
-          &lt;div className=&quot;stat-value&quot;&gt;{stats.xWins}&lt;/div&gt;
-          &lt;div className=&quot;stat-label&quot;&gt;X Wins&lt;/div&gt;
-          &lt;div className=&quot;stat-percentage&quot;&gt;{getWinPercentage(stats.xWins)}%&lt;/div&gt;
-        &lt;/div&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;stats-grid&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;stat-item&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;stat-value&quot;</span>&gt;</span>{stats.xWins}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;stat-label&quot;</span>&gt;</span>X Wins<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;stat-percentage&quot;</span>&gt;</span>{getWinPercentage(stats.xWins)}%<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
-        &lt;div className=&quot;stat-item&quot;&gt;
-          &lt;div className=&quot;stat-value&quot;&gt;{stats.oWins}&lt;/div&gt;
-          &lt;div className=&quot;stat-label&quot;&gt;O Wins&lt;/div&gt;
-          &lt;div className=&quot;stat-percentage&quot;&gt;{getWinPercentage(stats.oWins)}%&lt;/div&gt;
-        &lt;/div&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;stat-item&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;stat-value&quot;</span>&gt;</span>{stats.oWins}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;stat-label&quot;</span>&gt;</span>O Wins<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;stat-percentage&quot;</span>&gt;</span>{getWinPercentage(stats.oWins)}%<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
-        &lt;div className=&quot;stat-item&quot;&gt;
-          &lt;div className=&quot;stat-value&quot;&gt;{stats.draws}&lt;/div&gt;
-          &lt;div className=&quot;stat-label&quot;&gt;Draws&lt;/div&gt;
-          &lt;div className=&quot;stat-percentage&quot;&gt;{getWinPercentage(stats.draws)}%&lt;/div&gt;
-        &lt;/div&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;stat-item&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;stat-value&quot;</span>&gt;</span>{stats.draws}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;stat-label&quot;</span>&gt;</span>Draws<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;stat-percentage&quot;</span>&gt;</span>{getWinPercentage(stats.draws)}%<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
-        &lt;div className=&quot;stat-item total&quot;&gt;
-          &lt;div className=&quot;stat-value&quot;&gt;{stats.totalGames}&lt;/div&gt;
-          &lt;div className=&quot;stat-label&quot;&gt;Total Games&lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;stat-item total&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;stat-value&quot;</span>&gt;</span>{stats.totalGames}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;stat-label&quot;</span>&gt;</span>Total Games<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-export default GameStats;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">GameStats</span>;
 </code></pre>
 <hr>
 <h2 id="phase-2-backend-api-development" tabindex="-1">Phase 2: Backend API Development</h2>
 <h3 id="express-server-setup" tabindex="-1">Express Server Setup</h3>
 <p><strong>Server Entry Point (server/server.js) - STARTER CODE</strong>:</p>
-<pre><code class="language-javascript">const express = require('express');
-const cors = require('cors');
-const gameRoutes = require('./routes/gameRoutes');
+<pre class="hljs"><code><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);
+<span class="hljs-keyword">const</span> cors = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;cors&#x27;</span>);
+<span class="hljs-keyword">const</span> gameRoutes = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./routes/gameRoutes&#x27;</span>);
 
-const app = express();
-const PORT = process.env.PORT || 4000;
+<span class="hljs-keyword">const</span> app = <span class="hljs-title function_">express</span>();
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">PORT</span> = process.<span class="hljs-property">env</span>.<span class="hljs-property">PORT</span> || <span class="hljs-number">4000</span>;
 
-// TODO: Add middleware setup
-// Add express.json() for parsing JSON request bodies
-// Add CORS configuration for 'http://localhost:3000' origin
+<span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Add middleware setup</span>
+<span class="hljs-comment">// Add express.json() for parsing JSON request bodies</span>
+<span class="hljs-comment">// Add CORS configuration for &#x27;http://localhost:3000&#x27; origin</span>
 
-// TODO: Add root route (GET '/')
-// Return JSON with message, version, and available endpoints list
+<span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Add root route (GET &#x27;/&#x27;)</span>
+<span class="hljs-comment">// Return JSON with message, version, and available endpoints list</span>
 
-// TODO: Connect game routes with '/api/game' prefix
+<span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Connect game routes with &#x27;/api/game&#x27; prefix</span>
 
-// TODO: Add 404 handler for unmatched routes
-// Use app.use('*', ...) and return 404 status with error message
+<span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Add 404 handler for unmatched routes</span>
+<span class="hljs-comment">// Use app.use(&#x27;*&#x27;, ...) and return 404 status with error message</span>
 
-// TODO: Add global error handler
-// Use app.use((error, req, res, next) =&gt; ...)
-// Log error and return 500 status
+<span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Add global error handler</span>
+<span class="hljs-comment">// Use app.use((error, req, res, next) =&gt; ...)</span>
+<span class="hljs-comment">// Log error and return 500 status</span>
 
-// TODO: Start the server
-// Use app.listen() with PORT and console.log success message
+<span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Start the server</span>
+<span class="hljs-comment">// Use app.listen() with PORT and console.log success message</span>
 </code></pre>
 <h3 id="game-logic-api" tabindex="-1">Game Logic API</h3>
 <p><strong>Game Logic Utility (server/utils/gameLogic.js)</strong>:</p>
-<pre><code class="language-javascript">// Check for winner
-const checkWinner = (board) =&gt; {
-  const winningCombinations = [
-    [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
-    [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
-    [0, 4, 8], [2, 4, 6]             // Diagonals
+<pre class="hljs"><code><span class="hljs-comment">// Check for winner</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">checkWinner</span> = (<span class="hljs-params">board</span>) =&gt; {
+  <span class="hljs-keyword">const</span> winningCombinations = [
+    [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>], [<span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>], <span class="hljs-comment">// Rows</span>
+    [<span class="hljs-number">0</span>, <span class="hljs-number">3</span>, <span class="hljs-number">6</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">7</span>], [<span class="hljs-number">2</span>, <span class="hljs-number">5</span>, <span class="hljs-number">8</span>], <span class="hljs-comment">// Columns</span>
+    [<span class="hljs-number">0</span>, <span class="hljs-number">4</span>, <span class="hljs-number">8</span>], [<span class="hljs-number">2</span>, <span class="hljs-number">4</span>, <span class="hljs-number">6</span>]             <span class="hljs-comment">// Diagonals</span>
   ];
 
-  for (let combination of winningCombinations) {
-    const [a, b, c] = combination;
-    if (board[a] &amp;&amp; board[a] === board[b] &amp;&amp; board[a] === board[c]) {
-      return {
-        winner: board[a],
-        winningCombination: combination
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> combination <span class="hljs-keyword">of</span> winningCombinations) {
+    <span class="hljs-keyword">const</span> [a, b, c] = combination;
+    <span class="hljs-keyword">if</span> (board[a] &amp;&amp; board[a] === board[b] &amp;&amp; board[a] === board[c]) {
+      <span class="hljs-keyword">return</span> {
+        <span class="hljs-attr">winner</span>: board[a],
+        <span class="hljs-attr">winningCombination</span>: combination
       };
     }
   }
 
-  return { winner: null, winningCombination: null };
+  <span class="hljs-keyword">return</span> { <span class="hljs-attr">winner</span>: <span class="hljs-literal">null</span>, <span class="hljs-attr">winningCombination</span>: <span class="hljs-literal">null</span> };
 };
 
-// Check if board is full (draw)
-const checkDraw = (board) =&gt; {
-  return board.every(square =&gt; square !== null);
+<span class="hljs-comment">// Check if board is full (draw)</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">checkDraw</span> = (<span class="hljs-params">board</span>) =&gt; {
+  <span class="hljs-keyword">return</span> board.<span class="hljs-title function_">every</span>(<span class="hljs-function"><span class="hljs-params">square</span> =&gt;</span> square !== <span class="hljs-literal">null</span>);
 };
 
-// Validate move
-const isValidMove = (board, position) =&gt; {
-  // Check position is valid index
-  if (position &lt; 0 || position &gt; 8) {
-    return false;
+<span class="hljs-comment">// Validate move</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">isValidMove</span> = (<span class="hljs-params">board, position</span>) =&gt; {
+  <span class="hljs-comment">// Check position is valid index</span>
+  <span class="hljs-keyword">if</span> (position &lt; <span class="hljs-number">0</span> || position &gt; <span class="hljs-number">8</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
   }
 
-  // Check if square is empty
-  return board[position] === null;
+  <span class="hljs-comment">// Check if square is empty</span>
+  <span class="hljs-keyword">return</span> board[position] === <span class="hljs-literal">null</span>;
 };
 
-// Create new game state
-const createNewGame = () =&gt; {
-  return {
-    board: Array(9).fill(null),
-    currentPlayer: 'X',
-    winner: null,
-    isDraw: false,
-    gameActive: true,
-    winningCombination: null
+<span class="hljs-comment">// Create new game state</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">createNewGame</span> = (<span class="hljs-params"></span>) =&gt; {
+  <span class="hljs-keyword">return</span> {
+    <span class="hljs-attr">board</span>: <span class="hljs-title class_">Array</span>(<span class="hljs-number">9</span>).<span class="hljs-title function_">fill</span>(<span class="hljs-literal">null</span>),
+    <span class="hljs-attr">currentPlayer</span>: <span class="hljs-string">&#x27;X&#x27;</span>,
+    <span class="hljs-attr">winner</span>: <span class="hljs-literal">null</span>,
+    <span class="hljs-attr">isDraw</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">gameActive</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">winningCombination</span>: <span class="hljs-literal">null</span>
   };
 };
 
-// Make a move and return new game state
-const makeMove = (currentBoard, position, player) =&gt; {
-  // Validate move
-  if (!isValidMove(currentBoard, position)) {
-    throw new Error('Invalid move: square is already occupied or position is invalid');
+<span class="hljs-comment">// Make a move and return new game state</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">makeMove</span> = (<span class="hljs-params">currentBoard, position, player</span>) =&gt; {
+  <span class="hljs-comment">// Validate move</span>
+  <span class="hljs-keyword">if</span> (!<span class="hljs-title function_">isValidMove</span>(currentBoard, position)) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&#x27;Invalid move: square is already occupied or position is invalid&#x27;</span>);
   }
 
-  // Create new board with move
-  const newBoard = [...currentBoard];
+  <span class="hljs-comment">// Create new board with move</span>
+  <span class="hljs-keyword">const</span> newBoard = [...currentBoard];
   newBoard[position] = player;
 
-  // Check for winner
-  const { winner, winningCombination } = checkWinner(newBoard);
+  <span class="hljs-comment">// Check for winner</span>
+  <span class="hljs-keyword">const</span> { winner, winningCombination } = <span class="hljs-title function_">checkWinner</span>(newBoard);
   
-  // Check for draw
-  const isDraw = !winner &amp;&amp; checkDraw(newBoard);
+  <span class="hljs-comment">// Check for draw</span>
+  <span class="hljs-keyword">const</span> isDraw = !winner &amp;&amp; <span class="hljs-title function_">checkDraw</span>(newBoard);
 
-  // Determine next player
-  const nextPlayer = player === 'X' ? 'O' : 'X';
+  <span class="hljs-comment">// Determine next player</span>
+  <span class="hljs-keyword">const</span> nextPlayer = player === <span class="hljs-string">&#x27;X&#x27;</span> ? <span class="hljs-string">&#x27;O&#x27;</span> : <span class="hljs-string">&#x27;X&#x27;</span>;
 
-  // Create new game state
-  return {
-    board: newBoard,
-    currentPlayer: winner || isDraw ? player : nextPlayer,
+  <span class="hljs-comment">// Create new game state</span>
+  <span class="hljs-keyword">return</span> {
+    <span class="hljs-attr">board</span>: newBoard,
+    <span class="hljs-attr">currentPlayer</span>: winner || isDraw ? player : nextPlayer,
     winner,
     isDraw,
-    gameActive: !winner &amp;&amp; !isDraw,
+    <span class="hljs-attr">gameActive</span>: !winner &amp;&amp; !isDraw,
     winningCombination
   };
 };
 
-// Get game statistics
-const calculateStats = (games) =&gt; {
-  const stats = {
-    xWins: 0,
-    oWins: 0,
-    draws: 0,
-    totalGames: games.length
+<span class="hljs-comment">// Get game statistics</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">calculateStats</span> = (<span class="hljs-params">games</span>) =&gt; {
+  <span class="hljs-keyword">const</span> stats = {
+    <span class="hljs-attr">xWins</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">oWins</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">draws</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">totalGames</span>: games.<span class="hljs-property">length</span>
   };
 
-  games.forEach(game =&gt; {
-    if (game.winner === 'X') {
-      stats.xWins++;
-    } else if (game.winner === 'O') {
-      stats.oWins++;
-    } else if (game.isDraw) {
-      stats.draws++;
+  games.<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">game</span> =&gt;</span> {
+    <span class="hljs-keyword">if</span> (game.<span class="hljs-property">winner</span> === <span class="hljs-string">&#x27;X&#x27;</span>) {
+      stats.<span class="hljs-property">xWins</span>++;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (game.<span class="hljs-property">winner</span> === <span class="hljs-string">&#x27;O&#x27;</span>) {
+      stats.<span class="hljs-property">oWins</span>++;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (game.<span class="hljs-property">isDraw</span>) {
+      stats.<span class="hljs-property">draws</span>++;
     }
   });
 
-  return stats;
+  <span class="hljs-keyword">return</span> stats;
 };
 
-module.exports = {
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = {
   checkWinner,
   checkDraw,
   isValidMove,
@@ -931,168 +935,168 @@ module.exports = {
 };
 </code></pre>
 <p><strong>Game Controller (server/controllers/gameController.js)</strong>:</p>
-<pre><code class="language-javascript">const { 
+<pre class="hljs"><code><span class="hljs-keyword">const</span> { 
   createNewGame, 
   makeMove, 
   calculateStats 
-} = require('../utils/gameLogic');
+} = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;../utils/gameLogic&#x27;</span>);
 
-// In-memory storage for game history (in production, use a database)
-let gameHistory = [];
+<span class="hljs-comment">// In-memory storage for game history (in production, use a database)</span>
+<span class="hljs-keyword">let</span> gameHistory = [];
 
-// Start new game
-const newGame = (req, res) =&gt; {
-  try {
-    const gameState = createNewGame();
+<span class="hljs-comment">// Start new game</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">newGame</span> = (<span class="hljs-params">req, res</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> gameState = <span class="hljs-title function_">createNewGame</span>();
     
-    res.json({
-      success: true,
-      message: 'New game started',
-      data: gameState
+    res.<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;New game started&#x27;</span>,
+      <span class="hljs-attr">data</span>: gameState
     });
-  } catch (error) {
-    console.error('Error starting new game:', error);
-    res.status(500).json({
-      success: false,
-      error: 'Failed to start new game'
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error starting new game:&#x27;</span>, error);
+    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Failed to start new game&#x27;</span>
     });
   }
 };
 
-// Make a move
-const move = (req, res) =&gt; {
-  try {
-    const { board, position, player } = req.body;
+<span class="hljs-comment">// Make a move</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">move</span> = (<span class="hljs-params">req, res</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> { board, position, player } = req.<span class="hljs-property">body</span>;
 
-    // Validate input
-    if (!board || position === undefined || !player) {
-      return res.status(400).json({
-        success: false,
-        error: 'Missing required fields: board, position, player'
+    <span class="hljs-comment">// Validate input</span>
+    <span class="hljs-keyword">if</span> (!board || position === <span class="hljs-literal">undefined</span> || !player) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Missing required fields: board, position, player&#x27;</span>
       });
     }
 
-    if (!Array.isArray(board) || board.length !== 9) {
-      return res.status(400).json({
-        success: false,
-        error: 'Board must be an array of 9 elements'
+    <span class="hljs-keyword">if</span> (!<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(board) || board.<span class="hljs-property">length</span> !== <span class="hljs-number">9</span>) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Board must be an array of 9 elements&#x27;</span>
       });
     }
 
-    if (typeof position !== 'number' || position &lt; 0 || position &gt; 8) {
-      return res.status(400).json({
-        success: false,
-        error: 'Position must be a number between 0 and 8'
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> position !== <span class="hljs-string">&#x27;number&#x27;</span> || position &lt; <span class="hljs-number">0</span> || position &gt; <span class="hljs-number">8</span>) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Position must be a number between 0 and 8&#x27;</span>
       });
     }
 
-    if (player !== 'X' &amp;&amp; player !== 'O') {
-      return res.status(400).json({
-        success: false,
-        error: 'Player must be either &quot;X&quot; or &quot;O&quot;'
+    <span class="hljs-keyword">if</span> (player !== <span class="hljs-string">&#x27;X&#x27;</span> &amp;&amp; player !== <span class="hljs-string">&#x27;O&#x27;</span>) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Player must be either &quot;X&quot; or &quot;O&quot;&#x27;</span>
       });
     }
 
-    // Make the move
-    const newGameState = makeMove(board, position, player);
+    <span class="hljs-comment">// Make the move</span>
+    <span class="hljs-keyword">const</span> newGameState = <span class="hljs-title function_">makeMove</span>(board, position, player);
 
-    // If game ended, save to history
-    if (newGameState.winner || newGameState.isDraw) {
-      gameHistory.push({
+    <span class="hljs-comment">// If game ended, save to history</span>
+    <span class="hljs-keyword">if</span> (newGameState.<span class="hljs-property">winner</span> || newGameState.<span class="hljs-property">isDraw</span>) {
+      gameHistory.<span class="hljs-title function_">push</span>({
         ...newGameState,
-        completedAt: new Date()
+        <span class="hljs-attr">completedAt</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>()
       });
     }
 
-    res.json({
-      success: true,
-      message: 'Move made successfully',
-      data: newGameState
+    res.<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Move made successfully&#x27;</span>,
+      <span class="hljs-attr">data</span>: newGameState
     });
 
-  } catch (error) {
-    console.error('Error making move:', error);
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error making move:&#x27;</span>, error);
     
-    // Handle specific game logic errors
-    if (error.message.includes('Invalid move')) {
-      return res.status(400).json({
-        success: false,
-        error: error.message
+    <span class="hljs-comment">// Handle specific game logic errors</span>
+    <span class="hljs-keyword">if</span> (error.<span class="hljs-property">message</span>.<span class="hljs-title function_">includes</span>(<span class="hljs-string">&#x27;Invalid move&#x27;</span>)) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: error.<span class="hljs-property">message</span>
       });
     }
 
-    res.status(500).json({
-      success: false,
-      error: 'Failed to make move'
+    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Failed to make move&#x27;</span>
     });
   }
 };
 
-// Get game statistics
-const getStats = (req, res) =&gt; {
-  try {
-    const stats = calculateStats(gameHistory);
+<span class="hljs-comment">// Get game statistics</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">getStats</span> = (<span class="hljs-params">req, res</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> stats = <span class="hljs-title function_">calculateStats</span>(gameHistory);
     
-    res.json({
-      success: true,
-      data: stats
+    res.<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">data</span>: stats
     });
-  } catch (error) {
-    console.error('Error getting stats:', error);
-    res.status(500).json({
-      success: false,
-      error: 'Failed to get statistics'
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error getting stats:&#x27;</span>, error);
+    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Failed to get statistics&#x27;</span>
     });
   }
 };
 
-// Reset statistics
-const resetStats = (req, res) =&gt; {
-  try {
+<span class="hljs-comment">// Reset statistics</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">resetStats</span> = (<span class="hljs-params">req, res</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
     gameHistory = [];
     
-    res.json({
-      success: true,
-      message: 'Statistics reset successfully',
-      data: {
-        xWins: 0,
-        oWins: 0,
-        draws: 0,
-        totalGames: 0
+    res.<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Statistics reset successfully&#x27;</span>,
+      <span class="hljs-attr">data</span>: {
+        <span class="hljs-attr">xWins</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-attr">oWins</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-attr">draws</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-attr">totalGames</span>: <span class="hljs-number">0</span>
       }
     });
-  } catch (error) {
-    console.error('Error resetting stats:', error);
-    res.status(500).json({
-      success: false,
-      error: 'Failed to reset statistics'
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error resetting stats:&#x27;</span>, error);
+    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Failed to reset statistics&#x27;</span>
     });
   }
 };
 
-// Get game history (bonus feature)
-const getHistory = (req, res) =&gt; {
-  try {
-    const limit = parseInt(req.query.limit) || 10;
-    const recentGames = gameHistory
-      .slice(-limit)
-      .reverse(); // Most recent first
+<span class="hljs-comment">// Get game history (bonus feature)</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">getHistory</span> = (<span class="hljs-params">req, res</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> limit = <span class="hljs-built_in">parseInt</span>(req.<span class="hljs-property">query</span>.<span class="hljs-property">limit</span>) || <span class="hljs-number">10</span>;
+    <span class="hljs-keyword">const</span> recentGames = gameHistory
+      .<span class="hljs-title function_">slice</span>(-limit)
+      .<span class="hljs-title function_">reverse</span>(); <span class="hljs-comment">// Most recent first</span>
 
-    res.json({
-      success: true,
-      data: recentGames,
-      total: gameHistory.length
+    res.<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">data</span>: recentGames,
+      <span class="hljs-attr">total</span>: gameHistory.<span class="hljs-property">length</span>
     });
-  } catch (error) {
-    console.error('Error getting history:', error);
-    res.status(500).json({
-      success: false,
-      error: 'Failed to get game history'
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error getting history:&#x27;</span>, error);
+    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Failed to get game history&#x27;</span>
     });
   }
 };
 
-module.exports = {
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = {
   newGame,
   move,
   getStats,
@@ -1102,225 +1106,225 @@ module.exports = {
 </code></pre>
 <h3 id="cors-configuration" tabindex="-1">CORS Configuration</h3>
 <p><strong>Game Routes (server/routes/gameRoutes.js)</strong>:</p>
-<pre><code class="language-javascript">const express = require('express');
-const {
+<pre class="hljs"><code><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);
+<span class="hljs-keyword">const</span> {
   newGame,
   move,
   getStats,
   resetStats,
   getHistory
-} = require('../controllers/gameController');
+} = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;../controllers/gameController&#x27;</span>);
 
-const router = express.Router();
+<span class="hljs-keyword">const</span> router = express.<span class="hljs-title class_">Router</span>();
 
-// Game routes
-router.post('/new', newGame);           // POST /api/game/new
-router.post('/move', move);             // POST /api/game/move
-router.get('/stats', getStats);         // GET /api/game/stats
-router.post('/reset-stats', resetStats); // POST /api/game/reset-stats
-router.get('/history', getHistory);     // GET /api/game/history
+<span class="hljs-comment">// Game routes</span>
+router.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/new&#x27;</span>, newGame);           <span class="hljs-comment">// POST /api/game/new</span>
+router.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/move&#x27;</span>, move);             <span class="hljs-comment">// POST /api/game/move</span>
+router.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/stats&#x27;</span>, getStats);         <span class="hljs-comment">// GET /api/game/stats</span>
+router.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/reset-stats&#x27;</span>, resetStats); <span class="hljs-comment">// POST /api/game/reset-stats</span>
+router.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/history&#x27;</span>, getHistory);     <span class="hljs-comment">// GET /api/game/history</span>
 
-module.exports = router;
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = router;
 </code></pre>
 <hr>
 <h2 id="phase-3-frontend-backend-integration" tabindex="-1">Phase 3: Frontend-Backend Integration</h2>
 <h3 id="api-integration" tabindex="-1">API Integration</h3>
 <p><strong>API Service (client/src/services/gameAPI.js)</strong>:</p>
-<pre><code class="language-javascript">const API_BASE_URL = 'http://localhost:4000/api';
+<pre class="hljs"><code><span class="hljs-keyword">const</span> <span class="hljs-variable constant_">API_BASE_URL</span> = <span class="hljs-string">&#x27;http://localhost:4000/api&#x27;</span>;
 
-// Helper function for API calls
-const apiCall = async (endpoint, options = {}) =&gt; {
-  try {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        ...options.headers
+<span class="hljs-comment">// Helper function for API calls</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">apiCall</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">endpoint, options = {}</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`<span class="hljs-subst">${API_BASE_URL}</span><span class="hljs-subst">${endpoint}</span>`</span>, {
+      <span class="hljs-attr">headers</span>: {
+        <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
+        ...options.<span class="hljs-property">headers</span>
       },
       ...options
     });
 
-    const data = await response.json();
+    <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
     
-    if (!response.ok) {
-      throw new Error(data.error || 'API request failed');
+    <span class="hljs-keyword">if</span> (!response.<span class="hljs-property">ok</span>) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(data.<span class="hljs-property">error</span> || <span class="hljs-string">&#x27;API request failed&#x27;</span>);
     }
 
-    return data;
-  } catch (error) {
-    console.error('API Error:', error);
-    throw error;
+    <span class="hljs-keyword">return</span> data;
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;API Error:&#x27;</span>, error);
+    <span class="hljs-keyword">throw</span> error;
   }
 };
 
-// Game API methods
-export const gameAPI = {
-  // Start new game
-  newGame: () =&gt; apiCall('/game/new', { method: 'POST' }),
+<span class="hljs-comment">// Game API methods</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> gameAPI = {
+  <span class="hljs-comment">// Start new game</span>
+  <span class="hljs-attr">newGame</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">apiCall</span>(<span class="hljs-string">&#x27;/game/new&#x27;</span>, { <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span> }),
 
-  // Make a move
-  makeMove: (board, position, player) =&gt; 
-    apiCall('/game/move', {
-      method: 'POST',
-      body: JSON.stringify({ board, position, player })
+  <span class="hljs-comment">// Make a move</span>
+  <span class="hljs-attr">makeMove</span>: <span class="hljs-function">(<span class="hljs-params">board, position, player</span>) =&gt;</span> 
+    <span class="hljs-title function_">apiCall</span>(<span class="hljs-string">&#x27;/game/move&#x27;</span>, {
+      <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
+      <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>({ board, position, player })
     }),
 
-  // Get statistics
-  getStats: () =&gt; apiCall('/game/stats'),
+  <span class="hljs-comment">// Get statistics</span>
+  <span class="hljs-attr">getStats</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">apiCall</span>(<span class="hljs-string">&#x27;/game/stats&#x27;</span>),
 
-  // Reset statistics
-  resetStats: () =&gt; apiCall('/game/reset-stats', { method: 'POST' }),
+  <span class="hljs-comment">// Reset statistics</span>
+  <span class="hljs-attr">resetStats</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">apiCall</span>(<span class="hljs-string">&#x27;/game/reset-stats&#x27;</span>, { <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span> }),
 
-  // Get game history
-  getHistory: (limit = 10) =&gt; apiCall(`/game/history?limit=${limit}`)
+  <span class="hljs-comment">// Get game history</span>
+  <span class="hljs-attr">getHistory</span>: <span class="hljs-function">(<span class="hljs-params">limit = <span class="hljs-number">10</span></span>) =&gt;</span> <span class="hljs-title function_">apiCall</span>(<span class="hljs-string">`/game/history?limit=<span class="hljs-subst">${limit}</span>`</span>)
 };
 </code></pre>
 <h3 id="error-handling" tabindex="-1">Error Handling</h3>
 <p><strong>Error Boundary Component (client/src/components/ErrorBoundary.js)</strong>:</p>
-<pre><code class="language-javascript">import React from 'react';
+<pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 
-class ErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { hasError: false, error: null, errorInfo: null };
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">ErrorBoundary</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">React.Component</span> {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">props</span>) {
+    <span class="hljs-variable language_">super</span>(props);
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span> = { <span class="hljs-attr">hasError</span>: <span class="hljs-literal">false</span>, <span class="hljs-attr">error</span>: <span class="hljs-literal">null</span>, <span class="hljs-attr">errorInfo</span>: <span class="hljs-literal">null</span> };
   }
 
-  static getDerivedStateFromError(error) {
-    return { hasError: true };
+  <span class="hljs-keyword">static</span> <span class="hljs-title function_">getDerivedStateFromError</span>(<span class="hljs-params">error</span>) {
+    <span class="hljs-keyword">return</span> { <span class="hljs-attr">hasError</span>: <span class="hljs-literal">true</span> };
   }
 
-  componentDidCatch(error, errorInfo) {
-    this.setState({
-      error: error,
-      errorInfo: errorInfo
+  <span class="hljs-title function_">componentDidCatch</span>(<span class="hljs-params">error, errorInfo</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setState</span>({
+      <span class="hljs-attr">error</span>: error,
+      <span class="hljs-attr">errorInfo</span>: errorInfo
     });
     
-    // Log error to console in development
-    console.error('Error Boundary caught an error:', error, errorInfo);
+    <span class="hljs-comment">// Log error to console in development</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error Boundary caught an error:&#x27;</span>, error, errorInfo);
   }
 
-  render() {
-    if (this.state.hasError) {
-      return (
-        &lt;div className=&quot;error-boundary&quot;&gt;
-          &lt;h2&gt;Something went wrong!&lt;/h2&gt;
-          &lt;p&gt;We're sorry - something's gone wrong.&lt;/p&gt;
-          &lt;button onClick={() =&gt; window.location.reload()}&gt;
+  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span>.<span class="hljs-property">hasError</span>) {
+      <span class="hljs-keyword">return</span> (
+        <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;error-boundary&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Something went wrong!<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>We&#x27;re sorry - something&#x27;s gone wrong.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> window.location.reload()}&gt;
             Reload Page
-          &lt;/button&gt;
-          {process.env.NODE_ENV === 'development' &amp;&amp; (
-            &lt;details style={{ whiteSpace: 'pre-wrap', marginTop: '1rem' }}&gt;
-              &lt;summary&gt;Error Details (Development)&lt;/summary&gt;
+          <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+          {process.env.NODE_ENV === &#x27;development&#x27; &amp;&amp; (
+            <span class="hljs-tag">&lt;<span class="hljs-name">details</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">whiteSpace:</span> &#x27;<span class="hljs-attr">pre-wrap</span>&#x27;, <span class="hljs-attr">marginTop:</span> &#x27;<span class="hljs-attr">1rem</span>&#x27; }}&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">summary</span>&gt;</span>Error Details (Development)<span class="hljs-tag">&lt;/<span class="hljs-name">summary</span>&gt;</span>
               {this.state.error &amp;&amp; this.state.error.toString()}
-              &lt;br /&gt;
+              <span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span>
               {this.state.errorInfo.componentStack}
-            &lt;/details&gt;
+            <span class="hljs-tag">&lt;/<span class="hljs-name">details</span>&gt;</span>
           )}
-        &lt;/div&gt;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
       );
     }
 
-    return this.props.children;
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">props</span>.<span class="hljs-property">children</span>;
   }
 }
 
-export default ErrorBoundary;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">ErrorBoundary</span>;
 </code></pre>
 <h3 id="state-synchronization" tabindex="-1">State Synchronization</h3>
 <p><strong>Custom Hook for Game State (client/src/hooks/useGameState.js)</strong>:</p>
-<pre><code class="language-javascript">import { useState, useEffect } from 'react';
-import { gameAPI } from '../services/gameAPI';
+<pre class="hljs"><code><span class="hljs-keyword">import</span> { useState, useEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> { gameAPI } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../services/gameAPI&#x27;</span>;
 
-export const useGameState = () =&gt; {
-  const [gameState, setGameState] = useState({
-    board: Array(9).fill(null),
-    currentPlayer: 'X',
-    winner: null,
-    isDraw: false,
-    gameActive: true
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">useGameState</span> = (<span class="hljs-params"></span>) =&gt; {
+  <span class="hljs-keyword">const</span> [gameState, setGameState] = <span class="hljs-title function_">useState</span>({
+    <span class="hljs-attr">board</span>: <span class="hljs-title class_">Array</span>(<span class="hljs-number">9</span>).<span class="hljs-title function_">fill</span>(<span class="hljs-literal">null</span>),
+    <span class="hljs-attr">currentPlayer</span>: <span class="hljs-string">&#x27;X&#x27;</span>,
+    <span class="hljs-attr">winner</span>: <span class="hljs-literal">null</span>,
+    <span class="hljs-attr">isDraw</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">gameActive</span>: <span class="hljs-literal">true</span>
   });
 
-  const [stats, setStats] = useState({
-    xWins: 0,
-    oWins: 0,
-    draws: 0,
-    totalGames: 0
+  <span class="hljs-keyword">const</span> [stats, setStats] = <span class="hljs-title function_">useState</span>({
+    <span class="hljs-attr">xWins</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">oWins</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">draws</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">totalGames</span>: <span class="hljs-number">0</span>
   });
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  <span class="hljs-keyword">const</span> [loading, setLoading] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">false</span>);
+  <span class="hljs-keyword">const</span> [error, setError] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">null</span>);
 
-  // Initialize game on mount
-  useEffect(() =&gt; {
-    initializeGame();
-    loadStats();
+  <span class="hljs-comment">// Initialize game on mount</span>
+  <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-title function_">initializeGame</span>();
+    <span class="hljs-title function_">loadStats</span>();
   }, []);
 
-  const initializeGame = async () =&gt; {
-    try {
-      setLoading(true);
-      const result = await gameAPI.newGame();
-      setGameState(result.data);
-      setError(null);
-    } catch (error) {
-      setError('Failed to initialize game: ' + error.message);
-    } finally {
-      setLoading(false);
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">initializeGame</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">true</span>);
+      <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> gameAPI.<span class="hljs-title function_">newGame</span>();
+      <span class="hljs-title function_">setGameState</span>(result.<span class="hljs-property">data</span>);
+      <span class="hljs-title function_">setError</span>(<span class="hljs-literal">null</span>);
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-title function_">setError</span>(<span class="hljs-string">&#x27;Failed to initialize game: &#x27;</span> + error.<span class="hljs-property">message</span>);
+    } <span class="hljs-keyword">finally</span> {
+      <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">false</span>);
     }
   };
 
-  const loadStats = async () =&gt; {
-    try {
-      const result = await gameAPI.getStats();
-      setStats(result.data);
-    } catch (error) {
-      console.error('Error loading stats:', error);
-      // Don't show error for stats - not critical
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">loadStats</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> gameAPI.<span class="hljs-title function_">getStats</span>();
+      <span class="hljs-title function_">setStats</span>(result.<span class="hljs-property">data</span>);
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error loading stats:&#x27;</span>, error);
+      <span class="hljs-comment">// Don&#x27;t show error for stats - not critical</span>
     }
   };
 
-  const makeMove = async (position) =&gt; {
-    if (!gameState.gameActive || gameState.board[position] || loading) {
-      return;
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">makeMove</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">position</span>) =&gt; {
+    <span class="hljs-keyword">if</span> (!gameState.<span class="hljs-property">gameActive</span> || gameState.<span class="hljs-property">board</span>[position] || loading) {
+      <span class="hljs-keyword">return</span>;
     }
 
-    try {
-      setLoading(true);
-      setError(null);
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">true</span>);
+      <span class="hljs-title function_">setError</span>(<span class="hljs-literal">null</span>);
 
-      const result = await gameAPI.makeMove(
-        gameState.board, 
+      <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> gameAPI.<span class="hljs-title function_">makeMove</span>(
+        gameState.<span class="hljs-property">board</span>, 
         position, 
-        gameState.currentPlayer
+        gameState.<span class="hljs-property">currentPlayer</span>
       );
 
-      setGameState(result.data);
+      <span class="hljs-title function_">setGameState</span>(result.<span class="hljs-property">data</span>);
 
-      // If game ended, reload stats
-      if (result.data.winner || result.data.isDraw) {
-        await loadStats();
+      <span class="hljs-comment">// If game ended, reload stats</span>
+      <span class="hljs-keyword">if</span> (result.<span class="hljs-property">data</span>.<span class="hljs-property">winner</span> || result.<span class="hljs-property">data</span>.<span class="hljs-property">isDraw</span>) {
+        <span class="hljs-keyword">await</span> <span class="hljs-title function_">loadStats</span>();
       }
-    } catch (error) {
-      setError('Failed to make move: ' + error.message);
-    } finally {
-      setLoading(false);
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-title function_">setError</span>(<span class="hljs-string">&#x27;Failed to make move: &#x27;</span> + error.<span class="hljs-property">message</span>);
+    } <span class="hljs-keyword">finally</span> {
+      <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">false</span>);
     }
   };
 
-  const resetStats = async () =&gt; {
-    try {
-      await gameAPI.resetStats();
-      setStats({
-        xWins: 0,
-        oWins: 0,
-        draws: 0,
-        totalGames: 0
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">resetStats</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-keyword">await</span> gameAPI.<span class="hljs-title function_">resetStats</span>();
+      <span class="hljs-title function_">setStats</span>({
+        <span class="hljs-attr">xWins</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-attr">oWins</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-attr">draws</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-attr">totalGames</span>: <span class="hljs-number">0</span>
       });
-    } catch (error) {
-      setError('Failed to reset stats: ' + error.message);
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-title function_">setError</span>(<span class="hljs-string">&#x27;Failed to reset stats: &#x27;</span> + error.<span class="hljs-property">message</span>);
     }
   };
 
-  return {
+  <span class="hljs-keyword">return</span> {
     gameState,
     stats,
     loading,
@@ -1328,7 +1332,7 @@ export const useGameState = () =&gt; {
     initializeGame,
     makeMove,
     resetStats,
-    clearError: () =&gt; setError(null)
+    <span class="hljs-attr">clearError</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">setError</span>(<span class="hljs-literal">null</span>)
   };
 };
 </code></pre>
@@ -1336,175 +1340,175 @@ export const useGameState = () =&gt; {
 <h2 id="phase-4-advanced-features" tabindex="-1">Phase 4: Advanced Features</h2>
 <h3 id="game-history" tabindex="-1">Game History</h3>
 <p><strong>Game History Component (client/src/components/GameHistory.js)</strong>:</p>
-<pre><code class="language-javascript">import React, { useState, useEffect } from 'react';
-import { gameAPI } from '../services/gameAPI';
+<pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { useState, useEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> { gameAPI } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../services/gameAPI&#x27;</span>;
 
-function GameHistory() {
-  const [history, setHistory] = useState([]);
-  const [loading, setLoading] = useState(false);
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">GameHistory</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> [history, setHistory] = <span class="hljs-title function_">useState</span>([]);
+  <span class="hljs-keyword">const</span> [loading, setLoading] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">false</span>);
 
-  useEffect(() =&gt; {
-    loadHistory();
+  <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-title function_">loadHistory</span>();
   }, []);
 
-  const loadHistory = async () =&gt; {
-    try {
-      setLoading(true);
-      const result = await gameAPI.getHistory(20);
-      setHistory(result.data);
-    } catch (error) {
-      console.error('Error loading history:', error);
-    } finally {
-      setLoading(false);
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">loadHistory</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">true</span>);
+      <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> gameAPI.<span class="hljs-title function_">getHistory</span>(<span class="hljs-number">20</span>);
+      <span class="hljs-title function_">setHistory</span>(result.<span class="hljs-property">data</span>);
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error loading history:&#x27;</span>, error);
+    } <span class="hljs-keyword">finally</span> {
+      <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">false</span>);
     }
   };
 
-  const formatDate = (dateString) =&gt; {
-    return new Date(dateString).toLocaleString();
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">formatDate</span> = (<span class="hljs-params">dateString</span>) =&gt; {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(dateString).<span class="hljs-title function_">toLocaleString</span>();
   };
 
-  const getGameResult = (game) =&gt; {
-    if (game.winner) {
-      return `${game.winner} Won`;
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">getGameResult</span> = (<span class="hljs-params">game</span>) =&gt; {
+    <span class="hljs-keyword">if</span> (game.<span class="hljs-property">winner</span>) {
+      <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${game.winner}</span> Won`</span>;
     }
-    if (game.isDraw) {
-      return 'Draw';
+    <span class="hljs-keyword">if</span> (game.<span class="hljs-property">isDraw</span>) {
+      <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Draw&#x27;</span>;
     }
-    return 'In Progress';
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;In Progress&#x27;</span>;
   };
 
-  return (
-    &lt;div className=&quot;game-history&quot;&gt;
-      &lt;h3&gt;Recent Games&lt;/h3&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;game-history&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Recent Games<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
       
-      {loading &amp;&amp; &lt;p&gt;Loading history...&lt;/p&gt;}
+      {loading &amp;&amp; <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Loading history...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>}
       
       {history.length === 0 &amp;&amp; !loading &amp;&amp; (
-        &lt;p&gt;No games played yet.&lt;/p&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>No games played yet.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
       )}
 
-      &lt;div className=&quot;history-list&quot;&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;history-list&quot;</span>&gt;</span>
         {history.map((game, index) =&gt; (
-          &lt;div key={index} className=&quot;history-item&quot;&gt;
-            &lt;div className=&quot;history-result&quot;&gt;
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{index}</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;history-item&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;history-result&quot;</span>&gt;</span>
               {getGameResult(game)}
-            &lt;/div&gt;
-            &lt;div className=&quot;history-date&quot;&gt;
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;history-date&quot;</span>&gt;</span>
               {formatDate(game.completedAt)}
-            &lt;/div&gt;
-          &lt;/div&gt;
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
         ))}
-      &lt;/div&gt;
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
-      &lt;button onClick={loadHistory} disabled={loading}&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{loadHistory}</span> <span class="hljs-attr">disabled</span>=<span class="hljs-string">{loading}</span>&gt;</span>
         Refresh
-      &lt;/button&gt;
-    &lt;/div&gt;
+      <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-export default GameHistory;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">GameHistory</span>;
 </code></pre>
 <h3 id="statistics-tracking" tabindex="-1">Statistics Tracking</h3>
 <p><strong>Enhanced Stats Component with Charts (client/src/components/StatsChart.js)</strong>:</p>
-<pre><code class="language-javascript">import React from 'react';
+<pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 
-function StatsChart({ stats }) {
-  const total = stats.totalGames;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">StatsChart</span>(<span class="hljs-params">{ stats }</span>) {
+  <span class="hljs-keyword">const</span> total = stats.<span class="hljs-property">totalGames</span>;
   
-  if (total === 0) {
-    return (
-      &lt;div className=&quot;stats-chart&quot;&gt;
-        &lt;p&gt;Play some games to see statistics!&lt;/p&gt;
-      &lt;/div&gt;
+  <span class="hljs-keyword">if</span> (total === <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">return</span> (
+      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;stats-chart&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Play some games to see statistics!<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
     );
   }
 
-  const xPercentage = (stats.xWins / total) * 100;
-  const oPercentage = (stats.oWins / total) * 100;
-  const drawPercentage = (stats.draws / total) * 100;
+  <span class="hljs-keyword">const</span> xPercentage = (stats.<span class="hljs-property">xWins</span> / total) * <span class="hljs-number">100</span>;
+  <span class="hljs-keyword">const</span> oPercentage = (stats.<span class="hljs-property">oWins</span> / total) * <span class="hljs-number">100</span>;
+  <span class="hljs-keyword">const</span> drawPercentage = (stats.<span class="hljs-property">draws</span> / total) * <span class="hljs-number">100</span>;
 
-  return (
-    &lt;div className=&quot;stats-chart&quot;&gt;
-      &lt;div className=&quot;chart-bar&quot;&gt;
-        &lt;div className=&quot;chart-section x-wins&quot; style={{ width: `${xPercentage}%` }}&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;stats-chart&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;chart-bar&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;chart-section x-wins&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">width:</span> `${<span class="hljs-attr">xPercentage</span>}%` }}&gt;</span>
           {xPercentage &gt; 10 &amp;&amp; `${Math.round(xPercentage)}%`}
-        &lt;/div&gt;
-        &lt;div className=&quot;chart-section o-wins&quot; style={{ width: `${oPercentage}%` }}&gt;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;chart-section o-wins&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">width:</span> `${<span class="hljs-attr">oPercentage</span>}%` }}&gt;</span>
           {oPercentage &gt; 10 &amp;&amp; `${Math.round(oPercentage)}%`}
-        &lt;/div&gt;
-        &lt;div className=&quot;chart-section draws&quot; style={{ width: `${drawPercentage}%` }}&gt;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;chart-section draws&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">width:</span> `${<span class="hljs-attr">drawPercentage</span>}%` }}&gt;</span>
           {drawPercentage &gt; 10 &amp;&amp; `${Math.round(drawPercentage)}%`}
-        &lt;/div&gt;
-      &lt;/div&gt;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
       
-      &lt;div className=&quot;chart-legend&quot;&gt;
-        &lt;div className=&quot;legend-item&quot;&gt;
-          &lt;div className=&quot;legend-color x-wins&quot;&gt;&lt;/div&gt;
-          &lt;span&gt;X Wins ({stats.xWins})&lt;/span&gt;
-        &lt;/div&gt;
-        &lt;div className=&quot;legend-item&quot;&gt;
-          &lt;div className=&quot;legend-color o-wins&quot;&gt;&lt;/div&gt;
-          &lt;span&gt;O Wins ({stats.oWins})&lt;/span&gt;
-        &lt;/div&gt;
-        &lt;div className=&quot;legend-item&quot;&gt;
-          &lt;div className=&quot;legend-color draws&quot;&gt;&lt;/div&gt;
-          &lt;span&gt;Draws ({stats.draws})&lt;/span&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;chart-legend&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;legend-item&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;legend-color x-wins&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>X Wins ({stats.xWins})<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;legend-item&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;legend-color o-wins&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>O Wins ({stats.oWins})<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;legend-item&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;legend-color draws&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Draws ({stats.draws})<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-export default StatsChart;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">StatsChart</span>;
 </code></pre>
 <h3 id="multiplayer-support" tabindex="-1">Multiplayer Support</h3>
 <p><strong>Multiplayer Game Component (bonus feature)</strong>:</p>
-<pre><code class="language-javascript">// This is an advanced feature for students who finish early
-import React, { useState, useEffect } from 'react';
+<pre class="hljs"><code><span class="hljs-comment">// This is an advanced feature for students who finish early</span>
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { useState, useEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 
-function MultiplayerGame() {
-  const [gameId, setGameId] = useState(null);
-  const [playerSymbol, setPlayerSymbol] = useState(null);
-  const [isWaiting, setIsWaiting] = useState(false);
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">MultiplayerGame</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> [gameId, setGameId] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">null</span>);
+  <span class="hljs-keyword">const</span> [playerSymbol, setPlayerSymbol] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">null</span>);
+  <span class="hljs-keyword">const</span> [isWaiting, setIsWaiting] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">false</span>);
 
-  const createGame = async () =&gt; {
-    // Implementation would involve WebSocket or polling
-    // This is a placeholder for advanced students
-    console.log('Creating multiplayer game...');
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">createGame</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-comment">// Implementation would involve WebSocket or polling</span>
+    <span class="hljs-comment">// This is a placeholder for advanced students</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Creating multiplayer game...&#x27;</span>);
   };
 
-  const joinGame = async (id) =&gt; {
-    // Implementation would involve WebSocket or polling
-    console.log('Joining game:', id);
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">joinGame</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">id</span>) =&gt; {
+    <span class="hljs-comment">// Implementation would involve WebSocket or polling</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Joining game:&#x27;</span>, id);
   };
 
-  return (
-    &lt;div className=&quot;multiplayer-game&quot;&gt;
-      &lt;h3&gt;Multiplayer Mode&lt;/h3&gt;
-      &lt;p&gt;Coming soon! This is an advanced feature.&lt;/p&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;multiplayer-game&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Multiplayer Mode<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Coming soon! This is an advanced feature.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
       
-      &lt;div className=&quot;multiplayer-controls&quot;&gt;
-        &lt;button onClick={createGame}&gt;Create Game&lt;/button&gt;
-        &lt;input 
-          type=&quot;text&quot; 
-          placeholder=&quot;Game ID to join&quot;
-          onKeyPress={(e) =&gt; {
-            if (e.key === 'Enter' &amp;&amp; e.target.value) {
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;multiplayer-controls&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{createGame}</span>&gt;</span>Create Game<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> 
+          <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> 
+          <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;Game ID to join&quot;</span>
+          <span class="hljs-attr">onKeyPress</span>=<span class="hljs-string">{(e)</span> =&gt;</span> {
+            if (e.key === &#x27;Enter&#x27; &amp;&amp; e.target.value) {
               joinGame(e.target.value);
             }
           }}
         /&gt;
-      &lt;/div&gt;
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
       
       {isWaiting &amp;&amp; (
-        &lt;p&gt;Waiting for opponent to join...&lt;/p&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Waiting for opponent to join...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
       )}
-    &lt;/div&gt;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-export default MultiplayerGame;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">MultiplayerGame</span>;
 </code></pre>
 <hr>
 <h2 id="testing-and-debugging" tabindex="-1">Testing and Debugging</h2>
@@ -1534,15 +1538,15 @@ export default MultiplayerGame;
 </ol>
 <h3 id="debugging-tools" tabindex="-1">Debugging Tools</h3>
 <p><strong>Console Logging:</strong></p>
-<pre><code class="language-javascript">// Add debugging to components
-useEffect(() =&gt; {
-  console.log('Game state updated:', gameState);
+<pre class="hljs"><code><span class="hljs-comment">// Add debugging to components</span>
+<span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Game state updated:&#x27;</span>, gameState);
 }, [gameState]);
 
-// Add debugging to API calls
-const makeMove = async (position) =&gt; {
-  console.log('Making move:', { position, player: gameState.currentPlayer });
-  // ... rest of function
+<span class="hljs-comment">// Add debugging to API calls</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">makeMove</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">position</span>) =&gt; {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Making move:&#x27;</span>, { position, <span class="hljs-attr">player</span>: gameState.<span class="hljs-property">currentPlayer</span> });
+  <span class="hljs-comment">// ... rest of function</span>
 };
 </code></pre>
 <p><strong>Network Debugging:</strong></p>
@@ -1556,24 +1560,24 @@ const makeMove = async (position) =&gt; {
 <h2 id="deployment-considerations" tabindex="-1">Deployment Considerations</h2>
 <h3 id="production-setup" tabindex="-1">Production Setup</h3>
 <p><strong>Environment Variables:</strong></p>
-<pre><code class="language-javascript">// client/src/config.js
-const config = {
-  API_BASE_URL: process.env.REACT_APP_API_URL || 'http://localhost:4000/api'
+<pre class="hljs"><code><span class="hljs-comment">// client/src/config.js</span>
+<span class="hljs-keyword">const</span> config = {
+  <span class="hljs-attr">API_BASE_URL</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">REACT_APP_API_URL</span> || <span class="hljs-string">&#x27;http://localhost:4000/api&#x27;</span>
 };
 
-export default config;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> config;
 </code></pre>
 <p><strong>Build Scripts (package.json)</strong>:</p>
-<pre><code class="language-json">{
-  &quot;scripts&quot;: {
-    &quot;dev&quot;: &quot;concurrently \&quot;npm run server\&quot; \&quot;npm run client\&quot;&quot;,
-    &quot;server&quot;: &quot;cd server &amp;&amp; npm start&quot;,
-    &quot;client&quot;: &quot;cd client &amp;&amp; npm start&quot;,
-    &quot;build&quot;: &quot;cd client &amp;&amp; npm run build&quot;,
-    &quot;build:client&quot;: &quot;cd client &amp;&amp; npm run build&quot;,
-    &quot;build:server&quot;: &quot;cd server &amp;&amp; npm run build&quot;
-  }
-}
+<pre class="hljs"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;dev&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;concurrently \&quot;npm run server\&quot; \&quot;npm run client\&quot;&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;server&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;cd server &amp;&amp; npm start&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;client&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;cd client &amp;&amp; npm start&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;build&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;cd client &amp;&amp; npm run build&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;build:client&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;cd client &amp;&amp; npm run build&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;build:server&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;cd server &amp;&amp; npm run build&quot;</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
 </code></pre>
 <hr>
 <h2 id="code-review-checklist" tabindex="-1">Code Review Checklist</h2>
@@ -1683,5 +1687,6 @@ How does this project demonstrate the separation of concerns between frontend an
 </div>
 <script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
 <script src="../assets/animations.js"></script>
+<script src="../assets/search.js"></script>
 </body>
 </html>

@@ -130,7 +130,7 @@ More content...
 2. **Use Overview**: Press `o` to see all slides at once
 3. **Jump to Slides**: Press `g` + slide number to jump directly
 4. **Share PDF**: Export to PDF for easy sharing with students/colleagues
-5. **Host Online**: Build and deploy `dist/` folder to any static host (GitHub Pages, Netlify, Vercel)
+5. **Host Online**: Build and deploy `dist/` folder to any static host (Netlify, Vercel, or the TLM intranet server)
 
 ## File Structure
 
@@ -176,7 +176,7 @@ npm run build
 # Deploy dist/ folder
 ```
 
-### GitHub Pages
+### Static Hosting
 
 ```bash
 npm run build

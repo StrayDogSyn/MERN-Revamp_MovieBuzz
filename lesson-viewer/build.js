@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const MarkdownIt = require('markdown-it');
 const anchor = require('markdown-it-anchor');
+const hljs = require('highlight.js');
 
 const { WEEKS, PHASE_LABELS } = require('./src/nav-data');
 const { registerRules, wrapGlossarySection } = require('./src/markdown-rules');
@@ -13,20 +14,35 @@ const REPO_ROOT = path.resolve(ROOT, '..');
 const OUT_DIR = path.join(ROOT, 'weeks');
 const TEMPLATE_PATH = path.join(ROOT, 'src', 'template.html');
 
-// Matches github-slugger's algorithm (ASCII punctuation subset — sufficient
+// Matches the CommonMark/GFM heading slug algorithm (ASCII punctuation subset — sufficient
 // for this curriculum's headings, which are all ASCII). The legacy
 // student.md files hand-author their in-page TOC links (e.g.
-// "[Glossary](#glossary)") against GitHub's renderer, so heading IDs must
+// "[Glossary](#glossary)") against the GitLab renderer, so heading IDs must
 // use the same slug rules or those links 404 in the static output.
 const PUNCTUATION_CHARS = '\\\'!"#$%&()*+,./:;<=>?@[]^`{|}~';
-const GITHUB_PUNCTUATION_RE = new RegExp('[' + PUNCTUATION_CHARS.replace(/[\\\]^]/g, '\\$&') + ']', 'g');
+const MARKDOWN_PUNCTUATION_RE = new RegExp('[' + PUNCTUATION_CHARS.replace(/[\\\]^]/g, '\\$&') + ']', 'g');
 
-function githubSlugify(str) {
-  return str.toString().toLowerCase().replace(GITHUB_PUNCTUATION_RE, '').replace(/ /g, '-');
+function markdownSlugify(str) {
+  return str.toString().toLowerCase().replace(MARKDOWN_PUNCTUATION_RE, '').replace(/ /g, '-');
 }
 
-const md = new MarkdownIt({ html: true, linkify: true, typographer: false })
-  .use(anchor, { slugify: githubSlugify });
+const md = new MarkdownIt({
+  html: true,
+  linkify: true,
+  typographer: false,
+  highlight(code, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return '<pre class="hljs"><code>' +
+          hljs.highlight(code, { language: lang, ignoreIllegals: true }).value +
+          '</code></pre>';
+      } catch (_) { /* fall through */ }
+    }
+    return '<pre class="hljs"><code>' +
+      hljs.highlightAuto(code).value +
+      '</code></pre>';
+  }
+}).use(anchor, { slugify: markdownSlugify });
 registerRules(md);
 
 function buildSidebarHtml(activeId) {
@@ -77,7 +93,21 @@ function animationSeed(weekId) {
   return (0.3 + (hash % 1000) / 1000 * 0.65).toFixed(3);
 }
 
-function renderWeek(week, template) {
+/* Strip markdown syntax to plain text for search index snippets */
+function mdToText(src) {
+  return src
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/`[^`]+`/g, '')
+    .replace(/^#{1,6}\s+/gm, '')
+    .replace(/!?\[([^\]]*?)\]\([^)]*?\)/g, '$1')
+    .replace(/[*_~]{1,3}([^*_~]+)[*_~]{1,3}/g, '$1')
+    .replace(/^[-*+>]\s+/gm, '')
+    .replace(/\n{2,}/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function renderWeek(week, template, searchIndex) {
   const mdPath = path.join(REPO_ROOT, week.dirName, 'student.md');
   const raw = fs.readFileSync(mdPath, 'utf8');
   const preprocessed = wrapGlossarySection(raw);
@@ -85,6 +115,16 @@ function renderWeek(week, template) {
 
   const titleMatch = raw.match(/^#\s+(.+)$/m);
   const title = titleMatch ? titleMatch[1].replace(/[#*_`]/g, '').trim() : week.title;
+
+  /* Accumulate search index entry */
+  const plainText = mdToText(raw);
+  searchIndex.push({
+    id:      week.id,
+    title,
+    url:     `${week.dirName}/index.html`,
+    snippet: plainText.slice(0, 300),
+    body:    plainText
+  });
 
   const idx = WEEKS.findIndex(w => w.id === week.id);
   const prevWeek = idx > 0 ? WEEKS[idx - 1] : null;
@@ -101,7 +141,8 @@ function renderWeek(week, template) {
     .replace(/{{PREV_LINK}}/g, pagerLink(prevWeek, 'prev'))
     .replace(/{{NEXT_LINK}}/g, pagerLink(nextWeek, 'next'))
     .replace(/{{BODY_STYLE}}/g, bodyStyle)
-    .replace(/{{ANIMATIONS_PATH}}/g, '../assets/animations.js');
+    .replace(/{{ANIMATIONS_PATH}}/g, '../assets/animations.js')
+    .replace(/{{SEARCH_PATH}}/g, '../assets/search.js');
 
   const outDir = path.join(OUT_DIR, week.dirName);
   fs.mkdirSync(outDir, { recursive: true });
@@ -112,9 +153,15 @@ function renderWeek(week, template) {
 function main() {
   const template = fs.readFileSync(TEMPLATE_PATH, 'utf8');
   const targets = WEEKS.filter(w => w.prototype);
+  const searchIndex = [];
+
   for (const week of targets) {
-    renderWeek(week, template);
+    renderWeek(week, template, searchIndex);
   }
+
+  const indexPath = path.join(OUT_DIR, 'assets', 'search-index.json');
+  fs.writeFileSync(indexPath, JSON.stringify(searchIndex, null, 2), 'utf8');
+  console.log(`Wrote search-index.json (${searchIndex.length} entries)`);
 }
 
 main();

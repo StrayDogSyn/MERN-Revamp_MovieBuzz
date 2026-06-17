@@ -14,6 +14,10 @@
 <div class="layout">
 <nav class="sidebar" aria-label="Course weeks">
 <div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="sidebar-search">
+<input type="search" id="sidebar-search-input" class="search-input" placeholder="&#xf002; Search lessons…" aria-label="Search lessons">
+<div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+</div>
 <div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
 <a class="nav-link active" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
 <a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
@@ -90,31 +94,31 @@ The 16 weeks of this course are designed progressively. Each week adds exactly o
 <summary>📦 Step-by-step environment verification</summary>
 <p>This week there is no project directory to navigate into. Instead, open a terminal and run these verification commands one at a time.</p>
 <h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-check-nodejs" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Check Node.js</h3>
-<pre><code class="language-bash">node --version
+<pre class="hljs"><code>node --version
 </code></pre>
 <p><strong>Expected output:</strong> A version number like <code>v18.17.0</code> or higher. If you see <code>command not found</code>, Node.js is not installed.</p>
 <h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-check-npm" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Check npm</h3>
-<pre><code class="language-bash">npm --version
+<pre class="hljs"><code>npm --version
 </code></pre>
 <p><strong>Expected output:</strong> A version number like <code>9.6.7</code> or higher.</p>
 <h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-check-git" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Check Git</h3>
-<pre><code class="language-bash">git --version
+<pre class="hljs"><code>git --version
 </code></pre>
 <p><strong>Expected output:</strong> Something like <code>git version 2.41.0</code>. If you see <code>command not found</code>, Git is not installed.</p>
 <h3 class="step-heading" style="--organic-tilt:0deg" id="4step-4-check-git-identity" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Check Git identity</h3>
-<pre><code class="language-bash">git config --global user.name
+<pre class="hljs"><code>git config --global user.name
 git config --global user.email
 </code></pre>
 <p><strong>Expected output:</strong> Your full name and email address. If these are blank, run:</p>
-<pre><code class="language-bash">git config --global user.name &quot;Your Name&quot;
-git config --global user.email &quot;you@example.com&quot;
+<pre class="hljs"><code>git config --global user.name <span class="hljs-string">&quot;Your Name&quot;</span>
+git config --global user.email <span class="hljs-string">&quot;you@example.com&quot;</span>
 </code></pre>
 <h3 class="step-heading" style="--organic-tilt:0.1deg" id="5step-5-check-vs-code" tabindex="-1"><span class="step-badge" aria-hidden="true">5</span><span class="sr-only">Step 5: </span>Check VS Code</h3>
-<pre><code class="language-bash">code --version
+<pre class="hljs"><code>code --version
 </code></pre>
 <p><strong>Expected output:</strong> A version number. If this fails, VS Code may not be in your PATH — open VS Code manually and check the Command Palette for &quot;Shell Command: Install 'code' command in PATH.&quot;</p>
 <h3 class="step-heading" style="--organic-tilt:-0.2deg" id="6step-6-confirm-nvm-optional-but-strongly-recommended" tabindex="-1"><span class="step-badge" aria-hidden="true">6</span><span class="sr-only">Step 6: </span>Confirm nvm (optional but strongly recommended)</h3>
-<pre><code class="language-bash">nvm --version
+<pre class="hljs"><code>nvm --version
 </code></pre>
 <p>If you see <code>command not found</code>, that's okay for now — but nvm (Node Version Manager) will help you manage Node.js versions later in the course. Your instructor can help you install it if needed.</p>
 </details>
@@ -127,7 +131,7 @@ git config --global user.email &quot;you@example.com&quot;
 <li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <code>git config --global user.name</code> returns your name</li>
 <li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> <code>git config --global user.email</code> returns your email</li>
 <li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> VS Code opens and the integrated terminal works</li>
-<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> You have a GitHub account and can log in at <a href="http://github.com">github.com</a></li>
+<li class="task-list-item"><input type="checkbox" class="task-checkbox" disabled> You have a GitLab account and can log in at gitlab.tlm.cloud</li>
 </ul>
 </details>
 <hr>
@@ -166,10 +170,10 @@ git config --global user.email &quot;you@example.com&quot;
 </tbody>
 </table>
 <p>By the end of Week 16, you will have written code at every layer.</p>
-<pre><code class="language-javascript">// This is the kind of code you'll write in Week 12 — a simple Mongoose query
-// (Just a preview — you don't need to understand this yet)
-const movies = await Movie.find({});
-res.status(200).json(movies);
+<pre class="hljs"><code><span class="hljs-comment">// This is the kind of code you&#x27;ll write in Week 12 — a simple Mongoose query</span>
+<span class="hljs-comment">// (Just a preview — you don&#x27;t need to understand this yet)</span>
+<span class="hljs-keyword">const</span> movies = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">find</span>({});
+res.<span class="hljs-title function_">status</span>(<span class="hljs-number">200</span>).<span class="hljs-title function_">json</span>(movies);
 </code></pre>
 <details>
 <summary>🤔 Comprehension check — think before expanding</summary>
@@ -248,7 +252,7 @@ res.status(200).json(movies);
 </blockquote>
 <h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-verify-your-environment" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Verify Your Environment</h3>
 <p><strong>What you're doing:</strong> Run each verification command from the Setup section above and confirm every tool responds correctly.</p>
-<pre><code class="language-bash"># Run these one at a time and note the output
+<pre class="hljs"><code><span class="hljs-comment"># Run these one at a time and note the output</span>
 node --version
 npm --version
 git --version
@@ -266,26 +270,26 @@ code --version
 </ul>
 </details>
 <hr>
-<h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-set-up-a-github-account" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Set Up a GitHub Account</h3>
-<p><strong>What you're doing:</strong> Confirm you can log in to GitHub. Starting next week, you'll push code there after every session.</p>
-<pre><code class="language-bash"># Verify Git knows who you are before you create your first repo
+<h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-set-up-a-gitlab-account" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Set Up a GitLab Account</h3>
+<p><strong>What you're doing:</strong> Confirm you can log in to GitLab. Starting next week, you'll push code there after every session.</p>
+<pre class="hljs"><code><span class="hljs-comment"># Verify Git knows who you are before you create your first repo</span>
 git config --global user.name
 git config --global user.email
 </code></pre>
 <details>
 <summary>💡 Hint</summary>
 <ul>
-<li>Make sure the email in your <code>git config</code> matches the email you used to create your GitHub account. This is how GitHub connects your commits to your profile.</li>
-<li>If you haven't created a GitHub account yet, do it now at <a href="http://github.com">github.com</a> — it's free.</li>
+<li>Make sure the email in your <code>git config</code> matches the email you used to create your GitLab account. This is how GitLab connects your commits to your profile.</li>
+<li>If you haven't created a GitLab account yet, ask your instructor — accounts are provisioned through the TLM intranet.</li>
 </ul>
 </details>
 <hr>
 <h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-explore-the-finished-app-read-only" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Explore the Finished App (Read-Only)</h3>
 <p><strong>What you're doing:</strong> Navigate to <code>movie-buzz-finished/</code> in the course repo and spend a few minutes reading the file structure. You don't need to run it yet — just look.</p>
-<pre><code class="language-bash"># From the course repo root
-ls movie-buzz-finished/
-ls movie-buzz-finished/client/src/
-ls movie-buzz-finished/server/
+<pre class="hljs"><code><span class="hljs-comment"># From the course repo root</span>
+<span class="hljs-built_in">ls</span> movie-buzz-finished/
+<span class="hljs-built_in">ls</span> movie-buzz-finished/client/src/
+<span class="hljs-built_in">ls</span> movie-buzz-finished/server/
 </code></pre>
 <details>
 <summary>💡 Hint</summary>
@@ -307,13 +311,13 @@ Node.js is either not installed, or it was installed but your terminal doesn't k
 <li>On Windows, check if Node.js appears in &quot;Add or Remove Programs.&quot;</li>
 </ol>
 <p><strong>The fix:</strong></p>
-<pre><code class="language-bash"># Download and install Node.js LTS from:
-# https://nodejs.org/en/download
+<pre class="hljs"><code><span class="hljs-comment"># Download and install Node.js LTS from:</span>
+<span class="hljs-comment"># https://nodejs.org/en/download</span>
 
-# OR install nvm first (preferred) and use it to install Node.js:
-# macOS / Linux:
+<span class="hljs-comment"># OR install nvm first (preferred) and use it to install Node.js:</span>
+<span class="hljs-comment"># macOS / Linux:</span>
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-# Then close and reopen your terminal, then:
+<span class="hljs-comment"># Then close and reopen your terminal, then:</span>
 nvm install --lts
 nvm use --lts
 </code></pre>
@@ -328,12 +332,12 @@ Git was installed but never configured with your identity. Git requires a name a
 <li>Confirm you are setting global config (use <code>--global</code>), not local config.</li>
 </ol>
 <p><strong>The fix:</strong></p>
-<pre><code class="language-bash"># Wrong (missing --global sets it only for a single repo):
-git config user.name &quot;Your Name&quot;
+<pre class="hljs"><code><span class="hljs-comment"># Wrong (missing --global sets it only for a single repo):</span>
+git config user.name <span class="hljs-string">&quot;Your Name&quot;</span>
 
-# Correct (applies everywhere on your machine):
-git config --global user.name &quot;Your Name&quot;
-git config --global user.email &quot;you@example.com&quot;
+<span class="hljs-comment"># Correct (applies everywhere on your machine):</span>
+git config --global user.name <span class="hljs-string">&quot;Your Name&quot;</span>
+git config --global user.email <span class="hljs-string">&quot;you@example.com&quot;</span>
 </code></pre>
 </details>
 <details>
@@ -346,12 +350,12 @@ VS Code installs the <code>code</code> command into your PATH as a separate step
 <li>On macOS, confirm you moved VS Code to your Applications folder (not running it from the Downloads folder).</li>
 </ol>
 <p><strong>The fix:</strong></p>
-<pre><code class="language-bash"># In VS Code:
-# 1. Press Cmd+Shift+P (macOS) or Ctrl+Shift+P (Windows/Linux)
-# 2. Type: Shell Command: Install 'code' command in PATH
-# 3. Press Enter
-# 4. Close and reopen your terminal
-code --version  # Should now work
+<pre class="hljs"><code><span class="hljs-comment"># In VS Code:</span>
+<span class="hljs-comment"># 1. Press Cmd+Shift+P (macOS) or Ctrl+Shift+P (Windows/Linux)</span>
+<span class="hljs-comment"># 2. Type: Shell Command: Install &#x27;code&#x27; command in PATH</span>
+<span class="hljs-comment"># 3. Press Enter</span>
+<span class="hljs-comment"># 4. Close and reopen your terminal</span>
+code --version  <span class="hljs-comment"># Should now work</span>
 </code></pre>
 </details>
 <hr>
@@ -447,5 +451,6 @@ Seeing the finished product before you build it gives you a concrete mental mode
 </div>
 <script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
 <script src="../assets/animations.js"></script>
+<script src="../assets/search.js"></script>
 </body>
 </html>

@@ -176,7 +176,7 @@ Students often conflate "client" and "user." Clarify: the client is the software
 <details>
 <summary>🟠 High: Git not configured with name and email</summary>
 
-**What it looks like:** `git config --global user.name` returns a blank line. Their first commit next week will have an anonymous author, which causes GitHub attribution issues.
+**What it looks like:** `git config --global user.name` returns a blank line. Their first commit next week will have an anonymous author, which causes GitLab attribution issues.
 
 **Root cause:** Git was installed but the post-install configuration step was skipped. Very common on machines where a sysadmin did the install.
 
@@ -309,6 +309,6 @@ npm start
 >
 > **Windows PATH issues:** Students who installed Node.js or Git on Windows may need to restart their terminal (or even their machine) before the tools appear in PATH. Always recommend closing and reopening the terminal as a first debugging step.
 >
-> **nvm on Windows:** The standard nvm tool only works on macOS/Linux. Windows students should use `nvm-windows` (github.com/coreybutler/nvm-windows) — a separate project with different installation steps. Do not instruct Windows students to follow the standard nvm instructions.
+> **nvm on Windows:** The standard nvm tool only works on macOS/Linux. Windows students should use `nvm-windows` — a separate project with different installation steps (search "nvm-windows" in the TLM Help Desk portal for the offline installer). Do not instruct Windows students to follow the standard nvm instructions.
 >
 > **Timing:** The 25-minute environment walk-through can run long if multiple students have issues. Prioritize getting everyone past `node --version` — the remaining steps are easier to debug asynchronously. Do not sacrifice the Q&A segment; rapport built this week pays dividends when students are stuck in Week 11.

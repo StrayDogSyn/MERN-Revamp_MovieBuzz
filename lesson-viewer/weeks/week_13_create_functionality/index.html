@@ -14,6 +14,10 @@
 <div class="layout">
 <nav class="sidebar" aria-label="Course weeks">
 <div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="sidebar-search">
+<input type="search" id="sidebar-search-input" class="search-input" placeholder="&#xf002; Search lessons…" aria-label="Search lessons">
+<div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+</div>
 <div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
 <a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
 <a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
@@ -107,155 +111,155 @@
 <p>Before diving into the full implementation, let's explore some simple, focused examples to build our understanding of CREATE operations step by step.</p>
 <h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-basic-post-request-handling" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Basic POST Request Handling</h3>
 <p>Let's start with a minimal POST endpoint that accepts data:</p>
-<pre><code class="language-javascript">// Simple POST endpoint
-app.post('/api/movies', (req, res) =&gt; {
-  console.log('Received data:', req.body);
+<pre class="hljs"><code><span class="hljs-comment">// Simple POST endpoint</span>
+app.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/api/movies&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Received data:&#x27;</span>, req.<span class="hljs-property">body</span>);
 
-  // Return success response
-  res.status(201).json({
-    success: true,
-    message: 'Data received successfully',
-    receivedData: req.body
+  <span class="hljs-comment">// Return success response</span>
+  res.<span class="hljs-title function_">status</span>(<span class="hljs-number">201</span>).<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Data received successfully&#x27;</span>,
+    <span class="hljs-attr">receivedData</span>: req.<span class="hljs-property">body</span>
   });
 });
 </code></pre>
 <p><strong>Try It Out:</strong> Use Postman or curl to send POST data to this endpoint and see how it handles the request body.</p>
 <h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-request-body-validation" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Request Body Validation</h3>
 <p>Now let's add some basic validation to ensure we receive the required data:</p>
-<pre><code class="language-javascript">// POST endpoint with validation
-app.post('/api/movies', (req, res) =&gt; {
-  const { name, year, rating } = req.body;
+<pre class="hljs"><code><span class="hljs-comment">// POST endpoint with validation</span>
+app.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/api/movies&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> { name, year, rating } = req.<span class="hljs-property">body</span>;
 
-  // Check if required fields are present
-  if (!name || !year || !rating) {
-    return res.status(400).json({
-      success: false,
-      error: 'Missing required fields: name, year, and rating are required'
+  <span class="hljs-comment">// Check if required fields are present</span>
+  <span class="hljs-keyword">if</span> (!name || !year || !rating) {
+    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Missing required fields: name, year, and rating are required&#x27;</span>
     });
   }
 
-  // Validation passed
-  res.status(201).json({
-    success: true,
-    message: 'Movie data is valid',
-    movie: { name, year, rating }
+  <span class="hljs-comment">// Validation passed</span>
+  res.<span class="hljs-title function_">status</span>(<span class="hljs-number">201</span>).<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Movie data is valid&#x27;</span>,
+    <span class="hljs-attr">movie</span>: { name, year, rating }
   });
 });
 </code></pre>
 <p><strong>Try It Out:</strong> Test this endpoint with both complete and incomplete data to see how validation works.</p>
 <h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-simple-data-creation-no-database" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Simple Data Creation (No Database)</h3>
 <p>Let's simulate creating data by storing it in an array (before we connect to MongoDB):</p>
-<pre><code class="language-javascript">// In-memory storage for testing
-let movies = [];
-let nextId = 1;
+<pre class="hljs"><code><span class="hljs-comment">// In-memory storage for testing</span>
+<span class="hljs-keyword">let</span> movies = [];
+<span class="hljs-keyword">let</span> nextId = <span class="hljs-number">1</span>;
 
-// POST endpoint that &quot;creates&quot; a movie
-app.post('/api/movies', (req, res) =&gt; {
-  const { name, year, rating, description } = req.body;
+<span class="hljs-comment">// POST endpoint that &quot;creates&quot; a movie</span>
+app.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/api/movies&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> { name, year, rating, description } = req.<span class="hljs-property">body</span>;
 
-  // Basic validation
-  if (!name || !year || !rating) {
-    return res.status(400).json({
-      success: false,
-      error: 'Missing required fields'
+  <span class="hljs-comment">// Basic validation</span>
+  <span class="hljs-keyword">if</span> (!name || !year || !rating) {
+    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Missing required fields&#x27;</span>
     });
   }
 
-  // Create new movie object
-  const newMovie = {
-    id: nextId++,
+  <span class="hljs-comment">// Create new movie object</span>
+  <span class="hljs-keyword">const</span> newMovie = {
+    <span class="hljs-attr">id</span>: nextId++,
     name,
-    year: parseInt(year),
+    <span class="hljs-attr">year</span>: <span class="hljs-built_in">parseInt</span>(year),
     rating,
-    description: description || 'No description provided',
-    createdAt: new Date().toISOString()
+    <span class="hljs-attr">description</span>: description || <span class="hljs-string">&#x27;No description provided&#x27;</span>,
+    <span class="hljs-attr">createdAt</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">toISOString</span>()
   };
 
-  // &quot;Save&quot; to our array
-  movies.push(newMovie);
+  <span class="hljs-comment">// &quot;Save&quot; to our array</span>
+  movies.<span class="hljs-title function_">push</span>(newMovie);
 
-  // Return created movie
-  res.status(201).json({
-    success: true,
-    message: 'Movie created successfully',
-    data: newMovie
+  <span class="hljs-comment">// Return created movie</span>
+  res.<span class="hljs-title function_">status</span>(<span class="hljs-number">201</span>).<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Movie created successfully&#x27;</span>,
+    <span class="hljs-attr">data</span>: newMovie
   });
 });
 
-// GET endpoint to see our created movies
-app.get('/api/movies', (req, res) =&gt; {
-  res.json({
-    success: true,
-    count: movies.length,
-    data: movies
+<span class="hljs-comment">// GET endpoint to see our created movies</span>
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/api/movies&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">count</span>: movies.<span class="hljs-property">length</span>,
+    <span class="hljs-attr">data</span>: movies
   });
 });
 </code></pre>
 <p><strong>Try It Out:</strong> Create several movies using POST, then use GET to see your created data persist in memory.</p>
 <h3 class="step-heading" style="--organic-tilt:0deg" id="4step-4-error-handling-for-invalid-data" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Error Handling for Invalid Data</h3>
 <p>Let's handle common error scenarios that occur during creation:</p>
-<pre><code class="language-javascript">app.post('/api/movies', (req, res) =&gt; {
-  try {
-    const { name, year, rating } = req.body;
+<pre class="hljs"><code>app.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/api/movies&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> { name, year, rating } = req.<span class="hljs-property">body</span>;
 
-    // Check for empty request body
-    if (!req.body || Object.keys(req.body).length === 0) {
-      return res.status(400).json({
-        success: false,
-        error: 'Request body is required',
-        hint: 'Send JSON data with movie information'
+    <span class="hljs-comment">// Check for empty request body</span>
+    <span class="hljs-keyword">if</span> (!req.<span class="hljs-property">body</span> || <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(req.<span class="hljs-property">body</span>).<span class="hljs-property">length</span> === <span class="hljs-number">0</span>) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Request body is required&#x27;</span>,
+        <span class="hljs-attr">hint</span>: <span class="hljs-string">&#x27;Send JSON data with movie information&#x27;</span>
       });
     }
 
-    // Validate name
-    if (!name || typeof name !== 'string' || name.trim().length === 0) {
-      return res.status(400).json({
-        success: false,
-        error: 'Movie name is required and must be a non-empty string'
+    <span class="hljs-comment">// Validate name</span>
+    <span class="hljs-keyword">if</span> (!name || <span class="hljs-keyword">typeof</span> name !== <span class="hljs-string">&#x27;string&#x27;</span> || name.<span class="hljs-title function_">trim</span>().<span class="hljs-property">length</span> === <span class="hljs-number">0</span>) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Movie name is required and must be a non-empty string&#x27;</span>
       });
     }
 
-    // Validate year
-    if (!year || isNaN(year) || year &lt; 1800 || year &gt; new Date().getFullYear() + 5) {
-      return res.status(400).json({
-        success: false,
-        error: 'Year must be a valid number between 1800 and ' + (new Date().getFullYear() + 5)
+    <span class="hljs-comment">// Validate year</span>
+    <span class="hljs-keyword">if</span> (!year || <span class="hljs-built_in">isNaN</span>(year) || year &lt; <span class="hljs-number">1800</span> || year &gt; <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">getFullYear</span>() + <span class="hljs-number">5</span>) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Year must be a valid number between 1800 and &#x27;</span> + (<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">getFullYear</span>() + <span class="hljs-number">5</span>)
       });
     }
 
-    // Validate rating
-    const validRatings = ['G', 'PG', 'PG-13', 'R', 'NC-17', 'NR'];
-    if (!rating || !validRatings.includes(rating)) {
-      return res.status(400).json({
-        success: false,
-        error: 'Rating must be one of: ' + validRatings.join(', ')
+    <span class="hljs-comment">// Validate rating</span>
+    <span class="hljs-keyword">const</span> validRatings = [<span class="hljs-string">&#x27;G&#x27;</span>, <span class="hljs-string">&#x27;PG&#x27;</span>, <span class="hljs-string">&#x27;PG-13&#x27;</span>, <span class="hljs-string">&#x27;R&#x27;</span>, <span class="hljs-string">&#x27;NC-17&#x27;</span>, <span class="hljs-string">&#x27;NR&#x27;</span>];
+    <span class="hljs-keyword">if</span> (!rating || !validRatings.<span class="hljs-title function_">includes</span>(rating)) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Rating must be one of: &#x27;</span> + validRatings.<span class="hljs-title function_">join</span>(<span class="hljs-string">&#x27;, &#x27;</span>)
       });
     }
 
-    // If we get here, data is valid
-    const newMovie = {
-      id: nextId++,
-      name: name.trim(),
-      year: parseInt(year),
+    <span class="hljs-comment">// If we get here, data is valid</span>
+    <span class="hljs-keyword">const</span> newMovie = {
+      <span class="hljs-attr">id</span>: nextId++,
+      <span class="hljs-attr">name</span>: name.<span class="hljs-title function_">trim</span>(),
+      <span class="hljs-attr">year</span>: <span class="hljs-built_in">parseInt</span>(year),
       rating,
-      createdAt: new Date().toISOString()
+      <span class="hljs-attr">createdAt</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">toISOString</span>()
     };
 
-    movies.push(newMovie);
+    movies.<span class="hljs-title function_">push</span>(newMovie);
 
-    res.status(201).json({
-      success: true,
-      message: 'Movie created successfully',
-      data: newMovie
+    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">201</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Movie created successfully&#x27;</span>,
+      <span class="hljs-attr">data</span>: newMovie
     });
 
-  } catch (error) {
-    // Handle unexpected errors
-    console.error('Unexpected error:', error);
-    res.status(500).json({
-      success: false,
-      error: 'Internal server error',
-      message: 'Something went wrong while creating the movie'
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-comment">// Handle unexpected errors</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Unexpected error:&#x27;</span>, error);
+    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Internal server error&#x27;</span>,
+      <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Something went wrong while creating the movie&#x27;</span>
     });
   }
 });
@@ -307,36 +311,36 @@ Why is validation especially important for CREATE operations compared to READ op
 <h2 id="implementing-create-with-mongoose" tabindex="-1">Implementing CREATE with Mongoose</h2>
 <h3 id="basic-document-creation" tabindex="-1">Basic Document Creation</h3>
 <p>Mongoose provides several methods for creating documents:</p>
-<pre><code class="language-javascript">// Method 1: Create instance and save
-const movie = new Movie({
-  name: &quot;The Godfather&quot;,
-  year: 1972,
-  rating: &quot;R&quot;,
-  length: &quot;175 minutes&quot;,
-  description: &quot;The aging patriarch of an organized crime dynasty transfers control to his reluctant son.&quot;,
-  genre: [&quot;Crime&quot;, &quot;Drama&quot;],
-  director: &quot;Francis Ford Coppola&quot;,
-  stars: [&quot;Marlon Brando&quot;, &quot;Al Pacino&quot;, &quot;James Caan&quot;]
+<pre class="hljs"><code><span class="hljs-comment">// Method 1: Create instance and save</span>
+<span class="hljs-keyword">const</span> movie = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Movie</span>({
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;The Godfather&quot;</span>,
+  <span class="hljs-attr">year</span>: <span class="hljs-number">1972</span>,
+  <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;R&quot;</span>,
+  <span class="hljs-attr">length</span>: <span class="hljs-string">&quot;175 minutes&quot;</span>,
+  <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;The aging patriarch of an organized crime dynasty transfers control to his reluctant son.&quot;</span>,
+  <span class="hljs-attr">genre</span>: [<span class="hljs-string">&quot;Crime&quot;</span>, <span class="hljs-string">&quot;Drama&quot;</span>],
+  <span class="hljs-attr">director</span>: <span class="hljs-string">&quot;Francis Ford Coppola&quot;</span>,
+  <span class="hljs-attr">stars</span>: [<span class="hljs-string">&quot;Marlon Brando&quot;</span>, <span class="hljs-string">&quot;Al Pacino&quot;</span>, <span class="hljs-string">&quot;James Caan&quot;</span>]
 });
 
-const savedMovie = await movie.save();
+<span class="hljs-keyword">const</span> savedMovie = <span class="hljs-keyword">await</span> movie.<span class="hljs-title function_">save</span>();
 
-// Method 2: Direct creation with Model.create()
-const movie = await Movie.create({
-  name: &quot;The Godfather&quot;,
-  year: 1972,
-  rating: &quot;R&quot;,
-  length: &quot;175 minutes&quot;,
-  description: &quot;The aging patriarch of an organized crime dynasty transfers control to his reluctant son.&quot;,
-  genre: [&quot;Crime&quot;, &quot;Drama&quot;],
-  director: &quot;Francis Ford Coppola&quot;,
-  stars: [&quot;Marlon Brando&quot;, &quot;Al Pacino&quot;, &quot;James Caan&quot;]
+<span class="hljs-comment">// Method 2: Direct creation with Model.create()</span>
+<span class="hljs-keyword">const</span> movie = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">create</span>({
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;The Godfather&quot;</span>,
+  <span class="hljs-attr">year</span>: <span class="hljs-number">1972</span>,
+  <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;R&quot;</span>,
+  <span class="hljs-attr">length</span>: <span class="hljs-string">&quot;175 minutes&quot;</span>,
+  <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;The aging patriarch of an organized crime dynasty transfers control to his reluctant son.&quot;</span>,
+  <span class="hljs-attr">genre</span>: [<span class="hljs-string">&quot;Crime&quot;</span>, <span class="hljs-string">&quot;Drama&quot;</span>],
+  <span class="hljs-attr">director</span>: <span class="hljs-string">&quot;Francis Ford Coppola&quot;</span>,
+  <span class="hljs-attr">stars</span>: [<span class="hljs-string">&quot;Marlon Brando&quot;</span>, <span class="hljs-string">&quot;Al Pacino&quot;</span>, <span class="hljs-string">&quot;James Caan&quot;</span>]
 });
 
-// Method 3: Insert multiple documents
-const movies = await Movie.insertMany([
-  { name: &quot;Movie 1&quot;, year: 2021, /* other fields */ },
-  { name: &quot;Movie 2&quot;, year: 2022, /* other fields */ }
+<span class="hljs-comment">// Method 3: Insert multiple documents</span>
+<span class="hljs-keyword">const</span> movies = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">insertMany</span>([
+  { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Movie 1&quot;</span>, <span class="hljs-attr">year</span>: <span class="hljs-number">2021</span>, <span class="hljs-comment">/* other fields */</span> },
+  { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Movie 2&quot;</span>, <span class="hljs-attr">year</span>: <span class="hljs-number">2022</span>, <span class="hljs-comment">/* other fields */</span> }
 ]);
 </code></pre>
 <p><strong>When to Use Each Method:</strong></p>
@@ -347,591 +351,591 @@ const movies = await Movie.insertMany([
 </ul>
 <h3 id="handling-validation-errors" tabindex="-1">Handling Validation Errors</h3>
 <p>Mongoose automatically validates data based on your schema before saving:</p>
-<pre><code class="language-javascript">try {
-  const movie = await Movie.create({
-    name: &quot;Incomplete Movie&quot;,
-    year: &quot;not a number&quot;, // This will fail validation
-    // Missing required fields like rating, length, etc.
+<pre class="hljs"><code><span class="hljs-keyword">try</span> {
+  <span class="hljs-keyword">const</span> movie = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">create</span>({
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Incomplete Movie&quot;</span>,
+    <span class="hljs-attr">year</span>: <span class="hljs-string">&quot;not a number&quot;</span>, <span class="hljs-comment">// This will fail validation</span>
+    <span class="hljs-comment">// Missing required fields like rating, length, etc.</span>
   });
-} catch (error) {
-  if (error.name === 'ValidationError') {
-    // Handle validation errors
-    console.log('Validation failed:');
-    Object.values(error.errors).forEach(err =&gt; {
-      console.log(`${err.path}: ${err.message}`);
+} <span class="hljs-keyword">catch</span> (error) {
+  <span class="hljs-keyword">if</span> (error.<span class="hljs-property">name</span> === <span class="hljs-string">&#x27;ValidationError&#x27;</span>) {
+    <span class="hljs-comment">// Handle validation errors</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Validation failed:&#x27;</span>);
+    <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">values</span>(error.<span class="hljs-property">errors</span>).<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`<span class="hljs-subst">${err.path}</span>: <span class="hljs-subst">${err.message}</span>`</span>);
     });
   }
 }
 </code></pre>
 <h3 id="advanced-creation-patterns" tabindex="-1">Advanced Creation Patterns</h3>
-<pre><code class="language-javascript">// Creating with pre-save transformations
-const movieData = {
-  name: &quot;  the matrix  &quot;, // Has extra spaces
-  year: 1999,
-  rating: &quot;r&quot;, // Lowercase
-  genre: [&quot;action&quot;, &quot;sci-fi&quot;], // Lowercase genres
-  // ... other fields
+<pre class="hljs"><code><span class="hljs-comment">// Creating with pre-save transformations</span>
+<span class="hljs-keyword">const</span> movieData = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;  the matrix  &quot;</span>, <span class="hljs-comment">// Has extra spaces</span>
+  <span class="hljs-attr">year</span>: <span class="hljs-number">1999</span>,
+  <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;r&quot;</span>, <span class="hljs-comment">// Lowercase</span>
+  <span class="hljs-attr">genre</span>: [<span class="hljs-string">&quot;action&quot;</span>, <span class="hljs-string">&quot;sci-fi&quot;</span>], <span class="hljs-comment">// Lowercase genres</span>
+  <span class="hljs-comment">// ... other fields</span>
 };
 
-// The schema's pre-save middleware will clean this up
-const movie = await Movie.create(movieData);
-// Result: name trimmed, rating uppercase, genres capitalized
+<span class="hljs-comment">// The schema&#x27;s pre-save middleware will clean this up</span>
+<span class="hljs-keyword">const</span> movie = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">create</span>(movieData);
+<span class="hljs-comment">// Result: name trimmed, rating uppercase, genres capitalized</span>
 
-// Creating with custom validation
-const movie = new Movie(movieData);
+<span class="hljs-comment">// Creating with custom validation</span>
+<span class="hljs-keyword">const</span> movie = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Movie</span>(movieData);
 
-// Add custom logic before saving
-if (movie.year &gt; new Date().getFullYear()) {
-  throw new Error('Movie cannot be from the future');
+<span class="hljs-comment">// Add custom logic before saving</span>
+<span class="hljs-keyword">if</span> (movie.<span class="hljs-property">year</span> &gt; <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">getFullYear</span>()) {
+  <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&#x27;Movie cannot be from the future&#x27;</span>);
 }
 
-await movie.save();
+<span class="hljs-keyword">await</span> movie.<span class="hljs-title function_">save</span>();
 
-// Creating with default values
-const movie = await Movie.create({
-  name: &quot;New Movie&quot;,
-  year: 2024,
-  rating: &quot;PG&quot;,
-  length: &quot;120 minutes&quot;,
-  description: &quot;A great movie&quot;,
-  genre: [&quot;Drama&quot;],
-  director: &quot;Unknown Director&quot;,
-  stars: [&quot;Actor One&quot;]
-  // awards.oscars and awards.nominations will default to 0
+<span class="hljs-comment">// Creating with default values</span>
+<span class="hljs-keyword">const</span> movie = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">create</span>({
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;New Movie&quot;</span>,
+  <span class="hljs-attr">year</span>: <span class="hljs-number">2024</span>,
+  <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;PG&quot;</span>,
+  <span class="hljs-attr">length</span>: <span class="hljs-string">&quot;120 minutes&quot;</span>,
+  <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;A great movie&quot;</span>,
+  <span class="hljs-attr">genre</span>: [<span class="hljs-string">&quot;Drama&quot;</span>],
+  <span class="hljs-attr">director</span>: <span class="hljs-string">&quot;Unknown Director&quot;</span>,
+  <span class="hljs-attr">stars</span>: [<span class="hljs-string">&quot;Actor One&quot;</span>]
+  <span class="hljs-comment">// awards.oscars and awards.nominations will default to 0</span>
 });
 </code></pre>
 <hr>
 <h2 id="building-create-api-endpoints" tabindex="-1">Building CREATE API Endpoints</h2>
 <p>Let's implement the CREATE endpoint in our Express controller. Update your <code>controllers/movieController.js</code>:</p>
-<pre><code class="language-javascript">const Movie = require('../models/Movie');
+<pre class="hljs"><code><span class="hljs-keyword">const</span> <span class="hljs-title class_">Movie</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;../models/Movie&#x27;</span>);
 
-// Create new movie
-const createMovie = async (req, res) =&gt; {
-  try {
-    // Extract data from request body
-    const movieData = req.body;
+<span class="hljs-comment">// Create new movie</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">createMovie</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">req, res</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-comment">// Extract data from request body</span>
+    <span class="hljs-keyword">const</span> movieData = req.<span class="hljs-property">body</span>;
 
-    // Basic input validation
-    if (!movieData || Object.keys(movieData).length === 0) {
-      return res.status(400).json({
-        success: false,
-        error: 'Movie data is required'
+    <span class="hljs-comment">// Basic input validation</span>
+    <span class="hljs-keyword">if</span> (!movieData || <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(movieData).<span class="hljs-property">length</span> === <span class="hljs-number">0</span>) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Movie data is required&#x27;</span>
       });
     }
 
-    // Check for required fields (additional validation beyond schema)
-    const requiredFields = ['name', 'year', 'rating', 'length', 'description', 'director'];
-    const missingFields = requiredFields.filter(field =&gt; !movieData[field]);
+    <span class="hljs-comment">// Check for required fields (additional validation beyond schema)</span>
+    <span class="hljs-keyword">const</span> requiredFields = [<span class="hljs-string">&#x27;name&#x27;</span>, <span class="hljs-string">&#x27;year&#x27;</span>, <span class="hljs-string">&#x27;rating&#x27;</span>, <span class="hljs-string">&#x27;length&#x27;</span>, <span class="hljs-string">&#x27;description&#x27;</span>, <span class="hljs-string">&#x27;director&#x27;</span>];
+    <span class="hljs-keyword">const</span> missingFields = requiredFields.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">field</span> =&gt;</span> !movieData[field]);
 
-    if (missingFields.length &gt; 0) {
-      return res.status(400).json({
-        success: false,
-        error: 'Missing required fields',
-        missingFields: missingFields
+    <span class="hljs-keyword">if</span> (missingFields.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Missing required fields&#x27;</span>,
+        <span class="hljs-attr">missingFields</span>: missingFields
       });
     }
 
-    // Data sanitization
-    const sanitizedData = {
+    <span class="hljs-comment">// Data sanitization</span>
+    <span class="hljs-keyword">const</span> sanitizedData = {
       ...movieData,
-      name: movieData.name?.toString().trim(),
-      director: movieData.director?.toString().trim(),
-      description: movieData.description?.toString().trim(),
-      year: parseInt(movieData.year),
-      genre: Array.isArray(movieData.genre) ? 
-        movieData.genre.map(g =&gt; g.toString().trim()) : 
-        [movieData.genre?.toString().trim()].filter(Boolean),
-      stars: Array.isArray(movieData.stars) ? 
-        movieData.stars.map(s =&gt; s.toString().trim()) : 
-        [movieData.stars?.toString().trim()].filter(Boolean)
+      <span class="hljs-attr">name</span>: movieData.<span class="hljs-property">name</span>?.<span class="hljs-title function_">toString</span>().<span class="hljs-title function_">trim</span>(),
+      <span class="hljs-attr">director</span>: movieData.<span class="hljs-property">director</span>?.<span class="hljs-title function_">toString</span>().<span class="hljs-title function_">trim</span>(),
+      <span class="hljs-attr">description</span>: movieData.<span class="hljs-property">description</span>?.<span class="hljs-title function_">toString</span>().<span class="hljs-title function_">trim</span>(),
+      <span class="hljs-attr">year</span>: <span class="hljs-built_in">parseInt</span>(movieData.<span class="hljs-property">year</span>),
+      <span class="hljs-attr">genre</span>: <span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(movieData.<span class="hljs-property">genre</span>) ? 
+        movieData.<span class="hljs-property">genre</span>.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">g</span> =&gt;</span> g.<span class="hljs-title function_">toString</span>().<span class="hljs-title function_">trim</span>()) : 
+        [movieData.<span class="hljs-property">genre</span>?.<span class="hljs-title function_">toString</span>().<span class="hljs-title function_">trim</span>()].<span class="hljs-title function_">filter</span>(<span class="hljs-title class_">Boolean</span>),
+      <span class="hljs-attr">stars</span>: <span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(movieData.<span class="hljs-property">stars</span>) ? 
+        movieData.<span class="hljs-property">stars</span>.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">s</span> =&gt;</span> s.<span class="hljs-title function_">toString</span>().<span class="hljs-title function_">trim</span>()) : 
+        [movieData.<span class="hljs-property">stars</span>?.<span class="hljs-title function_">toString</span>().<span class="hljs-title function_">trim</span>()].<span class="hljs-title function_">filter</span>(<span class="hljs-title class_">Boolean</span>)
     };
 
-    // Create the movie
-    const newMovie = await Movie.create(sanitizedData);
+    <span class="hljs-comment">// Create the movie</span>
+    <span class="hljs-keyword">const</span> newMovie = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">create</span>(sanitizedData);
 
-    // Return success response
-    res.status(201).json({
-      success: true,
-      message: 'Movie created successfully',
-      data: newMovie
+    <span class="hljs-comment">// Return success response</span>
+    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">201</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Movie created successfully&#x27;</span>,
+      <span class="hljs-attr">data</span>: newMovie
     });
 
-  } catch (error) {
-    console.error('Error creating movie:', error);
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error creating movie:&#x27;</span>, error);
 
-    // Handle specific error types
-    if (error.name === 'ValidationError') {
-      const validationErrors = Object.values(error.errors).map(err =&gt; ({
-        field: err.path,
-        message: err.message,
-        value: err.value
+    <span class="hljs-comment">// Handle specific error types</span>
+    <span class="hljs-keyword">if</span> (error.<span class="hljs-property">name</span> === <span class="hljs-string">&#x27;ValidationError&#x27;</span>) {
+      <span class="hljs-keyword">const</span> validationErrors = <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">values</span>(error.<span class="hljs-property">errors</span>).<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> ({
+        <span class="hljs-attr">field</span>: err.<span class="hljs-property">path</span>,
+        <span class="hljs-attr">message</span>: err.<span class="hljs-property">message</span>,
+        <span class="hljs-attr">value</span>: err.<span class="hljs-property">value</span>
       }));
 
-      return res.status(400).json({
-        success: false,
-        error: 'Validation failed',
-        details: validationErrors
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Validation failed&#x27;</span>,
+        <span class="hljs-attr">details</span>: validationErrors
       });
     }
 
-    if (error.code === 11000) {
-      // Duplicate key error (if you have unique fields)
-      const field = Object.keys(error.keyPattern)[0];
-      return res.status(409).json({
-        success: false,
-        error: `Movie with this ${field} already exists`
+    <span class="hljs-keyword">if</span> (error.<span class="hljs-property">code</span> === <span class="hljs-number">11000</span>) {
+      <span class="hljs-comment">// Duplicate key error (if you have unique fields)</span>
+      <span class="hljs-keyword">const</span> field = <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(error.<span class="hljs-property">keyPattern</span>)[<span class="hljs-number">0</span>];
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">409</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">`Movie with this <span class="hljs-subst">${field}</span> already exists`</span>
       });
     }
 
-    if (error.name === 'CastError') {
-      return res.status(400).json({
-        success: false,
-        error: 'Invalid data type provided',
-        details: `${error.path} must be a valid ${error.kind}`
+    <span class="hljs-keyword">if</span> (error.<span class="hljs-property">name</span> === <span class="hljs-string">&#x27;CastError&#x27;</span>) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Invalid data type provided&#x27;</span>,
+        <span class="hljs-attr">details</span>: <span class="hljs-string">`<span class="hljs-subst">${error.path}</span> must be a valid <span class="hljs-subst">${error.kind}</span>`</span>
       });
     }
 
-    // Generic server error
-    res.status(500).json({
-      success: false,
-      error: 'Failed to create movie',
-      details: error.message
+    <span class="hljs-comment">// Generic server error</span>
+    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Failed to create movie&#x27;</span>,
+      <span class="hljs-attr">details</span>: error.<span class="hljs-property">message</span>
     });
   }
 };
 
-// Bulk create movies (optional advanced endpoint)
-const createMultipleMovies = async (req, res) =&gt; {
-  try {
-    const moviesData = req.body;
+<span class="hljs-comment">// Bulk create movies (optional advanced endpoint)</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">createMultipleMovies</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">req, res</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> moviesData = req.<span class="hljs-property">body</span>;
 
-    // Validate input
-    if (!Array.isArray(moviesData) || moviesData.length === 0) {
-      return res.status(400).json({
-        success: false,
-        error: 'Array of movies is required'
+    <span class="hljs-comment">// Validate input</span>
+    <span class="hljs-keyword">if</span> (!<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(moviesData) || moviesData.<span class="hljs-property">length</span> === <span class="hljs-number">0</span>) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Array of movies is required&#x27;</span>
       });
     }
 
-    // Limit bulk creation to prevent abuse
-    if (moviesData.length &gt; 50) {
-      return res.status(400).json({
-        success: false,
-        error: 'Cannot create more than 50 movies at once'
+    <span class="hljs-comment">// Limit bulk creation to prevent abuse</span>
+    <span class="hljs-keyword">if</span> (moviesData.<span class="hljs-property">length</span> &gt; <span class="hljs-number">50</span>) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Cannot create more than 50 movies at once&#x27;</span>
       });
     }
 
-    // Create all movies
-    const newMovies = await Movie.insertMany(moviesData, { 
-      ordered: false, // Continue even if some fail
-      rawResult: true // Get detailed results
+    <span class="hljs-comment">// Create all movies</span>
+    <span class="hljs-keyword">const</span> newMovies = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">insertMany</span>(moviesData, { 
+      <span class="hljs-attr">ordered</span>: <span class="hljs-literal">false</span>, <span class="hljs-comment">// Continue even if some fail</span>
+      <span class="hljs-attr">rawResult</span>: <span class="hljs-literal">true</span> <span class="hljs-comment">// Get detailed results</span>
     });
 
-    res.status(201).json({
-      success: true,
-      message: `Successfully created ${newMovies.insertedCount} movies`,
-      data: newMovies,
-      created: newMovies.insertedCount,
-      total: moviesData.length
+    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">201</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">message</span>: <span class="hljs-string">`Successfully created <span class="hljs-subst">${newMovies.insertedCount}</span> movies`</span>,
+      <span class="hljs-attr">data</span>: newMovies,
+      <span class="hljs-attr">created</span>: newMovies.<span class="hljs-property">insertedCount</span>,
+      <span class="hljs-attr">total</span>: moviesData.<span class="hljs-property">length</span>
     });
 
-  } catch (error) {
-    console.error('Error creating multiple movies:', error);
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error creating multiple movies:&#x27;</span>, error);
 
-    // Handle bulk write errors
-    if (error.name === 'BulkWriteError') {
-      const successCount = error.result.insertedCount;
-      const failureCount = error.writeErrors?.length || 0;
+    <span class="hljs-comment">// Handle bulk write errors</span>
+    <span class="hljs-keyword">if</span> (error.<span class="hljs-property">name</span> === <span class="hljs-string">&#x27;BulkWriteError&#x27;</span>) {
+      <span class="hljs-keyword">const</span> successCount = error.<span class="hljs-property">result</span>.<span class="hljs-property">insertedCount</span>;
+      <span class="hljs-keyword">const</span> failureCount = error.<span class="hljs-property">writeErrors</span>?.<span class="hljs-property">length</span> || <span class="hljs-number">0</span>;
 
-      return res.status(207).json({ // 207 = Multi-Status
-        success: false,
-        message: `Partial success: ${successCount} created, ${failureCount} failed`,
-        created: successCount,
-        failed: failureCount,
-        errors: error.writeErrors?.map(err =&gt; ({
-          index: err.index,
-          message: err.errmsg
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">207</span>).<span class="hljs-title function_">json</span>({ <span class="hljs-comment">// 207 = Multi-Status</span>
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">message</span>: <span class="hljs-string">`Partial success: <span class="hljs-subst">${successCount}</span> created, <span class="hljs-subst">${failureCount}</span> failed`</span>,
+        <span class="hljs-attr">created</span>: successCount,
+        <span class="hljs-attr">failed</span>: failureCount,
+        <span class="hljs-attr">errors</span>: error.<span class="hljs-property">writeErrors</span>?.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> ({
+          <span class="hljs-attr">index</span>: err.<span class="hljs-property">index</span>,
+          <span class="hljs-attr">message</span>: err.<span class="hljs-property">errmsg</span>
         }))
       });
     }
 
-    res.status(500).json({
-      success: false,
-      error: 'Failed to create movies',
-      details: error.message
+    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Failed to create movies&#x27;</span>,
+      <span class="hljs-attr">details</span>: error.<span class="hljs-property">message</span>
     });
   }
 };
 
-module.exports = {
-  // ... existing functions (getAllMovies, getMovieById, etc.)
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = {
+  <span class="hljs-comment">// ... existing functions (getAllMovies, getMovieById, etc.)</span>
   createMovie,
   createMultipleMovies
 };
 </code></pre>
 <p>Update your routes in <code>routes/movieRoutes.js</code>:</p>
-<pre><code class="language-javascript">const express = require('express');
-const {
+<pre class="hljs"><code><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);
+<span class="hljs-keyword">const</span> {
   getAllMovies,
   getMovieById,
   getMoviesByGenre,
   getRecentMovies,
   createMovie,
-  createMultipleMovies, // Optional
+  createMultipleMovies, <span class="hljs-comment">// Optional</span>
   updateMovie,
   deleteMovie
-} = require('../controllers/movieController');
+} = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;../controllers/movieController&#x27;</span>);
 
-const router = express.Router();
+<span class="hljs-keyword">const</span> router = express.<span class="hljs-title class_">Router</span>();
 
-// READ routes
-router.get('/', getAllMovies);
-router.get('/genre/:genre', getMoviesByGenre);
-router.get('/recent', getRecentMovies);
-router.get('/:id', getMovieById);
+<span class="hljs-comment">// READ routes</span>
+router.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/&#x27;</span>, getAllMovies);
+router.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/genre/:genre&#x27;</span>, getMoviesByGenre);
+router.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/recent&#x27;</span>, getRecentMovies);
+router.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/:id&#x27;</span>, getMovieById);
 
-// CREATE routes
-router.post('/', createMovie);                    // POST /api/movies
-router.post('/bulk', createMultipleMovies);       // POST /api/movies/bulk (optional)
+<span class="hljs-comment">// CREATE routes</span>
+router.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/&#x27;</span>, createMovie);                    <span class="hljs-comment">// POST /api/movies</span>
+router.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/bulk&#x27;</span>, createMultipleMovies);       <span class="hljs-comment">// POST /api/movies/bulk (optional)</span>
 
-// UPDATE and DELETE routes (placeholders for now)
-router.put('/:id', updateMovie);
-router.delete('/:id', deleteMovie);
+<span class="hljs-comment">// UPDATE and DELETE routes (placeholders for now)</span>
+router.<span class="hljs-title function_">put</span>(<span class="hljs-string">&#x27;/:id&#x27;</span>, updateMovie);
+router.<span class="hljs-title function_">delete</span>(<span class="hljs-string">&#x27;/:id&#x27;</span>, deleteMovie);
 
-module.exports = router;
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = router;
 </code></pre>
 <hr>
 <h2 id="frontend-integration" tabindex="-1">Frontend Integration</h2>
 <p>Now let's update your React frontend to handle movie creation. First, make sure your MovieForm component can create new movies:</p>
-<pre><code class="language-javascript">// In your React App.js, update the handleAddMovie function
-const handleAddMovie = async (movieData) =&gt; {
-  try {
-    setLoading(true);
-    setError(null);
+<pre class="hljs"><code><span class="hljs-comment">// In your React App.js, update the handleAddMovie function</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">handleAddMovie</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">movieData</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">true</span>);
+    <span class="hljs-title function_">setError</span>(<span class="hljs-literal">null</span>);
 
-    const response = await fetch(`${API_BASE_URL}/movies`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`<span class="hljs-subst">${API_BASE_URL}</span>/movies`</span>, {
+      <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
+      <span class="hljs-attr">headers</span>: {
+        <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
       },
-      body: JSON.stringify(movieData),
+      <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(movieData),
     });
 
-    const result = await response.json();
+    <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
 
-    if (result.success) {
-      // Success: refresh the movie list and close form
-      await fetchMovies(); // Refresh the list to show new movie
-      setShowForm(false);
+    <span class="hljs-keyword">if</span> (result.<span class="hljs-property">success</span>) {
+      <span class="hljs-comment">// Success: refresh the movie list and close form</span>
+      <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetchMovies</span>(); <span class="hljs-comment">// Refresh the list to show new movie</span>
+      <span class="hljs-title function_">setShowForm</span>(<span class="hljs-literal">false</span>);
       
-      // Optional: Show success message
-      setSuccessMessage(`&quot;${result.data.name}&quot; has been added successfully!`);
+      <span class="hljs-comment">// Optional: Show success message</span>
+      <span class="hljs-title function_">setSuccessMessage</span>(<span class="hljs-string">`&quot;<span class="hljs-subst">${result.data.name}</span>&quot; has been added successfully!`</span>);
       
-      // Clear success message after 3 seconds
-      setTimeout(() =&gt; setSuccessMessage(''), 3000);
-    } else {
-      // Handle API errors
-      if (result.details &amp;&amp; Array.isArray(result.details)) {
-        // Validation errors
-        const errorMessages = result.details.map(err =&gt; 
-          `${err.field}: ${err.message}`
-        ).join(', ');
-        setError(`Validation failed: ${errorMessages}`);
-      } else {
-        setError(result.error || 'Failed to add movie');
+      <span class="hljs-comment">// Clear success message after 3 seconds</span>
+      <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">setSuccessMessage</span>(<span class="hljs-string">&#x27;&#x27;</span>), <span class="hljs-number">3000</span>);
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-comment">// Handle API errors</span>
+      <span class="hljs-keyword">if</span> (result.<span class="hljs-property">details</span> &amp;&amp; <span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(result.<span class="hljs-property">details</span>)) {
+        <span class="hljs-comment">// Validation errors</span>
+        <span class="hljs-keyword">const</span> errorMessages = result.<span class="hljs-property">details</span>.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> 
+          <span class="hljs-string">`<span class="hljs-subst">${err.field}</span>: <span class="hljs-subst">${err.message}</span>`</span>
+        ).<span class="hljs-title function_">join</span>(<span class="hljs-string">&#x27;, &#x27;</span>);
+        <span class="hljs-title function_">setError</span>(<span class="hljs-string">`Validation failed: <span class="hljs-subst">${errorMessages}</span>`</span>);
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-title function_">setError</span>(result.<span class="hljs-property">error</span> || <span class="hljs-string">&#x27;Failed to add movie&#x27;</span>);
       }
     }
-  } catch (error) {
-    console.error('Error adding movie:', error);
-    setError('Failed to connect to server. Please try again.');
-  } finally {
-    setLoading(false);
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error adding movie:&#x27;</span>, error);
+    <span class="hljs-title function_">setError</span>(<span class="hljs-string">&#x27;Failed to connect to server. Please try again.&#x27;</span>);
+  } <span class="hljs-keyword">finally</span> {
+    <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">false</span>);
   }
 };
 </code></pre>
 <p>Update your MovieForm component to handle validation errors:</p>
-<pre><code class="language-javascript">// In MovieForm.js, add state for handling errors
-import React, { useState, useEffect } from 'react';
+<pre class="hljs"><code><span class="hljs-comment">// In MovieForm.js, add state for handling errors</span>
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { useState, useEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 
-function MovieForm({ onAddMovie, onUpdateMovie, onCancel, editingMovie }) {
-  const [movieData, setMovieData] = useState({
-    name: '',
-    year: '',
-    rating: '',
-    length: '',
-    description: '',
-    genre: '',
-    director: '',
-    stars: ''
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">MovieForm</span>(<span class="hljs-params">{ onAddMovie, onUpdateMovie, onCancel, editingMovie }</span>) {
+  <span class="hljs-keyword">const</span> [movieData, setMovieData] = <span class="hljs-title function_">useState</span>({
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+    <span class="hljs-attr">year</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+    <span class="hljs-attr">rating</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+    <span class="hljs-attr">length</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+    <span class="hljs-attr">genre</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+    <span class="hljs-attr">director</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+    <span class="hljs-attr">stars</span>: <span class="hljs-string">&#x27;&#x27;</span>
   });
   
-  const [errors, setErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  <span class="hljs-keyword">const</span> [errors, setErrors] = <span class="hljs-title function_">useState</span>({});
+  <span class="hljs-keyword">const</span> [isSubmitting, setIsSubmitting] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">false</span>);
 
-  // ... existing useEffect for editing ...
+  <span class="hljs-comment">// ... existing useEffect for editing ...</span>
 
-  const handleInputChange = (e) =&gt; {
-    const { name, value } = e.target;
-    setMovieData({
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleInputChange</span> = (<span class="hljs-params">e</span>) =&gt; {
+    <span class="hljs-keyword">const</span> { name, value } = e.<span class="hljs-property">target</span>;
+    <span class="hljs-title function_">setMovieData</span>({
       ...movieData,
       [name]: value
     });
 
-    // Clear error for this field when user starts typing
-    if (errors[name]) {
-      setErrors({
+    <span class="hljs-comment">// Clear error for this field when user starts typing</span>
+    <span class="hljs-keyword">if</span> (errors[name]) {
+      <span class="hljs-title function_">setErrors</span>({
         ...errors,
-        [name]: ''
+        [name]: <span class="hljs-string">&#x27;&#x27;</span>
       });
     }
   };
 
-  const validateForm = () =&gt; {
-    const newErrors = {};
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">validateForm</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">const</span> newErrors = {};
 
-    if (!movieData.name.trim()) {
-      newErrors.name = 'Movie name is required';
+    <span class="hljs-keyword">if</span> (!movieData.<span class="hljs-property">name</span>.<span class="hljs-title function_">trim</span>()) {
+      newErrors.<span class="hljs-property">name</span> = <span class="hljs-string">&#x27;Movie name is required&#x27;</span>;
     }
 
-    if (!movieData.year || movieData.year &lt; 1800) {
-      newErrors.year = 'Please enter a valid year';
+    <span class="hljs-keyword">if</span> (!movieData.<span class="hljs-property">year</span> || movieData.<span class="hljs-property">year</span> &lt; <span class="hljs-number">1800</span>) {
+      newErrors.<span class="hljs-property">year</span> = <span class="hljs-string">&#x27;Please enter a valid year&#x27;</span>;
     }
 
-    if (!movieData.rating) {
-      newErrors.rating = 'Rating is required';
+    <span class="hljs-keyword">if</span> (!movieData.<span class="hljs-property">rating</span>) {
+      newErrors.<span class="hljs-property">rating</span> = <span class="hljs-string">&#x27;Rating is required&#x27;</span>;
     }
 
-    if (!movieData.length.trim()) {
-      newErrors.length = 'Movie length is required';
+    <span class="hljs-keyword">if</span> (!movieData.<span class="hljs-property">length</span>.<span class="hljs-title function_">trim</span>()) {
+      newErrors.<span class="hljs-property">length</span> = <span class="hljs-string">&#x27;Movie length is required&#x27;</span>;
     }
 
-    if (!movieData.description.trim() || movieData.description.length &lt; 10) {
-      newErrors.description = 'Description must be at least 10 characters';
+    <span class="hljs-keyword">if</span> (!movieData.<span class="hljs-property">description</span>.<span class="hljs-title function_">trim</span>() || movieData.<span class="hljs-property">description</span>.<span class="hljs-property">length</span> &lt; <span class="hljs-number">10</span>) {
+      newErrors.<span class="hljs-property">description</span> = <span class="hljs-string">&#x27;Description must be at least 10 characters&#x27;</span>;
     }
 
-    if (!movieData.director.trim()) {
-      newErrors.director = 'Director is required';
+    <span class="hljs-keyword">if</span> (!movieData.<span class="hljs-property">director</span>.<span class="hljs-title function_">trim</span>()) {
+      newErrors.<span class="hljs-property">director</span> = <span class="hljs-string">&#x27;Director is required&#x27;</span>;
     }
 
-    if (!movieData.genre.trim()) {
-      newErrors.genre = 'At least one genre is required';
+    <span class="hljs-keyword">if</span> (!movieData.<span class="hljs-property">genre</span>.<span class="hljs-title function_">trim</span>()) {
+      newErrors.<span class="hljs-property">genre</span> = <span class="hljs-string">&#x27;At least one genre is required&#x27;</span>;
     }
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    <span class="hljs-title function_">setErrors</span>(newErrors);
+    <span class="hljs-keyword">return</span> <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(newErrors).<span class="hljs-property">length</span> === <span class="hljs-number">0</span>;
   };
 
-  const handleSubmit = async (e) =&gt; {
-    e.preventDefault();
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleSubmit</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">e</span>) =&gt; {
+    e.<span class="hljs-title function_">preventDefault</span>();
     
-    if (!validateForm()) {
-      return;
+    <span class="hljs-keyword">if</span> (!<span class="hljs-title function_">validateForm</span>()) {
+      <span class="hljs-keyword">return</span>;
     }
 
-    setIsSubmitting(true);
+    <span class="hljs-title function_">setIsSubmitting</span>(<span class="hljs-literal">true</span>);
 
-    try {
-      const processedMovie = {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-keyword">const</span> processedMovie = {
         ...movieData,
-        genre: movieData.genre.split(',').map(g =&gt; g.trim()).filter(Boolean),
-        stars: movieData.stars.split(',').map(s =&gt; s.trim()).filter(Boolean),
-        year: parseInt(movieData.year)
+        <span class="hljs-attr">genre</span>: movieData.<span class="hljs-property">genre</span>.<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;,&#x27;</span>).<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">g</span> =&gt;</span> g.<span class="hljs-title function_">trim</span>()).<span class="hljs-title function_">filter</span>(<span class="hljs-title class_">Boolean</span>),
+        <span class="hljs-attr">stars</span>: movieData.<span class="hljs-property">stars</span>.<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;,&#x27;</span>).<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">s</span> =&gt;</span> s.<span class="hljs-title function_">trim</span>()).<span class="hljs-title function_">filter</span>(<span class="hljs-title class_">Boolean</span>),
+        <span class="hljs-attr">year</span>: <span class="hljs-built_in">parseInt</span>(movieData.<span class="hljs-property">year</span>)
       };
 
-      if (editingMovie) {
-        await onUpdateMovie({ ...processedMovie, _id: editingMovie._id });
-      } else {
-        await onAddMovie(processedMovie);
+      <span class="hljs-keyword">if</span> (editingMovie) {
+        <span class="hljs-keyword">await</span> <span class="hljs-title function_">onUpdateMovie</span>({ ...processedMovie, <span class="hljs-attr">_id</span>: editingMovie.<span class="hljs-property">_id</span> });
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">await</span> <span class="hljs-title function_">onAddMovie</span>(processedMovie);
       }
-    } catch (error) {
-      // Error handling is done in parent component
-      console.error('Form submission error:', error);
-    } finally {
-      setIsSubmitting(false);
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-comment">// Error handling is done in parent component</span>
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Form submission error:&#x27;</span>, error);
+    } <span class="hljs-keyword">finally</span> {
+      <span class="hljs-title function_">setIsSubmitting</span>(<span class="hljs-literal">false</span>);
     }
   };
 
-  return (
-    &lt;div className=&quot;movie-form&quot;&gt;
-      &lt;h2&gt;{editingMovie ? 'Edit Movie' : 'Add New Movie'}&lt;/h2&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;movie-form&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>{editingMovie ? &#x27;Edit Movie&#x27; : &#x27;Add New Movie&#x27;}<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
       
-      &lt;form onSubmit={handleSubmit}&gt;
-        &lt;div className=&quot;form-group&quot;&gt;
-          &lt;input
-            type=&quot;text&quot;
-            name=&quot;name&quot;
-            placeholder=&quot;Movie Name *&quot;
-            value={movieData.name}
-            onChange={handleInputChange}
-            className={errors.name ? 'error' : ''}
-            required
-          /&gt;
-          {errors.name &amp;&amp; &lt;span className=&quot;error-message&quot;&gt;{errors.name}&lt;/span&gt;}
-        &lt;/div&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">onSubmit</span>=<span class="hljs-string">{handleSubmit}</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;form-group&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+            <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span>
+            <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;name&quot;</span>
+            <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;Movie Name *&quot;</span>
+            <span class="hljs-attr">value</span>=<span class="hljs-string">{movieData.name}</span>
+            <span class="hljs-attr">onChange</span>=<span class="hljs-string">{handleInputChange}</span>
+            <span class="hljs-attr">className</span>=<span class="hljs-string">{errors.name</span> ? &#x27;<span class="hljs-attr">error</span>&#x27; <span class="hljs-attr">:</span> &#x27;&#x27;}
+            <span class="hljs-attr">required</span>
+          /&gt;</span>
+          {errors.name &amp;&amp; <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;error-message&quot;</span>&gt;</span>{errors.name}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>}
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
-        &lt;div className=&quot;form-group&quot;&gt;
-          &lt;input
-            type=&quot;number&quot;
-            name=&quot;year&quot;
-            placeholder=&quot;Year *&quot;
-            value={movieData.year}
-            onChange={handleInputChange}
-            className={errors.year ? 'error' : ''}
-            min=&quot;1800&quot;
-            max={new Date().getFullYear() + 5}
-            required
-          /&gt;
-          {errors.year &amp;&amp; &lt;span className=&quot;error-message&quot;&gt;{errors.year}&lt;/span&gt;}
-        &lt;/div&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;form-group&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+            <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;number&quot;</span>
+            <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;year&quot;</span>
+            <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;Year *&quot;</span>
+            <span class="hljs-attr">value</span>=<span class="hljs-string">{movieData.year}</span>
+            <span class="hljs-attr">onChange</span>=<span class="hljs-string">{handleInputChange}</span>
+            <span class="hljs-attr">className</span>=<span class="hljs-string">{errors.year</span> ? &#x27;<span class="hljs-attr">error</span>&#x27; <span class="hljs-attr">:</span> &#x27;&#x27;}
+            <span class="hljs-attr">min</span>=<span class="hljs-string">&quot;1800&quot;</span>
+            <span class="hljs-attr">max</span>=<span class="hljs-string">{new</span> <span class="hljs-attr">Date</span>()<span class="hljs-attr">.getFullYear</span>() + <span class="hljs-attr">5</span>}
+            <span class="hljs-attr">required</span>
+          /&gt;</span>
+          {errors.year &amp;&amp; <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;error-message&quot;</span>&gt;</span>{errors.year}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>}
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
-        &lt;div className=&quot;form-group&quot;&gt;
-          &lt;select
-            name=&quot;rating&quot;
-            value={movieData.rating}
-            onChange={handleInputChange}
-            className={errors.rating ? 'error' : ''}
-            required
-          &gt;
-            &lt;option value=&quot;&quot;&gt;Select Rating *&lt;/option&gt;
-            &lt;option value=&quot;G&quot;&gt;G&lt;/option&gt;
-            &lt;option value=&quot;PG&quot;&gt;PG&lt;/option&gt;
-            &lt;option value=&quot;PG-13&quot;&gt;PG-13&lt;/option&gt;
-            &lt;option value=&quot;R&quot;&gt;R&lt;/option&gt;
-            &lt;option value=&quot;NC-17&quot;&gt;NC-17&lt;/option&gt;
-            &lt;option value=&quot;NR&quot;&gt;Not Rated&lt;/option&gt;
-          &lt;/select&gt;
-          {errors.rating &amp;&amp; &lt;span className=&quot;error-message&quot;&gt;{errors.rating}&lt;/span&gt;}
-        &lt;/div&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;form-group&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">select</span>
+            <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;rating&quot;</span>
+            <span class="hljs-attr">value</span>=<span class="hljs-string">{movieData.rating}</span>
+            <span class="hljs-attr">onChange</span>=<span class="hljs-string">{handleInputChange}</span>
+            <span class="hljs-attr">className</span>=<span class="hljs-string">{errors.rating</span> ? &#x27;<span class="hljs-attr">error</span>&#x27; <span class="hljs-attr">:</span> &#x27;&#x27;}
+            <span class="hljs-attr">required</span>
+          &gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span>Select Rating *<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;G&quot;</span>&gt;</span>G<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;PG&quot;</span>&gt;</span>PG<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;PG-13&quot;</span>&gt;</span>PG-13<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;R&quot;</span>&gt;</span>R<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;NC-17&quot;</span>&gt;</span>NC-17<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;NR&quot;</span>&gt;</span>Not Rated<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span>
+          {errors.rating &amp;&amp; <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;error-message&quot;</span>&gt;</span>{errors.rating}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>}
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
-        &lt;div className=&quot;form-group&quot;&gt;
-          &lt;input
-            type=&quot;text&quot;
-            name=&quot;length&quot;
-            placeholder=&quot;Length (e.g., '120 minutes') *&quot;
-            value={movieData.length}
-            onChange={handleInputChange}
-            className={errors.length ? 'error' : ''}
-            required
-          /&gt;
-          {errors.length &amp;&amp; &lt;span className=&quot;error-message&quot;&gt;{errors.length}&lt;/span&gt;}
-        &lt;/div&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;form-group&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+            <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span>
+            <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;length&quot;</span>
+            <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;Length (e.g., &#x27;120 minutes&#x27;) *&quot;</span>
+            <span class="hljs-attr">value</span>=<span class="hljs-string">{movieData.length}</span>
+            <span class="hljs-attr">onChange</span>=<span class="hljs-string">{handleInputChange}</span>
+            <span class="hljs-attr">className</span>=<span class="hljs-string">{errors.length</span> ? &#x27;<span class="hljs-attr">error</span>&#x27; <span class="hljs-attr">:</span> &#x27;&#x27;}
+            <span class="hljs-attr">required</span>
+          /&gt;</span>
+          {errors.length &amp;&amp; <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;error-message&quot;</span>&gt;</span>{errors.length}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>}
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
-        &lt;div className=&quot;form-group&quot;&gt;
-          &lt;textarea
-            name=&quot;description&quot;
-            placeholder=&quot;Description (minimum 10 characters) *&quot;
-            value={movieData.description}
-            onChange={handleInputChange}
-            className={errors.description ? 'error' : ''}
-            rows=&quot;4&quot;
-            required
-          /&gt;
-          {errors.description &amp;&amp; &lt;span className=&quot;error-message&quot;&gt;{errors.description}&lt;/span&gt;}
-        &lt;/div&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;form-group&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">textarea</span>
+            <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;description&quot;</span>
+            <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;Description (minimum 10 characters) *&quot;</span>
+            <span class="hljs-attr">value</span>=<span class="hljs-string">{movieData.description}</span>
+            <span class="hljs-attr">onChange</span>=<span class="hljs-string">{handleInputChange}</span>
+            <span class="hljs-attr">className</span>=<span class="hljs-string">{errors.description</span> ? &#x27;<span class="hljs-attr">error</span>&#x27; <span class="hljs-attr">:</span> &#x27;&#x27;}
+            <span class="hljs-attr">rows</span>=<span class="hljs-string">&quot;4&quot;</span>
+            <span class="hljs-attr">required</span>
+          /&gt;</span>
+          {errors.description &amp;&amp; <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;error-message&quot;</span>&gt;</span>{errors.description}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>}
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
-        &lt;div className=&quot;form-group&quot;&gt;
-          &lt;input
-            type=&quot;text&quot;
-            name=&quot;genre&quot;
-            placeholder=&quot;Genres (comma-separated) *&quot;
-            value={movieData.genre}
-            onChange={handleInputChange}
-            className={errors.genre ? 'error' : ''}
-            required
-          /&gt;
-          {errors.genre &amp;&amp; &lt;span className=&quot;error-message&quot;&gt;{errors.genre}&lt;/span&gt;}
-        &lt;/div&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;form-group&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+            <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span>
+            <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;genre&quot;</span>
+            <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;Genres (comma-separated) *&quot;</span>
+            <span class="hljs-attr">value</span>=<span class="hljs-string">{movieData.genre}</span>
+            <span class="hljs-attr">onChange</span>=<span class="hljs-string">{handleInputChange}</span>
+            <span class="hljs-attr">className</span>=<span class="hljs-string">{errors.genre</span> ? &#x27;<span class="hljs-attr">error</span>&#x27; <span class="hljs-attr">:</span> &#x27;&#x27;}
+            <span class="hljs-attr">required</span>
+          /&gt;</span>
+          {errors.genre &amp;&amp; <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;error-message&quot;</span>&gt;</span>{errors.genre}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>}
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
-        &lt;div className=&quot;form-group&quot;&gt;
-          &lt;input
-            type=&quot;text&quot;
-            name=&quot;director&quot;
-            placeholder=&quot;Director *&quot;
-            value={movieData.director}
-            onChange={handleInputChange}
-            className={errors.director ? 'error' : ''}
-            required
-          /&gt;
-          {errors.director &amp;&amp; &lt;span className=&quot;error-message&quot;&gt;{errors.director}&lt;/span&gt;}
-        &lt;/div&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;form-group&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+            <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span>
+            <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;director&quot;</span>
+            <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;Director *&quot;</span>
+            <span class="hljs-attr">value</span>=<span class="hljs-string">{movieData.director}</span>
+            <span class="hljs-attr">onChange</span>=<span class="hljs-string">{handleInputChange}</span>
+            <span class="hljs-attr">className</span>=<span class="hljs-string">{errors.director</span> ? &#x27;<span class="hljs-attr">error</span>&#x27; <span class="hljs-attr">:</span> &#x27;&#x27;}
+            <span class="hljs-attr">required</span>
+          /&gt;</span>
+          {errors.director &amp;&amp; <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;error-message&quot;</span>&gt;</span>{errors.director}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>}
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
-        &lt;div className=&quot;form-group&quot;&gt;
-          &lt;input
-            type=&quot;text&quot;
-            name=&quot;stars&quot;
-            placeholder=&quot;Stars (comma-separated)&quot;
-            value={movieData.stars}
-            onChange={handleInputChange}
-          /&gt;
-        &lt;/div&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;form-group&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+            <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span>
+            <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;stars&quot;</span>
+            <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;Stars (comma-separated)&quot;</span>
+            <span class="hljs-attr">value</span>=<span class="hljs-string">{movieData.stars}</span>
+            <span class="hljs-attr">onChange</span>=<span class="hljs-string">{handleInputChange}</span>
+          /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
-        &lt;div className=&quot;form-buttons&quot;&gt;
-          &lt;button 
-            type=&quot;submit&quot; 
-            disabled={isSubmitting}
-            className={isSubmitting ? 'submitting' : ''}
-          &gt;
-            {isSubmitting ? 'Saving...' : (editingMovie ? 'Update Movie' : 'Add Movie')}
-          &lt;/button&gt;
-          &lt;button type=&quot;button&quot; onClick={onCancel}&gt;Cancel&lt;/button&gt;
-        &lt;/div&gt;
-      &lt;/form&gt;
-    &lt;/div&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;form-buttons&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> 
+            <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> 
+            <span class="hljs-attr">disabled</span>=<span class="hljs-string">{isSubmitting}</span>
+            <span class="hljs-attr">className</span>=<span class="hljs-string">{isSubmitting</span> ? &#x27;<span class="hljs-attr">submitting</span>&#x27; <span class="hljs-attr">:</span> &#x27;&#x27;}
+          &gt;</span>
+            {isSubmitting ? &#x27;Saving...&#x27; : (editingMovie ? &#x27;Update Movie&#x27; : &#x27;Add Movie&#x27;)}
+          <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;button&quot;</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{onCancel}</span>&gt;</span>Cancel<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-export default MovieForm;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">MovieForm</span>;
 </code></pre>
 <hr>
 <h2 id="data-validation-and-sanitization" tabindex="-1">Data Validation and Sanitization</h2>
 <p>Proper data validation and sanitization are crucial for CREATE operations:</p>
-<pre><code class="language-javascript">// Example validation middleware (optional)
-const validateMovieData = (req, res, next) =&gt; {
-  const { name, year, rating, length, description, director } = req.body;
+<pre class="hljs"><code><span class="hljs-comment">// Example validation middleware (optional)</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">validateMovieData</span> = (<span class="hljs-params">req, res, next</span>) =&gt; {
+  <span class="hljs-keyword">const</span> { name, year, rating, length, description, director } = req.<span class="hljs-property">body</span>;
 
-  // Check required fields
-  if (!name || !year || !rating || !length || !description || !director) {
-    return res.status(400).json({
-      success: false,
-      error: 'Missing required fields'
+  <span class="hljs-comment">// Check required fields</span>
+  <span class="hljs-keyword">if</span> (!name || !year || !rating || !length || !description || !director) {
+    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Missing required fields&#x27;</span>
     });
   }
 
-  // Validate data types
-  if (typeof year !== 'number' || year &lt; 1800 || year &gt; new Date().getFullYear() + 5) {
-    return res.status(400).json({
-      success: false,
-      error: 'Year must be a valid number between 1800 and future releases'
+  <span class="hljs-comment">// Validate data types</span>
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> year !== <span class="hljs-string">&#x27;number&#x27;</span> || year &lt; <span class="hljs-number">1800</span> || year &gt; <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">getFullYear</span>() + <span class="hljs-number">5</span>) {
+    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Year must be a valid number between 1800 and future releases&#x27;</span>
     });
   }
 
-  // Validate rating
-  const validRatings = ['G', 'PG', 'PG-13', 'R', 'NC-17', 'NR'];
-  if (!validRatings.includes(rating)) {
-    return res.status(400).json({
-      success: false,
-      error: 'Rating must be one of: ' + validRatings.join(', ')
+  <span class="hljs-comment">// Validate rating</span>
+  <span class="hljs-keyword">const</span> validRatings = [<span class="hljs-string">&#x27;G&#x27;</span>, <span class="hljs-string">&#x27;PG&#x27;</span>, <span class="hljs-string">&#x27;PG-13&#x27;</span>, <span class="hljs-string">&#x27;R&#x27;</span>, <span class="hljs-string">&#x27;NC-17&#x27;</span>, <span class="hljs-string">&#x27;NR&#x27;</span>];
+  <span class="hljs-keyword">if</span> (!validRatings.<span class="hljs-title function_">includes</span>(rating)) {
+    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Rating must be one of: &#x27;</span> + validRatings.<span class="hljs-title function_">join</span>(<span class="hljs-string">&#x27;, &#x27;</span>)
     });
   }
 
-  // Sanitize strings
-  req.body.name = name.toString().trim();
-  req.body.director = director.toString().trim();
-  req.body.description = description.toString().trim();
+  <span class="hljs-comment">// Sanitize strings</span>
+  req.<span class="hljs-property">body</span>.<span class="hljs-property">name</span> = name.<span class="hljs-title function_">toString</span>().<span class="hljs-title function_">trim</span>();
+  req.<span class="hljs-property">body</span>.<span class="hljs-property">director</span> = director.<span class="hljs-title function_">toString</span>().<span class="hljs-title function_">trim</span>();
+  req.<span class="hljs-property">body</span>.<span class="hljs-property">description</span> = description.<span class="hljs-title function_">toString</span>().<span class="hljs-title function_">trim</span>();
 
-  next();
+  <span class="hljs-title function_">next</span>();
 };
 
-// Use in routes
-router.post('/', validateMovieData, createMovie);
+<span class="hljs-comment">// Use in routes</span>
+router.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/&#x27;</span>, validateMovieData, createMovie);
 </code></pre>
 <hr>
 <h2 id="testing-create-operations" tabindex="-1">Testing CREATE Operations</h2>
 <h3 id="using-curl" tabindex="-1">Using curl</h3>
-<pre><code class="language-bash"># Test successful creation
+<pre class="hljs"><code><span class="hljs-comment"># Test successful creation</span>
 curl -X POST http://localhost:4000/api/movies \
-  -H &quot;Content-Type: application/json&quot; \
-  -d '{
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -d <span class="hljs-string">&#x27;{
     &quot;name&quot;: &quot;Test Movie&quot;,
     &quot;year&quot;: 2024,
     &quot;rating&quot;: &quot;PG-13&quot;,
@@ -940,132 +944,132 @@ curl -X POST http://localhost:4000/api/movies \
     &quot;genre&quot;: [&quot;Comedy&quot;, &quot;Drama&quot;],
     &quot;director&quot;: &quot;Test Director&quot;,
     &quot;stars&quot;: [&quot;Actor One&quot;, &quot;Actor Two&quot;]
-  }'
+  }&#x27;</span>
 
-# Test validation errors
+<span class="hljs-comment"># Test validation errors</span>
 curl -X POST http://localhost:4000/api/movies \
-  -H &quot;Content-Type: application/json&quot; \
-  -d '{
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -d <span class="hljs-string">&#x27;{
     &quot;name&quot;: &quot;&quot;,
     &quot;year&quot;: &quot;not a number&quot;,
     &quot;rating&quot;: &quot;INVALID&quot;
-  }'
+  }&#x27;</span>
 
-# Test missing data
+<span class="hljs-comment"># Test missing data</span>
 curl -X POST http://localhost:4000/api/movies \
-  -H &quot;Content-Type: application/json&quot; \
-  -d '{}'
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -d <span class="hljs-string">&#x27;{}&#x27;</span>
 </code></pre>
 <h3 id="using-javascript-fetch" tabindex="-1">Using JavaScript fetch()</h3>
-<pre><code class="language-javascript">// Test in browser console or React app
-const testCreateMovie = async () =&gt; {
-  try {
-    const response = await fetch('http://localhost:4000/api/movies', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+<pre class="hljs"><code><span class="hljs-comment">// Test in browser console or React app</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">testCreateMovie</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;http://localhost:4000/api/movies&#x27;</span>, {
+      <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
+      <span class="hljs-attr">headers</span>: {
+        <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
       },
-      body: JSON.stringify({
-        name: &quot;JavaScript Test Movie&quot;,
-        year: 2024,
-        rating: &quot;R&quot;,
-        length: &quot;95 minutes&quot;,
-        description: &quot;A movie created via JavaScript fetch&quot;,
-        genre: [&quot;Thriller&quot;],
-        director: &quot;JS Developer&quot;,
-        stars: [&quot;Code Master&quot;, &quot;Debug Hero&quot;]
+      <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>({
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;JavaScript Test Movie&quot;</span>,
+        <span class="hljs-attr">year</span>: <span class="hljs-number">2024</span>,
+        <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;R&quot;</span>,
+        <span class="hljs-attr">length</span>: <span class="hljs-string">&quot;95 minutes&quot;</span>,
+        <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;A movie created via JavaScript fetch&quot;</span>,
+        <span class="hljs-attr">genre</span>: [<span class="hljs-string">&quot;Thriller&quot;</span>],
+        <span class="hljs-attr">director</span>: <span class="hljs-string">&quot;JS Developer&quot;</span>,
+        <span class="hljs-attr">stars</span>: [<span class="hljs-string">&quot;Code Master&quot;</span>, <span class="hljs-string">&quot;Debug Hero&quot;</span>]
       }),
     });
 
-    const result = await response.json();
-    console.log('Result:', result);
-  } catch (error) {
-    console.error('Error:', error);
+    <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Result:&#x27;</span>, result);
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error:&#x27;</span>, error);
   }
 };
 
-testCreateMovie();
+<span class="hljs-title function_">testCreateMovie</span>();
 </code></pre>
 <hr>
 <h2 id="error-handling-best-practices" tabindex="-1">Error Handling Best Practices</h2>
-<pre><code class="language-javascript">// Comprehensive error handling example
-const createMovieWithErrorHandling = async (req, res) =&gt; {
-  try {
-    const movieData = req.body;
+<pre class="hljs"><code><span class="hljs-comment">// Comprehensive error handling example</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">createMovieWithErrorHandling</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">req, res</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> movieData = req.<span class="hljs-property">body</span>;
 
-    // Input validation
-    if (!movieData) {
-      return res.status(400).json({
-        success: false,
-        error: 'Request body is required',
-        code: 'MISSING_BODY'
+    <span class="hljs-comment">// Input validation</span>
+    <span class="hljs-keyword">if</span> (!movieData) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Request body is required&#x27;</span>,
+        <span class="hljs-attr">code</span>: <span class="hljs-string">&#x27;MISSING_BODY&#x27;</span>
       });
     }
 
-    // Create movie
-    const newMovie = await Movie.create(movieData);
+    <span class="hljs-comment">// Create movie</span>
+    <span class="hljs-keyword">const</span> newMovie = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">create</span>(movieData);
 
-    // Success response
-    res.status(201).json({
-      success: true,
-      message: 'Movie created successfully',
-      data: newMovie
+    <span class="hljs-comment">// Success response</span>
+    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">201</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Movie created successfully&#x27;</span>,
+      <span class="hljs-attr">data</span>: newMovie
     });
 
-  } catch (error) {
-    // Log error for debugging
-    console.error('CREATE Error:', {
-      message: error.message,
-      stack: error.stack,
-      name: error.name,
-      code: error.code
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-comment">// Log error for debugging</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;CREATE Error:&#x27;</span>, {
+      <span class="hljs-attr">message</span>: error.<span class="hljs-property">message</span>,
+      <span class="hljs-attr">stack</span>: error.<span class="hljs-property">stack</span>,
+      <span class="hljs-attr">name</span>: error.<span class="hljs-property">name</span>,
+      <span class="hljs-attr">code</span>: error.<span class="hljs-property">code</span>
     });
 
-    // Validation errors
-    if (error.name === 'ValidationError') {
-      return res.status(400).json({
-        success: false,
-        error: 'Validation failed',
-        code: 'VALIDATION_ERROR',
-        details: Object.values(error.errors).map(err =&gt; ({
-          field: err.path,
-          message: err.message,
-          rejectedValue: err.value
+    <span class="hljs-comment">// Validation errors</span>
+    <span class="hljs-keyword">if</span> (error.<span class="hljs-property">name</span> === <span class="hljs-string">&#x27;ValidationError&#x27;</span>) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Validation failed&#x27;</span>,
+        <span class="hljs-attr">code</span>: <span class="hljs-string">&#x27;VALIDATION_ERROR&#x27;</span>,
+        <span class="hljs-attr">details</span>: <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">values</span>(error.<span class="hljs-property">errors</span>).<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> ({
+          <span class="hljs-attr">field</span>: err.<span class="hljs-property">path</span>,
+          <span class="hljs-attr">message</span>: err.<span class="hljs-property">message</span>,
+          <span class="hljs-attr">rejectedValue</span>: err.<span class="hljs-property">value</span>
         }))
       });
     }
 
-    // Duplicate key errors
-    if (error.code === 11000) {
-      const field = Object.keys(error.keyPattern)[0];
-      return res.status(409).json({
-        success: false,
-        error: `Duplicate ${field}`,
-        code: 'DUPLICATE_KEY',
-        field: field
+    <span class="hljs-comment">// Duplicate key errors</span>
+    <span class="hljs-keyword">if</span> (error.<span class="hljs-property">code</span> === <span class="hljs-number">11000</span>) {
+      <span class="hljs-keyword">const</span> field = <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(error.<span class="hljs-property">keyPattern</span>)[<span class="hljs-number">0</span>];
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">409</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">`Duplicate <span class="hljs-subst">${field}</span>`</span>,
+        <span class="hljs-attr">code</span>: <span class="hljs-string">&#x27;DUPLICATE_KEY&#x27;</span>,
+        <span class="hljs-attr">field</span>: field
       });
     }
 
-    // Cast errors (wrong data type)
-    if (error.name === 'CastError') {
-      return res.status(400).json({
-        success: false,
-        error: 'Invalid data type',
-        code: 'CAST_ERROR',
-        details: {
-          field: error.path,
-          expectedType: error.kind,
-          receivedValue: error.value
+    <span class="hljs-comment">// Cast errors (wrong data type)</span>
+    <span class="hljs-keyword">if</span> (error.<span class="hljs-property">name</span> === <span class="hljs-string">&#x27;CastError&#x27;</span>) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Invalid data type&#x27;</span>,
+        <span class="hljs-attr">code</span>: <span class="hljs-string">&#x27;CAST_ERROR&#x27;</span>,
+        <span class="hljs-attr">details</span>: {
+          <span class="hljs-attr">field</span>: error.<span class="hljs-property">path</span>,
+          <span class="hljs-attr">expectedType</span>: error.<span class="hljs-property">kind</span>,
+          <span class="hljs-attr">receivedValue</span>: error.<span class="hljs-property">value</span>
         }
       });
     }
 
-    // Generic server error
-    res.status(500).json({
-      success: false,
-      error: 'Internal server error',
-      code: 'INTERNAL_ERROR',
-      message: process.env.NODE_ENV === 'development' ? error.message : 'Something went wrong'
+    <span class="hljs-comment">// Generic server error</span>
+    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Internal server error&#x27;</span>,
+      <span class="hljs-attr">code</span>: <span class="hljs-string">&#x27;INTERNAL_ERROR&#x27;</span>,
+      <span class="hljs-attr">message</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">NODE_ENV</span> === <span class="hljs-string">&#x27;development&#x27;</span> ? error.<span class="hljs-property">message</span> : <span class="hljs-string">&#x27;Something went wrong&#x27;</span>
     });
   }
 };
@@ -1073,46 +1077,46 @@ const createMovieWithErrorHandling = async (req, res) =&gt; {
 <hr>
 <h2 id="security-considerations" tabindex="-1">Security Considerations</h2>
 <p>When implementing CREATE operations, consider these security measures:</p>
-<pre><code class="language-javascript">// 1. Rate limiting (requires express-rate-limit)
-const rateLimit = require('express-rate-limit');
+<pre class="hljs"><code><span class="hljs-comment">// 1. Rate limiting (requires express-rate-limit)</span>
+<span class="hljs-keyword">const</span> rateLimit = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express-rate-limit&#x27;</span>);
 
-const createMovieRateLimit = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 10, // limit each IP to 10 requests per windowMs
-  message: {
-    success: false,
-    error: 'Too many movies created, please try again later'
+<span class="hljs-keyword">const</span> createMovieRateLimit = <span class="hljs-title function_">rateLimit</span>({
+  <span class="hljs-attr">windowMs</span>: <span class="hljs-number">15</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>, <span class="hljs-comment">// 15 minutes</span>
+  <span class="hljs-attr">max</span>: <span class="hljs-number">10</span>, <span class="hljs-comment">// limit each IP to 10 requests per windowMs</span>
+  <span class="hljs-attr">message</span>: {
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Too many movies created, please try again later&#x27;</span>
   }
 });
 
-router.post('/', createMovieRateLimit, createMovie);
+router.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/&#x27;</span>, createMovieRateLimit, createMovie);
 
-// 2. Input size limiting
-app.use(express.json({ limit: '1mb' })); // Limit request body size
+<span class="hljs-comment">// 2. Input size limiting</span>
+app.<span class="hljs-title function_">use</span>(express.<span class="hljs-title function_">json</span>({ <span class="hljs-attr">limit</span>: <span class="hljs-string">&#x27;1mb&#x27;</span> })); <span class="hljs-comment">// Limit request body size</span>
 
-// 3. Data sanitization
-const sanitizeInput = (req, res, next) =&gt; {
-  // Remove potentially dangerous characters
-  for (let key in req.body) {
-    if (typeof req.body[key] === 'string') {
-      req.body[key] = req.body[key]
-        .replace(/&lt;script\b[^&lt;]*(?:(?!&lt;\/script&gt;)&lt;[^&lt;]*)*&lt;\/script&gt;/gi, '') // Remove scripts
-        .trim();
+<span class="hljs-comment">// 3. Data sanitization</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">sanitizeInput</span> = (<span class="hljs-params">req, res, next</span>) =&gt; {
+  <span class="hljs-comment">// Remove potentially dangerous characters</span>
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> key <span class="hljs-keyword">in</span> req.<span class="hljs-property">body</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> req.<span class="hljs-property">body</span>[key] === <span class="hljs-string">&#x27;string&#x27;</span>) {
+      req.<span class="hljs-property">body</span>[key] = req.<span class="hljs-property">body</span>[key]
+        .<span class="hljs-title function_">replace</span>(<span class="hljs-regexp">/&lt;script\b[^&lt;]*(?:(?!&lt;\/script&gt;)&lt;[^&lt;]*)*&lt;\/script&gt;/gi</span>, <span class="hljs-string">&#x27;&#x27;</span>) <span class="hljs-comment">// Remove scripts</span>
+        .<span class="hljs-title function_">trim</span>();
     }
   }
-  next();
+  <span class="hljs-title function_">next</span>();
 };
 
-router.post('/', sanitizeInput, createMovie);
+router.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/&#x27;</span>, sanitizeInput, createMovie);
 
-// 4. Authentication (placeholder)
-const authenticateUser = (req, res, next) =&gt; {
-  // Add authentication logic here
-  // For now, just continue
-  next();
+<span class="hljs-comment">// 4. Authentication (placeholder)</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">authenticateUser</span> = (<span class="hljs-params">req, res, next</span>) =&gt; {
+  <span class="hljs-comment">// Add authentication logic here</span>
+  <span class="hljs-comment">// For now, just continue</span>
+  <span class="hljs-title function_">next</span>();
 };
 
-router.post('/', authenticateUser, createMovie);
+router.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/&#x27;</span>, authenticateUser, createMovie);
 </code></pre>
 <hr>
 <h2 id="final-thoughts" tabindex="-1">Final Thoughts</h2>
@@ -1161,5 +1165,6 @@ How does proper validation and error handling in CREATE operations improve the u
 </div>
 <script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
 <script src="../assets/animations.js"></script>
+<script src="../assets/search.js"></script>
 </body>
 </html>

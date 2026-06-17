@@ -182,13 +182,13 @@ no side effects outside `weeks/` (it never writes into the source
 
 ### Heading-anchor slugging
 
-`build.js` defines its own `githubSlugify()` rather than using
+`build.js` defines its own `markdownSlugify()` rather than using
 `markdown-it-anchor`'s default slugify. The legacy `student.md` files hand-
-author in-page TOC links (e.g. `[Glossary](#glossary)`) against GitHub's
+author in-page TOC links (e.g. `[Glossary](#glossary)`) against the GitLab
 actual heading-slug algorithm. The default `markdown-it-anchor` slugify
 percent-encodes punctuation (producing IDs like `what-is-node.js%3F`), which
 does not match those hand-written links and silently breaks in-page
-navigation. `githubSlugify()` replicates the real algorithm — lowercase, strip
+navigation. `markdownSlugify()` replicates the algorithm — lowercase, strip
 an ASCII punctuation character class, spaces to hyphens — and was verified
 against all of Week 08's TOC links (0 of 18 unresolved after the fix). It
 covers ASCII punctuation only; see "Known edge cases" below.
@@ -259,8 +259,8 @@ to resolve before running the build on it, not something to force through.
   `classifyBlockquoteLead()`, it will fall through to the generic
   `callout--default` style rather than being miscategorized — safe, but
   worth a manual check per item 3 above.
-- **`githubSlugify()` only strips ASCII punctuation**, not the fuller Unicode
-  punctuation ranges real github-slugger handles. Every heading sampled
+- **`markdownSlugify()` only strips ASCII punctuation**, not the fuller Unicode
+  punctuation ranges the full GFM slug algorithm handles. Every heading sampled
   across this curriculum is plain ASCII, so this is a deliberate scope cut,
   not an oversight — but if a future week's heading contains e.g. an em-dash,
   curly quote, or non-Latin character, re-verify its TOC anchors resolve

@@ -14,6 +14,10 @@
 <div class="layout">
 <nav class="sidebar" aria-label="Course weeks">
 <div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="sidebar-search">
+<input type="search" id="sidebar-search-input" class="search-input" placeholder="&#xf002; Search lessons…" aria-label="Search lessons">
+<div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+</div>
 <div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
 <a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
 <a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
@@ -106,7 +110,7 @@
 <h2 id="starting-point" tabindex="-1">Starting Point</h2>
 <p>This lesson introduces server-side JavaScript with Node.js. We'll be moving from frontend React development to backend Node.js development.</p>
 <p>Navigate to the <code>week_08_nodejs_and_http/movie-buzz-backend</code> directory:</p>
-<pre><code class="language-bash">cd week_08_nodejs_and_http/movie-buzz-backend
+<pre class="hljs"><code><span class="hljs-built_in">cd</span> week_08_nodejs_and_http/movie-buzz-backend
 npm install
 node server.js
 </code></pre>
@@ -116,112 +120,112 @@ node server.js
 <p>Before building the Movie Buzz backend, let's start with simple Node.js examples to understand server-side JavaScript:</p>
 <h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-your-first-nodejs-script" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Your First Node.js Script</h3>
 <p>Create <code>hello.js</code>:</p>
-<pre><code class="language-javascript">// Simple Node.js script
-console.log('Hello from Node.js!');
-console.log('Current directory:', __dirname);
-console.log('Current file:', __filename);
+<pre class="hljs"><code><span class="hljs-comment">// Simple Node.js script</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Hello from Node.js!&#x27;</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Current directory:&#x27;</span>, __dirname);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Current file:&#x27;</span>, __filename);
 
-// Node.js has different global objects than browser
-console.log('Process ID:', process.pid);
-console.log('Node version:', process.version);
+<span class="hljs-comment">// Node.js has different global objects than browser</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Process ID:&#x27;</span>, process.<span class="hljs-property">pid</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Node version:&#x27;</span>, process.<span class="hljs-property">version</span>);
 </code></pre>
 <p>Run it:</p>
-<pre><code class="language-bash">node hello.js
+<pre class="hljs"><code>node hello.js
 </code></pre>
 <h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-working-with-files" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Working with Files</h3>
 <p>Create <code>file-example.js</code>:</p>
-<pre><code class="language-javascript">// Import the file system module
-const fs = require('fs');
+<pre class="hljs"><code><span class="hljs-comment">// Import the file system module</span>
+<span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;fs&#x27;</span>);
 
-// Read a file synchronously (blocking)
-try {
-  const data = fs.readFileSync('package.json', 'utf8');
-  console.log('File contents:', data);
-} catch (error) {
-  console.error('Error reading file:', error.message);
+<span class="hljs-comment">// Read a file synchronously (blocking)</span>
+<span class="hljs-keyword">try</span> {
+  <span class="hljs-keyword">const</span> data = fs.<span class="hljs-title function_">readFileSync</span>(<span class="hljs-string">&#x27;package.json&#x27;</span>, <span class="hljs-string">&#x27;utf8&#x27;</span>);
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;File contents:&#x27;</span>, data);
+} <span class="hljs-keyword">catch</span> (error) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error reading file:&#x27;</span>, error.<span class="hljs-property">message</span>);
 }
 
-// Write a file
-const message = 'Hello from Node.js file system!';
-fs.writeFileSync('output.txt', message);
-console.log('File written successfully!');
+<span class="hljs-comment">// Write a file</span>
+<span class="hljs-keyword">const</span> message = <span class="hljs-string">&#x27;Hello from Node.js file system!&#x27;</span>;
+fs.<span class="hljs-title function_">writeFileSync</span>(<span class="hljs-string">&#x27;output.txt&#x27;</span>, message);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;File written successfully!&#x27;</span>);
 
-// Read file asynchronously (non-blocking)
-fs.readFile('output.txt', 'utf8', (error, data) =&gt; {
-  if (error) {
-    console.error('Async read error:', error);
-  } else {
-    console.log('Async read result:', data);
+<span class="hljs-comment">// Read file asynchronously (non-blocking)</span>
+fs.<span class="hljs-title function_">readFile</span>(<span class="hljs-string">&#x27;output.txt&#x27;</span>, <span class="hljs-string">&#x27;utf8&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">error, data</span>) =&gt;</span> {
+  <span class="hljs-keyword">if</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Async read error:&#x27;</span>, error);
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Async read result:&#x27;</span>, data);
   }
 });
 </code></pre>
 <h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-creating-a-simple-http-server" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Creating a Simple HTTP Server</h3>
 <p>Create <code>simple-server.js</code>:</p>
-<pre><code class="language-javascript">// Import the http module
-const http = require('http');
+<pre class="hljs"><code><span class="hljs-comment">// Import the http module</span>
+<span class="hljs-keyword">const</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;http&#x27;</span>);
 
-// Create a simple server
-const server = http.createServer((req, res) =&gt; {
-  // Set response headers
-  res.writeHead(200, { 'Content-Type': 'text/html' });
+<span class="hljs-comment">// Create a simple server</span>
+<span class="hljs-keyword">const</span> server = http.<span class="hljs-title function_">createServer</span>(<span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-comment">// Set response headers</span>
+  res.<span class="hljs-title function_">writeHead</span>(<span class="hljs-number">200</span>, { <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;text/html&#x27;</span> });
 
-  // Send different responses based on URL
-  if (req.url === '/') {
-    res.end('&lt;h1&gt;Welcome to my Node.js server!&lt;/h1&gt;');
-  } else if (req.url === '/about') {
-    res.end('&lt;h1&gt;About Page&lt;/h1&gt;&lt;p&gt;This is a simple Node.js server&lt;/p&gt;');
-  } else {
-    res.writeHead(404);
-    res.end('&lt;h1&gt;Page Not Found&lt;/h1&gt;');
+  <span class="hljs-comment">// Send different responses based on URL</span>
+  <span class="hljs-keyword">if</span> (req.<span class="hljs-property">url</span> === <span class="hljs-string">&#x27;/&#x27;</span>) {
+    res.<span class="hljs-title function_">end</span>(<span class="hljs-string">&#x27;&lt;h1&gt;Welcome to my Node.js server!&lt;/h1&gt;&#x27;</span>);
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (req.<span class="hljs-property">url</span> === <span class="hljs-string">&#x27;/about&#x27;</span>) {
+    res.<span class="hljs-title function_">end</span>(<span class="hljs-string">&#x27;&lt;h1&gt;About Page&lt;/h1&gt;&lt;p&gt;This is a simple Node.js server&lt;/p&gt;&#x27;</span>);
+  } <span class="hljs-keyword">else</span> {
+    res.<span class="hljs-title function_">writeHead</span>(<span class="hljs-number">404</span>);
+    res.<span class="hljs-title function_">end</span>(<span class="hljs-string">&#x27;&lt;h1&gt;Page Not Found&lt;/h1&gt;&#x27;</span>);
   }
 });
 
-// Start the server
-const PORT = 3000;
-server.listen(PORT, () =&gt; {
-  console.log(`Server running at http://localhost:${PORT}`);
+<span class="hljs-comment">// Start the server</span>
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">PORT</span> = <span class="hljs-number">3000</span>;
+server.<span class="hljs-title function_">listen</span>(<span class="hljs-variable constant_">PORT</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Server running at http://localhost:<span class="hljs-subst">${PORT}</span>`</span>);
 });
 </code></pre>
 <p>Run it and visit <code>http://localhost:3000</code>:</p>
-<pre><code class="language-bash">node simple-server.js
+<pre class="hljs"><code>node simple-server.js
 </code></pre>
 <h3 class="step-heading" style="--organic-tilt:0deg" id="4step-4-working-with-modules" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Working with Modules</h3>
 <p>Create <code>math-utils.js</code>:</p>
-<pre><code class="language-javascript">// Simple module with utility functions
-function add(a, b) {
-  return a + b;
+<pre class="hljs"><code><span class="hljs-comment">// Simple module with utility functions</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">add</span>(<span class="hljs-params">a, b</span>) {
+  <span class="hljs-keyword">return</span> a + b;
 }
 
-function multiply(a, b) {
-  return a * b;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">multiply</span>(<span class="hljs-params">a, b</span>) {
+  <span class="hljs-keyword">return</span> a * b;
 }
 
-function divide(a, b) {
-  if (b === 0) {
-    throw new Error('Cannot divide by zero');
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">divide</span>(<span class="hljs-params">a, b</span>) {
+  <span class="hljs-keyword">if</span> (b === <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&#x27;Cannot divide by zero&#x27;</span>);
   }
-  return a / b;
+  <span class="hljs-keyword">return</span> a / b;
 }
 
-// Export functions for use in other files
-module.exports = {
+<span class="hljs-comment">// Export functions for use in other files</span>
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = {
   add,
   multiply,
   divide
 };
 </code></pre>
 <p>Create <code>use-math.js</code>:</p>
-<pre><code class="language-javascript">// Import our custom module
-const math = require('./math-utils');
+<pre class="hljs"><code><span class="hljs-comment">// Import our custom module</span>
+<span class="hljs-keyword">const</span> math = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./math-utils&#x27;</span>);
 
-console.log('2 + 3 =', math.add(2, 3));
-console.log('4 * 5 =', math.multiply(4, 5));
-console.log('10 / 2 =', math.divide(10, 2));
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;2 + 3 =&#x27;</span>, math.<span class="hljs-title function_">add</span>(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>));
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;4 * 5 =&#x27;</span>, math.<span class="hljs-title function_">multiply</span>(<span class="hljs-number">4</span>, <span class="hljs-number">5</span>));
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;10 / 2 =&#x27;</span>, math.<span class="hljs-title function_">divide</span>(<span class="hljs-number">10</span>, <span class="hljs-number">2</span>));
 
-try {
-  console.log('10 / 0 =', math.divide(10, 0));
-} catch (error) {
-  console.error('Math error:', error.message);
+<span class="hljs-keyword">try</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;10 / 0 =&#x27;</span>, math.<span class="hljs-title function_">divide</span>(<span class="hljs-number">10</span>, <span class="hljs-number">0</span>));
+} <span class="hljs-keyword">catch</span> (error) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Math error:&#x27;</span>, error.<span class="hljs-property">message</span>);
 }
 </code></pre>
 <blockquote class="callout callout--reflection-try" style="--tilt:0.2deg;--glow-intensity:0.88">
@@ -259,37 +263,37 @@ Why might it be advantageous to use the same language (JavaScript) for both fron
 <hr>
 <h2 id="setting-up-nodejs-development" tabindex="-1">Setting Up Node.js Development</h2>
 <p>First, let's initialize a new Node.js project:</p>
-<pre><code class="language-bash">npm init -y
+<pre class="hljs"><code>npm init -y
 </code></pre>
 <p>This creates a <code>package.json</code> file with default settings. Let's examine what was created:</p>
-<pre><code class="language-json">{
-  &quot;name&quot;: &quot;movie-buzz-backend&quot;,
-  &quot;version&quot;: &quot;1.0.0&quot;,
-  &quot;description&quot;: &quot;&quot;,
-  &quot;main&quot;: &quot;index.js&quot;,
-  &quot;scripts&quot;: {
-    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;
-  },
-  &quot;keywords&quot;: [],
-  &quot;author&quot;: &quot;&quot;,
-  &quot;license&quot;: &quot;ISC&quot;
-}
+<pre class="hljs"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;movie-buzz-backend&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1.0.0&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;main&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;index.js&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;test&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;keywords&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;author&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;license&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ISC&quot;</span>
+<span class="hljs-punctuation">}</span>
 </code></pre>
 <p>Let's add a start script to our package.json:</p>
-<pre><code class="language-json">{
-  &quot;name&quot;: &quot;movie-buzz-backend&quot;,
-  &quot;version&quot;: &quot;1.0.0&quot;,
-  &quot;description&quot;: &quot;Backend for Movie Buzz application&quot;,
-  &quot;main&quot;: &quot;server.js&quot;,
-  &quot;scripts&quot;: {
-    &quot;start&quot;: &quot;node server.js&quot;,
-    &quot;dev&quot;: &quot;nodemon server.js&quot;,
-    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;
-  },
-  &quot;keywords&quot;: [&quot;movies&quot;, &quot;backend&quot;, &quot;node&quot;],
-  &quot;author&quot;: &quot;Your Name&quot;,
-  &quot;license&quot;: &quot;ISC&quot;
-}
+<pre class="hljs"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;movie-buzz-backend&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1.0.0&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Backend for Movie Buzz application&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;main&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;server.js&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;start&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;node server.js&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;dev&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;nodemon server.js&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;test&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;keywords&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;movies&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;backend&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;node&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;author&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Your Name&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;license&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ISC&quot;</span>
+<span class="hljs-punctuation">}</span>
 </code></pre>
 <hr>
 <h2 id="nodejs-modules-and-require" tabindex="-1">Node.js Modules and require()</h2>
@@ -300,40 +304,40 @@ Why might it be advantageous to use the same language (JavaScript) for both fron
 <li><strong>Third-party modules</strong> (installed with npm)</li>
 </ol>
 <h3 id="using-built-in-modules" tabindex="-1">Using Built-in Modules</h3>
-<pre><code class="language-javascript">// Import the file system module
-const fs = require('fs');
+<pre class="hljs"><code><span class="hljs-comment">// Import the file system module</span>
+<span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;fs&#x27;</span>);
 
-// Import the path module for working with file paths
-const path = require('path');
+<span class="hljs-comment">// Import the path module for working with file paths</span>
+<span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>);
 
-// Use the modules
-console.log('Current directory:', __dirname);
-console.log('Current file:', __filename);
+<span class="hljs-comment">// Use the modules</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Current directory:&#x27;</span>, __dirname);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Current file:&#x27;</span>, __filename);
 </code></pre>
 <h3 id="creating-and-using-local-modules" tabindex="-1">Creating and Using Local Modules</h3>
 <p>Create a file called <code>utils.js</code>:</p>
-<pre><code class="language-javascript">// utils.js
-function formatMovieTitle(title) {
-  return title.toUpperCase();
+<pre class="hljs"><code><span class="hljs-comment">// utils.js</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">formatMovieTitle</span>(<span class="hljs-params">title</span>) {
+  <span class="hljs-keyword">return</span> title.<span class="hljs-title function_">toUpperCase</span>();
 }
 
-function calculateMovieAge(year) {
-  const currentYear = new Date().getFullYear();
-  return currentYear - year;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">calculateMovieAge</span>(<span class="hljs-params">year</span>) {
+  <span class="hljs-keyword">const</span> currentYear = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">getFullYear</span>();
+  <span class="hljs-keyword">return</span> currentYear - year;
 }
 
-// Export functions so they can be used in other files
-module.exports = {
+<span class="hljs-comment">// Export functions so they can be used in other files</span>
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = {
   formatMovieTitle,
   calculateMovieAge
 };
 </code></pre>
 <p>Now use it in another file:</p>
-<pre><code class="language-javascript">// main.js
-const { formatMovieTitle, calculateMovieAge } = require('./utils');
+<pre class="hljs"><code><span class="hljs-comment">// main.js</span>
+<span class="hljs-keyword">const</span> { formatMovieTitle, calculateMovieAge } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./utils&#x27;</span>);
 
-console.log(formatMovieTitle('the matrix')); // THE MATRIX
-console.log(calculateMovieAge(1999)); // Current year - 1999
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">formatMovieTitle</span>(<span class="hljs-string">&#x27;the matrix&#x27;</span>)); <span class="hljs-comment">// THE MATRIX</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">calculateMovieAge</span>(<span class="hljs-number">1999</span>)); <span class="hljs-comment">// Current year - 1999</span>
 </code></pre>
 <blockquote class="callout callout--reflection-consider" style="--tilt:-0.1deg;--glow-intensity:0.79">
 <div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
@@ -343,38 +347,38 @@ How does the module system help organize large applications? What problems does 
 <hr>
 <h2 id="file-system-operations" tabindex="-1">File System Operations</h2>
 <p>Node.js can read and write files using the <code>fs</code> module:</p>
-<pre><code class="language-javascript">const fs = require('fs');
+<pre class="hljs"><code><span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;fs&#x27;</span>);
 
-// Reading files synchronously (blocks execution)
-try {
-  const data = fs.readFileSync('data.txt', 'utf8');
-  console.log('File contents:', data);
-} catch (error) {
-  console.error('Error reading file:', error.message);
+<span class="hljs-comment">// Reading files synchronously (blocks execution)</span>
+<span class="hljs-keyword">try</span> {
+  <span class="hljs-keyword">const</span> data = fs.<span class="hljs-title function_">readFileSync</span>(<span class="hljs-string">&#x27;data.txt&#x27;</span>, <span class="hljs-string">&#x27;utf8&#x27;</span>);
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;File contents:&#x27;</span>, data);
+} <span class="hljs-keyword">catch</span> (error) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error reading file:&#x27;</span>, error.<span class="hljs-property">message</span>);
 }
 
-// Reading files asynchronously (non-blocking)
-fs.readFile('data.txt', 'utf8', (error, data) =&gt; {
-  if (error) {
-    console.error('Error reading file:', error.message);
-    return;
+<span class="hljs-comment">// Reading files asynchronously (non-blocking)</span>
+fs.<span class="hljs-title function_">readFile</span>(<span class="hljs-string">&#x27;data.txt&#x27;</span>, <span class="hljs-string">&#x27;utf8&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">error, data</span>) =&gt;</span> {
+  <span class="hljs-keyword">if</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error reading file:&#x27;</span>, error.<span class="hljs-property">message</span>);
+    <span class="hljs-keyword">return</span>;
   }
-  console.log('File contents:', data);
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;File contents:&#x27;</span>, data);
 });
 
-// Writing files
-const movieData = JSON.stringify({
-  name: &quot;The Matrix&quot;,
-  year: 1999,
-  director: &quot;The Wachowskis&quot;
-}, null, 2);
+<span class="hljs-comment">// Writing files</span>
+<span class="hljs-keyword">const</span> movieData = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>({
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;The Matrix&quot;</span>,
+  <span class="hljs-attr">year</span>: <span class="hljs-number">1999</span>,
+  <span class="hljs-attr">director</span>: <span class="hljs-string">&quot;The Wachowskis&quot;</span>
+}, <span class="hljs-literal">null</span>, <span class="hljs-number">2</span>);
 
-fs.writeFile('movie.json', movieData, 'utf8', (error) =&gt; {
-  if (error) {
-    console.error('Error writing file:', error.message);
-    return;
+fs.<span class="hljs-title function_">writeFile</span>(<span class="hljs-string">&#x27;movie.json&#x27;</span>, movieData, <span class="hljs-string">&#x27;utf8&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> {
+  <span class="hljs-keyword">if</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error writing file:&#x27;</span>, error.<span class="hljs-property">message</span>);
+    <span class="hljs-keyword">return</span>;
   }
-  console.log('File saved successfully!');
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;File saved successfully!&#x27;</span>);
 });
 </code></pre>
 <hr>
@@ -382,204 +386,204 @@ fs.writeFile('movie.json', movieData, 'utf8', (error) =&gt; {
 <p>Let's start building the backend for our Movie Buzz application.</p>
 <h3 id="project-structure" tabindex="-1">Project Structure</h3>
 <p>Create the following directory structure:</p>
-<pre><code class="language-bash">mkdir data models utils
-touch server.js data/movies.json models/Movie.js utils/fileUtils.js
+<pre class="hljs"><code><span class="hljs-built_in">mkdir</span> data models utils
+<span class="hljs-built_in">touch</span> server.js data/movies.json models/Movie.js utils/fileUtils.js
 </code></pre>
 <p>Your project should look like:</p>
-<pre><code>movie-buzz-backend/
+<pre class="hljs"><code>movie-buzz-backend/
 ├── data/
-│   └── movies.json
+│   └── movies<span class="hljs-selector-class">.json</span>
 ├── models/
-│   └── Movie.js
+│   └── Movie<span class="hljs-selector-class">.js</span>
 ├── utils/
-│   └── fileUtils.js
-├── package.json
-└── server.js
+│   └── fileUtils<span class="hljs-selector-class">.js</span>
+├── package<span class="hljs-selector-class">.json</span>
+└── server<span class="hljs-selector-class">.js</span>
 </code></pre>
 <h3 id="creating-movie-data-module" tabindex="-1">Creating Movie Data Module</h3>
 <p>First, let's create sample movie data in <code>data/movies.json</code>:</p>
-<pre><code class="language-json">[
-  {
-    &quot;id&quot;: 1,
-    &quot;name&quot;: &quot;The Matrix&quot;,
-    &quot;year&quot;: 1999,
-    &quot;rating&quot;: &quot;R&quot;,
-    &quot;length&quot;: &quot;136 minutes&quot;,
-    &quot;description&quot;: &quot;A computer hacker learns about the true nature of reality.&quot;,
-    &quot;genre&quot;: [&quot;Action&quot;, &quot;Sci-Fi&quot;],
-    &quot;director&quot;: &quot;The Wachowskis&quot;,
-    &quot;stars&quot;: [&quot;Keanu Reeves&quot;, &quot;Laurence Fishburne&quot;, &quot;Carrie-Anne Moss&quot;]
-  },
-  {
-    &quot;id&quot;: 2,
-    &quot;name&quot;: &quot;Inception&quot;,
-    &quot;year&quot;: 2010,
-    &quot;rating&quot;: &quot;PG-13&quot;,
-    &quot;length&quot;: &quot;148 minutes&quot;,
-    &quot;description&quot;: &quot;A thief who steals corporate secrets through dream-sharing technology.&quot;,
-    &quot;genre&quot;: [&quot;Action&quot;, &quot;Sci-Fi&quot;, &quot;Thriller&quot;],
-    &quot;director&quot;: &quot;Christopher Nolan&quot;,
-    &quot;stars&quot;: [&quot;Leonardo DiCaprio&quot;, &quot;Marion Cotillard&quot;, &quot;Tom Hardy&quot;]
-  },
-  {
-    &quot;id&quot;: 3,
-    &quot;name&quot;: &quot;Pulp Fiction&quot;,
-    &quot;year&quot;: 1994,
-    &quot;rating&quot;: &quot;R&quot;,
-    &quot;length&quot;: &quot;154 minutes&quot;,
-    &quot;description&quot;: &quot;The lives of two mob hitmen, a boxer, and other criminals intertwine in Los Angeles.&quot;,
-    &quot;genre&quot;: [&quot;Crime&quot;, &quot;Drama&quot;],
-    &quot;director&quot;: &quot;Quentin Tarantino&quot;,
-    &quot;stars&quot;: [&quot;John Travolta&quot;, &quot;Samuel L. Jackson&quot;, &quot;Uma Thurman&quot;]
-  }
-]
+<pre class="hljs"><code><span class="hljs-punctuation">[</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;The Matrix&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;year&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1999</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;rating&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;R&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;length&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;136 minutes&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;A computer hacker learns about the true nature of reality.&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;genre&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;Action&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;Sci-Fi&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;director&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;The Wachowskis&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;stars&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;Keanu Reeves&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;Laurence Fishburne&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;Carrie-Anne Moss&quot;</span><span class="hljs-punctuation">]</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Inception&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;year&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2010</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;rating&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;PG-13&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;length&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;148 minutes&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;A thief who steals corporate secrets through dream-sharing technology.&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;genre&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;Action&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;Sci-Fi&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;Thriller&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;director&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Christopher Nolan&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;stars&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;Leonardo DiCaprio&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;Marion Cotillard&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;Tom Hardy&quot;</span><span class="hljs-punctuation">]</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">3</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Pulp Fiction&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;year&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1994</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;rating&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;R&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;length&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;154 minutes&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;The lives of two mob hitmen, a boxer, and other criminals intertwine in Los Angeles.&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;genre&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;Crime&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;Drama&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;director&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Quentin Tarantino&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;stars&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;John Travolta&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;Samuel L. Jackson&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;Uma Thurman&quot;</span><span class="hljs-punctuation">]</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">]</span>
 </code></pre>
 <h3 id="building-server-utilities" tabindex="-1">Building Server Utilities</h3>
 <p>Create <code>utils/fileUtils.js</code>:</p>
-<pre><code class="language-javascript">const fs = require('fs');
-const path = require('path');
+<pre class="hljs"><code><span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;fs&#x27;</span>);
+<span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>);
 
-// Function to read JSON files
-function readJsonFile(filename) {
-  try {
-    const filePath = path.join(__dirname, '..', 'data', filename);
-    const data = fs.readFileSync(filePath, 'utf8');
-    return JSON.parse(data);
-  } catch (error) {
-    console.error(`Error reading file ${filename}:`, error.message);
-    return [];
+<span class="hljs-comment">// Function to read JSON files</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">readJsonFile</span>(<span class="hljs-params">filename</span>) {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> filePath = path.<span class="hljs-title function_">join</span>(__dirname, <span class="hljs-string">&#x27;..&#x27;</span>, <span class="hljs-string">&#x27;data&#x27;</span>, filename);
+    <span class="hljs-keyword">const</span> data = fs.<span class="hljs-title function_">readFileSync</span>(filePath, <span class="hljs-string">&#x27;utf8&#x27;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(data);
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">`Error reading file <span class="hljs-subst">${filename}</span>:`</span>, error.<span class="hljs-property">message</span>);
+    <span class="hljs-keyword">return</span> [];
   }
 }
 
-// Function to write JSON files
-function writeJsonFile(filename, data) {
-  try {
-    const filePath = path.join(__dirname, '..', 'data', filename);
-    const jsonData = JSON.stringify(data, null, 2);
-    fs.writeFileSync(filePath, jsonData, 'utf8');
-    return true;
-  } catch (error) {
-    console.error(`Error writing file ${filename}:`, error.message);
-    return false;
+<span class="hljs-comment">// Function to write JSON files</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">writeJsonFile</span>(<span class="hljs-params">filename, data</span>) {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> filePath = path.<span class="hljs-title function_">join</span>(__dirname, <span class="hljs-string">&#x27;..&#x27;</span>, <span class="hljs-string">&#x27;data&#x27;</span>, filename);
+    <span class="hljs-keyword">const</span> jsonData = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(data, <span class="hljs-literal">null</span>, <span class="hljs-number">2</span>);
+    fs.<span class="hljs-title function_">writeFileSync</span>(filePath, jsonData, <span class="hljs-string">&#x27;utf8&#x27;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">`Error writing file <span class="hljs-subst">${filename}</span>:`</span>, error.<span class="hljs-property">message</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
   }
 }
 
-module.exports = {
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = {
   readJsonFile,
   writeJsonFile
 };
 </code></pre>
 <p>Create a Movie model in <code>models/Movie.js</code>:</p>
-<pre><code class="language-javascript">const { readJsonFile, writeJsonFile } = require('../utils/fileUtils');
+<pre class="hljs"><code><span class="hljs-keyword">const</span> { readJsonFile, writeJsonFile } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;../utils/fileUtils&#x27;</span>);
 
-class Movie {
-  constructor(movieData) {
-    this.id = movieData.id;
-    this.name = movieData.name;
-    this.year = movieData.year;
-    this.rating = movieData.rating;
-    this.length = movieData.length;
-    this.description = movieData.description;
-    this.genre = movieData.genre;
-    this.director = movieData.director;
-    this.stars = movieData.stars;
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Movie</span> {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">movieData</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">id</span> = movieData.<span class="hljs-property">id</span>;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = movieData.<span class="hljs-property">name</span>;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">year</span> = movieData.<span class="hljs-property">year</span>;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">rating</span> = movieData.<span class="hljs-property">rating</span>;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">length</span> = movieData.<span class="hljs-property">length</span>;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">description</span> = movieData.<span class="hljs-property">description</span>;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">genre</span> = movieData.<span class="hljs-property">genre</span>;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">director</span> = movieData.<span class="hljs-property">director</span>;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">stars</span> = movieData.<span class="hljs-property">stars</span>;
   }
 
-  // Static method to get all movies
-  static getAll() {
-    return readJsonFile('movies.json');
+  <span class="hljs-comment">// Static method to get all movies</span>
+  <span class="hljs-keyword">static</span> <span class="hljs-title function_">getAll</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-title function_">readJsonFile</span>(<span class="hljs-string">&#x27;movies.json&#x27;</span>);
   }
 
-  // Static method to find a movie by ID
-  static findById(id) {
-    const movies = readJsonFile('movies.json');
-    return movies.find(movie =&gt; movie.id === parseInt(id));
+  <span class="hljs-comment">// Static method to find a movie by ID</span>
+  <span class="hljs-keyword">static</span> <span class="hljs-title function_">findById</span>(<span class="hljs-params">id</span>) {
+    <span class="hljs-keyword">const</span> movies = <span class="hljs-title function_">readJsonFile</span>(<span class="hljs-string">&#x27;movies.json&#x27;</span>);
+    <span class="hljs-keyword">return</span> movies.<span class="hljs-title function_">find</span>(<span class="hljs-function"><span class="hljs-params">movie</span> =&gt;</span> movie.<span class="hljs-property">id</span> === <span class="hljs-built_in">parseInt</span>(id));
   }
 
-  // Static method to get the next available ID
-  static getNextId() {
-    const movies = readJsonFile('movies.json');
-    if (movies.length === 0) return 1;
-    const maxId = Math.max(...movies.map(movie =&gt; movie.id));
-    return maxId + 1;
+  <span class="hljs-comment">// Static method to get the next available ID</span>
+  <span class="hljs-keyword">static</span> <span class="hljs-title function_">getNextId</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">const</span> movies = <span class="hljs-title function_">readJsonFile</span>(<span class="hljs-string">&#x27;movies.json&#x27;</span>);
+    <span class="hljs-keyword">if</span> (movies.<span class="hljs-property">length</span> === <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">const</span> maxId = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(...movies.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">movie</span> =&gt;</span> movie.<span class="hljs-property">id</span>));
+    <span class="hljs-keyword">return</span> maxId + <span class="hljs-number">1</span>;
   }
 
-  // Instance method to save a movie
-  save() {
-    const movies = readJsonFile('movies.json');
+  <span class="hljs-comment">// Instance method to save a movie</span>
+  <span class="hljs-title function_">save</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">const</span> movies = <span class="hljs-title function_">readJsonFile</span>(<span class="hljs-string">&#x27;movies.json&#x27;</span>);
     
-    if (!this.id) {
-      // New movie - assign ID
-      this.id = Movie.getNextId();
-      movies.push(this);
-    } else {
-      // Update existing movie
-      const index = movies.findIndex(movie =&gt; movie.id === this.id);
-      if (index !== -1) {
-        movies[index] = this;
-      } else {
-        movies.push(this);
+    <span class="hljs-keyword">if</span> (!<span class="hljs-variable language_">this</span>.<span class="hljs-property">id</span>) {
+      <span class="hljs-comment">// New movie - assign ID</span>
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">id</span> = <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">getNextId</span>();
+      movies.<span class="hljs-title function_">push</span>(<span class="hljs-variable language_">this</span>);
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-comment">// Update existing movie</span>
+      <span class="hljs-keyword">const</span> index = movies.<span class="hljs-title function_">findIndex</span>(<span class="hljs-function"><span class="hljs-params">movie</span> =&gt;</span> movie.<span class="hljs-property">id</span> === <span class="hljs-variable language_">this</span>.<span class="hljs-property">id</span>);
+      <span class="hljs-keyword">if</span> (index !== -<span class="hljs-number">1</span>) {
+        movies[index] = <span class="hljs-variable language_">this</span>;
+      } <span class="hljs-keyword">else</span> {
+        movies.<span class="hljs-title function_">push</span>(<span class="hljs-variable language_">this</span>);
       }
     }
     
-    return writeJsonFile('movies.json', movies);
+    <span class="hljs-keyword">return</span> <span class="hljs-title function_">writeJsonFile</span>(<span class="hljs-string">&#x27;movies.json&#x27;</span>, movies);
   }
 
-  // Static method to delete a movie
-  static delete(id) {
-    const movies = readJsonFile('movies.json');
-    const filteredMovies = movies.filter(movie =&gt; movie.id !== parseInt(id));
-    return writeJsonFile('movies.json', filteredMovies);
+  <span class="hljs-comment">// Static method to delete a movie</span>
+  <span class="hljs-keyword">static</span> <span class="hljs-title function_">delete</span>(<span class="hljs-params">id</span>) {
+    <span class="hljs-keyword">const</span> movies = <span class="hljs-title function_">readJsonFile</span>(<span class="hljs-string">&#x27;movies.json&#x27;</span>);
+    <span class="hljs-keyword">const</span> filteredMovies = movies.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">movie</span> =&gt;</span> movie.<span class="hljs-property">id</span> !== <span class="hljs-built_in">parseInt</span>(id));
+    <span class="hljs-keyword">return</span> <span class="hljs-title function_">writeJsonFile</span>(<span class="hljs-string">&#x27;movies.json&#x27;</span>, filteredMovies);
   }
 }
 
-module.exports = Movie;
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = <span class="hljs-title class_">Movie</span>;
 </code></pre>
 <p>Now create your main server file <code>server.js</code>:</p>
-<pre><code class="language-javascript">const Movie = require('./models/Movie');
+<pre class="hljs"><code><span class="hljs-keyword">const</span> <span class="hljs-title class_">Movie</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./models/Movie&#x27;</span>);
 
-// Test our Movie model
-console.log('=== Movie Buzz Backend ===');
+<span class="hljs-comment">// Test our Movie model</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;=== Movie Buzz Backend ===&#x27;</span>);
 
-// Get all movies
-console.log('All movies:');
-const allMovies = Movie.getAll();
-allMovies.forEach(movie =&gt; {
-  console.log(`- ${movie.name} (${movie.year})`);
+<span class="hljs-comment">// Get all movies</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;All movies:&#x27;</span>);
+<span class="hljs-keyword">const</span> allMovies = <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">getAll</span>();
+allMovies.<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">movie</span> =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`- <span class="hljs-subst">${movie.name}</span> (<span class="hljs-subst">${movie.year}</span>)`</span>);
 });
 
-// Find a specific movie
-console.log('\nFinding movie with ID 2:');
-const movie = Movie.findById(2);
-if (movie) {
-  console.log(`Found: ${movie.name} directed by ${movie.director}`);
-} else {
-  console.log('Movie not found');
+<span class="hljs-comment">// Find a specific movie</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;\nFinding movie with ID 2:&#x27;</span>);
+<span class="hljs-keyword">const</span> movie = <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">findById</span>(<span class="hljs-number">2</span>);
+<span class="hljs-keyword">if</span> (movie) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Found: <span class="hljs-subst">${movie.name}</span> directed by <span class="hljs-subst">${movie.director}</span>`</span>);
+} <span class="hljs-keyword">else</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Movie not found&#x27;</span>);
 }
 
-// Create a new movie
-console.log('\nCreating a new movie...');
-const newMovie = new Movie({
-  name: &quot;The Godfather&quot;,
-  year: 1972,
-  rating: &quot;R&quot;,
-  length: &quot;175 minutes&quot;,
-  description: &quot;The aging patriarch of an organized crime dynasty transfers control to his reluctant son.&quot;,
-  genre: [&quot;Crime&quot;, &quot;Drama&quot;],
-  director: &quot;Francis Ford Coppola&quot;,
-  stars: [&quot;Marlon Brando&quot;, &quot;Al Pacino&quot;, &quot;James Caan&quot;]
+<span class="hljs-comment">// Create a new movie</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;\nCreating a new movie...&#x27;</span>);
+<span class="hljs-keyword">const</span> newMovie = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Movie</span>({
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;The Godfather&quot;</span>,
+  <span class="hljs-attr">year</span>: <span class="hljs-number">1972</span>,
+  <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;R&quot;</span>,
+  <span class="hljs-attr">length</span>: <span class="hljs-string">&quot;175 minutes&quot;</span>,
+  <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;The aging patriarch of an organized crime dynasty transfers control to his reluctant son.&quot;</span>,
+  <span class="hljs-attr">genre</span>: [<span class="hljs-string">&quot;Crime&quot;</span>, <span class="hljs-string">&quot;Drama&quot;</span>],
+  <span class="hljs-attr">director</span>: <span class="hljs-string">&quot;Francis Ford Coppola&quot;</span>,
+  <span class="hljs-attr">stars</span>: [<span class="hljs-string">&quot;Marlon Brando&quot;</span>, <span class="hljs-string">&quot;Al Pacino&quot;</span>, <span class="hljs-string">&quot;James Caan&quot;</span>]
 });
 
-if (newMovie.save()) {
-  console.log(`Successfully saved: ${newMovie.name} with ID ${newMovie.id}`);
-} else {
-  console.log('Failed to save movie');
+<span class="hljs-keyword">if</span> (newMovie.<span class="hljs-title function_">save</span>()) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Successfully saved: <span class="hljs-subst">${newMovie.name}</span> with ID <span class="hljs-subst">${newMovie.id}</span>`</span>);
+} <span class="hljs-keyword">else</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Failed to save movie&#x27;</span>);
 }
 
-console.log('\nBackend operations complete!');
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;\nBackend operations complete!&#x27;</span>);
 </code></pre>
 <p>Test your backend:</p>
-<pre><code class="language-bash">node server.js
+<pre class="hljs"><code>node server.js
 </code></pre>
 <hr>
 <h2 id="introduction-to-http-module" tabindex="-1">Introduction to HTTP Module</h2>
@@ -595,84 +599,84 @@ console.log('\nBackend operations complete!');
 </ul>
 <h3 id="making-http-requests-with-nodejs" tabindex="-1">Making HTTP Requests with Node.js</h3>
 <p>Let's explore how Node.js can make HTTP requests to external APIs:</p>
-<pre><code class="language-javascript">// http-client.js
-const http = require('http');
+<pre class="hljs"><code><span class="hljs-comment">// http-client.js</span>
+<span class="hljs-keyword">const</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;http&#x27;</span>);
 
-// Function to make a GET request
-function makeHttpRequest(hostname, path, callback) {
-  const options = {
-    hostname: hostname,
-    port: 80,
-    path: path,
-    method: 'GET'
+<span class="hljs-comment">// Function to make a GET request</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">makeHttpRequest</span>(<span class="hljs-params">hostname, path, callback</span>) {
+  <span class="hljs-keyword">const</span> options = {
+    <span class="hljs-attr">hostname</span>: hostname,
+    <span class="hljs-attr">port</span>: <span class="hljs-number">80</span>,
+    <span class="hljs-attr">path</span>: path,
+    <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;GET&#x27;</span>
   };
 
-  const request = http.request(options, (response) =&gt; {
-    let data = '';
+  <span class="hljs-keyword">const</span> request = http.<span class="hljs-title function_">request</span>(options, <span class="hljs-function">(<span class="hljs-params">response</span>) =&gt;</span> {
+    <span class="hljs-keyword">let</span> data = <span class="hljs-string">&#x27;&#x27;</span>;
     
-    // Collect data chunks
-    response.on('data', (chunk) =&gt; {
+    <span class="hljs-comment">// Collect data chunks</span>
+    response.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">chunk</span>) =&gt;</span> {
       data += chunk;
     });
     
-    // Handle complete response
-    response.on('end', () =&gt; {
-      console.log('Response received:');
-      console.log('Status Code:', response.statusCode);
-      console.log('Data:', data);
+    <span class="hljs-comment">// Handle complete response</span>
+    response.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;end&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Response received:&#x27;</span>);
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Status Code:&#x27;</span>, response.<span class="hljs-property">statusCode</span>);
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Data:&#x27;</span>, data);
       
-      if (callback) {
-        callback(null, data);
+      <span class="hljs-keyword">if</span> (callback) {
+        <span class="hljs-title function_">callback</span>(<span class="hljs-literal">null</span>, data);
       }
     });
   });
 
-  // Handle request errors
-  request.on('error', (error) =&gt; {
-    console.error('Request error:', error.message);
-    if (callback) {
-      callback(error, null);
+  <span class="hljs-comment">// Handle request errors</span>
+  request.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;error&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Request error:&#x27;</span>, error.<span class="hljs-property">message</span>);
+    <span class="hljs-keyword">if</span> (callback) {
+      <span class="hljs-title function_">callback</span>(error, <span class="hljs-literal">null</span>);
     }
   });
 
-  // Send the request
-  request.end();
+  <span class="hljs-comment">// Send the request</span>
+  request.<span class="hljs-title function_">end</span>();
 }
 
-// Example: Get data from a public API
-console.log('Making HTTP request to a public API...');
-makeHttpRequest('jsonplaceholder.typicode.com', '/posts/1', (error, data) =&gt; {
-  if (error) {
-    console.error('Failed to get data:', error.message);
-  } else {
-    console.log('Successfully retrieved data!');
-    try {
-      const post = JSON.parse(data);
-      console.log('Post title:', post.title);
-    } catch (parseError) {
-      console.error('Failed to parse JSON:', parseError.message);
+<span class="hljs-comment">// Example: Get data from a public API</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Making HTTP request to a public API...&#x27;</span>);
+<span class="hljs-title function_">makeHttpRequest</span>(<span class="hljs-string">&#x27;jsonplaceholder.typicode.com&#x27;</span>, <span class="hljs-string">&#x27;/posts/1&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">error, data</span>) =&gt;</span> {
+  <span class="hljs-keyword">if</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Failed to get data:&#x27;</span>, error.<span class="hljs-property">message</span>);
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Successfully retrieved data!&#x27;</span>);
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-keyword">const</span> post = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(data);
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Post title:&#x27;</span>, post.<span class="hljs-property">title</span>);
+    } <span class="hljs-keyword">catch</span> (parseError) {
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Failed to parse JSON:&#x27;</span>, parseError.<span class="hljs-property">message</span>);
     }
   }
 });
 </code></pre>
 <h3 id="creating-a-simple-http-server" tabindex="-1">Creating a Simple HTTP Server</h3>
 <p>The <code>http</code> module can also create servers. Here's a basic example:</p>
-<pre><code class="language-javascript">// simple-server.js
-const http = require('http');
+<pre class="hljs"><code><span class="hljs-comment">// simple-server.js</span>
+<span class="hljs-keyword">const</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;http&#x27;</span>);
 
-const server = http.createServer((request, response) =&gt; {
-  console.log(`${request.method} request to ${request.url}`);
+<span class="hljs-keyword">const</span> server = http.<span class="hljs-title function_">createServer</span>(<span class="hljs-function">(<span class="hljs-params">request, response</span>) =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`<span class="hljs-subst">${request.method}</span> request to <span class="hljs-subst">${request.url}</span>`</span>);
   
-  // Set response headers
-  response.writeHead(200, { 'Content-Type': 'text/html' });
+  <span class="hljs-comment">// Set response headers</span>
+  response.<span class="hljs-title function_">writeHead</span>(<span class="hljs-number">200</span>, { <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;text/html&#x27;</span> });
   
-  // Send response
-  response.end('&lt;h1&gt;Hello from Node.js HTTP Server!&lt;/h1&gt;');
+  <span class="hljs-comment">// Send response</span>
+  response.<span class="hljs-title function_">end</span>(<span class="hljs-string">&#x27;&lt;h1&gt;Hello from Node.js HTTP Server!&lt;/h1&gt;&#x27;</span>);
 });
 
-const PORT = 3000;
-server.listen(PORT, () =&gt; {
-  console.log(`Simple HTTP server running on http://localhost:${PORT}`);
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">PORT</span> = <span class="hljs-number">3000</span>;
+server.<span class="hljs-title function_">listen</span>(<span class="hljs-variable constant_">PORT</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Simple HTTP server running on http://localhost:<span class="hljs-subst">${PORT}</span>`</span>);
 });
 </code></pre>
 <h3 id="why-learn-http-now" tabindex="-1">Why Learn HTTP Now?</h3>
@@ -691,60 +695,60 @@ How might understanding HTTP requests help you when connecting a React frontend 
 <hr>
 <h2 id="command-line-arguments" tabindex="-1">Command Line Arguments</h2>
 <p>Node.js can read command line arguments through <code>process.argv</code>:</p>
-<pre><code class="language-javascript">// command-line.js
-console.log('Command line arguments:');
-console.log(process.argv);
+<pre class="hljs"><code><span class="hljs-comment">// command-line.js</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Command line arguments:&#x27;</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(process.<span class="hljs-property">argv</span>);
 
-// Get arguments after the script name
-const args = process.argv.slice(2);
-console.log('User arguments:', args);
+<span class="hljs-comment">// Get arguments after the script name</span>
+<span class="hljs-keyword">const</span> args = process.<span class="hljs-property">argv</span>.<span class="hljs-title function_">slice</span>(<span class="hljs-number">2</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;User arguments:&#x27;</span>, args);
 
-// Example usage: node command-line.js search &quot;The Matrix&quot;
-if (args[0] === 'search' &amp;&amp; args[1]) {
-  const searchTerm = args[1];
-  const Movie = require('./models/Movie');
+<span class="hljs-comment">// Example usage: node command-line.js search &quot;The Matrix&quot;</span>
+<span class="hljs-keyword">if</span> (args[<span class="hljs-number">0</span>] === <span class="hljs-string">&#x27;search&#x27;</span> &amp;&amp; args[<span class="hljs-number">1</span>]) {
+  <span class="hljs-keyword">const</span> searchTerm = args[<span class="hljs-number">1</span>];
+  <span class="hljs-keyword">const</span> <span class="hljs-title class_">Movie</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./models/Movie&#x27;</span>);
   
-  const movies = Movie.getAll();
-  const results = movies.filter(movie =&gt; 
-    movie.name.toLowerCase().includes(searchTerm.toLowerCase())
+  <span class="hljs-keyword">const</span> movies = <span class="hljs-title class_">Movie</span>.<span class="hljs-title function_">getAll</span>();
+  <span class="hljs-keyword">const</span> results = movies.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">movie</span> =&gt;</span> 
+    movie.<span class="hljs-property">name</span>.<span class="hljs-title function_">toLowerCase</span>().<span class="hljs-title function_">includes</span>(searchTerm.<span class="hljs-title function_">toLowerCase</span>())
   );
   
-  console.log(`Found ${results.length} movies matching &quot;${searchTerm}&quot;:`);
-  results.forEach(movie =&gt; console.log(`- ${movie.name}`));
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Found <span class="hljs-subst">${results.length}</span> movies matching &quot;<span class="hljs-subst">${searchTerm}</span>&quot;:`</span>);
+  results.<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">movie</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`- <span class="hljs-subst">${movie.name}</span>`</span>));
 }
 </code></pre>
 <hr>
 <h2 id="asynchronous-programming-basics" tabindex="-1">Asynchronous Programming Basics</h2>
 <p>JavaScript in Node.js is asynchronous and event-driven. Here's a basic introduction:</p>
-<pre><code class="language-javascript">// Synchronous (blocking) - not recommended for production
-console.log('Start');
-const data = require('./data/movies.json');
-console.log('Data loaded');
-console.log('End');
+<pre class="hljs"><code><span class="hljs-comment">// Synchronous (blocking) - not recommended for production</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Start&#x27;</span>);
+<span class="hljs-keyword">const</span> data = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./data/movies.json&#x27;</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Data loaded&#x27;</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;End&#x27;</span>);
 
-// Asynchronous (non-blocking) - recommended
-console.log('Start');
+<span class="hljs-comment">// Asynchronous (non-blocking) - recommended</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Start&#x27;</span>);
 
-setTimeout(() =&gt; {
-  console.log('This runs after 2 seconds');
-}, 2000);
+<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;This runs after 2 seconds&#x27;</span>);
+}, <span class="hljs-number">2000</span>);
 
-console.log('End - this runs before the timeout');
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;End - this runs before the timeout&#x27;</span>);
 
-// Using callbacks for file operations
-const fs = require('fs');
+<span class="hljs-comment">// Using callbacks for file operations</span>
+<span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;fs&#x27;</span>);
 
-fs.readFile('./data/movies.json', 'utf8', (error, data) =&gt; {
-  if (error) {
-    console.error('Error:', error);
-    return;
+fs.<span class="hljs-title function_">readFile</span>(<span class="hljs-string">&#x27;./data/movies.json&#x27;</span>, <span class="hljs-string">&#x27;utf8&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">error, data</span>) =&gt;</span> {
+  <span class="hljs-keyword">if</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error:&#x27;</span>, error);
+    <span class="hljs-keyword">return</span>;
   }
   
-  const movies = JSON.parse(data);
-  console.log(`Loaded ${movies.length} movies asynchronously`);
+  <span class="hljs-keyword">const</span> movies = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(data);
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Loaded <span class="hljs-subst">${movies.length}</span> movies asynchronously`</span>);
 });
 
-console.log('File read started - this runs before the file is loaded');
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;File read started - this runs before the file is loaded&#x27;</span>);
 </code></pre>
 <hr>
 <h2 id="final-thoughts" tabindex="-1">Final Thoughts</h2>
@@ -787,5 +791,6 @@ How does this backend structure prepare us for scaling to a real database? What 
 </div>
 <script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
 <script src="../assets/animations.js"></script>
+<script src="../assets/search.js"></script>
 </body>
 </html>

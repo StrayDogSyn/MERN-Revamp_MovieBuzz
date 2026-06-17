@@ -14,6 +14,10 @@
 <div class="layout">
 <nav class="sidebar" aria-label="Course weeks">
 <div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="sidebar-search">
+<input type="search" id="sidebar-search-input" class="search-input" placeholder="&#xf002; Search lessons…" aria-label="Search lessons">
+<div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+</div>
 <div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
 <a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
 <a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
@@ -85,28 +89,28 @@
 <hr>
 <h2 id="🚀-getting-started" tabindex="-1">🚀 Getting Started</h2>
 <h3 id="step-1-installation" tabindex="-1"><strong>Step 1: Installation</strong></h3>
-<pre><code class="language-bash"># Navigate to the testing suite
-cd week_optional_testing_suite
+<pre class="hljs"><code><span class="hljs-comment"># Navigate to the testing suite</span>
+<span class="hljs-built_in">cd</span> week_optional_testing_suite
 
-# Install testing dependencies
+<span class="hljs-comment"># Install testing dependencies</span>
 npm install
 </code></pre>
 <h3 id="step-2-start-your-application" tabindex="-1"><strong>Step 2: Start Your Application</strong></h3>
 <p>Open three terminal windows:</p>
 <p><strong>Terminal 1 - Database:</strong></p>
-<pre><code class="language-bash">mongod
+<pre class="hljs"><code>mongod
 </code></pre>
 <p><strong>Terminal 2 - Backend Server:</strong></p>
-<pre><code class="language-bash">cd week_16_frontend_backend_integration/movie-buzz-fullstack/server
+<pre class="hljs"><code><span class="hljs-built_in">cd</span> week_16_frontend_backend_integration/movie-buzz-fullstack/server
 npm start
 </code></pre>
 <p><strong>Terminal 3 - Frontend App:</strong></p>
-<pre><code class="language-bash">cd week_16_frontend_backend_integration/movie-buzz-fullstack/client
+<pre class="hljs"><code><span class="hljs-built_in">cd</span> week_16_frontend_backend_integration/movie-buzz-fullstack/client
 npm start
 </code></pre>
 <h3 id="step-3-run-your-first-test" tabindex="-1"><strong>Step 3: Run Your First Test</strong></h3>
-<pre><code class="language-bash">cd week_optional_testing_suite
-npm test
+<pre class="hljs"><code><span class="hljs-built_in">cd</span> week_optional_testing_suite
+npm <span class="hljs-built_in">test</span>
 </code></pre>
 <p><strong>What should happen</strong>: You'll see tests running and results appearing. Green checkmarks (✅) mean tests passed, red X's (❌) mean something needs fixing.</p>
 <hr>
@@ -121,7 +125,7 @@ npm test
 <li>Does it handle errors properly?</li>
 </ul>
 <p><strong>Run only API tests:</strong></p>
-<pre><code class="language-bash">npm run test:api
+<pre class="hljs"><code>npm run <span class="hljs-built_in">test</span>:api
 </code></pre>
 <h3 id="end-to-end-tests---testing-user-experience" tabindex="-1"><strong>End-to-End Tests - Testing User Experience</strong></h3>
 <p>These tests simulate a real person using your app:</p>
@@ -133,7 +137,7 @@ npm test
 <li>What happens when things go wrong?</li>
 </ul>
 <p><strong>Run only E2E tests:</strong></p>
-<pre><code class="language-bash">npm run test:e2e
+<pre class="hljs"><code>npm run <span class="hljs-built_in">test</span>:e2e
 </code></pre>
 <h3 id="integration-tests---testing-advanced-features" tabindex="-1"><strong>Integration Tests - Testing Advanced Features</strong></h3>
 <p>These tests check your search/filter/sort functionality:</p>
@@ -145,26 +149,26 @@ npm test
 <li>Are results counted correctly?</li>
 </ul>
 <p><strong>Run only integration tests:</strong></p>
-<pre><code class="language-bash">npm run test:integration
+<pre class="hljs"><code>npm run <span class="hljs-built_in">test</span>:integration
 </code></pre>
 <hr>
 <h2 id="📊-reading-test-results" tabindex="-1">📊 Reading Test Results</h2>
 <h3 id="success-output-✅" tabindex="-1"><strong>Success Output</strong> ✅</h3>
-<pre><code>✓ should retrieve all movies (45ms)
-✓ should create a new movie with valid data (123ms)
-✓ should filter movies by genre (89ms)
+<pre class="hljs"><code>✓ should retrieve <span class="hljs-keyword">all</span> movies (<span class="hljs-number">45</span>ms)
+✓ should <span class="hljs-keyword">create</span> a <span class="hljs-built_in">new</span> movie <span class="hljs-keyword">with</span> <span class="hljs-keyword">valid</span> data (<span class="hljs-number">123</span>ms)
+✓ should <span class="hljs-keyword">filter</span> movies <span class="hljs-keyword">by</span> genre (<span class="hljs-number">89</span>ms)
 </code></pre>
 <p><strong>Meaning</strong>: Your code is working perfectly!</p>
 <h3 id="failure-output-❌" tabindex="-1"><strong>Failure Output</strong> ❌</h3>
-<pre><code>✗ should search movies by title (234ms)
+<pre class="hljs"><code>✗ should <span class="hljs-keyword">search</span> movies <span class="hljs-keyword">by</span> title (<span class="hljs-number">234</span>ms)
   Expected: Movies containing &quot;matrix&quot;
-  Received: No movies found
+  Received: <span class="hljs-keyword">No</span> movies <span class="hljs-built_in">found</span>
 </code></pre>
 <p><strong>Meaning</strong>: Something needs to be fixed. The test tells you what went wrong.</p>
 <h3 id="test-summary" tabindex="-1"><strong>Test Summary</strong></h3>
-<pre><code>Test Suites: 4 passed, 0 failed, 4 total
+<pre class="hljs"><code><span class="hljs-keyword">Test </span>Suites: 4 passed, 0 failed, 4 total
 Tests:       23 passed, 0 failed, 23 total
-Time:        1.234s
+<span class="hljs-keyword">Time:</span>        1.234s
 </code></pre>
 <p><strong>Goal</strong>: All tests passed = Portfolio ready! 🎉</p>
 <hr>
@@ -172,31 +176,31 @@ Time:        1.234s
 <h3 id="cannot-connect-to-mongodb" tabindex="-1"><strong>&quot;Cannot connect to MongoDB&quot;</strong></h3>
 <p><strong>Problem</strong>: Database isn't running
 <strong>Solution</strong>:</p>
-<pre><code class="language-bash">mongod
+<pre class="hljs"><code>mongod
 </code></pre>
 <p>Make sure MongoDB starts successfully before running tests.</p>
 <h3 id="api-endpoint-not-found" tabindex="-1"><strong>&quot;API endpoint not found&quot;</strong></h3>
 <p><strong>Problem</strong>: Backend server isn't running or wrong port
 <strong>Solution</strong>:</p>
-<pre><code class="language-bash">cd week_16_frontend_backend_integration/movie-buzz-fullstack/server
+<pre class="hljs"><code><span class="hljs-built_in">cd</span> week_16_frontend_backend_integration/movie-buzz-fullstack/server
 npm start
 </code></pre>
 <p>Should show &quot;Server running on port 4000&quot;</p>
 <h3 id="page-failed-to-load" tabindex="-1"><strong>&quot;Page failed to load&quot;</strong></h3>
 <p><strong>Problem</strong>: Frontend React app isn't running
 <strong>Solution</strong>:</p>
-<pre><code class="language-bash">cd week_16_frontend_backend_integration/movie-buzz-fullstack/client
+<pre class="hljs"><code><span class="hljs-built_in">cd</span> week_16_frontend_backend_integration/movie-buzz-fullstack/client
 npm start
 </code></pre>
 <p>Should show &quot;App running on port 3000&quot;</p>
 <h3 id="moviestarstolowercase-is-not-a-function" tabindex="-1"><strong>&quot;movie.stars.toLowerCase is not a function&quot;</strong></h3>
 <p><strong>Problem</strong>: Array fields not handled correctly in your code
 <strong>Solution</strong>: Check that your components handle arrays properly:</p>
-<pre><code class="language-javascript">// Wrong
-movie.stars.toLowerCase()
+<pre class="hljs"><code><span class="hljs-comment">// Wrong</span>
+movie.<span class="hljs-property">stars</span>.<span class="hljs-title function_">toLowerCase</span>()
 
-// Right  
-movie.stars.some(star =&gt; star.toLowerCase().includes(searchTerm))
+<span class="hljs-comment">// Right  </span>
+movie.<span class="hljs-property">stars</span>.<span class="hljs-title function_">some</span>(<span class="hljs-function"><span class="hljs-params">star</span> =&gt;</span> star.<span class="hljs-title function_">toLowerCase</span>().<span class="hljs-title function_">includes</span>(searchTerm))
 </code></pre>
 <h3 id="searchfilter-tests-failing" tabindex="-1"><strong>Search/Filter Tests Failing</strong></h3>
 <p><strong>Problem</strong>: Advanced features not working with API data
@@ -332,5 +336,6 @@ movie.stars.some(star =&gt; star.toLowerCase().includes(searchTerm))
 </div>
 <script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
 <script src="../assets/animations.js"></script>
+<script src="../assets/search.js"></script>
 </body>
 </html>

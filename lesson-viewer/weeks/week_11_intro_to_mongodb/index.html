@@ -14,6 +14,10 @@
 <div class="layout">
 <nav class="sidebar" aria-label="Course weeks">
 <div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="sidebar-search">
+<input type="search" id="sidebar-search-input" class="search-input" placeholder="&#xf002; Search lessons…" aria-label="Search lessons">
+<div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+</div>
 <div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
 <a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
 <a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
@@ -122,165 +126,165 @@
 <p>Before working with Movie Buzz database, let's understand MongoDB with simple examples:</p>
 <h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-understanding-documents-vs-tables" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>Understanding Documents vs Tables</h3>
 <p><strong>Traditional SQL Table (Users):</strong></p>
-<pre><code class="language-sql">CREATE TABLE users (
-  id INT PRIMARY KEY,
-  name VARCHAR(50),
-  email VARCHAR(100),
-  age INT
+<pre class="hljs"><code><span class="hljs-keyword">CREATE TABLE</span> users (
+  id <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY KEY</span>,
+  name <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">50</span>),
+  email <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>),
+  age <span class="hljs-type">INT</span>
 );
 
-INSERT INTO users VALUES (1, 'John', 'john@email.com', 25);
+<span class="hljs-keyword">INSERT INTO</span> users <span class="hljs-keyword">VALUES</span> (<span class="hljs-number">1</span>, <span class="hljs-string">&#x27;John&#x27;</span>, <span class="hljs-string">&#x27;john@email.com&#x27;</span>, <span class="hljs-number">25</span>);
 </code></pre>
 <p><strong>MongoDB Document (Users Collection):</strong></p>
-<pre><code class="language-javascript">// MongoDB stores data as documents (like JSON objects)
+<pre class="hljs"><code><span class="hljs-comment">// MongoDB stores data as documents (like JSON objects)</span>
 {
-  _id: ObjectId(&quot;64a1b2c3d4e5f6789abcdef0&quot;),
-  name: &quot;John&quot;,
-  email: &quot;john@email.com&quot;,
-  age: 25,
-  // MongoDB allows flexible fields
-  hobbies: [&quot;reading&quot;, &quot;gaming&quot;],
-  address: {
-    street: &quot;123 Main St&quot;,
-    city: &quot;Boston&quot;
+  <span class="hljs-attr">_id</span>: <span class="hljs-title class_">ObjectId</span>(<span class="hljs-string">&quot;64a1b2c3d4e5f6789abcdef0&quot;</span>),
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;John&quot;</span>,
+  <span class="hljs-attr">email</span>: <span class="hljs-string">&quot;john@email.com&quot;</span>,
+  <span class="hljs-attr">age</span>: <span class="hljs-number">25</span>,
+  <span class="hljs-comment">// MongoDB allows flexible fields</span>
+  <span class="hljs-attr">hobbies</span>: [<span class="hljs-string">&quot;reading&quot;</span>, <span class="hljs-string">&quot;gaming&quot;</span>],
+  <span class="hljs-attr">address</span>: {
+    <span class="hljs-attr">street</span>: <span class="hljs-string">&quot;123 Main St&quot;</span>,
+    <span class="hljs-attr">city</span>: <span class="hljs-string">&quot;Boston&quot;</span>
   }
 }
 </code></pre>
 <h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-basic-mongodb-shell-commands" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Basic MongoDB Shell Commands</h3>
 <p>Open your MongoDB shell and try these commands:</p>
-<pre><code class="language-javascript">// Switch to a practice database
+<pre class="hljs"><code><span class="hljs-comment">// Switch to a practice database</span>
 use practice_db
 
-// Insert a simple document
-db.students.insertOne({
-  name: &quot;Alice&quot;,
-  grade: &quot;A&quot;,
-  subjects: [&quot;Math&quot;, &quot;Science&quot;, &quot;History&quot;]
+<span class="hljs-comment">// Insert a simple document</span>
+db.<span class="hljs-property">students</span>.<span class="hljs-title function_">insertOne</span>({
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Alice&quot;</span>,
+  <span class="hljs-attr">grade</span>: <span class="hljs-string">&quot;A&quot;</span>,
+  <span class="hljs-attr">subjects</span>: [<span class="hljs-string">&quot;Math&quot;</span>, <span class="hljs-string">&quot;Science&quot;</span>, <span class="hljs-string">&quot;History&quot;</span>]
 })
 
-// Insert multiple documents
-db.students.insertMany([
-  { name: &quot;Bob&quot;, grade: &quot;B&quot;, subjects: [&quot;Math&quot;, &quot;Art&quot;] },
-  { name: &quot;Carol&quot;, grade: &quot;A&quot;, subjects: [&quot;Science&quot;, &quot;Math&quot;, &quot;English&quot;] }
+<span class="hljs-comment">// Insert multiple documents</span>
+db.<span class="hljs-property">students</span>.<span class="hljs-title function_">insertMany</span>([
+  { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Bob&quot;</span>, <span class="hljs-attr">grade</span>: <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-attr">subjects</span>: [<span class="hljs-string">&quot;Math&quot;</span>, <span class="hljs-string">&quot;Art&quot;</span>] },
+  { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Carol&quot;</span>, <span class="hljs-attr">grade</span>: <span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-attr">subjects</span>: [<span class="hljs-string">&quot;Science&quot;</span>, <span class="hljs-string">&quot;Math&quot;</span>, <span class="hljs-string">&quot;English&quot;</span>] }
 ])
 
-// Find all documents
-db.students.find()
+<span class="hljs-comment">// Find all documents</span>
+db.<span class="hljs-property">students</span>.<span class="hljs-title function_">find</span>()
 
-// Find documents with pretty formatting
-db.students.find().pretty()
+<span class="hljs-comment">// Find documents with pretty formatting</span>
+db.<span class="hljs-property">students</span>.<span class="hljs-title function_">find</span>().<span class="hljs-title function_">pretty</span>()
 
-// Find specific documents
-db.students.find({ grade: &quot;A&quot; })
-db.students.find({ name: &quot;Bob&quot; })
+<span class="hljs-comment">// Find specific documents</span>
+db.<span class="hljs-property">students</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">grade</span>: <span class="hljs-string">&quot;A&quot;</span> })
+db.<span class="hljs-property">students</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Bob&quot;</span> })
 
-// Find documents with array elements
-db.students.find({ subjects: &quot;Math&quot; })
+<span class="hljs-comment">// Find documents with array elements</span>
+db.<span class="hljs-property">students</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">subjects</span>: <span class="hljs-string">&quot;Math&quot;</span> })
 
-// Count documents
-db.students.countDocuments()
-db.students.countDocuments({ grade: &quot;A&quot; })
+<span class="hljs-comment">// Count documents</span>
+db.<span class="hljs-property">students</span>.<span class="hljs-title function_">countDocuments</span>()
+db.<span class="hljs-property">students</span>.<span class="hljs-title function_">countDocuments</span>({ <span class="hljs-attr">grade</span>: <span class="hljs-string">&quot;A&quot;</span> })
 </code></pre>
 <h3 class="step-heading" style="--organic-tilt:0.2deg" id="3step-3-working-with-different-data-types" tabindex="-1"><span class="step-badge" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Working with Different Data Types</h3>
-<pre><code class="language-javascript">// Switch to sample database
+<pre class="hljs"><code><span class="hljs-comment">// Switch to sample database</span>
 use sample_db
 
-// Insert document with various data types
-db.products.insertOne({
-  name: &quot;Laptop&quot;,                    // String
-  price: 999.99,                     // Number
-  inStock: true,                     // Boolean
-  tags: [&quot;electronics&quot;, &quot;computer&quot;], // Array
-  specs: {                           // Embedded object
-    cpu: &quot;Intel i7&quot;,
-    ram: &quot;16GB&quot;,
-    storage: &quot;512GB SSD&quot;
+<span class="hljs-comment">// Insert document with various data types</span>
+db.<span class="hljs-property">products</span>.<span class="hljs-title function_">insertOne</span>({
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Laptop&quot;</span>,                    <span class="hljs-comment">// String</span>
+  <span class="hljs-attr">price</span>: <span class="hljs-number">999.99</span>,                     <span class="hljs-comment">// Number</span>
+  <span class="hljs-attr">inStock</span>: <span class="hljs-literal">true</span>,                     <span class="hljs-comment">// Boolean</span>
+  <span class="hljs-attr">tags</span>: [<span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;computer&quot;</span>], <span class="hljs-comment">// Array</span>
+  <span class="hljs-attr">specs</span>: {                           <span class="hljs-comment">// Embedded object</span>
+    <span class="hljs-attr">cpu</span>: <span class="hljs-string">&quot;Intel i7&quot;</span>,
+    <span class="hljs-attr">ram</span>: <span class="hljs-string">&quot;16GB&quot;</span>,
+    <span class="hljs-attr">storage</span>: <span class="hljs-string">&quot;512GB SSD&quot;</span>
   },
-  releaseDate: new Date(),           // Date
-  reviews: []                        // Empty array
+  <span class="hljs-attr">releaseDate</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(),           <span class="hljs-comment">// Date</span>
+  <span class="hljs-attr">reviews</span>: []                        <span class="hljs-comment">// Empty array</span>
 })
 
-// Insert another product
-db.products.insertOne({
-  name: &quot;Book&quot;,
-  price: 19.99,
-  inStock: false,
-  tags: [&quot;education&quot;, &quot;paperback&quot;],
-  author: &quot;Jane Doe&quot;,                // Different fields are allowed!
-  isbn: &quot;978-0123456789&quot;
+<span class="hljs-comment">// Insert another product</span>
+db.<span class="hljs-property">products</span>.<span class="hljs-title function_">insertOne</span>({
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Book&quot;</span>,
+  <span class="hljs-attr">price</span>: <span class="hljs-number">19.99</span>,
+  <span class="hljs-attr">inStock</span>: <span class="hljs-literal">false</span>,
+  <span class="hljs-attr">tags</span>: [<span class="hljs-string">&quot;education&quot;</span>, <span class="hljs-string">&quot;paperback&quot;</span>],
+  <span class="hljs-attr">author</span>: <span class="hljs-string">&quot;Jane Doe&quot;</span>,                <span class="hljs-comment">// Different fields are allowed!</span>
+  <span class="hljs-attr">isbn</span>: <span class="hljs-string">&quot;978-0123456789&quot;</span>
 })
 
-// Query examples
-db.products.find({ inStock: true })
-db.products.find({ price: { $lt: 50 } })  // Price less than 50
-db.products.find({ tags: &quot;electronics&quot; })
-db.products.find({ &quot;specs.cpu&quot;: &quot;Intel i7&quot; })  // Query nested fields
+<span class="hljs-comment">// Query examples</span>
+db.<span class="hljs-property">products</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">inStock</span>: <span class="hljs-literal">true</span> })
+db.<span class="hljs-property">products</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">price</span>: { <span class="hljs-attr">$lt</span>: <span class="hljs-number">50</span> } })  <span class="hljs-comment">// Price less than 50</span>
+db.<span class="hljs-property">products</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">tags</span>: <span class="hljs-string">&quot;electronics&quot;</span> })
+db.<span class="hljs-property">products</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-string">&quot;specs.cpu&quot;</span>: <span class="hljs-string">&quot;Intel i7&quot;</span> })  <span class="hljs-comment">// Query nested fields</span>
 </code></pre>
 <h3 class="step-heading" style="--organic-tilt:0deg" id="4step-4-basic-crud-operations" tabindex="-1"><span class="step-badge" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>Basic CRUD Operations</h3>
-<pre><code class="language-javascript">// CREATE (Insert)
-db.books.insertOne({
-  title: &quot;JavaScript Basics&quot;,
-  author: &quot;John Smith&quot;,
-  pages: 300,
-  published: 2023
+<pre class="hljs"><code><span class="hljs-comment">// CREATE (Insert)</span>
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">insertOne</span>({
+  <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;JavaScript Basics&quot;</span>,
+  <span class="hljs-attr">author</span>: <span class="hljs-string">&quot;John Smith&quot;</span>,
+  <span class="hljs-attr">pages</span>: <span class="hljs-number">300</span>,
+  <span class="hljs-attr">published</span>: <span class="hljs-number">2023</span>
 })
 
-// READ (Find)
-db.books.find({ author: &quot;John Smith&quot; })
-db.books.findOne({ title: &quot;JavaScript Basics&quot; })
+<span class="hljs-comment">// READ (Find)</span>
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">author</span>: <span class="hljs-string">&quot;John Smith&quot;</span> })
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">findOne</span>({ <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;JavaScript Basics&quot;</span> })
 
-// UPDATE
-db.books.updateOne(
-  { title: &quot;JavaScript Basics&quot; },        // Find this document
-  { $set: { pages: 350 } }               // Update pages field
+<span class="hljs-comment">// UPDATE</span>
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">updateOne</span>(
+  { <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;JavaScript Basics&quot;</span> },        <span class="hljs-comment">// Find this document</span>
+  { <span class="hljs-attr">$set</span>: { <span class="hljs-attr">pages</span>: <span class="hljs-number">350</span> } }               <span class="hljs-comment">// Update pages field</span>
 )
 
-// Add a new field
-db.books.updateOne(
-  { title: &quot;JavaScript Basics&quot; },
-  { $set: { rating: 4.5 } }
+<span class="hljs-comment">// Add a new field</span>
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">updateOne</span>(
+  { <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;JavaScript Basics&quot;</span> },
+  { <span class="hljs-attr">$set</span>: { <span class="hljs-attr">rating</span>: <span class="hljs-number">4.5</span> } }
 )
 
-// DELETE
-db.books.deleteOne({ title: &quot;JavaScript Basics&quot; })
+<span class="hljs-comment">// DELETE</span>
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">deleteOne</span>({ <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;JavaScript Basics&quot;</span> })
 
-// Verify deletion
-db.books.find()
+<span class="hljs-comment">// Verify deletion</span>
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">find</span>()
 </code></pre>
 <h3 class="step-heading" style="--organic-tilt:0.1deg" id="5step-5-arrays-and-complex-queries" tabindex="-1"><span class="step-badge" aria-hidden="true">5</span><span class="sr-only">Step 5: </span>Arrays and Complex Queries</h3>
-<pre><code class="language-javascript">// Insert movies with array data (similar to our Movie Buzz app)
-db.movies.insertMany([
+<pre class="hljs"><code><span class="hljs-comment">// Insert movies with array data (similar to our Movie Buzz app)</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">insertMany</span>([
   {
-    title: &quot;The Matrix&quot;,
-    year: 1999,
-    genres: [&quot;Action&quot;, &quot;Sci-Fi&quot;],
-    directors: [&quot;The Wachowskis&quot;],
-    rating: &quot;R&quot;
+    <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;The Matrix&quot;</span>,
+    <span class="hljs-attr">year</span>: <span class="hljs-number">1999</span>,
+    <span class="hljs-attr">genres</span>: [<span class="hljs-string">&quot;Action&quot;</span>, <span class="hljs-string">&quot;Sci-Fi&quot;</span>],
+    <span class="hljs-attr">directors</span>: [<span class="hljs-string">&quot;The Wachowskis&quot;</span>],
+    <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;R&quot;</span>
   },
   {
-    title: &quot;Toy Story&quot;,
-    year: 1995,
-    genres: [&quot;Animation&quot;, &quot;Family&quot;, &quot;Comedy&quot;],
-    directors: [&quot;John Lasseter&quot;],
-    rating: &quot;G&quot;
+    <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;Toy Story&quot;</span>,
+    <span class="hljs-attr">year</span>: <span class="hljs-number">1995</span>,
+    <span class="hljs-attr">genres</span>: [<span class="hljs-string">&quot;Animation&quot;</span>, <span class="hljs-string">&quot;Family&quot;</span>, <span class="hljs-string">&quot;Comedy&quot;</span>],
+    <span class="hljs-attr">directors</span>: [<span class="hljs-string">&quot;John Lasseter&quot;</span>],
+    <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;G&quot;</span>
   },
   {
-    title: &quot;Inception&quot;,
-    year: 2010,
-    genres: [&quot;Action&quot;, &quot;Sci-Fi&quot;, &quot;Thriller&quot;],
-    directors: [&quot;Christopher Nolan&quot;],
-    rating: &quot;PG-13&quot;
+    <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;Inception&quot;</span>,
+    <span class="hljs-attr">year</span>: <span class="hljs-number">2010</span>,
+    <span class="hljs-attr">genres</span>: [<span class="hljs-string">&quot;Action&quot;</span>, <span class="hljs-string">&quot;Sci-Fi&quot;</span>, <span class="hljs-string">&quot;Thriller&quot;</span>],
+    <span class="hljs-attr">directors</span>: [<span class="hljs-string">&quot;Christopher Nolan&quot;</span>],
+    <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;PG-13&quot;</span>
   }
 ])
 
-// Query arrays
-db.movies.find({ genres: &quot;Sci-Fi&quot; })              // Has Sci-Fi genre
-db.movies.find({ genres: { $in: [&quot;Comedy&quot;] } })   // Has Comedy genre
-db.movies.find({ year: { $gte: 2000 } })          // Year &gt;= 2000
-db.movies.find({
-  genres: &quot;Action&quot;,
-  year: { $gte: 2000 }
-})  // Multiple conditions
+<span class="hljs-comment">// Query arrays</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">genres</span>: <span class="hljs-string">&quot;Sci-Fi&quot;</span> })              <span class="hljs-comment">// Has Sci-Fi genre</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">genres</span>: { <span class="hljs-attr">$in</span>: [<span class="hljs-string">&quot;Comedy&quot;</span>] } })   <span class="hljs-comment">// Has Comedy genre</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">year</span>: { <span class="hljs-attr">$gte</span>: <span class="hljs-number">2000</span> } })          <span class="hljs-comment">// Year &gt;= 2000</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">find</span>({
+  <span class="hljs-attr">genres</span>: <span class="hljs-string">&quot;Action&quot;</span>,
+  <span class="hljs-attr">year</span>: { <span class="hljs-attr">$gte</span>: <span class="hljs-number">2000</span> }
+})  <span class="hljs-comment">// Multiple conditions</span>
 </code></pre>
 <blockquote class="callout callout--reflection-try" style="--tilt:0.30000000000000004deg;--glow-intensity:0.82">
 <div class="callout-label lift"><i class="fas fa-tools callout-icon" aria-hidden="true"></i><span>Hands-On — Try It Out</span></div>
@@ -325,31 +329,31 @@ How might a flexible document structure be advantageous for a movie database whe
 <li><strong>Follow installation instructions</strong> for your operating system</li>
 <li><strong>Start MongoDB service</strong>:</li>
 </ol>
-<pre><code class="language-bash"># On macOS/Linux
-sudo service mongod start
+<pre class="hljs"><code><span class="hljs-comment"># On macOS/Linux</span>
+<span class="hljs-built_in">sudo</span> service mongod start
 
-# Or using brew on macOS
+<span class="hljs-comment"># Or using brew on macOS</span>
 brew services start mongodb-community
 
-# On Windows
+<span class="hljs-comment"># On Windows</span>
 net start MongoDB
 </code></pre>
 <ol start="4">
 <li><strong>Verify installation</strong>:</li>
 </ol>
-<pre><code class="language-bash">mongo --version
+<pre class="hljs"><code>mongo --version
 </code></pre>
 <h3 id="mongodb-shell" tabindex="-1">MongoDB Shell</h3>
 <p>The MongoDB shell (mongo) is a command-line interface for interacting with MongoDB:</p>
-<pre><code class="language-bash"># Start MongoDB shell
+<pre class="hljs"><code><span class="hljs-comment"># Start MongoDB shell</span>
 mongo
 
-# Or for newer versions
+<span class="hljs-comment"># Or for newer versions</span>
 mongosh
 </code></pre>
 <p>You should see a prompt like:</p>
-<pre><code>MongoDB shell version v5.0.0
-connecting to: mongodb://127.0.0.1:27017
+<pre class="hljs"><code>MongoDB <span class="hljs-built_in">shell</span> <span class="hljs-built_in">version</span> v5<span class="hljs-number">.0</span><span class="hljs-number">.0</span>
+connecting <span class="hljs-built_in">to</span>: mongodb://<span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">27017</span>
 &gt;
 </code></pre>
 <hr>
@@ -363,11 +367,11 @@ connecting to: mongodb://127.0.0.1:27017
 <li>Good for complex relationships between data</li>
 </ul>
 <p><strong>Example SQL Table:</strong></p>
-<pre><code class="language-sql">Movies Table:
-| id | name        | year | director          | rating |
-|----|-------------|------|-------------------|---------|
-| 1  | The Matrix  | 1999 | The Wachowskis   | R       |
-| 2  | Inception   | 2010 | Christopher Nolan| PG-13   |
+<pre class="hljs"><code>Movies <span class="hljs-keyword">Table</span>:
+<span class="hljs-operator">|</span> id <span class="hljs-operator">|</span> name        <span class="hljs-operator">|</span> <span class="hljs-keyword">year</span> <span class="hljs-operator">|</span> director          <span class="hljs-operator">|</span> rating <span class="hljs-operator">|</span>
+<span class="hljs-operator">|</span><span class="hljs-comment">----|-------------|------|-------------------|---------|</span>
+<span class="hljs-operator">|</span> <span class="hljs-number">1</span>  <span class="hljs-operator">|</span> The Matrix  <span class="hljs-operator">|</span> <span class="hljs-number">1999</span> <span class="hljs-operator">|</span> The Wachowskis   <span class="hljs-operator">|</span> R       <span class="hljs-operator">|</span>
+<span class="hljs-operator">|</span> <span class="hljs-number">2</span>  <span class="hljs-operator">|</span> Inception   <span class="hljs-operator">|</span> <span class="hljs-number">2010</span> <span class="hljs-operator">|</span> Christopher Nolan<span class="hljs-operator">|</span> PG<span class="hljs-number">-13</span>   <span class="hljs-operator">|</span>
 </code></pre>
 <p><strong>NoSQL Databases (like MongoDB):</strong></p>
 <ul>
@@ -378,19 +382,19 @@ connecting to: mongodb://127.0.0.1:27017
 <li>Good for rapidly changing data structures</li>
 </ul>
 <p><strong>Example MongoDB Document:</strong></p>
-<pre><code class="language-json">{
-  &quot;_id&quot;: ObjectId(&quot;507f1f77bcf86cd799439011&quot;),
-  &quot;name&quot;: &quot;The Matrix&quot;,
-  &quot;year&quot;: 1999,
-  &quot;director&quot;: &quot;The Wachowskis&quot;,
-  &quot;rating&quot;: &quot;R&quot;,
-  &quot;genre&quot;: [&quot;Action&quot;, &quot;Sci-Fi&quot;],
-  &quot;stars&quot;: [&quot;Keanu Reeves&quot;, &quot;Laurence Fishburne&quot;],
-  &quot;awards&quot;: {
-    &quot;oscars&quot;: 4,
-    &quot;nominations&quot;: 5
-  }
-}
+<pre class="hljs"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;_id&quot;</span><span class="hljs-punctuation">:</span> ObjectId(<span class="hljs-string">&quot;507f1f77bcf86cd799439011&quot;</span>)<span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;The Matrix&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;year&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1999</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;director&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;The Wachowskis&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;rating&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;R&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;genre&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;Action&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;Sci-Fi&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;stars&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;Keanu Reeves&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;Laurence Fishburne&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;awards&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;oscars&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;nominations&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">5</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
 </code></pre>
 <blockquote class="callout callout--reflection-consider" style="--tilt:-0.1deg;--glow-intensity:0.89">
 <div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
@@ -406,316 +410,316 @@ What advantages might the MongoDB document structure have for storing movie info
 <li><strong>Collection</strong>: Group of documents (like &quot;movies&quot;, &quot;users&quot;)</li>
 <li><strong>Document</strong>: Individual record (like a specific movie)</li>
 </ul>
-<pre><code>Database: movie-buzz
-├── Collection: movies
-│   ├── Document: { name: &quot;The Matrix&quot;, year: 1999, ... }
-│   ├── Document: { name: &quot;Inception&quot;, year: 2010, ... }
-│   └── Document: { name: &quot;Pulp Fiction&quot;, year: 1994, ... }
-├── Collection: users
-│   ├── Document: { name: &quot;John&quot;, email: &quot;john@example.com&quot; }
-│   └── Document: { name: &quot;Jane&quot;, email: &quot;jane@example.com&quot; }
+<pre class="hljs"><code><span class="hljs-params">Database:</span> movie-buzz
+├── <span class="hljs-params">Collection:</span> movies
+│   ├── <span class="hljs-params">Document:</span> { <span class="hljs-params">name:</span> <span class="hljs-string">&quot;The Matrix&quot;</span>, <span class="hljs-params">year:</span> <span class="hljs-number">1999</span>, ... }
+│   ├── <span class="hljs-params">Document:</span> { <span class="hljs-params">name:</span> <span class="hljs-string">&quot;Inception&quot;</span>, <span class="hljs-params">year:</span> <span class="hljs-number">2010</span>, ... }
+│   └── <span class="hljs-params">Document:</span> { <span class="hljs-params">name:</span> <span class="hljs-string">&quot;Pulp Fiction&quot;</span>, <span class="hljs-params">year:</span> <span class="hljs-number">1994</span>, ... }
+├── <span class="hljs-params">Collection:</span> users
+│   ├── <span class="hljs-params">Document:</span> { <span class="hljs-params">name:</span> <span class="hljs-string">&quot;John&quot;</span>, <span class="hljs-params">email:</span> <span class="hljs-string">&quot;john@example.com&quot;</span> }
+│   └── <span class="hljs-params">Document:</span> { <span class="hljs-params">name:</span> <span class="hljs-string">&quot;Jane&quot;</span>, <span class="hljs-params">email:</span> <span class="hljs-string">&quot;jane@example.com&quot;</span> }
 </code></pre>
 <h3 id="mongodb-shell-commands" tabindex="-1">MongoDB Shell Commands</h3>
 <p><strong>Basic Navigation:</strong></p>
-<pre><code class="language-javascript">// Show all databases
+<pre class="hljs"><code><span class="hljs-comment">// Show all databases</span>
 show dbs
 
-// Create/switch to a database
+<span class="hljs-comment">// Create/switch to a database</span>
 use movie-buzz
 
-// Show current database
+<span class="hljs-comment">// Show current database</span>
 db
 
-// Show collections in current database
+<span class="hljs-comment">// Show collections in current database</span>
 show collections
 
-// Get help
+<span class="hljs-comment">// Get help</span>
 help
 </code></pre>
 <p><strong>Document Operations:</strong></p>
-<pre><code class="language-javascript">// Insert a document
-db.movies.insertOne({
-  name: &quot;The Matrix&quot;,
-  year: 1999,
-  director: &quot;The Wachowskis&quot;,
-  rating: &quot;R&quot;
+<pre class="hljs"><code><span class="hljs-comment">// Insert a document</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">insertOne</span>({
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;The Matrix&quot;</span>,
+  <span class="hljs-attr">year</span>: <span class="hljs-number">1999</span>,
+  <span class="hljs-attr">director</span>: <span class="hljs-string">&quot;The Wachowskis&quot;</span>,
+  <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;R&quot;</span>
 })
 
-// Find all documents
-db.movies.find()
+<span class="hljs-comment">// Find all documents</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">find</span>()
 
-// Find with pretty formatting
-db.movies.find().pretty()
+<span class="hljs-comment">// Find with pretty formatting</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">find</span>().<span class="hljs-title function_">pretty</span>()
 
-// Find specific document
-db.movies.findOne({ name: &quot;The Matrix&quot; })
+<span class="hljs-comment">// Find specific document</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">findOne</span>({ <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;The Matrix&quot;</span> })
 
-// Count documents
-db.movies.countDocuments()
+<span class="hljs-comment">// Count documents</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">countDocuments</span>()
 </code></pre>
 <hr>
 <h2 id="setting-up-movie-buzz-database" tabindex="-1">Setting Up Movie Buzz Database</h2>
 <p>Let's create our Movie Buzz database and add some initial data.</p>
 <p><strong>Step 1: Start MongoDB and create database</strong></p>
-<pre><code class="language-bash"># Start MongoDB shell
+<pre class="hljs"><code><span class="hljs-comment"># Start MongoDB shell</span>
 mongosh
 
-# Create/switch to movie-buzz database
+<span class="hljs-comment"># Create/switch to movie-buzz database</span>
 use movie-buzz
 
-# The database won't appear until we add data
+<span class="hljs-comment"># The database won&#x27;t appear until we add data</span>
 </code></pre>
 <p><strong>Step 2: Create our first movie collection</strong></p>
-<pre><code class="language-javascript">// Insert our first movie
-db.movies.insertOne({
-  name: &quot;The Matrix&quot;,
-  year: 1999,
-  rating: &quot;R&quot;,
-  length: &quot;136 minutes&quot;,
-  description: &quot;A computer hacker learns about the true nature of reality.&quot;,
-  genre: [&quot;Action&quot;, &quot;Sci-Fi&quot;],
-  director: &quot;The Wachowskis&quot;,
-  stars: [&quot;Keanu Reeves&quot;, &quot;Laurence Fishburne&quot;, &quot;Carrie-Anne Moss&quot;],
-  createdAt: new Date(),
-  updatedAt: new Date()
+<pre class="hljs"><code><span class="hljs-comment">// Insert our first movie</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">insertOne</span>({
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;The Matrix&quot;</span>,
+  <span class="hljs-attr">year</span>: <span class="hljs-number">1999</span>,
+  <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;R&quot;</span>,
+  <span class="hljs-attr">length</span>: <span class="hljs-string">&quot;136 minutes&quot;</span>,
+  <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;A computer hacker learns about the true nature of reality.&quot;</span>,
+  <span class="hljs-attr">genre</span>: [<span class="hljs-string">&quot;Action&quot;</span>, <span class="hljs-string">&quot;Sci-Fi&quot;</span>],
+  <span class="hljs-attr">director</span>: <span class="hljs-string">&quot;The Wachowskis&quot;</span>,
+  <span class="hljs-attr">stars</span>: [<span class="hljs-string">&quot;Keanu Reeves&quot;</span>, <span class="hljs-string">&quot;Laurence Fishburne&quot;</span>, <span class="hljs-string">&quot;Carrie-Anne Moss&quot;</span>],
+  <span class="hljs-attr">createdAt</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(),
+  <span class="hljs-attr">updatedAt</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>()
 })
 </code></pre>
 <p><strong>Step 3: Add multiple movies</strong></p>
-<pre><code class="language-javascript">// Insert multiple movies at once
-db.movies.insertMany([
+<pre class="hljs"><code><span class="hljs-comment">// Insert multiple movies at once</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">insertMany</span>([
   {
-    name: &quot;Inception&quot;,
-    year: 2010,
-    rating: &quot;PG-13&quot;,
-    length: &quot;148 minutes&quot;,
-    description: &quot;A thief who steals corporate secrets through dream-sharing technology.&quot;,
-    genre: [&quot;Action&quot;, &quot;Sci-Fi&quot;, &quot;Thriller&quot;],
-    director: &quot;Christopher Nolan&quot;,
-    stars: [&quot;Leonardo DiCaprio&quot;, &quot;Marion Cotillard&quot;, &quot;Tom Hardy&quot;],
-    createdAt: new Date(),
-    updatedAt: new Date()
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Inception&quot;</span>,
+    <span class="hljs-attr">year</span>: <span class="hljs-number">2010</span>,
+    <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;PG-13&quot;</span>,
+    <span class="hljs-attr">length</span>: <span class="hljs-string">&quot;148 minutes&quot;</span>,
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;A thief who steals corporate secrets through dream-sharing technology.&quot;</span>,
+    <span class="hljs-attr">genre</span>: [<span class="hljs-string">&quot;Action&quot;</span>, <span class="hljs-string">&quot;Sci-Fi&quot;</span>, <span class="hljs-string">&quot;Thriller&quot;</span>],
+    <span class="hljs-attr">director</span>: <span class="hljs-string">&quot;Christopher Nolan&quot;</span>,
+    <span class="hljs-attr">stars</span>: [<span class="hljs-string">&quot;Leonardo DiCaprio&quot;</span>, <span class="hljs-string">&quot;Marion Cotillard&quot;</span>, <span class="hljs-string">&quot;Tom Hardy&quot;</span>],
+    <span class="hljs-attr">createdAt</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(),
+    <span class="hljs-attr">updatedAt</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>()
   },
   {
-    name: &quot;Pulp Fiction&quot;,
-    year: 1994,
-    rating: &quot;R&quot;,
-    length: &quot;154 minutes&quot;,
-    description: &quot;The lives of two mob hitmen, a boxer, and other criminals intertwine in Los Angeles.&quot;,
-    genre: [&quot;Crime&quot;, &quot;Drama&quot;],
-    director: &quot;Quentin Tarantino&quot;,
-    stars: [&quot;John Travolta&quot;, &quot;Samuel L. Jackson&quot;, &quot;Uma Thurman&quot;],
-    createdAt: new Date(),
-    updatedAt: new Date()
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Pulp Fiction&quot;</span>,
+    <span class="hljs-attr">year</span>: <span class="hljs-number">1994</span>,
+    <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;R&quot;</span>,
+    <span class="hljs-attr">length</span>: <span class="hljs-string">&quot;154 minutes&quot;</span>,
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;The lives of two mob hitmen, a boxer, and other criminals intertwine in Los Angeles.&quot;</span>,
+    <span class="hljs-attr">genre</span>: [<span class="hljs-string">&quot;Crime&quot;</span>, <span class="hljs-string">&quot;Drama&quot;</span>],
+    <span class="hljs-attr">director</span>: <span class="hljs-string">&quot;Quentin Tarantino&quot;</span>,
+    <span class="hljs-attr">stars</span>: [<span class="hljs-string">&quot;John Travolta&quot;</span>, <span class="hljs-string">&quot;Samuel L. Jackson&quot;</span>, <span class="hljs-string">&quot;Uma Thurman&quot;</span>],
+    <span class="hljs-attr">createdAt</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(),
+    <span class="hljs-attr">updatedAt</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>()
   }
 ])
 </code></pre>
 <p><strong>Step 4: Verify data</strong></p>
-<pre><code class="language-javascript">// Check that our database and collection exist
+<pre class="hljs"><code><span class="hljs-comment">// Check that our database and collection exist</span>
 show dbs
 show collections
 
-// View our movies
-db.movies.find().pretty()
+<span class="hljs-comment">// View our movies</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">find</span>().<span class="hljs-title function_">pretty</span>()
 
-// Count our movies
-db.movies.countDocuments()
+<span class="hljs-comment">// Count our movies</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">countDocuments</span>()
 </code></pre>
 <hr>
 <h2 id="basic-database-operations" tabindex="-1">Basic Database Operations</h2>
 <h3 id="creating-documents" tabindex="-1">Creating Documents</h3>
-<pre><code class="language-javascript">// Insert one document
-db.movies.insertOne({
-  name: &quot;The Godfather&quot;,
-  year: 1972,
-  director: &quot;Francis Ford Coppola&quot;,
-  rating: &quot;R&quot;
+<pre class="hljs"><code><span class="hljs-comment">// Insert one document</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">insertOne</span>({
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;The Godfather&quot;</span>,
+  <span class="hljs-attr">year</span>: <span class="hljs-number">1972</span>,
+  <span class="hljs-attr">director</span>: <span class="hljs-string">&quot;Francis Ford Coppola&quot;</span>,
+  <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;R&quot;</span>
 })
 
-// Insert multiple documents
-db.movies.insertMany([
-  { name: &quot;Movie 1&quot;, year: 2020 },
-  { name: &quot;Movie 2&quot;, year: 2021 }
+<span class="hljs-comment">// Insert multiple documents</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">insertMany</span>([
+  { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Movie 1&quot;</span>, <span class="hljs-attr">year</span>: <span class="hljs-number">2020</span> },
+  { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Movie 2&quot;</span>, <span class="hljs-attr">year</span>: <span class="hljs-number">2021</span> }
 ])
 </code></pre>
 <h3 id="reading-documents" tabindex="-1">Reading Documents</h3>
-<pre><code class="language-javascript">// Find all documents
-db.movies.find()
+<pre class="hljs"><code><span class="hljs-comment">// Find all documents</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">find</span>()
 
-// Find with condition
-db.movies.find({ year: 1999 })
+<span class="hljs-comment">// Find with condition</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">year</span>: <span class="hljs-number">1999</span> })
 
-// Find with multiple conditions
-db.movies.find({ year: 1999, rating: &quot;R&quot; })
+<span class="hljs-comment">// Find with multiple conditions</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">year</span>: <span class="hljs-number">1999</span>, <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;R&quot;</span> })
 
-// Find one document
-db.movies.findOne({ name: &quot;The Matrix&quot; })
+<span class="hljs-comment">// Find one document</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">findOne</span>({ <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;The Matrix&quot;</span> })
 
-// Find with advanced queries
-db.movies.find({ year: { $gte: 2000 } }) // Movies from 2000 or later
-db.movies.find({ genre: { $in: [&quot;Action&quot;] } }) // Movies with Action genre
-db.movies.find({ name: { $regex: /Matrix/i } }) // Case-insensitive search
+<span class="hljs-comment">// Find with advanced queries</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">year</span>: { <span class="hljs-attr">$gte</span>: <span class="hljs-number">2000</span> } }) <span class="hljs-comment">// Movies from 2000 or later</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">genre</span>: { <span class="hljs-attr">$in</span>: [<span class="hljs-string">&quot;Action&quot;</span>] } }) <span class="hljs-comment">// Movies with Action genre</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">name</span>: { <span class="hljs-attr">$regex</span>: <span class="hljs-regexp">/Matrix/i</span> } }) <span class="hljs-comment">// Case-insensitive search</span>
 </code></pre>
 <h3 id="updating-documents" tabindex="-1">Updating Documents</h3>
-<pre><code class="language-javascript">// Update one document
-db.movies.updateOne(
-  { name: &quot;The Matrix&quot; },
-  { $set: { rating: &quot;R&quot;, boxOffice: &quot;$463.5 million&quot; } }
+<pre class="hljs"><code><span class="hljs-comment">// Update one document</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">updateOne</span>(
+  { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;The Matrix&quot;</span> },
+  { <span class="hljs-attr">$set</span>: { <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;R&quot;</span>, <span class="hljs-attr">boxOffice</span>: <span class="hljs-string">&quot;$463.5 million&quot;</span> } }
 )
 
-// Update multiple documents
-db.movies.updateMany(
-  { year: { $lt: 2000 } },
-  { $set: { category: &quot;Classic&quot; } }
+<span class="hljs-comment">// Update multiple documents</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">updateMany</span>(
+  { <span class="hljs-attr">year</span>: { <span class="hljs-attr">$lt</span>: <span class="hljs-number">2000</span> } },
+  { <span class="hljs-attr">$set</span>: { <span class="hljs-attr">category</span>: <span class="hljs-string">&quot;Classic&quot;</span> } }
 )
 
-// Replace entire document
-db.movies.replaceOne(
-  { name: &quot;The Matrix&quot; },
+<span class="hljs-comment">// Replace entire document</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">replaceOne</span>(
+  { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;The Matrix&quot;</span> },
   {
-    name: &quot;The Matrix&quot;,
-    year: 1999,
-    director: &quot;The Wachowskis&quot;,
-    rating: &quot;R&quot;,
-    updatedAt: new Date()
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;The Matrix&quot;</span>,
+    <span class="hljs-attr">year</span>: <span class="hljs-number">1999</span>,
+    <span class="hljs-attr">director</span>: <span class="hljs-string">&quot;The Wachowskis&quot;</span>,
+    <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;R&quot;</span>,
+    <span class="hljs-attr">updatedAt</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>()
   }
 )
 </code></pre>
 <h3 id="deleting-documents" tabindex="-1">Deleting Documents</h3>
-<pre><code class="language-javascript">// Delete one document
-db.movies.deleteOne({ name: &quot;The Matrix&quot; })
+<pre class="hljs"><code><span class="hljs-comment">// Delete one document</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">deleteOne</span>({ <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;The Matrix&quot;</span> })
 
-// Delete multiple documents
-db.movies.deleteMany({ year: { $lt: 1980 } })
+<span class="hljs-comment">// Delete multiple documents</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">deleteMany</span>({ <span class="hljs-attr">year</span>: { <span class="hljs-attr">$lt</span>: <span class="hljs-number">1980</span> } })
 
-// Delete all documents in collection
-db.movies.deleteMany({})
+<span class="hljs-comment">// Delete all documents in collection</span>
+db.<span class="hljs-property">movies</span>.<span class="hljs-title function_">deleteMany</span>({})
 </code></pre>
 <hr>
 <h2 id="database-design-for-movie-buzz" tabindex="-1">Database Design for Movie Buzz</h2>
 <p>For our Movie Buzz application, we'll design our database structure:</p>
 <p><strong>Movies Collection Structure:</strong></p>
-<pre><code class="language-javascript">{
-  _id: ObjectId(&quot;...&quot;),           // Automatically generated unique ID
-  name: String,                   // Required
-  year: Number,                   // Required
-  rating: String,                 // Required (PG, PG-13, R, etc.)
-  length: String,                 // Required (e.g., &quot;136 minutes&quot;)
-  description: String,            // Required
-  genre: [String],                // Array of genres
-  director: String,               // Required
-  stars: [String],                // Array of actor names
-  poster: String,                 // Optional - URL to movie poster
-  boxOffice: String,              // Optional - box office earnings
-  awards: {                       // Optional nested object
-    oscars: Number,
-    nominations: Number
+<pre class="hljs"><code>{
+  <span class="hljs-attr">_id</span>: <span class="hljs-title class_">ObjectId</span>(<span class="hljs-string">&quot;...&quot;</span>),           <span class="hljs-comment">// Automatically generated unique ID</span>
+  <span class="hljs-attr">name</span>: <span class="hljs-title class_">String</span>,                   <span class="hljs-comment">// Required</span>
+  <span class="hljs-attr">year</span>: <span class="hljs-title class_">Number</span>,                   <span class="hljs-comment">// Required</span>
+  <span class="hljs-attr">rating</span>: <span class="hljs-title class_">String</span>,                 <span class="hljs-comment">// Required (PG, PG-13, R, etc.)</span>
+  <span class="hljs-attr">length</span>: <span class="hljs-title class_">String</span>,                 <span class="hljs-comment">// Required (e.g., &quot;136 minutes&quot;)</span>
+  <span class="hljs-attr">description</span>: <span class="hljs-title class_">String</span>,            <span class="hljs-comment">// Required</span>
+  <span class="hljs-attr">genre</span>: [<span class="hljs-title class_">String</span>],                <span class="hljs-comment">// Array of genres</span>
+  <span class="hljs-attr">director</span>: <span class="hljs-title class_">String</span>,               <span class="hljs-comment">// Required</span>
+  <span class="hljs-attr">stars</span>: [<span class="hljs-title class_">String</span>],                <span class="hljs-comment">// Array of actor names</span>
+  <span class="hljs-attr">poster</span>: <span class="hljs-title class_">String</span>,                 <span class="hljs-comment">// Optional - URL to movie poster</span>
+  <span class="hljs-attr">boxOffice</span>: <span class="hljs-title class_">String</span>,              <span class="hljs-comment">// Optional - box office earnings</span>
+  <span class="hljs-attr">awards</span>: {                       <span class="hljs-comment">// Optional nested object</span>
+    <span class="hljs-attr">oscars</span>: <span class="hljs-title class_">Number</span>,
+    <span class="hljs-attr">nominations</span>: <span class="hljs-title class_">Number</span>
   },
-  createdAt: Date,                // Timestamp
-  updatedAt: Date                 // Timestamp
+  <span class="hljs-attr">createdAt</span>: <span class="hljs-title class_">Date</span>,                <span class="hljs-comment">// Timestamp</span>
+  <span class="hljs-attr">updatedAt</span>: <span class="hljs-title class_">Date</span>                 <span class="hljs-comment">// Timestamp</span>
 }
 </code></pre>
 <p><strong>Example Document:</strong></p>
-<pre><code class="language-javascript">{
-  _id: ObjectId(&quot;507f1f77bcf86cd799439011&quot;),
-  name: &quot;The Matrix&quot;,
-  year: 1999,
-  rating: &quot;R&quot;,
-  length: &quot;136 minutes&quot;,
-  description: &quot;A computer hacker learns about the true nature of reality.&quot;,
-  genre: [&quot;Action&quot;, &quot;Sci-Fi&quot;],
-  director: &quot;The Wachowskis&quot;,
-  stars: [&quot;Keanu Reeves&quot;, &quot;Laurence Fishburne&quot;, &quot;Carrie-Anne Moss&quot;],
-  boxOffice: &quot;$463.5 million&quot;,
-  awards: {
-    oscars: 4,
-    nominations: 5
+<pre class="hljs"><code>{
+  <span class="hljs-attr">_id</span>: <span class="hljs-title class_">ObjectId</span>(<span class="hljs-string">&quot;507f1f77bcf86cd799439011&quot;</span>),
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;The Matrix&quot;</span>,
+  <span class="hljs-attr">year</span>: <span class="hljs-number">1999</span>,
+  <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;R&quot;</span>,
+  <span class="hljs-attr">length</span>: <span class="hljs-string">&quot;136 minutes&quot;</span>,
+  <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;A computer hacker learns about the true nature of reality.&quot;</span>,
+  <span class="hljs-attr">genre</span>: [<span class="hljs-string">&quot;Action&quot;</span>, <span class="hljs-string">&quot;Sci-Fi&quot;</span>],
+  <span class="hljs-attr">director</span>: <span class="hljs-string">&quot;The Wachowskis&quot;</span>,
+  <span class="hljs-attr">stars</span>: [<span class="hljs-string">&quot;Keanu Reeves&quot;</span>, <span class="hljs-string">&quot;Laurence Fishburne&quot;</span>, <span class="hljs-string">&quot;Carrie-Anne Moss&quot;</span>],
+  <span class="hljs-attr">boxOffice</span>: <span class="hljs-string">&quot;$463.5 million&quot;</span>,
+  <span class="hljs-attr">awards</span>: {
+    <span class="hljs-attr">oscars</span>: <span class="hljs-number">4</span>,
+    <span class="hljs-attr">nominations</span>: <span class="hljs-number">5</span>
   },
-  createdAt: ISODate(&quot;2024-01-15T10:30:00Z&quot;),
-  updatedAt: ISODate(&quot;2024-01-15T10:30:00Z&quot;)
+  <span class="hljs-attr">createdAt</span>: <span class="hljs-title class_">ISODate</span>(<span class="hljs-string">&quot;2024-01-15T10:30:00Z&quot;</span>),
+  <span class="hljs-attr">updatedAt</span>: <span class="hljs-title class_">ISODate</span>(<span class="hljs-string">&quot;2024-01-15T10:30:00Z&quot;</span>)
 }
 </code></pre>
 <hr>
 <h2 id="connecting-nodejs-to-mongodb" tabindex="-1">Connecting Node.js to MongoDB</h2>
 <p>To connect our Express API to MongoDB, we'll need to install the MongoDB Node.js driver:</p>
-<pre><code class="language-bash">cd movie-buzz-backend
+<pre class="hljs"><code><span class="hljs-built_in">cd</span> movie-buzz-backend
 npm install mongodb
 </code></pre>
 <p><strong>Basic Connection Example</strong> (we'll improve this next week):</p>
 <p>Create a new file <code>config/database.js</code>:</p>
-<pre><code class="language-javascript">const { MongoClient } = require('mongodb');
+<pre class="hljs"><code><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MongoClient</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;mongodb&#x27;</span>);
 
-const uri = 'mongodb://localhost:27017';
-const dbName = 'movie-buzz';
+<span class="hljs-keyword">const</span> uri = <span class="hljs-string">&#x27;mongodb://localhost:27017&#x27;</span>;
+<span class="hljs-keyword">const</span> dbName = <span class="hljs-string">&#x27;movie-buzz&#x27;</span>;
 
-let db = null;
+<span class="hljs-keyword">let</span> db = <span class="hljs-literal">null</span>;
 
-async function connectToDatabase() {
-  try {
-    const client = new MongoClient(uri);
-    await client.connect();
-    db = client.db(dbName);
-    console.log('🍃 Connected to MongoDB');
-    return db;
-  } catch (error) {
-    console.error('Failed to connect to MongoDB:', error);
-    process.exit(1);
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">connectToDatabase</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MongoClient</span>(uri);
+    <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">connect</span>();
+    db = client.<span class="hljs-title function_">db</span>(dbName);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;🍃 Connected to MongoDB&#x27;</span>);
+    <span class="hljs-keyword">return</span> db;
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Failed to connect to MongoDB:&#x27;</span>, error);
+    process.<span class="hljs-title function_">exit</span>(<span class="hljs-number">1</span>);
   }
 }
 
-function getDatabase() {
-  if (!db) {
-    throw new Error('Database not initialized. Call connectToDatabase first.');
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">getDatabase</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">if</span> (!db) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&#x27;Database not initialized. Call connectToDatabase first.&#x27;</span>);
   }
-  return db;
+  <span class="hljs-keyword">return</span> db;
 }
 
-module.exports = {
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = {
   connectToDatabase,
   getDatabase
 };
 </code></pre>
 <p><strong>Test the connection</strong> in your <code>server.js</code>:</p>
-<pre><code class="language-javascript">const express = require('express');
-const cors = require('cors');
-const { connectToDatabase, getDatabase } = require('./config/database');
+<pre class="hljs"><code><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);
+<span class="hljs-keyword">const</span> cors = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;cors&#x27;</span>);
+<span class="hljs-keyword">const</span> { connectToDatabase, getDatabase } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./config/database&#x27;</span>);
 
-const app = express();
-const PORT = process.env.PORT || 4000;
+<span class="hljs-keyword">const</span> app = <span class="hljs-title function_">express</span>();
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">PORT</span> = process.<span class="hljs-property">env</span>.<span class="hljs-property">PORT</span> || <span class="hljs-number">4000</span>;
 
-// Middleware
-app.use(express.json());
-app.use(cors());
+<span class="hljs-comment">// Middleware</span>
+app.<span class="hljs-title function_">use</span>(express.<span class="hljs-title function_">json</span>());
+app.<span class="hljs-title function_">use</span>(<span class="hljs-title function_">cors</span>());
 
-// Connect to database before starting server
-connectToDatabase().then(() =&gt; {
-  // Test route to verify database connection
-  app.get('/api/test-db', async (req, res) =&gt; {
-    try {
-      const db = getDatabase();
-      const movies = await db.collection('movies').find().toArray();
-      res.json({
-        success: true,
-        message: 'Database connection successful',
-        movieCount: movies.length,
-        movies: movies
+<span class="hljs-comment">// Connect to database before starting server</span>
+<span class="hljs-title function_">connectToDatabase</span>().<span class="hljs-title function_">then</span>(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-comment">// Test route to verify database connection</span>
+  app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/api/test-db&#x27;</span>, <span class="hljs-title function_">async</span> (req, res) =&gt; {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-keyword">const</span> db = <span class="hljs-title function_">getDatabase</span>();
+      <span class="hljs-keyword">const</span> movies = <span class="hljs-keyword">await</span> db.<span class="hljs-title function_">collection</span>(<span class="hljs-string">&#x27;movies&#x27;</span>).<span class="hljs-title function_">find</span>().<span class="hljs-title function_">toArray</span>();
+      res.<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Database connection successful&#x27;</span>,
+        <span class="hljs-attr">movieCount</span>: movies.<span class="hljs-property">length</span>,
+        <span class="hljs-attr">movies</span>: movies
       });
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        error: 'Database connection failed',
-        details: error.message
+    } <span class="hljs-keyword">catch</span> (error) {
+      res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+        <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">error</span>: <span class="hljs-string">&#x27;Database connection failed&#x27;</span>,
+        <span class="hljs-attr">details</span>: error.<span class="hljs-property">message</span>
       });
     }
   });
 
-  // Start server
-  app.listen(PORT, () =&gt; {
-    console.log(`🎬 Movie Buzz API running on http://localhost:${PORT}`);
+  <span class="hljs-comment">// Start server</span>
+  app.<span class="hljs-title function_">listen</span>(<span class="hljs-variable constant_">PORT</span>, <span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`🎬 Movie Buzz API running on http://localhost:<span class="hljs-subst">${PORT}</span>`</span>);
   });
 });
 </code></pre>
 <p>Test your database connection:</p>
-<pre><code class="language-bash">npm run dev
+<pre class="hljs"><code>npm run dev
 </code></pre>
 <p>Visit <code>http://localhost:4000/api/test-db</code> to verify your connection works.</p>
 <hr>
@@ -756,5 +760,6 @@ How does using a real database like MongoDB change the scalability and reliabili
 </div>
 <script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
 <script src="../assets/animations.js"></script>
+<script src="../assets/search.js"></script>
 </body>
 </html>

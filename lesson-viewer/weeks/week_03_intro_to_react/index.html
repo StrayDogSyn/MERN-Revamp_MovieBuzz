@@ -14,6 +14,10 @@
 <div class="layout">
 <nav class="sidebar" aria-label="Course weeks">
 <div class="sidebar-brand">&#127916; Movie Buzz Curriculum</div>
+<div class="sidebar-search">
+<input type="search" id="sidebar-search-input" class="search-input" placeholder="&#xf002; Search lessons…" aria-label="Search lessons">
+<div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+</div>
 <div class="nav-phase">Weeks 00–07 · Pre-Backend (React & Tooling)</div>
 <a class="nav-link" href="../week_00_welcome_call/index.html">Week 00 · Welcome Call</a>
 <a class="nav-link" href="../week_01_bash_and_git/index.html">Week 01 · Bash & Git</a>
@@ -95,7 +99,7 @@
 <h2 id="starting-point" tabindex="-1">Starting Point</h2>
 <p>Before we begin this lesson, we'll be working with the provided starter code for our Movie Buzz React app. Navigate to the <code>week_03_intro_to_react/movie-buzz</code> directory.</p>
 <p>Install the dependencies and start the development server:</p>
-<pre><code class="language-bash">cd week_03_intro_to_react/movie-buzz
+<pre class="hljs"><code><span class="hljs-built_in">cd</span> week_03_intro_to_react/movie-buzz
 npm install
 npm start
 </code></pre>
@@ -136,47 +140,47 @@ How is this different from the Node/Express servers we've been running? What's h
 <p>Before we build our movie components, let's start with simple examples to understand how React components work.</p>
 <h3 class="step-heading" style="--organic-tilt:0deg" id="1step-1-a-simple-greeting-component" tabindex="-1"><span class="step-badge" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>A Simple Greeting Component</h3>
 <p>Create a new file <code>src/components/Greeting.js</code>:</p>
-<pre><code class="language-jsx">// A simple component that displays a greeting
-function Greeting() {
-  return (
-    &lt;div&gt;
-      &lt;h1&gt;Hello, React!&lt;/h1&gt;
-      &lt;p&gt;Welcome to component-based development&lt;/p&gt;
-    &lt;/div&gt;
+<pre class="hljs"><code><span class="hljs-comment">// A simple component that displays a greeting</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">Greeting</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello, React!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Welcome to component-based development<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-export default Greeting;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">Greeting</span>;
 </code></pre>
 <h3 class="step-heading" style="--organic-tilt:-0.1deg" id="2step-2-component-with-props" tabindex="-1"><span class="step-badge" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Component with Props</h3>
 <p>Now let's make it dynamic. Create <code>src/components/Welcome.js</code>:</p>
-<pre><code class="language-jsx">// A component that accepts props to customize the greeting
-function Welcome({ name, age }) {
-  return (
-    &lt;div&gt;
-      &lt;h2&gt;Welcome, {name}!&lt;/h2&gt;
-      &lt;p&gt;You are {age} years old.&lt;/p&gt;
-    &lt;/div&gt;
+<pre class="hljs"><code><span class="hljs-comment">// A component that accepts props to customize the greeting</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">Welcome</span>(<span class="hljs-params">{ name, age }</span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Welcome, {name}!<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>You are {age} years old.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-export default Welcome;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">Welcome</span>;
 </code></pre>
 <p>To use these components in your App.js:</p>
-<pre><code class="language-jsx">import Greeting from './components/Greeting';
-import Welcome from './components/Welcome';
+<pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-title class_">Greeting</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./components/Greeting&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">Welcome</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./components/Welcome&#x27;</span>;
 
-function App() {
-  return (
-    &lt;div&gt;
-      &lt;Greeting /&gt;
-      &lt;Welcome name=&quot;Sarah&quot; age={25} /&gt;
-      &lt;Welcome name=&quot;John&quot; age={30} /&gt;
-    &lt;/div&gt;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Greeting</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Welcome</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Sarah&quot;</span> <span class="hljs-attr">age</span>=<span class="hljs-string">{25}</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Welcome</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;John&quot;</span> <span class="hljs-attr">age</span>=<span class="hljs-string">{30}</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-export default App;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">App</span>;
 </code></pre>
 <blockquote class="callout callout--reflection-try" style="--tilt:-0.2deg;--glow-intensity:0.83">
 <div class="callout-label lift"><i class="fas fa-tools callout-icon" aria-hidden="true"></i><span>Hands-On — Try It Out</span></div>
@@ -193,34 +197,34 @@ Create these simple components and test them in your app before moving on to the
 <li><strong>Output</strong>: Returns JSX that renders the movie information</li>
 <li><strong>Reusability</strong>: Can be used for any movie object with the same structure</li>
 </ul>
-<pre><code class="language-jsx">import React from &quot;react&quot;;
+<pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;
 
-function MovieBlock({ movie, index }) {
-  return (
-    &lt;div className=&quot;trending-card&quot;&gt;
-      &lt;img src=&quot;/images/movie-placeholder.png&quot; className=&quot;card-image&quot; alt={movie.name} /&gt;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">MovieBlock</span>(<span class="hljs-params">{ movie, index }</span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;trending-card&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;/images/movie-placeholder.png&quot;</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;card-image&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">{movie.name}</span> /&gt;</span>
 
-      &lt;span className=&quot;card-rank&quot;&gt;{index + 1}&lt;/span&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;card-rank&quot;</span>&gt;</span>{index + 1}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
 
-      &lt;div className=&quot;card-content&quot;&gt;
-        &lt;span className=&quot;card-title&quot;&gt;{movie.name}&lt;/span&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;card-content&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;card-title&quot;</span>&gt;</span>{movie.name}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
 
-        &lt;div className=&quot;card-info&quot;&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;card-info&quot;</span>&gt;</span>
           {movie.year} | {movie.length} | Rated: {movie.rating}
-        &lt;/div&gt;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
-        &lt;div className=&quot;card-meta&quot;&gt;
-          &lt;span className=&quot;card-genre&quot;&gt;
-            {Array.isArray(movie.genre) ? movie.genre.join(', ') : movie.genre}
-          &lt;/span&gt;
-          &lt;span className=&quot;card-director&quot;&gt;Director: {movie.director}&lt;/span&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;card-meta&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;card-genre&quot;</span>&gt;</span>
+            {Array.isArray(movie.genre) ? movie.genre.join(&#x27;, &#x27;) : movie.genre}
+          <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;card-director&quot;</span>&gt;</span>Director: {movie.director}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-export default MovieBlock;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">MovieBlock</span>;
 </code></pre>
 <h3 id="line-by-line-breakdown" tabindex="-1">Line-by-Line Breakdown</h3>
 <ol>
@@ -263,15 +267,15 @@ export default MovieBlock;
 </li>
 </ol>
 <h3 id="expected-movie-data-structure" tabindex="-1">Expected Movie Data Structure</h3>
-<pre><code class="language-javascript">const movie = {
-  name: &quot;The Matrix&quot;,
-  year: 1999,
-  rating: &quot;R&quot;,
-  length: &quot;136 min&quot;,
-  description: &quot;A computer hacker learns...&quot;,
-  genre: [&quot;Action&quot;, &quot;Sci-Fi&quot;],
-  director: &quot;The Wachowskis&quot;,
-  stars: [&quot;Keanu Reeves&quot;, &quot;Laurence Fishburne&quot;]
+<pre class="hljs"><code><span class="hljs-keyword">const</span> movie = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;The Matrix&quot;</span>,
+  <span class="hljs-attr">year</span>: <span class="hljs-number">1999</span>,
+  <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;R&quot;</span>,
+  <span class="hljs-attr">length</span>: <span class="hljs-string">&quot;136 min&quot;</span>,
+  <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;A computer hacker learns...&quot;</span>,
+  <span class="hljs-attr">genre</span>: [<span class="hljs-string">&quot;Action&quot;</span>, <span class="hljs-string">&quot;Sci-Fi&quot;</span>],
+  <span class="hljs-attr">director</span>: <span class="hljs-string">&quot;The Wachowskis&quot;</span>,
+  <span class="hljs-attr">stars</span>: [<span class="hljs-string">&quot;Keanu Reeves&quot;</span>, <span class="hljs-string">&quot;Laurence Fishburne&quot;</span>]
 };
 </code></pre>
 <p>Notice how this component accepts a <code>movie</code> prop and displays its properties!</p>
@@ -289,40 +293,40 @@ What is the <code>{ movie }</code> syntax in the function parameters? How does t
 <li>JavaScript expressions go inside <code>{}</code></li>
 <li>Component names must start with a capital letter</li>
 </ul>
-<pre><code class="language-jsx">function Example() {
-  const movieTitle = &quot;The Matrix&quot;;
+<pre class="hljs"><code><span class="hljs-keyword">function</span> <span class="hljs-title function_">Example</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> movieTitle = <span class="hljs-string">&quot;The Matrix&quot;</span>;
   
-  return (
-    &lt;div className=&quot;movie&quot;&gt;
-      &lt;h3&gt;{movieTitle}&lt;/h3&gt;
-      &lt;img src=&quot;/movie-icon.png&quot; alt=&quot;Movie icon&quot; /&gt;
-    &lt;/div&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;movie&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>{movieTitle}<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;/movie-icon.png&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;Movie icon&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 </code></pre>
 <hr>
 <h2 id="creating-the-movies-list-component" tabindex="-1">Creating the Movies List Component</h2>
 <p>Now let's create a component to display a list of movies. Create <code>src/components/MoviesList.js</code>:</p>
-<pre><code class="language-jsx">import React from &quot;react&quot;;
-import &quot;./MoviesList.css&quot;;
-import MovieBlock from './MovieBlock';
+<pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;./MoviesList.css&quot;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">MovieBlock</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./MovieBlock&#x27;</span>;
 
-function MoviesList({ movies }) {
-  return (
-    &lt;div className=&quot;trending-section&quot;&gt;
-      &lt;h2 className=&quot;trending-title&quot;&gt;Your Movie Collection ({movies.length} movies)&lt;/h2&gt;
-      &lt;p className=&quot;trending-subtitle&quot;&gt;Discover and manage your favorite films&lt;/p&gt;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">MoviesList</span>(<span class="hljs-params">{ movies }</span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;trending-section&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;trending-title&quot;</span>&gt;</span>Your Movie Collection ({movies.length} movies)<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;trending-subtitle&quot;</span>&gt;</span>Discover and manage your favorite films<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 
-      &lt;div className=&quot;trending-cards&quot;&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;trending-cards&quot;</span>&gt;</span>
         {movies.map((movie, index) =&gt; (
-          &lt;MovieBlock key={movie.id} movie={movie} index={index} /&gt;
+          <span class="hljs-tag">&lt;<span class="hljs-name">MovieBlock</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{movie.id}</span> <span class="hljs-attr">movie</span>=<span class="hljs-string">{movie}</span> <span class="hljs-attr">index</span>=<span class="hljs-string">{index}</span> /&gt;</span>
         ))}
-      &lt;/div&gt;
-    &lt;/div&gt;
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-export default MoviesList;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">MoviesList</span>;
 </code></pre>
 <blockquote class="callout callout--reflection-consider" style="--tilt:-0.1deg;--glow-intensity:0.99">
 <div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
@@ -331,192 +335,192 @@ What is the <code>.map()</code> method doing here? Why do we need the <code>key<
 </blockquote>
 <h2 id="adding-sample-movie-data" tabindex="-1">Adding Sample Movie Data</h2>
 <p>Now let's add some sample movie data to our App component. Update <code>src/App.js</code>:</p>
-<pre><code class="language-jsx">import React from 'react';
-import MoviesList from './components/MoviesList';
-import './App.css';
+<pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">MoviesList</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./components/MoviesList&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./App.css&#x27;</span>;
 
-// Sample movie data for Week 3
-const movies = [
+<span class="hljs-comment">// Sample movie data for Week 3</span>
+<span class="hljs-keyword">const</span> movies = [
   {
-    id: 1,
-    name: &quot;The Matrix&quot;,
-    year: 1999,
-    rating: &quot;R&quot;,
-    length: &quot;136 minutes&quot;,
-    description: &quot;A computer programmer is led to fight an underground war against powerful computers who have constructed his entire reality with a system called the Matrix.&quot;,
-    genre: [&quot;Action&quot;, &quot;Sci-Fi&quot;],
-    director: &quot;The Wachowskis&quot;,
-    stars: [&quot;Keanu Reeves&quot;, &quot;Laurence Fishburne&quot;, &quot;Carrie-Anne Moss&quot;]
+    <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;The Matrix&quot;</span>,
+    <span class="hljs-attr">year</span>: <span class="hljs-number">1999</span>,
+    <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;R&quot;</span>,
+    <span class="hljs-attr">length</span>: <span class="hljs-string">&quot;136 minutes&quot;</span>,
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;A computer programmer is led to fight an underground war against powerful computers who have constructed his entire reality with a system called the Matrix.&quot;</span>,
+    <span class="hljs-attr">genre</span>: [<span class="hljs-string">&quot;Action&quot;</span>, <span class="hljs-string">&quot;Sci-Fi&quot;</span>],
+    <span class="hljs-attr">director</span>: <span class="hljs-string">&quot;The Wachowskis&quot;</span>,
+    <span class="hljs-attr">stars</span>: [<span class="hljs-string">&quot;Keanu Reeves&quot;</span>, <span class="hljs-string">&quot;Laurence Fishburne&quot;</span>, <span class="hljs-string">&quot;Carrie-Anne Moss&quot;</span>]
   },
   {
-    id: 2,
-    name: &quot;The Godfather&quot;,
-    year: 1972,
-    rating: &quot;R&quot;,
-    length: &quot;175 minutes&quot;,
-    description: &quot;The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.&quot;,
-    genre: [&quot;Crime&quot;, &quot;Drama&quot;],
-    director: &quot;Francis Ford Coppola&quot;,
-    stars: [&quot;Marlon Brando&quot;, &quot;Al Pacino&quot;, &quot;James Caan&quot;]
+    <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;The Godfather&quot;</span>,
+    <span class="hljs-attr">year</span>: <span class="hljs-number">1972</span>,
+    <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;R&quot;</span>,
+    <span class="hljs-attr">length</span>: <span class="hljs-string">&quot;175 minutes&quot;</span>,
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.&quot;</span>,
+    <span class="hljs-attr">genre</span>: [<span class="hljs-string">&quot;Crime&quot;</span>, <span class="hljs-string">&quot;Drama&quot;</span>],
+    <span class="hljs-attr">director</span>: <span class="hljs-string">&quot;Francis Ford Coppola&quot;</span>,
+    <span class="hljs-attr">stars</span>: [<span class="hljs-string">&quot;Marlon Brando&quot;</span>, <span class="hljs-string">&quot;Al Pacino&quot;</span>, <span class="hljs-string">&quot;James Caan&quot;</span>]
   },
   {
-    id: 3,
-    name: &quot;Pulp Fiction&quot;,
-    year: 1994,
-    rating: &quot;R&quot;,
-    length: &quot;154 minutes&quot;,
-    description: &quot;The lives of two mob hitmen, a boxer, a gangster and his wife intertwine in four tales of violence and redemption.&quot;,
-    genre: [&quot;Crime&quot;, &quot;Drama&quot;],
-    director: &quot;Quentin Tarantino&quot;,
-    stars: [&quot;John Travolta&quot;, &quot;Uma Thurman&quot;, &quot;Samuel L. Jackson&quot;]
+    <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>,
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Pulp Fiction&quot;</span>,
+    <span class="hljs-attr">year</span>: <span class="hljs-number">1994</span>,
+    <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;R&quot;</span>,
+    <span class="hljs-attr">length</span>: <span class="hljs-string">&quot;154 minutes&quot;</span>,
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;The lives of two mob hitmen, a boxer, a gangster and his wife intertwine in four tales of violence and redemption.&quot;</span>,
+    <span class="hljs-attr">genre</span>: [<span class="hljs-string">&quot;Crime&quot;</span>, <span class="hljs-string">&quot;Drama&quot;</span>],
+    <span class="hljs-attr">director</span>: <span class="hljs-string">&quot;Quentin Tarantino&quot;</span>,
+    <span class="hljs-attr">stars</span>: [<span class="hljs-string">&quot;John Travolta&quot;</span>, <span class="hljs-string">&quot;Uma Thurman&quot;</span>, <span class="hljs-string">&quot;Samuel L. Jackson&quot;</span>]
   },
   {
-    id: 4,
-    name: &quot;The Dark Knight&quot;,
-    year: 2008,
-    rating: &quot;PG-13&quot;,
-    length: &quot;152 minutes&quot;,
-    description: &quot;When the menace known as The Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests.&quot;,
-    genre: [&quot;Action&quot;, &quot;Crime&quot;, &quot;Drama&quot;],
-    director: &quot;Christopher Nolan&quot;,
-    stars: [&quot;Christian Bale&quot;, &quot;Heath Ledger&quot;, &quot;Aaron Eckhart&quot;]
+    <span class="hljs-attr">id</span>: <span class="hljs-number">4</span>,
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;The Dark Knight&quot;</span>,
+    <span class="hljs-attr">year</span>: <span class="hljs-number">2008</span>,
+    <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;PG-13&quot;</span>,
+    <span class="hljs-attr">length</span>: <span class="hljs-string">&quot;152 minutes&quot;</span>,
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;When the menace known as The Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests.&quot;</span>,
+    <span class="hljs-attr">genre</span>: [<span class="hljs-string">&quot;Action&quot;</span>, <span class="hljs-string">&quot;Crime&quot;</span>, <span class="hljs-string">&quot;Drama&quot;</span>],
+    <span class="hljs-attr">director</span>: <span class="hljs-string">&quot;Christopher Nolan&quot;</span>,
+    <span class="hljs-attr">stars</span>: [<span class="hljs-string">&quot;Christian Bale&quot;</span>, <span class="hljs-string">&quot;Heath Ledger&quot;</span>, <span class="hljs-string">&quot;Aaron Eckhart&quot;</span>]
   },
   {
-    id: 5,
-    name: &quot;Forrest Gump&quot;,
-    year: 1994,
-    rating: &quot;PG-13&quot;,
-    length: &quot;142 minutes&quot;,
-    description: &quot;The presidencies of Kennedy and Johnson, the Vietnam War, the Watergate scandal and other historical events unfold from the perspective of an Alabama man.&quot;,
-    genre: [&quot;Drama&quot;, &quot;Romance&quot;],
-    director: &quot;Robert Zemeckis&quot;,
-    stars: [&quot;Tom Hanks&quot;, &quot;Robin Wright&quot;, &quot;Gary Sinise&quot;]
+    <span class="hljs-attr">id</span>: <span class="hljs-number">5</span>,
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Forrest Gump&quot;</span>,
+    <span class="hljs-attr">year</span>: <span class="hljs-number">1994</span>,
+    <span class="hljs-attr">rating</span>: <span class="hljs-string">&quot;PG-13&quot;</span>,
+    <span class="hljs-attr">length</span>: <span class="hljs-string">&quot;142 minutes&quot;</span>,
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;The presidencies of Kennedy and Johnson, the Vietnam War, the Watergate scandal and other historical events unfold from the perspective of an Alabama man.&quot;</span>,
+    <span class="hljs-attr">genre</span>: [<span class="hljs-string">&quot;Drama&quot;</span>, <span class="hljs-string">&quot;Romance&quot;</span>],
+    <span class="hljs-attr">director</span>: <span class="hljs-string">&quot;Robert Zemeckis&quot;</span>,
+    <span class="hljs-attr">stars</span>: [<span class="hljs-string">&quot;Tom Hanks&quot;</span>, <span class="hljs-string">&quot;Robin Wright&quot;</span>, <span class="hljs-string">&quot;Gary Sinise&quot;</span>]
   }
 ];
 
-function App() {
-  return (
-    &lt;div className=&quot;app&quot;&gt;
-      &lt;header className=&quot;app-header&quot;&gt;
-        &lt;h1&gt;🎬 Movie Buzz&lt;/h1&gt;
-        &lt;p&gt;Where all the best movies live...&lt;/p&gt;
-      &lt;/header&gt;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;app-header&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>🎬 Movie Buzz<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Where all the best movies live...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span>
 
-      &lt;main className=&quot;app-main&quot;&gt;
-        &lt;MoviesList movies={movies} /&gt;
-      &lt;/main&gt;
-    &lt;/div&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">main</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;app-main&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">MoviesList</span> <span class="hljs-attr">movies</span>=<span class="hljs-string">{movies}</span> /&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 
-export default App;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">App</span>;
 </code></pre>
 <h2 id="adding-netflix-style-movie-card-styling" tabindex="-1">Adding Netflix-Style Movie Card Styling</h2>
 <p>Now let's add some beautiful Netflix-inspired styling to make our movie cards look professional. This CSS is already provided for you in <code>src/components/MoviesList.css</code> — open it to see how the classes connect to the JSX you just wrote:</p>
-<pre><code class="language-css">/* Netflix-style movie section */
-.trending-section {
-  background: #000;
-  padding: 40px 20px;
-  border-radius: 24px;
-  margin: 20px;
+<pre class="hljs"><code><span class="hljs-comment">/* Netflix-style movie section */</span>
+<span class="hljs-selector-class">.trending-section</span> {
+  <span class="hljs-attribute">background</span>: <span class="hljs-number">#000</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">40px</span> <span class="hljs-number">20px</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">24px</span>;
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">20px</span>;
 }
 
-.trending-title {
-  color: rgb(194, 143, 41);
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 8px;
+<span class="hljs-selector-class">.trending-title</span> {
+  <span class="hljs-attribute">color</span>: <span class="hljs-built_in">rgb</span>(<span class="hljs-number">194</span>, <span class="hljs-number">143</span>, <span class="hljs-number">41</span>);
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">2.5rem</span>;
+  <span class="hljs-attribute">font-weight</span>: bold;
+  <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">8px</span>;
 }
 
-.trending-subtitle {
-  color: #ccc;
-  font-size: 1.1rem;
-  margin-bottom: 24px;
-  font-style: italic;
+<span class="hljs-selector-class">.trending-subtitle</span> {
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#ccc</span>;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.1rem</span>;
+  <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">24px</span>;
+  <span class="hljs-attribute">font-style</span>: italic;
 }
 
-/* Horizontal scrolling card row */
-.trending-cards {
-  display: flex;
-  gap: 32px;
-  padding: 20px 0;
-  overflow-x: auto;
+<span class="hljs-comment">/* Horizontal scrolling card row */</span>
+<span class="hljs-selector-class">.trending-cards</span> {
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">gap</span>: <span class="hljs-number">32px</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">20px</span> <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">overflow-x</span>: auto;
 }
 
-/* Individual movie card */
-.trending-card {
-  position: relative;
-  width: 280px;
-  min-width: 280px;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-  background: #222;
-  transition: transform 0.2s;
-  cursor: pointer;
+<span class="hljs-comment">/* Individual movie card */</span>
+<span class="hljs-selector-class">.trending-card</span> {
+  <span class="hljs-attribute">position</span>: relative;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">280px</span>;
+  <span class="hljs-attribute">min-width</span>: <span class="hljs-number">280px</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">18px</span>;
+  <span class="hljs-attribute">overflow</span>: hidden;
+  <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">8px</span> <span class="hljs-number">24px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0.5</span>);
+  <span class="hljs-attribute">background</span>: <span class="hljs-number">#222</span>;
+  <span class="hljs-attribute">transition</span>: transform <span class="hljs-number">0.2s</span>;
+  <span class="hljs-attribute">cursor</span>: pointer;
 }
 
-.trending-card:hover {
-  transform: scale(1.05);
+<span class="hljs-selector-class">.trending-card</span><span class="hljs-selector-pseudo">:hover</span> {
+  <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">scale</span>(<span class="hljs-number">1.05</span>);
 }
 
-.card-image {
-  width: 100%;
-  height: 320px;
-  object-fit: cover;
-  display: block;
+<span class="hljs-selector-class">.card-image</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">320px</span>;
+  <span class="hljs-attribute">object-fit</span>: cover;
+  <span class="hljs-attribute">display</span>: block;
 }
 
-.card-rank {
-  position: absolute;
-  left: 12px;
-  top: 12px;
-  font-size: 4.5rem;
-  font-weight: 900;
-  color: #fff;
-  text-shadow: 2px 2px 8px #000;
+<span class="hljs-selector-class">.card-rank</span> {
+  <span class="hljs-attribute">position</span>: absolute;
+  <span class="hljs-attribute">left</span>: <span class="hljs-number">12px</span>;
+  <span class="hljs-attribute">top</span>: <span class="hljs-number">12px</span>;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">4.5rem</span>;
+  <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">900</span>;
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#fff</span>;
+  <span class="hljs-attribute">text-shadow</span>: <span class="hljs-number">2px</span> <span class="hljs-number">2px</span> <span class="hljs-number">8px</span> <span class="hljs-number">#000</span>;
 }
 
-/* Card content overlays the image */
-.card-content {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  padding: 16px;
-  background: linear-gradient(0deg, rgba(0,0,0,0.95) 80%, transparent 100%);
-  color: #fff;
+<span class="hljs-comment">/* Card content overlays the image */</span>
+<span class="hljs-selector-class">.card-content</span> {
+  <span class="hljs-attribute">position</span>: absolute;
+  <span class="hljs-attribute">left</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">bottom</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">16px</span>;
+  <span class="hljs-attribute">background</span>: <span class="hljs-built_in">linear-gradient</span>(<span class="hljs-number">0deg</span>, <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0.95</span>) <span class="hljs-number">80%</span>, transparent <span class="hljs-number">100%</span>);
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#fff</span>;
 }
 
-.card-title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 8px;
-  display: block;
-  letter-spacing: 1px;
+<span class="hljs-selector-class">.card-title</span> {
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.2rem</span>;
+  <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">600</span>;
+  <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">8px</span>;
+  <span class="hljs-attribute">display</span>: block;
+  <span class="hljs-attribute">letter-spacing</span>: <span class="hljs-number">1px</span>;
 }
 
-.card-info {
-  margin-bottom: 8px;
-  font-size: 0.9rem;
-  color: rgb(194, 143, 41);
-  font-weight: 500;
+<span class="hljs-selector-class">.card-info</span> {
+  <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">8px</span>;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">0.9rem</span>;
+  <span class="hljs-attribute">color</span>: <span class="hljs-built_in">rgb</span>(<span class="hljs-number">194</span>, <span class="hljs-number">143</span>, <span class="hljs-number">41</span>);
+  <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">500</span>;
 }
 
-.card-meta {
-  margin-bottom: 12px;
-  font-size: 0.85rem;
+<span class="hljs-selector-class">.card-meta</span> {
+  <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">12px</span>;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">0.85rem</span>;
 }
 
-.card-genre {
-  color: #ccc;
-  display: block;
-  margin-bottom: 4px;
+<span class="hljs-selector-class">.card-genre</span> {
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#ccc</span>;
+  <span class="hljs-attribute">display</span>: block;
+  <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">4px</span>;
 }
 
-.card-director {
-  color: #ccc;
-  display: block;
+<span class="hljs-selector-class">.card-director</span> {
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#ccc</span>;
+  <span class="hljs-attribute">display</span>: block;
 }
 </code></pre>
 <hr>
@@ -566,5 +570,6 @@ How is passing props similar to calling a function with parameters? How is it di
 </div>
 <script src="https://cdn.tlm.cloud/anime/3.2.0/anime.min.js"></script>
 <script src="../assets/animations.js"></script>
+<script src="../assets/search.js"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@
 
 ## 🗺️ What You're Building This Week
 
-You are setting up the Movie Buzz project repository and creating its first commit history. By the end of this week you will have a Git-tracked project directory with a basic HTML/CSS movie page, a `.gitignore` file, and at least three meaningful commits pushed to GitHub. Every file you write for the rest of the course will live inside this repository.
+You are setting up the Movie Buzz project repository and creating its first commit history. By the end of this week you will have a Git-tracked project directory with a basic HTML/CSS movie page, a `.gitignore` file, and at least three meaningful commits pushed to the course GitLab repository. Every file you write for the rest of the course will live inside this repository.
 
 > 💡 **This week in the arc:** Week 01 is the foundation under everything else. The Git habits you build now — meaningful commit messages, proper staging, keeping `node_modules` out of version control — will matter every single week through Week 16.
 
@@ -19,7 +19,7 @@ By the end of this week you will be able to:
 - [ ] Navigate the file system using `cd`, `ls`, and `pwd` without looking up the syntax
 - [ ] Create and move files and directories using `mkdir`, `touch`, and `mv`
 - [ ] Initialize a Git repository, stage files, and create descriptive commits
-- [ ] Push a local repository to GitHub and verify the push succeeded
+- [ ] Push a local repository to GitLab and verify the push succeeded
 
 ---
 
@@ -98,7 +98,7 @@ git status
 - [ ] `git --version` returns a version number
 - [ ] `git config --global user.name` returns your name (not blank)
 - [ ] `git config --global user.email` returns your email (not blank)
-- [ ] You have a GitHub account and are logged in at github.com
+- [ ] You have a GitLab account and are logged in at gitlab.tlm.cloud
 
 </details>
 
@@ -180,7 +180,7 @@ Write it in the imperative mood, as if completing the sentence "This commit will
 
 Before moving on, try to answer:
 1. What is the difference between `git add .` and `git commit`? Why are they two separate commands instead of one?
-2. After you run `git commit`, where does the snapshot live — on your computer or on GitHub?
+2. After you run `git commit`, where does the snapshot live — on your computer or on GitLab?
 
 *(The answer to #2 is important — understand it before Task 3)*
 
@@ -188,12 +188,12 @@ Before moving on, try to answer:
 
 ---
 
-### Connecting to GitHub
+### Connecting to GitLab
 
-`git push` uploads your local commits to a remote repository (on GitHub). Before you can push, you need to connect your local repo to a remote:
+`git push` uploads your local commits to a remote repository (on GitLab). Before you can push, you need to connect your local repo to a remote:
 
 ```bash
-git remote add origin https://github.com/yourusername/movie-buzz.git
+git remote add origin https://gitlab.tlm.cloud/yourusername/movie-buzz.git
 git branch -M main
 git push -u origin main
 ```
@@ -301,30 +301,30 @@ After the first push with `-u`, future pushes are just `git push`.
 
 ---
 
-### Task 4: Push to GitHub
+### Task 4: Push to GitLab
 
-**What you're doing:** Create a new repository on GitHub and push your local commits there.
+**What you're doing:** Create a new repository on GitLab and push your local commits there.
 
 ```bash
-# TODO: Go to github.com and create a new repository named "movie-buzz"
+# TODO: Go to gitlab.tlm.cloud and create a new repository named "movie-buzz"
 #       - Set it to Public
 #       - Do NOT initialize it with a README (you already have local commits)
 # TODO: Copy the repository URL (HTTPS format)
-# TODO: Back in your terminal, connect your local repo to GitHub:
-git remote add origin https://github.com/YOUR_USERNAME/movie-buzz.git
+# TODO: Back in your terminal, connect your local repo to GitLab:
+git remote add origin https://gitlab.tlm.cloud/YOUR_USERNAME/movie-buzz.git
 git branch -M main
 git push -u origin main
 
-# TODO: Refresh github.com/YOUR_USERNAME/movie-buzz and verify your files appear
+# TODO: Refresh gitlab.tlm.cloud/YOUR_USERNAME/movie-buzz and verify your files appear
 # TODO: Click on "Commits" and confirm all three commits appear with your messages
 ```
 
 <details>
 <summary>💡 Hint</summary>
 
-- **Think about:** After `git push`, GitHub is a backup of your local repo. Any commit that exists locally but hasn't been pushed yet is not on GitHub.
+- **Think about:** After `git push`, GitLab is a backup of your local repo. Any commit that exists locally but has not been pushed yet is not on GitLab.
 - **Check:** If `git push` fails with "remote origin already exists," you already ran `git remote add origin` once. Skip that command and run `git push -u origin main` directly.
-- **The pattern looks like:** Create repo on GitHub → copy the URL → run the three commands in your terminal → refresh GitHub to verify.
+- **The pattern looks like:** Create repo on GitLab → copy the URL → run the three commands in your terminal → refresh GitLab to verify.
 
 </details>
 
@@ -342,7 +342,7 @@ git push -u origin main
 # TODO: Add .DS_Store (macOS system file) on its own line
 # TODO: Add .env on its own line (for secret keys you'll add later)
 # TODO: Commit the .gitignore file with message: "Add .gitignore"
-# TODO: Push the update to GitHub
+# TODO: Push the update to GitLab
 ```
 
 <details>
@@ -407,7 +407,7 @@ git rm -r --cached node_modules/
 <summary>❌ Error: `git push` fails with `src refspec main does not match any`</summary>
 
 **Why this happens:**
-Your local branch is named `master` (the old Git default) but you're trying to push to `main`. GitHub now uses `main` as the default.
+Your local branch is named `master` (the old Git default) but you are trying to push to `main`. GitLab uses `main` as the default branch name.
 
 **Check these things:**
 1. Run `git branch` to see what your current branch is named.
@@ -433,7 +433,7 @@ Before marking this week complete, verify each item by running your code:
 
 - [ ] **Directory structure built:** `ls movie-buzz` shows `index.html`, `assets/`, `js/`, `style/`, `.gitignore`
 - [ ] **Three commits in history:** `git log --oneline` in `movie-buzz/` shows three commits with descriptive messages
-- [ ] **Pushed to GitHub:** Refresh `github.com/YOUR_USERNAME/movie-buzz` — files and commits appear
+- [ ] **Pushed to GitLab: Refresh `gitlab.tlm.cloud/YOUR_USERNAME/movie-buzz` — files and commits appear
 - [ ] **`.gitignore` working:** Create a test `node_modules/` directory, run `git status`, confirm it does not appear as untracked
 - [ ] **TLM Roadtrip (optional but encouraged):** Complete the bash navigation challenge in `TLM_Roadtrip/` — see its README for instructions
 
@@ -490,7 +490,7 @@ Shell scripts are how professional developers automate repetitive setup tasks. E
 | Resource | Why It's Useful |
 |----------|----------------|
 | [Git Official Docs](https://git-scm.com/doc) | Authoritative reference for every Git command |
-| [GitHub Docs: Creating a repo](https://docs.github.com/en/get-started/quickstart/create-a-repo) | Step-by-step for setting up your first GitHub repo |
+| [GitLab Docs: Creating a repo](https://docs.gitlab.tlm.cloud/en/get-started/quickstart/create-a-repo) | Step-by-step for setting up your first GitLab repo |
 | [Atlassian Git Tutorial](https://www.atlassian.com/git/tutorials) | Visual explanations of staging, commits, and branching |
 | [gitignore.io](https://www.toptal.com/developers/gitignore) | Generate `.gitignore` files for any project type |
 | [TLM Roadtrip](./TLM_Roadtrip/) | Supplemental bash navigation challenge included with this week |
