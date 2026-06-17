@@ -15,6 +15,8 @@ A GitHub Actions workflow (`.github/workflows/deploy-gitlab-pages.yml`) does the
 5. Runs `npm run build`.
 6. Deploys the generated `build/` or `dist/` output to GitHub Pages.
 
+The GitLab source URL is defined once as `GITLAB_REPO_URL` in that workflow.
+
 ## Publishing
 
 1. In this GitHub repository, open **Settings → Pages**.

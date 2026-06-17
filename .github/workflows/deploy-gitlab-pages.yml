@@ -5,6 +5,9 @@ on:
   schedule:
     - cron: "0 6 * * *"
 
+env:
+  GITLAB_REPO_URL: https://gitlab.com/eric.petross/tlm-mern-moviebuzz-revamp.git
+
 permissions:
   contents: read
   pages: write
@@ -22,7 +25,7 @@ jobs:
         env:
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
         run: |
-          GITLAB_URL="https://gitlab.com/eric.petross/tlm-mern-moviebuzz-revamp.git"
+          GITLAB_URL="${GITLAB_REPO_URL}"
 
           if [ -n "$GITLAB_TOKEN" ]; then
             ASKPASS_SCRIPT="/tmp/gitlab-askpass.sh"
@@ -36,10 +39,9 @@ jobs:
             chmod 700 "$ASKPASS_SCRIPT"
             GIT_ASKPASS="$ASKPASS_SCRIPT" GIT_TERMINAL_PROMPT=0 git clone "$GITLAB_URL" source
             rm -f "$ASKPASS_SCRIPT"
-            exit 0
+          else
+            git clone "$GITLAB_URL" source
           fi
-
-          git clone "$GITLAB_URL" source
 
       - name: Resolve Node.js version
         id: node-version
