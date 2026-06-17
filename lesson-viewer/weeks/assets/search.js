@@ -26,8 +26,14 @@
     return escapeHtml(text).replace(re, '<mark class="search-highlight">$1</mark>');
   }
 
-  function render(matches, query) {
+  function render(matches, query, opts) {
+    opts = opts || {};
     if (!query) { results.innerHTML = ''; results.hidden = true; return; }
+    if (opts.error) {
+      results.innerHTML = '<p class="search-error">Search is temporarily unavailable. Try reloading the page, or ask your instructor.</p>';
+      results.hidden = false;
+      return;
+    }
     if (!matches.length) {
       results.innerHTML = '<p class="search-empty">No results for <em>' + escapeHtml(query) + '</em></p>';
       results.hidden = false;
@@ -59,9 +65,16 @@
     if (loading) return;
     loading = true;
     fetch('../assets/search-index.json')
-      .then(function (r) { return r.json(); })
+      .then(function (r) {
+        if (!r.ok) throw new Error('search-index fetch failed: ' + r.status);
+        return r.json();
+      })
       .then(function (data) { index = data; loading = false; callback(); })
-      .catch(function () { loading = false; render([], input.value.trim()); });
+      .catch(function (err) {
+        loading = false;
+        console.error('Search index failed to load:', err);
+        render([], input.value.trim(), { error: true });
+      });
   }
 
   input.addEventListener('input', function () {

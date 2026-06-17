@@ -57,13 +57,7 @@
 <li><a href="#setting-up-express">Setting Up Express</a></li>
 <li><a href="#creating-api-routes">Creating API Routes</a></li>
 <li><a href="#understanding-cors">Understanding CORS</a></li>
-<li><a href="#building-movie-buzz-api">Building Movie Buzz API</a>
-<ul>
-<li><a href="#creating-controllers">Creating Controllers</a></li>
-<li><a href="#setting-up-routes">Setting Up Routes</a></li>
-<li><a href="#adding-middleware">Adding Middleware</a></li>
-</ul>
-</li>
+<li><a href="#building-movie-buzz-api">Building Movie Buzz API</a></li>
 <li><a href="#testing-api-endpoints">Testing API Endpoints</a></li>
 <li><a href="#connecting-react-frontend">Connecting React Frontend</a></li>
 <li><a href="#error-handling">Error Handling</a></li>
@@ -280,7 +274,7 @@ curl http://localhost:3000/protected
 <span class="hljs-comment"># Protected endpoint (should succeed)</span>
 curl -H <span class="hljs-string">&quot;Authorization: Bearer valid-token&quot;</span> http://localhost:3000/protected
 </code></pre>
-<blockquote class="callout callout--reflection-try" style="--tilt:0.4deg;--glow-intensity:0.76">
+<blockquote class="callout callout--reflection-try" style="--tilt:0deg;--glow-intensity:0.95">
 <div class="callout-label lift"><i class="fas fa-tools callout-icon" aria-hidden="true"></i><span>Hands-On — Try It Out</span></div>
 <p><code>Try It Out</code>
 Create and test these Express examples to understand:</p>
@@ -321,7 +315,7 @@ app.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x
 });
 </code></pre>
 <p>Express is the &quot;E&quot; in MEAN and MERN stack, making it an essential part of full-stack JavaScript development.</p>
-<blockquote class="callout callout--reflection-consider" style="--tilt:0.1deg;--glow-intensity:0.64">
+<blockquote class="callout callout--reflection-consider" style="--tilt:-0.2deg;--glow-intensity:0.83">
 <div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code>
 Based on your HTTP server experience from Week 8, what specific problems do you think Express solves?</p>
@@ -932,7 +926,7 @@ curl -X DELETE http://localhost:4000/api/movies/1
 <li>Real-time data synchronization between frontend and backend</li>
 </ul>
 <p>This represents a major milestone: you now have a full-stack MERN application (missing only the MongoDB, which we'll add soon)!</p>
-<blockquote class="callout callout--reflection-consider" style="--tilt:-0.1deg;--glow-intensity:0.69">
+<blockquote class="callout callout--reflection-consider" style="--tilt:0.2deg;--glow-intensity:0.88">
 <div class="callout-label lift"><i class="fas fa-brain callout-icon" aria-hidden="true"></i><span>Reflection — Consider This</span></div>
 <p><code>Consider This</code><br>
 How does having a separate API backend change the architecture of your application? What new possibilities does this enable?</p>

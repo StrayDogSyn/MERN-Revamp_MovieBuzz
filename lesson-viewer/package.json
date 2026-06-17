@@ -4,7 +4,11 @@
   "description": "Static pre-rendering build for the Movie Buzz student.md lesson viewer (TLM Brand Guide 2022)",
   "private": true,
   "scripts": {
-    "build": "node build.js"
+    "build": "node build.js && npm run guard:all",
+    "guard:all": "npm run guard:html && npm run guard:css && npm run guard:anchors",
+    "guard:html": "node scripts/audit-html-passthrough.js && node scripts/audit-guards.js",
+    "guard:css": "node scripts/audit-duplicate-css-selectors.js",
+    "guard:anchors": "node scripts/audit-toc-anchors.js"
   },
   "dependencies": {
     "highlight.js": "^11.11.1",

@@ -27,8 +27,8 @@ function markdownSlugify(str) {
 }
 
 const md = new MarkdownIt({
-  html: true,
-  linkify: false,
+  html: true,       // required: student.md files use raw <details>/<summary> blocks for disclosure widgets
+  linkify: false,   // fixed in prior pass; bare identifiers like todo.id must not become external links
   typographer: false,
   highlight(code, lang) {
     if (lang && hljs.getLanguage(lang)) {
@@ -154,14 +154,27 @@ function main() {
   const template = fs.readFileSync(TEMPLATE_PATH, 'utf8');
   const targets = WEEKS.filter(w => w.prototype);
   const searchIndex = [];
+  let errorCount = 0;
 
   for (const week of targets) {
-    renderWeek(week, template, searchIndex);
+    try {
+      renderWeek(week, template, searchIndex);
+    } catch (err) {
+      console.error(`\nBuild failed while processing: ${path.join(REPO_ROOT, week.dirName, 'student.md')}`);
+      console.error(`Reason: ${err.message}\n`);
+      errorCount++;
+    }
+  }
+
+  if (errorCount > 0) {
+    console.error(`Build aborted — ${errorCount} source file(s) failed. Fix the error(s) above and re-run.`);
+    process.exit(1);
   }
 
   const indexPath = path.join(OUT_DIR, 'assets', 'search-index.json');
   fs.writeFileSync(indexPath, JSON.stringify(searchIndex, null, 2), 'utf8');
   console.log(`Wrote search-index.json (${searchIndex.length} entries)`);
+  console.log(`\nBuild summary: ${targets.length} page(s) built, 0 errors.`);
 }
 
 main();

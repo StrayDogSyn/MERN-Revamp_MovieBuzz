@@ -450,7 +450,6 @@ details > summary::before {
   display: inline-block;
   margin-right: 9px;
   color: var(--tlm-gold);
-  transition: transform 0.15s ease;
 }
 
 details[open] > summary::before {
@@ -724,7 +723,6 @@ li.task-list-item { list-style: none; margin-left: -1.4em; }
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: inherit;
   background-image: var(--noise);
   background-size: 200px 200px;
   opacity: 0.025;
@@ -1026,6 +1024,13 @@ details[open] {
   padding: 12px 14px;
   font-size: 0.82rem;
   color: var(--text-dim);
+  margin: 0;
+}
+
+.search-error {
+  padding: 12px 14px;
+  font-size: 0.82rem;
+  color: #c0622a;
   margin: 0;
 }
 
