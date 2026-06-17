@@ -277,16 +277,16 @@ When your tests pass, you can confidently say:
 ## 📚 Learning Resources
 
 ### **Testing Fundamentals**
-- [Introduction to Software Testing](https://www.guru99.com/software-testing-introduction-importance.html)
-- [Testing Best Practices](https://testautomationu.applitools.com/)
+- Introduction to Software Testing — ask your instructor for the offline reference
+- Testing Best Practices — ask your instructor for the offline reference
 
 ### **JavaScript Testing**
-- [Jest Testing Framework](https://jestjs.io/docs/getting-started)
-- [Testing React Applications](https://testing-library.com/docs/react-testing-library/intro/)
+- Jest Testing Framework — see the offline docs snapshot in the TLM Help Desk portal
+- Testing React Applications — see the offline docs snapshot in the TLM Help Desk portal
 
 ### **Career Resources**
-- [QA Engineer Career Path](https://www.coursera.org/articles/qa-engineer)
-- [Software Testing in Job Interviews](https://www.interviewbit.com/software-testing-interview-questions/)
+- QA Engineer Career Path — ask your instructor for recommended reading
+- Software Testing in Job Interviews — ask your instructor for the interview prep guide
 
 ---
 

@@ -256,11 +256,11 @@ Node.js is either not installed, or it was installed but your terminal doesn't k
 **The fix:**
 ```bash
 # Download and install Node.js LTS from:
-# https://nodejs.org/en/download
+# Ask your instructor for the Node.js offline installer (available from TLM Help Desk)
 
 # OR install nvm first (preferred) and use it to install Node.js:
 # macOS / Linux:
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+ bash| bash
 # Then close and reopen your terminal, then:
 nvm install --lts
 nvm use --lts
@@ -375,10 +375,10 @@ Seeing the finished product before you build it gives you a concrete mental mode
 
 | Resource | Why It's Useful |
 |----------|----------------|
-| [Node.js LTS Downloads](https://nodejs.org/en/download) | Official installer for Node.js on all platforms |
-| [Git Download](https://git-scm.com/downloads) | Official Git installer |
-| [VS Code Download](https://code.visualstudio.com/) | Official VS Code installer |
+| Node.js LTS installer (available offline from TLM Help Desk) | Official installer for Node.js on all platforms |
+| Git installer (available offline from TLM Help Desk) | Official Git installer |
+| VS Code installer (available offline from TLM Help Desk) | Official VS Code installer |
 | [GitLab](https://gitlab.tlm.cloud) | Where you'll push all your course work |
-| [nvm (Node Version Manager)](https://www.npmjs.com/package/nvm) | Recommended way to manage Node.js versions on macOS/Linux |
+| nvm (Node Version Manager) — offline installer from TLM Help Desk | Recommended way to manage Node.js versions on macOS/Linux |
 
 > 📌 **Reminder:** `movie-buzz-finished/` is the reference implementation for the entire course. Use it to **verify your output**, not to copy code.

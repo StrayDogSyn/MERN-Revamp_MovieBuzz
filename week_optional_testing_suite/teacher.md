@@ -244,10 +244,10 @@ npm run cleanup
 ## 📚 Resources and References
 
 ### **Testing Documentation**
-- [Jest Testing Framework](https://jestjs.io/docs/getting-started)
-- [Puppeteer E2E Testing](https://pptr.dev/)
-- [Supertest API Testing](https://www.npmjs.com/package/supertest)
-- [MongoDB Memory Server](https://www.npmjs.com/package/mongodb-memory-server)
+- Jest Testing Framework — offline docs snapshot available from TLM Help Desk
+- Puppeteer E2E Testing — offline docs snapshot available from TLM Help Desk
+- Supertest API Testing — installed via npm, no external access required
+- MongoDB Memory Server — installed via npm, no external access required
 
 ### **Best Practices**
 - Write descriptive test names that explain what is being tested

@@ -192,9 +192,9 @@ npm run build
 
 ## Resources
 
-- [Slidev Documentation](https://sli.dev)
-- [Slidev Themes](https://sli.dev/themes/gallery.html)
-- [Markdown Guide](https://sli.dev/guide/syntax.html)
+- Slidev Documentation — see the offline copy in the TLM Help Desk portal
+- Slidev Themes — see the offline copy in the TLM Help Desk portal
+- Markdown Guide — see the offline copy in the TLM Help Desk portal
 
 ## License
 

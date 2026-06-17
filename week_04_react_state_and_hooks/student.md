@@ -496,10 +496,10 @@ This requires lifting state up — the "show favorites only" toggle lives in the
 
 | Resource | Why It's Useful |
 |----------|----------------|
-| [React Docs: useState](https://react.dev/reference/react/useState) | Official reference with interactive examples |
-| [React Docs: useEffect](https://react.dev/reference/react/useEffect) | Explains the dependency array in depth |
-| [React Docs: Responding to Events](https://react.dev/learn/responding-to-events) | Covers the onClick/onChange patterns used this week |
-| [React Docs: State: A Component's Memory](https://react.dev/learn/state-a-components-memory) | Best conceptual explanation of what state actually is |
-| [MDN: localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) | Reference for the Stretch Goal 1 persistence feature |
+| React Docs: useState (see offline React reference in TLM Help Desk portal) | Official reference with interactive examples |
+| React Docs: useEffect (see offline React reference in TLM Help Desk portal) | Explains the dependency array in depth |
+| React Docs: Responding to Events (see offline React reference in TLM Help Desk portal) | Covers the onClick/onChange patterns used this week |
+| React Docs: State — A Component's Memory (see offline React reference in TLM Help Desk portal) | Best conceptual explanation of what state actually is |
+| MDN: localStorage (see offline MDN Web Docs snapshot in TLM Help Desk portal) | Reference for the Stretch Goal 1 persistence feature |
 
 > 📌 **Reminder:** `movie-buzz-finished/` is the reference implementation. Use it to **verify your output**, not to copy code.

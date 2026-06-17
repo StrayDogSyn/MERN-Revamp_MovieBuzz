@@ -13,8 +13,8 @@ Before starting this lesson, verify the following:
    ```
    If not installed, follow the installation guide for your OS:
    - **macOS**: `brew tap mongodb/brew && brew install mongodb-community`
-   - **Windows**: Download from [mongodb.com/try/download/community](https://www.mongodb.com/try/download/community)
-   - **Linux**: Follow [mongodb.com/docs/manual/administration/install-on-linux](https://www.mongodb.com/docs/manual/administration/install-on-linux/)
+   - **Windows**: Download from TLM Help Desk portal (MongoDB offline installer available)
+   - **Linux**: Follow TLM Help Desk portal (MongoDB offline installer and Linux setup guide available)
 
 2. **MongoDB is running**:
    ```bash

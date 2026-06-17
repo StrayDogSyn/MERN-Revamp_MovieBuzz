@@ -489,10 +489,10 @@ Shell scripts are how professional developers automate repetitive setup tasks. E
 
 | Resource | Why It's Useful |
 |----------|----------------|
-| [Git Official Docs](https://git-scm.com/doc) | Authoritative reference for every Git command |
+| Git Official Docs (ask instructor for offline PDF reference) | Authoritative reference for every Git command |
 | [GitLab Docs: Creating a repo](https://docs.gitlab.tlm.cloud/en/get-started/quickstart/create-a-repo) | Step-by-step for setting up your first GitLab repo |
-| [Atlassian Git Tutorial](https://www.atlassian.com/git/tutorials) | Visual explanations of staging, commits, and branching |
-| [gitignore.io](https://www.toptal.com/developers/gitignore) | Generate `.gitignore` files for any project type |
+| Atlassian Git Tutorial (ask instructor for offline Git reference booklet) | Visual explanations of staging, commits, and branching |
+| gitignore templates (standard templates included in TLM course repo starter files) | Generate `.gitignore` files for any project type |
 | [TLM Roadtrip](./TLM_Roadtrip/) | Supplemental bash navigation challenge included with this week |
 
 > 📌 **Reminder:** `movie-buzz-finished/` is the reference implementation for the full application. Use it to **verify your output**, not to copy code.
