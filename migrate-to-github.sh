@@ -13,9 +13,9 @@
 set -euo pipefail
 
 # ─── Config — the only two lines you might edit ──────────────────────────────
-GITHUB_REMOTE="https://github.com/StrayDogSyn/MERN-Revamp_MovieBuzz.git"
+GITHUB_REMOTE="https://github.com/StrayDogSyn/MERN-peer-review.git"
 GITHUB_USER="StrayDogSyn"
-REPO_NAME="MERN-Revamp_MovieBuzz"
+REPO_NAME="MERN-peer-review"
 # ─────────────────────────────────────────────────────────────────────────────
 
 GOLD='\033[0;33m'; RED='\033[0;31m'; GREEN='\033[0;32m'; NC='\033[0m'
@@ -25,30 +25,25 @@ die()  { echo -e "${RED}✗ $1${NC}" >&2; exit 1; }
 
 # ─── Sanity: are we in the right place? ──────────────────────────────────────
 [ -d .git ] || die "No .git here. Run this from your project root (the folder git tracks)."
-[ -d movie-buzz-finished ] || say "Heads up: no movie-buzz-finished/ dir found — confirm you're in the project root."
+[ -d lesson-viewer ] || say "Heads up: no lesson-viewer/ dir found — confirm you're in the project root."
 
 # ─── STEP 1: secrets gate (HARD — blocks the whole script) ───────────────────
 say "Scanning for secrets before anything touches GitHub..."
 
 LEAKS=0
 
-# .env tracked right now? Skip the intentionally-tracked CRA dev file (no secrets).
-while IFS= read -r tracked_env; do
-  # movie-buzz-finished/client/.env is deliberately tracked (HOST + DANGEROUSLY_DISABLE_HOST_CHECK only)
-  if [[ "$tracked_env" == "movie-buzz-finished/client/.env" ]]; then
-    continue
-  fi
-  echo -e "${RED}  Unexpected .env tracked: $tracked_env${NC}"
-  LEAKS=1
-done < <(git ls-files | grep -iE '(^|/)\.env$' || true)
+# .env tracked right now?
+if git ls-files | grep -qiE '(^|/)\.env$'; then
+  echo -e "${RED}  .env is currently tracked by git.${NC}"; LEAKS=1
+fi
 
 # .env anywhere in history (outside the known-safe client file)?
 if git log --all --oneline -- '*.env' ':(exclude)movie-buzz-finished/client/.env' 2>/dev/null | grep -q .; then
   echo -e "${RED}  .env appears in git HISTORY (untracking now isn't enough — history needs purging).${NC}"; LEAKS=1
 fi
 
-# live-looking credentials in tracked files
-# exclusions: markdown, examples, node_modules, lesson HTML (curriculum examples with localhost URIs), week_* dirs
+# live-looking credentials?
+if git log --all --oneline -- '*ples with localhost URIs), week_* dirs
 if git grep -niE 'mongodb(\+srv)?://[^ "'"'"']+|password\s*=\s*['"'"'"][^'"'"'"]+|secret\s*=\s*['"'"'"][^'"'"'"]+|api[_-]?key\s*=\s*['"'"'"][^'"'"'"]+' \
    -- \
    ':(exclude)*.md' \
