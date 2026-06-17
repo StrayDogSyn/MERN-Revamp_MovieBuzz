@@ -34,4 +34,4 @@ ok "Pushed."
 
 echo
 ok "Deployment triggered."
-echo -e "${GOLD}Check workflow status at: https://github.com/StrayDogSyn/MERN-peer-review/actions${NC}"
+echo -e "${GOLD}Check workflow status at: https://github.com/StrayDogSyn/MERN-Revamp_MovieBuzz/actions${NC}"
