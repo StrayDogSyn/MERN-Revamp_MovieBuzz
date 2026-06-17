@@ -19,12 +19,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Clone GitLab repository
+        env:
+          GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
         run: |
-          if [ -n "${{ secrets.GITLAB_TOKEN }}" ]; then
-            GITLAB_URL="https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.com/eric.petross/tlm-mern-moviebuzz-revamp.git"
-          else
-            GITLAB_URL="https://gitlab.com/eric.petross/tlm-mern-moviebuzz-revamp.git"
+          GITLAB_URL="https://gitlab.com/eric.petross/tlm-mern-moviebuzz-revamp.git"
+
+          if [ -n "$GITLAB_TOKEN" ]; then
+            ASKPASS_SCRIPT="/tmp/gitlab-askpass.sh"
+            {
+              echo '#!/usr/bin/env sh'
+              echo 'case "$1" in'
+              echo '  *Username*) echo "oauth2" ;;'
+              echo '  *Password*) echo "$GITLAB_TOKEN" ;;'
+              echo 'esac'
+            } > "$ASKPASS_SCRIPT"
+            chmod 700 "$ASKPASS_SCRIPT"
+            GIT_ASKPASS="$ASKPASS_SCRIPT" GIT_TERMINAL_PROMPT=0 git clone "$GITLAB_URL" source
+            rm -f "$ASKPASS_SCRIPT"
+            exit 0
           fi
+
           git clone "$GITLAB_URL" source
 
       - name: Resolve Node.js version
@@ -58,7 +72,7 @@ jobs:
           cd "$APP_DIR"
 
           if ! node -e "const pkg=require('./package.json'); process.exit(pkg.scripts && pkg.scripts.build ? 0 : 1)"; then
-            echo "No build script found in ${APP_DIR}/package.json."
+            echo "No build script found in package.json for the selected app directory."
             exit 1
           fi
 
