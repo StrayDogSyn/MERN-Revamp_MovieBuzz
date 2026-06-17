@@ -20,12 +20,27 @@ jobs:
     steps:
       - name: Clone GitLab repository
         run: |
-          git clone https://gitlab.com/eric.petross/tlm-mern-moviebuzz-revamp.git source
+          if [ -n "${{ secrets.GITLAB_TOKEN }}" ]; then
+            GITLAB_URL="https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.com/eric.petross/tlm-mern-moviebuzz-revamp.git"
+          else
+            GITLAB_URL="https://gitlab.com/eric.petross/tlm-mern-moviebuzz-revamp.git"
+          fi
+          git clone "$GITLAB_URL" source
+
+      - name: Resolve Node.js version
+        id: node-version
+        run: |
+          if [ -f source/.nvmrc ]; then
+            NODE_VERSION="$(tr -d 'v[:space:]' < source/.nvmrc)"
+            echo "value=${NODE_VERSION}" >> "$GITHUB_OUTPUT"
+          else
+            echo "value=20" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: ${{ steps.node-version.outputs.value }}
 
       - name: Build static site
         run: |
@@ -41,6 +56,11 @@ jobs:
           fi
 
           cd "$APP_DIR"
+
+          if ! node -e "const pkg=require('./package.json'); process.exit(pkg.scripts && pkg.scripts.build ? 0 : 1)"; then
+            echo "No build script found in ${APP_DIR}/package.json."
+            exit 1
+          fi
 
           if [ -f package-lock.json ]; then
             npm ci
