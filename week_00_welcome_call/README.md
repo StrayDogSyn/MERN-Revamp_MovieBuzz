@@ -14,7 +14,7 @@
 │   Building "Movie Buzz" - Your Netflix-Style App           │
 │                                                             │
 │   [IMAGE: Netflix-style movie grid with colorful cards]    │
-│   https://images.unsplash.com/photo-1489599904095-47bcc2e  │
+│   [TLM_ASSET: contact media team for approved image]  │
 │                                                             │
 │   💻 17 Weeks of Progressive Learning                       │
 │   🚀 From Beginner to Full-Stack Developer                 │
@@ -37,7 +37,7 @@
 │   [N] Node.js      - 🟢 Runtime Environment                │
 │                                                             │
 │   [IMAGE: MERN stack diagram]                              │
-│   https://images.unsplash.com/photo-1555066931-4365d14bab │
+│   [TLM_ASSET: contact media team for approved image] │
 │                                                             │
 │   ✨ Full JavaScript Ecosystem                             │
 │   📱 Modern, Scalable Web Applications                     │
@@ -66,7 +66,7 @@
 │   Week 16:    Full-Stack Integration                       │
 │                                                             │
 │   [IMAGE: Learning progression roadmap]                    │
-│   https://images.unsplash.com/photo-1516321318423-f06f85  │
+│   [TLM_ASSET: contact media team for approved image]  │
 │                                                             │
 │   🎯 Each Week Builds on Previous Knowledge                │
 │                                                             │
@@ -91,7 +91,7 @@
 │   ✅ Trending Movies Section                               │
 │                                                             │
 │   [IMAGE: Movie database interface]                        │
-│   https://images.unsplash.com/photo-1489599904095-47bcc2e  │
+│   [TLM_ASSET: contact media team for approved image]  │
 │                                                             │
 │   🌟 Professional Portfolio Project                        │
 │                                                             │
@@ -119,7 +119,7 @@
 │   };                                                        │
 │                                                             │
 │   [IMAGE: Code editor with TODO comments]                  │
-│   https://images.unsplash.com/photo-1555066931-4365d14bab │
+│   [TLM_ASSET: contact media team for approved image] │
 │                                                             │
 │   💡 You Write Code, You Learn Code                        │
 │                                                             │
@@ -143,7 +143,7 @@
 │   🔸 Smooth Hover Animations                               │
 │                                                             │
 │   [IMAGE: Netflix-style interface]                         │
-│   https://images.unsplash.com/photo-1574267432553-4b4628  │
+│   [TLM_ASSET: contact media team for approved image]  │
 │                                                             │
 │   📱 Mobile-First: 85% width, 1em padding                 │
 │   🖥️ Desktop: Full responsive experience                   │
@@ -173,7 +173,7 @@
 │   📊 CRUD Operations                                        │
 │                                                             │
 │   [IMAGE: Technology logos arranged]                       │
-│   https://images.unsplash.com/photo-1555066931-4365d14bab │
+│   [TLM_ASSET: contact media team for approved image] │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -199,7 +199,7 @@
 │   📁 week_XX_topic/movie-buzz/ (Your Work)                 │
 │                                                             │
 │   [IMAGE: Development environment]                          │
-│   https://images.unsplash.com/photo-1461749280684-dccba630 │
+│   [TLM_ASSET: contact media team for approved image] │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -226,7 +226,7 @@
 │   5️⃣ Compare with finished version                         │
 │                                                             │
 │   [IMAGE: Organized folder structure]                       │
-│   https://images.unsplash.com/photo-1586281380349-632531d │
+│   [TLM_ASSET: contact media team for approved image] │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -248,7 +248,7 @@
 │   Week 15: DELETE  🗑️ DELETE /api/movies/:id               │
 │                                                             │
 │   [IMAGE: API endpoint testing in Postman]                 │
-│   https://images.unsplash.com/photo-1555066931-4365d14bab │
+│   [TLM_ASSET: contact media team for approved image] │
 │                                                             │
 │   ⚡ Real Database Operations                               │
 │   🧪 Testing with Postman                                  │
@@ -278,7 +278,7 @@
 │   🔍 Step-by-step implementation guides                    │
 │                                                             │
 │   [IMAGE: Collaborative learning]                           │
-│   https://images.unsplash.com/photo-1522202176988-66273375 │
+│   [TLM_ASSET: contact media team for approved image] │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -305,7 +305,7 @@
 │   💼 Portfolio-Ready Project                               │
 │                                                             │
 │   [IMAGE: Celebration/achievement]                          │
-│   https://images.unsplash.com/photo-1513475382585-d06e583 │
+│   [TLM_ASSET: contact media team for approved image] │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -331,7 +331,7 @@
 │   🎯 Focus on progress, not perfection                     │
 │                                                             │
 │   [IMAGE: Rocket launch or journey beginning]              │
-│   https://images.unsplash.com/photo-1446776877081-d282a0  │
+│   [TLM_ASSET: contact media team for approved image]  │
 │                                                             │
 │   🎬 Welcome to Movie Buzz Development!                    │
 │                                                             │
