@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import { movieService } from '../../services/movieService';
+import { getMovie } from '../../services/movieService';
 import './MovieForm.css';
 
 function MovieForm({ addMovie, editMovie, movies }) {
@@ -28,7 +28,7 @@ function MovieForm({ addMovie, editMovie, movies }) {
     } else {
       // Fallback: fetch directly (handles page refresh / direct links)
       setFetchingMovie(true);
-      movieService.getMovie(movieId)
+      getMovie(movieId)
         .then(movie => {
           populateForm(movie);
           setFetchingMovie(false);

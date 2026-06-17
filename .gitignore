@@ -11,3 +11,7 @@ node_modules/
 
 # Exception: client/.env is intentionally tracked (CRA DANGEROUSLY_DISABLE_HOST_CHECK, no secrets)
 !movie-buzz-finished/client/.env
+.env.*
+!.env.example
+client/build/
+_site/

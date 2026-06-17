@@ -36,7 +36,7 @@ if (process.env.NODE_ENV !== 'test') {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(movieRouter);
+app.use('/api/movies', movieRouter);
 
 // Global 404 handler
 app.use('*', (req, res) => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { movieService } from './services/movieService';
+import { getMovies, createMovie, updateMovie, deleteMovie } from './services/movieService';
 import MoviesList from './components/MoviesList/MoviesList';
 import MovieForm from './components/MovieForm/MovieForm';
 import Header from './components/HeaderFooter/Header';
@@ -28,7 +28,7 @@ function App() {
   const fetchMovies = () => {
     setLoading(true);
     setError(null);
-    movieService.getMovies()
+    getMovies()
       .then(data => {
         setMovies(data);
         setLoading(false);
@@ -45,7 +45,7 @@ function App() {
   }, []);
 
   const onDelete = (movieId) => {
-    movieService.deleteMovie(movieId)
+    deleteMovie(movieId)
       .then(deleted => {
         setMovies(prev => prev.filter(movie => movie._id !== deleted._id));
       })
@@ -56,7 +56,7 @@ function App() {
   };
 
   const onAdd = (movie) => {
-    return movieService.createMovie(movie)
+    return createMovie(movie)
       .then(newMovie => {
         setMovies(prev => [...prev, newMovie]);
       });
@@ -64,7 +64,7 @@ function App() {
   };
 
   const editMovie = (movie) => {
-    return movieService.updateMovie(movie._id, movie)
+    return updateMovie(movie._id, movie)
       .then(updatedMovie => {
         setMovies(prev => prev.map(m => m._id === movie._id ? updatedMovie : m));
       });
