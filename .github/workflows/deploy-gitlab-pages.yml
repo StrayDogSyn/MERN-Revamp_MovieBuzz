@@ -36,7 +36,7 @@ jobs:
               echo '  *Password*) echo "$GITLAB_TOKEN" ;;'
               echo 'esac'
             } > "$ASKPASS_SCRIPT"
-            chmod 700 "$ASKPASS_SCRIPT"
+            chmod 500 "$ASKPASS_SCRIPT"
             GIT_ASKPASS="$ASKPASS_SCRIPT" GIT_TERMINAL_PROMPT=0 git clone "$GITLAB_URL" source
             rm -f "$ASKPASS_SCRIPT"
           else
@@ -47,7 +47,7 @@ jobs:
         id: node-version
         run: |
           if [ -f source/.nvmrc ]; then
-            NODE_VERSION="$(tr -d 'v[:space:]' < source/.nvmrc)"
+            NODE_VERSION="$(sed 's/^v//' source/.nvmrc | tr -d '[:space:]')"
             echo "value=${NODE_VERSION}" >> "$GITHUB_OUTPUT"
           else
             echo "value=20" >> "$GITHUB_OUTPUT"
